@@ -1,0 +1,14 @@
+# Formwerk on swarvex: three.js environment (Node 24, Chromium for the scene tests). Protected paths: only the lead
+# changes them (dependencies, the parameter contract, the test rules and the category limits).
+template: threejs
+test: npm test
+preview: npm run build
+preview_dir: dist
+note: Every asset is a file in src/assets/<category>/ with a parameter schema, a budget and a build function; read AGENTS.md and docs/style-guide.md. Scene baselines live in tests/scene/baseline/<id>.png and come with the asset.
+protected: |
+  - package.json
+  - package-lock.json
+  - src/core/**
+  - src/assets/define.ts
+  - tests/core/assets.test.ts
+  - tests/scene/run.mjs
