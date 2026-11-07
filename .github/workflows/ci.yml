@@ -1,0 +1,35 @@
+name: CI
+
+# Every push and pull request: types, core tests, build with catalogue, scene tests in headless Chrome (SwiftShader).
+# The gallery itself is the project's preview on swarvex, rebuilt after every merge: https://formwerk.swarvex.run
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      CHROME_PATH: /usr/bin/google-chrome
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      # Bilder und Abweichungen der Szenen-Tests, um einen Fehlschlag ansehen zu können
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scene-out
+          path: tests/scene/out/
