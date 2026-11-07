@@ -1,0 +1,15 @@
+// The sounds of the catalogue. A new sound is one file in its category folder plus one line here.
+import type { AnySound } from "./define";
+import { click } from "./ui/click";
+import { chime } from "./ui/chime";
+import { hit } from "./impact/hit";
+import { explosion } from "./impact/explosion";
+import { footstep } from "./movement/footstep";
+import { jump } from "./movement/jump";
+import { whoosh } from "./movement/whoosh";
+import { pickup } from "./effects/pickup";
+import { zap } from "./effects/zap";
+import { wind } from "./ambience/wind";
+
+export const SOUNDS: AnySound[] = [click, chime, hit, explosion, footstep, jump, whoosh, pickup, zap, wind];
+export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);

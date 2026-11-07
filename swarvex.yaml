@@ -4,13 +4,15 @@ template: threejs
 test: npm test
 preview: npm run build
 preview_dir: dist
-note: Every asset is a file in src/assets/<category>/ with a parameter schema (every parameter with describe), presets, physics hints, optional movable parts, a budget and a build function; read AGENTS.md and docs/style-guide.md. Scene baselines live in tests/scene/baseline/<id>.png and come with the asset; the scene test also bakes patterned assets and checks the .glb round trip.
+note: The catalogue of game assets as code. A model is a file in src/assets/<category>/, a sound a file in src/sounds/<category>/, each with a parameter schema (every parameter with describe), presets, a budget and a build function; read AGENTS.md and docs/style-guide.md. Reference images live in tests/scene/baseline/<id>.png and come with the asset: a render for a model, a spectrogram for a sound (agents cannot listen: describe the sound in words). The scene test also bakes patterned models and checks the .glb round trip.
 protected: |
   - package.json
   - package-lock.json
   - src/core/**
   - src/assets/define.ts
+  - src/sounds/define.ts
   - src/catalog.ts
   - scripts/**
   - tests/core/**
   - tests/scene/run.mjs
+  - tests/scene/sounds.mjs

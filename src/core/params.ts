@@ -4,7 +4,7 @@
 export type Text = { de: string; en: string };
 // describe: one plain sentence on what the parameter changes and which values are typical (agents choose values by it)
 type Common = { label: Text; describe: Text };
-export type NumberParam = Common & { type: "number"; min: number; max: number; step: number; default: number; unit?: "m" | "°" };
+export type NumberParam = Common & { type: "number"; min: number; max: number; step: number; default: number; unit?: "m" | "°" | "s" | "Hz" };
 export type IntegerParam = Common & { type: "integer"; min: number; max: number; default: number };
 export type ChoiceParam<O extends string = string> = Common & { type: "choice"; options: readonly O[]; labels?: Record<O, Text>; default: O };
 export type ColorParam = Common & { type: "color"; default: string };

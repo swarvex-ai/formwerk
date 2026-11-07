@@ -1,6 +1,7 @@
 name: CI
 
-# Every push and pull request: types, core tests, build with catalogue, scene tests in headless Chrome (SwiftShader).
+# Every push and pull request: types, core and sound tests, spectrograms, build with catalogue and sound files, scene
+# tests in headless Chrome (SwiftShader).
 # The gallery itself is the project's preview on swarvex, rebuilt after every merge: https://formwerk.swarvex.run
 on:
   push:

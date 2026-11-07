@@ -1,7 +1,9 @@
 # Formwerk: instructions for agents
 
-Formwerk is a library of parametric 3D assets as code for three.js (r187, WebGPURenderer with WebGL 2 fallback, TSL
-materials). Every asset is one function of its parameters. No model files, no image textures, no generator credits.
+Formwerk is the catalogue of game assets as code: parametric 3D models for three.js (r187, WebGPURenderer with WebGL 2
+fallback, TSL materials) and sounds for any engine (48 kHz mono, WAV). Every asset is one function of its parameters.
+No model or audio files, no image textures, no generator credits. Sprites, music and materials as image textures
+follow, each as its own kind with its own contract; until then, a request for one of them goes to the lead.
 
 ## Requests from other projects come first
 
@@ -11,7 +13,7 @@ rest. Build it as a parametric asset like any other, not as a one-off for that p
 it through the catalogue, and so does everyone after it. If a request needs something the contract lacks, say so in
 your submission.
 
-## Adding an asset (the usual task)
+## Adding a model (the usual task)
 
 1. One file `src/assets/<category>/<id>.ts` (categories: furniture, architecture, nature, vehicles, props) with
    `defineAsset({ id, category, title, description, params, presets, rig?, physics, budget, build })`.
@@ -22,6 +24,20 @@ your submission.
    at both ends of their range, and the physics data. The scene test writes `tests/scene/baseline/<id>.png`: look at
    `tests/scene/out/<id>.png`, then commit the baseline with the asset. Patterned assets are also baked and exported
    as .glb; `tests/scene/out/<id>.baked.png` and `<id>.glb.png` must look like the live render.
+
+## Adding a sound
+
+1. One file `src/sounds/<category>/<id>.ts` (categories: ui, impact, movement, effects, ambience) with
+   `defineSound({ id, category, title, description, params, presets, loop, maxSeconds, build })`. `build` returns the
+   samples at `RATE` (48 kHz mono) from the building blocks of `src/core/audio.ts` (`Osc`, `Biquad`, `LowPass`,
+   `envelope`, `grains`, `smooth`, `white`, `semitones`). Copy the closest existing sound and change it.
+2. One line in `src/sounds/index.ts` (catalogue) and one in `src/sounds/lib.ts` (library export).
+3. `npm test`: the sound tests build it at its defaults, every extreme, every preset and random values, and check the
+   length budget, the level, no DC, clean edges (one-shots) or seam (loops), that it is audible, that it decays on its
+   own and that it is deterministic. `tests/scene/sounds.mjs` writes its spectrogram to
+   `tests/scene/baseline/<id>.png`: look at `tests/scene/out/<id>.png`, then commit it with the sound.
+4. **Agents cannot listen.** Say in your submission what the sound should sound like and what you changed, in
+   words a person can check by ear; the reviewers see the spectrogram, the lead listens in the preview before merging.
 
 ## Rules
 
@@ -44,15 +60,20 @@ your submission.
   allows. The category limits in `tests/core/assets.test.ts` are protected.
 - **Randomness** only from the `seed` argument (`rng(seed)`), never `Math.random()`: same values and seed, same asset.
 - **Texts** in English and German (`title`, `description`, every label, option label, describe and preset label).
+- **Sounds:** the finish (DC, edges or loop seam, level to −1 dBFS) belongs to the contract, not to `build`; loops
+  render their length plus `LOOP_TAIL`. No recordings or audio files, and no melodies or sound-alikes of known games,
+  films or songs.
 - Style: `docs/style-guide.md`. Engine traps: https://github.com/swarvex-ai/swarvex/tree/main/lead/engine-reference/threejs
 
 ## Protected (only the lead changes these)
 
-The parameter and asset contract (`src/core/**`, `src/assets/define.ts`), the catalogue format (`src/catalog.ts`,
-`scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`) and the dependencies. If an asset needs more from
-them, say so in your submission.
+The parameter, asset and sound contracts (`src/core/**`, `src/assets/define.ts`, `src/sounds/define.ts`), the
+catalogue format (`src/catalog.ts`, `scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`,
+`tests/scene/sounds.mjs`) and the dependencies. If an asset or a sound needs more from them, say so in your
+submission.
 
 ## Commands
 
-`npm run dev` (gallery), `npm test` (types, core tests, build with catalogue, scene tests), `npm run test:core` (fast,
-while working). `npm run build` also writes `dist/catalog.json` and `dist/llms.txt`.
+`npm run dev` (gallery), `npm test` (types, core and sound tests, spectrograms, build with catalogue, scene tests),
+`npm run test:core` (fast, while working), `npm run test:sound` (spectrograms only). `npm run build` also writes
+`dist/catalog.json`, `dist/llms.txt` and every sound at its defaults and presets as `dist/sounds/*.wav`.

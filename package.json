@@ -1,7 +1,7 @@
 {
   "name": "formwerk",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "test:core": "vitest run",
     "test:scene": "npm run build && node tests/scene/run.mjs",
-    "test": "tsc --noEmit && vitest run && npm run build && node tests/scene/run.mjs"
+    "test": "tsc --noEmit && vitest run && node tests/scene/sounds.mjs && npm run build && node tests/scene/run.mjs",
+    "test:sound": "node tests/scene/sounds.mjs"
   },
   "dependencies": {
     "three": "0.187.0"
@@ -23,9 +24,13 @@
     "vite": "8.3.5",
     "vitest": "5.0.5"
   },
-  "description": "Parametric 3D assets as code for three.js: furniture, architecture, nature, vehicles and props with presets, movable parts and physics hints. Change the parameters, share the link, download .glb, .usdz or .obj.",
+  "description": "Game assets as code: parametric 3D models for three.js and sounds for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj or .wav. CC0.",
   "license": "MIT",
   "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./sounds": "./src/sounds/lib.ts"
+  },
   "keywords": [
     "three.js",
     "procedural",
@@ -34,6 +39,9 @@
     "tsl",
     "webgpu",
     "gltf",
-    "game-assets"
+    "game-assets",
+    "sound-effects",
+    "procedural-audio",
+    "wav"
   ]
 }
