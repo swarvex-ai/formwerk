@@ -1,6 +1,7 @@
 // Scene tests in headless Chromium: the build (dist/) is served locally, every asset of the catalogue is shown at its
 // defaults in test mode (?test&asset=<id>), its draw calls and triangles are checked against its budget and its image
-// against tests/scene/baseline/<id>.png.
+// against tests/scene/baseline/<id>.png. Assets with procedural patterns are then baked for the export and rendered
+// again: the baked texture has to look like the live TSL material (tests/scene/out/<id>.baked.png).
 // No network, no GPU: WebGL 2 through SwiftShader. A missing baseline is written and the test fails, so it gets committed
 // on purpose. Results and diffs: tests/scene/out/.
 import { createServer } from "node:http";
@@ -15,7 +16,7 @@ const dist = join(ordner, "../../dist");
 const viewport = { width: 320, height: 240 };
 const browser = [process.env.CHROME_PATH, "/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome"].find((p) => p && existsSync(p));
 if (!browser) { console.error("No Chromium found: set CHROME_PATH (the swarvex threejs environment has it)."); process.exit(2); }
-if (!existsSync(join(dist, "index.html"))) { console.error("No build: run `vite build` first."); process.exit(2); }
+if (!existsSync(join(dist, "index.html"))) { console.error("No build: run `npm run build` first."); process.exit(2); }
 
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".wasm": "application/wasm", ".glb": "model/gltf-binary" };
 const server = createServer((req, res) => {
@@ -32,6 +33,9 @@ const out = join(ordner, "out");
 mkdirSync(out, { recursive: true });
 mkdirSync(join(ordner, "baseline"), { recursive: true });
 let fehler = 0;
+// Gebacken gegen live: strenge Farbschwelle, sonst fällt eine falsch liegende Maserung nicht auf (gemessen: richtig
+// höchstens 0,5 % der Pixel, gespiegelte Textur mindestens 2,5 %)
+const BACKEN_SCHWELLE = 0.02, BACKEN_MAX = 1.5;
 // Die Szenen sind die Assets des Katalogs, mit ihrem eigenen Budget
 const katalog = await chrome.newPage({ viewport });
 await katalog.goto(`${basis}?test`);
@@ -71,6 +75,26 @@ for (const s of scenes) {
         if (prozent > (s.maxDiffPercent ?? 2)) { fehler++; bericht(`FAIL ${prozent.toFixed(2)} % of pixels differ from the baseline (allowed ${s.maxDiffPercent ?? 2} %), see tests/scene/out`); }
         else bericht(`ok · ${asset.drawCalls} draw calls · ${asset.triangles} triangles · ${prozent.toFixed(2)} % changed`);
       }
+    }
+    if (await page.evaluate(() => window.__formwerk.patterned())) {
+      const b = await page.evaluate(() => window.__formwerk.bake());
+      await page.evaluate(() => window.__swarvex.step(1));
+      const gebacken = PNG.sync.read(await page.locator("canvas").screenshot());
+      writeFileSync(join(out, `${s.name}.baked.png`), PNG.sync.write(gebacken));
+      const n = pixelmatch(bild.data, gebacken.data, null, bild.width, bild.height, { threshold: BACKEN_SCHWELLE });
+      const prozent = (100 * n) / (bild.width * bild.height);
+      if (!b.textured) { fehler++; bericht("FAIL bake: no surface got the texture"); }
+      else if (prozent > BACKEN_MAX) { fehler++; bericht(`FAIL bake: the baked texture differs from the live material in ${prozent.toFixed(2)} % of pixels (allowed ${BACKEN_MAX} %), see tests/scene/out/${s.name}.baked.png`); }
+      else bericht(`baked ok · ${b.textured} textured meshes · ${b.ms} ms · ${prozent.toFixed(2)} % differ from the live material`);
+      // Rundlauf: .glb exportieren, mit dem GLTFLoader laden, rendern; so sieht es in anderen Programmen aus
+      const g = await page.evaluate(() => window.__formwerk.roundtrip());
+      await page.evaluate(() => window.__swarvex.step(1));
+      const geladen = PNG.sync.read(await page.locator("canvas").screenshot());
+      writeFileSync(join(out, `${s.name}.glb.png`), PNG.sync.write(geladen));
+      const m = pixelmatch(bild.data, geladen.data, null, bild.width, bild.height, { threshold: BACKEN_SCHWELLE });
+      const p2 = (100 * m) / (bild.width * bild.height);
+      if (!g.images || p2 > BACKEN_MAX) { fehler++; bericht(`FAIL glb round trip: ${g.images} textured meshes, ${p2.toFixed(2)} % of pixels differ from the live material (allowed ${BACKEN_MAX} %), see tests/scene/out/${s.name}.glb.png`); }
+      else bericht(`glb ok · ${Math.round(g.bytes / 1024)} KB · ${p2.toFixed(2)} % differ after export and reload`);
     }
   } catch (e) {
     fehler++;

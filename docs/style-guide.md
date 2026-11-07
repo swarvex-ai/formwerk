@@ -13,3 +13,9 @@ The catalogue should look like one set, whoever builds an asset.
 - **Names:** ids in kebab-case English (`server-rack`), parameters in camelCase English (`seatHeight`).
 - **Budgets:** furniture up to 20,000 triangles, architecture 30,000, nature 150,000 at the extremes; most assets
   should stay far below at their defaults.
+- **Descriptions (`describe`):** one sentence, what the parameter changes and which real values are typical; no
+  marketing, no repetition of the label. Agents read them in llms.txt to choose values.
+- **Presets:** two to four looks that differ clearly (a bar stool, a milking stool, a kitchen chair), named in
+  kebab-case English after what they are, not after their values (`bar-stool`, not `tall-metal`).
+- **Movable parts:** hinge where the real hinge is; 0 is closed, positive opens; doors and gates open to the front
+  (+z), lids upwards. Rotations up to the real stop (a lid 110°, a door 120°).

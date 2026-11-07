@@ -1,5 +1,6 @@
 // Shared materials as TSL nodes: they compile to WGSL (WebGPU) or GLSL (WebGL 2) and need no image files. Every
-// material also knows plain PBR values for the .glb export (procedural detail is not baked into textures yet).
+// material also knows plain PBR values for the export, whether it has a procedural pattern (the export bakes those into
+// a texture, src/core/export.ts) and a density for the mass estimate (src/core/physics.ts).
 import { MeshStandardMaterial, type Material } from "three";
 import { MeshStandardNodeMaterial } from "three/webgpu";
 import { color, float, mix, mx_noise_float, positionLocal, sin } from "three/tsl";
@@ -13,7 +14,13 @@ const PBR: Record<MaterialKind, { roughness: number; metalness: number }> = {
   leaf: { roughness: 0.8, metalness: 0 }, glow: { roughness: 0.4, metalness: 0 },
 };
 
-export function material(kind: MaterialKind, hex: string, scale = 1): MeshStandardNodeMaterial {
+// Effective densities in kg/m³ for the way assets are modelled: metal parts are drawn solid but are mostly tubes and
+// sheets in reality, plastic is hollow, foliage clusters are mostly air. Good for an estimate, not for engineering.
+const DICHTE: Record<MaterialKind, number> = { wood: 600, metal: 2500, paint: 600, stone: 2500, plastic: 300, bark: 800, leaf: 30, glow: 1000 };
+const MUSTER: MaterialKind[] = ["wood", "stone", "bark", "leaf"];
+
+/** `density` overrides the effective density for things drawn solid that are hollow inside (a server, a cabinet). */
+export function material(kind: MaterialKind, hex: string, scale = 1, density?: number): MeshStandardNodeMaterial {
   const m = new MeshStandardNodeMaterial(PBR[kind]);
   const base = color(hex);
   const p = positionLocal.mul(float(scale));
@@ -25,11 +32,14 @@ export function material(kind: MaterialKind, hex: string, scale = 1): MeshStanda
     case "glow": m.colorNode = base; m.emissiveNode = base.mul(2); break;
     default: m.colorNode = base;
   }
-  m.userData.export = { color: hex, emissive: kind === "glow" ? hex : "#000000", ...PBR[kind] };
+  m.userData.export = { kind, color: hex, emissive: kind === "glow" ? hex : "#000000", ...PBR[kind], density: density ?? DICHTE[kind], pattern: MUSTER.includes(kind) };
   return m;
 }
 
-/** A plain PBR material for the .glb export, from the values a material() carries. */
+export type ExportInfo = { kind: MaterialKind; color: string; emissive: string; roughness: number; metalness: number; density: number; pattern: boolean };
+export const exportInfo = (m: Material): ExportInfo | undefined => m.userData.export as ExportInfo | undefined;
+
+/** A plain PBR material for the export, from the values a material() carries. */
 export function exportMaterial(m: Material): MeshStandardMaterial {
   const e = (m.userData.export ?? { color: "#cccccc", emissive: "#000000", roughness: 0.6, metalness: 0 }) as { color: string; emissive: string; roughness: number; metalness: number };
   return new MeshStandardMaterial({ color: e.color, emissive: e.emissive, roughness: e.roughness, metalness: e.metalness, flatShading: Boolean((m as { flatShading?: boolean }).flatShading) });

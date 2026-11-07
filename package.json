@@ -1,14 +1,15 @@
 {
   "name": "formwerk",
   "private": true,
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/catalog.mjs",
     "typecheck": "tsc --noEmit",
     "test:core": "vitest run",
-    "test:scene": "vite build && node tests/scene/run.mjs",
-    "test": "tsc --noEmit && vitest run && vite build && node tests/scene/run.mjs"
+    "test:scene": "npm run build && node tests/scene/run.mjs",
+    "test": "tsc --noEmit && vitest run && npm run build && node tests/scene/run.mjs"
   },
   "dependencies": {
     "three": "0.187.0"
@@ -22,7 +23,7 @@
     "vite": "8.3.5",
     "vitest": "5.0.5"
   },
-  "description": "Parametric 3D assets as code for three.js: furniture, architecture and nature. Change the parameters, share the link, download a .glb.",
+  "description": "Parametric 3D assets as code for three.js: furniture, architecture and nature with presets, movable parts and physics hints. Change the parameters, share the link, download .glb, .usdz or .obj.",
   "license": "MIT",
   "main": "src/index.ts",
   "keywords": [
@@ -31,6 +32,8 @@
     "parametric",
     "3d-assets",
     "tsl",
-    "webgpu"
+    "webgpu",
+    "gltf",
+    "game-assets"
   ]
 }
