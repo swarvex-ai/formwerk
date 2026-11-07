@@ -5,8 +5,9 @@ import { Box3, BoxGeometry, BufferGeometry, CylinderGeometry, Group, Mesh, Vecto
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { withPreset, type Presets, type Schema, type Text, type Values } from "../core/params";
 
-export type Category = "furniture" | "architecture" | "nature";
-export const CATEGORIES: Category[] = ["furniture", "architecture", "nature"];
+// Vehicles and props came with requests from other projects in mind (a tank for a game, a market stall for a town)
+export type Category = "furniture" | "architecture" | "nature" | "vehicles" | "props";
+export const CATEGORIES: Category[] = ["furniture", "architecture", "nature", "vehicles", "props"];
 
 /**
  * A movable part (lid, door, gate, drawer): a child object with this name and its origin at the hinge.

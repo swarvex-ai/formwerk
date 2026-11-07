@@ -9,7 +9,9 @@ import { hullPoints, physicsOf } from "../../src/core/physics";
 import { rng } from "../../src/core/rng";
 
 // Upper limits per category (the lead changes these, not a single asset)
-const GRENZE = { furniture: { triangles: 20000, drawCalls: 4 }, architecture: { triangles: 30000, drawCalls: 4 }, nature: { triangles: 150000, drawCalls: 3 } } as const;
+// (vehicles: several movable parts such as turret, barrel, wheels or doors, each its own draw call)
+const GRENZE = { furniture: { triangles: 20000, drawCalls: 4 }, architecture: { triangles: 30000, drawCalls: 4 }, nature: { triangles: 150000, drawCalls: 3 },
+  vehicles: { triangles: 60000, drawCalls: 8 }, props: { triangles: 10000, drawCalls: 4 } } as const;
 
 const pruefsumme = (o: Object3D) => {
   let summe = 0;

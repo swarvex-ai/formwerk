@@ -3,9 +3,17 @@
 Formwerk is a library of parametric 3D assets as code for three.js (r187, WebGPURenderer with WebGL 2 fallback, TSL
 materials). Every asset is one function of its parameters. No model files, no image textures, no generator credits.
 
+## Requests from other projects come first
+
+Formwerk is the shared asset catalogue of swarvex. When another project needs an asset ("a tank for our game", "a
+market stall for the town"), its lead sends Formwerk a work request, and the task that answers it goes ahead of the
+rest. Build it as a parametric asset like any other, not as a one-off for that project: the requesting project gets
+it through the catalogue, and so does everyone after it. If a request needs something the contract lacks, say so in
+your submission.
+
 ## Adding an asset (the usual task)
 
-1. One file `src/assets/<category>/<id>.ts` with
+1. One file `src/assets/<category>/<id>.ts` (categories: furniture, architecture, nature, vehicles, props) with
    `defineAsset({ id, category, title, description, params, presets, rig?, physics, budget, build })`.
    Copy the closest existing asset and change it.
 2. One line in `src/assets/index.ts` (catalogue) and one in `src/index.ts` (library export).

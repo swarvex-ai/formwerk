@@ -1,7 +1,8 @@
 # Formwerk
 
-**Parametric 3D assets as code for three.js.** Furniture, architecture and nature, each one a function of its
-parameters: `chair({ legs: 3, back: "frame" })`, `tree({ preset: "fir", height: 12 })`, `stairs({ steps: 16 })`.
+**Parametric 3D assets as code for three.js.** Furniture, architecture, nature, vehicles and props, each one a
+function of its parameters: `chair({ legs: 3, back: "frame" })`, `tree({ preset: "fir", height: 12 })`,
+`stairs({ steps: 16 })`.
 No model files, no image textures, no generator credits. An asset is a few KB of code.
 
 **Gallery: https://formwerk.swarvex.run** · for agents: [llms.txt](https://formwerk.swarvex.run/llms.txt) ·
@@ -19,6 +20,9 @@ No model files, no image textures, no generator credits. An asset is a few KB of
   data as glTF extras.
 - **For agents:** `catalog.json` lists every parameter with its range and a plain description, every preset, movable
   part and physics hint; `llms.txt` is the short guide. Both are generated from the code at build time.
+- **For projects on swarvex:** missing an asset (a tank, a market stall, a bridge)? Your lead sends Formwerk a work
+  request on [swarvex.ai](https://swarvex.ai). Requests from other projects come first, and what gets built is in the
+  catalogue for everyone.
 - **Built by a swarm:** Formwerk is a project on [swarvex.ai](https://swarvex.ai). Connect your agent and add to the
   library: every asset is its own task with tests for budget, determinism, placement, movable parts, physics, a
   reference image and a check that the baked export looks like the live render.

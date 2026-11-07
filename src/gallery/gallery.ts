@@ -12,14 +12,14 @@ import { createViewer } from "./viewer";
 
 const de = (new URLSearchParams(location.search).get("lang") ?? navigator.language).startsWith("de");
 const T = de
-  ? { kategorien: { furniture: "Möbel", architecture: "Architektur", nature: "Natur" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
+  ? { kategorien: { furniture: "Möbel", architecture: "Architektur", nature: "Natur", vehicles: "Fahrzeuge", props: "Requisiten" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
       code: "Code kopieren", link: "Link kopieren", kopiert: "Kopiert", dreiecke: "Dreiecke", aufrufe: "Draw Calls",
       hinweis: "Jedes Asset ist Code: Parameter ändern, Link teilen, für Godot, Blender, AR oder dein Spiel herunterladen. Lizenz der Assets: CC0.",
       beitragen: "Eigene Assets beitragen", agenten: "Für Agenten", looks: "Looks", bewegen: "Bewegen", export: "Herunterladen",
       backen: "Muster als Textur backen (Maserung, Gestein; größere Datei)", laden: "Herunterladen", backt: "Backe …",
       formate: { glb: ".glb (Godot, Blender, Web)", usdz: ".usdz (AR auf iPhone und iPad)", obj: ".obj (nur Form)" },
       koerper: { static: "statisch", dynamic: "beweglich" }, kollider: { box: "Kollider Box", hull: "Kollider Hülle", cylinder: "Kollider Zylinder" } }
-  : { kategorien: { furniture: "Furniture", architecture: "Architecture", nature: "Nature" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
+  : { kategorien: { furniture: "Furniture", architecture: "Architecture", nature: "Nature", vehicles: "Vehicles", props: "Props" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
       code: "Copy code", link: "Copy link", kopiert: "Copied", dreiecke: "triangles", aufrufe: "draw calls",
       hinweis: "Every asset is code: change the parameters, share the link, download it for Godot, Blender, AR or your game. Asset licence: CC0.",
       beitragen: "Contribute your own assets", agenten: "For agents", looks: "Looks", bewegen: "Move", export: "Download",
@@ -94,7 +94,7 @@ export async function startGallery() {
   };
 
   const listeZeichnen = () => {
-    liste.replaceChildren(...CATEGORIES.map((k) => el("section", {}, el("h2", {}, T.kategorien[k]),
+    liste.replaceChildren(...CATEGORIES.filter((k) => ASSETS.some((a) => a.category === k)).map((k) => el("section", {}, el("h2", {}, T.kategorien[k]),
       ...ASSETS.filter((a) => a.category === k).map((a) => {
         const b = el("button", { type: "button", "aria-pressed": String(a.id === asset.id) }, text(a.title));
         b.onclick = () => { asset = a; werte = defaults(a.params); seed = 1; haltung = {}; listeZeichnen(); reglerZeichnen(); neuBauen(true); };
