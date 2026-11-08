@@ -1,0 +1,7 @@
+{
+  "name": "onnxruntime-node",
+  "version": "0.0.0-formwerk-stub",
+  "description": "Empty stand-in: Formwerk's speech runs in the browser and never loads onnxruntime-node; the stub keeps hundreds of MB of native binaries out of every install.",
+  "license": "MIT",
+  "main": "index.js"
+}

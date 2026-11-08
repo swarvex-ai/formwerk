@@ -20,6 +20,7 @@ declare global {
 
 export async function startTest(params: URLSearchParams) {
   if (params.has("surface")) { await (await import("./test-surface")).startSurfaceTest(params); return; }
+  if (params.has("speech")) { await (await import("./test-speech")).startSpeechTest(); return; }
   document.body.classList.add("test");
   const canvas = document.querySelector("canvas")!;
   // Standard WebGL 2 (läuft überall gleich); ?webgpu prüft den WebGPU-Pfad, wo der Browser einen Adapter hat

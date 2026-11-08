@@ -11,7 +11,8 @@
     "test:scene": "npm run build && node tests/scene/run.mjs",
     "test": "tsc --noEmit && vitest run && node tests/scene/sounds.mjs && node tests/scene/sprites.mjs && npm run build && node tests/scene/run.mjs",
     "test:sound": "node tests/scene/sounds.mjs",
-    "test:sprite": "node tests/scene/sprites.mjs"
+    "test:sprite": "node tests/scene/sprites.mjs",
+    "test:speech": "npm run build && node tests/speech/quality.mjs"
   },
   "dependencies": {
     "three": "0.187.0"
@@ -52,5 +53,12 @@
     "pixel-art",
     "sprites",
     "godot"
-  ]
+  ],
+  "workspaces": [
+    "speech"
+  ],
+  "overrides": {
+    "onnxruntime-node": "file:./speech/stubs/onnxruntime-node",
+    "sharp": "file:./speech/stubs/sharp"
+  }
 }

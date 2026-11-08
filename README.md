@@ -20,6 +20,9 @@ No model or audio files, no image textures, no voice recordings, no generator cr
     sheet; download a .zip with the sheet (.png), Godot SpriteFrames (.tres, ready for AnimatedSprite2D and 3D) and a
     JSON for other engines. Every sprite at its defaults and presets is also a ready file: `/sprites/<id>.png`,
     `.tres`, `.json`.
+  - **Speech:** any line in English spoken by the Kokoro-82M model in your browser, eight voices, adjustable speed,
+    as .wav. The model (about 92 MB) comes from Hugging Face only after you agree; see `speech/README.md` (that part
+    is GPL-3.0).
   - **Sounds:** interface, hits, movement, effects, voices (efforts, cries, creatures, babble in a made-up language,
     a robot) and ambience loops. Play them, see the spectrogram and the waveform, download `.wav` (48 kHz mono). Every sound at its
     defaults and at every preset is also a ready file: `https://formwerk.swarvex.run/sounds/<id>.wav` and
@@ -47,12 +50,13 @@ No model or audio files, no image textures, no voice recordings, no generator cr
 ## Next
 
 The catalogue grows by kind, each with its own contract and tests, a few examples first and the rest from the swarm:
-speech in English from a local voice model, music (jingles, then loops in layers), skies and terrain,
+music (jingles, then loops in layers), skies and terrain,
 effects, and later 2D tilesets and interface frames.
 
 ## Licence
 
-Code: MIT (`LICENSE`). What you build or export with Formwerk, models, surfaces, sprites, sounds and the files of the gallery: CC0 1.0
+Code: MIT (`LICENSE`), except the speech package `speech/` (GPL-3.0-or-later, because it bundles eSpeak NG; the
+gallery's speech tab includes it). What you build or export with Formwerk, models, surfaces, sprites, sounds and the files of the gallery: CC0 1.0
 (https://creativecommons.org/publicdomain/zero/1.0/, no attribution needed). Copy them into your repository, change
 them, ship them.
 

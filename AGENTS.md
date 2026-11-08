@@ -3,8 +3,9 @@
 Formwerk is the catalogue of game assets as code: parametric 3D models for three.js (r187, WebGPURenderer with WebGL 2
 fallback, TSL materials), surfaces that tile (live TSL materials, baked into PNG maps of any size for other engines)
 pixel sprites with Godot SpriteFrames, and sounds for any engine (48 kHz mono, WAV), voices included. Every asset is
-one function of its parameters. No model, image or audio files, no generator credits. Music and speech follow, each
-as its own kind with its own contract; until then, a request for one of them goes to the lead.
+one function of its parameters. No model, image or audio files, no generator credits. Speech in English comes from a
+local voice model in the separate GPL package `speech/` (only the gallery's speech tab imports it; never import it
+from `src/` outside `src/gallery/`). Music follows as its own kind; until then, a request for it goes to the lead.
 
 ## Requests from other projects come first
 
@@ -98,7 +99,7 @@ your submission.
 The parameter, asset, surface and sound contracts (`src/core/**`, `src/assets/define.ts`, `src/surfaces/define.ts`,
 `src/surfaces/noise.ts`, `src/surfaces/bake.ts`, `src/sprites/define.ts`, `src/sounds/define.ts`), the catalogue format (`src/catalog.ts`,
 `scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`,
-`tests/scene/sounds.mjs`, `tests/scene/sprites.mjs`) and the dependencies. If an asset or a sound needs more from them, say so in your
+`tests/scene/sounds.mjs`, `tests/scene/sprites.mjs`), the speech package (`speech/**`) and the dependencies. If an asset or a sound needs more from them, say so in your
 submission.
 
 ## Commands

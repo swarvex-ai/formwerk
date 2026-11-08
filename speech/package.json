@@ -1,0 +1,12 @@
+{
+  "name": "formwerk-speech",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Speech in English for Formwerk: any line of text spoken by Kokoro-82M in the browser, finished like every Formwerk sound (48 kHz mono, −1 dBFS). GPL-3.0-or-later because it bundles eSpeak NG through kokoro-js.",
+  "license": "GPL-3.0-or-later",
+  "main": "src/index.ts",
+  "dependencies": {
+    "kokoro-js": "1.2.1"
+  }
+}

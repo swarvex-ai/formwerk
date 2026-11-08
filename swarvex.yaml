@@ -21,3 +21,4 @@ protected: |
   - tests/scene/run.mjs
   - tests/scene/sounds.mjs
   - tests/scene/sprites.mjs
+  - speech/**

@@ -13,6 +13,7 @@ import { MAPS, type AnySurface } from "./surfaces/define";
 import { SIZES } from "./surfaces/bake";
 import type { Pixels } from "./core/pixels";
 import { SPRITES } from "./sprites";
+import { DOWNLOAD_MB, MAX_CHARACTERS, MODEL, VOICES } from "../speech/src";
 import { animationName, godotSpriteFrames, makeSheet, sheetJson, type AnySprite } from "./sprites/define";
 
 export const GALLERY = "https://formwerk.swarvex.run";
@@ -107,6 +108,11 @@ export function catalog(base = GALLERY) {
     models: ASSETS.map((a) => eintrag(a, base)),
     surfaces: SURFACES.map((f) => flaechenEintrag(f, base)),
     sprites: SPRITES.map((s) => spriteEintrag(s, base)),
+    speech: {
+      gallery: `${base}/#speech`, language: "English", model: MODEL, downloadMB: DOWNLOAD_MB, maxCharacters: MAX_CHARACTERS,
+      voices: Object.keys(VOICES), licence: "package speech/ GPL-3.0-or-later (eSpeak NG inside kokoro-js); spoken files CC0",
+      note: "Any line of English text, spoken in the browser and finished as a Formwerk sound (48 kHz mono, -1 dBFS). The model comes from Hugging Face only after the person agrees. No German voice yet.",
+    },
     sounds: SOUNDS.map((s) => klangEintrag(s, base)),
   };
 }
@@ -200,6 +206,7 @@ export function llmsTxt(k: Catalog): string {
     teile.push(`- Parameters:`, ...Object.entries(s.params).map(([n, p]) => paramZeile(n, p)));
     teile.push(`- Presets: ${Object.entries(s.presets).map(([n, p]) => `\`${n}\` (${p.label.en})`).join(", ")}`);
   }
+  teile.push(``, `## Speech (English)`, ``, `${k.speech.note} Gallery: ${k.speech.gallery}. Voices: ${k.speech.voices.map((v) => `\`${v}\``).join(", ")}. Licence: ${k.speech.licence}.`);
   teile.push(``, `## Sounds`);
   for (const s of k.sounds) {
     teile.push(``, `### ${s.function}() · ${s.title.en} (${s.category}, ${s.loop ? "seamless loop" : "one-shot"})`, ``, s.description.en, ``, `- Gallery: ${s.gallery}`);
