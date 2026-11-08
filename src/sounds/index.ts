@@ -9,7 +9,11 @@ import { jump } from "./movement/jump";
 import { whoosh } from "./movement/whoosh";
 import { pickup } from "./effects/pickup";
 import { zap } from "./effects/zap";
+import { effort } from "./voice/effort";
+import { pain } from "./voice/pain";
+import { creature } from "./voice/creature";
+import { babble } from "./voice/babble";
 import { wind } from "./ambience/wind";
 
-export const SOUNDS: AnySound[] = [click, chime, hit, explosion, footstep, jump, whoosh, pickup, zap, wind];
+export const SOUNDS: AnySound[] = [click, chime, hit, explosion, footstep, jump, whoosh, pickup, zap, effort, pain, creature, babble, wind];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);

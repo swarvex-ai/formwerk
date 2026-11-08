@@ -10,7 +10,7 @@ import { makeSound, SOUND_CATEGORIES } from "../../src/sounds/define";
 import { SOUNDS } from "../../src/sounds";
 
 // Upper limits per category in seconds (the lead changes these, not a single sound)
-const GRENZE = { ui: 4, impact: 4, movement: 1.5, effects: 2.5, ambience: 12 } as const;
+const GRENZE = { ui: 4, impact: 4, movement: 1.5, effects: 2.5, voice: 4, ambience: 12 } as const;
 
 describe("sound catalogue", () => {
   it("ids are unique across models and sounds, kebab-case, with texts in German and English", () => {

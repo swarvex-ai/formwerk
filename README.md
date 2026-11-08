@@ -2,8 +2,8 @@
 
 **Game assets as code.** Parametric 3D models for three.js and sounds for any engine, each one a function of its
 parameters: `chair({ legs: 3, back: "frame" })`, `tree({ preset: "fir", height: 12 })`,
-`hit({ weight: 0.8, metal: 1 })`, `footstep({ surface: "gravel" }, seed)`.
-No model or audio files, no image textures, no generator credits. An asset is a few KB of code.
+`hit({ weight: 0.8, metal: 1 })`, `footstep({ surface: "gravel" }, seed)`, `creature({ size: 3, aggression: 0.9 })`.
+No model or audio files, no image textures, no voice recordings, no generator credits. An asset is a few KB of code.
 
 **Gallery: https://formwerk.swarvex.run** · for agents: [llms.txt](https://formwerk.swarvex.run/llms.txt) ·
 [catalog.json](https://formwerk.swarvex.run/catalog.json)
@@ -12,7 +12,8 @@ No model or audio files, no image textures, no generator credits. An asset is a 
   code snippet and downloads made in your browser.
   - **Models:** sliders for movable parts; `.glb` for Godot, Blender and the web, `.usdz` for AR on iPhone and iPad,
     `.obj` for the shape alone. Procedural patterns (wood grain, stone, bark) are baked into a texture on export.
-  - **Sounds:** play them, see the spectrogram and the waveform, download `.wav` (48 kHz mono). Every sound at its
+  - **Sounds:** interface, hits, movement, effects, voices (efforts, cries, creatures, babble in a made-up language,
+    a robot) and ambience loops. Play them, see the spectrogram and the waveform, download `.wav` (48 kHz mono). Every sound at its
     defaults and at every preset is also a ready file: `https://formwerk.swarvex.run/sounds/<id>.wav` and
     `<id>.<preset>.wav`, listed in the catalogue.
 - **Library:** `import { chair } from "formwerk"`; `import { hit, toAudioBuffer, toWav } from "formwerk/sounds"`

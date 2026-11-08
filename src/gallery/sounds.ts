@@ -9,10 +9,10 @@ import { makeSound, SOUND_CATEGORIES, type AnySound } from "../sounds/define";
 import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
 
 const K = de
-  ? { kategorien: { ui: "Bedienung", impact: "Treffer & Explosionen", movement: "Bewegung", effects: "Effekte", ambience: "Umgebung (Schleifen)" },
+  ? { kategorien: { ui: "Bedienung", impact: "Treffer & Explosionen", movement: "Bewegung", effects: "Effekte", voice: "Stimmen", ambience: "Umgebung (Schleifen)" },
       spielen: "▶ Abspielen", stoppen: "■ Stopp", schleife: "nahtlose Schleife", einmal: "Einzelklang", spitze: "Spitze", lautheit: "Lautheit",
       wav: "Herunterladen (.wav, 48 kHz mono)", automatisch: "Nach jeder Änderung abspielen", bild: "Spektrogramm (Zeit nach rechts, Tonhöhe nach oben) und Wellenform" }
-  : { kategorien: { ui: "Interface", impact: "Hits & explosions", movement: "Movement", effects: "Effects", ambience: "Ambience (loops)" },
+  : { kategorien: { ui: "Interface", impact: "Hits & explosions", movement: "Movement", effects: "Effects", voice: "Voices", ambience: "Ambience (loops)" },
       spielen: "▶ Play", stoppen: "■ Stop", schleife: "seamless loop", einmal: "one-shot", spitze: "peak", lautheit: "loudness",
       wav: "Download (.wav, 48 kHz mono)", automatisch: "Play after every change", bild: "Spectrogram (time to the right, pitch up) and waveform" };
 

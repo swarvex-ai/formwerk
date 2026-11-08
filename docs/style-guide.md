@@ -38,4 +38,9 @@ The catalogue should look like one set, whoever builds an asset.
 - **No melodies of known games, films or songs**, not even rebuilt from notes: a melody is protected however it is
   synthesised. No sound-alikes of a famous sound either.
 - **Presets:** two to four uses that differ clearly (`punch`, `heavy-thud`, `sword-clash`), named after what they are.
-- **Budgets per category (seconds):** interface 4, impact 4, movement 1.5, effects 2.5, ambience loops 12.
+- **Voices** (`src/core/voice.ts`): a glottis, the formants of a mouth shape, breath and hiss, as keyframes that glide
+  into each other. Efforts, cries, creatures and a made-up language, never words of a real one. `size` is the length
+  of the vocal tract (a child 0.7, a giant 3): set it with the pitch, a deep voice in a small body sounds wrong.
+  Every change of loudness glides over at least 10 ms; a jump in a key clicks. No imitation of a real person's voice
+  or of a known character.
+- **Budgets per category (seconds):** interface 4, impact 4, movement 1.5, effects 2.5, voices 4, ambience loops 12.

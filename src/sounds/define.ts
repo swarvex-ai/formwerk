@@ -5,8 +5,8 @@
 import { centre, foldLoop, fadeEdges, LOOP_TAIL, metrics, normalize, RATE, removeDC, type Samples } from "../core/audio";
 import { withPreset, type Presets, type Schema, type Text, type Values } from "../core/params";
 
-export type SoundCategory = "ui" | "impact" | "movement" | "effects" | "ambience";
-export const SOUND_CATEGORIES: SoundCategory[] = ["ui", "impact", "movement", "effects", "ambience"];
+export type SoundCategory = "ui" | "impact" | "movement" | "effects" | "voice" | "ambience";
+export const SOUND_CATEGORIES: SoundCategory[] = ["ui", "impact", "movement", "effects", "voice", "ambience"];
 
 export type Sound<S extends Schema = Schema> = {
   id: string; category: SoundCategory; title: Text; description: Text; params: S;

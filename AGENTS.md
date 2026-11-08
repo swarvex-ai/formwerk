@@ -27,10 +27,11 @@ your submission.
 
 ## Adding a sound
 
-1. One file `src/sounds/<category>/<id>.ts` (categories: ui, impact, movement, effects, ambience) with
+1. One file `src/sounds/<category>/<id>.ts` (categories: ui, impact, movement, effects, voice, ambience) with
    `defineSound({ id, category, title, description, params, presets, loop, maxSeconds, build })`. `build` returns the
    samples at `RATE` (48 kHz mono) from the building blocks of `src/core/audio.ts` (`Osc`, `Biquad`, `LowPass`,
-   `envelope`, `grains`, `smooth`, `white`, `semitones`). Copy the closest existing sound and change it.
+   `envelope`, `grains`, `smooth`, `white`, `semitones`); voices use `voice()` from `src/core/voice.ts` with keyframes
+   (pitch, mouth shape, voice, breath, hiss). Copy the closest existing sound and change it.
 2. One line in `src/sounds/index.ts` (catalogue) and one in `src/sounds/lib.ts` (library export).
 3. `npm test`: the sound tests build it at its defaults, every extreme, every preset and random values, and check the
    length budget, the level, no DC, clean edges (one-shots) or seam (loops), that it is audible, that it decays on its
