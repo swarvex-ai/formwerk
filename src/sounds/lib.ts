@@ -20,6 +20,19 @@ import { pop as s15 } from "./ui/pop";
 import { toggle as s16 } from "./ui/toggle";
 import { buzz as s17 } from "./ui/buzz";
 import { alert as s18 } from "./ui/alert";
+import { typing as s19 } from "./ui/typing";
+import { glass as s20 } from "./impact/glass";
+import { clang as s21 } from "./impact/clang";
+import { knock as s22 } from "./impact/knock";
+import { splash as s23 } from "./movement/splash";
+import { creak as s24 } from "./movement/creak";
+import { magic as s25 } from "./effects/magic";
+import { engine as s26 } from "./effects/engine";
+import { heartbeat as s27 } from "./effects/heartbeat";
+import { rain as s28 } from "./ambience/rain";
+import { fire as s29 } from "./ambience/fire";
+import { hum as s30 } from "./ambience/hum";
+import { thunder as s31 } from "./ambience/thunder";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -41,3 +54,5 @@ export const click = klang(s1), chime = klang(s2), hit = klang(s3), explosion = 
 export const jump = klang(s6), whoosh = klang(s7), pickup = klang(s8), zap = klang(s9), wind = klang(s10);
 export const effort = klang(s11), pain = klang(s12), creature = klang(s13), babble = klang(s14);
 export const pop = klang(s15), toggle = klang(s16), buzz = klang(s17), alert = klang(s18);
+export const typing = klang(s19), glass = klang(s20), clang = klang(s21), knock = klang(s22), splash = klang(s23), creak = klang(s24);
+export const magic = klang(s25), engine = klang(s26), heartbeat = klang(s27), rain = klang(s28), fire = klang(s29), hum = klang(s30), thunder = klang(s31);

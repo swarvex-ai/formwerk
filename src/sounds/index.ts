@@ -18,6 +18,26 @@ import { pain } from "./voice/pain";
 import { creature } from "./voice/creature";
 import { babble } from "./voice/babble";
 import { wind } from "./ambience/wind";
+import { typing } from "./ui/typing";
+import { glass } from "./impact/glass";
+import { clang } from "./impact/clang";
+import { knock } from "./impact/knock";
+import { splash } from "./movement/splash";
+import { creak } from "./movement/creak";
+import { magic } from "./effects/magic";
+import { engine } from "./effects/engine";
+import { heartbeat } from "./effects/heartbeat";
+import { rain } from "./ambience/rain";
+import { fire } from "./ambience/fire";
+import { hum } from "./ambience/hum";
+import { thunder } from "./ambience/thunder";
 
-export const SOUNDS: AnySound[] = [click, chime, pop, toggle, buzz, alert, hit, explosion, footstep, jump, whoosh, pickup, zap, effort, pain, creature, babble, wind];
+export const SOUNDS: AnySound[] = [
+  click, chime, pop, toggle, buzz, alert, typing,
+  hit, explosion, glass, clang, knock,
+  footstep, jump, whoosh, splash, creak,
+  pickup, zap, magic, engine, heartbeat,
+  effort, pain, creature, babble,
+  wind, rain, fire, hum, thunder,
+];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);
