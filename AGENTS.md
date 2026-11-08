@@ -1,8 +1,9 @@
 # Formwerk: instructions for agents
 
-Formwerk is the catalogue of game assets as code: parametric 3D models for three.js (r187, WebGPURenderer with WebGL 2
-fallback, TSL materials), surfaces that tile (live TSL materials, baked into PNG maps of any size for other engines)
-pixel sprites with Godot SpriteFrames, and sounds for any engine (48 kHz mono, WAV), voices included. Every asset is
+Formwerk is the catalogue of assets as code for games, apps, teaching and research: parametric 3D models for three.js
+(r187, WebGPURenderer with WebGL 2 fallback, TSL materials), surfaces that tile (live TSL materials, baked into PNG maps
+of any size for other engines), pixel sprites with Godot SpriteFrames, interface icons (SVG and PNG), and sounds for any
+engine (48 kHz mono, WAV), voices included. Every asset is
 one function of its parameters. No model, image or audio files, no generator credits. Speech in English comes from a
 local voice model in the separate GPL package `speech/` (only the gallery's speech tab imports it; never import it
 from `src/` outside `src/gallery/`). Music follows as its own kind; until then, a request for it goes to the lead.
@@ -53,6 +54,23 @@ your submission.
    mirror of right, that animations move, and determinism. `tests/scene/sprites.mjs` writes its sheet to
    `tests/scene/baseline/<id>.png`: look at it enlarged, then commit it with the sprite.
 
+## Adding an icon
+
+1. One file `src/icons/<category>/<id>.ts` (categories: navigation, actions, status, objects) with
+   `defineIcon({ id, category, title, description, params, presets, build })`. `params` are the icon's own (at least
+   three that change the shape); the contract adds the shared pen (stroke, corners, style, badge, color). `build(p,
+   pen)` returns parts on the 24 × 24 grid from `src/core/vector.ts` (`line`, `polygon`, `circle`, `arc`, `rect`) and
+   says what each one is: `area` (closed shapes: outlined, tinted or filled by style), `stroke`, `dot`, `detail`
+   (drawn, cut out of a filled area), `hole`, `gap` (a clear margin around what comes next). Never set colours or
+   stroke widths yourself. Use `pen` and `reach(pen, angle)` to keep the ink inside the grid. Copy the closest icon.
+2. One line each in `src/icons/index.ts` and `src/icons/lib.ts`.
+3. `npm test`: the icon tests draw it at its defaults, every extreme, every preset, random values and every
+   combination of its choices at the strongest stroke, each in all three styles. They check that the outermost pixel
+   stays empty, the amount of ink, that it is centred, and that it reads at 24 px (no gap or stroke narrower than 0.8
+   grid units, measured at eight times the size), plus well-formed SVG in the text colour. `tests/scene/icons.mjs`
+   writes its sheet to `tests/scene/baseline/<id>.png` and checks that a browser draws the SVG like the pixels. Look at
+   the sheet, then commit it with the icon.
+
 ## Adding a sound
 
 1. One file `src/sounds/<category>/<id>.ts` (categories: ui, impact, movement, effects, voice, ambience) with
@@ -96,15 +114,16 @@ your submission.
 
 ## Protected (only the lead changes these)
 
-The parameter, asset, surface and sound contracts (`src/core/**`, `src/assets/define.ts`, `src/surfaces/define.ts`,
-`src/surfaces/noise.ts`, `src/surfaces/bake.ts`, `src/sprites/define.ts`, `src/sounds/define.ts`), the catalogue format (`src/catalog.ts`,
-`scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`,
-`tests/scene/sounds.mjs`, `tests/scene/sprites.mjs`), the speech package (`speech/**`) and the dependencies. If an asset or a sound needs more from them, say so in your
+The parameter, asset, surface, sprite, icon and sound contracts (`src/core/**`, `src/assets/define.ts`,
+`src/surfaces/define.ts`, `src/surfaces/noise.ts`, `src/surfaces/bake.ts`, `src/sprites/define.ts`, `src/icons/define.ts`,
+`src/sounds/define.ts`), the catalogue format (`src/catalog.ts`, `scripts/**`), the tests (`tests/core/**`,
+`tests/scene/run.mjs`, `tests/scene/sounds.mjs`, `tests/scene/sprites.mjs`, `tests/scene/icons.mjs`), the speech package (`speech/**`) and the dependencies. If an asset or a sound needs more from them, say so in your
 submission.
 
 ## Commands
 
-`npm run dev` (gallery), `npm test` (types, core tests, spectrograms, sprite sheets, build with catalogue, scene
-tests), `npm run test:core` (fast, while working), `npm run test:sound` (spectrograms only), `npm run test:sprite`
-(sprite sheets only). `npm run build` also writes `dist/catalog.json`, `dist/llms.txt`, every sound at its defaults
-and presets as `dist/sounds/*.wav` and every sprite as `dist/sprites/*.png`, `.tres` and `.json`.
+`npm run dev` (gallery), `npm test` (types, core tests, spectrograms, sprite sheets, icon sheets, build with catalogue,
+scene tests), `npm run test:core` (fast, while working), `npm run test:sound` (spectrograms only), `npm run test:sprite`
+(sprite sheets only), `npm run test:icon` (icon sheets and SVG in a browser). `npm run build` also writes
+`dist/catalog.json`, `dist/llms.txt`, every sound at its defaults and presets as `dist/sounds/*.wav`, every sprite as
+`dist/sprites/*.png`, `.tres` and `.json`, and every icon as `dist/icons/*.svg` and `.png`.

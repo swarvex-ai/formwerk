@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Formwerk: game assets as code</title>
-    <meta name="description" content="Open catalogue of game assets as code: parametric 3D models and tiling surfaces for three.js, PNG maps up to 8192 pixels and sounds for any engine. Change the parameters, share the link, download .glb, .png or .wav. CC0." />
+    <title>Formwerk: assets as code</title>
+    <meta name="description" content="Open catalogue of assets as code for games, apps, teaching and research: parametric 3D models and tiling surfaces for three.js, PNG maps up to 8192 pixels, pixel sprites, interface icons and sounds for any engine. Change the parameters, share the link, download .glb, .png, .svg or .wav. CC0." />
     <link rel="icon" href="data:," />
     <style>
       :root { color-scheme: dark; --grund: #0f1114; --flaeche: #16191d; --linie: #2a2f36; --text: #e8eaed; --leise: #9aa3ad; --akzent: #22d3ee; font: 15px/1.45 system-ui, sans-serif; }
@@ -48,6 +48,14 @@
         .liste section { display: contents; } .liste h2 { display: none; } .liste button { width: auto; }
         .regler { border-left: 0; }
       }
+      .iconbild { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px 16px 36px; }
+      .iconbild .karte { display: grid; grid-template-rows: 1fr auto; place-items: center; border-radius: 10px; border: 1px solid var(--linie); min-height: 0; }
+      .iconbild .hell { background: #f6f7f9; } .iconbild .dunkel { background: #16191d; }
+      .iconbild .gross svg { width: min(192px, 30vw); height: auto; display: block; }
+      .iconbild .klein { display: flex; gap: 18px; align-items: end; padding: 12px; } .iconbild .klein svg { display: block; }
+      .liste button.mitbild { display: flex; align-items: center; gap: 8px; } .liste button.mitbild svg { flex: none; }
+      .buehne:has(.iconbild:not([hidden])) .werte { bottom: 10px; }
+      @media (max-width: 860px) { .iconbild { grid-template-columns: 1fr; } }
       body.test { display: block; } body.test .buehne { position: fixed; inset: 0; } body.test .werte { display: none; }
     </style>
   </head>

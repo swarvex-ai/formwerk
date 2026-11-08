@@ -1,20 +1,21 @@
-// The gallery shell: header with the tabs (models, surfaces, sprites, sounds, speech), the three regions (list, stage, controls) and what every
+// The gallery shell: header with the tabs (models, surfaces, sprites, icons, sounds, speech), the three regions (list, stage, controls) and what every
 // tab shares (parameter fields, buttons, copying, downloads). Each kind of asset is its own module, loaded when its
 // tab opens, so three.js only comes with models and surfaces. No server work: the page is static.
 import type { Param, Text } from "../core/params";
 import { SOUNDS, soundById } from "../sounds";
 import { SURFACE_IDS } from "../surfaces/list";
 import { SPRITES, spriteById } from "../sprites";
+import { ICONS, iconById } from "../icons";
 
 export const de = (new URLSearchParams(location.search).get("lang") ?? navigator.language).startsWith("de");
 export const T = de
-  ? { reiter: { models: "Modelle", surfaces: "Oberflächen", sprites: "Sprites", sounds: "Klänge", speech: "Sprache" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
+  ? { reiter: { models: "Modelle", surfaces: "Oberflächen", sprites: "Sprites", icons: "Icons", sounds: "Klänge", speech: "Sprache" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
       code: "Code kopieren", link: "Link kopieren", kopiert: "Kopiert", looks: "Looks", export: "Herunterladen", laden: "Herunterladen",
-      hinweis: "Jedes Asset ist Code: Parameter ändern, Link teilen, für Godot, Blender, AR oder dein Spiel herunterladen. Lizenz der Assets: CC0.",
+      hinweis: "Jedes Asset ist Code: Parameter ändern, Link teilen, für dein Spiel, deine App, Godot, Blender oder AR herunterladen. Lizenz der Assets: CC0.",
       beitragen: "Eigene Assets beitragen", agenten: "Für Agenten", datenschutz: "Datenschutz" }
-  : { reiter: { models: "Models", surfaces: "Surfaces", sprites: "Sprites", sounds: "Sounds", speech: "Speech" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
+  : { reiter: { models: "Models", surfaces: "Surfaces", sprites: "Sprites", icons: "Icons", sounds: "Sounds", speech: "Speech" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
       code: "Copy code", link: "Copy link", kopiert: "Copied", looks: "Looks", export: "Download", laden: "Download",
-      hinweis: "Every asset is code: change the parameters, share the link, download it for Godot, Blender, AR or your game. Asset licence: CC0.",
+      hinweis: "Every asset is code: change the parameters, share the link, download it for your game, your app, Godot, Blender or AR. Asset licence: CC0.",
       beitragen: "Contribute your own assets", agenten: "For agents", datenschutz: "Privacy" };
 
 export const el = <K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, string> = {}, ...kinder: (Node | string)[]) => {
@@ -91,7 +92,7 @@ export async function startShell() {
   const b: Bereich = { liste: el("nav", { class: "liste", "aria-label": "Assets" }), regler: el("form", { class: "regler" }), buehne, werte: el("p", { class: "werte" }) };
   const reiter = Object.fromEntries((Object.keys(T.reiter) as Art[]).map((art) => [art, knopf(T.reiter[art], () => {
     // Models: an empty hash shows the first model; the other kinds their first one
-    location.hash = art === "sounds" ? SOUNDS[0].id : art === "surfaces" ? SURFACE_IDS[0] : art === "sprites" ? SPRITES[0].id : art === "speech" ? "speech" : "";
+    location.hash = art === "sounds" ? SOUNDS[0].id : art === "surfaces" ? SURFACE_IDS[0] : art === "sprites" ? SPRITES[0].id : art === "icons" ? ICONS[0].id : art === "speech" ? "speech" : "";
   })])) as Record<Art, HTMLButtonElement>;
   wurzel.append(
     el("header", {}, el("h1", {}, "Formwerk"), el("nav", { class: "reiter", "aria-label": de ? "Arten" : "Kinds" }, ...Object.values(reiter)),
@@ -105,13 +106,13 @@ export async function startShell() {
   let art: Art | null = null, aktiv: Galerie | null = null, laeuft: Promise<void> = Promise.resolve();
   const laden = async () => {
     const id = hashTeile().id;
-    const neu: Art = id === "speech" ? "speech" : soundById(id) ? "sounds" : (SURFACE_IDS as readonly string[]).includes(id) ? "surfaces" : spriteById(id) ? "sprites" : "models";
+    const neu: Art = id === "speech" ? "speech" : soundById(id) ? "sounds" : (SURFACE_IDS as readonly string[]).includes(id) ? "surfaces" : spriteById(id) ? "sprites" : iconById(id) ? "icons" : "models";
     if (neu === art && aktiv) { aktiv.zeigen(); return; }
     aktiv?.stop();
     aktiv = null;
     art = neu;
     for (const [k, knopfE] of Object.entries(reiter)) knopfE.setAttribute("aria-current", String(k === neu));
-    const modul = neu === "speech" ? await import("./speech") : neu === "sounds" ? await import("./sounds") : neu === "surfaces" ? await import("./surfaces") : neu === "sprites" ? await import("./sprites") : await import("./models");
+    const modul = neu === "speech" ? await import("./speech") : neu === "sounds" ? await import("./sounds") : neu === "surfaces" ? await import("./surfaces") : neu === "sprites" ? await import("./sprites") : neu === "icons" ? await import("./icons") : await import("./models");
     if (art !== neu) return;
     aktiv = await modul.start(b);
     aktiv.zeigen();

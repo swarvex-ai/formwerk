@@ -1,7 +1,7 @@
 {
   "name": "formwerk",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,9 +9,10 @@
     "typecheck": "tsc --noEmit",
     "test:core": "vitest run",
     "test:scene": "npm run build && node tests/scene/run.mjs",
-    "test": "tsc --noEmit && vitest run && node tests/scene/sounds.mjs && node tests/scene/sprites.mjs && npm run build && node tests/scene/run.mjs",
+    "test": "tsc --noEmit && vitest run && node tests/scene/sounds.mjs && node tests/scene/sprites.mjs && node tests/scene/icons.mjs && npm run build && node tests/scene/run.mjs",
     "test:sound": "node tests/scene/sounds.mjs",
     "test:sprite": "node tests/scene/sprites.mjs",
+    "test:icon": "node tests/scene/icons.mjs",
     "test:speech": "npm run build && node tests/speech/quality.mjs"
   },
   "dependencies": {
@@ -26,13 +27,14 @@
     "vite": "8.3.5",
     "vitest": "5.0.5"
   },
-  "description": "Game assets as code: parametric 3D models and tiling surfaces for three.js, surfaces as PNG maps up to 8192 pixels, pixel sprites with Godot SpriteFrames, and sounds (voices included) for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj, .png, .tres or .wav. CC0.",
+  "description": "Assets as code for games, apps, teaching and research: parametric 3D models and tiling surfaces for three.js, surfaces as PNG maps up to 8192 pixels, pixel sprites with Godot SpriteFrames, interface icons as SVG and PNG, and sounds (voices included) for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj, .png, .svg, .tres or .wav. CC0.",
   "license": "MIT",
   "main": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
     "./sounds": "./src/sounds/lib.ts",
-    "./sprites": "./src/sprites/lib.ts"
+    "./sprites": "./src/sprites/lib.ts",
+    "./icons": "./src/icons/lib.ts"
   },
   "keywords": [
     "three.js",
@@ -52,7 +54,11 @@
     "procedural-voice",
     "pixel-art",
     "sprites",
-    "godot"
+    "godot",
+    "icons",
+    "svg-icons",
+    "ui-icons",
+    "ui-sounds"
   ],
   "workspaces": [
     "speech"

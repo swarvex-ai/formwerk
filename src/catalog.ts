@@ -15,6 +15,8 @@ import type { Pixels } from "./core/pixels";
 import { SPRITES } from "./sprites";
 import { DOWNLOAD_MB, MAX_CHARACTERS, MODEL, VOICES } from "../speech/src";
 import { animationName, godotSpriteFrames, makeSheet, sheetJson, type AnySprite } from "./sprites/define";
+import { ICONS } from "./icons";
+import { makeIcon, ownParams, type AnyIcon } from "./icons/define";
 
 export const GALLERY = "https://formwerk.swarvex.run";
 export const REPOSITORY = "https://github.com/swarvex-ai/formwerk";
@@ -69,6 +71,27 @@ function spriteEintrag(s: AnySprite, base: string) {
   };
 }
 
+function iconEintrag(i: AnyIcon, base: string) {
+  const datei = (name: string) => ({ svg: `${base}/icons/${name}.svg`, png: `${base}/icons/${name}.png` });
+  return {
+    id: i.id, category: i.category, title: i.title, description: i.description,
+    function: funktion(i.id), gallery: `${base}/#${i.id}`, files: datei(i.id),
+    params: i.params as Record<string, Param>, own: ownParams(i),
+    presets: Object.fromEntries(Object.entries(i.presets).map(([name, p]) => [name, { ...p, gallery: `${base}/#${i.id}?preset=${name}`, files: datei(`${i.id}.${name}`) }])),
+  };
+}
+
+/** Size of the ready PNG files of the icons. */
+export const ICON_PNG = 128;
+
+/** The ready icon files: every icon at its defaults and every preset as SVG (currentColor) and PNG (128 px). */
+export function iconFiles(): ({ path: string; image: Pixels } | { path: string; text: string })[] {
+  return ICONS.flatMap((i) => [{ name: i.id, input: {} }, ...Object.keys(i.presets).map((preset) => ({ name: `${i.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
+    const m = makeIcon(i, input);
+    return [{ path: `icons/${name}.svg`, text: m.svg() + "\n" }, { path: `icons/${name}.png`, image: m.pixels(ICON_PNG) }];
+  }));
+}
+
 /** The ready sprite files: every sprite at its defaults and every preset as sheet (.png), Godot SpriteFrames and JSON. */
 export function spriteFiles(): ({ path: string; image: Pixels } | { path: string; text: string })[] {
   return SPRITES.flatMap((s) => [{ name: s.id, input: {} }, ...Object.keys(s.presets).map((preset) => ({ name: `${s.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
@@ -92,7 +115,7 @@ export function soundFiles(): { path: string; bytes: Uint8Array<ArrayBuffer> }[]
 export function catalog(base = GALLERY) {
   return {
     name: "Formwerk",
-    description: "Game assets as code: parametric 3D models and tiling surfaces for three.js (r187, WebGPU with WebGL 2 fallback, TSL materials), surfaces as PNG maps up to 8192 pixels, pixel sprites with Godot SpriteFrames and sounds for any engine (WAV, 48 kHz mono).",
+    description: "Assets as code for games, apps, teaching and research: parametric 3D models and tiling surfaces for three.js (r187, WebGPU with WebGL 2 fallback, TSL materials), surfaces as PNG maps up to 8192 pixels, pixel sprites with Godot SpriteFrames, interface icons (SVG and PNG) and sounds for any engine (WAV, 48 kHz mono).",
     licence: { code: "MIT", assets: "CC0-1.0" },
     gallery: base, repository: REPOSITORY,
     conventions: {
@@ -103,11 +126,13 @@ export function catalog(base = GALLERY) {
       physics: "body static or dynamic; collider box (bounding box), hull (convex hull) or cylinder (trunk); massKg is an estimate",
       surfaces: "materials that tile without a seam; one tile is tileMetres metres. three.js: a live TSL material (no textures, sharp at any distance), repeat = tiles across the mesh's UVs. Other engines: PNG maps baked in the gallery at 512 to 8192 pixels per tile (larger sizes get finer detail): colour (sRGB), normal (OpenGL, green up, as Godot and Blender expect), roughness, metalness, height (linear; reliefMetres between black and white)",
       sprites: "pixel art with hard edges (alpha 0 or 255) and a one-pixel outline; a sheet per sprite: rows animation × direction, columns frames; grounded sprites have their feet on the bottom row of the frame. Godot: put the .png and .tres side by side, use the .tres as SpriteFrames of an AnimatedSprite2D or AnimatedSprite3D and set the texture filter to Nearest",
+      icons: "a 24 × 24 grid with one stroke width for the whole set; shared parameters stroke (grid units), corners (round or sharp), style (outline, duotone, filled), badge (a dot at the top right) and color (of the PNG files only); the SVG takes the text colour (currentColor) and scales without loss, masks for cut-outs have ids unique per drawing; every icon reads at 24 px: no gap or stroke narrower than 0.8 grid units, the outermost pixel stays empty",
       sounds: "48 kHz mono, peak at −1 dBFS; one-shots start and end at zero, loops (loop: true) repeat without a seam; the same values and seed give the same samples, other seeds vary them (footsteps, hits)",
     },
     models: ASSETS.map((a) => eintrag(a, base)),
     surfaces: SURFACES.map((f) => flaechenEintrag(f, base)),
     sprites: SPRITES.map((s) => spriteEintrag(s, base)),
+    icons: ICONS.map((i) => iconEintrag(i, base)),
     speech: {
       gallery: `${base}/#speech`, language: "English", model: MODEL, downloadMB: DOWNLOAD_MB, maxCharacters: MAX_CHARACTERS,
       voices: Object.keys(VOICES), licence: "package speech/ GPL-3.0-or-later (eSpeak NG inside kokoro-js); spoken files CC0",
@@ -132,7 +157,7 @@ export function llmsTxt(k: Catalog): string {
     ``,
     `> ${k.description} Every asset is a function of typed parameters. Code MIT, assets CC0: copy, change and ship them anywhere, no attribution needed.`,
     ``,
-    `- Gallery with controls, share links and downloads (.glb with baked patterns, .usdz, .obj, PNG maps of surfaces, .wav): ${k.gallery}`,
+    `- Gallery with controls, share links and downloads (.glb with baked patterns, .usdz, .obj, PNG maps of surfaces, sprite sheets, .svg and .png icons, .wav): ${k.gallery}`,
     `- Full catalogue with every parameter, preset, movable part, physics hint and sound file: ${k.gallery}/catalog.json`,
     `- Source: ${k.repository} (TypeScript; copy \`src/\` into your project or add the repository as a git dependency)`,
     ``,
@@ -171,6 +196,17 @@ export function llmsTxt(k: Catalog): string {
     ``,
     `Godot and other engines: download the sheet with its SpriteFrames (.tres) and JSON (listed below, or with your values from the gallery). Set the texture filter to Nearest.`,
     ``,
+    `## Use: icons`,
+    ``,
+    "```ts",
+    `import { gear, mark } from "formwerk/icons"; // no three.js`,
+    `const svg = gear({ teeth: 6, style: "filled" }).svg(32); // SVG text in the text colour (currentColor), 32 px`,
+    `button.innerHTML = mark({ preset: "warning", stroke: 1.5 }).svg();`,
+    `const pixels = gear({ preset: "cog" }).pixels(512);           // RGBA pixels in the colour of \`color\``,
+    "```",
+    ``,
+    `Apps, sites and engines: download the SVG or PNG files (every icon at its defaults and every preset, listed below), or set values in the gallery and download any size there. Every icon has the shared parameters \`stroke\`, \`corners\`, \`style\`, \`badge\` and \`color\`, so a set stays consistent.`,
+    ``,
     `## Use: sounds`,
     ``,
     "```ts",
@@ -205,6 +241,13 @@ export function llmsTxt(k: Catalog): string {
     teile.push(`- Animations: ${s.animations.map((a) => `\`${a.name}\` (${a.frames} frames, ${a.fps} fps)`).join(", ")}`);
     teile.push(`- Parameters:`, ...Object.entries(s.params).map(([n, p]) => paramZeile(n, p)));
     teile.push(`- Presets: ${Object.entries(s.presets).map(([n, p]) => `\`${n}\` (${p.label.en})`).join(", ")}`);
+  }
+  teile.push(``, `## Icons`);
+  for (const i of k.icons) {
+    teile.push(``, `### ${i.function}() · ${i.title.en} (${i.category})`, ``, i.description.en, ``, `- Gallery: ${i.gallery}`);
+    teile.push(`- Files at the defaults: ${i.files.svg}, ${i.files.png}`);
+    teile.push(`- Parameters (besides the shared stroke, corners, style, badge, color):`, ...i.own.map((n) => paramZeile(n, i.params[n])));
+    teile.push(`- Presets: ${Object.entries(i.presets).map(([n, p]) => `\`${n}\` (${p.label.en})`).join(", ")}`);
   }
   teile.push(``, `## Speech (English)`, ``, `${k.speech.note} Gallery: ${k.speech.gallery}. Voices: ${k.speech.voices.map((v) => `\`${v}\``).join(", ")}. Licence: ${k.speech.licence}.`);
   teile.push(``, `## Sounds`);

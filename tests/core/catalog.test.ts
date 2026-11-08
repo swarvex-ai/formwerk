@@ -1,7 +1,8 @@
 // The catalogue for agents (catalog.json, llms.txt): complete, serialisable, and every asset in it.
 import { describe, expect, it } from "vitest";
 import { ASSETS } from "../../src/assets";
-import { catalog, llmsTxt, soundFiles, spriteFiles } from "../../src/catalog";
+import { catalog, iconFiles, llmsTxt, soundFiles, spriteFiles } from "../../src/catalog";
+import { ICONS } from "../../src/icons";
 import { fromWav } from "../../src/core/audio";
 import { SOUNDS } from "../../src/sounds";
 import { SURFACES } from "../../src/surfaces";
@@ -48,9 +49,18 @@ describe("catalogue for agents", () => {
       expect(s.animations.length).toBeGreaterThan(0);
     }
   });
+  it("lists every icon with its files and its own parameters", () => {
+    expect(k.icons.map((i) => i.id)).toEqual(ICONS.map((i) => i.id));
+    const dateien = new Set(iconFiles().map((f) => `https://example.test/${f.path}`));
+    for (const i of k.icons) {
+      for (const f of [i.files, ...Object.values(i.presets).map((p) => p.files)]) for (const u of Object.values(f)) expect(dateien.has(u), u).toBe(true);
+      expect(i.own.length).toBeGreaterThanOrEqual(3);
+      for (const n of ["stroke", "corners", "style", "badge", "color"]) expect(i.params).toHaveProperty(n);
+    }
+  });
   it("llms.txt names every function and parameter", () => {
     const t = llmsTxt(k);
-    for (const a of [...k.models, ...k.surfaces, ...k.sprites, ...k.sounds]) {
+    for (const a of [...k.models, ...k.surfaces, ...k.sprites, ...k.icons, ...k.sounds]) {
       expect(t).toContain(`### ${a.function}()`);
       for (const p of Object.keys(a.params)) expect(t).toContain(`\`${p}\``);
     }

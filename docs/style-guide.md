@@ -48,6 +48,21 @@ The catalogue should look like one set, whoever builds an asset.
 - **Palette:** few colours (the tests allow 40 per sheet); colours that a game changes (skin, clothes, liquid) are
   parameters, the rest fixed.
 
+## Icons
+
+- **Grid:** 24 × 24 units, one pixel each at the design size. Ink stays inside the outermost unit; shapes fill the
+  room up to about 2 units from the edge, like other icon sets, so icons sit together in a toolbar.
+- **One pen:** stroke width, corners and style come from the contract, the same for every icon of a set. Draw centre
+  lines; the stroke grows to both sides. Where a heavy stroke or a miter tip would leave the grid, use
+  `reach(pen, angle)` and give way: fewer teeth, a smaller door, a symbol that moves, never a stroke of its own width.
+- **Readable at 24 px:** gaps and strokes at least 0.8 units (the tests measure it); a detail that does not fit is
+  left out rather than drawn as a smudge.
+- **Simple shapes:** what the thing is, not how it looks in detail: a house is five corners and a door, a bell a dome,
+  a rim and a clapper. Curves as `arc` or as a polygon with enough points (every 15–20 degrees).
+- **Filled style:** what is an `area` becomes solid, a `detail` is cut out of it, a `hole` stays open. Plan the parts
+  so the filled icon still says the same thing.
+- **Presets** name what the icon means in an interface (`settings`, `warning`, `team`), not its values.
+
 ## Sounds
 
 - **Sound:** game-ready and clear rather than realistic in every detail: one recognisable event per sound (a hit, a
@@ -58,6 +73,9 @@ The catalogue should look like one set, whoever builds an asset.
   (body against noise), not its overall level.
 - **Variation:** use the seed for things that repeat (steps, hits, debris), so a game can alternate a few seeds.
   Interface sounds and tones are exact and need no seed.
+- **Interface sounds** say one thing each and work in pairs where an app needs both: on rises, off falls; send glides
+  up, receive down; success is major or open fifths, an error a low buzz or a falling minor. Short (most under 0.3 s),
+  never startling at −1 dBFS: soft attacks of a few milliseconds, nothing harsh unless it is an alarm.
 - **Length:** as short as the event; one-shots end on their own (the tests check that the last 50 ms are at least
   10 dB below the loudest moment). Loops render their length plus `LOOP_TAIL`; the finish folds the tail into the
   start.
