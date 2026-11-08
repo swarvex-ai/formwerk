@@ -1,16 +1,17 @@
-// The gallery shell: header with the tabs (models, sounds), the three regions (list, stage, controls) and what every
+// The gallery shell: header with the tabs (models, surfaces, sounds), the three regions (list, stage, controls) and what every
 // tab shares (parameter fields, buttons, copying, downloads). Each kind of asset is its own module, loaded when its
-// tab opens, so three.js only comes with the models. No server work: the page is static.
+// tab opens, so three.js only comes with models and surfaces. No server work: the page is static.
 import type { Param, Text } from "../core/params";
 import { SOUNDS, soundById } from "../sounds";
+import { SURFACE_IDS } from "../surfaces/list";
 
 export const de = (new URLSearchParams(location.search).get("lang") ?? navigator.language).startsWith("de");
 export const T = de
-  ? { reiter: { models: "Modelle", sounds: "Klänge" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
+  ? { reiter: { models: "Modelle", surfaces: "Oberflächen", sounds: "Klänge" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
       code: "Code kopieren", link: "Link kopieren", kopiert: "Kopiert", looks: "Looks", export: "Herunterladen", laden: "Herunterladen",
       hinweis: "Jedes Asset ist Code: Parameter ändern, Link teilen, für Godot, Blender, AR oder dein Spiel herunterladen. Lizenz der Assets: CC0.",
       beitragen: "Eigene Assets beitragen", agenten: "Für Agenten" }
-  : { reiter: { models: "Models", sounds: "Sounds" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
+  : { reiter: { models: "Models", surfaces: "Surfaces", sounds: "Sounds" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
       code: "Copy code", link: "Copy link", kopiert: "Copied", looks: "Looks", export: "Download", laden: "Download",
       hinweis: "Every asset is code: change the parameters, share the link, download it for Godot, Blender, AR or your game. Asset licence: CC0.",
       beitragen: "Contribute your own assets", agenten: "For agents" };
@@ -88,8 +89,8 @@ export async function startShell() {
   const wurzel = document.querySelector("#app")!, buehne = document.querySelector<HTMLElement>(".buehne")!;
   const b: Bereich = { liste: el("nav", { class: "liste", "aria-label": "Assets" }), regler: el("form", { class: "regler" }), buehne, werte: el("p", { class: "werte" }) };
   const reiter = Object.fromEntries((Object.keys(T.reiter) as Art[]).map((art) => [art, knopf(T.reiter[art], () => {
-    // Models: an empty hash shows the first model; sounds: the first sound
-    location.hash = art === "sounds" ? SOUNDS[0].id : "";
+    // Models: an empty hash shows the first model; surfaces and sounds: their first one
+    location.hash = art === "sounds" ? SOUNDS[0].id : art === "surfaces" ? SURFACE_IDS[0] : "";
   })])) as Record<Art, HTMLButtonElement>;
   wurzel.append(
     el("header", {}, el("h1", {}, "Formwerk"), el("nav", { class: "reiter", "aria-label": de ? "Arten" : "Kinds" }, ...Object.values(reiter)),
@@ -101,13 +102,14 @@ export async function startShell() {
 
   let art: Art | null = null, aktiv: Galerie | null = null, laeuft: Promise<void> = Promise.resolve();
   const laden = async () => {
-    const neu: Art = soundById(hashTeile().id) ? "sounds" : "models";
+    const id = hashTeile().id;
+    const neu: Art = soundById(id) ? "sounds" : (SURFACE_IDS as readonly string[]).includes(id) ? "surfaces" : "models";
     if (neu === art && aktiv) { aktiv.zeigen(); return; }
     aktiv?.stop();
     aktiv = null;
     art = neu;
     for (const [k, knopfE] of Object.entries(reiter)) knopfE.setAttribute("aria-current", String(k === neu));
-    const modul = neu === "sounds" ? await import("./sounds") : await import("./models");
+    const modul = neu === "sounds" ? await import("./sounds") : neu === "surfaces" ? await import("./surfaces") : await import("./models");
     if (art !== neu) return;
     aktiv = await modul.start(b);
     aktiv.zeigen();

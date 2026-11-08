@@ -20,6 +20,21 @@ The catalogue should look like one set, whoever builds an asset.
 - **Movable parts:** hinge where the real hinge is; 0 is closed, positive opens; doors and gates open to the front
   (+z), lids upwards. Rotations up to the real stop (a lid 110°, a door 120°).
 
+## Surfaces
+
+- **Tile:** one tile is a real size (`tile`, usually 1 m) and repeats without a seam: every pattern comes from the
+  tiling building blocks with a whole number of cells per tile. The scene test bakes each map half a tile further on
+  and compares; a single pixel that does not repeat fails it.
+- **Relief:** `depth` is the real height between black and white in the height map (4 cm for cobbles, 1.2 cm for
+  planks, 6 mm for riveted steel); the normal map follows from it, so do not exaggerate it for effect.
+- **Colour:** linear values from `color("#hex")` (the bake stores sRGB). Natural materials stay muted; variation per
+  stone or plank comes from the cell's random number, wear and dirt from fractal noise.
+- **Detail follows the size:** pass the sampler's `resolution` to the noise of fine detail (pores, fibres), so a 4096
+  bake gets finer detail than a 512 one; use a fixed resolution for large shapes (masks, warps), so they look the same
+  at every size.
+- **Cost:** a live surface runs per pixel and frame. Keep it to one Voronoi and a few fractal noises; the gallery and
+  games with many surfaces show the baked maps.
+
 ## Sounds
 
 - **Sound:** game-ready and clear rather than realistic in every detail: one recognisable event per sound (a hit, a

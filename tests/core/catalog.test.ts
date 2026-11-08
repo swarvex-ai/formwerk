@@ -4,6 +4,7 @@ import { ASSETS } from "../../src/assets";
 import { catalog, llmsTxt, soundFiles } from "../../src/catalog";
 import { fromWav } from "../../src/core/audio";
 import { SOUNDS } from "../../src/sounds";
+import { SURFACES } from "../../src/surfaces";
 
 describe("catalogue for agents", () => {
   const k = catalog("https://example.test");
@@ -29,9 +30,18 @@ describe("catalogue for agents", () => {
     }
     for (const f of soundFiles()) expect(fromWav(f.bytes).samples.length, f.path).toBeGreaterThan(100);
   });
+  it("lists every surface with parameters, presets, tile size and maps", () => {
+    expect(k.surfaces.map((f) => f.id)).toEqual(SURFACES.map((f) => f.id));
+    for (const f of k.surfaces) {
+      expect(Object.values(f.params).every((p) => p.describe.en.length > 0)).toBe(true);
+      expect(Object.keys(f.presets).length).toBeGreaterThanOrEqual(2);
+      expect(f.tileMetres).toBeGreaterThan(0);
+      expect(f.maps).toEqual(["color", "normal", "roughness", "metalness", "height"]);
+    }
+  });
   it("llms.txt names every function and parameter", () => {
     const t = llmsTxt(k);
-    for (const a of [...k.models, ...k.sounds]) {
+    for (const a of [...k.models, ...k.surfaces, ...k.sounds]) {
       expect(t).toContain(`### ${a.function}()`);
       for (const p of Object.keys(a.params)) expect(t).toContain(`\`${p}\``);
     }

@@ -24,7 +24,7 @@
     "vite": "8.3.5",
     "vitest": "5.0.5"
   },
-  "description": "Game assets as code: parametric 3D models for three.js and sounds for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj or .wav. CC0.",
+  "description": "Game assets as code: parametric 3D models and tiling surfaces for three.js, surfaces as PNG maps up to 8192 pixels and sounds (voices included) for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj, .png or .wav. CC0.",
   "license": "MIT",
   "main": "src/index.ts",
   "exports": {
@@ -42,6 +42,10 @@
     "game-assets",
     "sound-effects",
     "procedural-audio",
-    "wav"
+    "wav",
+    "pbr-textures",
+    "tileable-textures",
+    "procedural-textures",
+    "procedural-voice"
   ]
 }

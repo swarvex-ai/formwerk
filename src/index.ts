@@ -14,6 +14,11 @@ import { fence as a7 } from "./assets/architecture/fence";
 import { column as a8 } from "./assets/architecture/column";
 import { tree as a9 } from "./assets/nature/tree";
 import { rock as a10 } from "./assets/nature/rock";
+import { makeSurface as machFlaeche, surfaceMaterial as flaechenMaterial, type Surface } from "./surfaces/define";
+import type { MeshStandardNodeMaterial } from "three/webgpu";
+import { cobblestone as f1 } from "./surfaces/stone/cobblestone";
+import { planks as f2 } from "./surfaces/wood/planks";
+import { metalPlate as f3 } from "./surfaces/metal/metal-plate";
 
 export { ASSETS, assetById } from "./assets";
 export { defaults, clean, random, withPreset } from "./core/params";
@@ -22,6 +27,9 @@ export { physicsOf, hullPoints } from "./core/physics";
 export { bake, exportCopy, toGLB, toUSDZ, toOBJ } from "./core/export";
 export { exportMaterial } from "./materials";
 export { catalog } from "./catalog";
+export { SURFACES, surfaceById } from "./surfaces";
+export { makeSurface, surfaceMaterial, mapNode, MAPS } from "./surfaces/define";
+export { bakeSurface, bakedMaterial, createBaker, toPNG, toTextures, toZip, SIZES } from "./surfaces/bake";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Input<A extends Asset<any>> = Partial<Values<A["params"]>> & { preset?: Extract<keyof A["presets"], string> };
@@ -30,3 +38,11 @@ const bauer = <A extends Asset<any>>(a: A) => (values: Input<A> = {}, seed = 1):
 
 export const chair = bauer(a1), table = bauer(a2), shelf = bauer(a3), crate = bauer(a4), serverRack = bauer(a5);
 export const stairs = bauer(a6), fence = bauer(a7), column = bauer(a8), tree = bauer(a9), rock = bauer(a10);
+
+// Surfaces as three.js materials: `cobblestone({ moss: 0.5 }, seed, repeat)`; repeat = tiles across the mesh's UVs
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SurfaceInput<F extends Surface<any>> = Partial<Values<F["params"]>> & { preset?: Extract<keyof F["presets"], string> };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const flaeche = <F extends Surface<any>>(f: F) => (values: SurfaceInput<F> = {}, seed = 1, repeat: number | readonly [number, number] = 1): MeshStandardNodeMaterial =>
+  flaechenMaterial(machFlaeche(f, values, seed), repeat);
+export const cobblestone = flaeche(f1), planks = flaeche(f2), metalPlate = flaeche(f3);

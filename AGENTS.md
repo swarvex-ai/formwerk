@@ -1,9 +1,10 @@
 # Formwerk: instructions for agents
 
 Formwerk is the catalogue of game assets as code: parametric 3D models for three.js (r187, WebGPURenderer with WebGL 2
-fallback, TSL materials) and sounds for any engine (48 kHz mono, WAV). Every asset is one function of its parameters.
-No model or audio files, no image textures, no generator credits. Sprites, music and materials as image textures
-follow, each as its own kind with its own contract; until then, a request for one of them goes to the lead.
+fallback, TSL materials), surfaces that tile (live TSL materials, baked into PNG maps of any size for other engines)
+and sounds for any engine (48 kHz mono, WAV), voices included. Every asset is one function of its parameters. No
+model, image or audio files, no generator credits. Sprites and music follow, each as its own kind with its own
+contract; until then, a request for one of them goes to the lead.
 
 ## Requests from other projects come first
 
@@ -24,6 +25,19 @@ your submission.
    at both ends of their range, and the physics data. The scene test writes `tests/scene/baseline/<id>.png`: look at
    `tests/scene/out/<id>.png`, then commit the baseline with the asset. Patterned assets are also baked and exported
    as .glb; `tests/scene/out/<id>.baked.png` and `<id>.glb.png` must look like the live render.
+
+## Adding a surface
+
+1. One file `src/surfaces/<category>/<id>.ts` (categories: stone, wood, metal) with
+   `defineSurface({ id, category, title, description, params, presets, tile, depth, build })`. `build` returns a
+   sampler `(q, resolution) => { height, color, roughness, metalness }` in TSL, where `q` is the position on the tile
+   (0 to 1). Use the tiling building blocks of `src/surfaces/noise.ts` (`fbm`, `noise`, `voronoi`, `cell`, `wrap`,
+   `ramp`): every pattern must repeat after one tile. Copy the closest surface and change it.
+2. One line each in `src/surfaces/index.ts`, `src/surfaces/list.ts` and `src/index.ts`.
+3. `npm test`: the scene test renders it live and writes `tests/scene/baseline/<id>.png` and `<id>.maps.png` (colour,
+   normal, roughness, height); it checks that every map repeats after exactly one tile, that the bake is deterministic
+   and that a plane with the baked PNG maps looks like the live material. Look at `tests/scene/out/`, then commit the
+   baselines with the surface.
 
 ## Adding a sound
 
@@ -68,8 +82,9 @@ your submission.
 
 ## Protected (only the lead changes these)
 
-The parameter, asset and sound contracts (`src/core/**`, `src/assets/define.ts`, `src/sounds/define.ts`), the
-catalogue format (`src/catalog.ts`, `scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`,
+The parameter, asset, surface and sound contracts (`src/core/**`, `src/assets/define.ts`, `src/surfaces/define.ts`,
+`src/surfaces/noise.ts`, `src/surfaces/bake.ts`, `src/sounds/define.ts`), the catalogue format (`src/catalog.ts`,
+`scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`,
 `tests/scene/sounds.mjs`) and the dependencies. If an asset or a sound needs more from them, say so in your
 submission.
 

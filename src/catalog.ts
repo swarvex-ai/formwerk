@@ -8,6 +8,9 @@ import { metrics, toWav } from "./core/audio";
 import type { Param } from "./core/params";
 import { SOUNDS } from "./sounds";
 import { makeSound, type AnySound } from "./sounds/define";
+import { SURFACES } from "./surfaces";
+import { MAPS, type AnySurface } from "./surfaces/define";
+import { SIZES } from "./surfaces/bake";
 
 export const GALLERY = "https://formwerk.swarvex.run";
 export const REPOSITORY = "https://github.com/swarvex-ai/formwerk";
@@ -40,6 +43,16 @@ function klangEintrag(s: AnySound, base: string) {
   };
 }
 
+function flaechenEintrag(f: AnySurface, base: string) {
+  return {
+    id: f.id, category: f.category, title: f.title, description: f.description,
+    function: funktion(f.id), gallery: `${base}/#${f.id}`,
+    params: f.params as Record<string, Param>,
+    presets: Object.fromEntries(Object.entries(f.presets).map(([name, p]) => [name, { ...p, gallery: `${base}/#${f.id}?preset=${name}` }])),
+    tileMetres: f.tile, reliefMetres: f.depth, maps: MAPS, sizes: [...SIZES],
+  };
+}
+
 /** The ready sound files of the gallery: every sound at its defaults and at every preset, seed 1. */
 export function soundFiles(): { path: string; bytes: Uint8Array<ArrayBuffer> }[] {
   return SOUNDS.flatMap((s) => [
@@ -51,7 +64,7 @@ export function soundFiles(): { path: string; bytes: Uint8Array<ArrayBuffer> }[]
 export function catalog(base = GALLERY) {
   return {
     name: "Formwerk",
-    description: "Game assets as code: parametric 3D models for three.js (r187, WebGPU with WebGL 2 fallback, TSL materials) and sounds for any engine (WAV, 48 kHz mono).",
+    description: "Game assets as code: parametric 3D models and tiling surfaces for three.js (r187, WebGPU with WebGL 2 fallback, TSL materials), surfaces as PNG maps up to 8192 pixels and sounds for any engine (WAV, 48 kHz mono).",
     licence: { code: "MIT", assets: "CC0-1.0" },
     gallery: base, repository: REPOSITORY,
     conventions: {
@@ -60,9 +73,11 @@ export function catalog(base = GALLERY) {
       presets: "{ preset: \"<name>\" } sets the preset's values, explicit values win over it",
       rig: "movable parts are named child objects with their origin at the hinge; rotate = degrees around axis, slide = metres along axis, 0 is closed, positive opens",
       physics: "body static or dynamic; collider box (bounding box), hull (convex hull) or cylinder (trunk); massKg is an estimate",
+      surfaces: "materials that tile without a seam; one tile is tileMetres metres. three.js: a live TSL material (no textures, sharp at any distance), repeat = tiles across the mesh's UVs. Other engines: PNG maps baked in the gallery at 512 to 8192 pixels per tile (larger sizes get finer detail): colour (sRGB), normal (OpenGL, green up, as Godot and Blender expect), roughness, metalness, height (linear; reliefMetres between black and white)",
       sounds: "48 kHz mono, peak at −1 dBFS; one-shots start and end at zero, loops (loop: true) repeat without a seam; the same values and seed give the same samples, other seeds vary them (footsteps, hits)",
     },
     models: ASSETS.map((a) => eintrag(a, base)),
+    surfaces: SURFACES.map((f) => flaechenEintrag(f, base)),
     sounds: SOUNDS.map((s) => klangEintrag(s, base)),
   };
 }
@@ -82,7 +97,7 @@ export function llmsTxt(k: Catalog): string {
     ``,
     `> ${k.description} Every asset is a function of typed parameters. Code MIT, assets CC0: copy, change and ship them anywhere, no attribution needed.`,
     ``,
-    `- Gallery with controls, share links and downloads (.glb with baked patterns, .usdz, .obj, .wav): ${k.gallery}`,
+    `- Gallery with controls, share links and downloads (.glb with baked patterns, .usdz, .obj, PNG maps of surfaces, .wav): ${k.gallery}`,
     `- Full catalogue with every parameter, preset, movable part, physics hint and sound file: ${k.gallery}/catalog.json`,
     `- Source: ${k.repository} (TypeScript; copy \`src/\` into your project or add the repository as a git dependency)`,
     ``,
@@ -100,6 +115,16 @@ export function llmsTxt(k: Catalog): string {
     `Conventions: ${Object.entries(k.conventions).map(([a, b]) => `${a}: ${b}`).join("; ")}.`,
     ``,
     `Missing an asset? Projects on swarvex.ai can send Formwerk a work request; everyone else opens an issue.`,
+    ``,
+    `## Use: surfaces`,
+    ``,
+    "```ts",
+    `import { cobblestone, bakeSurface, makeSurface, SURFACES } from "formwerk";`,
+    `floor.material = cobblestone({ preset: "old-town", moss: 0.3 }, 1, 8); // values, seed, tiles across the UVs (an 8 m floor, 1 m tiles)`,
+    `const maps = await bakeSurface(makeSurface(SURFACES[0]), 2048); // PNG-ready maps in the browser: colour, normal, roughness, metalness, height`,
+    "```",
+    ``,
+    `Godot, Blender and other engines: set the values in the gallery and download the PNG maps (512 to 8192 pixels per tile, .zip).`,
     ``,
     `## Use: sounds`,
     ``,
@@ -121,6 +146,12 @@ export function llmsTxt(k: Catalog): string {
     const rig = Object.entries(a.rig);
     if (rig.length) teile.push(`- Movable parts: ${rig.map(([n, r]) => `\`${n}\` (${r.type} ${r.min}–${r.max}${r.type === "rotate" ? "°" : " m"})`).join(", ")}`);
     teile.push(`- Physics: ${a.physics.body}, collider ${a.physics.collider}; at defaults ${a.atDefaults.size.width} × ${a.atDefaults.size.height} × ${a.atDefaults.size.depth} m, about ${a.atDefaults.massKg} kg, ${a.atDefaults.triangles} triangles`);
+  }
+  teile.push(``, `## Surfaces`);
+  for (const f of k.surfaces) {
+    teile.push(``, `### ${f.function}() · ${f.title.en} (${f.category}, one tile ${f.tileMetres} m)`, ``, f.description.en, ``, `- Gallery: ${f.gallery}`);
+    teile.push(`- Parameters:`, ...Object.entries(f.params).map(([n, p]) => paramZeile(n, p)));
+    teile.push(`- Presets: ${Object.entries(f.presets).map(([n, p]) => `\`${n}\` (${p.label.en})`).join(", ")}`);
   }
   teile.push(``, `## Sounds`);
   for (const s of k.sounds) {

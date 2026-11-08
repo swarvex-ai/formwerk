@@ -1,6 +1,5 @@
 // The models tab: every model with controls generated from its parameter schema, presets, movable parts, a live 3D
 // view, a share link, a code snippet and downloads (.glb with baked patterns, .usdz, .obj) made in the browser.
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { Object3D } from "three";
 import { ASSETS, assetById } from "../assets";
 import { CATEGORIES, infoOf, make, measure, pose, size, type AnyAsset } from "../assets/define";
@@ -8,7 +7,7 @@ import { defaults, random, withPreset, type Param } from "../core/params";
 import { toGLB, toOBJ, toUSDZ } from "../core/export";
 import { rng } from "../core/rng";
 import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
-import { createViewer } from "./viewer";
+import { stage } from "./stage";
 
 const M = de
   ? { kategorien: { furniture: "Möbel", architecture: "Architektur", nature: "Natur", vehicles: "Fahrzeuge", props: "Requisiten" },
@@ -22,15 +21,10 @@ const M = de
       formate: { glb: ".glb (Godot, Blender, web)", usdz: ".usdz (AR on iPhone and iPad)", obj: ".obj (shape only)" },
       koerper: { static: "static", dynamic: "dynamic" }, kollider: { box: "box collider", hull: "hull collider", cylinder: "cylinder collider" } };
 
-// One renderer for the page: a canvas keeps its context, so switching tabs reuses it
-let ansicht: Promise<{ viewer: Awaited<ReturnType<typeof createViewer>>; controls: OrbitControls }> | null = null;
-
 export async function start(b: Bereich): Promise<Galerie> {
   const canvas = b.buehne.querySelector<HTMLCanvasElement>("canvas.dreid")!;
   canvas.hidden = false;
-  ansicht ??= createViewer(canvas, { forceWebGL: new URLSearchParams(location.search).has("webgl"), antialias: true, background: "#16191d" })
-    .then((viewer) => { const controls = new OrbitControls(viewer.camera, canvas); controls.enableDamping = true; return { viewer, controls }; });
-  const { viewer, controls } = await ansicht;
+  const { viewer, controls } = await stage(canvas);
 
   let asset: AnyAsset = ASSETS[0], werte: Record<string, unknown> = {}, seed = 1;
   let objekt: Object3D | null = null;

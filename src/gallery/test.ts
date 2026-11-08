@@ -5,6 +5,7 @@ import { ASSETS, assetById } from "../assets";
 import { make, measure } from "../assets/define";
 import { exportCopy, toGLB } from "../core/export";
 import { exportInfo } from "../materials";
+import { SURFACES } from "../surfaces";
 import { createViewer } from "./viewer";
 
 declare global {
@@ -12,12 +13,13 @@ declare global {
     __swarvex?: { step(n: number): { drawCalls: number; triangles: number }; tick(): number };
     __formwerk?: {
       ids(): string[]; budget(id: string): { triangles: number; drawCalls: number }; measure(): { triangles: number; drawCalls: number };
-      patterned(): boolean; bake(): Promise<{ textured: number; ms: number }>; roundtrip(): Promise<{ bytes: number; images: number }>; backend(): string;
+      surfaces(): string[]; patterned(): boolean; bake(): Promise<{ textured: number; ms: number }>; roundtrip(): Promise<{ bytes: number; images: number }>; backend(): string;
     };
   }
 }
 
 export async function startTest(params: URLSearchParams) {
+  if (params.has("surface")) { await (await import("./test-surface")).startSurfaceTest(params); return; }
   document.body.classList.add("test");
   const canvas = document.querySelector("canvas")!;
   // Standard WebGL 2 (läuft überall gleich); ?webgpu prüft den WebGPU-Pfad, wo der Browser einen Adapter hat
@@ -28,6 +30,7 @@ export async function startTest(params: URLSearchParams) {
   if (objekt) { viewer.show(objekt); viewer.frame(); }
   window.__formwerk = {
     ids: () => ASSETS.map((a) => a.id),
+    surfaces: () => SURFACES.map((s) => s.id),
     budget: (id) => assetById(id)!.budget,
     measure: () => (objekt ? measure(objekt) : { triangles: 0, drawCalls: 0 }),
     backend: () => ((viewer.renderer.backend as { isWebGPUBackend?: boolean }).isWebGPUBackend ? "webgpu" : "webgl2"),

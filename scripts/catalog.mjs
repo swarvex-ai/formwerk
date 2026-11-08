@@ -13,4 +13,4 @@ const dateien = module.soundFiles();
 mkdirSync(`${wurzel}/dist/sounds`, { recursive: true });
 for (const f of dateien) writeFileSync(`${wurzel}/dist/${f.path}`, f.bytes);
 const kb = Math.round(dateien.reduce((n, f) => n + f.bytes.length, 0) / 1024);
-console.log(`catalog: ${k.models.length} models, ${k.sounds.length} sounds → dist/catalog.json, dist/llms.txt, ${dateien.length} files in dist/sounds (${kb} KB)`);
+console.log(`catalog: ${k.models.length} models, ${k.surfaces.length} surfaces, ${k.sounds.length} sounds → dist/catalog.json, dist/llms.txt, ${dateien.length} files in dist/sounds (${kb} KB)`);
