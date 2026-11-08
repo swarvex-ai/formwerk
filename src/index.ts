@@ -14,6 +14,19 @@ import { fence as a7 } from "./assets/architecture/fence";
 import { column as a8 } from "./assets/architecture/column";
 import { tree as a9 } from "./assets/nature/tree";
 import { rock as a10 } from "./assets/nature/rock";
+import { bed as a11 } from "./assets/furniture/bed";
+import { door as a12 } from "./assets/architecture/door";
+import { bush as a13 } from "./assets/nature/bush";
+import { barrel as a14 } from "./assets/props/barrel";
+import { chest as a15 } from "./assets/props/chest";
+import { lampPost as a16 } from "./assets/props/lamp-post";
+import { bench as a17 } from "./assets/props/bench";
+import { signpost as a18 } from "./assets/props/signpost";
+import { marketStall as a19 } from "./assets/props/market-stall";
+import { cart as a20 } from "./assets/vehicles/cart";
+import { car as a21 } from "./assets/vehicles/car";
+import { boat as a22 } from "./assets/vehicles/boat";
+import { tank as a23 } from "./assets/vehicles/tank";
 import { makeSurface as machFlaeche, surfaceMaterial as flaechenMaterial, type Surface } from "./surfaces/define";
 import type { MeshStandardNodeMaterial } from "three/webgpu";
 import { cobblestone as f1 } from "./surfaces/stone/cobblestone";
@@ -38,6 +51,8 @@ const bauer = <A extends Asset<any>>(a: A) => (values: Input<A> = {}, seed = 1):
 
 export const chair = bauer(a1), table = bauer(a2), shelf = bauer(a3), crate = bauer(a4), serverRack = bauer(a5);
 export const stairs = bauer(a6), fence = bauer(a7), column = bauer(a8), tree = bauer(a9), rock = bauer(a10);
+export const bed = bauer(a11), door = bauer(a12), bush = bauer(a13), barrel = bauer(a14), chest = bauer(a15), lampPost = bauer(a16);
+export const bench = bauer(a17), signpost = bauer(a18), marketStall = bauer(a19), cart = bauer(a20), car = bauer(a21), boat = bauer(a22), tank = bauer(a23);
 
 // Surfaces as three.js materials: `cobblestone({ moss: 0.5 }, seed, repeat)`; repeat = tiles across the mesh's UVs
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

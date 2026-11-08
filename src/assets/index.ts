@@ -10,6 +10,25 @@ import { fence } from "./architecture/fence";
 import { column } from "./architecture/column";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
+import { bed } from "./furniture/bed";
+import { door } from "./architecture/door";
+import { bush } from "./nature/bush";
+import { barrel } from "./props/barrel";
+import { chest } from "./props/chest";
+import { lampPost } from "./props/lamp-post";
+import { bench } from "./props/bench";
+import { signpost } from "./props/signpost";
+import { marketStall } from "./props/market-stall";
+import { cart } from "./vehicles/cart";
+import { car } from "./vehicles/car";
+import { boat } from "./vehicles/boat";
+import { tank } from "./vehicles/tank";
 
-export const ASSETS: AnyAsset[] = [chair, table, shelf, crate, serverRack, stairs, fence, column, tree, rock];
+export const ASSETS: AnyAsset[] = [
+  chair, table, shelf, crate, serverRack, bed,
+  stairs, fence, column, door,
+  tree, rock, bush,
+  barrel, chest, lampPost, bench, signpost, marketStall,
+  cart, car, boat, tank,
+];
 export const assetById = (id: string) => ASSETS.find((a) => a.id === id);
