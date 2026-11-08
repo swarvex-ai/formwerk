@@ -44,14 +44,18 @@ for (const s of SPRITES) {
         const was = `${s.id} ${JSON.stringify(werte)}`, sheet = makeSheet(s, werte, 1);
         expect([sheet.image.w, sheet.image.h], `${was}: sheet size`).toEqual([spalten * s.frame.w, zeilen * s.frame.h]);
         expect(sheet.frames.length).toBe(s.animations.reduce((n, a) => n + a.frames, 0) * s.directions.length);
-        for (let i = 3; i < sheet.image.data.length; i += 4) expect([0, 255], `${was}: hard edges`).toContain(sheet.image.data[i]);
+        let weich = 0;
+        for (let i = 3; i < sheet.image.data.length; i += 4) if (sheet.image.data[i] !== 0 && sheet.image.data[i] !== 255) weich++;
+        expect(weich, `${was}: hard edges (alpha 0 or 255)`).toBe(0);
         expect(sheet.image.colours(), `${was}: at most ${FARBEN} colours`).toBeLessThanOrEqual(FARBEN);
         // The drawing leaves the outer ring free, so the outline fits into the frame
         const zeichne = s.build(withPreset(s.params, s.presets, werte), 1);
         for (const a of s.animations) for (const d of s.directions) for (let f = 0; f < a.frames; f++) {
           const b = zeichne(a.name, d, f);
-          for (let x = 0; x < b.w; x++) expect(b.alpha(x, 0) + b.alpha(x, b.h - 1), `${was} ${a.name} ${d} ${f}: top and bottom row free`).toBe(0);
-          for (let y = 0; y < b.h; y++) expect(b.alpha(0, y) + b.alpha(b.w - 1, y), `${was} ${a.name} ${d} ${f}: left and right column free`).toBe(0);
+          let rand = 0;
+          for (let x = 0; x < b.w; x++) rand += b.alpha(x, 0) + b.alpha(x, b.h - 1);
+          for (let y = 0; y < b.h; y++) rand += b.alpha(0, y) + b.alpha(b.w - 1, y);
+          expect(rand, `${was} ${a.name} ${d} ${f}: the outer ring stays free for the outline`).toBe(0);
         }
         for (const f of sheet.frames) {
           const voll = Array.from({ length: f.h }, (_, y) => zeile(sheet, f, y).some(Boolean));
@@ -64,7 +68,9 @@ for (const s of SPRITES) {
       const sheet = makeSheet(s);
       if (s.directions.includes("left") && s.directions.includes("right")) for (const f of sheet.frames.filter((x) => x.direction === "right")) {
         const l = sheet.frames.find((x) => x.direction === "left" && x.animation === f.animation && x.frame === f.frame)!;
-        for (let y = 0; y < f.h; y++) for (let x = 0; x < f.w; x++) expect(sheet.image.get(l.x + f.w - 1 - x, l.y + y)).toEqual(sheet.image.get(f.x + x, f.y + y));
+        let anders = 0;
+        for (let y = 0; y < f.h; y++) for (let x = 0; x < f.w; x++) if (sheet.image.get(l.x + f.w - 1 - x, l.y + y).join() !== sheet.image.get(f.x + x, f.y + y).join()) anders++;
+        expect(anders, `${f.animation} ${f.frame}: left is the mirror of right`).toBe(0);
       }
       for (const a of s.animations.filter((x) => x.frames > 1)) for (const d of s.directions) {
         const bilder = sheet.frames.filter((f) => f.animation === a.name && f.direction === d).map((f) => pixel(sheet, f).join(";"));
