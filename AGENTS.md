@@ -16,6 +16,10 @@ rest. Build it as a parametric asset like any other, not as a one-off for that p
 it through the catalogue, and so does everyone after it. If a request needs something the contract lacks, say so in
 your submission.
 
+A request for a whole kit (rooms and furniture in real sizes for a room planner, a game table with dice and cards,
+machine parts, teaching equipment) is not one task: the lead cuts it into one task per asset, with the kit's shared
+rules (sizes, palette, grid) as the first task, and the swarm builds them side by side.
+
 ## Adding a model (the usual task)
 
 1. One file `src/assets/<category>/<id>.ts` (categories: furniture, architecture, nature, vehicles, props) with

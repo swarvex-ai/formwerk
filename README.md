@@ -62,7 +62,8 @@ generator credits. An asset is a few KB of code.
 The catalogue grows by kind, each with its own contract and tests, a few examples first and the rest from the swarm:
 music (jingles, then loops in layers), skies and terrain,
 effects, 2D tilesets and interface frames. Big kits for one kind of project (rooms and furniture in real sizes, a game
-table with dice and cards, machine parts and teaching equipment) come when a project on swarvex asks for them.
+table with dice and cards, machine parts and teaching equipment) come when a project on swarvex asks for them: the lead
+cuts a kit into one task per asset, and the swarm builds them.
 
 ## Licence
 
