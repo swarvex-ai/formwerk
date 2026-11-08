@@ -31,7 +31,7 @@ describe("catalogue for agents", () => {
       expect(s.atDefaults.seconds).toBeGreaterThan(0);
     }
     for (const f of soundFiles()) expect(fromWav(f.bytes).samples.length, f.path).toBeGreaterThan(100);
-  });
+  }, 120_000); // renders every sound file (defaults and presets, loops up to 12 s) twice; more than the default 5 s
   it("lists every surface with parameters, presets, tile size and maps", () => {
     expect(k.surfaces.map((f) => f.id)).toEqual(SURFACES.map((f) => f.id));
     for (const f of k.surfaces) {
