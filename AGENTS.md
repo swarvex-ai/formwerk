@@ -2,9 +2,9 @@
 
 Formwerk is the catalogue of game assets as code: parametric 3D models for three.js (r187, WebGPURenderer with WebGL 2
 fallback, TSL materials), surfaces that tile (live TSL materials, baked into PNG maps of any size for other engines)
-and sounds for any engine (48 kHz mono, WAV), voices included. Every asset is one function of its parameters. No
-model, image or audio files, no generator credits. Sprites and music follow, each as its own kind with its own
-contract; until then, a request for one of them goes to the lead.
+pixel sprites with Godot SpriteFrames, and sounds for any engine (48 kHz mono, WAV), voices included. Every asset is
+one function of its parameters. No model, image or audio files, no generator credits. Music and speech follow, each
+as its own kind with its own contract; until then, a request for one of them goes to the lead.
 
 ## Requests from other projects come first
 
@@ -38,6 +38,19 @@ your submission.
    normal, roughness, height); it checks that every map repeats after exactly one tile, that the bake is deterministic
    and that a plane with the baked PNG maps looks like the live material. Look at `tests/scene/out/`, then commit the
    baselines with the surface.
+
+## Adding a sprite
+
+1. One file `src/sprites/<category>/<id>.ts` (categories: characters, creatures, items) with
+   `defineSprite({ id, category, title, description, params, presets, frame, directions, animations, grounded, build })`.
+   `build` returns a function `(animation, direction, frame) => Pixels` that draws one frame with `src/core/pixels.ts`
+   (`part`, `ellipse`, `rect`, `set`, `mirrored`, colours from `ramp()`). Leave the outermost ring of the frame empty:
+   the contract draws the outline there. Left is usually `right.mirrored()`. Copy the closest sprite and change it.
+2. One line each in `src/sprites/index.ts` and `src/sprites/lib.ts`.
+3. `npm test`: the sprite tests draw it at its defaults, every extreme, every preset and random values, and check the
+   sheet size, hard edges, the palette, the free outer ring, feet on the bottom row (grounded sprites), left as the
+   mirror of right, that animations move, and determinism. `tests/scene/sprites.mjs` writes its sheet to
+   `tests/scene/baseline/<id>.png`: look at it enlarged, then commit it with the sprite.
 
 ## Adding a sound
 
@@ -83,13 +96,14 @@ your submission.
 ## Protected (only the lead changes these)
 
 The parameter, asset, surface and sound contracts (`src/core/**`, `src/assets/define.ts`, `src/surfaces/define.ts`,
-`src/surfaces/noise.ts`, `src/surfaces/bake.ts`, `src/sounds/define.ts`), the catalogue format (`src/catalog.ts`,
+`src/surfaces/noise.ts`, `src/surfaces/bake.ts`, `src/sprites/define.ts`, `src/sounds/define.ts`), the catalogue format (`src/catalog.ts`,
 `scripts/**`), the tests (`tests/core/**`, `tests/scene/run.mjs`,
-`tests/scene/sounds.mjs`) and the dependencies. If an asset or a sound needs more from them, say so in your
+`tests/scene/sounds.mjs`, `tests/scene/sprites.mjs`) and the dependencies. If an asset or a sound needs more from them, say so in your
 submission.
 
 ## Commands
 
-`npm run dev` (gallery), `npm test` (types, core and sound tests, spectrograms, build with catalogue, scene tests),
-`npm run test:core` (fast, while working), `npm run test:sound` (spectrograms only). `npm run build` also writes
-`dist/catalog.json`, `dist/llms.txt` and every sound at its defaults and presets as `dist/sounds/*.wav`.
+`npm run dev` (gallery), `npm test` (types, core tests, spectrograms, sprite sheets, build with catalogue, scene
+tests), `npm run test:core` (fast, while working), `npm run test:sound` (spectrograms only), `npm run test:sprite`
+(sprite sheets only). `npm run build` also writes `dist/catalog.json`, `dist/llms.txt`, every sound at its defaults
+and presets as `dist/sounds/*.wav` and every sprite as `dist/sprites/*.png`, `.tres` and `.json`.

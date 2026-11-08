@@ -9,8 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test:core": "vitest run",
     "test:scene": "npm run build && node tests/scene/run.mjs",
-    "test": "tsc --noEmit && vitest run && node tests/scene/sounds.mjs && npm run build && node tests/scene/run.mjs",
-    "test:sound": "node tests/scene/sounds.mjs"
+    "test": "tsc --noEmit && vitest run && node tests/scene/sounds.mjs && node tests/scene/sprites.mjs && npm run build && node tests/scene/run.mjs",
+    "test:sound": "node tests/scene/sounds.mjs",
+    "test:sprite": "node tests/scene/sprites.mjs"
   },
   "dependencies": {
     "three": "0.187.0"
@@ -24,12 +25,13 @@
     "vite": "8.3.5",
     "vitest": "5.0.5"
   },
-  "description": "Game assets as code: parametric 3D models and tiling surfaces for three.js, surfaces as PNG maps up to 8192 pixels and sounds (voices included) for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj, .png or .wav. CC0.",
+  "description": "Game assets as code: parametric 3D models and tiling surfaces for three.js, surfaces as PNG maps up to 8192 pixels, pixel sprites with Godot SpriteFrames, and sounds (voices included) for any engine, each a function of its parameters. Change the values, share the link, download .glb, .usdz, .obj, .png, .tres or .wav. CC0.",
   "license": "MIT",
   "main": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./sounds": "./src/sounds/lib.ts"
+    "./sounds": "./src/sounds/lib.ts",
+    "./sprites": "./src/sprites/lib.ts"
   },
   "keywords": [
     "three.js",
@@ -46,6 +48,9 @@
     "pbr-textures",
     "tileable-textures",
     "procedural-textures",
-    "procedural-voice"
+    "procedural-voice",
+    "pixel-art",
+    "sprites",
+    "godot"
   ]
 }

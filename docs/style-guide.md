@@ -35,6 +35,19 @@ The catalogue should look like one set, whoever builds an asset.
 - **Cost:** a live surface runs per pixel and frame. Keep it to one Voronoi and a few fractal noises; the gallery and
   games with many surfaces show the baked maps.
 
+## Sprites
+
+- **Pixel art:** hard edges (no half-transparent pixels), whole pixels only, a one-pixel outline from the contract
+  (a deep shade of the colour it touches). Shading with `ramp()`: light from the top left, three to four shades per
+  material; shadows cooler, highlights warmer.
+- **Sizes:** characters 24 × 32 pixels, creatures 24 × 24, items and icons 16 × 16. One pixel density for the whole
+  set: a sprite is not drawn at a higher resolution than its neighbours.
+- **Grounded sprites** stand with their feet on the bottom row in `idle`; jumps and hops may leave it.
+- **Animations:** `idle` first (2–4 frames, slow), then movement (`walk` 4 frames at 8 fps). Names in lower case
+  English; with several directions the files call them `walk_down`, `walk_left` …
+- **Palette:** few colours (the tests allow 40 per sheet); colours that a game changes (skin, clothes, liquid) are
+  parameters, the rest fixed.
+
 ## Sounds
 
 - **Sound:** game-ready and clear rather than realistic in every detail: one recognisable event per sound (a hit, a

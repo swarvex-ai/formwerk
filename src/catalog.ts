@@ -11,6 +11,9 @@ import { makeSound, type AnySound } from "./sounds/define";
 import { SURFACES } from "./surfaces";
 import { MAPS, type AnySurface } from "./surfaces/define";
 import { SIZES } from "./surfaces/bake";
+import type { Pixels } from "./core/pixels";
+import { SPRITES } from "./sprites";
+import { animationName, godotSpriteFrames, makeSheet, sheetJson, type AnySprite } from "./sprites/define";
 
 export const GALLERY = "https://formwerk.swarvex.run";
 export const REPOSITORY = "https://github.com/swarvex-ai/formwerk";
@@ -53,6 +56,30 @@ function flaechenEintrag(f: AnySurface, base: string) {
   };
 }
 
+function spriteEintrag(s: AnySprite, base: string) {
+  const datei = (name: string) => ({ png: `${base}/sprites/${name}.png`, godot: `${base}/sprites/${name}.tres`, json: `${base}/sprites/${name}.json` });
+  return {
+    id: s.id, category: s.category, title: s.title, description: s.description,
+    function: funktion(s.id), gallery: `${base}/#${s.id}`, files: datei(s.id),
+    params: s.params as Record<string, Param>,
+    presets: Object.fromEntries(Object.entries(s.presets).map(([name, p]) => [name, { ...p, gallery: `${base}/#${s.id}?preset=${name}`, files: datei(`${s.id}.${name}`) }])),
+    frame: s.frame, directions: s.directions, grounded: s.grounded,
+    animations: s.animations.flatMap((a) => s.directions.map((d) => ({ name: animationName(s, a.name, d), frames: a.frames, fps: a.fps, loop: a.loop }))),
+  };
+}
+
+/** The ready sprite files: every sprite at its defaults and every preset as sheet (.png), Godot SpriteFrames and JSON. */
+export function spriteFiles(): ({ path: string; image: Pixels } | { path: string; text: string })[] {
+  return SPRITES.flatMap((s) => [{ name: s.id, input: {} }, ...Object.keys(s.presets).map((preset) => ({ name: `${s.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
+    const sheet = makeSheet(s, input);
+    return [
+      { path: `sprites/${name}.png`, image: sheet.image },
+      { path: `sprites/${name}.tres`, text: godotSpriteFrames(sheet, `${name}.png`) },
+      { path: `sprites/${name}.json`, text: JSON.stringify(sheetJson(sheet, `${name}.png`), null, 1) + "\n" },
+    ];
+  }));
+}
+
 /** The ready sound files of the gallery: every sound at its defaults and at every preset, seed 1. */
 export function soundFiles(): { path: string; bytes: Uint8Array<ArrayBuffer> }[] {
   return SOUNDS.flatMap((s) => [
@@ -64,7 +91,7 @@ export function soundFiles(): { path: string; bytes: Uint8Array<ArrayBuffer> }[]
 export function catalog(base = GALLERY) {
   return {
     name: "Formwerk",
-    description: "Game assets as code: parametric 3D models and tiling surfaces for three.js (r187, WebGPU with WebGL 2 fallback, TSL materials), surfaces as PNG maps up to 8192 pixels and sounds for any engine (WAV, 48 kHz mono).",
+    description: "Game assets as code: parametric 3D models and tiling surfaces for three.js (r187, WebGPU with WebGL 2 fallback, TSL materials), surfaces as PNG maps up to 8192 pixels, pixel sprites with Godot SpriteFrames and sounds for any engine (WAV, 48 kHz mono).",
     licence: { code: "MIT", assets: "CC0-1.0" },
     gallery: base, repository: REPOSITORY,
     conventions: {
@@ -74,10 +101,12 @@ export function catalog(base = GALLERY) {
       rig: "movable parts are named child objects with their origin at the hinge; rotate = degrees around axis, slide = metres along axis, 0 is closed, positive opens",
       physics: "body static or dynamic; collider box (bounding box), hull (convex hull) or cylinder (trunk); massKg is an estimate",
       surfaces: "materials that tile without a seam; one tile is tileMetres metres. three.js: a live TSL material (no textures, sharp at any distance), repeat = tiles across the mesh's UVs. Other engines: PNG maps baked in the gallery at 512 to 8192 pixels per tile (larger sizes get finer detail): colour (sRGB), normal (OpenGL, green up, as Godot and Blender expect), roughness, metalness, height (linear; reliefMetres between black and white)",
+      sprites: "pixel art with hard edges (alpha 0 or 255) and a one-pixel outline; a sheet per sprite: rows animation × direction, columns frames; grounded sprites have their feet on the bottom row of the frame. Godot: put the .png and .tres side by side, use the .tres as SpriteFrames of an AnimatedSprite2D or AnimatedSprite3D and set the texture filter to Nearest",
       sounds: "48 kHz mono, peak at −1 dBFS; one-shots start and end at zero, loops (loop: true) repeat without a seam; the same values and seed give the same samples, other seeds vary them (footsteps, hits)",
     },
     models: ASSETS.map((a) => eintrag(a, base)),
     surfaces: SURFACES.map((f) => flaechenEintrag(f, base)),
+    sprites: SPRITES.map((s) => spriteEintrag(s, base)),
     sounds: SOUNDS.map((s) => klangEintrag(s, base)),
   };
 }
@@ -126,6 +155,16 @@ export function llmsTxt(k: Catalog): string {
     ``,
     `Godot, Blender and other engines: set the values in the gallery and download the PNG maps (512 to 8192 pixels per tile, .zip).`,
     ``,
+    `## Use: sprites`,
+    ``,
+    "```ts",
+    `import { villager, sheetJson, godotSpriteFrames } from "formwerk/sprites"; // no three.js`,
+    `const sheet = villager({ preset: "merchant", shirt: "#335577" }); // RGBA pixels and frame rectangles`,
+    `const tres = godotSpriteFrames(sheet, "merchant.png");             // Godot SpriteFrames next to the PNG`,
+    "```",
+    ``,
+    `Godot and other engines: download the sheet with its SpriteFrames (.tres) and JSON (listed below, or with your values from the gallery). Set the texture filter to Nearest.`,
+    ``,
     `## Use: sounds`,
     ``,
     "```ts",
@@ -152,6 +191,14 @@ export function llmsTxt(k: Catalog): string {
     teile.push(``, `### ${f.function}() · ${f.title.en} (${f.category}, one tile ${f.tileMetres} m)`, ``, f.description.en, ``, `- Gallery: ${f.gallery}`);
     teile.push(`- Parameters:`, ...Object.entries(f.params).map(([n, p]) => paramZeile(n, p)));
     teile.push(`- Presets: ${Object.entries(f.presets).map(([n, p]) => `\`${n}\` (${p.label.en})`).join(", ")}`);
+  }
+  teile.push(``, `## Sprites`);
+  for (const s of k.sprites) {
+    teile.push(``, `### ${s.function}() · ${s.title.en} (${s.category}, ${s.frame.w} × ${s.frame.h} pixels, ${s.directions.length} direction${s.directions.length > 1 ? "s" : ""})`, ``, s.description.en, ``, `- Gallery: ${s.gallery}`);
+    teile.push(`- Files at the defaults: ${s.files.png}, ${s.files.godot}, ${s.files.json}`);
+    teile.push(`- Animations: ${s.animations.map((a) => `\`${a.name}\` (${a.frames} frames, ${a.fps} fps)`).join(", ")}`);
+    teile.push(`- Parameters:`, ...Object.entries(s.params).map(([n, p]) => paramZeile(n, p)));
+    teile.push(`- Presets: ${Object.entries(s.presets).map(([n, p]) => `\`${n}\` (${p.label.en})`).join(", ")}`);
   }
   teile.push(``, `## Sounds`);
   for (const s of k.sounds) {
