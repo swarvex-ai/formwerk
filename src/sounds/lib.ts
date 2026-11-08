@@ -16,6 +16,10 @@ import { effort as s11 } from "./voice/effort";
 import { pain as s12 } from "./voice/pain";
 import { creature as s13 } from "./voice/creature";
 import { babble as s14 } from "./voice/babble";
+import { pop as s15 } from "./ui/pop";
+import { toggle as s16 } from "./ui/toggle";
+import { buzz as s17 } from "./ui/buzz";
+import { alert as s18 } from "./ui/alert";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -36,3 +40,4 @@ const klang = <S extends Sound<any>>(s: S) => (values: Input<S> = {}, seed = 1) 
 export const click = klang(s1), chime = klang(s2), hit = klang(s3), explosion = klang(s4), footstep = klang(s5);
 export const jump = klang(s6), whoosh = klang(s7), pickup = klang(s8), zap = klang(s9), wind = klang(s10);
 export const effort = klang(s11), pain = klang(s12), creature = klang(s13), babble = klang(s14);
+export const pop = klang(s15), toggle = klang(s16), buzz = klang(s17), alert = klang(s18);
