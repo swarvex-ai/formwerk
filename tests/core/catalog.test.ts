@@ -57,7 +57,7 @@ describe("catalogue for agents", () => {
       expect(i.own.length).toBeGreaterThanOrEqual(3);
       for (const n of ["stroke", "corners", "style", "badge", "color"]) expect(i.params).toHaveProperty(n);
     }
-  });
+  }, 60_000); // draws every icon file (SVG and a 128 px PNG); slow runners need more than the default 5 s
   it("llms.txt names every function and parameter", () => {
     const t = llmsTxt(k);
     for (const a of [...k.models, ...k.surfaces, ...k.sprites, ...k.icons, ...k.sounds]) {
