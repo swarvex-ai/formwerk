@@ -15,12 +15,12 @@ import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, spe
 import { ENVIRONMENT, stage } from "./stage";
 
 const O = de
-  ? { kategorien: { stone: "Stein", wood: "Holz", metal: "Metall" }, groesse: "Pixel pro Kachel",
+  ? { kategorien: { stone: "Stein", wood: "Holz", metal: "Metall", ground: "Boden" }, groesse: "Pixel pro Kachel",
       karten: { color: "Farbe", normal: "Normal", roughness: "Rauheit", metalness: "Metall", height: "Höhe" } as Record<MapName, string>,
       zip: "Herunterladen (.zip mit PNG-Karten)", backt: "Backe", packt: "Packe …",
       gross: "8192 Pixel brauchen etwa 1 GB Speicher und einige Sekunden pro Karte.",
       kachel: "Kachel", relief: "Relief", nahtlos: "nahtlos kachelbar", normal: "Normal-Map im OpenGL-Format (Godot, Blender, three.js)", vorschau: "Vorschau mit 1024 px gebacken", backtGerade: "backe …" }
-  : { kategorien: { stone: "Stone", wood: "Wood", metal: "Metal" }, groesse: "Pixels per tile",
+  : { kategorien: { stone: "Stone", wood: "Wood", metal: "Metal", ground: "Ground" }, groesse: "Pixels per tile",
       karten: { color: "colour", normal: "normal", roughness: "roughness", metalness: "metalness", height: "height" } as Record<MapName, string>,
       zip: "Download (.zip of PNG maps)", backt: "Baking", packt: "Packing …",
       gross: "8192 pixels need about 1 GB of memory and a few seconds per map.",

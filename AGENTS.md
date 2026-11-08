@@ -34,7 +34,7 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
 
 ## Adding a surface
 
-1. One file `src/surfaces/<category>/<id>.ts` (categories: stone, wood, metal) with
+1. One file `src/surfaces/<category>/<id>.ts` (categories: stone, wood, metal, ground) with
    `defineSurface({ id, category, title, description, params, presets, tile, depth, build })`. `build` returns a
    sampler `(q, resolution) => { height, color, roughness, metalness }` in TSL, where `q` is the position on the tile
    (0 to 1). Use the tiling building blocks of `src/surfaces/noise.ts` (`fbm`, `noise`, `voronoi`, `cell`, `wrap`,

@@ -9,8 +9,8 @@ import { float, Fn, normalize, normalMap, uv, vec2, vec3 } from "three/tsl";
 import { withPreset, type Presets, type Schema, type Text, type Values } from "../core/params";
 import type { F, V2, V3 } from "./noise";
 
-export type SurfaceCategory = "stone" | "wood" | "metal";
-export const SURFACE_CATEGORIES: SurfaceCategory[] = ["stone", "wood", "metal"];
+export type SurfaceCategory = "stone" | "wood" | "metal" | "ground";
+export const SURFACE_CATEGORIES: SurfaceCategory[] = ["stone", "wood", "metal", "ground"];
 
 /** What a surface is at one point: height 0 to 1, colour in linear RGB, roughness and metalness 0 to 1. */
 export type Layers = { height: F; color: V3; roughness: F; metalness: F };

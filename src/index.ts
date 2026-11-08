@@ -32,6 +32,16 @@ import type { MeshStandardNodeMaterial } from "three/webgpu";
 import { cobblestone as f1 } from "./surfaces/stone/cobblestone";
 import { planks as f2 } from "./surfaces/wood/planks";
 import { metalPlate as f3 } from "./surfaces/metal/metal-plate";
+import { bricks as f4 } from "./surfaces/stone/bricks";
+import { tiles as f5 } from "./surfaces/stone/tiles";
+import { concrete as f6 } from "./surfaces/stone/concrete";
+import { marble as f7 } from "./surfaces/stone/marble";
+import { parquet as f8 } from "./surfaces/wood/parquet";
+import { corrugated as f9 } from "./surfaces/metal/corrugated";
+import { grass as f10 } from "./surfaces/ground/grass";
+import { sand as f11 } from "./surfaces/ground/sand";
+import { dirt as f12 } from "./surfaces/ground/dirt";
+import { snow as f13 } from "./surfaces/ground/snow";
 
 export { ASSETS, assetById } from "./assets";
 export { defaults, clean, random, withPreset } from "./core/params";
@@ -60,4 +70,5 @@ type SurfaceInput<F extends Surface<any>> = Partial<Values<F["params"]>> & { pre
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const flaeche = <F extends Surface<any>>(f: F) => (values: SurfaceInput<F> = {}, seed = 1, repeat: number | readonly [number, number] = 1): MeshStandardNodeMaterial =>
   flaechenMaterial(machFlaeche(f, values, seed), repeat);
-export const cobblestone = flaeche(f1), planks = flaeche(f2), metalPlate = flaeche(f3);
+export const cobblestone = flaeche(f1), planks = flaeche(f2), metalPlate = flaeche(f3), bricks = flaeche(f4), tiles = flaeche(f5);
+export const concrete = flaeche(f6), marble = flaeche(f7), parquet = flaeche(f8), corrugated = flaeche(f9), grass = flaeche(f10), sand = flaeche(f11), dirt = flaeche(f12), snow = flaeche(f13);

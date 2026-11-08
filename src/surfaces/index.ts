@@ -3,6 +3,16 @@ import type { AnySurface } from "./define";
 import { cobblestone } from "./stone/cobblestone";
 import { planks } from "./wood/planks";
 import { metalPlate } from "./metal/metal-plate";
+import { bricks } from "./stone/bricks";
+import { tiles } from "./stone/tiles";
+import { concrete } from "./stone/concrete";
+import { marble } from "./stone/marble";
+import { parquet } from "./wood/parquet";
+import { corrugated } from "./metal/corrugated";
+import { grass } from "./ground/grass";
+import { sand } from "./ground/sand";
+import { dirt } from "./ground/dirt";
+import { snow } from "./ground/snow";
 
-export const SURFACES: AnySurface[] = [cobblestone, planks, metalPlate];
+export const SURFACES: AnySurface[] = [cobblestone, bricks, tiles, concrete, marble, planks, parquet, metalPlate, corrugated, grass, sand, dirt, snow];
 export const surfaceById = (id: string) => SURFACES.find((s) => s.id === id);
