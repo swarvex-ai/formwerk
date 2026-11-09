@@ -1,0 +1,13 @@
+# Catalogue registries: nearly every task adds its asset here, one import and one entry per line. When two tasks add
+# their lines at the same place, keep both instead of a conflict (the swarvex merge train applies with git apply --3way);
+# the tests then check the result. Only for lines that are added; never put two entries on one line.
+src/index.ts merge=union
+src/assets/index.ts merge=union
+src/surfaces/index.ts merge=union
+src/surfaces/list.ts merge=union
+src/sprites/index.ts merge=union
+src/sprites/lib.ts merge=union
+src/icons/index.ts merge=union
+src/icons/lib.ts merge=union
+src/sounds/index.ts merge=union
+src/sounds/lib.ts merge=union
