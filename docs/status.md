@@ -45,7 +45,7 @@ handles; doors read weakly at baseline size. Consider whether the cap should all
 terrain and effects kinds need a contract first (level D, lead). The rework rate of 67 % comes from the registry refactor (02b51b3) landing under
 two open patches, not from unclear tasks; new reservations start on the current main. Two reservations were handed back without a result
 (unknown model); watch whether one task keeps getting handed back.
-Pending approvals: none. Open question to the visionary: decide submission 133 (bridge), which I may not review.
+Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21) and 134 (wheelbarrow, message 22); runner on the lead account (message 22).
 Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
 Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; write docs/plan.md milestones with estimates when more
 merges land; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
