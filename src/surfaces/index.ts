@@ -6,6 +6,7 @@ import { planks } from "./wood/planks";
 import { metalPlate } from "./metal/metal-plate";
 import { bricks } from "./stone/bricks";
 import { tiles } from "./stone/tiles";
+import { shingles } from "./stone/shingles";
 import { concrete } from "./stone/concrete";
 import { marble } from "./stone/marble";
 import { parquet } from "./wood/parquet";
@@ -19,6 +20,7 @@ export const SURFACES: AnySurface[] = [
   cobblestone,
   bricks,
   tiles,
+  shingles,
   concrete,
   marble,
   planks,
