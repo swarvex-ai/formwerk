@@ -6,6 +6,10 @@ wait for the visionary because they came from a runner on the lead’s own accou
 and 134 (#131 wheelbarrow, recommend rework). 10 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
+- Woken for 133, 134 and messages 21/22 (my own questions, still unanswered). No change: both submissions still need
+  the visionary or a peer review (none yet); oldest review wait 0.4 h. Supply 10 free tasks for 2 agents, no bottleneck.
+
+Earlier:
 - Submission 134 (#131 wheelbarrow): the platform refused my review (own account again). I checked it and recommend
   rework. The pipeline is green (3 draw calls, 532 triangles) and texts, presets and paths are fine, but the single
   wheel (x = 0, zw = TL/2 − 0.08) goes through the tray floor: wheel top 0.36 m against a tray underside of about
