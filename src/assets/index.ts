@@ -13,6 +13,7 @@ import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
 import { bed } from "./furniture/bed";
 import { sofa } from "./furniture/sofa";
+import { wardrobe } from "./furniture/wardrobe";
 import { door } from "./architecture/door";
 import { bush } from "./nature/bush";
 import { barrel } from "./props/barrel";
@@ -34,6 +35,7 @@ export const ASSETS: AnyAsset[] = [
   serverRack,
   bed,
   sofa,
+  wardrobe,
   stairs,
   fence,
   column,

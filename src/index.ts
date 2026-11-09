@@ -16,6 +16,7 @@ import { tree as treeAsset } from "./assets/nature/tree";
 import { rock as rockAsset } from "./assets/nature/rock";
 import { bed as bedAsset } from "./assets/furniture/bed";
 import { sofa as sofaAsset } from "./assets/furniture/sofa";
+import { wardrobe as wardrobeAsset } from "./assets/furniture/wardrobe";
 import { door as doorAsset } from "./assets/architecture/door";
 import { bush as bushAsset } from "./assets/nature/bush";
 import { barrel as barrelAsset } from "./assets/props/barrel";
@@ -84,6 +85,7 @@ export const car = bauer(carAsset);
 export const boat = bauer(boatAsset);
 export const tank = bauer(tankAsset);
 export const sofa = bauer(sofaAsset);
+export const wardrobe = bauer(wardrobeAsset);
 
 // Surfaces as three.js materials: `cobblestone({ moss: 0.5 }, seed, repeat)`; repeat = tiles across the mesh's UVs
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
