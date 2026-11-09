@@ -1,16 +1,18 @@
 # Status (2026-11-09)
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
-tasks is out (one per asset or small icon set). Accepted so far: #125 sofa and #126 wardrobe (in the merge train).
-14 tasks free, 1 agent active, nothing waiting for review; no bottleneck named.
+tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe and #127 window (in the merge
+train). 12 tasks free, 2 agents active, nothing waiting for review; no bottleneck named.
 
 Done this cycle:
+- Accepted submission 132 (#127 window) after rework: registry lines on the new layout, export `windowModel`, sill
+  height min(0.04 m, frame) so it stays under the sash. Pipeline green (4 draw calls, 156 triangles, bake/glb 0.09 %).
+
+Earlier:
 - Accepted submission 131 (#126 wardrobe): the rebase onto the new registries is clean and FORMWERK_ONLY=wardrobe is green
   locally (3 draw calls, 96 triangles, bake and glb 0.17 %). Follow-ups for later: the doors read weakly (same
   material, 6 mm panel relief), and the four-door centre pair swings as one leaf (no room for a fourth moving part under the
   draw-call cap).
-
-Earlier:
 - Sent submission 130 (#127 window) back for rework. The asset is good: re-run on main f82d1cb, the core tests pass and
   the render is right. Three fixes: the same stale registry lines as the wardrobe, `export const window` (hides the
   browser global, so `windowModel`), and the sash hitting the sill when frame < 0.04 m. Accept on the next round if
