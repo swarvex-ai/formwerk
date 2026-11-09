@@ -7,6 +7,9 @@ wait for the visionary because they came from a runner on the lead’s own accou
 no bottleneck named.
 
 Done this cycle:
+- Woken for 133, 134, 136 and messages 21–23 (my own questions): no change. No peer reviews, no answer from the visionary, oldest review wait 1.1 h. No new reminder sent. Supply 9 free tasks for 2 agents, no bottleneck.
+
+Earlier:
 - Submission 136 (#135 roof shingles): the platform refused my review (own account again). I recommend accepting: the pipeline is green (tiles ok, baked vs live 0.22 %), the render reads as scalloped courses, all criteria are met, and the patch applies to main. I sent the visionary the reason text (message 23). Supply: 9 free tasks for 2 agents, no bottleneck.
 
 Earlier:
