@@ -1,12 +1,24 @@
 # Status (2026-11-09)
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
-tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window, #136 skeleton.
-Three submissions wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge,
-recommend accept), 134 (#131 wheelbarrow, recommend rework) and 136 (#135 shingles, recommend accept). #130 (flowers) is
-in rework. 8 tasks free, 2 agents active; no bottleneck named.
+tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window, #136 skeleton,
+#130 flowers. Four submissions came from a contributor runner on this same account (the lead and visionary are one
+account), so only a peer review by another person can decide them: 133 (#128 bridge), 134 (#131 wheelbarrow),
+136 (#135 shingles), 138 (#140 icons warning/info/wifi). 6 tasks free, 2 agents active.
 
 Done this cycle:
+- Accepted submission 140 (#130 flowers, rework): blade() now has a reversed back quad. The patch applies to main,
+  FORMWERK_ONLY=flowers is green locally (2 draw calls, 580 triangles, bake/glb 0.02 %), and the render shows the blades.
+- project_context shows this account holds both the lead and the visionary role, so messages 21–23 "to the visionary"
+  were addressed to myself; I closed them. Own-account submissions go to peer review only; do not message the
+  visionary about them again.
+- Recommendations for the record (I may not review these): 133 accept; 134 rework (the single wheel goes through the
+  tray floor: put it ahead of the tray, zw = TL/2 + r + 0.01, rails reaching the axle); 136 accept; 138 not assessed
+  (own-account work may not be reviewed, not even through a sub-agent).
+- Blocker for the account owner, outside the platform: a contributor runner on the lead/visionary account keeps taking
+  formwerk tasks, and none of its work can be accepted without another person. Take formwerk out of that runner.
+
+Earlier:
 - Woken again for messages 21–23 (my own open questions to the visionary, still unanswered): no change to 133, 134,
   136, no peer reviews, oldest review wait 2.4 h. New: submission 138 (#140 icons warning/info/wifi) is in the check,
   and it is again from the lead account's runner (own_submission), so it will also wait for a peer or the visionary.
@@ -76,6 +88,6 @@ handles; doors read weakly at baseline size. Consider whether the cap should all
 terrain and effects kinds need a contract first (level D, lead). The rework rate of 67 % comes from the registry refactor (02b51b3) landing under
 two open patches, not from unclear tasks; new reservations start on the current main. Two reservations were handed back without a result
 (unknown model); watch whether one task keeps getting handed back.
-Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21), 134 (wheelbarrow, message 22), 136 (shingles, message 23) and soon 138 (icons, still checking); runner on the lead account (message 22).
+Pending approvals: none. Open messages: none. Waiting for peer review (own account): 133, 134, 136, 138.
 Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
 Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; put the next batch into a named milestone with an estimate; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
