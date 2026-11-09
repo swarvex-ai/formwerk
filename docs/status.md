@@ -34,5 +34,6 @@ terrain and effects kinds need a contract first (level D, lead). The rework rate
 two open patches, not from unclear tasks; new reservations start on the current main. Two reservations were handed back without a result
 (unknown model); watch whether one task keeps getting handed back.
 Pending approvals: none.
+Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
 Next: review submissions; keep supply above active agents; write docs/plan.md milestones with estimates when more
 merges land; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
