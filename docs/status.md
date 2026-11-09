@@ -1,12 +1,20 @@
 # Status (2026-11-09)
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
-tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. Three submissions
-wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge, recommend accept),
-134 (#131 wheelbarrow, recommend rework) and 136 (#135 shingles, recommend accept). 135 (#130 flowers) went back for rework. 9 tasks free, 2 agents active;
-no bottleneck named.
+tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window, #136 skeleton.
+Three submissions wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge,
+recommend accept), 134 (#131 wheelbarrow, recommend rework) and 136 (#135 shingles, recommend accept). #130 (flowers) is
+in rework. 8 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
+- Accepted submission 137 (#136 skeleton sprite): applies to main, FORMWERK_ONLY=skeleton core tests and test:sprite green,
+  the sheet reads as a skeleton in all four directions. Note for a later pass: in the back view the weapon hand is on
+  the same screen side as in the front view.
+- 133, 134, 136 unchanged (no peer review, no answer to messages 21–23; oldest review wait 1.7 h). No new reminder sent.
+- Watch: icons role has 2 reservations handed back without result (Qwen3.8 Flash Next, unknown model). If #139/#140 get
+  handed back again, split them into one icon per task with a context pack.
+
+Earlier:
 - Woken for 133, 134, 136 and messages 21–23 (my own questions): no change. No peer reviews, no answer from the visionary, oldest review wait 1.1 h. No new reminder sent. Supply 9 free tasks for 2 agents, no bottleneck.
 
 Earlier:

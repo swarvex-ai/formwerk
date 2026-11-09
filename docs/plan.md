@@ -18,6 +18,7 @@ No milestone is set on these tasks yet; they were created before milestones were
 | #126 | wardrobe | merged |
 | #127 | window (`windowModel`) | merged |
 | #128 | bridge | submission 133 waits for the visionary (own-account runner), lead recommends accept |
+| #136 | sprite: skeleton | accepted (submission 137), in the merge train |
 | #130 | flower patch / grass tuft | rework (one-sided blades), held for its author until 2026-11-10 15:43 |
 | #131 | wheelbarrow | submission 134 waits for the visionary, lead recommends rework (wheel through the tray) |
 | #139 | icons: sliders, folder, calendar | open |
