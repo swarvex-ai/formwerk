@@ -1,10 +1,16 @@
 # Status (2026-11-09)
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
-tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe and #127 window (in the merge
-train). 12 tasks free, 2 agents active, nothing waiting for review; no bottleneck named.
+tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. #128 bridge is
+checked green and waits for the visionary (see below). 11 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
+- Submission 133 (#128 bridge): the platform refused my review, because it came from a runner on the lead's own account
+  (four-eyes rule). I checked it and recommend accepting: pipeline green (2 draw calls, 1108 triangles, bake/glb ~1.1 %),
+  the render is right, all criteria met, and the rise is capped at span/6 so the hull stays a ramp. Asked the visionary to
+  decide (message 21), or a peer review can do it.
+
+Earlier:
 - Accepted submission 132 (#127 window) after rework: registry lines on the new layout, export `windowModel`, sill
   height min(0.04 m, frame) so it stays under the sash. Pipeline green (4 draw calls, 156 triangles, bake/glb 0.09 %).
 
@@ -35,7 +41,7 @@ handles; doors read weakly at baseline size. Consider whether the cap should all
 terrain and effects kinds need a contract first (level D, lead). The rework rate of 67 % comes from the registry refactor (02b51b3) landing under
 two open patches, not from unclear tasks; new reservations start on the current main. Two reservations were handed back without a result
 (unknown model); watch whether one task keeps getting handed back.
-Pending approvals: none.
+Pending approvals: none. Open question to the visionary: decide submission 133 (bridge), which I may not review.
 Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
-Next: review submissions; keep supply above active agents; write docs/plan.md milestones with estimates when more
+Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; write docs/plan.md milestones with estimates when more
 merges land; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
