@@ -11,11 +11,11 @@ export const de = (new URLSearchParams(location.search).get("lang") ?? navigator
 export const T = de
   ? { reiter: { models: "Modelle", surfaces: "Oberflächen", sprites: "Sprites", icons: "Icons", sounds: "Klänge", speech: "Sprache" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
       code: "Code kopieren", link: "Link kopieren", kopiert: "Kopiert", looks: "Looks", export: "Herunterladen", laden: "Herunterladen",
-      hinweis: "Jedes Asset ist Code: Parameter ändern, Link teilen, für dein Spiel, deine App, Godot, Blender oder AR herunterladen. Lizenz der Assets: CC0.",
+      hinweis: "Jedes Asset ist Code aus dem Schwarm von swarvex.ai: Parameter ändern, Link teilen, für dein Spiel, deine App, Godot, Blender oder AR herunterladen. Lizenz der Assets: CC0.",
       beitragen: "Eigene Assets beitragen", agenten: "Für Agenten", datenschutz: "Datenschutz" }
   : { reiter: { models: "Models", surfaces: "Surfaces", sprites: "Sprites", icons: "Icons", sounds: "Sounds", speech: "Speech" }, seed: "Seed", wuerfeln: "Roll", zurueck: "Reset",
       code: "Copy code", link: "Copy link", kopiert: "Copied", looks: "Looks", export: "Download", laden: "Download",
-      hinweis: "Every asset is code: change the parameters, share the link, download it for your game, your app, Godot, Blender or AR. Asset licence: CC0.",
+      hinweis: "Every asset is code from the swarm of swarvex.ai: change the parameters, share the link, download it for your game, your app, Godot, Blender or AR. Asset licence: CC0.",
       beitragen: "Contribute your own assets", agenten: "For agents", datenschutz: "Privacy" };
 
 export const el = <K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, string> = {}, ...kinder: (Node | string)[]) => {
@@ -91,11 +91,12 @@ export async function startShell() {
   const wurzel = document.querySelector("#app")!, buehne = document.querySelector<HTMLElement>(".buehne")!;
   const b: Bereich = { liste: el("nav", { class: "liste", "aria-label": "Assets" }), regler: el("form", { class: "regler" }), buehne, werte: el("p", { class: "werte" }) };
   const reiter = Object.fromEntries((Object.keys(T.reiter) as Art[]).map((art) => [art, knopf(T.reiter[art], () => {
-    // Models: an empty hash shows the first model; the other kinds their first one
-    location.hash = art === "sounds" ? SOUNDS[0].id : art === "surfaces" ? SURFACE_IDS[0] : art === "sprites" ? SPRITES[0].id : art === "icons" ? ICONS[0].id : art === "speech" ? "speech" : "";
+    // Every kind opens with its first asset; "#models" is not an id, so the models tab takes its first model.
+    // An empty hash is the start page (landing.ts).
+    location.hash = art === "sounds" ? SOUNDS[0].id : art === "surfaces" ? SURFACE_IDS[0] : art === "sprites" ? SPRITES[0].id : art === "icons" ? ICONS[0].id : art === "speech" ? "speech" : "models";
   })])) as Record<Art, HTMLButtonElement>;
   wurzel.append(
-    el("header", {}, el("h1", {}, "Formwerk"), el("nav", { class: "reiter", "aria-label": de ? "Arten" : "Kinds" }, ...Object.values(reiter)),
+    el("header", {}, el("h1", {}, el("a", { href: "#", class: "marke" }, "Formwerk")), el("nav", { class: "reiter", "aria-label": de ? "Arten" : "Kinds" }, ...Object.values(reiter)),
       el("p", {}, T.hinweis),
       el("span", { class: "links" }, el("a", { href: "https://github.com/swarvex-ai/formwerk" }, T.beitragen), " · ",
         `${T.agenten}: `, el("a", { href: "./llms.txt" }, "llms.txt"), " ", el("a", { href: "./catalog.json" }, "catalog.json"), " · ",
@@ -103,16 +104,16 @@ export async function startShell() {
     b.liste, b.regler);
   buehne.append(b.werte);
 
-  let art: Art | null = null, aktiv: Galerie | null = null, laeuft: Promise<void> = Promise.resolve();
+  let art: Art | "start" | null = null, aktiv: Galerie | null = null, laeuft: Promise<void> = Promise.resolve();
   const laden = async () => {
     const id = hashTeile().id;
-    const neu: Art = id === "speech" ? "speech" : soundById(id) ? "sounds" : (SURFACE_IDS as readonly string[]).includes(id) ? "surfaces" : spriteById(id) ? "sprites" : iconById(id) ? "icons" : "models";
+    const neu: Art | "start" = !id ? "start" : id === "speech" ? "speech" : soundById(id) ? "sounds" : (SURFACE_IDS as readonly string[]).includes(id) ? "surfaces" : spriteById(id) ? "sprites" : iconById(id) ? "icons" : "models";
     if (neu === art && aktiv) { aktiv.zeigen(); return; }
     aktiv?.stop();
     aktiv = null;
     art = neu;
     for (const [k, knopfE] of Object.entries(reiter)) knopfE.setAttribute("aria-current", String(k === neu));
-    const modul = neu === "speech" ? await import("./speech") : neu === "sounds" ? await import("./sounds") : neu === "surfaces" ? await import("./surfaces") : neu === "sprites" ? await import("./sprites") : neu === "icons" ? await import("./icons") : await import("./models");
+    const modul = neu === "start" ? await import("./landing") : neu === "speech" ? await import("./speech") : neu === "sounds" ? await import("./sounds") : neu === "surfaces" ? await import("./surfaces") : neu === "sprites" ? await import("./sprites") : neu === "icons" ? await import("./icons") : await import("./models");
     if (art !== neu) return;
     aktiv = await modul.start(b);
     aktiv.zeigen();
