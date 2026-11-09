@@ -29,6 +29,7 @@ import { cart } from "./vehicles/cart";
 import { car } from "./vehicles/car";
 import { boat } from "./vehicles/boat";
 import { tank } from "./vehicles/tank";
+import { wheelbarrow } from "./vehicles/wheelbarrow";
 
 export const ASSETS: AnyAsset[] = [
   chair,
@@ -59,5 +60,6 @@ export const ASSETS: AnyAsset[] = [
   car,
   boat,
   tank,
+  wheelbarrow,
 ];
 export const assetById = (id: string) => ASSETS.find((a) => a.id === id);
