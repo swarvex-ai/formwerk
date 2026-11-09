@@ -42,6 +42,8 @@
       .haken { display: flex; gap: 8px; align-items: flex-start; font-size: .85rem; color: var(--leise); } .haken[hidden] { display: none; }
       button.haupt { border-color: var(--akzent); color: var(--akzent); } button:disabled { opacity: .6; cursor: progress; }
       header .links { font-size: .9rem; color: var(--leise); }
+      header a.sprache { margin-left: auto; padding: 5px 14px; border: 1px solid var(--linie); border-radius: 999px; color: var(--text); text-decoration: none; font-size: .9rem; }
+      header a.sprache:hover, header a.sprache:focus-visible { border-color: var(--akzent); color: var(--akzent); }
       @media (max-width: 860px) {
         body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 55vh auto; grid-template-areas: "kopf" "liste" "buehne" "regler"; height: auto; }
         .liste { display: flex; gap: 4px 12px; flex-wrap: wrap; border-right: 0; border-bottom: 1px solid var(--linie); }

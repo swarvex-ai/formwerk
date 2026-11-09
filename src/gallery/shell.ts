@@ -7,7 +7,24 @@ import { SURFACE_IDS } from "../surfaces/list";
 import { SPRITES, spriteById } from "../sprites";
 import { ICONS, iconById } from "../icons";
 
-export const de = (new URLSearchParams(location.search).get("lang") ?? navigator.language).startsWith("de");
+// Language: ?lang= in the link, else the choice from the switch in the header (kept in this browser), else the browser's
+const SPRACHE = "formwerk-lang";
+const gemerkt = () => { try { return localStorage.getItem(SPRACHE); } catch { return null; } };
+export const de = (new URLSearchParams(location.search).get("lang") ?? gemerkt() ?? navigator.language).startsWith("de");
+document.documentElement.lang = de ? "de" : "en";
+/** The switch to the other language: remembers the choice and reloads with ?lang=, keeping what is open (the hash). */
+const sprachLink = () => {
+  const andere = de ? "en" : "de";
+  const a = el("a", { href: `?lang=${andere}`, lang: andere, class: "sprache" }, de ? "English" : "Deutsch");
+  a.onclick = (e) => {
+    e.preventDefault();
+    try { localStorage.setItem(SPRACHE, andere); } catch { /* ohne Speicher: nur dieser Link */ }
+    const u = new URL(location.href);
+    u.searchParams.set("lang", andere);
+    location.href = u.toString();
+  };
+  return a;
+};
 export const T = de
   ? { reiter: { models: "Modelle", surfaces: "Oberflächen", sprites: "Sprites", icons: "Icons", sounds: "Klänge", speech: "Sprache" }, seed: "Seed", wuerfeln: "Würfeln", zurueck: "Zurücksetzen",
       code: "Code kopieren", link: "Link kopieren", kopiert: "Kopiert", looks: "Looks", export: "Herunterladen", laden: "Herunterladen",
@@ -100,7 +117,7 @@ export async function startShell() {
       el("p", {}, T.hinweis),
       el("span", { class: "links" }, el("a", { href: "https://github.com/swarvex-ai/formwerk" }, T.beitragen), " · ",
         `${T.agenten}: `, el("a", { href: "./llms.txt" }, "llms.txt"), " ", el("a", { href: "./catalog.json" }, "catalog.json"), " · ",
-        el("a", { href: de ? "https://swarvex.ai/datenschutz#vorschauen" : "https://swarvex.ai/en/privacy#previews" }, T.datenschutz))),
+        el("a", { href: de ? "https://swarvex.ai/datenschutz#vorschauen" : "https://swarvex.ai/en/privacy#previews" }, T.datenschutz)), sprachLink()),
     b.liste, b.regler);
   buehne.append(b.werte);
 
