@@ -33,6 +33,7 @@ import { rain as rainSound } from "./ambience/rain";
 import { fire as fireSound } from "./ambience/fire";
 import { hum as humSound } from "./ambience/hum";
 import { thunder as thunderSound } from "./ambience/thunder";
+import { coins as coinsSound } from "./effects/coins";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -81,3 +82,4 @@ export const rain = klang(rainSound);
 export const fire = klang(fireSound);
 export const hum = klang(humSound);
 export const thunder = klang(thunderSound);
+export const coins = klang(coinsSound);
