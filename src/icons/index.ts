@@ -1,4 +1,5 @@
-// The icons of the catalogue. A new icon is one file in its category folder plus one line here.
+// The icons of the catalogue. A new icon is one file in its category folder plus its import and its entry here,
+// each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnyIcon } from "./define";
 import { home } from "./navigation/home";
 import { user } from "./navigation/user";
@@ -24,9 +25,27 @@ import { mail } from "./objects/mail";
 import { chart } from "./objects/chart";
 
 export const ICONS: AnyIcon[] = [
-  home, user, arrow, list,
-  search, close, plus, check, trash, pencil, download, play,
-  bell, mark, heart, star, lock, eye, clock,
-  gear, mail, chart,
+  home,
+  user,
+  arrow,
+  list,
+  search,
+  close,
+  plus,
+  check,
+  trash,
+  pencil,
+  download,
+  play,
+  bell,
+  mark,
+  heart,
+  star,
+  lock,
+  eye,
+  clock,
+  gear,
+  mail,
+  chart,
 ];
 export const iconById = (id: string) => ICONS.find((i) => i.id === id);

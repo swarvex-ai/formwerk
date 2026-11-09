@@ -3,19 +3,19 @@
 // Godot's SpriteFrames and a JSON for other engines.
 import type { Values } from "../core/params";
 import { makeSheet, type Sprite } from "./define";
-import { villager as s1 } from "./characters/villager";
-import { slime as s2 } from "./creatures/slime";
-import { potion as s3 } from "./items/potion";
-import { coin as s4 } from "./items/coin";
-import { gem as s5 } from "./items/gem";
-import { key as s6 } from "./items/key";
-import { sword as s7 } from "./items/sword";
-import { shield as s8 } from "./items/shield";
-import { life as s9 } from "./items/life";
-import { bomb as s10 } from "./items/bomb";
-import { bat as s11 } from "./creatures/bat";
-import { ghost as s12 } from "./creatures/ghost";
-import { spider as s13 } from "./creatures/spider";
+import { villager as villagerSprite } from "./characters/villager";
+import { slime as slimeSprite } from "./creatures/slime";
+import { potion as potionSprite } from "./items/potion";
+import { coin as coinSprite } from "./items/coin";
+import { gem as gemSprite } from "./items/gem";
+import { key as keySprite } from "./items/key";
+import { sword as swordSprite } from "./items/sword";
+import { shield as shieldSprite } from "./items/shield";
+import { life as lifeSprite } from "./items/life";
+import { bomb as bombSprite } from "./items/bomb";
+import { bat as batSprite } from "./creatures/bat";
+import { ghost as ghostSprite } from "./creatures/ghost";
+import { spider as spiderSprite } from "./creatures/spider";
 
 export { SPRITES, spriteById } from "./index";
 export { makeSheet, sheetJson, godotSpriteFrames, animationName, SPRITE_CATEGORIES } from "./define";
@@ -26,5 +26,16 @@ type Input<S extends Sprite<any>> = Partial<Values<S["params"]>> & { preset?: Ex
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const bogen = <S extends Sprite<any>>(s: S) => (values: Input<S> = {}, seed = 1) => makeSheet(s, values, seed);
 
-export const villager = bogen(s1), slime = bogen(s2), potion = bogen(s3);
-export const coin = bogen(s4), gem = bogen(s5), key = bogen(s6), sword = bogen(s7), shield = bogen(s8), life = bogen(s9), bomb = bogen(s10), bat = bogen(s11), ghost = bogen(s12), spider = bogen(s13);
+export const villager = bogen(villagerSprite);
+export const slime = bogen(slimeSprite);
+export const potion = bogen(potionSprite);
+export const coin = bogen(coinSprite);
+export const gem = bogen(gemSprite);
+export const key = bogen(keySprite);
+export const sword = bogen(swordSprite);
+export const shield = bogen(shieldSprite);
+export const life = bogen(lifeSprite);
+export const bomb = bogen(bombSprite);
+export const bat = bogen(batSprite);
+export const ghost = bogen(ghostSprite);
+export const spider = bogen(spiderSprite);

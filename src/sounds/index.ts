@@ -1,4 +1,5 @@
-// The sounds of the catalogue. A new sound is one file in its category folder plus one line here.
+// The sounds of the catalogue. A new sound is one file in its category folder plus its import and its entry here,
+// each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnySound } from "./define";
 import { click } from "./ui/click";
 import { chime } from "./ui/chime";
@@ -33,11 +34,36 @@ import { hum } from "./ambience/hum";
 import { thunder } from "./ambience/thunder";
 
 export const SOUNDS: AnySound[] = [
-  click, chime, pop, toggle, buzz, alert, typing,
-  hit, explosion, glass, clang, knock,
-  footstep, jump, whoosh, splash, creak,
-  pickup, zap, magic, engine, heartbeat,
-  effort, pain, creature, babble,
-  wind, rain, fire, hum, thunder,
+  click,
+  chime,
+  pop,
+  toggle,
+  buzz,
+  alert,
+  typing,
+  hit,
+  explosion,
+  glass,
+  clang,
+  knock,
+  footstep,
+  jump,
+  whoosh,
+  splash,
+  creak,
+  pickup,
+  zap,
+  magic,
+  engine,
+  heartbeat,
+  effort,
+  pain,
+  creature,
+  babble,
+  wind,
+  rain,
+  fire,
+  hum,
+  thunder,
 ];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);

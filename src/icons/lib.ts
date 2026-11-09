@@ -3,28 +3,28 @@
 // as RGBA pixels in any size, both from the same geometry.
 import type { Values } from "../core/params";
 import { makeIcon, type Icon, type StyleSchema } from "./define";
-import { home as i1 } from "./navigation/home";
-import { user as i2 } from "./navigation/user";
-import { arrow as i3 } from "./navigation/arrow";
-import { list as i4 } from "./navigation/list";
-import { search as i5 } from "./actions/search";
-import { close as i6 } from "./actions/close";
-import { plus as i7 } from "./actions/plus";
-import { check as i8 } from "./actions/check";
-import { trash as i9 } from "./actions/trash";
-import { pencil as i10 } from "./actions/pencil";
-import { download as i11 } from "./actions/download";
-import { play as i12 } from "./actions/play";
-import { bell as i13 } from "./status/bell";
-import { mark as i14 } from "./status/mark";
-import { heart as i15 } from "./status/heart";
-import { star as i16 } from "./status/star";
-import { lock as i17 } from "./status/lock";
-import { eye as i18 } from "./status/eye";
-import { clock as i19 } from "./status/clock";
-import { gear as i20 } from "./objects/gear";
-import { mail as i21 } from "./objects/mail";
-import { chart as i22 } from "./objects/chart";
+import { home as homeIcon } from "./navigation/home";
+import { user as userIcon } from "./navigation/user";
+import { arrow as arrowIcon } from "./navigation/arrow";
+import { list as listIcon } from "./navigation/list";
+import { search as searchIcon } from "./actions/search";
+import { close as closeIcon } from "./actions/close";
+import { plus as plusIcon } from "./actions/plus";
+import { check as checkIcon } from "./actions/check";
+import { trash as trashIcon } from "./actions/trash";
+import { pencil as pencilIcon } from "./actions/pencil";
+import { download as downloadIcon } from "./actions/download";
+import { play as playIcon } from "./actions/play";
+import { bell as bellIcon } from "./status/bell";
+import { mark as markIcon } from "./status/mark";
+import { heart as heartIcon } from "./status/heart";
+import { star as starIcon } from "./status/star";
+import { lock as lockIcon } from "./status/lock";
+import { eye as eyeIcon } from "./status/eye";
+import { clock as clockIcon } from "./status/clock";
+import { gear as gearIcon } from "./objects/gear";
+import { mail as mailIcon } from "./objects/mail";
+import { chart as chartIcon } from "./objects/chart";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -35,25 +35,25 @@ type Input<I extends Icon<any>> = Partial<Values<I["params"] & StyleSchema>> & {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const zeichen = <I extends Icon<any>>(i: I) => (values: Input<I> = {}) => makeIcon(i, values);
 
-export const home = zeichen(i1),
-  user = zeichen(i2),
-  arrow = zeichen(i3),
-  list = zeichen(i4),
-  search = zeichen(i5),
-  close = zeichen(i6),
-  plus = zeichen(i7),
-  check = zeichen(i8),
-  trash = zeichen(i9),
-  pencil = zeichen(i10),
-  download = zeichen(i11),
-  play = zeichen(i12),
-  bell = zeichen(i13),
-  mark = zeichen(i14),
-  heart = zeichen(i15),
-  star = zeichen(i16),
-  lock = zeichen(i17),
-  eye = zeichen(i18),
-  clock = zeichen(i19),
-  gear = zeichen(i20),
-  mail = zeichen(i21),
-  chart = zeichen(i22);
+export const home = zeichen(homeIcon);
+export const user = zeichen(userIcon);
+export const arrow = zeichen(arrowIcon);
+export const list = zeichen(listIcon);
+export const search = zeichen(searchIcon);
+export const close = zeichen(closeIcon);
+export const plus = zeichen(plusIcon);
+export const check = zeichen(checkIcon);
+export const trash = zeichen(trashIcon);
+export const pencil = zeichen(pencilIcon);
+export const download = zeichen(downloadIcon);
+export const play = zeichen(playIcon);
+export const bell = zeichen(bellIcon);
+export const mark = zeichen(markIcon);
+export const heart = zeichen(heartIcon);
+export const star = zeichen(starIcon);
+export const lock = zeichen(lockIcon);
+export const eye = zeichen(eyeIcon);
+export const clock = zeichen(clockIcon);
+export const gear = zeichen(gearIcon);
+export const mail = zeichen(mailIcon);
+export const chart = zeichen(chartIcon);

@@ -1,4 +1,5 @@
-// The surfaces of the catalogue. A new surface is one file in its category folder plus one line here.
+// The surfaces of the catalogue. A new surface is one file in its category folder plus its import and its entry here,
+// each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnySurface } from "./define";
 import { cobblestone } from "./stone/cobblestone";
 import { planks } from "./wood/planks";
@@ -14,5 +15,19 @@ import { sand } from "./ground/sand";
 import { dirt } from "./ground/dirt";
 import { snow } from "./ground/snow";
 
-export const SURFACES: AnySurface[] = [cobblestone, bricks, tiles, concrete, marble, planks, parquet, metalPlate, corrugated, grass, sand, dirt, snow];
+export const SURFACES: AnySurface[] = [
+  cobblestone,
+  bricks,
+  tiles,
+  concrete,
+  marble,
+  planks,
+  parquet,
+  metalPlate,
+  corrugated,
+  grass,
+  sand,
+  dirt,
+  snow,
+];
 export const surfaceById = (id: string) => SURFACES.find((s) => s.id === id);

@@ -25,7 +25,8 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
 1. One file `src/assets/<category>/<id>.ts` (categories: furniture, architecture, nature, vehicles, props) with
    `defineAsset({ id, category, title, description, params, presets, rig?, physics, budget, build })`.
    Copy the closest existing asset and change it.
-2. One line in `src/assets/index.ts` (catalogue) and one in `src/index.ts` (library export).
+2. Its import and its entry in `src/assets/index.ts` (catalogue) and in `src/index.ts` (library export), each on a line
+   of its own: copy a neighbouring line.
 3. `npm test`: the core tests build your asset at its defaults, every extreme, every preset and random values, and
    check the budget, that it stands on the floor, that it is deterministic, that movable parts stay above the floor
    at both ends of their range, and the physics data. The scene test writes `tests/scene/baseline/<id>.png`: look at
@@ -39,7 +40,8 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    sampler `(q, resolution) => { height, color, roughness, metalness }` in TSL, where `q` is the position on the tile
    (0 to 1). Use the tiling building blocks of `src/surfaces/noise.ts` (`fbm`, `noise`, `voronoi`, `cell`, `wrap`,
    `ramp`): every pattern must repeat after one tile. Copy the closest surface and change it.
-2. One line each in `src/surfaces/index.ts`, `src/surfaces/list.ts` and `src/index.ts`.
+2. Its import and its entry in `src/surfaces/index.ts`, `src/surfaces/list.ts` and `src/index.ts`, each on a line of its
+   own: copy a neighbouring line.
 3. `npm test`: the scene test renders it live and writes `tests/scene/baseline/<id>.png` and `<id>.maps.png` (colour,
    normal, roughness, height); it checks that every map repeats after exactly one tile, that the bake is deterministic
    and that a plane with the baked PNG maps looks like the live material. Look at `tests/scene/out/`, then commit the
@@ -52,7 +54,7 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    `build` returns a function `(animation, direction, frame) => Pixels` that draws one frame with `src/core/pixels.ts`
    (`part`, `ellipse`, `rect`, `set`, `mirrored`, colours from `ramp()`). Leave the outermost ring of the frame empty:
    the contract draws the outline there. Left is usually `right.mirrored()`. Copy the closest sprite and change it.
-2. One line each in `src/sprites/index.ts` and `src/sprites/lib.ts`.
+2. Its import and its entry in `src/sprites/index.ts` and `src/sprites/lib.ts`, each on a line of its own.
 3. `npm test`: the sprite tests draw it at its defaults, every extreme, every preset and random values, and check the
    sheet size, hard edges, the palette, the free outer ring, feet on the bottom row (grounded sprites), left as the
    mirror of right, that animations move, and determinism. `tests/scene/sprites.mjs` writes its sheet to
@@ -67,7 +69,7 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    says what each one is: `area` (closed shapes: outlined, tinted or filled by style), `stroke`, `dot`, `detail`
    (drawn, cut out of a filled area), `hole`, `gap` (a clear margin around what comes next). Never set colours or
    stroke widths yourself. Use `pen` and `reach(pen, angle)` to keep the ink inside the grid. Copy the closest icon.
-2. One line each in `src/icons/index.ts` and `src/icons/lib.ts`.
+2. Its import and its entry in `src/icons/index.ts` and `src/icons/lib.ts`, each on a line of its own.
 3. `npm test`: the icon tests draw it at its defaults, every extreme, every preset, random values and every
    combination of its choices at the strongest stroke, each in all three styles. They check that the outermost pixel
    stays empty, the amount of ink, that it is centred, and that it reads at 24 px (no gap or stroke narrower than 0.8
@@ -82,7 +84,8 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    samples at `RATE` (48 kHz mono) from the building blocks of `src/core/audio.ts` (`Osc`, `Biquad`, `LowPass`,
    `envelope`, `grains`, `smooth`, `white`, `semitones`); voices use `voice()` from `src/core/voice.ts` with keyframes
    (pitch, mouth shape, voice, breath, hiss). Copy the closest existing sound and change it.
-2. One line in `src/sounds/index.ts` (catalogue) and one in `src/sounds/lib.ts` (library export).
+2. Its import and its entry in `src/sounds/index.ts` (catalogue) and in `src/sounds/lib.ts` (library export), each on a
+   line of its own.
 3. `npm test`: the sound tests build it at its defaults, every extreme, every preset and random values, and check the
    length budget, the level, no DC, clean edges (one-shots) or seam (loops), that it is audible, that it decays on its
    own and that it is deterministic. `tests/scene/sounds.mjs` writes its spectrogram to

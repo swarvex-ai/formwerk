@@ -1,4 +1,5 @@
-// The catalogue: every asset of Formwerk. A new asset is one file in its category folder plus one line here.
+// The catalogue: every asset of Formwerk. A new asset is one file in its category folder plus its import and its entry here,
+// each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnyAsset } from "./define";
 import { chair } from "./furniture/chair";
 import { table } from "./furniture/table";
@@ -26,10 +27,29 @@ import { boat } from "./vehicles/boat";
 import { tank } from "./vehicles/tank";
 
 export const ASSETS: AnyAsset[] = [
-  chair, table, shelf, crate, serverRack, bed, sofa,
-  stairs, fence, column, door,
-  tree, rock, bush,
-  barrel, chest, lampPost, bench, signpost, marketStall,
-  cart, car, boat, tank,
+  chair,
+  table,
+  shelf,
+  crate,
+  serverRack,
+  bed,
+  sofa,
+  stairs,
+  fence,
+  column,
+  door,
+  tree,
+  rock,
+  bush,
+  barrel,
+  chest,
+  lampPost,
+  bench,
+  signpost,
+  marketStall,
+  cart,
+  car,
+  boat,
+  tank,
 ];
 export const assetById = (id: string) => ASSETS.find((a) => a.id === id);

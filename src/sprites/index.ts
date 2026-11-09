@@ -1,4 +1,5 @@
-// The sprites of the catalogue. A new sprite is one file in its category folder plus one line here.
+// The sprites of the catalogue. A new sprite is one file in its category folder plus its import and its entry here,
+// each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnySprite } from "./define";
 import { villager } from "./characters/villager";
 import { slime } from "./creatures/slime";
@@ -14,5 +15,19 @@ import { bat } from "./creatures/bat";
 import { ghost } from "./creatures/ghost";
 import { spider } from "./creatures/spider";
 
-export const SPRITES: AnySprite[] = [villager, slime, bat, ghost, spider, potion, coin, gem, key, sword, shield, life, bomb];
+export const SPRITES: AnySprite[] = [
+  villager,
+  slime,
+  bat,
+  ghost,
+  spider,
+  potion,
+  coin,
+  gem,
+  key,
+  sword,
+  shield,
+  life,
+  bomb,
+];
 export const spriteById = (id: string) => SPRITES.find((s) => s.id === id);
