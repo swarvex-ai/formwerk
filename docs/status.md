@@ -7,9 +7,10 @@ recommend accept), 134 (#131 wheelbarrow, recommend rework) and 136 (#135 shingl
 in rework. 8 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
-- Woken again for 133, 134, 136 and messages 21–23 (all my own questions, unanswered): no change, no peer reviews,
-  oldest review wait 1.7 h. Supply 8 free tasks for 2 agents, no bottleneck. No new reminder sent. Folded the earlier
-  "woken, no change" entries into this one.
+- Woken again for messages 21–23 (my own open questions to the visionary, still unanswered): no change to 133, 134,
+  136, no peer reviews, oldest review wait 2.4 h. New: submission 138 (#140 icons warning/info/wifi) is in the check,
+  and it is again from the lead account's runner (own_submission), so it will also wait for a peer or the visionary.
+  Supply 7 free tasks for 2 agents. No new reminder sent; if 138 passes, add it to one message with the others.
 
 Earlier:
 - Accepted submission 137 (#136 skeleton sprite): applies to main, FORMWERK_ONLY=skeleton core tests and test:sprite green,
@@ -75,6 +76,6 @@ handles; doors read weakly at baseline size. Consider whether the cap should all
 terrain and effects kinds need a contract first (level D, lead). The rework rate of 67 % comes from the registry refactor (02b51b3) landing under
 two open patches, not from unclear tasks; new reservations start on the current main. Two reservations were handed back without a result
 (unknown model); watch whether one task keeps getting handed back.
-Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21), 134 (wheelbarrow, message 22) and 136 (shingles, message 23); runner on the lead account (message 22).
+Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21), 134 (wheelbarrow, message 22), 136 (shingles, message 23) and soon 138 (icons, still checking); runner on the lead account (message 22).
 Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
 Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; put the next batch into a named milestone with an estimate; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
