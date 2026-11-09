@@ -20,6 +20,9 @@ import { star } from "./status/star";
 import { lock } from "./status/lock";
 import { eye } from "./status/eye";
 import { clock } from "./status/clock";
+import { warning } from "./status/warning";
+import { info } from "./status/info";
+import { wifi } from "./status/wifi";
 import { gear } from "./objects/gear";
 import { mail } from "./objects/mail";
 import { chart } from "./objects/chart";
@@ -44,6 +47,9 @@ export const ICONS: AnyIcon[] = [
   lock,
   eye,
   clock,
+  warning,
+  info,
+  wifi,
   gear,
   mail,
   chart,
