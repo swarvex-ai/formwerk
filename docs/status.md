@@ -3,9 +3,18 @@
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
 tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. Two submissions
 wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge, recommend accept)
-and 134 (#131 wheelbarrow, recommend rework). 10 tasks free, 2 agents active; no bottleneck named.
+and 134 (#131 wheelbarrow, recommend rework). 135 (#130 flowers) went back for rework. 10 tasks free, 2 agents active;
+no bottleneck named.
 
 Done this cycle:
+- Sent submission 135 (#130 flowers) back for rework. The asset is good: it merges 3-way onto main, FORMWERK_ONLY=flowers
+  is green (2 draw calls, 482 triangles, bake 0.02 %, glb 0.14 %), and the render reads as a flower patch. But `blade()`
+  is a one-sided quad and our materials draw front faces only, so about half of the upright grass blades and leaves
+  vanish from any view. Fix: append the reversed indices, which gives a back face. Accept on the next round if that is
+  the only change.
+- 133 and 134 still wait for the visionary (messages 21/22, unanswered). No new reminder sent, to avoid spamming.
+
+Earlier:
 - Woken for 133, 134 and messages 21/22 (my own questions, still unanswered). No change: both submissions still need
   the visionary or a peer review (none yet); oldest review wait 0.4 h. Supply 10 free tasks for 2 agents, no bottleneck.
 
