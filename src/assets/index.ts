@@ -9,6 +9,7 @@ import { serverRack } from "./furniture/server-rack";
 import { stairs } from "./architecture/stairs";
 import { fence } from "./architecture/fence";
 import { column } from "./architecture/column";
+import { bridge } from "./architecture/bridge";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
 import { bed } from "./furniture/bed";
@@ -41,6 +42,7 @@ export const ASSETS: AnyAsset[] = [
   stairs,
   fence,
   column,
+  bridge,
   door,
   windowAsset,
   tree,
