@@ -15,6 +15,7 @@ import { bed } from "./furniture/bed";
 import { sofa } from "./furniture/sofa";
 import { wardrobe } from "./furniture/wardrobe";
 import { door } from "./architecture/door";
+import { windowAsset } from "./architecture/window";
 import { bush } from "./nature/bush";
 import { barrel } from "./props/barrel";
 import { chest } from "./props/chest";
@@ -40,6 +41,7 @@ export const ASSETS: AnyAsset[] = [
   fence,
   column,
   door,
+  windowAsset,
   tree,
   rock,
   bush,
