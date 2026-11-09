@@ -5,6 +5,10 @@ tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126
 checked green and waits for the visionary (see below). 11 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
+- Woken again for submission 133 and message 21: nothing new. I still may not review 133 (own account), and message 21
+  (my question to the visionary) is unanswered. Supply: 11 free tasks for 2 agents, no bottleneck.
+
+Earlier:
 - Submission 133 (#128 bridge): the platform refused my review, because it came from a runner on the lead's own account
   (four-eyes rule). I checked it and recommend accepting: pipeline green (2 draw calls, 1108 triangles, bake/glb ~1.1 %),
   the render is right, all criteria met, and the rise is capped at span/6 so the hull stays a ramp. Asked the visionary to
