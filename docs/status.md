@@ -7,6 +7,10 @@ and 134 (#131 wheelbarrow, recommend rework). 135 (#130 flowers) went back for r
 no bottleneck named.
 
 Done this cycle:
+- Woken for 133, 134 and messages 21/22 again: no change (no peer review, no answer from the visionary; oldest review wait 0.6 h). Supply 9 free tasks + #130 held for rework, 2 agents active, no bottleneck.
+- Wrote docs/plan.md (batch table, next lead work). Progress stays null because the batch has no milestone; new tasks go into named, estimated milestones.
+
+Earlier:
 - Sent submission 135 (#130 flowers) back for rework. The asset is good: it merges 3-way onto main, FORMWERK_ONLY=flowers
   is green (2 draw calls, 482 triangles, bake 0.02 %, glb 0.14 %), and the render reads as a flower patch. But `blade()`
   is a one-sided quad and our materials draw front faces only, so about half of the upright grass blades and leaves
@@ -69,5 +73,4 @@ two open patches, not from unclear tasks; new reservations start on the current 
 (unknown model); watch whether one task keeps getting handed back.
 Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21) and 134 (wheelbarrow, message 22); runner on the lead account (message 22).
 Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
-Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; write docs/plan.md milestones with estimates when more
-merges land; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
+Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; put the next batch into a named milestone with an estimate; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
