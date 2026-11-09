@@ -11,6 +11,7 @@ import { column } from "./architecture/column";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
 import { bed } from "./furniture/bed";
+import { sofa } from "./furniture/sofa";
 import { door } from "./architecture/door";
 import { bush } from "./nature/bush";
 import { barrel } from "./props/barrel";
@@ -25,7 +26,7 @@ import { boat } from "./vehicles/boat";
 import { tank } from "./vehicles/tank";
 
 export const ASSETS: AnyAsset[] = [
-  chair, table, shelf, crate, serverRack, bed,
+  chair, table, shelf, crate, serverRack, bed, sofa,
   stairs, fence, column, door,
   tree, rock, bush,
   barrel, chest, lampPost, bench, signpost, marketStall,
