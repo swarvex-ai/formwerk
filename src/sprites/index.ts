@@ -14,6 +14,7 @@ import { bomb } from "./items/bomb";
 import { bat } from "./creatures/bat";
 import { ghost } from "./creatures/ghost";
 import { spider } from "./creatures/spider";
+import { skeleton } from "./creatures/skeleton";
 
 export const SPRITES: AnySprite[] = [
   villager,
@@ -21,6 +22,7 @@ export const SPRITES: AnySprite[] = [
   bat,
   ghost,
   spider,
+  skeleton,
   potion,
   coin,
   gem,

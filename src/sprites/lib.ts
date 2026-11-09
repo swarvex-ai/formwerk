@@ -16,6 +16,7 @@ import { bomb as bombSprite } from "./items/bomb";
 import { bat as batSprite } from "./creatures/bat";
 import { ghost as ghostSprite } from "./creatures/ghost";
 import { spider as spiderSprite } from "./creatures/spider";
+import { skeleton as skeletonSprite } from "./creatures/skeleton";
 
 export { SPRITES, spriteById } from "./index";
 export { makeSheet, sheetJson, godotSpriteFrames, animationName, SPRITE_CATEGORIES } from "./define";
@@ -39,3 +40,4 @@ export const bomb = bogen(bombSprite);
 export const bat = bogen(batSprite);
 export const ghost = bogen(ghostSprite);
 export const spider = bogen(spiderSprite);
+export const skeleton = bogen(skeletonSprite);
