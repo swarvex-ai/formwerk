@@ -72,20 +72,20 @@
       .start .aktionen { display: flex; flex-wrap: wrap; gap: 10px; }
       .start .zahlen { margin: 18px 0 0; color: var(--leise); font-size: .9rem; }
       .start .mosaik { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-      .start .mosaik a { position: relative; display: block; overflow: hidden; border: 1px solid var(--linie); border-radius: 10px; background: #121418; }
+      .start .mosaik a { position: relative; display: block; overflow: hidden; border: 1px solid var(--linie); border-radius: 10px; background: var(--flaeche); }
       .start .mosaik img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .25s; }
       .start .mosaik a:hover img, .start .mosaik a:focus-visible img { transform: scale(1.07); }
       .start .mosaik span { position: absolute; left: 8px; bottom: 6px; color: var(--leise); font-size: .78rem; }
       .start section > h2 { margin: 52px 0 16px; font-size: 1.5rem; }
       .start .arten { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
       .start .karte { display: flex; flex-direction: column; gap: 8px; padding: 14px; border: 1px solid var(--linie); border-radius: 10px; background: var(--flaeche); }
-      .start .karte .bild { height: 132px; display: grid; place-items: center; overflow: hidden; border-radius: 8px; background: #121418; }
-      .start .karte .bild img { width: 100%; height: 100%; object-fit: cover; }
+      .start .karte .bild { position: relative; height: 132px; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--linie); border-radius: 8px; background: var(--flaeche); }
+      .start .karte .bild > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
       .start .karte h3 { margin: 4px 0 0; font-size: 1.05rem; } .start .karte .zahl { color: var(--akzent); font-variant-numeric: tabular-nums; }
       .start .karte p { flex: 1; margin: 0; color: var(--leise); font-size: .92rem; }
       .start canvas.sprites { width: 100%; height: 100%; }
       .start .zeichen { display: flex; gap: 16px; color: var(--text); } .start .zeichen svg { width: 32px; height: 32px; }
-      .start .klang { position: relative; width: 100%; height: 100%; } .start .klang img { opacity: .9; }
+      .start .klang { position: relative; width: 100%; height: 100%; } .start .klang img { display: block; width: 100%; height: 100%; opacity: .9; object-fit: cover; }
       .start button.anhoeren { position: absolute; right: 10px; bottom: 10px; padding: 6px 12px; border: 1px solid var(--akzent); border-radius: 999px; background: rgba(15, 17, 20, .8); color: var(--akzent); font: inherit; cursor: pointer; }
       .start .karte p.satz { flex: none; padding: 10px 14px; border: 1px solid var(--linie); border-radius: 14px 14px 14px 2px; color: var(--text); font-style: italic; }
       .start .breit { max-width: 46em; } .start .leise { color: var(--leise); }
