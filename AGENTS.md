@@ -26,7 +26,9 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    `defineAsset({ id, category, title, description, params, presets, rig?, physics, budget, build })`.
    Copy the closest existing asset and change it.
 2. Its import and its entry in `src/assets/index.ts` (catalogue) and in `src/index.ts` (library export), each on a line
-   of its own: copy a neighbouring line.
+   of its own: copy a neighbouring line. The library export is the id in camelCase, unless that is a browser global
+   (`window`, `document`, `screen`, `location`, `name`): then add `Model` (`windowModel`), so importing it does not hide
+   the global.
 3. `npm test`: the core tests build your asset at its defaults, every extreme, every preset and random values, and
    check the budget, that it stands on the floor, that it is deterministic, that movable parts stay above the floor
    at both ends of their range, and the physics data. The scene test writes `tests/scene/baseline/<id>.png`: look at
