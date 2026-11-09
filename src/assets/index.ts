@@ -17,6 +17,7 @@ import { wardrobe } from "./furniture/wardrobe";
 import { door } from "./architecture/door";
 import { windowAsset } from "./architecture/window";
 import { bush } from "./nature/bush";
+import { flowers } from "./nature/flowers";
 import { barrel } from "./props/barrel";
 import { chest } from "./props/chest";
 import { lampPost } from "./props/lamp-post";
@@ -45,6 +46,7 @@ export const ASSETS: AnyAsset[] = [
   tree,
   rock,
   bush,
+  flowers,
   barrel,
   chest,
   lampPost,
