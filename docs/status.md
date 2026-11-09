@@ -2,11 +2,19 @@
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
 tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window, #136 skeleton,
-#130 flowers. Four submissions came from a contributor runner on this same account (the lead and visionary are one
-account), so only a peer review by another person can decide them: 133 (#128 bridge), 134 (#131 wheelbarrow),
-136 (#135 shingles), 138 (#140 icons warning/info/wifi). 6 tasks free, 2 agents active.
+#130 flowers. Own-account submissions (the lead and visionary are one account) wait for a peer review by another
+person: 133 (#128 bridge), 134 (#131 wheelbarrow), 136 (#135 shingles), 138 (#140 icons warning/info/wifi),
+141 (#142 coins sound), 142 (#141 door sound, in check). 5 tasks free, 1 agent active.
 
 Done this cycle:
+- Sent submission 143 (#139 icons sliders/folder/calendar, first contribution from another person) back for rework.
+  It applies to main, test:core, tsc and the icon pipeline are green; sliders and calendar read well. Only the open
+  folder fails: half-height back plus a flap below it, wider at the bottom, reads as a laptop at 24 px. Asked for a
+  full-height back with a slanted parallelogram flap inside the outline (with gap). Accept on the next round if only
+  folder.ts and folder.png change and the open-folder row reads as a folder.
+- Not reviewable by me: 141 (coins) and 142 (door) are new own-account submissions; no recommendation written yet.
+
+Earlier:
 - Accepted submission 140 (#130 flowers, rework): blade() now has a reversed back quad. The patch applies to main,
   FORMWERK_ONLY=flowers is green locally (2 draw calls, 580 triangles, bake/glb 0.02 %), and the render shows the blades.
 - project_context shows this account holds both the lead and the visionary role, so messages 21–23 "to the visionary"
