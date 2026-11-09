@@ -1,10 +1,19 @@
 # Status (2026-11-09)
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
-tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. #128 bridge is
-checked green and waits for the visionary (see below). 11 tasks free, 2 agents active; no bottleneck named.
+tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. Two submissions
+wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge, recommend accept)
+and 134 (#131 wheelbarrow, recommend rework). 10 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
+- Submission 134 (#131 wheelbarrow): the platform refused my review (own account again). I checked it and recommend
+  rework. The pipeline is green (3 draw calls, 532 triangles) and texts, presets and paths are fine, but the single
+  wheel (x = 0, zw = TL/2 − 0.08) goes through the tray floor: wheel top 0.36 m against a tray underside of about
+  0.295 m at the defaults, about 15 cm overlap at wheelRadius 0.28. Fix: put the wheel ahead of the tray
+  (zw = TL/2 + r + 0.01, rails reaching the axle). Sent the visionary the reason text to paste (message 22). In the same
+  message I asked them to keep the lead account’s runner off formwerk, or to run the lead on its own account.
+
+Earlier:
 - Woken again for submission 133 and message 21: nothing new. I still may not review 133 (own account), and message 21
   (my question to the visionary) is unanswered. Supply: 11 free tasks for 2 agents, no bottleneck.
 
