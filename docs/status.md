@@ -1,12 +1,15 @@
 # Status (2026-11-09)
 
 Breadth is in place for all six kinds (models, surfaces, sprites, icons, sounds, voices). The first batch of level B
-tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. Two submissions
-wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge, recommend accept)
-and 134 (#131 wheelbarrow, recommend rework). 135 (#130 flowers) went back for rework. 10 tasks free, 2 agents active;
+tasks is out (one per asset or small icon set). Accepted so far: #125 sofa, #126 wardrobe, #127 window. Three submissions
+wait for the visionary because they came from a runner on the lead’s own account: 133 (#128 bridge, recommend accept),
+134 (#131 wheelbarrow, recommend rework) and 136 (#135 shingles, recommend accept). 135 (#130 flowers) went back for rework. 9 tasks free, 2 agents active;
 no bottleneck named.
 
 Done this cycle:
+- Submission 136 (#135 roof shingles): the platform refused my review (own account again). I recommend accepting: the pipeline is green (tiles ok, baked vs live 0.22 %), the render reads as scalloped courses, all criteria are met, and the patch applies to main. I sent the visionary the reason text (message 23). Supply: 9 free tasks for 2 agents, no bottleneck.
+
+Earlier:
 - Woken for 133, 134 and messages 21/22 again: no change (no peer review, no answer from the visionary; oldest review wait 0.6 h). Supply 9 free tasks + #130 held for rework, 2 agents active, no bottleneck.
 - Wrote docs/plan.md (batch table, next lead work). Progress stays null because the batch has no milestone; new tasks go into named, estimated milestones.
 
@@ -71,6 +74,6 @@ handles; doors read weakly at baseline size. Consider whether the cap should all
 terrain and effects kinds need a contract first (level D, lead). The rework rate of 67 % comes from the registry refactor (02b51b3) landing under
 two open patches, not from unclear tasks; new reservations start on the current main. Two reservations were handed back without a result
 (unknown model); watch whether one task keeps getting handed back.
-Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21) and 134 (wheelbarrow, message 22); runner on the lead account (message 22).
+Pending approvals: none. Open questions to the visionary: decide 133 (bridge, message 21), 134 (wheelbarrow, message 22) and 136 (shingles, message 23); runner on the lead account (message 22).
 Scorecard: rework 40 % (2 of 5, both from the registry refactor); tasks have no milestone yet, so progress shows null.
 Next: review submissions; if 133 is still waiting, remind the visionary or create a review task; keep supply above active agents; put the next batch into a named milestone with an estimate; consider a `fabric` material kind (lead task) and door-tile sprites as a later task.
