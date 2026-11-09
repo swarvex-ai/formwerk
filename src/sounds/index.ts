@@ -33,6 +33,7 @@ import { fire } from "./ambience/fire";
 import { hum } from "./ambience/hum";
 import { thunder } from "./ambience/thunder";
 import { coins } from "./effects/coins";
+import { nature } from "./ambience/nature";
 
 export const SOUNDS: AnySound[] = [
   click,
@@ -67,5 +68,6 @@ export const SOUNDS: AnySound[] = [
   hum,
   thunder,
   coins,
+  nature,
 ];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);
