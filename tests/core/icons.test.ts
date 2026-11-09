@@ -4,6 +4,7 @@
 // narrower than about one pixel (src/core/vector.ts, legibility). The SVG is well formed, takes the
 // text colour and comes out the same for the same values. The reference sheets are checked by tests/scene/icons.mjs.
 import { describe, expect, it } from "vitest";
+import { only } from "../only.mjs";
 import { ASSETS } from "../../src/assets";
 import { extremes, presetProblems, random, schemaProblems } from "../../src/core/params";
 import { rng } from "../../src/core/rng";
@@ -45,7 +46,7 @@ describe("icon catalogue", () => {
   });
 });
 
-for (const icon of ICONS) {
+for (const icon of only(ICONS)) {
   describe(icon.id, () => {
     const r = rng(42);
     const faelle = [...extremes(icon.params), ...Object.keys(icon.presets).map((preset) => ({ preset })), ...Array.from({ length: 10 }, () => random(icon.params, r))]

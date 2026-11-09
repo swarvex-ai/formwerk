@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { runnerImport } from "vite";
 import { PNG } from "pngjs";
 import pixelmatch from "pixelmatch";
+import { only } from "../only.mjs";
 
 const wurzel = fileURLToPath(new URL("../..", import.meta.url)), ordner = fileURLToPath(new URL(".", import.meta.url));
 const laden = async (pfad) => (await runnerImport(pfad, { root: wurzel, configFile: false, logLevel: "error" })).module;
@@ -17,7 +18,7 @@ const width = 384, height = 160, ERLAUBT = 0.5;
 mkdirSync(`${ordner}out`, { recursive: true });
 mkdirSync(`${ordner}baseline`, { recursive: true });
 let fehler = 0;
-for (const s of SOUNDS) {
+for (const s of only(SOUNDS)) {
   const bild = new PNG({ width, height });
   bild.data.set(spectrogram(makeSound(s).samples, width, height));
   writeFileSync(`${ordner}out/${s.id}.png`, PNG.sync.write(bild));

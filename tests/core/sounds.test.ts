@@ -2,6 +2,7 @@
 // finite, at −1 dBFS, no DC, no click at the edges (one-shots) or the seam (loops), not silent, decaying on its own,
 // and the same samples for the same values and seed. Its reference spectrogram is checked by tests/scene/sounds.mjs.
 import { describe, expect, it } from "vitest";
+import { only } from "../only.mjs";
 import { ASSETS } from "../../src/assets";
 import { fromWav, metrics, PEAK, RATE, toWav } from "../../src/core/audio";
 import { extremes, presetProblems, random, schemaProblems } from "../../src/core/params";
@@ -35,7 +36,7 @@ describe("sound catalogue", () => {
   });
 });
 
-for (const s of SOUNDS) {
+for (const s of only(SOUNDS)) {
   describe(s.id, () => {
     const r = rng(42);
     const faelle = [...extremes(s.params), ...Object.keys(s.presets).map((preset) => ({ preset })), ...Array.from({ length: 8 }, () => random(s.params, r))];

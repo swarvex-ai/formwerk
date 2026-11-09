@@ -9,6 +9,7 @@ import { runnerImport } from "vite";
 import { chromium } from "playwright-core";
 import { PNG } from "pngjs";
 import pixelmatch from "pixelmatch";
+import { only } from "../only.mjs";
 
 const wurzel = fileURLToPath(new URL("../..", import.meta.url)), ordner = fileURLToPath(new URL(".", import.meta.url));
 const laden = async (pfad) => (await runnerImport(pfad, { root: wurzel, configFile: false, logLevel: "error" })).module;
@@ -30,7 +31,7 @@ const aufWeiss = (bild, px, ox, oy) => {
 
 const chrome = await chromium.launch({ executablePath: browser, args: ["--disable-dev-shm-usage"] });
 let fehler = 0;
-for (const icon of ICONS) {
+for (const icon of only(ICONS)) {
   const zeilen = [{}, ...Object.keys(icon.presets).map((preset) => ({ preset }))];
   // The reference sheet: one row per look, one column per style
   const blatt = new PNG({ width: STILE.length * ZELLE, height: zeilen.length * (G + 8) });

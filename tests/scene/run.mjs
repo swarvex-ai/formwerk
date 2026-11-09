@@ -11,6 +11,7 @@ import { extname, join, normalize } from "node:path";
 import { chromium } from "playwright-core";
 import { PNG } from "pngjs";
 import pixelmatch from "pixelmatch";
+import { checked } from "../only.mjs";
 
 const ordner = new URL(".", import.meta.url).pathname;
 const dist = join(ordner, "../../dist");
@@ -41,8 +42,9 @@ const BACKEN_SCHWELLE = 0.02, BACKEN_MAX = 1.5;
 const katalog = await chrome.newPage({ viewport });
 await katalog.goto(`${basis}?test`);
 await katalog.waitForFunction(() => document.body.dataset.ready === "1", null, { timeout: 60_000 });
-const scenes = await katalog.evaluate(() => window.__formwerk.ids().map((id) => ({ name: id, query: `asset=${id}`, steps: 0, maxDiffPercent: 2, ...window.__formwerk.budget(id) })));
-const flaechen = await katalog.evaluate(() => window.__formwerk.surfaces());
+// FORMWERK_ONLY (tests/only.mjs): in the swarvex test pipeline only the assets a contribution changes
+const scenes = (await katalog.evaluate(() => window.__formwerk.ids().map((id) => ({ name: id, query: `asset=${id}`, steps: 0, maxDiffPercent: 2, ...window.__formwerk.budget(id) })))).filter((s) => checked(s.name));
+const flaechen = (await katalog.evaluate(() => window.__formwerk.surfaces())).filter((id) => checked(id));
 await katalog.close();
 for (const s of scenes) {
   const page = await chrome.newPage({ viewport, deviceScaleFactor: 1 });

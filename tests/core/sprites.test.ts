@@ -4,6 +4,7 @@
 // the mirror of right, animations that move, and the same pixels for the same values and seed. The reference sheets
 // are checked by tests/scene/sprites.mjs.
 import { describe, expect, it } from "vitest";
+import { only } from "../only.mjs";
 import { ASSETS } from "../../src/assets";
 import { extremes, presetProblems, random, schemaProblems, withPreset } from "../../src/core/params";
 import { rng } from "../../src/core/rng";
@@ -34,7 +35,7 @@ describe("sprite catalogue", () => {
   });
 });
 
-for (const s of SPRITES) {
+for (const s of only(SPRITES)) {
   describe(s.id, () => {
     const r = rng(42);
     const faelle = [...extremes(s.params), ...Object.keys(s.presets).map((preset) => ({ preset })), ...Array.from({ length: 6 }, () => random(s.params, r))];

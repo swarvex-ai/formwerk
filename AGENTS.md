@@ -131,3 +131,8 @@ scene tests), `npm run test:core` (fast, while working), `npm run test:sound` (s
 (sprite sheets only), `npm run test:icon` (icon sheets and SVG in a browser). `npm run build` also writes
 `dist/catalog.json`, `dist/llms.txt`, every sound at its defaults and presets as `dist/sounds/*.wav`, every sprite as
 `dist/sprites/*.png`, `.tres` and `.json`, and every icon as `dist/icons/*.svg` and `.png`.
+
+`FORMWERK_ONLY=<id>,<id> npm test` checks only these assets one by one (the checks across the whole catalogue and the
+build still run): quick while you work on your asset. The swarvex test pipeline does the same by itself
+(`scripts/pipeline-test.mjs`): it tests the assets your contribution changes, and the full suite as soon as it touches
+shared code. The full suite also runs on GitHub after every merge.

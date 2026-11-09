@@ -1,6 +1,7 @@
 // Every asset, at its defaults, its extremes and random values: valid schema, within budget, finite, standing on the
 // floor, and the same output for the same values and seed. A new asset passes these before it can be merged.
 import { describe, expect, it } from "vitest";
+import { only } from "../only.mjs";
 import { Box3, type BufferGeometry, type Mesh, type Object3D } from "three";
 import { ASSETS } from "../../src/assets";
 import { CATEGORIES, infoOf, make, measure, pose } from "../../src/assets/define";
@@ -46,7 +47,7 @@ describe("catalogue", () => {
   });
 });
 
-for (const a of ASSETS) {
+for (const a of only(ASSETS)) {
   describe(a.id, () => {
     const r = rng(42);
     const faelle = [...extremes(a.params), ...Array.from({ length: 12 }, () => random(a.params, r))];

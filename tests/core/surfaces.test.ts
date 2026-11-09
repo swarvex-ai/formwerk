@@ -1,6 +1,7 @@
 // Every surface: valid schema, presets, texts, a tile size and relief, and an id that no model or sound uses. The
 // shaders themselves are compiled, baked and checked (tiling, determinism, bake against live) by tests/scene/run.mjs.
 import { describe, expect, it } from "vitest";
+import { only } from "../only.mjs";
 import { ASSETS } from "../../src/assets";
 import { extremes, presetProblems, random, schemaProblems } from "../../src/core/params";
 import { rng } from "../../src/core/rng";
@@ -29,7 +30,7 @@ describe("surface catalogue", () => {
   it("the gallery shell knows every surface without loading three.js (src/surfaces/list.ts)", () => {
     expect([...SURFACE_IDS]).toEqual(SURFACES.map((f) => f.id));
   });
-  for (const f of SURFACES) {
+  for (const f of only(SURFACES)) {
     it(`${f.id} builds a sampler at its defaults, extremes, presets and random values`, () => {
       const r = rng(42);
       const faelle = [...extremes(f.params), ...Object.keys(f.presets).map((preset) => ({ preset })), ...Array.from({ length: 6 }, () => random(f.params, r))];
