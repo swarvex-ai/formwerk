@@ -7,6 +7,11 @@ recommend accept), 134 (#131 wheelbarrow, recommend rework) and 136 (#135 shingl
 in rework. 8 tasks free, 2 agents active; no bottleneck named.
 
 Done this cycle:
+- Woken again for 133, 134, 136 and messages 21–23 (all my own questions, unanswered): no change, no peer reviews,
+  oldest review wait 1.7 h. Supply 8 free tasks for 2 agents, no bottleneck. No new reminder sent. Folded the earlier
+  "woken, no change" entries into this one.
+
+Earlier:
 - Accepted submission 137 (#136 skeleton sprite): applies to main, FORMWERK_ONLY=skeleton core tests and test:sprite green,
   the sheet reads as a skeleton in all four directions. Note for a later pass: in the back view the weapon hand is on
   the same screen side as in the front view.
@@ -15,14 +20,7 @@ Done this cycle:
   handed back again, split them into one icon per task with a context pack.
 
 Earlier:
-- Woken for 133, 134, 136 and messages 21–23 (my own questions): no change. No peer reviews, no answer from the visionary, oldest review wait 1.1 h. No new reminder sent. Supply 9 free tasks for 2 agents, no bottleneck.
-
-Earlier:
 - Submission 136 (#135 roof shingles): the platform refused my review (own account again). I recommend accepting: the pipeline is green (tiles ok, baked vs live 0.22 %), the render reads as scalloped courses, all criteria are met, and the patch applies to main. I sent the visionary the reason text (message 23). Supply: 9 free tasks for 2 agents, no bottleneck.
-
-Earlier:
-- Woken for 133, 134 and messages 21/22 again: no change (no peer review, no answer from the visionary; oldest review wait 0.6 h). Supply 9 free tasks + #130 held for rework, 2 agents active, no bottleneck.
-- Wrote docs/plan.md (batch table, next lead work). Progress stays null because the batch has no milestone; new tasks go into named, estimated milestones.
 
 Earlier:
 - Sent submission 135 (#130 flowers) back for rework. The asset is good: it merges 3-way onto main, FORMWERK_ONLY=flowers
@@ -33,20 +31,12 @@ Earlier:
 - 133 and 134 still wait for the visionary (messages 21/22, unanswered). No new reminder sent, to avoid spamming.
 
 Earlier:
-- Woken for 133, 134 and messages 21/22 (my own questions, still unanswered). No change: both submissions still need
-  the visionary or a peer review (none yet); oldest review wait 0.4 h. Supply 10 free tasks for 2 agents, no bottleneck.
-
-Earlier:
 - Submission 134 (#131 wheelbarrow): the platform refused my review (own account again). I checked it and recommend
   rework. The pipeline is green (3 draw calls, 532 triangles) and texts, presets and paths are fine, but the single
   wheel (x = 0, zw = TL/2 − 0.08) goes through the tray floor: wheel top 0.36 m against a tray underside of about
   0.295 m at the defaults, about 15 cm overlap at wheelRadius 0.28. Fix: put the wheel ahead of the tray
   (zw = TL/2 + r + 0.01, rails reaching the axle). Sent the visionary the reason text to paste (message 22). In the same
   message I asked them to keep the lead account’s runner off formwerk, or to run the lead on its own account.
-
-Earlier:
-- Woken again for submission 133 and message 21: nothing new. I still may not review 133 (own account), and message 21
-  (my question to the visionary) is unanswered. Supply: 11 free tasks for 2 agents, no bottleneck.
 
 Earlier:
 - Submission 133 (#128 bridge): the platform refused my review, because it came from a runner on the lead's own account
