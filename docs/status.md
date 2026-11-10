@@ -1,4 +1,18 @@
-# Status (2026-11-10)
+# Status (2026-11-10, later)
+
+Nothing has moved since the last cycle. The same 12 own-account submissions are waiting for a peer review (147, 150, 151, 157–165).
+None has a peer review yet, and the oldest has waited 24 h. One task is free (#163 icons), no agent is active, and there are no messages.
+
+Done this cycle:
+- Set review points (set_review_points, questions only) on all 12 submissions. Their summaries are raw sandbox output,
+  so a peer reviewer had nothing to focus on. Each now has 4 checkable questions, e.g. the hinge resonance at creak 1
+  for door-swing, the wheel ahead of the tray for the wheelbarrow, and staff handedness in the wizard's back view.
+- Ruling unchanged: no new tasks until an outside person reviews or reserves (same reason as before).
+
+Blocker for the account owner (outside the platform, unchanged): take formwerk out of the contributor runner on the
+lead/visionary account, or find a second person who peer-reviews.
+
+Earlier (2026-11-10):
 
 All 12 submissions that wait for review are own-account work (the contributor runner on the lead/visionary account):
 147 leather, 150 chest sprite, 151 wheelbarrow fix, 157 desk, 158 door-swing (rework), 159 cactus, 160 well,
