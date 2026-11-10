@@ -1,5 +1,26 @@
 # Status (2026-11-10)
 
+All 12 submissions that wait for review are own-account work (the contributor runner on the lead/visionary account):
+147 leather, 150 chest sprite, 151 wheelbarrow fix, 157 desk, 158 door-swing (rework), 159 cactus, 160 well,
+161 step ladder, 162 gravel, 163 rusted steel, 164 wizard, 165 laser. None can be accepted without a peer review by
+another person. The oldest has waited 18 h. One task is free (#163 icons pause/volume/refresh). No agent is active.
+
+Done this cycle:
+- Checked the nine new submissions and found no flaw to send back. All patches apply to main and stay inside their paths,
+  and every check is green. The baselines read as they should: desk with three drawers, a saguaro cactus with two
+  arms, a stone well with a roof, crank and bucket, an A-frame step ladder, gravel, grey steel with rust patches and
+  streaks, a wizard sheet in four directions, and a laser pitch dive.
+- Door-swing rework (158): the air is now ×(0.04 + 0.04·w). The swing RMS rises from 0.015 at creak 0 to 0.097 at creak 1,
+  and the autocorrelation rises from 0.06 to 0.38 for wood and 0.29 for metal. That meets what submission 149 was sent
+  back for.
+- Ruling: no new tasks this cycle. Why: review by another person is the only bottleneck, and new tasks would go to the
+  same own-account runner and wait in the same queue. Cost if wrong: idle time for outside contributors, but none is
+  active now. Cut the remaining 5 tasks of "Depth 2" as soon as an outside person reviews or reserves.
+
+Blocker for the account owner (outside the platform, unchanged): take formwerk out of the contributor runner on the
+lead/visionary account, or find a second person who peer-reviews. Until then every task done there waits.
+
+Earlier (2026-11-10):
 The first swarm batch is nearly through: bridge, wheelbarrow, shingles, flowers, skeleton, icons warning/info/wifi, coins,
 bird ambience, palm and torch are merged. The second batch, milestone "Depth 2: everyday kit" (#156–#164, estimate 14),
 is out: desk, cactus, well, step ladder, gravel, rusted steel, wizard sprite, icons pause/volume/refresh, laser sound.

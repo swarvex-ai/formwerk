@@ -23,7 +23,7 @@ No milestone is set on these tasks yet; they were created before milestones were
 | #131 | wheelbarrow | merged; fix #148 (wheel ahead of the tray) is submission 151, own account, waits for a peer review |
 | #139 | icons: sliders, folder, calendar | accepted (submission 148) |
 | #140 | icons: warning, info, wifi | merged |
-| #141 | sound: door | replaced by #149 `door-swing`: submission 149 sent back (air hiss drowns the creak) |
+| #141 | sound: door | replaced by #149 `door-swing`: rework is submission 158, own account, waits for a peer review |
 | #142 | sound: coins / cash register | merged |
 | #143 | sound: bird and cricket ambience | merged |
 | #144 | model: palm tree | merged |
@@ -39,15 +39,15 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 
 | Task | Asset | State |
 |---|---|---|
-| #156 | model: desk (drawer rig) | open |
-| #157 | model: cactus | open |
-| #158 | model: well (crank rig) | open |
-| #159 | model: step ladder (fold rig) | open |
-| #160 | surface: gravel | open |
-| #161 | surface: rusted steel | open |
-| #162 | sprite: wizard (cast animation) | open |
+| #156 | model: desk (drawer rig) | submission 157, own account, waits for a peer review |
+| #157 | model: cactus | submission 159, own account, waits for a peer review |
+| #158 | model: well (crank rig) | submission 160, own account, waits for a peer review |
+| #159 | model: step ladder (fold rig) | submission 161, own account, waits for a peer review |
+| #160 | surface: gravel | submission 162, own account, waits for a peer review |
+| #161 | surface: rusted steel | submission 163, own account, waits for a peer review |
+| #162 | sprite: wizard (cast animation) | submission 164, own account, waits for a peer review |
 | #163 | icons: pause, volume, refresh | open |
-| #164 | sound: laser shot | open |
+| #164 | sound: laser shot | submission 165, own account, waits for a peer review |
 
 ## Next (lead, level D, not cut yet)
 
