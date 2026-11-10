@@ -17,21 +17,37 @@ No milestone is set on these tasks yet; they were created before milestones were
 | #125 | sofa | merged |
 | #126 | wardrobe | merged |
 | #127 | window (`windowModel`) | merged |
-| #128 | bridge | submission 133 waits for the visionary (own-account runner), lead recommends accept |
-| #136 | sprite: skeleton | accepted (submission 137), in the merge train |
-| #130 | flower patch / grass tuft | rework (one-sided blades), held for its author until 2026-11-10 15:43 |
-| #131 | wheelbarrow | submission 134 waits for the visionary, lead recommends rework (wheel through the tray) |
-| #139 | icons: sliders, folder, calendar | open |
-| #140 | icons: warning, info, wifi | open |
-| #141 | sound: door | open |
-| #142 | sound: coins / cash register | open |
-| #143 | sound: bird and cricket ambience | open |
-| #144 | model: palm tree | open |
-| #145 | model: torch | open |
-| #146 | surface: leather (category `wood`) | open |
-| #147 | sprite: treasure chest | open |
+| #128 | bridge | merged |
+| #136 | sprite: skeleton | merged |
+| #130 | flower patch / grass tuft | merged |
+| #131 | wheelbarrow | merged; fix #148 (wheel ahead of the tray) is submission 151, own account, waits for a peer review |
+| #139 | icons: sliders, folder, calendar | accepted (submission 148) |
+| #140 | icons: warning, info, wifi | merged |
+| #141 | sound: door | replaced by #149 `door-swing`: submission 149 sent back (air hiss drowns the creak) |
+| #142 | sound: coins / cash register | merged |
+| #143 | sound: bird and cricket ambience | merged |
+| #144 | model: palm tree | merged |
+| #145 | model: torch | merged |
+| #146 | surface: leather (category `wood`) | submission 147, own account, waits for a peer review |
+| #147 | sprite: treasure chest | submission 150, own account, waits for a peer review |
 
 Dependencies: none between these tasks; all build on the contracts on main. Critical path: none (breadth is done).
+
+## Milestone "Depth 2: everyday kit" (estimate 14 tasks)
+
+Created 2026-11-10, all level B, no dependencies between them, paths disjoint except the union-merged registries.
+
+| Task | Asset | State |
+|---|---|---|
+| #156 | model: desk (drawer rig) | open |
+| #157 | model: cactus | open |
+| #158 | model: well (crank rig) | open |
+| #159 | model: step ladder (fold rig) | open |
+| #160 | surface: gravel | open |
+| #161 | surface: rusted steel | open |
+| #162 | sprite: wizard (cast animation) | open |
+| #163 | icons: pause, volume, refresh | open |
+| #164 | sound: laser shot | open |
 
 ## Next (lead, level D, not cut yet)
 
