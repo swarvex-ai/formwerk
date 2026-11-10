@@ -28,6 +28,9 @@ import { wifi as wifiIcon } from "./status/wifi";
 import { gear as gearIcon } from "./objects/gear";
 import { mail as mailIcon } from "./objects/mail";
 import { chart as chartIcon } from "./objects/chart";
+import { sliders as slidersIcon } from "./objects/sliders";
+import { folder as folderIcon } from "./objects/folder";
+import { calendar as calendarIcon } from "./objects/calendar";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -63,3 +66,6 @@ export const wifi = zeichen(wifiIcon);
 export const gear = zeichen(gearIcon);
 export const mail = zeichen(mailIcon);
 export const chart = zeichen(chartIcon);
+export const sliders = zeichen(slidersIcon);
+export const folder = zeichen(folderIcon);
+export const calendar = zeichen(calendarIcon);

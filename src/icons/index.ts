@@ -26,6 +26,9 @@ import { wifi } from "./status/wifi";
 import { gear } from "./objects/gear";
 import { mail } from "./objects/mail";
 import { chart } from "./objects/chart";
+import { sliders } from "./objects/sliders";
+import { folder } from "./objects/folder";
+import { calendar } from "./objects/calendar";
 
 export const ICONS: AnyIcon[] = [
   home,
@@ -53,5 +56,8 @@ export const ICONS: AnyIcon[] = [
   gear,
   mail,
   chart,
+  sliders,
+  folder,
+  calendar,
 ];
 export const iconById = (id: string) => ICONS.find((i) => i.id === id);
