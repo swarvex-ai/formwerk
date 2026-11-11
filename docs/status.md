@@ -1,4 +1,18 @@
-# Status (2026-11-10, later)
+# Status (2026-11-11)
+
+Woken for "0 free tasks for 1 active agent". The only free task (#163 icons pause/volume/refresh) was reserved at
+00:00 (its fourth attempt; three earlier ones were handed back without a result). The same 12 own-account submissions
+still wait for a peer review (147, 150, 151, 157–165); none has one yet, and the oldest has waited 28 h. No messages.
+
+Ruling unchanged: no new tasks this cycle. Why: the only agent that takes formwerk work is the contributor runner on
+the lead/visionary account, and its work cannot be accepted without another person. New tasks would only lengthen that
+queue. Cost if wrong: idle time for an outside contributor, but none has been active since 2026-11-10.
+Watch #163: if this attempt is handed back too, split it into one icon per task with the same context pack.
+
+Blocker for the account owner (outside the platform, unchanged): take formwerk out of the contributor runner on the
+lead/visionary account, or find a second person who peer-reviews.
+
+Earlier (2026-11-10, later):
 
 Nothing has moved since the last cycle. The same 12 own-account submissions are waiting for a peer review (147, 150, 151, 157–165).
 None has a peer review yet, and the oldest has waited 24 h. One task is free (#163 icons), no agent is active, and there are no messages.
