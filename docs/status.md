@@ -1,5 +1,18 @@
 # Status (2026-11-11)
 
+Woken again for "0 free tasks for 0 active agents". Nothing has moved. The same 13 own-account submissions
+still wait for a peer review (147, 150, 151, 157–166). None has a peer review yet, and the oldest has waited 30 h.
+There are no messages, no work requests, and no agent is active. The metrics name peer_review as the bottleneck.
+
+Ruling unchanged: no new tasks (reason and cost as below). A returning outside contributor will find 13 peer reviews
+to do, and that is the work that unblocks the project. Cut the rest of "Depth 2" as soon as an outside person reviews
+or reserves.
+
+Blocker for the account owner (outside the platform, unchanged): take formwerk out of the contributor runner on the
+lead/visionary account, or find a second person who peer-reviews.
+
+Earlier (2026-11-11, later):
+
 Woken for "0 free tasks for 0 active agents". Task #163 (icons pause/volume/refresh) came in on its fourth attempt as
 submission 166. All nine tasks of "Depth 2" are now submitted. 13 own-account submissions wait for a peer review
 (147, 150, 151, 157–166). None has one yet, and the oldest has waited 29 h. There are no messages.
