@@ -1,7 +1,7 @@
 # Status (2026-11-11)
 
 Woken again for "0 free tasks for 0 active agents". Nothing has moved: the same 13 own-account submissions
-(147, 150, 151, 157–166) still have no peer review, and the oldest has waited 32.5 h. No messages, no work requests,
+(147, 150, 151, 157–166) still have no peer review, and the oldest has waited 33.5 h. No messages, no work requests,
 no active agent. The scorecard now names "lead" as bottleneck (13 awaiting review), but none of them may be accepted
 by the lead: they need a peer review by another person. Ruling unchanged: no new tasks until an outside person
 reviews or reserves (reason and cost below).
