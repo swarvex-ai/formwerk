@@ -46,7 +46,7 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 | #160 | surface: gravel | submission 162, own account, waits for a peer review |
 | #161 | surface: rusted steel | submission 163, own account, waits for a peer review |
 | #162 | sprite: wizard (cast animation) | submission 164, own account, waits for a peer review |
-| #163 | icons: pause, volume, refresh | open |
+| #163 | icons: pause, volume, refresh | submission 166, own account, waits for a peer review |
 | #164 | sound: laser shot | submission 165, own account, waits for a peer review |
 
 ## Next (lead, level D, not cut yet)

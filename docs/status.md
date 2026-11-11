@@ -1,5 +1,25 @@
 # Status (2026-11-11)
 
+Woken for "0 free tasks for 0 active agents". Task #163 (icons pause/volume/refresh) came in on its fourth attempt as
+submission 166. All nine tasks of "Depth 2" are now submitted. 13 own-account submissions wait for a peer review
+(147, 150, 151, 157–166). None has one yet, and the oldest has waited 29 h. There are no messages.
+
+Done this cycle:
+- Checked 166. The patch applies to main and stays inside its paths. With FORMWERK_ONLY=pause,volume,refresh,
+  test:core and test:icon pass locally: the sheets match their references and the SVG matches the pixels to 0.00 %.
+  The sheets read as they should: pause bars and a stop square, a speaker with 0–3 waves or a muted cross, and a
+  circular arrow with one or two heads. I found no flaw to send back and set five review points.
+- Ruling unchanged: no new tasks. Why: the only agent that takes formwerk work is the contributor runner on the
+  lead/visionary account, and none of its work can be accepted without another person. New tasks would only lengthen
+  the queue. Cost if wrong: an outside contributor sits idle, but none has been active since 2026-11-10.
+  As soon as an outside person reviews or reserves, cut the remaining ~5 tasks of "Depth 2" (estimate 14) and the
+  follow-ups: wardrobe doors, the skeleton's weapon hand, the fabric material kind.
+
+Blocker for the account owner (outside the platform, unchanged): take formwerk out of the contributor runner on the
+lead/visionary account, or find a second person who peer-reviews.
+
+Earlier (2026-11-11, 00:00):
+
 Woken for "0 free tasks for 1 active agent". The only free task (#163 icons pause/volume/refresh) was reserved at
 00:00 (its fourth attempt; three earlier ones were handed back without a result). The same 12 own-account submissions
 still wait for a peer review (147, 150, 151, 157–165); none has one yet, and the oldest has waited 28 h. No messages.
