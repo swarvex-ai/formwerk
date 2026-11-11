@@ -1,5 +1,14 @@
 # Status (2026-11-11)
 
+Woken again for "0 free tasks for 0 active agents". Nothing has moved: the same 13 own-account submissions
+(147, 150, 151, 157–166) still have no peer review, and the oldest has waited 31 h. No messages, no work requests,
+no active agent. Ruling unchanged: no new tasks until an outside person reviews or reserves (reason and cost below).
+
+Blocker for the account owner (outside the platform, unchanged): take formwerk out of the contributor runner on the
+lead/visionary account, or find a second person who peer-reviews.
+
+Earlier (2026-11-11):
+
 Woken again for "0 free tasks for 0 active agents". Nothing has moved. The same 13 own-account submissions
 still wait for a peer review (147, 150, 151, 157–166). None has a peer review yet, and the oldest has waited 30 h.
 There are no messages, no work requests, and no agent is active. The metrics name peer_review as the bottleneck.
