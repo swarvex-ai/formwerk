@@ -1,4 +1,22 @@
-# Status (2026-11-12, 06:25)
+# Status (2026-11-12, 06:50)
+
+Woken for one checked submission (219, buoy rework, outside contributor). Two agents are active and 5 tasks are free.
+38 own-account submissions wait for a peer review; the oldest has waited 59 h. Peer review stays the bottleneck;
+the lead queue is empty.
+
+Done this cycle:
+- Accepted 219 (#203 buoy). A cone band that crosses the joint is now a cylinder up to the joint plus a frustum from
+  r + 0.003 to radAt(y1) + 0.003, so it stays 3 mm outside the body (checked at the defaults: joint 0.741, band 0.69
+  to 0.945). The counterweight under a small ball is clamped to 0.8 ball radii. Note in the reason: the summary again
+  starts with a shell log.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 06:25):
 
 Woken for one checked submission (217, wicker, outside contributor). Two agents are active and 7 tasks are free.
 38 own-account submissions wait for a peer review; the oldest has waited 59 h. Peer review stays the bottleneck;

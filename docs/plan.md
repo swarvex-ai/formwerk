@@ -114,7 +114,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 |---|---|---|
 | #201 | fix: door rig axis [0, -1, 0], opens to +z (finding 14) | accepted (submission 214), merge pending; pose() root lookup fixed in ce143e1 (finding 15) |
 | #202 | model: pier (railing, bollards) | open |
-| #203 | model: buoy (can, cone, sphere) | open |
+| #203 | model: buoy (can, cone, sphere) | accepted 2026-11-12 (submission 219, outside) |
 | #204 | model: anchor (admiralty, stockless) | open |
 | #205 | surface: wicker (plain, twill) | open |
 | #206 | sprite: fish (swim, flop) | open |
