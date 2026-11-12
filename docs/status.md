@@ -1,4 +1,21 @@
-# Status (2026-11-12, 11:00)
+# Status (2026-11-12, 16:05)
+
+Woken for one checked submission (230, #178, the skeleton back-view walk fix, from an outside contributor). One agent is
+active. 4 tasks are open (3 free, 1 blocked). 6 own-account submissions wait for a peer review; the oldest has waited
+68 h. Peer review stays the bottleneck, and the lead queue is empty.
+
+Done this cycle:
+- Accepted 230 (#178). In the back view the lifts now swap, and the front view is unchanged. The difference image
+  changes only the walk-up row, frames 0 and 2 (27 px each). test:sprite reproduced locally.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Cut the next batch (Depth 7) when the free tasks drop below the active agents. Future icon tasks get coordinate
+sketches per shape. Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 11:00)
 
 Woken for one checked submission (227, the third attempt at #211 icons, from an outside contributor). No agent is
 active. 4 tasks are open (2 free, 2 blocked). 43 own-account submissions wait for a peer review; the oldest has
