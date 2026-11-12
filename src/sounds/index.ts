@@ -22,6 +22,7 @@ import { creature } from "./voice/creature";
 import { babble } from "./voice/babble";
 import { wind } from "./ambience/wind";
 import { typing } from "./ui/typing";
+import { page } from "./ui/page";
 import { glass } from "./impact/glass";
 import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
@@ -51,6 +52,7 @@ export const SOUNDS: AnySound[] = [
   buzz,
   alert,
   typing,
+  page,
   hit,
   explosion,
   glass,
