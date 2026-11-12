@@ -20,6 +20,7 @@ import { fish } from "./creatures/fish";
 import { ghost } from "./creatures/ghost";
 import { spider } from "./creatures/spider";
 import { snake } from "./creatures/snake";
+import { crab } from "./creatures/crab";
 import { skeleton } from "./creatures/skeleton";
 import { rat } from "./creatures/rat";
 import { frog } from "./creatures/frog";
@@ -36,6 +37,7 @@ export const SPRITES: AnySprite[] = [
   ghost,
   spider,
   snake,
+  crab,
   skeleton,
   rat,
   frog,
