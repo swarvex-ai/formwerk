@@ -35,6 +35,7 @@ import { hum as humSound } from "./ambience/hum";
 import { thunder as thunderSound } from "./ambience/thunder";
 import { coins as coinsSound } from "./effects/coins";
 import { nature as natureSound } from "./ambience/nature";
+import { stream as streamSound } from "./ambience/stream";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -85,3 +86,4 @@ export const hum = klang(humSound);
 export const thunder = klang(thunderSound);
 export const coins = klang(coinsSound);
 export const nature = klang(natureSound);
+export const stream = klang(streamSound);
