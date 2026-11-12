@@ -13,6 +13,7 @@ export const SURFACE_IDS = [
   "wicker",
   "metal-plate",
   "corrugated",
+  "rust",
   "grass",
   "sand",
   "dirt",
