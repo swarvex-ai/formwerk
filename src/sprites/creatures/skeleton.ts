@@ -1,4 +1,4 @@
-import { hex, Pixels, ramp, type Ramp } from "../../core/pixels";
+import { hex, Pixels, ramp, type Ramp, type RGBA } from "../../core/pixels";
 import { defineSprite, type Direction } from "../define";
 
 const W = 24, H = 24, BODEN = 22;
@@ -39,22 +39,22 @@ export const skeleton = defineSprite({
     const stahl = ramp("#c2cbd8"), griff = ramp("#6b4a2c"), krone = ramp("#c8a03a"), sehne = hex("#e8e2d0");
     const breit = p.build === "broad" ? 1 : 0;
 
-    const waffe = (b: Pixels, handX: number, handY: number) => {
+    const waffe = (b: Pixels, handX: number, handY: number, rich = 1) => {
+      const punkt = (dx: number, y: number, c: RGBA) => b.set(handX + rich * dx, y, c);
+      const flaeche = (dx: number, y: number, w: number, h: number, c: RGBA) => b.rect(handX + (rich === 1 ? dx : -dx - w + 1), y, w, h, c);
       if (p.weapon === "sword") {
-        const x = handX + 1;
-        b.set(x, Math.max(1, handY - 11), stahl.light);
-        for (let y = Math.max(1, handY - 10); y <= handY - 2; y++) { b.set(x, y, stahl.light); b.set(x + 1, y, stahl.base); }
-        b.rect(x - 1, handY - 1, 4, 1, griff.dark);
-        b.rect(x, handY, 2, 2, griff.base);
+        punkt(1, Math.max(1, handY - 11), stahl.light);
+        for (let y = Math.max(1, handY - 10); y <= handY - 2; y++) { punkt(1, y, stahl.light); punkt(2, y, stahl.base); }
+        flaeche(0, handY - 1, 4, 1, griff.dark);
+        flaeche(1, handY, 2, 2, griff.base);
       } else if (p.weapon === "bow") {
-        const s = handX + 2;
-        for (let y = handY - 6; y <= handY + 2; y++) b.set(s, y, sehne);
+        for (let y = handY - 6; y <= handY + 2; y++) punkt(2, y, sehne);
         for (let t = 0; t <= 8; t++) {
           const y = handY - 6 + t, dx = Math.round(2 * Math.sin((Math.PI * t) / 8));
-          b.set(s + dx, y, griff.base);
-          if (dx > 0) b.set(s + dx - 1, y, griff.dark);
+          punkt(2 + dx, y, griff.base);
+          if (dx > 0) punkt(1 + dx, y, griff.dark);
         }
-        b.set(s + 2, handY, griff.light);
+        punkt(4, handY, griff.light);
       }
     };
 
@@ -125,14 +125,23 @@ export const skeleton = defineSprite({
         b.rect(12 - hw + 1, y, 2 * hw - 2, 1, k.base);
         b.set(12 - hw + 1, y, k.dark); b.set(12 + hw - 2, y, k.dark);
       }
-      // arms, the right one holds the weapon
-      const linksArm = gehen && f === 2 ? 1 : 0, rechtsArm = gehen && f === 0 ? 1 : 0;
-      b.part(12 - hw - 2, brust + linksArm, 2, 6, k);
-      b.set(11 - hw, brust + 5 + linksArm, k.light);
-      b.part(12 + hw, brust + rechtsArm, 2, 6, k);
-      const handX = 12 + hw + 1, handY = brust + rechtsArm + 5;
-      b.set(handX, handY, k.light);
-      waffe(b, handX, handY);
+      // arms: from the front the weapon arm is on screen right, from behind on the left; the swing stays on its side
+      const leerArm = gehen && f === 2 ? 1 : 0, waffenArm = gehen && f === 0 ? 1 : 0;
+      if (hinten) {
+        b.part(12 - hw - 2, brust + waffenArm, 2, 6, k);
+        const handX = 12 - hw - 2, handY = brust + waffenArm + 5;
+        b.set(handX, handY, k.light);
+        waffe(b, handX, handY, -1);
+        b.part(12 + hw, brust + leerArm, 2, 6, k);
+        b.set(12 + hw, brust + 5 + leerArm, k.light);
+      } else {
+        b.part(12 - hw - 2, brust + leerArm, 2, 6, k);
+        b.set(11 - hw, brust + 5 + leerArm, k.light);
+        b.part(12 + hw, brust + waffenArm, 2, 6, k);
+        const handX = 12 + hw + 1, handY = brust + waffenArm + 5;
+        b.set(handX, handY, k.light);
+        waffe(b, handX, handY);
+      }
       // skull: sockets and glow in front, a seam from behind
       b.part(12 - hw, oben, 2 * hw, 6, k, true);
       b.rect(11 - breit, oben + 6, 4 + 2 * breit, 1, k.base);
