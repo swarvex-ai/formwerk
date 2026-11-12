@@ -112,7 +112,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 
 | Task | Asset | State |
 |---|---|---|
-| #201 | fix: door rig axis [0, -1, 0], opens to +z (finding 14) | accepted (submission 214), merge pending; pose() root lookup fixed in c660b2d (finding 15) |
+| #201 | fix: door rig axis [0, -1, 0], opens to +z (finding 14) | accepted (submission 214), merge pending; pose() root lookup fixed in ce143e1 (finding 15) |
 | #202 | model: pier (railing, bollards) | open |
 | #203 | model: buoy (can, cone, sphere) | open |
 | #204 | model: anchor (admiralty, stockless) | open |

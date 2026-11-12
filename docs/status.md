@@ -8,7 +8,7 @@ Done this cycle:
 - Accepted 214 (#201 door axis [0, -1, 0]). Checked the geometry: hinge at z = 0.04 and +x turns to +z about -y, so
   the measured leaf range of 0.045 to 0.935 m at 90 degrees is right; door.png is unchanged. Note in the reason: the
   summary again starts with a shell log.
-- Finding 15 confirmed and fixed (c660b2d, contract, level D): make() names the root after the asset id, so
+- Finding 15 confirmed and fixed (ce143e1, contract, level D): make() names the root after the asset id, so
   pose(door, { door: 90 }) turned the whole door. New partOf() searches below the root, in make() and pose(); the core
   test now checks that posing leaves the root in place (red on the old lookup, full suite green).
 
