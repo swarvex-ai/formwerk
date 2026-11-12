@@ -32,6 +32,7 @@ import { lampPost } from "./props/lamp-post";
 import { bench } from "./props/bench";
 import { signpost } from "./props/signpost";
 import { marketStall } from "./props/market-stall";
+import { tent } from "./props/tent";
 import { torch } from "./props/torch";
 import { lantern } from "./props/lantern";
 import { ladder } from "./props/ladder";
@@ -75,6 +76,7 @@ export const ASSETS: AnyAsset[] = [
   bench,
   signpost,
   marketStall,
+  tent,
   torch,
   lantern,
   ladder,
