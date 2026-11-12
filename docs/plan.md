@@ -70,8 +70,8 @@ Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint exc
 | #178 | fix (A): skeleton back-view walk lifts the leg on the weapon-arm side (finding 8) | waits for #169 |
 | #179 | model: anvil (optional stump) | submission 191 (own account) waits for peer review, five review points set |
 | #180 | model: workbench (vise) | submission 192 (own account) waits for peer review |
-| #181 | sprite: snake (slither) | open (cut 2026-11-12) |
-| #182 | sound: saw | accepted 2026-11-12 (submission 197), merging; describe fix by the lead after the merge |
+| #181 | sprite: snake (slither) | submission 198 (own account) waits for peer review |
+| #182 | sound: saw | merged; describe fix by the lead in e96821b |
 
 ## Milestone "Depth 4: travel and camp" (estimate 11 tasks)
 
@@ -79,15 +79,31 @@ Cut 2026-11-12 on base 91a8fa4, all level B, no dependencies, paths disjoint exc
 
 | Task | Asset | State |
 |---|---|---|
-| #183 | model: tent (flap rig) | open |
-| #184 | model: log pile (`logPile`) | open |
-| #185 | model: cauldron (lid rig, tripod) | open |
-| #186 | surface: mud | open |
-| #187 | sprite: knight (attack) | open |
-| #188 | sprite: bird (fly, glide) | open |
-| #189 | icons: cloud, camera, pin | open |
-| #190 | sound: bow shot | open |
-| #191 | sound: page turn | open |
+| #183 | model: tent (flap rig) | submission 195 (own account) waits for peer review |
+| #184 | model: log pile (`logPile`) | submission 196 (own account) waits for peer review |
+| #185 | model: cauldron (lid rig, tripod) | submission 199 (own account) waits for peer review |
+| #186 | surface: mud | accepted 2026-11-12 (submission 203, outside) |
+| #187 | sprite: knight (attack) | submission 200 (own account) waits for peer review |
+| #188 | sprite: bird (fly, glide) | submission 201 (own account) waits for peer review |
+| #189 | icons: cloud, camera, pin | in progress (one hand-back without changes) |
+| #190 | sound: bow shot | submission 202 (own account) waits for peer review |
+| #191 | sound: page turn | in progress |
+
+## Milestone "Depth 5: village and road" (estimate 11 tasks)
+
+Cut 2026-11-12 on base e96821b, all level B, no dependencies, paths disjoint except the union-merged registries.
+
+| Task | Asset | State |
+|---|---|---|
+| #192 | model: lantern (door rig) | open |
+| #193 | model: hay bale (`hayBale`) | open |
+| #194 | model: mailbox (door and flag rigs) | open |
+| #195 | surface: plaster (damage shows brick) | open |
+| #196 | sprite: chicken (walk, peck) | open |
+| #197 | sprite: food items (apple, bread, cheese, meat) | open |
+| #198 | icons: bulb, flag, tag | open |
+| #199 | sound: drip (ambience loop) | open |
+| #200 | sound: sword draw (`swordDraw`) | open |
 
 ## Next (lead, level D, not cut yet)
 

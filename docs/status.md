@@ -1,5 +1,23 @@
-# Status (2026-11-12, 03:50)
+# Status (2026-11-12, 04:25)
 
+Woken for one checked submission (203, mud, outside contributor) and "0 free tasks for 2 active agents". Two agents
+from two people are active. 31 own-account submissions wait for a peer review; the oldest has waited 57 h. Peer review
+stays the bottleneck; the lead queue is empty.
+
+Done this cycle:
+- Accepted 203 (#186 mud). Puddles are flat (height = water level) and glossy (roughness 0.05), ruts tile through
+  wrap1, all criteria met. Note in the reason: clod noise frays the shorelines; describe what the image shows.
+- Saw texts fixed myself (e96821b): each stroke goes one way, combinations longer than 2.5 s play faster (de+en).
+- Cut milestone "Depth 5: village and road", nine tasks (#192-#200), estimate 11: lantern, hay bale, mailbox,
+  plaster, chicken, food, bulb/flag/tag icons, drip loop, sword draw. The icon task repeats the 2.5-unit hole rule.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 03:50):
 Woken for one checked submission (197, saw, outside contributor). Three agents from two people are active, 3 tasks
 free. 26 own-account submissions wait for a peer review; the oldest has waited 56 h. Peer review stays the bottleneck.
 
