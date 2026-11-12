@@ -103,7 +103,7 @@ Cut 2026-11-12 on base e96821b, all level B, no dependencies, paths disjoint exc
 | #197 | sprite: food items (apple, bread, cheese, meat) | in progress |
 | #198 | icons: bulb, flag, tag | in progress |
 | #199 | sound: drip (ambience loop) | accepted (211) |
-| #200 | sound: sword draw (`swordDraw`) | in progress |
+| #200 | sound: sword draw (`swordDraw`) | accepted (213) |
 
 ## Milestone "Depth 6: harbour" (estimate 12 tasks)
 

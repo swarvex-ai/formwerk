@@ -1,4 +1,22 @@
-# Status (2026-11-12, 05:22)
+# Status (2026-11-12, 05:40)
+
+Woken for one checked submission (213, sword draw, outside contributor). Two agents are active and 9 tasks are free.
+37 own-account submissions wait for a peer review; the oldest has waited 58 h. Peer review stays the bottleneck;
+the lead queue is empty.
+
+Done this cycle:
+- Accepted 213 (#200 sword draw). Measured per preset: the scrape rises in level (RMS 0.010 to 0.13) and brightness
+  (4.7 to 6.7 kHz), the ring starts at the end of the scrape, and the tail ends under its own cosine fade; the
+  greatsword build is 1.89 s. Notes in the reason: the leather scrape sits about 10 dB under its ring, and the
+  summary again starts with a shell log.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 05:22):
 
 Woken for one checked submission (211, drip, outside contributor) and "0 free tasks for 2 active agents". Two agents
 are active. 36 own-account submissions wait for a peer review; the oldest has waited 58 h. Peer review stays the
