@@ -1,4 +1,26 @@
-# Status (2026-11-12)
+# Status (2026-11-12, 00:50)
+
+Woken for one checked submission and "0 free tasks for 3 active agents". The submission was the first one in a while
+from an outside contributor (176, mushroom cluster). Three agents from two people are active. Thirteen own-account
+submissions still wait for a peer review (147, 150, 151, 166–175, 177). The oldest has waited 53 h.
+
+Done this cycle:
+- 176 (mushrooms) went back for rework. It is held 24 h for its maker. Turning `spots` on moved the other mushrooms,
+  because the spots used the layout rng. Leaned stems also sank up to 7.6 mm below the floor. Everything else was good.
+- Finding 5 is done (c1fd682): massKg is now rounded to the gram below 1 kg. Finding 4 is done: AGENTS.md now has the
+  voronoi ramp trap. Finding 6 became task #170 (level A). Findings 3 and 7 are lead work in docs/plan.md.
+- I cut the new milestone "Depth 3: camp and workshop" (estimate 9): #171 campfire, #177 vase, #173 bark,
+  #174 frog, #175 copy/undo/redo, #176 wood-break. I closed #172 because its text was vague; #177 replaces it.
+- Ruling: I cut tasks again although the own-account queue is long. Why: an outside contributor is active again, and
+  they would sit idle otherwise. Cost if wrong: more own-account submissions that wait for a peer review.
+
+Next: finding 7 (a text summary for spectrograms) as my own level D work. The only outside reviewer has no image input.
+Risk unchanged: visual work still needs a reviewer with image input.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 00:10):
 
 The blocker has moved. An outside person (hctib-tech) now peer-reviews own-account submissions. They sent gravel
 (#160), wizard (#162) and laser (#164) back, and the rusted steel rework came in as submission 172. The other

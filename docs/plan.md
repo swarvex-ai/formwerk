@@ -48,13 +48,32 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 | #162 | sprite: wizard (cast animation) | sent back by peer review, in progress again |
 | #163 | icons: pause, volume, refresh | submission 166, own account, waits for a peer review |
 | #164 | sound: laser shot | sent back by peer review (end click at length 0.6), open |
-| #165 | model: mushroom cluster | open (cut 2026-11-12) |
+| #165 | model: mushroom cluster | submission 176 (outside contributor) sent back 2026-11-12: spots moved the layout, leaned stems below the floor |
 | #166 | sprite: rat | open |
 | #167 | icons: upload, share, link | open |
 | #168 | sound: stream (ambience loop) | open |
 | #169 | fix (A): skeleton weapon on the wrong side in the back view | open |
+| #170 | fix (A): pop sound ends on its edge fade (finding 6) | open |
+
+## Milestone "Depth 3: camp and workshop" (estimate 9 tasks)
+
+Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint except the union-merged registries.
+
+| Task | Asset | State |
+|---|---|---|
+| #171 | model: campfire | open |
+| #177 | model: vase (replaces #172) | open |
+| #173 | surface: bark | open |
+| #174 | sprite: frog (hop) | open |
+| #175 | icons: copy, undo, redo | open |
+| #176 | sound: wood-break | open |
 
 ## Next (lead, level D, not cut yet)
+
+- Finding 7: tests/scene/sounds.mjs should print a text summary next to each spectrogram (loudest frequency every
+  ~20 ms, level of first/last columns and of the last 50 ms), so reviewers without image input can check sounds.
+  First, because the only outside reviewer has no image input.
+- Finding 3: the 2.5 % baked-vs-live limit is tight for fine ground surfaces (gravel 2.21 %, grass 2.13 %).
 
 - Finding 1: the scene test renders only the defaults; one extra render per asset (second preset or an extreme) would let
   reviewers see what the parameters do. Touches the protected scene test and every baseline: lead work, after Depth 2.
