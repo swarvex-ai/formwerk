@@ -37,6 +37,9 @@ export type Info = {
   rig: Record<string, RigPart>; physics: Physics & { massKg: number; cylinder?: { radius: number; height: number } };
 };
 
+// Mass to 0.1 kg, below 1 kg to the gram, so small props (a mushroom, a coin) keep a mass above zero
+const kilo = (kg: number) => (kg < 1 ? Math.round(kg * 1000) / 1000 : Math.round(kg * 10) / 10);
+
 /** Builds an asset from (partial, unchecked) values, a preset name under `preset`, and a seed; attaches its info. */
 export function make(asset: AnyAsset, input: Record<string, unknown> = {}, seed = 1): Object3D {
   const values = withPreset(asset.params, asset.presets, input);
@@ -47,7 +50,7 @@ export function make(asset: AnyAsset, input: Record<string, unknown> = {}, seed 
     const teil = o.getObjectByName(name);
     if (teil) rig[name] = { ...r, ...(teil.userData.range as Partial<RigPart> | undefined) };
   }
-  const physics: Info["physics"] = { ...asset.physics, massKg: Math.round(((o.userData.massKg as number) ?? 0) * 10) / 10 };
+  const physics: Info["physics"] = { ...asset.physics, massKg: kilo((o.userData.massKg as number) ?? 0) };
   if (asset.physics.collider === "cylinder") {
     if (!o.userData.cylinder) throw new Error(`${asset.id}: collider "cylinder" needs parts.cylinder(radius, height) in build()`);
     physics.cylinder = o.userData.cylinder as { radius: number; height: number };
