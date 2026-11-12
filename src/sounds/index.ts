@@ -25,6 +25,7 @@ import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
 import { splash } from "./movement/splash";
 import { creak } from "./movement/creak";
+import { doorSwing } from "./movement/door-swing";
 import { magic } from "./effects/magic";
 import { engine } from "./effects/engine";
 import { heartbeat } from "./effects/heartbeat";
@@ -57,6 +58,7 @@ export const SOUNDS: AnySound[] = [
   whoosh,
   splash,
   creak,
+  doorSwing,
   pickup,
   zap,
   magic,
