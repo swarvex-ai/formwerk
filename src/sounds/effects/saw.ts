@@ -11,9 +11,9 @@ export const saw = defineSound({
   },
   params: {
     strokes: { type: "integer", min: 1, max: 8, default: 4, label: { de: "Züge", en: "Strokes" },
-      describe: { de: "Wie viele Züge hin und zurück: 1 ein einzelner Schnitt, 4 ein paar Züge, 8 ein langes Brett.", en: "How many strokes back and forth: 1 a single cut, 4 a few strokes, 8 a long board." } },
+      describe: { de: "Wie viele Züge, abwechselnd hin und zurück: 1 ein einzelner Schnitt, 4 ein paar Züge, 8 ein langes Brett. Der Klang dauert höchstens 2,5 s; mehr Züge, als hineinpassen, werden schneller.", en: "How many strokes, alternating push and pull: 1 a single cut, 4 a few strokes, 8 a long board. The sound lasts at most 2.5 s; more strokes than fit are played faster." } },
     tempo: { type: "number", min: 0.8, max: 3, step: 0.1, default: 1.6, label: { de: "Tempo", en: "Tempo" },
-      describe: { de: "Züge pro Sekunde: 1 gemächlich, 1,6 zügig, 3 hektisch; ein Zug ist ein Hin und Zurück.", en: "Strokes per second: 1 leisurely, 1.6 brisk, 3 frantic; one stroke is a push and a pull." } },
+      describe: { de: "Züge pro Sekunde: 1 gemächlich, 1,6 zügig, 3 hektisch; ein Zug geht in eine Richtung. Wird es länger als 2,5 s, wird es schneller.", en: "Strokes per second: 1 leisurely, 1.6 brisk, 3 frantic; each stroke goes one way. Combinations longer than 2.5 s are played faster." } },
     pitch: { type: "number", min: 0, max: 1, step: 0.05, default: 0.5, label: { de: "Klanghöhe", en: "Pitch" },
       describe: { de: "0 eine grobe Reißsäge, tief und rau, 0,5 ein Fuchsschwanz, 1 eine feine, hohe Feinsäge.", en: "0 a coarse rip saw, low and rough, 0.5 a panel saw, 1 a fine, high tenon saw." } },
     push: { type: "number", min: 0, max: 1, step: 0.05, default: 0.6, label: { de: "Stoßbetonung", en: "Push emphasis" },
