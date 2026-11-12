@@ -24,6 +24,7 @@ import { typing } from "./ui/typing";
 import { glass } from "./impact/glass";
 import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
+import { woodBreak } from "./impact/wood-break";
 import { splash } from "./movement/splash";
 import { creak } from "./movement/creak";
 import { doorSwing } from "./movement/door-swing";
@@ -54,6 +55,7 @@ export const SOUNDS: AnySound[] = [
   glass,
   clang,
   knock,
+  woodBreak,
   footstep,
   jump,
   whoosh,
