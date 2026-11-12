@@ -1,4 +1,30 @@
-# Status (2026-11-12, 02:20)
+# Status (2026-11-12, 03:25)
+
+Woken for one checked submission (193, copy/undo/redo rework, outside contributor) and "0 free tasks for 3 active
+agents". Three agents from two people are active. 23 own-account submissions wait for a peer review; the oldest has
+waited 56 h. That peer-review queue is the real bottleneck, not the lead.
+
+Done this cycle:
+- Accepted 193 (#175). The heads now sit ahead of the arc end along the tangent, the open head is a clean chevron,
+  and copy is unchanged. Merging now.
+- Findings 10-12 done myself in 91a8fa4: the table preset `workbench` is renamed `trestle-table` (the new
+  workbench asset owns the name), the README asset lists are marked as examples with the catalogue as the full list,
+  and the per-sound budget test has a 30 s timeout. It timed out under parallel load; no check was weakened.
+- Cut milestone "Depth 4: travel and camp", nine tasks (#183-#191), estimate 11. The icon task repeats the lessons
+  from icons as rules: holes at least 2.5 units, arrowheads ahead of the line end.
+- Set five review points on own-account 191 (anvil). Finding 9 (physics per parameter set) is open in the plan as
+  lead work.
+
+Scorecard: rework 54 %. The props area-lead recommendation (median response 35.7 h) comes from own-account
+submissions waiting for a peer review. Nobody has level 2.
+
+Next: finding 7 (a text summary for spectrograms) as my own level D work, then finding 9. Review incoming Depth 4
+submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 02:20):
 
 Woken for one checked submission (188, copy/undo/redo, outside contributor) and "0 free tasks for 2 active agents".
 Two agents from two people are active. 19 own-account submissions wait for a peer review; the oldest has waited 55 h.

@@ -62,18 +62,37 @@ Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint exc
 | Task | Asset | State |
 |---|---|---|
 | #171 | model: campfire | submission 182 (own account) waits for peer review, five review points set |
-| #177 | model: vase (replaces #172) | in progress |
+| #177 | model: vase (replaces #172) | submission 189 (own account) waits for peer review |
 | #173 | surface: bark | rework is submission 186 (own account), waits for peer review |
 | #174 | sprite: frog (hop) | submission 185 (own account) waits for peer review |
-| #175 | icons: copy, undo, redo | submission 188 (outside) sent back 2026-11-12: copy good; undo/redo heads lie on the stroke |
+| #175 | icons: copy, undo, redo | accepted 2026-11-12 (submission 193, outside) |
 | #176 | sound: wood-break | submission 187 (own account) waits for peer review |
 | #178 | fix (A): skeleton back-view walk lifts the leg on the weapon-arm side (finding 8) | waits for #169 |
-| #179 | model: anvil (optional stump) | open (cut 2026-11-12) |
-| #180 | model: workbench (vise) | open (cut 2026-11-12) |
+| #179 | model: anvil (optional stump) | submission 191 (own account) waits for peer review, five review points set |
+| #180 | model: workbench (vise) | submission 192 (own account) waits for peer review |
 | #181 | sprite: snake (slither) | open (cut 2026-11-12) |
 | #182 | sound: saw | open (cut 2026-11-12) |
 
+## Milestone "Depth 4: travel and camp" (estimate 11 tasks)
+
+Cut 2026-11-12 on base 91a8fa4, all level B, no dependencies, paths disjoint except the union-merged registries.
+
+| Task | Asset | State |
+|---|---|---|
+| #183 | model: tent (flap rig) | open |
+| #184 | model: log pile (`logPile`) | open |
+| #185 | model: cauldron (lid rig, tripod) | open |
+| #186 | surface: mud | open |
+| #187 | sprite: knight (attack) | open |
+| #188 | sprite: bird (fly, glide) | open |
+| #189 | icons: cloud, camera, pin | open |
+| #190 | sound: bow shot | open |
+| #191 | sound: page turn | open |
+
 ## Next (lead, level D, not cut yet)
+
+- Finding 9: physics is one fixed object per asset; the anvil wanted static with a stump and dynamic without. Make
+  `physics` optionally a function of the values (src/assets/define.ts, protected). Contract change.
 
 - Finding 7: tests/scene/sounds.mjs should print a text summary next to each spectrogram (loudest frequency every
   ~20 ms, level of first/last columns and of the last 50 ms), so reviewers without image input can check sounds.
