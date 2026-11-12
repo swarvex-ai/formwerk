@@ -2,9 +2,9 @@
 // floor, and the same output for the same values and seed. A new asset passes these before it can be merged.
 import { describe, expect, it } from "vitest";
 import { only } from "../only.mjs";
-import { Box3, type BufferGeometry, type Mesh, type Object3D } from "three";
+import { Box3, Quaternion, type BufferGeometry, type Mesh, type Object3D } from "three";
 import { ASSETS } from "../../src/assets";
-import { CATEGORIES, infoOf, make, measure, pose } from "../../src/assets/define";
+import { CATEGORIES, infoOf, make, measure, partOf, pose } from "../../src/assets/define";
 import { extremes, presetProblems, random, schemaProblems } from "../../src/core/params";
 import { hullPoints, physicsOf } from "../../src/core/physics";
 import { rng } from "../../src/core/rng";
@@ -70,6 +70,7 @@ for (const a of only(ASSETS)) {
           for (const v of [r.min, r.max]) {
             const b = new Box3().setFromObject(pose(o, { [name]: v }));
             expect(Number.isFinite(b.max.y) && b.min.y > -0.02, `${was}: ${name} at ${v}`).toBe(true);
+            expect(o.quaternion.equals(new Quaternion()) && o.position.lengthSq() === 0, `${was}: ${name} moves its part, not the whole asset`).toBe(true);
           }
           pose(o, { [name]: 0 });
         }
@@ -78,7 +79,7 @@ for (const a of only(ASSETS)) {
     it("presets build, movable parts appear, physics data is complete", () => {
       for (const name of Object.keys(a.presets)) expect(measure(make(a, { preset: name })).triangles, `${a.id} preset ${name}`).toBeGreaterThan(0);
       for (const name of Object.keys(a.rig ?? {})) {
-        expect(faelle.some((w) => make(a, w).getObjectByName(name)), `${a.id}: movable part ${name} appears for some values`).toBe(true);
+        expect(faelle.some((w) => partOf(make(a, w), name)), `${a.id}: movable part ${name} appears for some values`).toBe(true);
       }
       const p = physicsOf(make(a));
       expect(p.halfExtents.every((x) => x > 0)).toBe(true);

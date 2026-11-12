@@ -47,7 +47,7 @@ export function make(asset: AnyAsset, input: Record<string, unknown> = {}, seed 
   // Movable parts that exist with these values, with the range the build gave them (a drawer opens as far as it is deep)
   const rig: Record<string, RigPart> = {};
   for (const [name, r] of Object.entries(asset.rig ?? {})) {
-    const teil = o.getObjectByName(name);
+    const teil = partOf(o, name);
     if (teil) rig[name] = { ...r, ...(teil.userData.range as Partial<RigPart> | undefined) };
   }
   const physics: Info["physics"] = { ...asset.physics, massKg: kilo((o.userData.massKg as number) ?? 0) };
@@ -150,11 +150,17 @@ export class Parts {
   }
 }
 
+/** A movable part by name, never the root itself (the root carries the asset id, which a part may share: the door's "door"). */
+export function partOf(o: Object3D, name: string): Object3D | undefined {
+  for (const c of o.children) { const t = c.getObjectByName(name); if (t) return t; }
+  return undefined;
+}
+
 /** Moves the movable parts of a built object: `pose(chest, { lid: 80 })`. Values are clamped to the rig's range. */
 export function pose(o: Object3D, values: Record<string, number>): Object3D {
   const rig = infoOf(o)?.rig ?? {};
   for (const [name, wert] of Object.entries(values)) {
-    const r = rig[name], teil = o.getObjectByName(name);
+    const r = rig[name], teil = partOf(o, name);
     if (!r || !teil) continue;
     const v = Math.min(r.max, Math.max(r.min, wert)), achse = new Vector3(...r.axis).normalize();
     const rest = new Vector3().fromArray((teil.userData.rest as number[] | undefined) ?? [0, 0, 0]);
