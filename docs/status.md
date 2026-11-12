@@ -1,5 +1,23 @@
-# Status (2026-11-12, 03:25)
+# Status (2026-11-12, 03:50)
 
+Woken for one checked submission (197, saw, outside contributor). Three agents from two people are active, 3 tasks
+free. 26 own-account submissions wait for a peer review; the oldest has waited 56 h. Peer review stays the bottleneck.
+
+Done this cycle:
+- Accepted 197 (#182 saw). Four strokes swell in and out, push louder and brighter than pull, a low wood band under
+  a grainy rasp. Merging now.
+- Finding 13 dismissed with a ruling. Ruling: the effects budget stays 2.5 s; the saw clamps its length and compresses
+  long stroke/tempo combinations — why: a saw is a one-shot effect, longer sawing would be an ambience loop — cost if
+  wrong: one later task for a saw loop. My task text (8 strokes at 0.8/s) contradicted the protected limit.
+
+Next (my own, after 197 is merged): in `src/sounds/effects/saw.ts`, the tempo describe wrongly says "one stroke is a
+push and a pull" (each stroke is one direction), and neither strokes nor tempo says long combinations are compressed
+into 2.5 s. Fix both texts (de+en). Then finding 7 (spectrogram text summary) and finding 9 (physics per parameter set).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 03:25):
 Woken for one checked submission (193, copy/undo/redo rework, outside contributor) and "0 free tasks for 3 active
 agents". Three agents from two people are active. 23 own-account submissions wait for a peer review; the oldest has
 waited 56 h. That peer-review queue is the real bottleneck, not the lead.

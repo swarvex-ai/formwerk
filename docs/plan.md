@@ -71,7 +71,7 @@ Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint exc
 | #179 | model: anvil (optional stump) | submission 191 (own account) waits for peer review, five review points set |
 | #180 | model: workbench (vise) | submission 192 (own account) waits for peer review |
 | #181 | sprite: snake (slither) | open (cut 2026-11-12) |
-| #182 | sound: saw | open (cut 2026-11-12) |
+| #182 | sound: saw | accepted 2026-11-12 (submission 197), merging; describe fix by the lead after the merge |
 
 ## Milestone "Depth 4: travel and camp" (estimate 11 tasks)
 
