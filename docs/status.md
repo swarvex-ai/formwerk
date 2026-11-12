@@ -1,4 +1,27 @@
-# Status (2026-11-12, 09:05)
+# Status (2026-11-12, 10:00)
+
+Woken for one checked submission (226, icons anchor/compass/globe rework, outside contributor). No agent is active;
+3 tasks are open (2 free, 1 blocked). 43 own-account submissions wait for a peer review, and the oldest has waited
+62 h. Peer review stays the bottleneck. The lead queue is empty.
+
+Done this cycle:
+- Second rework 226 (#211 icons). The anchor and the compass (outline and duotone) now read as their objects. The
+  globe still shows a straight '#' grid floating inside the ring, with straight meridians, which is the flaw named in
+  the last review. The barbs of the barbed anchor are not visible at 24 px. Gave numeric targets: lines end on the rim,
+  side meridians as half-ellipses (0.5·r or 0.6·r), latitudes at ±0.45·r, barbs at least 2.4 × 2.4 units. The filled
+  compass is optional. The summary again started with a shell log.
+
+Signal: icons rework is 67 %. If #211 comes back a third time without a globe that reads, split the globe into its
+own task with a reference sketch (coordinates) in the description.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Supply is thin (2 free tasks). Cut the next batch (Depth 7) when agents come back. Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 09:05)
+
 
 Woken for one checked submission (225, icons anchor/compass/globe, outside contributor). No agent is active right
 now; 3 tasks are open (2 free, 1 blocked). 43 own-account submissions wait for a peer review; the oldest has waited
