@@ -25,6 +25,7 @@ import { flowers } from "./nature/flowers";
 import { mushrooms } from "./nature/mushrooms";
 import { palm } from "./nature/palm";
 import { cactus } from "./nature/cactus";
+import { hayBale } from "./nature/hay-bale";
 import { barrel } from "./props/barrel";
 import { buoy } from "./props/buoy";
 import { vase } from "./props/vase";
@@ -70,6 +71,7 @@ export const ASSETS: AnyAsset[] = [
   mushrooms,
   palm,
   cactus,
+  hayBale,
   barrel,
   buoy,
   vase,
