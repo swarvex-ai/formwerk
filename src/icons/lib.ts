@@ -37,6 +37,9 @@ import { chart as chartIcon } from "./objects/chart";
 import { sliders as slidersIcon } from "./objects/sliders";
 import { folder as folderIcon } from "./objects/folder";
 import { calendar as calendarIcon } from "./objects/calendar";
+import { cloud as cloudIcon } from "./objects/cloud";
+import { camera as cameraIcon } from "./objects/camera";
+import { pin as pinIcon } from "./objects/pin";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -81,3 +84,6 @@ export const chart = zeichen(chartIcon);
 export const sliders = zeichen(slidersIcon);
 export const folder = zeichen(folderIcon);
 export const calendar = zeichen(calendarIcon);
+export const cloud = zeichen(cloudIcon);
+export const camera = zeichen(cameraIcon);
+export const pin = zeichen(pinIcon);

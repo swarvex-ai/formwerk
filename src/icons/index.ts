@@ -35,6 +35,9 @@ import { chart } from "./objects/chart";
 import { sliders } from "./objects/sliders";
 import { folder } from "./objects/folder";
 import { calendar } from "./objects/calendar";
+import { cloud } from "./objects/cloud";
+import { camera } from "./objects/camera";
+import { pin } from "./objects/pin";
 
 export const ICONS: AnyIcon[] = [
   home,
@@ -71,5 +74,8 @@ export const ICONS: AnyIcon[] = [
   sliders,
   folder,
   calendar,
+  cloud,
+  camera,
+  pin,
 ];
 export const iconById = (id: string) => ICONS.find((i) => i.id === id);
