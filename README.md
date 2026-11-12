@@ -13,15 +13,15 @@ generator credits. An asset is a few KB of code.
 
 - **Gallery:** every asset with controls generated from its parameters, presets, a share link for every setting, a
   code snippet and downloads made in your browser.
-  - **Models:** furniture (chair, table, shelf, crate, server rack, bed), architecture (stairs, fence, column, door),
+  - **Models:** for example furniture (chair, table, shelf, crate, server rack, bed), architecture (stairs, fence, column, door),
     nature (tree, rock, bush), props (barrel, chest, lamp post, bench, signpost, market stall) and vehicles (cart,
     car, rowboat, tank). Sliders for movable parts; `.glb` for Godot, Blender and the web, `.usdz` for AR on iPhone and iPad,
     `.obj` for the shape alone. Procedural patterns (wood grain, stone, bark) are baked into a texture on export.
-  - **Surfaces:** stone (cobblestones, bricks, tiles, concrete, marble), wood (planks, parquet), metal (plates,
+  - **Surfaces:** for example stone (cobblestones, bricks, tiles, concrete, marble), wood (planks, parquet), metal (plates,
     corrugated sheet) and ground (grass, sand, dirt, snow) on a floor and a ball. Download the maps as PNG files in a .zip
     (colour, normal in OpenGL format, roughness, metalness, height) at 512 to 8192 pixels per tile; a larger size gets
     finer detail, not only more pixels. Every surface repeats without a seam.
-  - **Sprites:** characters walking in four directions, creatures (slime, bat, ghost, spider), items (potion, coin,
+  - **Sprites:** for example characters walking in four directions, creatures (slime, bat, ghost, spider), items (potion, coin,
     gem, key, sword, shield, heart, bomb). See the animation large and the whole
     sheet; download a .zip with the sheet (.png), Godot SpriteFrames (.tres, ready for AnimatedSprite2D and 3D) and a
     JSON for other engines. Every sprite at its defaults and presets is also a ready file: `/sprites/<id>.png`,
@@ -34,12 +34,13 @@ generator credits. An asset is a few KB of code.
   - **Speech:** any line in English spoken by the Kokoro-82M model in your browser, eight voices, adjustable speed,
     as .wav. The model (about 92 MB) comes from Hugging Face only after you agree; see `speech/README.md` (that part
     is GPL-3.0).
-  - **Sounds:** interface (click, chime, pop, toggle on and off, error buzz, alerts from a reminder to an alarm,
+  - **Sounds:** for example interface (click, chime, pop, toggle on and off, error buzz, alerts from a reminder to an alarm,
     typing), hits (glass, metal, knocking), movement (splash, creak), effects (magic, an engine loop, a heartbeat),
     voices (efforts, cries, creatures, babble in a made-up language, a robot) and ambience (wind, rain, fire, hum,
     thunder). Play them, see the spectrogram and the waveform, download `.wav` (48 kHz mono). Every sound at its
     defaults and at every preset is also a ready file: `https://formwerk.swarvex.run/sounds/<id>.wav` and
     `<id>.<preset>.wav`, listed in the catalogue.
+  - The lists above are examples; the full, current list is the gallery and [catalog.json](https://formwerk.swarvex.run/catalog.json).
 - **Library:** `import { chair, cobblestone, bakedMaterial } from "formwerk"`; `import { hit, toAudioBuffer, toWav } from "formwerk/sounds"`,
   `import { villager, godotSpriteFrames } from "formwerk/sprites"`, `import { gear, mark } from "formwerk/icons"` (all three without three.js). Values outside the ranges are clamped, so every call builds a valid asset. Presets set a look
   (`chair({ preset: "bar-stool" })`), explicit values win over them.

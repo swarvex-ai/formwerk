@@ -31,7 +31,7 @@ export const table = defineAsset({
   presets: {
     "coffee-table": { label: { de: "Couchtisch", en: "Coffee table" }, values: { width: 1.1, depth: 0.6, height: 0.42 } },
     bistro: { label: { de: "Bistrotisch", en: "Bistro table" }, values: { top: "round", width: 0.7, base: "pedestal", material: "metal", color: "#3d4248" } },
-    workbench: { label: { de: "Werkbank", en: "Workbench" }, values: { width: 2, height: 0.9, thickness: 0.06, base: "trestle", drawer: true, color: "#b98b55" } },
+    "trestle-table": { label: { de: "Bocktisch", en: "Trestle table" }, values: { width: 2, height: 0.9, thickness: 0.06, base: "trestle", drawer: true, color: "#b98b55" } },
   },
   rig: { drawer: { label: { de: "Schublade", en: "Drawer" }, type: "slide", axis: [0, 0, 1], min: 0, max: 0.5 } },
   physics: { body: "static", collider: "box" },

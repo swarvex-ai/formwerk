@@ -56,7 +56,7 @@ for (const s of only(SOUNDS)) {
           expect(m.endDb, `${was}: decays on its own (the last 50 ms at least 10 dB below the loudest)`).toBeLessThan(-10);
         }
       }
-    });
+    }, 30_000); // long sounds at many parameter sets: the 5 s default times out when the suite runs in parallel
     it("is deterministic: same values and seed, same samples", () => {
       const w = random(s.params, rng(7));
       expect(makeSound(s, w, 3).samples).toEqual(makeSound(s, w, 3).samples);
