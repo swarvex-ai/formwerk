@@ -11,6 +11,7 @@ import { stairs } from "./architecture/stairs";
 import { fence } from "./architecture/fence";
 import { column } from "./architecture/column";
 import { bridge } from "./architecture/bridge";
+import { pier } from "./architecture/pier";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
 import { logPile } from "./nature/log-pile";
@@ -61,6 +62,7 @@ export const ASSETS: AnyAsset[] = [
   fence,
   column,
   bridge,
+  pier,
   door,
   windowAsset,
   tree,
