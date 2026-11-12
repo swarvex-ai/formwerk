@@ -13,6 +13,7 @@ import { column } from "./architecture/column";
 import { bridge } from "./architecture/bridge";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
+import { logPile } from "./nature/log-pile";
 import { bed } from "./furniture/bed";
 import { sofa } from "./furniture/sofa";
 import { wardrobe } from "./furniture/wardrobe";
@@ -63,6 +64,7 @@ export const ASSETS: AnyAsset[] = [
   windowAsset,
   tree,
   rock,
+  logPile,
   bush,
   flowers,
   mushrooms,
