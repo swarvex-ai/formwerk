@@ -27,11 +27,14 @@ export const pop = defineSound({
   loop: false, maxSeconds: 0.35,
   build(p, seed) {
     const r = rng(seed), s = buffer(p.length + 0.02), osc = new Osc("sine"), hp = new Biquad("highpass", 2500, 0.8);
+    const ab = s.length / RATE - 0.02;
     for (let i = 0; i < s.length; i++) {
       const t = i / RATE, weg = Math.min(1, t / p.length);
       // The pitch glides fast at first, then settles, like air leaving a bubble
       const f = p.pitch * 2 ** (p.glide * (1 - Math.exp(-weg * 3)) / (1 - Math.exp(-3)));
-      s[i] = osc.next(f) * envelope(t, 0.003, p.length / 3.5) + hp.run(white(r)) * envelope(t, 0.0003, 0.0025) * p.snap * 0.9;
+      // The tone dies away on its own: a raised-cosine tail over the last 20 ms of the buffer
+      const k = Math.min(1, Math.max(0, (t - ab) / 0.02));
+      s[i] = osc.next(f) * envelope(t, 0.003, p.length / 3.5) * (0.5 * (1 + Math.cos(Math.PI * k))) + hp.run(white(r)) * envelope(t, 0.0003, 0.0025) * p.snap * 0.9;
     }
     return s;
   },
