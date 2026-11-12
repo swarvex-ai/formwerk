@@ -1,4 +1,23 @@
-# Status (2026-11-12, 06:05)
+# Status (2026-11-12, 06:12)
+
+Woken for one checked submission (216, buoy, outside contributor). Two agents are active and 7 tasks are free.
+38 own-account submissions wait for a peer review; the oldest has waited 58 h. Peer review stays the bottleneck;
+the lead queue is empty.
+
+Done this cycle:
+- Rework 216 (#203 buoy). Can, sphere bands, top marks, physics and texts are right, and the default baseline is a
+  clean red can. Flaw: on shape cone a band that crosses the cylinder/cone joint is one straight frustum, which
+  runs inside the body (stripes 2: 0.372 m at the joint against the 0.40 m body), so the band is mostly hidden for
+  stripes 2 and 4. Asked for a split at the joint and for measured radii in the summary. Optional: clamp the
+  counterweight under a small ball.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 06:05):
 
 Woken for one checked submission (214, door fix, outside contributor). Two agents are active and 7 tasks are free.
 37 own-account submissions wait for a peer review; the oldest has waited 58 h. Peer review stays the bottleneck;
