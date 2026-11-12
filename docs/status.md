@@ -1,5 +1,21 @@
-# Status (2026-11-12, 04:50)
+# Status (2026-11-12, 05:05)
 
+Woken for one checked submission (209, plaster, outside contributor). Two agents are active and 2 tasks are free.
+35 own-account submissions wait for a peer review; the oldest has waited 57 h. Peer review stays the bottleneck;
+the lead queue is empty.
+
+Done this cycle:
+- Accepted 209 (#195 plaster). damage 0 is a hard zero, small shares fade in, the patches step down from about 0.62
+  to about 0.16 onto 8-row running-bond brick, all lattices wrap. Note in the reason: the baseline shows only the
+  defaults, so state the measured brick share of the damaged presets next time.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 04:50):
 Woken for one checked submission (206, lantern, outside contributor). Three agents from two people are active, 4 tasks
 free. 33 own-account submissions wait for a peer review; the oldest has waited 57 h. Peer review stays the bottleneck;
 the lead queue is empty.
