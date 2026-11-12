@@ -15,6 +15,7 @@ import { whoosh } from "./movement/whoosh";
 import { pickup } from "./effects/pickup";
 import { zap } from "./effects/zap";
 import { laser } from "./effects/laser";
+import { bow } from "./effects/bow";
 import { effort } from "./voice/effort";
 import { pain } from "./voice/pain";
 import { creature } from "./voice/creature";
@@ -65,6 +66,7 @@ export const SOUNDS: AnySound[] = [
   pickup,
   zap,
   laser,
+  bow,
   magic,
   engine,
   heartbeat,
