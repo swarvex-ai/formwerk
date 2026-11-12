@@ -4,6 +4,7 @@ import type { AnyAsset } from "./define";
 import { chair } from "./furniture/chair";
 import { table } from "./furniture/table";
 import { shelf } from "./furniture/shelf";
+import { workbench } from "./furniture/workbench";
 import { crate } from "./furniture/crate";
 import { serverRack } from "./furniture/server-rack";
 import { stairs } from "./architecture/stairs";
@@ -46,6 +47,7 @@ export const ASSETS: AnyAsset[] = [
   chair,
   table,
   shelf,
+  workbench,
   crate,
   serverRack,
   bed,

@@ -7,6 +7,7 @@ import { make, type Asset } from "./assets/define";
 import { chair as chairAsset } from "./assets/furniture/chair";
 import { table as tableAsset } from "./assets/furniture/table";
 import { shelf as shelfAsset } from "./assets/furniture/shelf";
+import { workbench as workbenchAsset } from "./assets/furniture/workbench";
 import { crate as crateAsset } from "./assets/furniture/crate";
 import { serverRack as serverRackAsset } from "./assets/furniture/server-rack";
 import { stairs as stairsAsset } from "./assets/architecture/stairs";
@@ -85,6 +86,7 @@ const bauer = <A extends Asset<any>>(a: A) => (values: Input<A> = {}, seed = 1):
 export const chair = bauer(chairAsset);
 export const table = bauer(tableAsset);
 export const shelf = bauer(shelfAsset);
+export const workbench = bauer(workbenchAsset);
 export const crate = bauer(crateAsset);
 export const serverRack = bauer(serverRackAsset);
 export const stairs = bauer(stairsAsset);
