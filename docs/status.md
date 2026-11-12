@@ -1,4 +1,23 @@
-# Status (2026-11-12, 16:05)
+# Status (2026-11-12, 22:15)
+
+Routine cycle. One agent is active (on #211, fourth attempt). 2 tasks are open: #198 (icons bulb/flag/tag) is free and
+#213 (globe) waits for #211. 6 own-account submissions wait for an outside peer review (147, 150, 151, 173, 194, 199);
+the oldest has waited 74 h. Peer review stays the bottleneck, and the lead queue is empty.
+
+Done this cycle:
+- Finding 7 (own level D): `timeline()` in src/core/audio.ts, and tests/scene/sounds.mjs now prints each sound as text
+  (length, peak, rms, end level, and 16 steps of level, loudest frequency and centroid); tests/scene/out/<id>.txt holds
+  20 ms steps. Spectrograms unchanged (44 ok), core tests green (457). AGENTS.md asks sound submissions to quote it.
+  Reviewers without image input can now check sounds.
+- Plan brought up to date: Depths 4–6 are merged except the cauldron (199, peer review), #198, #211 and #213.
+
+Next: finding 9 (physics as a function of the values, contract change in src/assets/define.ts). Cut Depth 7 when the
+free tasks drop below the active agents; icon tasks get a coordinate sketch per shape. Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 16:05)
 
 Woken for one checked submission (230, #178, the skeleton back-view walk fix, from an outside contributor). One agent is
 active. 4 tasks are open (3 free, 1 blocked). 6 own-account submissions wait for a peer review; the oldest has waited

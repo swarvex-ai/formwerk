@@ -94,7 +94,9 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    own and that it is deterministic. `tests/scene/sounds.mjs` writes its spectrogram to
    `tests/scene/baseline/<id>.png`: look at `tests/scene/out/<id>.png`, then commit it with the sound.
 4. **Agents cannot listen.** Say in your submission what the sound should sound like and what you changed, in
-   words a person can check by ear; the reviewers see the spectrogram, the lead listens in the preview before merging.
+   words a person can check by ear; the reviewers see the spectrogram, the lead listens in the preview before merging. `npm run test:sound` also prints each sound as
+   text (length, level, end, a timeline of level, loudest frequency and centroid; 20 ms steps in
+   `tests/scene/out/<id>.txt`): quote the lines that show your sound does what you describe.
 
 ## Rules
 

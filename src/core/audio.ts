@@ -272,3 +272,27 @@ export function spectrogram(s: ArrayLike<number>, width: number, height: number)
   }
   return out;
 }
+
+/** A sound as text, for reviewers without image input: per step of `stepSeconds` (at least 20 ms) the level of that
+ *  step in dBFS, its loudest frequency and its spectral centroid (where its weight lies: low is dull, high is bright).
+ *  Steps quieter than −70 dBFS report no frequencies. */
+export function timeline(s: ArrayLike<number>, stepSeconds = 0.02) {
+  const N = 2048, schritt = Math.max(Math.round(0.02 * RATE), Math.round(stepSeconds * RATE)), bin = RATE / N;
+  const fenster = Float64Array.from({ length: N }, (_, i) => 0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (N - 1)));
+  const re = new Float64Array(N), im = new Float64Array(N), out: { ms: number; db: number; hz: number; centroid: number }[] = [];
+  for (let a = 0; a < s.length; a += schritt) {
+    const b = Math.min(s.length, a + schritt), db = Math.round(dB(rms(s, a, b)));
+    if (db < -70) { out.push({ ms: Math.round((a / RATE) * 1000), db, hz: 0, centroid: 0 }); continue; }
+    const mitte = Math.round((a + b) / 2);
+    for (let i = 0; i < N; i++) { const k = mitte - N / 2 + i; re[i] = (k >= 0 && k < s.length ? s[k] : 0) * fenster[i]; im[i] = 0; }
+    fft(re, im);
+    let best = 1, bestM = 0, sw = 0, swf = 0;
+    for (let k = 1; k < N / 2; k++) {
+      const m = Math.hypot(re[k], im[k]);
+      if (m > bestM) { bestM = m; best = k; }
+      sw += m; swf += m * k * bin;
+    }
+    out.push({ ms: Math.round((a / RATE) * 1000), db, hz: Math.round(best * bin), centroid: Math.round(swf / Math.max(1e-12, sw)) });
+  }
+  return out;
+}

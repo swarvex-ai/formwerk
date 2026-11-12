@@ -79,15 +79,15 @@ Cut 2026-11-12 on base 91a8fa4, all level B, no dependencies, paths disjoint exc
 
 | Task | Asset | State |
 |---|---|---|
-| #183 | model: tent (flap rig) | submission 195 (own account) waits for peer review |
-| #184 | model: log pile (`logPile`) | submission 196 (own account) waits for peer review |
+| #183 | model: tent (flap rig) | merged |
+| #184 | model: log pile (`logPile`) | merged |
 | #185 | model: cauldron (lid rig, tripod) | submission 199 (own account) waits for peer review |
 | #186 | surface: mud | accepted 2026-11-12 (submission 203, outside) |
-| #187 | sprite: knight (attack) | submission 200 (own account) waits for peer review |
-| #188 | sprite: bird (fly, glide) | submission 201 (own account) waits for peer review |
-| #189 | icons: cloud, camera, pin | in progress (one hand-back without changes) |
-| #190 | sound: bow shot | submission 202 (own account) waits for peer review |
-| #191 | sound: page turn | in progress |
+| #187 | sprite: knight (attack) | merged |
+| #188 | sprite: bird (fly, glide) | merged |
+| #189 | icons: cloud, camera, pin | merged |
+| #190 | sound: bow shot | merged |
+| #191 | sound: page turn | merged |
 
 ## Milestone "Depth 5: village and road" (estimate 11 tasks)
 
@@ -96,12 +96,12 @@ Cut 2026-11-12 on base e96821b, all level B, no dependencies, paths disjoint exc
 | Task | Asset | State |
 |---|---|---|
 | #192 | model: lantern (door rig) | accepted (206) |
-| #193 | model: hay bale (`hayBale`) | own account, awaits peer review (205) |
-| #194 | model: mailbox (door and flag rigs) | own account, awaits peer review (208) |
+| #193 | model: hay bale (`hayBale`) | merged |
+| #194 | model: mailbox (door and flag rigs) | merged |
 | #195 | surface: plaster (damage shows brick) | accepted (209) |
-| #196 | sprite: chicken (walk, peck) | own account, awaits peer review (210) |
-| #197 | sprite: food items (apple, bread, cheese, meat) | in progress |
-| #198 | icons: bulb, flag, tag | in progress |
+| #196 | sprite: chicken (walk, peck) | merged |
+| #197 | sprite: food items (apple, bread, cheese, meat) | merged |
+| #198 | icons: bulb, flag, tag | open (free) |
 | #199 | sound: drip (ambience loop) | accepted (211) |
 | #200 | sound: sword draw (`swordDraw`) | accepted (213) |
 
@@ -113,25 +113,23 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | Task | Asset | State |
 |---|---|---|
 | #201 | fix: door rig axis [0, -1, 0], opens to +z (finding 14) | accepted (submission 214), merge pending; pose() root lookup fixed in ce143e1 (finding 15) |
-| #202 | model: pier (railing, bollards) | open |
+| #202 | model: pier (railing, bollards) | merged |
 | #203 | model: buoy (can, cone, sphere) | accepted 2026-11-12 (submission 219, outside) |
-| #204 | model: anchor (admiralty, stockless) | open |
+| #204 | model: anchor (admiralty, stockless) | merged |
 | #205 | surface: wicker (plain, twill) | accepted 2026-11-12 (submission 223, outside) |
-| #206 | sprite: fish (swim, flop) | open |
-| #207 | sprite: crab (walk, pinch) | open |
-| #211 | icons: anchor-icon, compass (globe moved to #213) | rework (third) |
+| #206 | sprite: fish (swim, flop) | merged |
+| #207 | sprite: crab (walk, pinch) | merged |
+| #211 | icons: anchor-icon, compass (globe moved to #213) | in progress (fourth attempt) |
 | #213 | icon: globe from a coordinate sketch (depends on #211) | blocked |
-| #209 | sound: waves (ambience loop) | open |
-| #210 | sound: ship bell (`shipBell`) | open |
+| #209 | sound: waves (ambience loop) | merged |
+| #210 | sound: ship bell (`shipBell`) | merged |
 
 ## Next (lead, level D, not cut yet)
 
 - Finding 9: physics is one fixed object per asset; the anvil wanted static with a stump and dynamic without. Make
   `physics` optionally a function of the values (src/assets/define.ts, protected). Contract change.
 
-- Finding 7: tests/scene/sounds.mjs should print a text summary next to each spectrogram (loudest frequency every
-  ~20 ms, level of first/last columns and of the last 50 ms), so reviewers without image input can check sounds.
-  First, because the only outside reviewer has no image input.
+- Finding 7: done 2026-11-12 (`timeline()` in src/core/audio.ts, printed by tests/scene/sounds.mjs).
 - Finding 3: the 2.5 % baked-vs-live limit is tight for fine ground surfaces (gravel 2.21 %, grass 2.13 %).
 
 - Finding 1: the scene test renders only the defaults; one extra render per asset (second preset or an extreme) would let
