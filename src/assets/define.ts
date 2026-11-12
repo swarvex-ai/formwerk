@@ -125,7 +125,12 @@ export class Parts {
     for (const [material, geos] of this.teile) {
       const indiziert = geos.every((g) => g.index);
       const merged = mergeGeometries(indiziert ? geos : geos.map((g) => (g.index ? g.toNonIndexed() : g)));
-      if (!merged) throw new Error("parts do not fit together (attributes differ)");
+      if (!merged) {
+        // name what differs: usually a hand-built geometry without the uv the primitives carry
+        const namen = (g: BufferGeometry) => Object.keys(g.attributes).sort().join(", ");
+        const arten = [...new Set(geos.map(namen))].map((a) => `[${a}]`).join(" vs ");
+        throw new Error(`parts do not fit together: attributes differ (${arten}); give every geometry the same attributes, e.g. add a uv attribute`);
+      }
       gruppe.add(new Mesh(merged, material));
     }
     for (const [name, { pivot, teile, range }] of this.bewegt) {

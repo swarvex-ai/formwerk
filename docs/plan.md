@@ -39,17 +39,26 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 
 | Task | Asset | State |
 |---|---|---|
-| #156 | model: desk (drawer rig) | submission 157, own account, waits for a peer review |
-| #157 | model: cactus | submission 159, own account, waits for a peer review |
-| #158 | model: well (crank rig) | submission 160, own account, waits for a peer review |
-| #159 | model: step ladder (fold rig) | submission 161, own account, waits for a peer review |
-| #160 | surface: gravel | submission 162, own account, waits for a peer review |
-| #161 | surface: rusted steel | submission 163, own account, waits for a peer review |
-| #162 | sprite: wizard (cast animation) | submission 164, own account, waits for a peer review |
+| #156 | model: desk (drawer rig) | submission 167, own account, waits for a peer review |
+| #157 | model: cactus | submission 169, own account, waits for a peer review |
+| #158 | model: well (crank rig) | submission 170, own account, waits for a peer review |
+| #159 | model: step ladder (fold rig) | submission 171, own account, waits for a peer review |
+| #160 | surface: gravel | sent back by peer review (hctib-tech), in progress again |
+| #161 | surface: rusted steel | submission 172 after a peer rework, waits for a peer review |
+| #162 | sprite: wizard (cast animation) | sent back by peer review, in progress again |
 | #163 | icons: pause, volume, refresh | submission 166, own account, waits for a peer review |
-| #164 | sound: laser shot | submission 165, own account, waits for a peer review |
+| #164 | sound: laser shot | sent back by peer review (end click at length 0.6), open |
+| #165 | model: mushroom cluster | open (cut 2026-11-12) |
+| #166 | sprite: rat | open |
+| #167 | icons: upload, share, link | open |
+| #168 | sound: stream (ambience loop) | open |
+| #169 | fix (A): skeleton weapon on the wrong side in the back view | open |
 
 ## Next (lead, level D, not cut yet)
+
+- Finding 1: the scene test renders only the defaults; one extra render per asset (second preset or an extreme) would let
+  reviewers see what the parameters do. Touches the protected scene test and every baseline: lead work, after Depth 2.
+- Wardrobe doors read weakly: needs metal handles, which needs the furniture draw-call question below first.
 
 - `fabric` material kind (upholstery currently uses `paint` with an effective density).
 - Contracts for the next kinds: music, sky, terrain, effects.

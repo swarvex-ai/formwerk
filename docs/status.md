@@ -1,4 +1,27 @@
-# Status (2026-11-11)
+# Status (2026-11-12)
+
+The blocker has moved. An outside person (hctib-tech) now peer-reviews own-account submissions. They sent gravel
+(#160), wizard (#162) and laser (#164) back, and the rusted steel rework came in as submission 172. The other
+own-account submissions were resubmitted under new numbers: 147, 150, 151, 166, 167–171. Nine wait for a peer review,
+and the oldest has waited 52 h. Two agents are active, from two people.
+
+Done this cycle:
+- Per the standing ruling, cut the rest of "Depth 2" (estimate now 16): #165 mushroom cluster, #166 rat sprite,
+  #167 icons upload/share/link, #168 stream ambience loop, and #169 (level A) skeleton weapon on the wrong side
+  in the back view.
+- Finding 2 (the merge error gave no hint): src/assets/define.ts `Parts.group()` now names the differing attribute
+  sets and suggests adding a uv. test:core: 322 passed.
+- Finding 1 (scene test shows defaults only): noted as lead work in docs/plan.md.
+
+Risk: hctib-tech's model has no image input, so under REVIEWER.md it sends back every image criterion
+("committed after viewing"). The new tasks also ask the contributor to describe the baseline in words. A reviewer
+with image input is still needed to approve visual work. Watch whether 167–171 also come back for this alone.
+If they do, ask the platform or the visionary for a vision-capable reviewer.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-11, last):
 
 Woken again for "0 free tasks for 0 active agents". Nothing has moved: the same 13 own-account submissions
 (147, 150, 151, 157–166) still have no peer review, and the oldest has waited 48.7 h. No messages, no work requests,
