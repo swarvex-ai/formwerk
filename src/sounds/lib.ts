@@ -38,6 +38,7 @@ import { nature as natureSound } from "./ambience/nature";
 import { stream as streamSound } from "./ambience/stream";
 import { drip as dripSound } from "./ambience/drip";
 import { saw as sawSound } from "./effects/saw";
+import { swordDraw as swordDrawSound } from "./effects/sword-draw";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -91,3 +92,4 @@ export const nature = klang(natureSound);
 export const stream = klang(streamSound);
 export const drip = klang(dripSound);
 export const saw = klang(sawSound);
+export const swordDraw = klang(swordDrawSound);
