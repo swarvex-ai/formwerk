@@ -13,6 +13,9 @@ import { trash } from "./actions/trash";
 import { pencil } from "./actions/pencil";
 import { download } from "./actions/download";
 import { play } from "./actions/play";
+import { copy } from "./actions/copy";
+import { undo } from "./actions/undo";
+import { redo } from "./actions/redo";
 import { bell } from "./status/bell";
 import { mark } from "./status/mark";
 import { heart } from "./status/heart";
@@ -43,6 +46,9 @@ export const ICONS: AnyIcon[] = [
   pencil,
   download,
   play,
+  copy,
+  undo,
+  redo,
   bell,
   mark,
   heart,
