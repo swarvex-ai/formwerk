@@ -15,6 +15,7 @@ import { rock } from "./nature/rock";
 import { bed } from "./furniture/bed";
 import { sofa } from "./furniture/sofa";
 import { wardrobe } from "./furniture/wardrobe";
+import { desk } from "./furniture/desk";
 import { door } from "./architecture/door";
 import { windowAsset } from "./architecture/window";
 import { bush } from "./nature/bush";
@@ -45,6 +46,7 @@ export const ASSETS: AnyAsset[] = [
   bed,
   sofa,
   wardrobe,
+  desk,
   stairs,
   fence,
   column,

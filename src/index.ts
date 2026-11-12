@@ -18,6 +18,7 @@ import { rock as rockAsset } from "./assets/nature/rock";
 import { bed as bedAsset } from "./assets/furniture/bed";
 import { sofa as sofaAsset } from "./assets/furniture/sofa";
 import { wardrobe as wardrobeAsset } from "./assets/furniture/wardrobe";
+import { desk as deskAsset } from "./assets/furniture/desk";
 import { door as doorAsset } from "./assets/architecture/door";
 import { windowAsset } from "./assets/architecture/window";
 import { bush as bushAsset } from "./assets/nature/bush";
@@ -107,6 +108,7 @@ export const tank = bauer(tankAsset);
 export const wheelbarrow = bauer(wheelbarrowAsset);
 export const sofa = bauer(sofaAsset);
 export const wardrobe = bauer(wardrobeAsset);
+export const desk = bauer(deskAsset);
 export const windowModel = bauer(windowAsset);
 
 // Surfaces as three.js materials: `cobblestone({ moss: 0.5 }, seed, repeat)`; repeat = tiles across the mesh's UVs
