@@ -1,4 +1,23 @@
-# Status (2026-11-12, 06:12)
+# Status (2026-11-12, 06:25)
+
+Woken for one checked submission (217, wicker, outside contributor). Two agents are active and 7 tasks are free.
+38 own-account submissions wait for a peer review; the oldest has waited 59 h. Peer review stays the bottleneck;
+the lead queue is empty.
+
+Done this cycle:
+- Rework 217 (#205 wicker). Params, presets, texts, index lines and the plain/twill over-under rule are right, and
+  the colour map reads as a weave. Flaw: the top strand sinks to height 0 at both cell ends (sin(u*PI)), while the
+  same strand under the next cell sits at about 0.25, so the height map shows one pillow per cell with a step at
+  every border, and the normal map has hard lines. Asked for hTop = mix(under level, peak, eH), with the heights
+  measured on both sides of a border given in the summary.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 06:12):
 
 Woken for one checked submission (216, buoy, outside contributor). Two agents are active and 7 tasks are free.
 38 own-account submissions wait for a peer review; the oldest has waited 58 h. Peer review stays the bottleneck;
