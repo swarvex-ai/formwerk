@@ -55,7 +55,12 @@ export const lampPost = defineAsset({
     if (arm < 0.05) kopf(0, true);
     else for (const s of p.heads === 2 ? [-1, 1] : [1]) {
       t.box(mast, arm, 0.05, 0.05, (s * arm) / 2, h - 0.1, 0);
-      t.add(mast, new CylinderGeometry(0.03, 0.03, 0.4, 6).rotateZ(s * 0.9).translate(s * Math.min(arm * 0.5, 0.2), h - 0.25, 0));
+      // Brace at 45° from the post up to the underside of the arm, ending well short of the light; none on a short arm
+      const r = Math.min(arm * 0.5, 0.4), unten = h - 0.125;
+      if (r >= 0.15) {
+        const lang = Math.SQRT2 * (r - 0.04) + 0.04; // a little longer, so both ends sit in the post and the arm
+        t.add(mast, new CylinderGeometry(0.03, 0.03, lang, 6).rotateZ((-s * Math.PI) / 4).translate((s * (0.04 + r)) / 2, unten - (r - 0.04) / 2, 0));
+      }
       kopf(s * arm, false);
     }
     return t.cylinder(0.13, h).group();
