@@ -25,7 +25,7 @@ export const door = defineAsset({
     interior: { label: { de: "Zimmertür", en: "Interior door" }, values: { width: 0.85, panels: 0, color: "#e8e2d6" } },
     "garden-door": { label: { de: "Gartentür", en: "Garden door" }, values: { window: true, panels: 2, color: "#4f6b4a" } },
   },
-  rig: { door: { label: { de: "Tür", en: "Door" }, type: "rotate", axis: [0, 1, 0], min: 0, max: 100 } },
+  rig: { door: { label: { de: "Tür", en: "Door" }, type: "rotate", axis: [0, -1, 0], min: 0, max: 100 } },
   physics: { body: "static", collider: "box" },
   budget: { triangles: 2000, drawCalls: 4 },
   build(p) {
