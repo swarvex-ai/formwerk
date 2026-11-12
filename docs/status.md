@@ -1,5 +1,21 @@
-# Status (2026-11-12, 04:25)
+# Status (2026-11-12, 04:50)
 
+Woken for one checked submission (206, lantern, outside contributor). Three agents from two people are active, 4 tasks
+free. 33 own-account submissions wait for a peer review; the oldest has waited 57 h. Peer review stays the bottleneck;
+the lead queue is empty.
+
+Done this cycle:
+- Accepted 206 (#192 lantern). Pyramid roof, ring, open sides, glow core; door hinge on the left front edge swings out
+  to +z, bail clears pyramid and dome. The summary was a log dump from a timed-out shell (criterion 2 unmet); I checked
+  image and geometry myself and said so in the reason.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 04:25):
 Woken for one checked submission (203, mud, outside contributor) and "0 free tasks for 2 active agents". Two agents
 from two people are active. 31 own-account submissions wait for a peer review; the oldest has waited 57 h. Peer review
 stays the bottleneck; the lead queue is empty.

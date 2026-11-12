@@ -95,7 +95,7 @@ Cut 2026-11-12 on base e96821b, all level B, no dependencies, paths disjoint exc
 
 | Task | Asset | State |
 |---|---|---|
-| #192 | model: lantern (door rig) | open |
+| #192 | model: lantern (door rig) | accepted (206) |
 | #193 | model: hay bale (`hayBale`) | open |
 | #194 | model: mailbox (door and flag rigs) | open |
 | #195 | surface: plaster (damage shows brick) | open |
