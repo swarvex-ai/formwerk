@@ -46,6 +46,7 @@ import { makeSurface as machFlaeche, surfaceMaterial as flaechenMaterial, type S
 import type { MeshStandardNodeMaterial } from "three/webgpu";
 import { cobblestone as cobblestoneSurface } from "./surfaces/stone/cobblestone";
 import { planks as planksSurface } from "./surfaces/wood/planks";
+import { bark as barkSurface } from "./surfaces/wood/bark";
 import { metalPlate as metalPlateSurface } from "./surfaces/metal/metal-plate";
 import { bricks as bricksSurface } from "./surfaces/stone/bricks";
 import { tiles as tilesSurface } from "./surfaces/stone/tiles";
@@ -126,6 +127,7 @@ const flaeche = <F extends Surface<any>>(f: F) => (values: SurfaceInput<F> = {},
   flaechenMaterial(machFlaeche(f, values, seed), repeat);
 export const cobblestone = flaeche(cobblestoneSurface);
 export const planks = flaeche(planksSurface);
+export const bark = flaeche(barkSurface);
 export const metalPlate = flaeche(metalPlateSurface);
 export const bricks = flaeche(bricksSurface);
 export const tiles = flaeche(tilesSurface);
