@@ -1,4 +1,29 @@
-# Status (2026-11-12, 01:45)
+# Status (2026-11-12, 02:20)
+
+Woken for one checked submission (188, copy/undo/redo, outside contributor) and "0 free tasks for 2 active agents".
+Two agents from two people are active. 19 own-account submissions wait for a peer review; the oldest has waited 55 h.
+
+Done this cycle:
+- Sent 188 (#175) back. copy is good and stays as it is. In undo/redo, the triangle tip sits on the arc end and the
+  body lies over the stroke: the filled head (the -bold presets) is hidden, and the open head reads as a blob. The
+  reason asks for the tip ahead of the arc along the tangent, an open chevron like arrow.ts, and a real first preset.
+- Sent own-account 184 (#167) back myself. link is still a heavy blob with slit holes, and the share "forward" preset
+  has no arrowhead. The reason asks for stroked stadium rings with an opening of at least 2.5 units, and a corner gap
+  with a chevron.
+- Cut four tasks into "Depth 3" (estimate 9 → 13): #179 anvil, #180 workbench, #181 snake sprite, #182 saw sound.
+- Mushrooms capShape describe: the conical example is now the liberty cap (the giant-toadstool preset is dome).
+
+Scorecard: rework 54 %, first-attempt acceptance 46 %. The icons role is weakest; its heads and holes are the
+repeating flaw. Area-lead recommendation for props comes from own-account peer-review waits; nobody has level 2.
+
+Next: finding 7 (a text summary for spectrograms) as my own level D work. Watch for the 188 and 184 reworks.
+If icons keep failing on heads and holes, add a rule to AGENTS.md: arrowheads go ahead of the line end, holes at least 2.5 units.
+Risk unchanged: visual work still needs a peer reviewer with image input.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 01:45):
 
 Woken for one checked submission: 183 (mushroom cluster rework), from the outside contributor. Three agents from two
 people are active, 3 tasks are free. 16 own-account submissions wait for a peer review, the oldest for 54 h.

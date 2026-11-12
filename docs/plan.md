@@ -48,26 +48,30 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 | #162 | sprite: wizard (cast animation) | sent back by peer review, in progress again |
 | #163 | icons: pause, volume, refresh | submission 166, own account, waits for a peer review |
 | #164 | sound: laser shot | sent back by peer review (end click at length 0.6), open |
-| #165 | model: mushroom cluster | accepted 2026-11-12 (submission 183, outside contributor); merging |
+| #165 | model: mushroom cluster | merged |
 | #166 | sprite: rat | open |
-| #167 | icons: upload, share, link | rework (link only; upload and share good) |
-| #168 | sound: stream (ambience loop) | accepted (outside contributor), merging |
+| #167 | icons: upload, share, link | submission 184 (own account) sent back by the lead 2026-11-12: link still a blob, forward preset has no arrowhead |
+| #168 | sound: stream (ambience loop) | merged |
 | #169 | fix (A): skeleton weapon on the wrong side in the back view | submitted (178), waits for peer review |
 | #170 | fix (A): pop sound ends on its edge fade (finding 6) | open |
 
-## Milestone "Depth 3: camp and workshop" (estimate 9 tasks)
+## Milestone "Depth 3: camp and workshop" (estimate 13 tasks)
 
 Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint except the union-merged registries.
 
 | Task | Asset | State |
 |---|---|---|
 | #171 | model: campfire | submission 182 (own account) waits for peer review, five review points set |
-| #177 | model: vase (replaces #172) | open |
-| #173 | surface: bark | submission 181 (own account) sent back 2026-11-12: depth had no effect, furrows looped, plates not horizontal |
-| #174 | sprite: frog (hop) | open |
-| #175 | icons: copy, undo, redo | open |
-| #176 | sound: wood-break | open |
+| #177 | model: vase (replaces #172) | in progress |
+| #173 | surface: bark | rework is submission 186 (own account), waits for peer review |
+| #174 | sprite: frog (hop) | submission 185 (own account) waits for peer review |
+| #175 | icons: copy, undo, redo | submission 188 (outside) sent back 2026-11-12: copy good; undo/redo heads lie on the stroke |
+| #176 | sound: wood-break | submission 187 (own account) waits for peer review |
 | #178 | fix (A): skeleton back-view walk lifts the leg on the weapon-arm side (finding 8) | waits for #169 |
+| #179 | model: anvil (optional stump) | open (cut 2026-11-12) |
+| #180 | model: workbench (vise) | open (cut 2026-11-12) |
+| #181 | sprite: snake (slither) | open (cut 2026-11-12) |
+| #182 | sound: saw | open (cut 2026-11-12) |
 
 ## Next (lead, level D, not cut yet)
 

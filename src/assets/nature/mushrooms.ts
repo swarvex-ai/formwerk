@@ -59,7 +59,7 @@ export const mushrooms = defineAsset({
       describe: { de: "Höhe des größten Stiels: 0,03 m kurz und gedrungen, 0,08 m ein typischer Pilz, 0,4 m ein hoher Schirmling.", en: "Height of the largest stem: 0.03 m short and stout, 0.08 m a typical mushroom, 0.4 m a tall toadstool." } },
     capShape: { type: "choice", label: { de: "Hutform", en: "Cap shape" }, options: ["dome", "flat", "cone"],
       labels: { dome: { de: "gewölbt", en: "dome" }, flat: { de: "flach", en: "flat" }, cone: { de: "kegelig", en: "cone" } }, default: "dome",
-      describe: { de: "Gewölbter, flacher oder kegeliger Hut: Fliegenpilz gewölbt, Pfifferling flach, Schirmling kegelig.", en: "Domed, flat or conical cap: fly agaric domed, chanterelle flat, toadstool conical." } },
+      describe: { de: "Gewölbter, flacher oder kegeliger Hut: Fliegenpilz gewölbt, Pfifferling flach, Spitzkegeliger Kahlkopf kegelig.", en: "Domed, flat or conical cap: fly agaric domed, chanterelle flat, liberty cap conical." } },
     spots: { type: "boolean", label: { de: "Sprenkel", en: "Spots" }, default: false,
       describe: { de: "Helle Sprenkel auf den Hüten, etwa für den Fliegenpilz; aus bleiben die Hüte glatt.", en: "Light spots on the caps, e.g. for the fly agaric; off leaves the caps smooth." } },
     capColor: { type: "color", label: { de: "Hutfarbe", en: "Cap colour" }, default: "#8a5a34",
