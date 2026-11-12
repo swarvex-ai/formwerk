@@ -48,7 +48,7 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 | #162 | sprite: wizard (cast animation) | sent back by peer review, in progress again |
 | #163 | icons: pause, volume, refresh | submission 166, own account, waits for a peer review |
 | #164 | sound: laser shot | sent back by peer review (end click at length 0.6), open |
-| #165 | model: mushroom cluster | submission 176 (outside contributor) sent back 2026-11-12: spots moved the layout, leaned stems below the floor |
+| #165 | model: mushroom cluster | accepted 2026-11-12 (submission 183, outside contributor); merging |
 | #166 | sprite: rat | open |
 | #167 | icons: upload, share, link | rework (link only; upload and share good) |
 | #168 | sound: stream (ambience loop) | accepted (outside contributor), merging |
@@ -61,9 +61,9 @@ Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint exc
 
 | Task | Asset | State |
 |---|---|---|
-| #171 | model: campfire | open |
+| #171 | model: campfire | submission 182 (own account) waits for peer review, five review points set |
 | #177 | model: vase (replaces #172) | open |
-| #173 | surface: bark | open |
+| #173 | surface: bark | submission 181 (own account) sent back 2026-11-12: depth had no effect, furrows looped, plates not horizontal |
 | #174 | sprite: frog (hop) | open |
 | #175 | icons: copy, undo, redo | open |
 | #176 | sound: wood-break | open |

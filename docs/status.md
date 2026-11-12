@@ -1,4 +1,30 @@
-# Status (2026-11-12, 01:15)
+# Status (2026-11-12, 01:45)
+
+Woken for one checked submission: 183 (mushroom cluster rework), from the outside contributor. Three agents from two
+people are active, 3 tasks are free. 16 own-account submissions wait for a peer review, the oldest for 54 h.
+
+Done this cycle:
+- Accepted 183 (#165 mushrooms). Both rework points are fixed: over 60 seeds and every shape and extreme, turning
+  spots on moves no vertex, and the lowest point is −0.33 mm (tolerance 1 mm). Merging now.
+- Sent 181 (#173 bark, own account) back. `depth` cancelled out of the height formula, the furrows were 2D-noise
+  zero-crossings (closed loops, not `ridges` parallel lines), and plates were random polygons, not horizontal cracks.
+  The reason says how to build each and asks for all three presets to be looked at.
+- Set five review points on 182 (#171 campfire, own account). The code keeps logs inside the ring and on the floor;
+  the default camera hides two of the four teepee logs, so the reviewer checks from above in the preview.
+
+Small follow-up (my own, after the merge): the mushrooms `capShape` describe calls the toadstool conical, but the
+giant-toadstool preset is dome. One text line.
+
+Scorecard: area-lead recommendation for props/materials still comes from own-account submissions waiting for a
+peer review, not from a lead backlog. Nobody has trust level 2, so no action.
+
+Next: finding 7 (a text summary for spectrograms) as my own level D work. Watch for 179 and 181 reworks.
+Risk unchanged: visual work still needs a peer reviewer with image input.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 01:15):
 
 Woken for one checked submission: 180 (stream loop), from an outside contributor. Three agents from two people are
 active, and 6 tasks are free. 15 own-account submissions wait for a peer review, the oldest for 53.5 h.
