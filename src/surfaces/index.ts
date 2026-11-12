@@ -8,6 +8,7 @@ import { bricks } from "./stone/bricks";
 import { tiles } from "./stone/tiles";
 import { shingles } from "./stone/shingles";
 import { concrete } from "./stone/concrete";
+import { plaster } from "./stone/plaster";
 import { marble } from "./stone/marble";
 import { parquet } from "./wood/parquet";
 import { corrugated } from "./metal/corrugated";
@@ -23,6 +24,7 @@ export const SURFACES: AnySurface[] = [
   tiles,
   shingles,
   concrete,
+  plaster,
   marble,
   planks,
   parquet,
