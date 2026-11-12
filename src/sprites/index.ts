@@ -15,6 +15,7 @@ import { bomb } from "./items/bomb";
 import { bat } from "./creatures/bat";
 import { ghost } from "./creatures/ghost";
 import { spider } from "./creatures/spider";
+import { snake } from "./creatures/snake";
 import { skeleton } from "./creatures/skeleton";
 import { rat } from "./creatures/rat";
 import { frog } from "./creatures/frog";
@@ -26,6 +27,7 @@ export const SPRITES: AnySprite[] = [
   bat,
   ghost,
   spider,
+  snake,
   skeleton,
   rat,
   frog,
