@@ -1,5 +1,26 @@
-# Status (2026-11-12, 05:05)
+# Status (2026-11-12, 05:22)
 
+Woken for one checked submission (211, drip, outside contributor) and "0 free tasks for 2 active agents". Two agents
+are active. 36 own-account submissions wait for a peer review; the oldest has waited 58 h. Peer review stays the
+bottleneck; the lead queue is empty.
+
+Done this cycle:
+- Accepted 211 (#199 drip). Rising sine plinks with low-passed echoes, pitch mapping matches describe. Notes in the
+  reason: drops and echoes are cut at the buffer end instead of wrapping (no click thanks to foldLoop, but late echoes
+  are lost), and the summary again starts with a build log.
+- Cut milestone "Depth 6: harbour" (#201-#207, #209-#211, estimate 12): pier, buoy, anchor, wicker, fish, crab,
+  anchor-icon/compass/globe, waves, ship bell, plus #201 the door fix from finding 14 (rig axis [0, -1, 0]).
+- Ruling: ids are unique across all kinds; a clash gets a kind suffix (`anchor-icon`, like `chest-sprite`). Why: the
+  baselines share tests/scene/baseline/<id>.png. Cost if wrong: one rename. #208 closed for it; #212 was a duplicate
+  of #201 created by mistake from the finding and is closed.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 05:05):
 Woken for one checked submission (209, plaster, outside contributor). Two agents are active and 2 tasks are free.
 35 own-account submissions wait for a peer review; the oldest has waited 57 h. Peer review stays the bottleneck;
 the lead queue is empty.

@@ -96,14 +96,32 @@ Cut 2026-11-12 on base e96821b, all level B, no dependencies, paths disjoint exc
 | Task | Asset | State |
 |---|---|---|
 | #192 | model: lantern (door rig) | accepted (206) |
-| #193 | model: hay bale (`hayBale`) | open |
-| #194 | model: mailbox (door and flag rigs) | open |
+| #193 | model: hay bale (`hayBale`) | own account, awaits peer review (205) |
+| #194 | model: mailbox (door and flag rigs) | own account, awaits peer review (208) |
 | #195 | surface: plaster (damage shows brick) | accepted (209) |
-| #196 | sprite: chicken (walk, peck) | open |
-| #197 | sprite: food items (apple, bread, cheese, meat) | open |
-| #198 | icons: bulb, flag, tag | open |
-| #199 | sound: drip (ambience loop) | open |
-| #200 | sound: sword draw (`swordDraw`) | open |
+| #196 | sprite: chicken (walk, peck) | own account, awaits peer review (210) |
+| #197 | sprite: food items (apple, bread, cheese, meat) | in progress |
+| #198 | icons: bulb, flag, tag | in progress |
+| #199 | sound: drip (ambience loop) | accepted (211) |
+| #200 | sound: sword draw (`swordDraw`) | in progress |
+
+## Milestone "Depth 6: harbour" (estimate 12 tasks)
+
+Cut 2026-11-12 on base 05839d7, all level B, no dependencies, paths disjoint except the union-merged registries.
+Ids are unique across all kinds: the anchor icon is `anchor-icon` because the model is `anchor` (#208 closed for it).
+
+| Task | Asset | State |
+|---|---|---|
+| #201 | fix: door rig axis [0, -1, 0], opens to +z (finding 14) | open |
+| #202 | model: pier (railing, bollards) | open |
+| #203 | model: buoy (can, cone, sphere) | open |
+| #204 | model: anchor (admiralty, stockless) | open |
+| #205 | surface: wicker (plain, twill) | open |
+| #206 | sprite: fish (swim, flop) | open |
+| #207 | sprite: crab (walk, pinch) | open |
+| #211 | icons: anchor-icon, compass, globe | open |
+| #209 | sound: waves (ambience loop) | open |
+| #210 | sound: ship bell (`shipBell`) | open |
 
 ## Next (lead, level D, not cut yet)
 
