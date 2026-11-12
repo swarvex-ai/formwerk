@@ -35,6 +35,7 @@ import { torch } from "./props/torch";
 import { lantern } from "./props/lantern";
 import { ladder } from "./props/ladder";
 import { campfire } from "./props/campfire";
+import { anvil } from "./props/anvil";
 import { cart } from "./vehicles/cart";
 import { car } from "./vehicles/car";
 import { boat } from "./vehicles/boat";
@@ -76,6 +77,7 @@ export const ASSETS: AnyAsset[] = [
   lantern,
   ladder,
   campfire,
+  anvil,
   cart,
   car,
   boat,
