@@ -45,6 +45,7 @@ import { drip as dripSound } from "./ambience/drip";
 import { saw as sawSound } from "./effects/saw";
 import { swordDraw as swordDrawSound } from "./effects/sword-draw";
 import { waves as wavesSound } from "./ambience/waves";
+import { shipBell as shipBellSound } from "./effects/ship-bell";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -105,3 +106,4 @@ export const drip = klang(dripSound);
 export const saw = klang(sawSound);
 export const swordDraw = klang(swordDrawSound);
 export const waves = klang(wavesSound);
+export const shipBell = klang(shipBellSound);
