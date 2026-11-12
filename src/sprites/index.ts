@@ -6,6 +6,7 @@ import { wizard } from "./characters/wizard";
 import { knight } from "./characters/knight";
 import { slime } from "./creatures/slime";
 import { potion } from "./items/potion";
+import { food } from "./items/food";
 import { coin } from "./items/coin";
 import { gem } from "./items/gem";
 import { key } from "./items/key";
@@ -38,6 +39,7 @@ export const SPRITES: AnySprite[] = [
   frog,
   chicken,
   potion,
+  food,
   coin,
   gem,
   key,
