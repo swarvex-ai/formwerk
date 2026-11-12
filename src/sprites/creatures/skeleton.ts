@@ -111,7 +111,8 @@ export const skeleton = defineSprite({
       const top = p.skull === "crowned" ? 3 : 2, oben = top + hub;
       const hw = 4 + breit, brust = oben + 7, legW = 2 + breit;
       // walking towards or away: one leg lifted while the arm on the other side swings
-      const links = gehen && f === 0 ? -1 : 0, rechts = gehen && f === 2 ? -1 : 0;
+      const links = gehen && (hinten ? f === 2 : f === 0) ? -1 : 0;
+      const rechts = gehen && (hinten ? f === 0 : f === 2) ? -1 : 0;
       const bein = (x: number, lift: number) => {
         b.part(x, 17 + lift, legW, 6, k);
         b.rect(x - 1, BODEN + lift, legW + 2, 1, k.base);
