@@ -11,6 +11,7 @@ import { concrete } from "./stone/concrete";
 import { plaster } from "./stone/plaster";
 import { marble } from "./stone/marble";
 import { parquet } from "./wood/parquet";
+import { wicker } from "./wood/wicker";
 import { corrugated } from "./metal/corrugated";
 import { grass } from "./ground/grass";
 import { sand } from "./ground/sand";
@@ -28,6 +29,7 @@ export const SURFACES: AnySurface[] = [
   marble,
   planks,
   parquet,
+  wicker,
   metalPlate,
   corrugated,
   grass,
