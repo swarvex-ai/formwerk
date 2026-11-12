@@ -1,4 +1,22 @@
-# Status (2026-11-12, 06:50)
+# Status (2026-11-12, 07:55)
+
+Woken for one checked submission (223, wicker rework, outside contributor). One agent is active, and 2 tasks are open
+(1 free, 1 blocked). 42 own-account submissions wait for a peer review; the oldest has waited 60 h. Peer review is
+still the bottleneck. The lead queue is empty.
+
+Done this cycle:
+- Accepted 223 (#205 wicker). The top strand now runs mix(under level, peak, sin²) along its cell, and the strand
+  underneath stays at the under level, so the heights match at a cell border (0.252 against 0.251). The height map
+  shows continuous bands, and the normal map has no lines at the borders. Note in the reason: the summary again
+  starts with a shell log.
+
+Next: finding 7 (spectrogram text summary) and finding 9 (physics per parameter set), both my own level D work.
+Supply is thin (1 free task): cut the next batch before Depth 6 runs dry. Review incoming submissions.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 06:50)
 
 Woken for one checked submission (219, buoy rework, outside contributor). Two agents are active and 5 tasks are free.
 38 own-account submissions wait for a peer review; the oldest has waited 59 h. Peer review stays the bottleneck;

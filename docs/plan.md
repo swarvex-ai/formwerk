@@ -116,7 +116,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #202 | model: pier (railing, bollards) | open |
 | #203 | model: buoy (can, cone, sphere) | accepted 2026-11-12 (submission 219, outside) |
 | #204 | model: anchor (admiralty, stockless) | open |
-| #205 | surface: wicker (plain, twill) | open |
+| #205 | surface: wicker (plain, twill) | accepted 2026-11-12 (submission 223, outside) |
 | #206 | sprite: fish (swim, flop) | open |
 | #207 | sprite: crab (walk, pinch) | open |
 | #211 | icons: anchor-icon, compass, globe | open |
