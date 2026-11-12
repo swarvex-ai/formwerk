@@ -21,6 +21,7 @@ import { snake } from "./creatures/snake";
 import { skeleton } from "./creatures/skeleton";
 import { rat } from "./creatures/rat";
 import { frog } from "./creatures/frog";
+import { chicken } from "./creatures/chicken";
 
 export const SPRITES: AnySprite[] = [
   villager,
@@ -35,6 +36,7 @@ export const SPRITES: AnySprite[] = [
   skeleton,
   rat,
   frog,
+  chicken,
   potion,
   coin,
   gem,
