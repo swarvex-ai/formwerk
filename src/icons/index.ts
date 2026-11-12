@@ -16,6 +16,9 @@ import { play } from "./actions/play";
 import { copy } from "./actions/copy";
 import { undo } from "./actions/undo";
 import { redo } from "./actions/redo";
+import { pause } from "./actions/pause";
+import { volume } from "./actions/volume";
+import { refresh } from "./actions/refresh";
 import { bell } from "./status/bell";
 import { mark } from "./status/mark";
 import { heart } from "./status/heart";
@@ -49,6 +52,9 @@ export const ICONS: AnyIcon[] = [
   copy,
   undo,
   redo,
+  pause,
+  volume,
+  refresh,
   bell,
   mark,
   heart,
