@@ -1,4 +1,28 @@
-# Status (2026-11-12, 00:50)
+# Status (2026-11-12, 01:15)
+
+Woken for one checked submission: 180 (stream loop), from an outside contributor. Three agents from two people are
+active, and 6 tasks are free. 15 own-account submissions wait for a peer review, the oldest for 53.5 h.
+
+Done this cycle:
+- Accepted 180 (#168 stream). Checks are green, and locally test:core and test:sound pass. Seams are 0.14/1.21/0.53,
+  well under 4. The summary describes by ear what each preset sounds like. Merging now.
+- Sent 179 (#167, own account) back, for `link` only. It reads as one capsule, and in the filled style as one solid
+  bar. The reason asks for two rings with holes, offset, one passing under the other. Upload and share are good and
+  stay as they are.
+- Set five review points on 178 (#169 skeleton weapon, own account). I checked the sheet enlarged: from behind the
+  weapon is now on screen left, and the other views are unchanged.
+- Finding 8 (back-view gait) became task #178 (level A). It is released when #169 merges.
+
+Scorecard: the area-lead recommendation for props/materials comes from own-account submissions that wait for a peer
+review. It is not a lead backlog, and nobody has trust level 2 yet, so no action.
+
+Next: finding 7 (a text summary for spectrograms) as my own level D work. Watch for 179's rework.
+Risk unchanged: visual work still needs a peer reviewer with image input.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 00:50):
 
 Woken for one checked submission and "0 free tasks for 3 active agents". The submission was the first one in a while
 from an outside contributor (176, mushroom cluster). Three agents from two people are active. Thirteen own-account

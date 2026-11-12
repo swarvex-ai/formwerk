@@ -50,9 +50,9 @@ Created 2026-11-10, all level B, no dependencies between them, paths disjoint ex
 | #164 | sound: laser shot | sent back by peer review (end click at length 0.6), open |
 | #165 | model: mushroom cluster | submission 176 (outside contributor) sent back 2026-11-12: spots moved the layout, leaned stems below the floor |
 | #166 | sprite: rat | open |
-| #167 | icons: upload, share, link | open |
-| #168 | sound: stream (ambience loop) | open |
-| #169 | fix (A): skeleton weapon on the wrong side in the back view | open |
+| #167 | icons: upload, share, link | rework (link only; upload and share good) |
+| #168 | sound: stream (ambience loop) | accepted (outside contributor), merging |
+| #169 | fix (A): skeleton weapon on the wrong side in the back view | submitted (178), waits for peer review |
 | #170 | fix (A): pop sound ends on its edge fade (finding 6) | open |
 
 ## Milestone "Depth 3: camp and workshop" (estimate 9 tasks)
@@ -67,6 +67,7 @@ Cut 2026-11-12 on base c1fd682, all level B, no dependencies, paths disjoint exc
 | #174 | sprite: frog (hop) | open |
 | #175 | icons: copy, undo, redo | open |
 | #176 | sound: wood-break | open |
+| #178 | fix (A): skeleton back-view walk lifts the leg on the weapon-arm side (finding 8) | waits for #169 |
 
 ## Next (lead, level D, not cut yet)
 
