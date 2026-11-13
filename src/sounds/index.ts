@@ -38,6 +38,7 @@ import { engine } from "./effects/engine";
 import { heartbeat } from "./effects/heartbeat";
 import { rain } from "./ambience/rain";
 import { fire } from "./ambience/fire";
+import { sizzle } from "./ambience/sizzle";
 import { hum } from "./ambience/hum";
 import { thunder } from "./ambience/thunder";
 import { coins } from "./effects/coins";
@@ -89,6 +90,7 @@ export const SOUNDS: AnySound[] = [
   wind,
   rain,
   fire,
+  sizzle,
   hum,
   thunder,
   coins,
