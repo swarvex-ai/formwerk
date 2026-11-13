@@ -150,13 +150,13 @@ No icon task this round: icons rework at 67 % and #220/#221 are still open.
 
 | Task | Asset | State |
 |---|---|---|
-| #232 | model: tankard (lid rig) | open |
-| #233 | model: candlestick (1/3/5 arms, lit) | open |
-| #234 | model: fireplace (architecture, arch opening) | sent back (274): logs pierce the back wall, arch can leave the face |
-| #235 | surface: hammered copper (metal) | open |
-| #236 | sprite: cat (idle, walk, sleep) | open |
-| #237 | sprite: drinks (mug, bottle, goblet, cup) | open |
-| #238 | sound: pour | open |
+| #232 | model: tankard (lid rig) | merged |
+| #233 | model: candlestick (1/3/5 arms, lit) | merged |
+| #234 | model: fireplace (architecture, arch opening) | merged |
+| #235 | surface: hammered copper (metal) | done (283, peer-reviewed) |
+| #236 | sprite: cat (idle, walk, sleep) | merged |
+| #237 | sprite: drinks (mug, bottle, goblet, cup) | done (285, peer-reviewed) |
+| #238 | sound: pour | accepted 2026-11-13 (submission 286, outside) |
 
 ## Milestone "Depth 9: study" (estimate 5 tasks)
 
@@ -169,6 +169,21 @@ rework at 68 %).
 | #240 | surface: flagstone (stone) | open |
 | #241 | sound: writing (pencil, quill, chalk) | open |
 | #242 | sprite: owl (front, idle/blink/look) | open |
+
+## Milestone "Depth 10: graveyard" (estimate 7 tasks)
+
+Cut 2026-11-13 on base 58ed8ca, all level B, no dependencies, paths disjoint except the union-merged registries.
+No icon task (icons rework at 70 %; the compass is my own design work first). #243 and #244 were closed within
+minutes and replaced by #249 and #248 (my cutting slips: a sideways lean below the base, and a lid hinge that swung
+into the body).
+
+| Task | Asset | State |
+|---|---|---|
+| #249 | model: gravestone (slab / cross / obelisk, plinth, tilt) | open |
+| #248 | model: coffin (box / tapered, lid rig) | open |
+| #245 | surface: leaf litter (`leaves`, ground) | open |
+| #246 | sprite: wolf (idle, walk, howl) | open |
+| #247 | sound: crow (voice, caws) | open |
 
 ## Next (lead, level D, not cut yet)
 

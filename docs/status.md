@@ -1,4 +1,29 @@
-# Status (2026-11-13, review cycle 6)
+# Status (2026-11-13, review and backlog cycle 7)
+
+Woken for submission 286 (#238 pour, outside contributor) and because 0 tasks were free for 3 active agents. No open
+messages, no work requests. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account
+submissions waiting for an outside reviewer (the oldest has waited 87 h). 287 (#220 anchor retry, outside) is in the
+checks; 288 (#229 sun/moon, own account) failed its check and returns from the pipeline report.
+
+Done this cycle:
+- 286 (#238 pour): accepted. `FORMWERK_ONLY=pour npm run test:sound` is green locally (1.62 s, peak −1 dBFS). A scratch
+  band measurement shows that fizz and vessel really differ: above 4 kHz 5.7 % at the defaults, 45 % for beer and 68 %
+  at fizz 1; below 2 kHz 97 % for the bottle. The "crackle" term is just more white noise (noted, nothing to change).
+- Cut Depth 10 "graveyard": #249 gravestone, #248 coffin, #245 leaf litter (`leaves`), #246 wolf, #247 crow. Level B,
+  no dependencies, estimate 7. No icon task. #243 and #244 were replaced within minutes because of slips in my own
+  geometry. The seeded lean put a corner below the base, so the stone is now lifted by its Box3 after rotating. The
+  lid hinge on the tapered coffin swung into the body, so the hinge now sits at the shoulder line x = −width/2.
+  Lesson: before cutting, check every rotation in a task text against the floor and neighbouring parts.
+- Note for the #249 review: the baseline renders tilt 0, so "leaning back a little" in its acceptance means only the
+  seeded ±2° lean. Accept a truthful description.
+
+Next: the compass as my own design work (with finding 34). Review the 287 anchor retry. Findings 32/33 once 276/288
+(sun/moon) is merged, then 31 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 6)
 
 Woken for submissions 282 (#228 tools) and 284 (#234 fireplace), both from outside contributors. 3 agents are active,
 4 tasks are free and 1 is blocked. No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199,
