@@ -157,6 +157,7 @@ No icon task this round: icons rework at 67 % and #220/#221 are still open.
 | #236 | sprite: cat (idle, walk, sleep) | merged |
 | #237 | sprite: drinks (mug, bottle, goblet, cup) | done (285, peer-reviewed) |
 | #238 | sound: pour | accepted 2026-11-13 (submission 286, outside) |
+| #256 | fix (A): tankard lid built at the floor (fixes #232; the lid and lever used hinge coordinates) | open |
 
 ## Milestone "Depth 9: study" (estimate 5 tasks)
 
@@ -179,11 +180,11 @@ into the body).
 
 | Task | Asset | State |
 |---|---|---|
-| #249 | model: gravestone (slab / cross / obelisk, plinth, tilt) | open |
+| #249 | model: gravestone (slab / cross / obelisk, plinth, tilt) | merged |
 | #248 | model: coffin (box / tapered, lid rig) | submitted (297, own account); review points set |
-| #245 | surface: leaf litter (`leaves`, ground) | submitted (294, own account), review points set |
-| #246 | sprite: wolf (idle, walk, howl) | open |
-| #247 | sound: crow (voice, caws) | accepted (296) |
+| #245 | surface: leaf litter (`leaves`, ground) | merged (294, peer-reviewed) |
+| #246 | sprite: wolf (idle, walk, howl) | merged |
+| #247 | sound: crow (voice, caws) | merged (296) |
 
 ## Milestone "Depth 11: kitchen" (estimate 5 tasks)
 
@@ -193,12 +194,29 @@ replaced by #254 and #255 (a self-contradicting height line, and a bee geometry 
 
 | Task | Asset | State |
 |---|---|---|
-| #250 | model: bucket (wood / metal pail, handle rig) | open |
-| #254 | surface: end grain (butcher block, no voronoi) | open |
-| #255 | sprite: bee (fly, hover) | open |
-| #253 | sound: sizzle (frying loop) | open |
+| #250 | model: bucket (wood / metal pail, handle rig) | 299 (outside) sent back: the handle sat at the floor because my trap said not to translate it |
+| #254 | surface: end grain (butcher block, no voronoi) | in progress |
+| #255 | sprite: bee (fly, hover) | submitted (301), in the checks |
+| #253 | sound: sizzle (frying loop) | accepted |
+
+## Milestone "Depth 12: garden" (estimate 6 tasks)
+
+Cut 2026-11-13, all level B, no dependencies, paths disjoint except the union-merged registries. No icon task.
+
+| Task | Asset | State |
+|---|---|---|
+| #257 | model: beehive (straw skep, stand) | open |
+| #258 | surface: moss (ground, fbm only) | open |
+| #259 | sprite: snail (idle, crawl, hide) | open |
+| #260 | sound: bubbling (boiling loop) | open |
 
 ## Next (lead, level D, not cut yet)
+
+- Contract check for movable parts: the hinge lies within 5 cm of its part's bounding box, measured across the
+  rotation axis (the fence gate hinges at the floor on a vertical axis). It would have caught the tankard lid (#256)
+  and the bucket handle (299). A scratch sweep of every rigged asset on 2026-11-13 found only the tankard. Add it to
+  tests/core/assets.test.ts after #256 is merged.
+
 
 - Finding 31: foldLoop (src/core/audio.ts) lifts periodic loops by up to +3 dB in their first LOOP_TAIL, so the first
   beat of hooves or heartbeat stands out. An equal-power or level-compensating fold. Changes every loop baseline.
