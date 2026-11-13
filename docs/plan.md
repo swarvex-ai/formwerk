@@ -194,7 +194,7 @@ replaced by #254 and #255 (a self-contradicting height line, and a bee geometry 
 
 | Task | Asset | State |
 |---|---|---|
-| #250 | model: bucket (wood / metal pail, handle rig) | 299 sent back (my trap); retry 310 in the checks |
+| #250 | model: bucket (wood / metal pail, handle rig) | merged (retry 310 accepted) |
 | #254 | surface: end grain (butcher block, no voronoi) | merged |
 | #255 | sprite: bee (fly, hover) | merged |
 | #253 | sound: sizzle (frying loop) | accepted |
@@ -217,10 +217,23 @@ No icon task. The sled geometry was prototyped in a scratch test first (min y 0 
 
 | Task | Asset | State |
 |---|---|---|
-| #261 | model: sled (runners with front curls, slats, backrest) | open |
-| #262 | surface: ice (cracks from one voronoi, bubbles, frost) | open |
-| #263 | sprite: hare (idle, hop, alert) | open |
-| #264 | sound: sleigh bells (loop, hooves loop frame) | open |
+| #261 | model: sled (runners with front curls, slats, backrest) | submitted (312, own account); review points set |
+| #262 | surface: ice (cracks from one voronoi, bubbles, frost) | submitted (313, outside) |
+| #263 | sprite: hare (idle, hop, alert) | in progress |
+| #264 | sound: sleigh bells (loop, hooves loop frame) | in progress |
+
+## Milestone "Depth 14: mine" (estimate 6 tasks)
+
+Cut 2026-11-13 on base c60f8a1, all level B, no dependencies, paths disjoint except the union-merged registries.
+No icon task. Every one of the four was built on main in a scratch branch first and passed its core tests at every
+extreme and preset (cart 936 triangles / 4 draw calls; slate bakes at 0.00 %; mole 26/26; pickaxe 25/25, < 1.6 s).
+
+| Task | Asset | State |
+|---|---|---|
+| #265 | model: mine cart (tub, flanged wheels, optional track, load) | open |
+| #266 | surface: slate (strata with ledges, one voronoi for blocks, rust) | open |
+| #267 | sprite: mole (idle, walk, dig into a mound) | open |
+| #268 | sound: pickaxe (tink, bite, crumbs) | open |
 
 ## Next (lead, level D, not cut yet)
 
