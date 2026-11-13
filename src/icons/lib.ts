@@ -40,6 +40,9 @@ import { calendar as calendarIcon } from "./objects/calendar";
 import { cloud as cloudIcon } from "./objects/cloud";
 import { camera as cameraIcon } from "./objects/camera";
 import { pin as pinIcon } from "./objects/pin";
+import { bulb as bulbIcon } from "./objects/bulb";
+import { flag as flagIcon } from "./status/flag";
+import { tag as tagIcon } from "./objects/tag";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -87,3 +90,6 @@ export const calendar = zeichen(calendarIcon);
 export const cloud = zeichen(cloudIcon);
 export const camera = zeichen(cameraIcon);
 export const pin = zeichen(pinIcon);
+export const bulb = zeichen(bulbIcon);
+export const flag = zeichen(flagIcon);
+export const tag = zeichen(tagIcon);

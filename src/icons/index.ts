@@ -38,6 +38,9 @@ import { calendar } from "./objects/calendar";
 import { cloud } from "./objects/cloud";
 import { camera } from "./objects/camera";
 import { pin } from "./objects/pin";
+import { bulb } from "./objects/bulb";
+import { flag } from "./status/flag";
+import { tag } from "./objects/tag";
 
 export const ICONS: AnyIcon[] = [
   home,
@@ -77,5 +80,8 @@ export const ICONS: AnyIcon[] = [
   cloud,
   camera,
   pin,
+  bulb,
+  flag,
+  tag,
 ];
 export const iconById = (id: string) => ICONS.find((i) => i.id === id);
