@@ -55,6 +55,7 @@ import { car } from "./vehicles/car";
 import { boat } from "./vehicles/boat";
 import { tank } from "./vehicles/tank";
 import { wheelbarrow } from "./vehicles/wheelbarrow";
+import { sled } from "./vehicles/sled";
 import { anchor } from "./props/anchor";
 import { candlestick } from "./props/candlestick";
 
@@ -113,6 +114,7 @@ export const ASSETS: AnyAsset[] = [
   boat,
   tank,
   wheelbarrow,
+  sled,
   anchor,
   candlestick,
 ];
