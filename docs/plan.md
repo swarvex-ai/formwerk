@@ -235,7 +235,7 @@ extreme and preset (cart 936 triangles / 4 draw calls; slate bakes at 0.00 %; mo
 | #267 | sprite: mole (idle, walk, dig into a mound) | merged |
 | #268 | sound: pickaxe (tink, bite, crumbs) | open |
 
-## Milestone "Depth 15: castle" (estimate 4 tasks)
+## Milestone "Depth 15: castle" (estimate 6 tasks)
 
 Cut 2026-11-13 on base 16d8ccb, level B, no dependencies, paths disjoint except the union-merged registries. No icon
 task. Both were built on main in a scratch branch first (throne: 4 draw calls, 416 triangles, baked/glb 0.01 %; horn:
@@ -243,8 +243,11 @@ task. Both were built on main in a scratch branch first (throne: 4 draw calls, 4
 
 | Task | Asset | State |
 |---|---|---|
-| #269 | model: throne (tall back, arms, cushion, finials, dais) | open |
-| #270 | sound: horn (war horn, hunting horn, conch; one note) | open |
+| #269 | model: throne (tall back, arms, cushion, finials, dais) | merged |
+| #270 | sound: horn (war horn, hunting horn, conch; one note) | merged |
+| #271 | fix: gravel stones at real size (tile 0.25 m, 8–16 cells) | open |
+| #272 | fix: upload and share legible in every combination | accepted (332) |
+| #273 | sprite: crown (points, band with stones, glint) | open |
 
 ## Next (lead, level D, not cut yet)
 

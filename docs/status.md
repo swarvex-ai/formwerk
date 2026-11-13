@@ -1,4 +1,17 @@
-# Status (2026-11-13, review cycle 18)
+# Status (2026-11-13, review cycle 19)
+
+Woken for 332 (#272 upload/share legibility fix, outside contributor). 2 agents are active. Before this cycle 1 task was free, and now 2 are free (#271 gravel fix, #273 crown). No messages. Throne, horn and sun/moon are merged. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions that have waited about 13 h for an outside reviewer.
+
+Done this cycle:
+- 332 (#272): accepted. I swept it myself, more finely than the brief asked: upload had 0 failures in 2028 cases (the full grid at stroke 2.25) and 0 in 1200 at strokes 1–2. Share had 0 in 1440 (the full grid, all six strokes). `FORMWERK_ONLY=upload,share npm test` is green.
+- Cut #273 sprite crown (Depth 15, level B). I built it in scratch first: the sprite tests pass and the sheet reads as a crown. The scratch copy is in /tmp/crown in the sandbox only.
+- Cleanup: the sandbox still had the leftover review-326 branch and the zz-* scratch tests. I removed both, and local main is fast-forwarded to origin.
+
+Next: the icon test grid (ruling from cycle 18: a coarse grid over every param at the strongest stroke in place of 10 random cases; my own level D work); review #271 and #273 when they are checked; set review points on own-account submissions; the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9. Depth 15 still lacks a surface (a castle wall of rough ashlar is the candidate).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 18)
 
 Woken for 322 (#160 gravel, outside contributor). 2 agents are active and, after this cycle, 6 tasks are free. No messages. 321 (#167 upload/share/link icons, own account) got its peer review and merged while I was checking it. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions waiting for an outside reviewer.
 
