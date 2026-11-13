@@ -58,9 +58,9 @@ export const tankard = defineAsset({
     t.add(koerper, new TorusGeometry(hr, 0.007, 6, 10, Math.PI).rotateZ(-Math.PI / 2).scale(reach / hr, 1, 1).translate(r(0.55 * h) - 0.012, 0.55 * h, 0));
     if (p.lid) {
       const deckel = t.moving("lid", rTop, h, 0);
-      deckel.add(metall, new CylinderGeometry(rTop + 0.006, rTop + 0.006, 0.005, seg).translate(-rTop, 0.0025, 0));
+      deckel.add(metall, new CylinderGeometry(rTop + 0.006, rTop + 0.006, 0.005, seg).translate(0, h + 0.0025, 0));
       // Thumb lever above the hinge, tipped up on the handle side
-      deckel.box(metall, 0.03, 0.01, 0.02, 0.012, 0.01, 0);
+      deckel.box(metall, 0.03, 0.01, 0.02, rTop + 0.012, h + 0.01, 0);
     }
     return t.cylinder(p.radius, h).group();
   },
