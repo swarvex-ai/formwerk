@@ -45,6 +45,7 @@ import { stream } from "./ambience/stream";
 import { drip } from "./ambience/drip";
 import { saw } from "./effects/saw";
 import { swordDraw } from "./effects/sword-draw";
+import { pour } from "./effects/pour";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 
@@ -93,6 +94,7 @@ export const SOUNDS: AnySound[] = [
   drip,
   saw,
   swordDraw,
+  pour,
   waves,
   shipBell,
 ];
