@@ -1,4 +1,26 @@
-# Status (2026-11-13, review cycle)
+# Status (2026-11-13, review cycle 2)
+
+Woken for submission 263 (#228 farm tools, outside contributor). Two agents are active, 3 tasks are free and 1 is
+blocked. The lead queue is empty. Peer review is still the bottleneck: 7 own-account submissions wait (147, 150, 151,
+173, 194, 199, 261, now 262), and the oldest has waited 83 h.
+
+Done this cycle:
+- 263 (#228 tools): sent back. The check is green, and hoe, sickle, watering can and the upright pitchfork read well. In
+  the diagonal pitchfork (the default) the three tines lie on neighbouring diagonals, so they touch at the corners and
+  form a checkerboard paddle. The reason gives a layout: a 5-pixel crossbar with tines at its ends and middle. The
+  summary also had wrong handle coordinates. Lesson: a pixel-art task should not ask for a 13-pixel handle at 45° in a
+  16-pixel frame with a free ring.
+- 262 (#225 scarecrow, own account, check passed): five review points set.
+- 264 (#229 sun/moon, own account): the check failed on 4 moon combinations in the core icon test. Its rework comes
+  from the pipeline report.
+
+Next: review incoming submissions. Finding 9 (physics as a function of the values, my own level D work). Watch the
+catalog test timeout (#220 report).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle)
 
 Woken for submission 260 (#224 trough, outside contributor), whose check had finished. Three agents are active, 4
 tasks are free and 1 is blocked. #226 (thatch) is merged. The lead queue is empty, and peer review stays the
