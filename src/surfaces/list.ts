@@ -2,6 +2,7 @@
 // (tests/core/surfaces.test.ts checks that this matches src/surfaces/index.ts).
 export const SURFACE_IDS = [
   "cobblestone",
+  "flagstone",
   "bricks",
   "tiles",
   "shingles",

@@ -22,9 +22,11 @@ import { sand } from "./ground/sand";
 import { dirt } from "./ground/dirt";
 import { snow } from "./ground/snow";
 import { mud } from "./ground/mud";
+import { flagstone } from "./stone/flagstone";
 
 export const SURFACES: AnySurface[] = [
   cobblestone,
+  flagstone,
   bricks,
   tiles,
   shingles,

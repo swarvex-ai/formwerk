@@ -80,6 +80,7 @@ import { sand as sandSurface } from "./surfaces/ground/sand";
 import { dirt as dirtSurface } from "./surfaces/ground/dirt";
 import { snow as snowSurface } from "./surfaces/ground/snow";
 import { mud as mudSurface } from "./surfaces/ground/mud";
+import { flagstone as flagstoneSurface } from "./surfaces/stone/flagstone";
 
 export { ASSETS, assetById } from "./assets";
 export { defaults, clean, random, withPreset } from "./core/params";
@@ -158,6 +159,7 @@ type SurfaceInput<F extends Surface<any>> = Partial<Values<F["params"]>> & { pre
 const flaeche = <F extends Surface<any>>(f: F) => (values: SurfaceInput<F> = {}, seed = 1, repeat: number | readonly [number, number] = 1): MeshStandardNodeMaterial =>
   flaechenMaterial(machFlaeche(f, values, seed), repeat);
 export const cobblestone = flaeche(cobblestoneSurface);
+export const flagstone = flaeche(flagstoneSurface);
 export const planks = flaeche(planksSurface);
 export const thatch = flaeche(thatchSurface);
 export const bark = flaeche(barkSurface);
