@@ -39,8 +39,8 @@ export const wheelbarrow = defineAsset({
     const t = new Parts();
     const r = p.wheelRadius, TL = p.trayLength, TW = p.trayWidth, TD = p.trayDepth;
     // The two rails run from above the wheel up to the handle ends; the tray lies tilted forward on them
-    const s = TW / 2 + 0.02, zf = TL / 2 + 0.04, zB = -TL / 2 - p.handleLength, zL = -TL / 2 + 0.1, zw = TL / 2 - 0.08;
-    const vorn = r + 0.06, oben = r + 0.42, hang = (oben - vorn) / (zf - zB), neigung = Math.atan(hang);
+    const s = TW / 2 + 0.02, zf = TL / 2 + r + 0.01, zB = -TL / 2 - p.handleLength, zL = -TL / 2 + 0.1, zw = TL / 2 + r + 0.01;
+    const vorn = r, oben = r + 0.42, hang = (oben - vorn) / (zf - zB), neigung = Math.atan(hang);
     const hoehe = (z: number) => vorn + (zf - z) * hang;
     const lang = Math.hypot(zf - zB, oben - vorn);
     for (const sx of [-1, 1]) t.add(geruest, new BoxGeometry(0.045, 0.04, lang).rotateX(neigung).translate(sx * s, (vorn + oben) / 2, (zf + zB) / 2));
