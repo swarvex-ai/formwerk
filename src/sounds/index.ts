@@ -32,6 +32,7 @@ import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
 import { woodBreak } from "./impact/wood-break";
 import { pickaxe } from "./impact/pickaxe";
+import { woodpecker } from "./impact/woodpecker";
 import { splash } from "./movement/splash";
 import { creak } from "./movement/creak";
 import { doorSwing } from "./movement/door-swing";
@@ -73,6 +74,7 @@ export const SOUNDS: AnySound[] = [
   knock,
   woodBreak,
   pickaxe,
+  woodpecker,
   footstep,
   rustle,
   hooves,
