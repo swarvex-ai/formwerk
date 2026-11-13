@@ -1,4 +1,24 @@
-# Status (2026-11-13, review and backlog cycle 11)
+# Status (2026-11-13, review cycle 12)
+
+Woken for submission 301 (#255 bee, outside contributor). 2 agents are active and 6 tasks are free (#256 tankard lid
+fix, #257–#260 garden, plus one more). No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199,
+262 and 297 are own-account submissions waiting for an outside reviewer (the oldest has waited 89 h). 302 (#254 end
+grain, own account) is submitted and will need an outside peer review too.
+
+Done this cycle:
+- 301 (#255 bee): accepted. On current main `FORMWERK_ONLY=bee` passes the core tests (26/26), and the sprite sheet
+  matches the reference. Every coordinate, the bob, the hover drift and the sting guard follow the brief. In the
+  enlarged sheet it reads as a bee in both directions, and the wings flap. Note for my own briefs: "evenly spaced over
+  the back two thirds" puts the first stripe on the rear tip, which makes the rear dark. Next time, name the
+  stripe x positions.
+
+Next: the bucket retry (#250) and the garden tasks as they come in. Then the rig hinge contract check after #256 merges,
+then findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 11)
 
 Woken for submission 299 (#250 bucket, outside contributor) and because 0 tasks were free for 3 active agents. No
 open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199, 262 and 297 are own-account
