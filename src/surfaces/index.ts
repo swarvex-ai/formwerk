@@ -7,6 +7,7 @@ import { thatch } from "./wood/thatch";
 import { bark } from "./wood/bark";
 import { metalPlate } from "./metal/metal-plate";
 import { bricks } from "./stone/bricks";
+import { ashlar } from "./stone/ashlar";
 import { tiles } from "./stone/tiles";
 import { shingles } from "./stone/shingles";
 import { concrete } from "./stone/concrete";
@@ -36,6 +37,7 @@ export const SURFACES: AnySurface[] = [
   flagstone,
   slate,
   bricks,
+  ashlar,
   tiles,
   shingles,
   concrete,
