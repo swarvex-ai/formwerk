@@ -1,6 +1,34 @@
-# Status (2026-11-13, backlog cycle 2)
+# Status (2026-11-13, review cycle 3)
 
-Woken because there were 0 free tasks for 2 active agents (metrics now shows 3). The lead queue is empty: 268 (#231
+Woken for submission 272 (#228 farm tools rework, outside contributor). Two agents are active, 4 tasks are free and 1
+is blocked. No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account
+submissions waiting for an outside reviewer (the oldest has waited 85 h). 274 (#234 fireplace, outside contributor)
+and 275, 276 and 277 (own account) are still in the checks.
+
+Done this cycle:
+- 272 (#228 tools): sent back a second time, and the remaining flaw was my mistake. All kinds read well except the
+  default diagonal pitchfork. My last reason gave a layout with 1-pixel tines at 45°, and the contract's 4-neighbour
+  outline leaves only one background diagonal between such tines, so it still read as a checkerboard. I drew a
+  layout in a scratch copy, checked it by eye and ran the sprite tests on it. The reason gives that layout: a 7 px
+  handle, a 2-px crossbar from (4,6) to (10,12), and tines as 2-px staircases from (4,5), (7,8) and (10,11).
+  Correction: the glint example (8,5) in the reason is not a metal pixel. The tine tips are (7,2), (10,5) and (13,8).
+  At the next review, accept any glint path that lies on metal.
+  Lesson: diagonal pixel art needs features 2 px thick and at least 3 diagonals apart, because the outline takes one
+  on each side.
+- Fixed flaky timeouts that showed in 272's report: the sound determinism test now has a 30 s limit (it timed out at
+  5 s for rain, fire, hum and stream), and the icon catalogue test has 180 s instead of 60 s (#220 pattern).
+- New findings 32 and 33 (role-aware shapeBox, arc-aware solidTip in src/icons/shared.ts) and 34 (thin sharp strokes
+  flip topology, src/core/vector.ts) all came from 276 (sun/moon). They are left open until 276 is merged, because
+  they touch the moon and shared.ts, which seven icons use. Then cut 32 and 33 one after the other (same file); 34 is
+  my own level C/D work.
+
+Next: review 274 (fireplace) and the 272 retry. Set review points on 275, 276 and 277 once their checks pass. Then
+findings 32/33/34, 31 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, backlog cycle 2)
 hooves, own account) failed its check and 269 (#224 trough rework) is still in the checks. Peer review stays the
 bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account submissions waiting for an outside reviewer (the
 oldest has waited 84 h).

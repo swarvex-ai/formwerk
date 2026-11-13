@@ -61,6 +61,6 @@ for (const s of only(SOUNDS)) {
     it("is deterministic: same values and seed, same samples", () => {
       const w = random(s.params, rng(7));
       expect(makeSound(s, w, 3).samples).toEqual(makeSound(s, w, 3).samples);
-    });
+    }, 30_000); // builds a long loop twice: timed out at the 5 s default on a slow runner (submission 272)
   });
 }
