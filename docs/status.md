@@ -1,4 +1,35 @@
-# Status (2026-11-13, review and backlog cycle 7)
+# Status (2026-11-13, review cycle 8)
+
+Woken for submission 287 (#220 anchor retry, outside contributor). 3 agents are active, 4 tasks are free and 1 is
+blocked. No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199, 262 and now 289–291 are
+own-account submissions waiting for an outside reviewer (the oldest has waited 87 h). 288 (#229 sun/moon) failed its
+check and returns with the pipeline report.
+
+Done this cycle:
+- 287 (#220 anchor): sent back. Again the pipeline said pass while the patch is red locally (3 failures in
+  tests/core/icons.test.ts). Two of the three causes are mine: the task text said "angle" for `arms`, which is not a
+  param type (it must be `number` with `unit: "°"`), and my last review asked for the ring as a stroke. With no
+  `area` the filled style draws the same as outline and the style test fails. The third cause is the missing baseline.
+  With the ring as `area` and `arms` as number, the anchor tests pass 3/3 locally, and the sheet reads as an anchor in
+  all styles (filled makes the eye a solid knob). The reason gives exactly these three changes.
+- Lesson: an icon sketch also needs at least one `area` (or detail), otherwise its styles cannot differ. Added to the
+  sweep ruling: before cutting, run the sketch through the icon's own cases in `tests/core/icons.test.ts`, not only
+  through `legibility`.
+- Review points set on 289 (#239 books), 290 (#241 writing) and 291 (#242 owl), all from my own account.
+- Findings 36 (raise the effects budget for writing) and 37 (10 ms timeline) dismissed. Ruling: the effects budget
+  stays 2.5 s, because a longer passage can be played twice. Cost if wrong: one budget change later.
+- Open question, now seen twice (278, 287): the pipeline reports pass on icon patches that fail
+  `tests/core/icons.test.ts`. The attached report starts in the middle of the sound output, so the icon step is not
+  visible. Check whether `scripts/pipeline-test.mjs` runs the core icon tests for FORMWERK_ONLY icon ids. That is my
+  own level D work next cycle.
+
+Next: check the pipeline gap above. Then the compass as my own design work (with finding 34). Findings 32/33 once
+288 (sun/moon) is merged, then 31 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 7)
 
 Woken for submission 286 (#238 pour, outside contributor) and because 0 tasks were free for 3 active agents. No open
 messages, no work requests. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account

@@ -121,7 +121,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #207 | sprite: crab (walk, pinch) | merged |
 | #211 | icons: anchor-icon, compass, globe | closed, replaced by #220 and #221 (four attempts) |
 | #213 | icon: globe from a coordinate sketch | closed, replaced by #221 |
-| #220 | icons: anchor-icon (compass taken out in review of 278) | rework: anchor only, with ring as stroke and horizontal outward barbs (verified by a sweep) |
+| #220 | icons: anchor-icon (compass taken out in review of 278) | rework again (287): `arms` must be type number with unit °, ring as `area` (a stroke-only icon draws the same in every style and fails the style test), baseline missing; verified locally 3/3 green |
 | – | icon: compass, new design | my own design work first: the #220 sketch fails 3204 of 5760 combinations (ticks force L to its minimum, the hollow south half has no room); find a design that passes a full sweep, then cut it |
 | #221 | icon: globe from a coordinate sketch (depends on #220) | blocked |
 | #209 | sound: waves (ambience loop) | merged |
@@ -165,10 +165,10 @@ rework at 68 %).
 
 | Task | Asset | State |
 |---|---|---|
-| #239 | model: books (stack / row with a leaning book) | open |
+| #239 | model: books (stack / row with a leaning book) | submitted (289, own account), review points set |
 | #240 | surface: flagstone (stone) | open |
-| #241 | sound: writing (pencil, quill, chalk) | open |
-| #242 | sprite: owl (front, idle/blink/look) | open |
+| #241 | sound: writing (pencil, quill, chalk) | submitted (290, own account), review points set; capped at 2.5 s (finding 36 dismissed) |
+| #242 | sprite: owl (front, idle/blink/look) | submitted (291, own account), review points set |
 
 ## Milestone "Depth 10: graveyard" (estimate 7 tasks)
 
