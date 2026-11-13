@@ -101,11 +101,11 @@ Cut 2026-11-12 on base e96821b, all level B, no dependencies, paths disjoint exc
 | #195 | surface: plaster (damage shows brick) | accepted (209) |
 | #196 | sprite: chicken (walk, peck) | merged |
 | #197 | sprite: food items (apple, bread, cheese, meat) | merged |
-| #198 | icons: bulb, flag, tag | open (free) |
+| #198 | icons: bulb, flag, tag | merged |
 | #199 | sound: drip (ambience loop) | accepted (211) |
 | #200 | sound: sword draw (`swordDraw`) | accepted (213) |
 
-## Milestone "Depth 6: harbour" (estimate 12 tasks)
+## Milestone "Depth 6: harbour" (estimate 14 tasks)
 
 Cut 2026-11-12 on base 05839d7, all level B, no dependencies, paths disjoint except the union-merged registries.
 Ids are unique across all kinds: the anchor icon is `anchor-icon` because the model is `anchor` (#208 closed for it).
@@ -121,10 +121,26 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #207 | sprite: crab (walk, pinch) | merged |
 | #211 | icons: anchor-icon, compass, globe | closed, replaced by #220 and #221 (four attempts) |
 | #213 | icon: globe from a coordinate sketch | closed, replaced by #221 |
-| #220 | icons: anchor-icon, compass from a coordinate sketch | open |
+| #220 | icons: anchor-icon, compass from a coordinate sketch | in progress (fifth attempt overall; last one sent back by peer review) |
 | #221 | icon: globe from a coordinate sketch (depends on #220) | blocked |
 | #209 | sound: waves (ambience loop) | merged |
 | #210 | sound: ship bell (`shipBell`) | merged |
+
+## Milestone "Depth 7: farm" (estimate 10 tasks)
+
+Cut 2026-11-13 on base c240293, all level B, no dependencies, paths disjoint except the union-merged registries.
+The icon task has a coordinate sketch per shape from the start.
+
+| Task | Asset | State |
+|---|---|---|
+| #224 | model: water trough (planks, stone, metal; water level) | open |
+| #225 | model: scarecrow | open |
+| #226 | surface: thatch | open |
+| #227 | sprite: pig (idle, walk, eat) | open |
+| #228 | sprite: farm tools (pitchfork, hoe, sickle, watering can) | open |
+| #229 | icons: sun, moon (sketched) | open |
+| #230 | sound: rooster crow (voice) | open |
+| #231 | sound: hooves (loop, walk/trot/gallop) | open |
 
 ## Next (lead, level D, not cut yet)
 

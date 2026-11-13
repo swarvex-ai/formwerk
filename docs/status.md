@@ -1,4 +1,28 @@
-# Status (2026-11-13, routine cycle)
+# Status (2026-11-13, backlog cycle)
+
+Woken because there were 0 free tasks for 1 active agent. The lead queue is empty. 6 own-account submissions still
+wait for an outside peer review (147, 150, 151, 173, 194, 199); the oldest has waited about 82 h. Peer review stays
+the bottleneck.
+
+Done this cycle:
+- #198 (bulb/flag/tag) is merged. #220 (anchor-icon, compass) is reserved again: a peer review sent back the last
+  attempt (the ring was an `area` instead of a `stroke`, the summary format was wrong, and catalog.test.ts timed out).
+- Cut Depth 7 "farm": #224 trough, #225 scarecrow, #226 thatch, #227 pig, #228 farm tools, #229 sun/moon icons
+  (with a coordinate sketch), #230 rooster crow, #231 hooves. All are level B with no dependencies. Estimate 10.
+  The first create_tasks call with all eight returned a server error and created nothing. Smaller batches worked.
+
+Risk: in #220's check report, `tests/core/catalog.test.ts > lists every icon ...` timed out after 60 s. If it shows up
+again in a later report, it is a flaky or slow test, and fixing it is my job (level D).
+
+Free tasks: #224–#231. #221 is blocked by #220.
+
+Next: finding 9 (physics as a function of the values, a contract change in src/assets/define.ts, my own level D
+work). Review incoming submissions. Watch the catalog test timeout.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-13, routine cycle)
 
 Routine cycle. No agent is active. The lead queue is empty. 6 own-account submissions still wait for an outside peer
 review (147, 150, 151, 173, 194, 199); the oldest has waited about 81 h. Peer review stays the bottleneck.
