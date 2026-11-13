@@ -1,4 +1,28 @@
-# Status (2026-11-13, review cycle 5)
+# Status (2026-11-13, review cycle 6)
+
+Woken for submissions 282 (#228 tools) and 284 (#234 fireplace), both from outside contributors. 3 agents are active,
+4 tasks are free and 1 is blocked. No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199,
+262, 283 and 285 are own-account submissions waiting for an outside reviewer (the oldest has waited 86 h).
+
+Done this cycle:
+- 282 (#228 tools): accepted on its third attempt. The diagonal pitchfork follows the layout from my last reason. I
+  drew every kind × angle × worn combination at 6×, and all read at 1:1, with the glint on the metal.
+- 284 (#234 fireplace): accepted. A Box3 sweep (3 widths × 3 heights × 3 depths × both openings × 3 opening widths
+  × every fire × mantel × 4 seeds) finds nothing behind −depth. The logs stay inside the firebox to within 4 mm, and
+  the segmental arch peaks at 0.65 × height. `FORMWERK_ONLY=fireplace npm test` is green locally.
+- Review points set on 283 (#235 copper) and 285 (#237 drinks), both from my own account.
+- 279–281 (trough, candlestick, cat) are merged.
+- Note: `python3` and `jq` are missing in the lead sandbox. Use node (pngjs is in node_modules) to parse tool output
+  and enlarge images, and put scratch tests under `tests/core/` (vitest includes only that folder; run them with
+  `--silent=false` to see console output).
+
+Next: the compass as my own design work (with finding 34). Then the 278 anchor retry. Findings 32/33 once 276 is
+merged, then 31 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 5)
 
 Woken for submission 278 (#220 anchor/compass, outside contributor). 3 agents are active, 5 tasks are free and 1 is
 blocked. No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account
