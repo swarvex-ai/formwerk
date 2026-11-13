@@ -18,6 +18,7 @@ import { fireplace } from "./architecture/fireplace";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
 import { logPile } from "./nature/log-pile";
+import { stump } from "./nature/stump";
 import { bed } from "./furniture/bed";
 import { sofa } from "./furniture/sofa";
 import { wardrobe } from "./furniture/wardrobe";
@@ -88,6 +89,7 @@ export const ASSETS: AnyAsset[] = [
   tree,
   rock,
   logPile,
+  stump,
   bush,
   flowers,
   mushrooms,
