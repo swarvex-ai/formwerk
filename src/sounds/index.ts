@@ -48,6 +48,7 @@ import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
+import { writing } from "./effects/writing";
 
 export const SOUNDS: AnySound[] = [
   click,
@@ -97,5 +98,6 @@ export const SOUNDS: AnySound[] = [
   pour,
   waves,
   shipBell,
+  writing,
 ];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);
