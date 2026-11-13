@@ -39,6 +39,7 @@ import { bench } from "./props/bench";
 import { signpost } from "./props/signpost";
 import { mailbox } from "./props/mailbox";
 import { marketStall } from "./props/market-stall";
+import { books } from "./props/books";
 import { tent } from "./props/tent";
 import { torch } from "./props/torch";
 import { lantern } from "./props/lantern";
@@ -93,6 +94,7 @@ export const ASSETS: AnyAsset[] = [
   signpost,
   mailbox,
   marketStall,
+  books,
   tent,
   torch,
   lantern,
