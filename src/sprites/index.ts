@@ -37,6 +37,7 @@ import { cat } from "./creatures/cat";
 import { hare } from "./creatures/hare";
 import { owl } from "./creatures/owl";
 import { wolf } from "./creatures/wolf";
+import { deer } from "./creatures/deer";
 import { snail } from "./creatures/snail";
 
 export const SPRITES: AnySprite[] = [
@@ -62,6 +63,7 @@ export const SPRITES: AnySprite[] = [
   hare,
   owl,
   wolf,
+  deer,
   snail,
   potion,
   food,
