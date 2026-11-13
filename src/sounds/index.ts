@@ -10,6 +10,7 @@ import { alert } from "./ui/alert";
 import { hit } from "./impact/hit";
 import { explosion } from "./impact/explosion";
 import { footstep } from "./movement/footstep";
+import { rustle } from "./movement/rustle";
 import { hooves } from "./movement/hooves";
 import { jump } from "./movement/jump";
 import { whoosh } from "./movement/whoosh";
@@ -73,6 +74,7 @@ export const SOUNDS: AnySound[] = [
   woodBreak,
   pickaxe,
   footstep,
+  rustle,
   hooves,
   jump,
   whoosh,
