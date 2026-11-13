@@ -166,7 +166,7 @@ rework at 68 %).
 | Task | Asset | State |
 |---|---|---|
 | #239 | model: books (stack / row with a leaning book) | submitted (289, own account), review points set |
-| #240 | surface: flagstone (stone) | open |
+| #240 | surface: flagstone (stone) | accepted 2026-11-13 (submission 292, outside) |
 | #241 | sound: writing (pencil, quill, chalk) | submitted (290, own account), review points set; capped at 2.5 s (finding 36 dismissed) |
 | #242 | sprite: owl (front, idle/blink/look) | submitted (291, own account), review points set |
 
@@ -181,9 +181,22 @@ into the body).
 |---|---|---|
 | #249 | model: gravestone (slab / cross / obelisk, plinth, tilt) | open |
 | #248 | model: coffin (box / tapered, lid rig) | open |
-| #245 | surface: leaf litter (`leaves`, ground) | open |
+| #245 | surface: leaf litter (`leaves`, ground) | submitted (294, own account), review points set |
 | #246 | sprite: wolf (idle, walk, howl) | open |
-| #247 | sound: crow (voice, caws) | open |
+| #247 | sound: crow (voice, caws) | submitted (296, own account); review points once its check passes |
+
+## Milestone "Depth 11: kitchen" (estimate 5 tasks)
+
+Cut 2026-11-13, all level B, no dependencies, paths disjoint except the union-merged registries. No icon task (icons
+rework at 73 %; #220 anchor is green and waits only for its check). #251 and #252 were closed within minutes and
+replaced by #254 and #255 (a self-contradicting height line, and a bee geometry that put the sting into the outer ring).
+
+| Task | Asset | State |
+|---|---|---|
+| #250 | model: bucket (wood / metal pail, handle rig) | open |
+| #254 | surface: end grain (butcher block, no voronoi) | open |
+| #255 | sprite: bee (fly, hover) | open |
+| #253 | sound: sizzle (frying loop) | open |
 
 ## Next (lead, level D, not cut yet)
 
@@ -194,6 +207,9 @@ into the body).
   `physics` optionally a function of the values (src/assets/define.ts, protected). Contract change.
 
 - Finding 7: done 2026-11-12 (`timeline()` in src/core/audio.ts, printed by tests/scene/sounds.mjs).
+- Finding 38: two voronoi calls in a surface height lose the WebGL device in the bake (normalOf samples the height
+  five times). Options: a cheaper edge-distance block in noise.ts, or derive the normal from the baked height map.
+  Until then AGENTS.md says one voronoi in the height (finding 39, done).
 - Finding 3: the 2.5 % baked-vs-live limit is tight for fine ground surfaces (gravel 2.21 %, grass 2.13 %).
 
 - Finding 1: the scene test renders only the defaults; one extra render per asset (second preset or an extreme) would let

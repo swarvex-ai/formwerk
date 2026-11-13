@@ -43,6 +43,8 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    (0 to 1). Use the tiling building blocks of `src/surfaces/noise.ts` (`fbm`, `noise`, `voronoi`, `cell`, `wrap`,
    `ramp`): every pattern must repeat after one tile. Copy the closest surface and change it. Keep ramps on the voronoi edge
    distance (`v.x`) at least 0.15 wide: narrower ones lose the WebGL device in the headless bake at coarse cell counts.
+   Keep the height to one `voronoi` call: the normal map samples the height five times, and two voronoi layers in
+   the height lose the device too. A second voronoi in colour or roughness is fine.
 2. Its import and its entry in `src/surfaces/index.ts`, `src/surfaces/list.ts` and `src/index.ts`, each on a line of its
    own: copy a neighbouring line.
 3. `npm test`: the scene test renders it live and writes `tests/scene/baseline/<id>.png` and `<id>.maps.png` (colour,
