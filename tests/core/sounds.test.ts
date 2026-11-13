@@ -25,7 +25,8 @@ describe("sound catalogue", () => {
       expect(presetProblems(s.params, s.presets), s.id).toEqual([]);
       expect(Object.keys(s.presets).length, `${s.id}: at least two presets`).toBeGreaterThanOrEqual(2);
       expect(Object.keys(s.params).length, `${s.id}: a sound is parametric`).toBeGreaterThanOrEqual(3);
-      expect(s.maxSeconds, `${s.id}: budget within the category limit`).toBeLessThanOrEqual(GRENZE[s.category]);
+      // a loop in any category (hoofbeats, engine) may run as long as an ambience loop
+      expect(s.maxSeconds, `${s.id}: budget within the category limit`).toBeLessThanOrEqual(s.loop ? GRENZE.ambience : GRENZE[s.category]);
     }
   });
   it("WAV files keep the samples (16 bit, 48 kHz mono)", () => {

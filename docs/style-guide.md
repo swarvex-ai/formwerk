@@ -89,4 +89,4 @@ The catalogue should look like one set, whoever builds an asset.
   of the vocal tract (a child 0.7, a giant 3): set it with the pitch, a deep voice in a small body sounds wrong.
   Every change of loudness glides over at least 10 ms; a jump in a key clicks. No imitation of a real person's voice
   or of a known character.
-- **Budgets per category (seconds):** interface 4, impact 4, movement 1.5, effects 2.5, voices 4, ambience loops 12.
+- **Budgets per category (seconds):** interface 4, impact 4, movement 1.5, effects 2.5, voices 4, ambience loops 12. A loop in any category (hoofbeats, an engine) may use up to 12.
