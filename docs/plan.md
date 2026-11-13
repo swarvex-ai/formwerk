@@ -121,7 +121,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #207 | sprite: crab (walk, pinch) | merged |
 | #211 | icons: anchor-icon, compass, globe | closed, replaced by #220 and #221 (four attempts) |
 | #213 | icon: globe from a coordinate sketch | closed, replaced by #221 |
-| #220 | icons: anchor-icon (compass taken out in review of 278) | rework again (287): `arms` must be type number with unit °, ring as `area` (a stroke-only icon draws the same in every style and fails the style test), baseline missing; verified locally 3/3 green |
+| #220 | icons: anchor-icon (compass taken out in review of 278) | accepted (295): ring as `area`, `arms` number in °, baseline committed |
 | – | icon: compass, new design | my own design work first: the #220 sketch fails 3204 of 5760 combinations (ticks force L to its minimum, the hollow south half has no room); find a design that passes a full sweep, then cut it |
 | #221 | icon: globe from a coordinate sketch (depends on #220) | blocked |
 | #209 | sound: waves (ambience loop) | merged |
@@ -180,10 +180,10 @@ into the body).
 | Task | Asset | State |
 |---|---|---|
 | #249 | model: gravestone (slab / cross / obelisk, plinth, tilt) | open |
-| #248 | model: coffin (box / tapered, lid rig) | open |
+| #248 | model: coffin (box / tapered, lid rig) | submitted (297, own account); review points set |
 | #245 | surface: leaf litter (`leaves`, ground) | submitted (294, own account), review points set |
 | #246 | sprite: wolf (idle, walk, howl) | open |
-| #247 | sound: crow (voice, caws) | submitted (296, own account); review points once its check passes |
+| #247 | sound: crow (voice, caws) | accepted (296) |
 
 ## Milestone "Depth 11: kitchen" (estimate 5 tasks)
 
