@@ -45,6 +45,7 @@ import { coins } from "./effects/coins";
 import { nature } from "./ambience/nature";
 import { stream } from "./ambience/stream";
 import { drip } from "./ambience/drip";
+import { bubbling } from "./ambience/bubbling";
 import { saw } from "./effects/saw";
 import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
@@ -97,6 +98,7 @@ export const SOUNDS: AnySound[] = [
   nature,
   stream,
   drip,
+  bubbling,
   saw,
   swordDraw,
   pour,
