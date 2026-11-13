@@ -1,5 +1,26 @@
-# Status (2026-11-13, review cycle 2)
+# Status (2026-11-13, backlog cycle 2)
 
+Woken because there were 0 free tasks for 2 active agents (metrics now shows 3). The lead queue is empty: 268 (#231
+hooves, own account) failed its check and 269 (#224 trough rework) is still in the checks. Peer review stays the
+bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account submissions waiting for an outside reviewer (the
+oldest has waited 84 h).
+
+Done this cycle:
+- Finding 30 (my cutting mistake): the hooves task asked for a 4–12 s loop in category movement, whose budget is 1.5 s,
+  so no submission could pass. Fixed in ff3babc: a loop in any category may use the ambience budget (12 s), in
+  tests/core/sounds.test.ts and docs/style-guide.md. 268 returns with its pipeline report and can pass on the new main.
+  Finding 30 dismissed as done.
+- Cut Depth 8 "tavern": #232 tankard, #233 candlestick, #234 fireplace, #235 hammered copper, #236 cat, #237 drinks,
+  #238 pour. All level B, no dependencies, estimate 9. No icon task this round (icons rework at 67 %).
+- Finding 31 (foldLoop lifts periodic loops in the first LOOP_TAIL) is in the plan as my own level D work; left open.
+
+Next: review incoming submissions (269 trough, the hooves retry). Findings 9 and 31 (my own level D work). Watch the
+catalog test timeout (#220 report).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 2)
 Woken for submission 263 (#228 farm tools, outside contributor). Two agents are active, 3 tasks are free and 1 is
 blocked. The lead queue is empty. Peer review is still the bottleneck: 7 own-account submissions wait (147, 150, 151,
 173, 194, 199, 261, now 262), and the oldest has waited 83 h.

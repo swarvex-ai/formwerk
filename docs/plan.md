@@ -133,16 +133,34 @@ The icon task has a coordinate sketch per shape from the start.
 
 | Task | Asset | State |
 |---|---|---|
-| #224 | model: water trough (planks, stone, metal; water level) | open |
+| #224 | model: water trough (planks, stone, metal; water level) | rework submitted (269), in checks |
 | #225 | model: scarecrow | open |
-| #226 | surface: thatch | open |
-| #227 | sprite: pig (idle, walk, eat) | open |
-| #228 | sprite: farm tools (pitchfork, hoe, sickle, watering can) | open |
-| #229 | icons: sun, moon (sketched) | open |
+| #226 | surface: thatch | merged |
+| #227 | sprite: pig (idle, walk, eat) | merged |
+| #228 | sprite: farm tools (pitchfork, hoe, sickle, watering can) | sent back (263), reserved again |
+| #229 | icons: sun, moon (sketched) | check failed (264), back from the pipeline report |
 | #230 | sound: rooster crow (voice) | open |
-| #231 | sound: hooves (loop, walk/trot/gallop) | open |
+| #231 | sound: hooves (loop, walk/trot/gallop) | 268 failed on the movement budget (finding 30, my cutting mistake); fixed in ff3babc |
+
+## Milestone "Depth 8: tavern" (estimate 9 tasks)
+
+Cut 2026-11-13 on base ff3babc, all level B, no dependencies, paths disjoint except the union-merged registries.
+No icon task this round: icons rework at 67 % and #220/#221 are still open.
+
+| Task | Asset | State |
+|---|---|---|
+| #232 | model: tankard (lid rig) | open |
+| #233 | model: candlestick (1/3/5 arms, lit) | open |
+| #234 | model: fireplace (architecture, arch opening) | open |
+| #235 | surface: hammered copper (metal) | open |
+| #236 | sprite: cat (idle, walk, sleep) | open |
+| #237 | sprite: drinks (mug, bottle, goblet, cup) | open |
+| #238 | sound: pour | open |
 
 ## Next (lead, level D, not cut yet)
+
+- Finding 31: foldLoop (src/core/audio.ts) lifts periodic loops by up to +3 dB in their first LOOP_TAIL, so the first
+  beat of hooves or heartbeat stands out. An equal-power or level-compensating fold. Changes every loop baseline.
 
 - Finding 9: physics is one fixed object per asset; the anvil wanted static with a stump and dynamic without. Make
   `physics` optionally a function of the values (src/assets/define.ts, protected). Contract change.
