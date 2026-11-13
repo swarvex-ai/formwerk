@@ -151,11 +151,23 @@ No icon task this round: icons rework at 67 % and #220/#221 are still open.
 |---|---|---|
 | #232 | model: tankard (lid rig) | open |
 | #233 | model: candlestick (1/3/5 arms, lit) | open |
-| #234 | model: fireplace (architecture, arch opening) | open |
+| #234 | model: fireplace (architecture, arch opening) | sent back (274): logs pierce the back wall, arch can leave the face |
 | #235 | surface: hammered copper (metal) | open |
 | #236 | sprite: cat (idle, walk, sleep) | open |
 | #237 | sprite: drinks (mug, bottle, goblet, cup) | open |
 | #238 | sound: pour | open |
+
+## Milestone "Depth 9: study" (estimate 5 tasks)
+
+Cut 2026-11-13, all level B, no dependencies, paths disjoint except the union-merged registries. No icon task (icons
+rework at 68 %).
+
+| Task | Asset | State |
+|---|---|---|
+| #239 | model: books (stack / row with a leaning book) | open |
+| #240 | surface: flagstone (stone) | open |
+| #241 | sound: writing (pencil, quill, chalk) | open |
+| #242 | sprite: owl (front, idle/blink/look) | open |
 
 ## Next (lead, level D, not cut yet)
 

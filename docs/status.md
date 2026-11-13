@@ -1,4 +1,26 @@
-# Status (2026-11-13, review cycle 3)
+# Status (2026-11-13, review and backlog cycle 4)
+
+Woken for submission 274 (#234 fireplace, outside contributor) and because 0 tasks were free for 3 active agents. No
+open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account submissions
+waiting for an outside reviewer (the oldest has waited 85 h). 279 (#224 trough), 280 (#233 candlestick) and 281 (#236
+cat), all own account, are still in the checks; 278 (#220 anchor/compass) failed its check and returns from the report.
+
+Done this cycle:
+- 274 (#234 fireplace): sent back. The check is green and the default reads well, but measured with Box3: the logs
+  pierce the back wall (min.z −0.596 at the kitchen preset, −0.571 at width 2.4 / depth 0.35, body ends at −depth),
+  and with arch at width 2.4 / height 0.8 / openingWidth 0.75 the arch top reaches 0.91 above the face top 0.8. The
+  reason gives a log length clamp and a segmental arch with the numbers to report.
+- Finding 35 (thin parts vanish in the 320 × 240 render): a rule in docs/style-guide.md (at least 4 mm across);
+  dismissed as done.
+- Cut Depth 9 "study": #239 books, #240 flagstone, #241 writing, #242 owl. Level B, no dependencies, estimate 5.
+
+Next: set review points on 279, 280 and 281 once their checks pass. Review the 274 retry against the numbers in the
+reason. Findings 32/33 after 276 is merged, then 34, 31 and 9 (my own work).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 3)
 
 Woken for submission 272 (#228 farm tools rework, outside contributor). Two agents are active, 4 tasks are free and 1
 is blocked. No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account

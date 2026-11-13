@@ -10,6 +10,8 @@ The catalogue should look like one set, whoever builds an asset.
 - **Segments:** cylinders 8–16 around for furniture, 32 for turned or architectural parts; icosahedron detail 0–1 for
   foliage clusters.
 - **Variation:** use the seed for natural things (trees, rocks, plants). Man-made things are exact and need no seed.
+- **Thin parts** (wicks, wires, needles, spokes): at least 4 mm across. Thinner parts are counted in the triangles but
+  vanish in the 320 × 240 scene render, so reviewers cannot see them in the baseline.
 - **Names:** ids in kebab-case English (`server-rack`), parameters in camelCase English (`seatHeight`).
 - **Budgets:** furniture up to 20,000 triangles, architecture 30,000, nature 150,000 at the extremes; most assets
   should stay far below at their defaults.
