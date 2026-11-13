@@ -6,12 +6,12 @@ export const gravel = defineSurface({
   id: "gravel", category: "ground",
   title: { de: "Kies", en: "Gravel" },
   description: {
-    de: "Loses Kiesbett aus runden Flusskieseln oder kantigem Schotter auf dunklem Grund. Eine Kachel ist 1 × 1 m.",
-    en: "Loose bed of gravel with rounded pebbles or crushed stone on a dark ground. One tile is 1 × 1 m.",
+    de: "Loses Kiesbett aus runden Flusskieseln oder kantigem Schotter auf dunklem Grund. Eine Kachel ist 0,25 × 0,25 m.",
+    en: "Loose bed of gravel with rounded pebbles or crushed stone on a dark ground. One tile is 0.25 × 0.25 m.",
   },
   params: {
-    stoneSize: { type: "number", min: 0.005, max: 0.06, step: 0.005, default: 0.02, label: { de: "Steingröße", en: "Stone size" },
-      describe: { de: "Durchschnittliche Größe der Steine in Metern: 0,01 m feiner Zierkies, 0,02 m Gartenweg, 0,04 m Gleisschotter.", en: "Average size of the stones in metres: 0.01 m fine pea gravel, 0.02 m garden path, 0.04 m railway ballast." } },
+    stoneSize: { type: "number", min: 0.016, max: 0.032, step: 0.002, default: 0.02, label: { de: "Steingröße", en: "Stone size" },
+      describe: { de: "Durchschnittliche Größe der Steine in Metern: 0,016 m feiner Kies, 0,02 m Gartenweg, 0,03 m Gleisschotter.", en: "Average size of the stones in metres: 0.016 m fine gravel, 0.02 m garden path, 0.03 m railway ballast." } },
     coverage: { type: "number", min: 0.4, max: 1, step: 0.05, default: 0.85, label: { de: "Bedeckung", en: "Coverage" },
       describe: { de: "Anteil des Bodens, der mit Steinen bedeckt ist: 0,5 lückenhaft gestreut, 0,85 dichtes Kiesbett, 1 geschlossene Steinschicht.", en: "Share of the ground covered by stones: 0.5 sparse scattering, 0.85 dense gravel bed, 1 solid stone layer." } },
     shape: { type: "choice", options: ["pebbles", "crushed"], default: "pebbles", label: { de: "Form", en: "Shape" },
@@ -24,13 +24,13 @@ export const gravel = defineSurface({
   },
   presets: {
     "garden-path": { label: { de: "Gartenweg", en: "Garden path" }, values: { shape: "pebbles", stoneSize: 0.02, coverage: 0.85, colorA: "#c8c2b6", colorB: "#9e968a" } },
-    "railway-ballast": { label: { de: "Gleisschotter", en: "Railway ballast" }, values: { shape: "crushed", stoneSize: 0.04, coverage: 0.9, colorA: "#5a5856", colorB: "#3a3836" } },
-    "river-pebbles": { label: { de: "Flusskiesel", en: "River pebbles" }, values: { shape: "pebbles", stoneSize: 0.025, coverage: 0.85, colorA: "#a68a72", colorB: "#5e666c" } },
+    "railway-ballast": { label: { de: "Gleisschotter", en: "Railway ballast" }, values: { shape: "crushed", stoneSize: 0.03, coverage: 0.9, colorA: "#5a5856", colorB: "#3a3836" } },
+    "river-pebbles": { label: { de: "Flusskiesel", en: "River pebbles" }, values: { shape: "pebbles", stoneSize: 0.024, coverage: 0.85, colorA: "#a68a72", colorB: "#5e666c" } },
   },
-  tile: 1, depth: 0.035,
+  tile: 0.25, depth: 0.00875,
   build(p, seed) {
-    // Map stoneSize [0.005, 0.06] to an integer grid cell count between 16 and 8
-    const n = Math.max(8, Math.min(16, Math.round(1 / (p.stoneSize * 4))));
+    // Map stoneSize [0.016, 0.032] to an integer grid cell count between 16 and 8 on the 0.25 m tile
+    const n = Math.max(8, Math.min(16, Math.round(0.25 / p.stoneSize)));
     const colA = color(p.colorA), colB = color(p.colorB), bodenFarbe = vec3(0.12, 0.1, 0.08);
     const isPebble = p.shape === "pebbles";
     const gap = (1 - p.coverage) * 0.25 + 0.04;
