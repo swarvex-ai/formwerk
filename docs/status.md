@@ -1,4 +1,26 @@
-# Status (2026-11-13, review cycle 12)
+# Status (2026-11-13, backlog cycle 13)
+
+Woken because 0 tasks were free for 1 active agent. No open messages, no work requests, nothing checked to review:
+306 (#221 globe, outside) and 310 (#250 bucket retry, outside) are still in the checks. The contributor runner on the
+lead/visionary account took all four garden tasks (304, 305, 307, 308). Peer review stays the bottleneck: 147, 150,
+151, 173, 194, 199, 262 and 297 are own-account submissions waiting for an outside reviewer (the oldest ~90 h).
+#256 (tankard lid fix) is accepted; end grain and bee are merged.
+
+Done this cycle:
+- Cut Depth 13 "winter": #261 sled, #262 ice, #263 hare, #264 sleigh bells. Level B, estimate 6. No icon task
+  (icons rework still 70 %). Before cutting I built the sled in a scratch test (not committed): the curl
+  (half torus, `rotateZ(-π/2).rotateY(-π/2)`) bulges forward from the floor to the deck, min y is 0 at the defaults
+  and every extreme, under 600 triangles. The ice keeps one voronoi in the height and a 0.15-wide crack ramp
+  (thinned with `pow(3)`); the sleigh bells copy the hooves loop frame, which sidesteps finding 31.
+
+Next: review 306 (globe, icons at 70 % rework: check closely) and 310 (bucket retry: the handle over the rim) once
+checked; set review points on 304/305/307/308 once they are checked. Then the rig hinge contract check (now #256 is
+accepted), findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 12)
 
 Woken for submission 301 (#255 bee, outside contributor). 2 agents are active and 6 tasks are free (#256 tankard lid
 fix, #257–#260 garden, plus one more). No open messages. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199,

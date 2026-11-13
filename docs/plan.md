@@ -157,7 +157,7 @@ No icon task this round: icons rework at 67 % and #220/#221 are still open.
 | #236 | sprite: cat (idle, walk, sleep) | merged |
 | #237 | sprite: drinks (mug, bottle, goblet, cup) | done (285, peer-reviewed) |
 | #238 | sound: pour | accepted 2026-11-13 (submission 286, outside) |
-| #256 | fix (A): tankard lid built at the floor (fixes #232; the lid and lever used hinge coordinates) | open |
+| #256 | fix (A): tankard lid built at the floor (fixes #232; the lid and lever used hinge coordinates) | accepted |
 
 ## Milestone "Depth 9: study" (estimate 5 tasks)
 
@@ -194,9 +194,9 @@ replaced by #254 and #255 (a self-contradicting height line, and a bee geometry 
 
 | Task | Asset | State |
 |---|---|---|
-| #250 | model: bucket (wood / metal pail, handle rig) | 299 (outside) sent back: the handle sat at the floor because my trap said not to translate it |
-| #254 | surface: end grain (butcher block, no voronoi) | in progress |
-| #255 | sprite: bee (fly, hover) | submitted (301), in the checks |
+| #250 | model: bucket (wood / metal pail, handle rig) | 299 sent back (my trap); retry 310 in the checks |
+| #254 | surface: end grain (butcher block, no voronoi) | merged |
+| #255 | sprite: bee (fly, hover) | merged |
 | #253 | sound: sizzle (frying loop) | accepted |
 
 ## Milestone "Depth 12: garden" (estimate 6 tasks)
@@ -205,10 +205,22 @@ Cut 2026-11-13, all level B, no dependencies, paths disjoint except the union-me
 
 | Task | Asset | State |
 |---|---|---|
-| #257 | model: beehive (straw skep, stand) | open |
-| #258 | surface: moss (ground, fbm only) | open |
-| #259 | sprite: snail (idle, crawl, hide) | open |
-| #260 | sound: bubbling (boiling loop) | open |
+| #257 | model: beehive (straw skep, stand) | submitted (304, own account) |
+| #258 | surface: moss (ground, fbm only) | submitted (305, own account) |
+| #259 | sprite: snail (idle, crawl, hide) | submitted (307, own account) |
+| #260 | sound: bubbling (boiling loop) | submitted (308, own account) |
+
+## Milestone "Depth 13: winter" (estimate 6 tasks)
+
+Cut 2026-11-13 on base 0f80ae2, all level B, no dependencies, paths disjoint except the union-merged registries.
+No icon task. The sled geometry was prototyped in a scratch test first (min y 0 at every extreme, < 600 triangles).
+
+| Task | Asset | State |
+|---|---|---|
+| #261 | model: sled (runners with front curls, slats, backrest) | open |
+| #262 | surface: ice (cracks from one voronoi, bubbles, frost) | open |
+| #263 | sprite: hare (idle, hop, alert) | open |
+| #264 | sound: sleigh bells (loop, hooves loop frame) | open |
 
 ## Next (lead, level D, not cut yet)
 
