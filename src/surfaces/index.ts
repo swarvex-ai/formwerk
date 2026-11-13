@@ -15,6 +15,7 @@ import { marble } from "./stone/marble";
 import { parquet } from "./wood/parquet";
 import { endGrain } from "./wood/end-grain";
 import { wicker } from "./wood/wicker";
+import { leather } from "./wood/leather";
 import { corrugated } from "./metal/corrugated";
 import { rust } from "./metal/rust";
 import { copper } from "./metal/copper";
@@ -45,6 +46,7 @@ export const SURFACES: AnySurface[] = [
   parquet,
   endGrain,
   wicker,
+  leather,
   metalPlate,
   corrugated,
   rust,

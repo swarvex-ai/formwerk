@@ -16,6 +16,7 @@ export const SURFACE_IDS = [
   "parquet",
   "end-grain",
   "wicker",
+  "leather",
   "metal-plate",
   "corrugated",
   "rust",
