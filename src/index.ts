@@ -92,6 +92,7 @@ import { slate as slateSurface } from "./surfaces/stone/slate";
 import { leaves as leavesSurface } from "./surfaces/ground/leaves";
 import { moss as mossSurface } from "./surfaces/ground/moss";
 import { ice as iceSurface } from "./surfaces/ground/ice";
+import { gravel as gravelSurface } from "./surfaces/ground/gravel";
 
 export { ASSETS, assetById } from "./assets";
 export { defaults, clean, random, withPreset } from "./core/params";
@@ -202,3 +203,4 @@ export const mud = flaeche(mudSurface);
 export const leaves = flaeche(leavesSurface);
 export const moss = flaeche(mossSurface);
 export const ice = flaeche(iceSurface);
+export const gravel = flaeche(gravelSurface);
