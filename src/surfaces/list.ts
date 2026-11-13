@@ -13,6 +13,7 @@ export const SURFACE_IDS = [
   "thatch",
   "bark",
   "parquet",
+  "end-grain",
   "wicker",
   "metal-plate",
   "corrugated",

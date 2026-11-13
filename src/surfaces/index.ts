@@ -13,6 +13,7 @@ import { concrete } from "./stone/concrete";
 import { plaster } from "./stone/plaster";
 import { marble } from "./stone/marble";
 import { parquet } from "./wood/parquet";
+import { endGrain } from "./wood/end-grain";
 import { wicker } from "./wood/wicker";
 import { corrugated } from "./metal/corrugated";
 import { rust } from "./metal/rust";
@@ -38,6 +39,7 @@ export const SURFACES: AnySurface[] = [
   thatch,
   bark,
   parquet,
+  endGrain,
   wicker,
   metalPlate,
   corrugated,
