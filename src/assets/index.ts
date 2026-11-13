@@ -47,6 +47,7 @@ import { marketStall } from "./props/market-stall";
 import { books } from "./props/books";
 import { tent } from "./props/tent";
 import { torch } from "./props/torch";
+import { banner } from "./props/banner";
 import { lantern } from "./props/lantern";
 import { ladder } from "./props/ladder";
 import { campfire } from "./props/campfire";
@@ -110,6 +111,7 @@ export const ASSETS: AnyAsset[] = [
   books,
   tent,
   torch,
+  banner,
   lantern,
   ladder,
   campfire,
