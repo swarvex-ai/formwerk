@@ -45,6 +45,8 @@ import { anchorIcon } from "./objects/anchor-icon";
 import { upload } from "./actions/upload";
 import { share } from "./actions/share";
 import { link } from "./actions/link";
+import { sun } from "./status/sun";
+import { moon } from "./status/moon";
 
 export const ICONS: AnyIcon[] = [
   home,
@@ -91,5 +93,7 @@ export const ICONS: AnyIcon[] = [
   upload,
   share,
   link,
+  sun,
+  moon,
 ];
 export const iconById = (id: string) => ICONS.find((i) => i.id === id);

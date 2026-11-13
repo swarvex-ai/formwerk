@@ -47,6 +47,8 @@ import { anchorIcon as anchorIconObj } from "./objects/anchor-icon";
 import { upload as uploadIcon } from "./actions/upload";
 import { share as shareIcon } from "./actions/share";
 import { link as linkIcon } from "./actions/link";
+import { sun as sunIcon } from "./status/sun";
+import { moon as moonIcon } from "./status/moon";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -101,3 +103,5 @@ export const anchorIcon = zeichen(anchorIconObj);
 export const upload = zeichen(uploadIcon);
 export const share = zeichen(shareIcon);
 export const link = zeichen(linkIcon);
+export const sun = zeichen(sunIcon);
+export const moon = zeichen(moonIcon);
