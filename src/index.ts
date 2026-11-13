@@ -86,6 +86,7 @@ import { snow as snowSurface } from "./surfaces/ground/snow";
 import { mud as mudSurface } from "./surfaces/ground/mud";
 import { flagstone as flagstoneSurface } from "./surfaces/stone/flagstone";
 import { leaves as leavesSurface } from "./surfaces/ground/leaves";
+import { moss as mossSurface } from "./surfaces/ground/moss";
 
 export { ASSETS, assetById } from "./assets";
 export { defaults, clean, random, withPreset } from "./core/params";
@@ -190,3 +191,4 @@ export const dirt = flaeche(dirtSurface);
 export const snow = flaeche(snowSurface);
 export const mud = flaeche(mudSurface);
 export const leaves = flaeche(leavesSurface);
+export const moss = flaeche(mossSurface);
