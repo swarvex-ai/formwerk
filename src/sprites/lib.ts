@@ -27,6 +27,7 @@ import { skeleton as skeletonSprite } from "./creatures/skeleton";
 import { rat as ratSprite } from "./creatures/rat";
 import { frog as frogSprite } from "./creatures/frog";
 import { chicken as chickenSprite } from "./creatures/chicken";
+import { pig as pigSprite } from "./creatures/pig";
 
 export { SPRITES, spriteById } from "./index";
 export { makeSheet, sheetJson, godotSpriteFrames, animationName, SPRITE_CATEGORIES } from "./define";
@@ -61,3 +62,4 @@ export const skeleton = bogen(skeletonSprite);
 export const rat = bogen(ratSprite);
 export const frog = bogen(frogSprite);
 export const chicken = bogen(chickenSprite);
+export const pig = bogen(pigSprite);
