@@ -11,6 +11,7 @@ import { drinks } from "./items/drinks";
 import { coin } from "./items/coin";
 import { gem } from "./items/gem";
 import { crown } from "./items/crown";
+import { scroll } from "./items/scroll";
 import { key } from "./items/key";
 import { chest } from "./items/chest";
 import { sword } from "./items/sword";
@@ -68,6 +69,7 @@ export const SPRITES: AnySprite[] = [
   coin,
   gem,
   crown,
+  scroll,
   key,
   chest,
   sword,
