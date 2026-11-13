@@ -51,6 +51,7 @@ import { boat } from "./vehicles/boat";
 import { tank } from "./vehicles/tank";
 import { wheelbarrow } from "./vehicles/wheelbarrow";
 import { anchor } from "./props/anchor";
+import { candlestick } from "./props/candlestick";
 
 export const ASSETS: AnyAsset[] = [
   chair,
@@ -103,5 +104,6 @@ export const ASSETS: AnyAsset[] = [
   tank,
   wheelbarrow,
   anchor,
+  candlestick,
 ];
 export const assetById = (id: string) => ASSETS.find((a) => a.id === id);
