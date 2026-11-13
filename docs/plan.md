@@ -245,13 +245,24 @@ task. Both were built on main in a scratch branch first (throne: 4 draw calls, 4
 |---|---|---|
 | #269 | model: throne (tall back, arms, cushion, finials, dais) | merged |
 | #270 | sound: horn (war horn, hunting horn, conch; one note) | merged |
-| #271 | fix: gravel stones at real size (tile 0.25 m, 8–16 cells) | in progress again (337 failed the bake at 2.64 %); brief lacks depth 0.009 |
+| #271 | fix: gravel stones at real size (tile 0.25 m, 8–16 cells) | merged (f792358) |
 | #272 | fix: upload and share legible in every combination | merged (332) |
 | #273 | sprite: crown (points, band with stones, glint) | merged |
-| #274 | surface: ashlar (dressed blocks, rock face; scratch-built on 40c27be, baked 0.47 %) | submitted (339, own) |
-| #275 | model: battlement (wall, walk, merlons, corbel course; scratch: 26/26, baked 0.02 %) | accepted (341) |
-| #276 | sprite: scroll (rolls, text lines, seal, unrolls; scratch: sprite tests pass) | submitted (340, own) |
-| #277 | model: banner (pole, crossbar, cloth with straight/point/swallowtail end, lozenge, cross foot; scratch: 26/26, baked 0.00 %) | open |
+| #274 | surface: ashlar (dressed blocks, rock face; scratch-built on 40c27be, baked 0.47 %) | merged |
+| #275 | model: battlement (wall, walk, merlons, corbel course; scratch: 26/26, baked 0.02 %) | merged |
+| #276 | sprite: scroll (rolls, text lines, seal, unrolls; scratch: sprite tests pass) | merged |
+| #277 | model: banner (pole, crossbar, cloth with straight/point/swallowtail end, lozenge, cross foot; scratch: 26/26, baked 0.00 %) | accepted, waiting for merge |
+
+## Milestone "Depth 16: forest" (estimate 5 tasks)
+
+Cut 2026-11-13 on base f792358, level B, no dependencies, paths disjoint except the union-merged registries. No icon
+task. All three were built on main in a scratch branch first.
+
+| Task | Asset | State |
+|---|---|---|
+| #278 | model: tree stump (saw/axe/broken cut, root flares; scratch: 26/26, baked 0.12 %, glb 0.11 %) | open |
+| #279 | sprite: deer (idle, walk, graze; antlers none/spikes/crown, fawn spots; scratch: core tests pass, sheet reads) | open |
+| #280 | sound: rustle (foliage swell, leaf grains, twig snaps; scratch: 25/25, max 1.32 s) | open |
 
 ## Next (lead, level D, not cut yet)
 
