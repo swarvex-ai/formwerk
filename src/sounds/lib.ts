@@ -53,6 +53,7 @@ import { pour as pourSound } from "./effects/pour";
 import { waves as wavesSound } from "./ambience/waves";
 import { shipBell as shipBellSound } from "./effects/ship-bell";
 import { writing as writingSound } from "./effects/writing";
+import { sleighBells as sleighBellsSound } from "./movement/sleigh-bells";
 
 export { SOUNDS, soundById } from "./index";
 export { makeSound, SOUND_CATEGORIES } from "./define";
@@ -121,3 +122,4 @@ export const pour = klang(pourSound);
 export const waves = klang(wavesSound);
 export const shipBell = klang(shipBellSound);
 export const writing = klang(writingSound);
+export const sleighBells = klang(sleighBellsSound);

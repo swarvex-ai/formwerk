@@ -52,6 +52,7 @@ import { pour } from "./effects/pour";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 import { writing } from "./effects/writing";
+import { sleighBells } from "./movement/sleigh-bells";
 
 export const SOUNDS: AnySound[] = [
   click,
@@ -105,5 +106,6 @@ export const SOUNDS: AnySound[] = [
   waves,
   shipBell,
   writing,
+  sleighBells,
 ];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);
