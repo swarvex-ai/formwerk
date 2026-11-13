@@ -86,6 +86,7 @@ import { dirt as dirtSurface } from "./surfaces/ground/dirt";
 import { snow as snowSurface } from "./surfaces/ground/snow";
 import { mud as mudSurface } from "./surfaces/ground/mud";
 import { flagstone as flagstoneSurface } from "./surfaces/stone/flagstone";
+import { slate as slateSurface } from "./surfaces/stone/slate";
 import { leaves as leavesSurface } from "./surfaces/ground/leaves";
 import { moss as mossSurface } from "./surfaces/ground/moss";
 import { ice as iceSurface } from "./surfaces/ground/ice";
@@ -172,6 +173,7 @@ const flaeche = <F extends Surface<any>>(f: F) => (values: SurfaceInput<F> = {},
   flaechenMaterial(machFlaeche(f, values, seed), repeat);
 export const cobblestone = flaeche(cobblestoneSurface);
 export const flagstone = flaeche(flagstoneSurface);
+export const slate = flaeche(slateSurface);
 export const planks = flaeche(planksSurface);
 export const thatch = flaeche(thatchSurface);
 export const bark = flaeche(barkSurface);

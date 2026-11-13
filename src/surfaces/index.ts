@@ -24,6 +24,7 @@ import { dirt } from "./ground/dirt";
 import { snow } from "./ground/snow";
 import { mud } from "./ground/mud";
 import { flagstone } from "./stone/flagstone";
+import { slate } from "./stone/slate";
 import { leaves } from "./ground/leaves";
 import { moss } from "./ground/moss";
 import { ice } from "./ground/ice";
@@ -31,6 +32,7 @@ import { ice } from "./ground/ice";
 export const SURFACES: AnySurface[] = [
   cobblestone,
   flagstone,
+  slate,
   bricks,
   tiles,
   shingles,

@@ -3,6 +3,7 @@
 export const SURFACE_IDS = [
   "cobblestone",
   "flagstone",
+  "slate",
   "bricks",
   "tiles",
   "shingles",
