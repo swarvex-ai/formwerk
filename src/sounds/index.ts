@@ -19,6 +19,7 @@ import { bow } from "./effects/bow";
 import { effort } from "./voice/effort";
 import { pain } from "./voice/pain";
 import { creature } from "./voice/creature";
+import { rooster } from "./voice/rooster";
 import { babble } from "./voice/babble";
 import { wind } from "./ambience/wind";
 import { typing } from "./ui/typing";
@@ -77,6 +78,7 @@ export const SOUNDS: AnySound[] = [
   effort,
   pain,
   creature,
+  rooster,
   babble,
   wind,
   rain,
