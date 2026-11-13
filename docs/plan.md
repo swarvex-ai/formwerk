@@ -121,7 +121,8 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #207 | sprite: crab (walk, pinch) | merged |
 | #211 | icons: anchor-icon, compass, globe | closed, replaced by #220 and #221 (four attempts) |
 | #213 | icon: globe from a coordinate sketch | closed, replaced by #221 |
-| #220 | icons: anchor-icon, compass from a coordinate sketch | in progress (fifth attempt overall; last one sent back by peer review) |
+| #220 | icons: anchor-icon (compass taken out in review of 278) | rework: anchor only, with ring as stroke and horizontal outward barbs (verified by a sweep) |
+| – | icon: compass, new design | my own design work first: the #220 sketch fails 3204 of 5760 combinations (ticks force L to its minimum, the hollow south half has no room); find a design that passes a full sweep, then cut it |
 | #221 | icon: globe from a coordinate sketch (depends on #220) | blocked |
 | #209 | sound: waves (ambience loop) | merged |
 | #210 | sound: ship bell (`shipBell`) | merged |
