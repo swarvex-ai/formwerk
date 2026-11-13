@@ -7,6 +7,7 @@ import { knight } from "./characters/knight";
 import { slime } from "./creatures/slime";
 import { potion } from "./items/potion";
 import { food } from "./items/food";
+import { drinks } from "./items/drinks";
 import { coin } from "./items/coin";
 import { gem } from "./items/gem";
 import { key } from "./items/key";
@@ -49,6 +50,7 @@ export const SPRITES: AnySprite[] = [
   cat,
   potion,
   food,
+  drinks,
   coin,
   gem,
   key,
