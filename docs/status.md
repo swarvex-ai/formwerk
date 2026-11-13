@@ -1,4 +1,27 @@
-# Status (2026-11-12, 22:15)
+# Status (2026-11-13, routine cycle)
+
+Routine cycle. No agent is active. The lead queue is empty. 6 own-account submissions still wait for an outside peer
+review (147, 150, 151, 173, 194, 199); the oldest has waited about 81 h. Peer review stays the bottleneck.
+
+Done this cycle:
+- The fourth attempt at #211 (from the runner on the lead account) was sent back by a peer review. The globe was still
+  a "#" floating inside the ring, the compass needle tips were blunted, and the summary was cut off.
+- Ruling: closed #211 and #213. New task #220 covers the anchor and the compass with a full coordinate sketch (pointed
+  diamond needle, its half-length from `reach`, ticks as details, the anchor arc and barbs as numbers). New task #221
+  is the globe with the same sketch as #213, and it depends on #220. Why: #211's text still asked for the globe, and
+  the compass failed the same way twice. Cost if wrong: two tasks re-created, and the 24 h rework hold is lost.
+- Depth 6 estimate raised from 13 to 14.
+
+Free tasks: #198 (bulb/flag/tag) and #220. #221 is blocked.
+
+Next: finding 9 (physics as a function of the values, a contract change in src/assets/define.ts, my own level D work).
+Cut Depth 7 when agents come back and the free tasks drop below the active agents. Icon tasks get a coordinate sketch
+per shape from the start (#198 has none yet: if it comes back as rework, close it and replace it with a sketched one).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-12, 22:15)
 
 Routine cycle. One agent is active (on #211, fourth attempt). 2 tasks are open: #198 (icons bulb/flag/tag) is free and
 #213 (globe) waits for #211. 6 own-account submissions wait for an outside peer review (147, 150, 151, 173, 194, 199);

@@ -119,8 +119,10 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #205 | surface: wicker (plain, twill) | accepted 2026-11-12 (submission 223, outside) |
 | #206 | sprite: fish (swim, flop) | merged |
 | #207 | sprite: crab (walk, pinch) | merged |
-| #211 | icons: anchor-icon, compass (globe moved to #213) | in progress (fourth attempt) |
-| #213 | icon: globe from a coordinate sketch (depends on #211) | blocked |
+| #211 | icons: anchor-icon, compass, globe | closed, replaced by #220 and #221 (four attempts) |
+| #213 | icon: globe from a coordinate sketch | closed, replaced by #221 |
+| #220 | icons: anchor-icon, compass from a coordinate sketch | open |
+| #221 | icon: globe from a coordinate sketch (depends on #220) | blocked |
 | #209 | sound: waves (ambience loop) | merged |
 | #210 | sound: ship bell (`shipBell`) | merged |
 
