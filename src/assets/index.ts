@@ -2,6 +2,7 @@
 // each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnyAsset } from "./define";
 import { chair } from "./furniture/chair";
+import { throne } from "./furniture/throne";
 import { table } from "./furniture/table";
 import { shelf } from "./furniture/shelf";
 import { workbench } from "./furniture/workbench";
@@ -62,6 +63,7 @@ import { candlestick } from "./props/candlestick";
 
 export const ASSETS: AnyAsset[] = [
   chair,
+  throne,
   table,
   shelf,
   workbench,

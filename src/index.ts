@@ -5,6 +5,7 @@ import type { Object3D } from "three";
 import type { Values } from "./core/params";
 import { make, type Asset } from "./assets/define";
 import { chair as chairAsset } from "./assets/furniture/chair";
+import { throne as throneAsset } from "./assets/furniture/throne";
 import { table as tableAsset } from "./assets/furniture/table";
 import { shelf as shelfAsset } from "./assets/furniture/shelf";
 import { workbench as workbenchAsset } from "./assets/furniture/workbench";
@@ -111,6 +112,7 @@ type Input<A extends Asset<any>> = Partial<Values<A["params"]>> & { preset?: Ext
 const bauer = <A extends Asset<any>>(a: A) => (values: Input<A> = {}, seed = 1): Object3D => make(a, values, seed);
 
 export const chair = bauer(chairAsset);
+export const throne = bauer(throneAsset);
 export const table = bauer(tableAsset);
 export const shelf = bauer(shelfAsset);
 export const workbench = bauer(workbenchAsset);
