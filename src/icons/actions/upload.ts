@@ -30,7 +30,9 @@ export const upload = defineIcon({
       // The arrow leaves the tray upward, its tail standing clear above the tray's line
       const unten = -(pen.width + CLEAR), roh = (y: number) => unten - y; // y from the tail (0) to the tip (l)
       if (p.head === "filled") {
-        const schaft = Math.max(2, pen.width / 2 + 0.9), kopf = schaft + 2.5, hals = l - kopf;
+        const schaft = Math.max(2, pen.width / 2 + 0.9);
+        const kopf = schaft + (tief > 0 ? Math.max(1.6, 2.5 - tief * 0.2) : 2.5);
+        const hals = l - kopf;
         const pts: Pt[] = [[-schaft, 0], [schaft, 0], [schaft, hals], [kopf, hals], [0, l], [-kopf, hals], [-schaft, hals]];
         teile.push(area(polygon(...pts.map(([x, y]): Pt => [x, roh(y)]))));
       } else {

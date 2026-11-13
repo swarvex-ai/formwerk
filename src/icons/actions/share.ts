@@ -35,14 +35,15 @@ export const share = defineIcon({
     }
     const knoten = RICHTUNG.map(([x, y]): Pt => [12 + x * p.spread, 12 + y * p.spread]);
     const teile: Part[] = [];
+    const r = Math.max(p.nodeSize, pen.width / 2 + 0.6);
     // Both lines run from the left node to the two right ones, standing clear of the dots at both ends
-    const abstand = p.nodeSize + pen.width + 1;
+    const abstand = r + pen.width + 1;
     for (const z of [1, 2]) {
       const [a, b] = [knoten[0], knoten[z]], la = Math.hypot(b[0] - a[0], b[1] - a[1]);
       const dx = (b[0] - a[0]) / la, dy = (b[1] - a[1]) / la;
       if (la - 2 * abstand > 0.9) teile.push(stroke(line([a[0] + dx * abstand, a[1] + dy * abstand], [b[0] - dx * abstand, b[1] - dy * abstand])));
     }
-    for (const q of knoten) teile.push(area(circle(q, p.nodeSize)));
+    for (const q of knoten) teile.push(area(circle(q, r)));
     return centre(teile, pen);
   },
 });
