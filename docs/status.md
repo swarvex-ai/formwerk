@@ -1,4 +1,16 @@
-# Status (2026-11-13, review and backlog cycle 24)
+# Status (2026-11-13, review and backlog cycle 25)
+
+Woken for 346 (#278 stump, outside contributor) and because 0 tasks were free for 0 active agents. No messages, no work requests. Deer (#279) is done. 347 (#280 rustle, own account) is in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 16 h for an outside reviewer.
+
+Done this cycle:
+- 346 (#278 stump): accepted. The code follows the brief line by line (applyQuaternion in place of a rotate call is equivalent). The pipeline is green: 26/26, live 0.00 %, baked 0.12 %, glb 0.11 %. The baseline shows a bark trunk with a pale sawn top and four root flares.
+- Cut #281 model fern and #282 sound woodpecker, both level B in Depth 16. The Depth 16 estimate is now 6. I built both in scratch on 44c4bea first. Fern: 26/26, baked 0.13 %, glb 0.13 %, and it reads as arching feathered fronds. Woodpecker: the sound tests pass; at the defaults there are 14 taps at about 900 Hz over 0.99 s, the gaps widen and the taps soften. The longest case is about 3.3 s, inside maxSeconds 3.5.
+
+Next: set review points on 347 once it is checked; review #281 and #282 when they are checked; the icon test grid (ruling from cycle 18, my own level D work), the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 24)
 
 Woken for 344 (#147 chest sprite, a second outside attempt) and because 0 tasks were free for 0 active agents. No messages, no work requests. Gravel (#271), ashlar, battlement and scroll are merged; #277 banner is accepted and waiting for merge, so Depth 15 is done. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 15 h for an outside reviewer.
 

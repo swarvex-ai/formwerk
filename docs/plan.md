@@ -253,16 +253,18 @@ task. Both were built on main in a scratch branch first (throne: 4 draw calls, 4
 | #276 | sprite: scroll (rolls, text lines, seal, unrolls; scratch: sprite tests pass) | merged |
 | #277 | model: banner (pole, crossbar, cloth with straight/point/swallowtail end, lozenge, cross foot; scratch: 26/26, baked 0.00 %) | accepted, waiting for merge |
 
-## Milestone "Depth 16: forest" (estimate 5 tasks)
+## Milestone "Depth 16: forest" (estimate 6 tasks)
 
 Cut 2026-11-13 on base f792358, level B, no dependencies, paths disjoint except the union-merged registries. No icon
 task. All three were built on main in a scratch branch first.
 
 | Task | Asset | State |
 |---|---|---|
-| #278 | model: tree stump (saw/axe/broken cut, root flares; scratch: 26/26, baked 0.12 %, glb 0.11 %) | open |
-| #279 | sprite: deer (idle, walk, graze; antlers none/spikes/crown, fawn spots; scratch: core tests pass, sheet reads) | open |
-| #280 | sound: rustle (foliage swell, leaf grains, twig snaps; scratch: 25/25, max 1.32 s) | open |
+| #278 | model: tree stump (saw/axe/broken cut, root flares; scratch: 26/26, baked 0.12 %, glb 0.11 %) | 346 accepted 2026-11-13 |
+| #279 | sprite: deer (idle, walk, graze; antlers none/spikes/crown, fawn spots; scratch: core tests pass, sheet reads) | done |
+| #280 | sound: rustle (foliage swell, leaf grains, twig snaps; scratch: 25/25, max 1.32 s) | submission 347 (own account), in the checks |
+| #281 | model: fern (arching feathered fronds, brown crown; scratch on 44c4bea: 26/26, baked 0.13 %, glb 0.13 %) | open |
+| #282 | sound: woodpecker (drumming roll that slows and fades; scratch on 44c4bea: tests pass, 0.99 s at defaults) | open |
 
 ## Next (lead, level D, not cut yet)
 
