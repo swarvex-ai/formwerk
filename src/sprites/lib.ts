@@ -33,6 +33,7 @@ import { frog as frogSprite } from "./creatures/frog";
 import { chicken as chickenSprite } from "./creatures/chicken";
 import { pig as pigSprite } from "./creatures/pig";
 import { cat as catSprite } from "./creatures/cat";
+import { hare as hareSprite } from "./creatures/hare";
 import { wolf as wolfSprite } from "./creatures/wolf";
 import { snail as snailSprite } from "./creatures/snail";
 
@@ -74,6 +75,7 @@ export const frog = bogen(frogSprite);
 export const chicken = bogen(chickenSprite);
 export const pig = bogen(pigSprite);
 export const cat = bogen(catSprite);
+export const hare = bogen(hareSprite);
 export const owl = bogen(owlSprite);
 export const wolf = bogen(wolfSprite);
 export const snail = bogen(snailSprite);
