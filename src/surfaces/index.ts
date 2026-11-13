@@ -26,6 +26,7 @@ import { mud } from "./ground/mud";
 import { flagstone } from "./stone/flagstone";
 import { leaves } from "./ground/leaves";
 import { moss } from "./ground/moss";
+import { ice } from "./ground/ice";
 
 export const SURFACES: AnySurface[] = [
   cobblestone,
@@ -53,5 +54,6 @@ export const SURFACES: AnySurface[] = [
   mud,
   leaves,
   moss,
+  ice,
 ];
 export const surfaceById = (id: string) => SURFACES.find((s) => s.id === id);
