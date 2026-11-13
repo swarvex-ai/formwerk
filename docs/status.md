@@ -1,4 +1,17 @@
-# Status (2026-11-13, review and backlog cycle 14)
+# Status (2026-11-13, review cycle 15)
+
+Woken for submission 306 (#221 globe, outside contributor), which now passes its checks. 1 agent is active and 4 tasks are free. No open messages, no work requests. Peer review stays the bottleneck: 151, 173, 194, 199, 262 and 297 are own-account submissions waiting for an outside reviewer (the oldest has waited ~38 h by the metrics). 312 (sled, own account) is in the checks. 313 (ice, outside), 314 (hare, own), 315 (sleigh bells, own), 316 (slate, own) and 317 (mine cart, outside) are submitted.
+
+Done this cycle:
+- 306 (#221 globe): sent back (rework). The code follows my sketch exactly, but my sketch is wrong. The pipeline is green only because its 10 random cases (seed 42) missed the bad ones. A scratch sweep over every meridians/latitudes value, tilt in steps of 6, 4 strokes, both corner types and 3 styles fails legibility() in 802 of 1296 cases. Cause 1, filled style: the grid ends on ri and its caps reach R, so only hw of rim remains and it breaks at stroke ≤ 1.5. Cause 2, outline style: the meridian ellipse is tangent to the rim at the poles, and the slivers there change the hole count. A lens of two arcs with endpoints at R − hw − 0.4 still fails 44 %. I closed #221.
+- Ruling: no globe task goes out until I have a geometry with 0 failures in the sweep. Options to try: drop latitudes = 2; keep the grid one CLEAR off the rim with caps (as framed() does) and test whether it still reads as a globe; or give the lens a pole cap. Cost if wrong: the globe stays missing from Depth 6 for a while.
+- Lesson (in memory): before cutting an icon brief, sweep every combination; a green pipeline is not enough for icons.
+
+Next: review 313 (ice) and 317 (mine cart) once checked; set review points on the own-account submissions once checked (312, 314, 315, 316). Then the globe geometry sweep, the rig hinge contract check, and findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 14)
 
 Woken for submission 310 (#250 bucket retry, outside) and because 0 tasks were free for 2 active agents. No open
 messages, no work requests. Peer review stays the bottleneck: 147, 150, 151, 173, 194, 199, 262, 297 and now

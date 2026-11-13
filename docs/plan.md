@@ -123,7 +123,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #213 | icon: globe from a coordinate sketch | closed, replaced by #221 |
 | #220 | icons: anchor-icon (compass taken out in review of 278) | accepted (295): ring as `area`, `arms` number in °, baseline committed |
 | – | icon: compass, new design | my own design work first: the #220 sketch fails 3204 of 5760 combinations (ticks force L to its minimum, the hollow south half has no room); find a design that passes a full sweep, then cut it |
-| #221 | icon: globe from a coordinate sketch (depends on #220) | blocked |
+| #221 | icon: globe from a coordinate sketch (depends on #220) | closed 2026-11-13: the brief geometry fails legibility in 802 of 1296 combinations (306 sent back); the lead verifies a new geometry before recutting |
 | #209 | sound: waves (ambience loop) | merged |
 | #210 | sound: ship bell (`shipBell`) | merged |
 
