@@ -34,6 +34,7 @@ import { chicken as chickenSprite } from "./creatures/chicken";
 import { pig as pigSprite } from "./creatures/pig";
 import { cat as catSprite } from "./creatures/cat";
 import { wolf as wolfSprite } from "./creatures/wolf";
+import { snail as snailSprite } from "./creatures/snail";
 
 export { SPRITES, spriteById } from "./index";
 export { makeSheet, sheetJson, godotSpriteFrames, animationName, SPRITE_CATEGORIES } from "./define";
@@ -75,3 +76,4 @@ export const pig = bogen(pigSprite);
 export const cat = bogen(catSprite);
 export const owl = bogen(owlSprite);
 export const wolf = bogen(wolfSprite);
+export const snail = bogen(snailSprite);
