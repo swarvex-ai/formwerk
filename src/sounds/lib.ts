@@ -53,6 +53,7 @@ import { swordDraw as swordDrawSound } from "./effects/sword-draw";
 import { pour as pourSound } from "./effects/pour";
 import { waves as wavesSound } from "./ambience/waves";
 import { shipBell as shipBellSound } from "./effects/ship-bell";
+import { horn as hornSound } from "./effects/horn";
 import { writing as writingSound } from "./effects/writing";
 import { sleighBells as sleighBellsSound } from "./movement/sleigh-bells";
 
@@ -123,5 +124,6 @@ export const swordDraw = klang(swordDrawSound);
 export const pour = klang(pourSound);
 export const waves = klang(wavesSound);
 export const shipBell = klang(shipBellSound);
+export const horn = klang(hornSound);
 export const writing = klang(writingSound);
 export const sleighBells = klang(sleighBellsSound);

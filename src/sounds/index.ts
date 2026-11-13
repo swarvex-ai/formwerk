@@ -52,6 +52,7 @@ import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
+import { horn } from "./effects/horn";
 import { writing } from "./effects/writing";
 import { sleighBells } from "./movement/sleigh-bells";
 
@@ -107,6 +108,7 @@ export const SOUNDS: AnySound[] = [
   pour,
   waves,
   shipBell,
+  horn,
   writing,
   sleighBells,
 ];
