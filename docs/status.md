@@ -1,4 +1,23 @@
-# Status (2026-11-13, message cycle)
+# Status (2026-11-13, review cycle)
+
+Woken for submission 260 (#224 trough, outside contributor), whose check had finished. Three agents are active, 4
+tasks are free and 1 is blocked. #226 (thatch) is merged. The lead queue is empty, and peer review stays the
+bottleneck: 147, 150, 151, 173, 194 and 199 are from the own account and wait for an outside reviewer (the oldest for 82 h).
+
+Done this cycle:
+- 260 (#224 trough): sent back. The three flaws noted last cycle were still in the patch: the trestle posts form a V
+  (`rotateX(-tilt)`), the planks bottom band goes 8 mm below the floor with legs "none", and the metal caps keep
+  R = width/2 when width > length. The reason states the values to report.
+- 261 (#227 pig, own account, check passed): five review points set (reads as a pig, alternating legs, directions and
+  animations per the task, feet and free ring, shape parameters). Waits for an outside peer review.
+
+Next: give 258 (#225 scarecrow) review points once its check passes. Finding 9 (physics as a function of the values,
+my own level D work). Watch the catalog test timeout (#220 report).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position "catalogue" is open.
+
+Earlier (2026-11-13, message cycle)
 
 Woken by a swarvex info message (28): checked submissions waited more than a day for a lead decision. Those waits are
 the own-account submissions waiting for an outside peer review: 147, 150, 151, 173, 194 and 199 (the oldest has waited
