@@ -43,6 +43,7 @@ import { pin as pinIcon } from "./objects/pin";
 import { bulb as bulbIcon } from "./objects/bulb";
 import { flag as flagIcon } from "./status/flag";
 import { tag as tagIcon } from "./objects/tag";
+import { anchorIcon as anchorIconObj } from "./objects/anchor-icon";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -93,3 +94,4 @@ export const pin = zeichen(pinIcon);
 export const bulb = zeichen(bulbIcon);
 export const flag = zeichen(flagIcon);
 export const tag = zeichen(tagIcon);
+export const anchorIcon = zeichen(anchorIconObj);
