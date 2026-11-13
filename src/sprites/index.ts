@@ -16,6 +16,7 @@ import { shield } from "./items/shield";
 import { life } from "./items/life";
 import { bomb } from "./items/bomb";
 import { tools } from "./items/tools";
+import { bee } from "./creatures/bee";
 import { bat } from "./creatures/bat";
 import { bird } from "./creatures/bird";
 import { fish } from "./creatures/fish";
@@ -37,6 +38,7 @@ export const SPRITES: AnySprite[] = [
   wizard,
   knight,
   slime,
+  bee,
   bat,
   bird,
   fish,
