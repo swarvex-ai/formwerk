@@ -1,4 +1,17 @@
-# Status (2026-11-13, review and backlog cycle 25)
+# Status (2026-11-13, review and backlog cycle 26)
+
+Woken for 349 (#281 fern, outside contributor) and because 0 tasks were free for 0 active agents. No messages, no work requests. Depth 16 is complete: stump, rustle, woodpecker and fern are merged, deer is done. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 17 h for an outside reviewer.
+
+Done this cycle:
+- 349 (#281 fern): accepted, now merged (ded2b6e). The code follows the brief line for line. On main after stump and rustle the patch applies 3-way and the core tests pass 26/26. The pipeline shows 2 draw calls and 446 triangles, baked and glb both 0.13 %.
+- Cut milestone "Depth 17: pond" (estimate 4): #283 sound croak, #284 sprite duck, #285 model reeds, all level B. I built each in a scratch worktree on b32d4fa first, and each brief carries the full verified file. Croak: tests pass, 1.6 s at the defaults, the longest case 3.82 s of maxSeconds 3.9 (voice limit 4 s). Duck: 26 tests green, and the sheet reads in every preset. Reeds: 26/26, 2 draw calls, 778 triangles (1984 at the maximum), baked 0.10 %, glb 0.11 %.
+- Risk seen while building reeds: a bare `npx vitest run tests/core` without FORMWERK_ONLY can fail on random sun and moon icon cases. This belongs to the icon test grid work below. Check it before the next icon task.
+
+Next: review #283–#285 when they are checked; the icon test grid (ruling from cycle 18, my own level D work, now also the sun/moon random failures), the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 25)
 
 Woken for 346 (#278 stump, outside contributor) and because 0 tasks were free for 0 active agents. No messages, no work requests. Deer (#279) is done. 347 (#280 rustle, own account) is in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 16 h for an outside reviewer.
 

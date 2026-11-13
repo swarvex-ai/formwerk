@@ -260,11 +260,22 @@ task. All three were built on main in a scratch branch first.
 
 | Task | Asset | State |
 |---|---|---|
-| #278 | model: tree stump (saw/axe/broken cut, root flares; scratch: 26/26, baked 0.12 %, glb 0.11 %) | 346 accepted 2026-11-13 |
+| #278 | model: tree stump (saw/axe/broken cut, root flares; scratch: 26/26, baked 0.12 %, glb 0.11 %) | merged (49e175f) |
 | #279 | sprite: deer (idle, walk, graze; antlers none/spikes/crown, fawn spots; scratch: core tests pass, sheet reads) | done |
-| #280 | sound: rustle (foliage swell, leaf grains, twig snaps; scratch: 25/25, max 1.32 s) | submission 347 (own account), in the checks |
-| #281 | model: fern (arching feathered fronds, brown crown; scratch on 44c4bea: 26/26, baked 0.13 %, glb 0.13 %) | open |
-| #282 | sound: woodpecker (drumming roll that slows and fades; scratch on 44c4bea: tests pass, 0.99 s at defaults) | open |
+| #280 | sound: rustle (foliage swell, leaf grains, twig snaps; scratch: 25/25, max 1.32 s) | merged (b32d4fa) |
+| #281 | model: fern (arching feathered fronds, brown crown; scratch on 44c4bea: 26/26, baked 0.13 %, glb 0.13 %) | merged (ded2b6e) |
+| #282 | sound: woodpecker (drumming roll that slows and fades; scratch on 44c4bea: tests pass, 0.99 s at defaults) | merged (18b36ae) |
+
+## Milestone "Depth 17: pond" (estimate 4 tasks)
+
+Cut 2026-11-13 on base b32d4fa, level B, no dependencies, paths disjoint except the union-merged registries. No icon
+or surface task. All three were built on main in a scratch worktree first, and each brief carries the full file.
+
+| Task | Asset | State |
+|---|---|---|
+| #283 | sound: croak (pulsed frog calls; common frog, bullfrog, tree frog; scratch: tests pass, 1.6 s at defaults, longest 3.82 s of 3.9) | open |
+| #284 | sprite: duck (idle, walk, swim; mallard, hen, duckling, farm duck; scratch: 26 tests green, sheet reads) | open |
+| #285 | model: reeds (cattail, common reed, sedge; scratch: 26/26, 2 draw calls, 778 triangles, baked 0.10 %, glb 0.11 %) | open |
 
 ## Next (lead, level D, not cut yet)
 
