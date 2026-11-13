@@ -1,4 +1,16 @@
-# Status (2026-11-13, review cycle 19)
+# Status (2026-11-13, review and backlog cycle 20)
+
+Woken for 334 (#147 chest sprite, outside contributor) and because 0 tasks were free for 1 active agent. No messages, no work requests. 335 (#273 crown, outside) and 336 (#185 cauldron, own account) are in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions that have waited about 14 h for an outside reviewer.
+
+Done this cycle:
+- 334 (#147 chest sprite): sent back (rework). The tests are green and it reads as a chest. But in the last frame of `open`, the frame a game holds, the lid floats free of the body: row 5 is empty, and rows 5–6 at gold none/few. The reason names the rows to fill (the inside of the lid at rows 4–7, with the trim bands continued). My brief's "lid rising" was ambiguous.
+- Cut #274 surface ashlar (Depth 15, level B, role materials). I built it in scratch on 40c27be first: core tests green, tiles ok, baked vs live 0.47 %, and it reads as a coursed block wall. The scratch copy is in /tmp/ashlar in the sandbox only. Depth 15 estimate is now 7.
+
+Next: review 335 (crown) once checked, set review points on 336 (cauldron, own) once checked, and review the chest rework. Then the icon test grid (ruling from cycle 18, my own level D work), the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 19)
 
 Woken for 332 (#272 upload/share legibility fix, outside contributor). 2 agents are active. Before this cycle 1 task was free, and now 2 are free (#271 gravel fix, #273 crown). No messages. Throne, horn and sun/moon are merged. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions that have waited about 13 h for an outside reviewer.
 
