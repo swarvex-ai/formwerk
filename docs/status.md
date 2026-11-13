@@ -1,4 +1,17 @@
-# Status (2026-11-13, review and backlog cycle 20)
+# Status (2026-11-13, review and backlog cycle 21)
+
+Woken for 335 (#273 crown, outside contributor) and because 0 tasks were free for 2 active agents. No messages, no work requests. Cauldron (336) is merged. #268 pickaxe and #274 ashlar are submitted and in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions that have waited about 14 h for an outside reviewer.
+
+Done this cycle:
+- 335 (#273 crown): accepted. The code follows the brief line by line. Sprite tests 106/106, and `test:sprite` gives the same pixels as the reference. The sheet reads as a crown.
+- 337 (#271 gravel, own account): the check fails the bake at 2.64 % (allowed 2.5 %). The patch follows my brief, so the fault is in the brief. Normal slope = depth / tile (src/surfaces/define.ts:51), so tile 0.25 with depth 0.035 makes the relief 4× steeper, and 3.5 cm of relief on 2 cm stones is not real gravel anyway. Measured: with `depth: 0.009` the bake is 2.28 %, and main itself is at 2.26 % (gravel is close to the limit even on main). Math.floor instead (12 cells) gives 2.35 % but does not fix the slope. A rework was refused while the task is still in the checks. Next cycle: if #271 is back in the pool, close it and recut with `depth: 0.009` added, or send 337 back with that reason once it is checked.
+- Cut #275 model battlement (architecture) and #276 sprite scroll (items), both level B in Depth 15, both built in scratch first (battlement 26/26, baked 0.02 %, glb 0.03 %; scroll sprite tests pass, sheet reads). Depth 15 estimate is now 9.
+
+Next: gravel (above); review #268, #274, #275, #276 when checked; the icon test grid (ruling from cycle 18, my own level D work), the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9. Gravel sits at 2.26 % of 2.5 % on main: a future ruling may lower its cell clamp.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 20)
 
 Woken for 334 (#147 chest sprite, outside contributor) and because 0 tasks were free for 1 active agent. No messages, no work requests. 335 (#273 crown, outside) and 336 (#185 cauldron, own account) are in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions that have waited about 14 h for an outside reviewer.
 
