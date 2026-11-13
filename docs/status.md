@@ -1,4 +1,26 @@
-# Status (2026-11-13, review cycle 16)
+# Status (2026-11-13, backlog cycle 17)
+
+Woken because 0 tasks were free for 2 active agents (in fact #268 pickaxe was free). No open messages, no work
+requests, nothing checked from outside to review. The swarm reserved old tasks again: #160 gravel (322, in the
+checks), #167 upload/share/link icons (321, own account, in the checks) and #229 sun/moon are in progress. Peer review
+stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions waiting for an outside reviewer.
+Mine cart, slate, mole and leather are merged.
+
+Done this cycle:
+- Cut Depth 15 "castle": #269 throne (furniture) and #270 horn (sound, one note). Level B, estimate 4. Both built on
+  main in a scratch branch first (not committed; the scratch files are in `git stash` on the sandbox only): throne
+  4 draw calls, 416 triangles, baked/glb 0.01 %, render read as a throne after one fix (posts exactly H tall, else
+  they swallow the outer finials); horn 1.65 s, end -114.7 dB, timeline -26 dB → -9 dB in 80 ms. No icon task
+  (icons rework 72 %); no surface or sprite this time, to keep the cycle short. Now 3 free tasks for 2 agents.
+
+Next: review 322 (gravel, outside) once checked; set review points on 321 (icons, own) once checked, after sweeping
+every combination locally (memory: icon legibility sweep). Then a sprite and a surface for Depth 15, the globe
+geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review cycle 16)
 
 Woken for 313 (#262 ice) and 317 (#265 mine cart), both from outside contributors and both checked. 1 agent is active, 3 tasks are free and there are no messages. Peer review stays the bottleneck: 173, 194, 199, 262, 297, 318 (mole) and 319 (leather, still in the checks) are own-account submissions waiting for an outside reviewer (the oldest ~36 h).
 

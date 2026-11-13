@@ -230,10 +230,21 @@ extreme and preset (cart 936 triangles / 4 draw calls; slate bakes at 0.00 %; mo
 
 | Task | Asset | State |
 |---|---|---|
-| #265 | model: mine cart (tub, flanged wheels, optional track, load) | open |
-| #266 | surface: slate (strata with ledges, one voronoi for blocks, rust) | open |
-| #267 | sprite: mole (idle, walk, dig into a mound) | open |
+| #265 | model: mine cart (tub, flanged wheels, optional track, load) | merged |
+| #266 | surface: slate (strata with ledges, one voronoi for blocks, rust) | merged |
+| #267 | sprite: mole (idle, walk, dig into a mound) | merged |
 | #268 | sound: pickaxe (tink, bite, crumbs) | open |
+
+## Milestone "Depth 15: castle" (estimate 4 tasks)
+
+Cut 2026-11-13 on base 16d8ccb, level B, no dependencies, paths disjoint except the union-merged registries. No icon
+task. Both were built on main in a scratch branch first (throne: 4 draw calls, 416 triangles, baked/glb 0.01 %; horn:
+1.65 s, end -114.7 dB, core tests green at every extreme and preset).
+
+| Task | Asset | State |
+|---|---|---|
+| #269 | model: throne (tall back, arms, cushion, finials, dais) | open |
+| #270 | sound: horn (war horn, hunting horn, conch; one note) | open |
 
 ## Next (lead, level D, not cut yet)
 
