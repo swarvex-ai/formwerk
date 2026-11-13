@@ -3,6 +3,7 @@
 import type { AnySurface } from "./define";
 import { cobblestone } from "./stone/cobblestone";
 import { planks } from "./wood/planks";
+import { thatch } from "./wood/thatch";
 import { bark } from "./wood/bark";
 import { metalPlate } from "./metal/metal-plate";
 import { bricks } from "./stone/bricks";
@@ -30,6 +31,7 @@ export const SURFACES: AnySurface[] = [
   plaster,
   marble,
   planks,
+  thatch,
   bark,
   parquet,
   wicker,
