@@ -44,6 +44,9 @@ import { bulb as bulbIcon } from "./objects/bulb";
 import { flag as flagIcon } from "./status/flag";
 import { tag as tagIcon } from "./objects/tag";
 import { anchorIcon as anchorIconObj } from "./objects/anchor-icon";
+import { upload as uploadIcon } from "./actions/upload";
+import { share as shareIcon } from "./actions/share";
+import { link as linkIcon } from "./actions/link";
 
 export { ICONS, iconById } from "./index";
 export { makeIcon, ICON_CATEGORIES, STYLE } from "./define";
@@ -95,3 +98,6 @@ export const bulb = zeichen(bulbIcon);
 export const flag = zeichen(flagIcon);
 export const tag = zeichen(tagIcon);
 export const anchorIcon = zeichen(anchorIconObj);
+export const upload = zeichen(uploadIcon);
+export const share = zeichen(shareIcon);
+export const link = zeichen(linkIcon);

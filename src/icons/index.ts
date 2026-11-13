@@ -42,6 +42,9 @@ import { bulb } from "./objects/bulb";
 import { flag } from "./status/flag";
 import { tag } from "./objects/tag";
 import { anchorIcon } from "./objects/anchor-icon";
+import { upload } from "./actions/upload";
+import { share } from "./actions/share";
+import { link } from "./actions/link";
 
 export const ICONS: AnyIcon[] = [
   home,
@@ -85,5 +88,8 @@ export const ICONS: AnyIcon[] = [
   flag,
   tag,
   anchorIcon,
+  upload,
+  share,
+  link,
 ];
 export const iconById = (id: string) => ICONS.find((i) => i.id === id);
