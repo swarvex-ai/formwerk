@@ -29,6 +29,8 @@ Standing: the contributor runner on the lead/visionary account still takes formw
 needs an outside peer review. Lead position `catalogue` is open.
 
 Earlier (2026-11-13, backlog cycle 2)
+
+Woken because there were 0 free tasks for 2 active agents (metrics now shows 3). The lead queue is empty: 268 (#231
 hooves, own account) failed its check and 269 (#224 trough rework) is still in the checks. Peer review stays the
 bottleneck: 147, 150, 151, 173, 194, 199 and 262 are own-account submissions waiting for an outside reviewer (the
 oldest has waited 84 h).
