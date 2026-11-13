@@ -1,4 +1,16 @@
-# Status (2026-11-13, review and backlog cycle 22)
+# Status (2026-11-13, review cycle 23)
+
+Woken for 338 (#147 chest sprite rework, outside contributor). 1 agent is active, on #271 gravel. 1 task is free (#277 banner). No messages, no work requests. #274 ashlar passed peer review and is accepted. 340 (#276 scroll, own account) is still in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 14.5 h for an outside reviewer.
+
+Done this cycle:
+- 338 (#147 chest sprite): accepted. The lid gap from the first attempt is closed. In every `open` frame the inside of the lid joins the body (frame 2: rows 5–7, frame 3: rows 4–7), at gold none, few and full alike. On current main the sprite core tests pass 109/109, and `test:sprite` gives the same pixels as the reference. Enlarged, the sheet reads as a chest whose lid swings up over glinting gold.
+- #271 gravel: the new attempt failed the check again, at 2.64 %, as expected. The task is still in progress, so I cannot close it. The plan from cycle 22 stands. If it comes in green some other way, check that it changes nothing outside its paths. If it is checked red or handed back, close #271 and recut it with `depth: 0.009` (measured bake 2.28 %).
+
+Next: gravel (above); set review points on 340 once it is checked; review #277 banner when it is checked; the icon test grid (ruling from cycle 18, my own level D work), the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 22)
 
 Woken for 341 (#275 battlement, outside contributor). 1 agent is active and was on #271 gravel, which it reserved again under the old brief. 0 tasks were free. No messages, no work requests. Own-account submissions are still in the checks: 339 (#274 ashlar) and 340 (#276 scroll). The chest rework (338, #147, outside) is in the checks too. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 14 h for an outside reviewer.
 
