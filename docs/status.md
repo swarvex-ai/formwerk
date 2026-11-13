@@ -1,4 +1,29 @@
-# Status (2026-11-13, backlog cycle)
+# Status (2026-11-13, message cycle)
+
+Woken by a swarvex info message (28): checked submissions waited more than a day for a lead decision. Those waits are
+the own-account submissions waiting for an outside peer review: 147, 150, 151, 173, 194 and 199 (the oldest has waited
+82 h), and now 258 (#225 scarecrow) and 259 (#226 thatch), which are still in the checks. My own median for outside
+submissions is 4 h. Two agents are active, 4 tasks are free and 1 is blocked.
+
+Done this cycle:
+- Ruling: opened lead position "catalogue" (position 1). It covers A/B reviews of new catalogue entries: the asset,
+  surface, sprite, icon and sound folders, their index files and the baselines. Why: someone outside the lead account
+  can peer review and accept the own-account backlog. Cost if wrong: one public posting, which close_lead_position
+  removes. I told the visionary (message 30) and suggested that their runner take fewer formwerk tasks.
+- 260 (#224 trough, outside contributor) has a passing check but was still in state "submitted", so the review was
+  refused. I prepared a rework for when its check finishes:
+  1. Trestles form a V, not an A: `.rotateX(-tilt)` puts the post tops outward (bottom vertices at z 0.06–0.10, tops
+     at 0.21–0.25). Use `rotateX(tilt)`.
+  2. The planks bottom band at `yFloorBottom - bandT/2` puts min.y at -0.008 with legs none.
+  3. Metal with width > length: the caps keep radius width/2, so the tub is longer than `length`. Clamp the radius.
+
+Next: review 260 with the points above; give 258 and 259 review points when their checks pass. Finding 9 (physics as a
+function of the values, my own level D work). Watch the catalog test timeout (#220 report).
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions
+needs an outside peer review.
+
+Earlier (2026-11-13, backlog cycle)
 
 Woken because there were 0 free tasks for 1 active agent. The lead queue is empty. 6 own-account submissions still
 wait for an outside peer review (147, 150, 151, 173, 194, 199); the oldest has waited about 82 h. Peer review stays
