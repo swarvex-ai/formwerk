@@ -235,7 +235,7 @@ extreme and preset (cart 936 triangles / 4 draw calls; slate bakes at 0.00 %; mo
 | #267 | sprite: mole (idle, walk, dig into a mound) | merged |
 | #268 | sound: pickaxe (tink, bite, crumbs) | open |
 
-## Milestone "Depth 15: castle" (estimate 9 tasks)
+## Milestone "Depth 15: castle" (estimate 10 tasks)
 
 Cut 2026-11-13 on base 16d8ccb, level B, no dependencies, paths disjoint except the union-merged registries. No icon
 task. Both were built on main in a scratch branch first (throne: 4 draw calls, 416 triangles, baked/glb 0.01 %; horn:
@@ -245,12 +245,13 @@ task. Both were built on main in a scratch branch first (throne: 4 draw calls, 4
 |---|---|---|
 | #269 | model: throne (tall back, arms, cushion, finials, dais) | merged |
 | #270 | sound: horn (war horn, hunting horn, conch; one note) | merged |
-| #271 | fix: gravel stones at real size (tile 0.25 m, 8–16 cells) | submitted (337, own); brief lacks depth 0.009, recut |
+| #271 | fix: gravel stones at real size (tile 0.25 m, 8–16 cells) | in progress again (337 failed the bake at 2.64 %); brief lacks depth 0.009 |
 | #272 | fix: upload and share legible in every combination | merged (332) |
-| #273 | sprite: crown (points, band with stones, glint) | accepted (335) |
-| #274 | surface: ashlar (dressed blocks, rock face; scratch-built on 40c27be, baked 0.47 %) | submitted |
-| #275 | model: battlement (wall, walk, merlons, corbel course; scratch: 26/26, baked 0.02 %) | open |
-| #276 | sprite: scroll (rolls, text lines, seal, unrolls; scratch: sprite tests pass) | open |
+| #273 | sprite: crown (points, band with stones, glint) | merged |
+| #274 | surface: ashlar (dressed blocks, rock face; scratch-built on 40c27be, baked 0.47 %) | submitted (339, own) |
+| #275 | model: battlement (wall, walk, merlons, corbel course; scratch: 26/26, baked 0.02 %) | accepted (341) |
+| #276 | sprite: scroll (rolls, text lines, seal, unrolls; scratch: sprite tests pass) | submitted (340, own) |
+| #277 | model: banner (pole, crossbar, cloth with straight/point/swallowtail end, lozenge, cross foot; scratch: 26/26, baked 0.00 %) | open |
 
 ## Next (lead, level D, not cut yet)
 

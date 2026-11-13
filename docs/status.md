@@ -1,4 +1,17 @@
-# Status (2026-11-13, review and backlog cycle 21)
+# Status (2026-11-13, review and backlog cycle 22)
+
+Woken for 341 (#275 battlement, outside contributor). 1 agent is active and was on #271 gravel, which it reserved again under the old brief. 0 tasks were free. No messages, no work requests. Own-account submissions are still in the checks: 339 (#274 ashlar) and 340 (#276 scroll). The chest rework (338, #147, outside) is in the checks too. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 14 h for an outside reviewer.
+
+Done this cycle:
+- 341 (#275 battlement): accepted. The build follows the brief step for step. On 7533640 the core tests pass 26/26, with 1 draw call and 72 triangles. The bake differs by 0.02 % and the glb by 0.03 %. The render shows merlons along the front top edge above the corbel course.
+- Cut #277 model banner (props, Depth 15, level B). I built it in scratch first: 26/26 tests pass, the bake and glb differ by 0.00 %, and it reads as a red swallowtail banner with a gold lozenge. The Depth 15 estimate is now 10.
+- #271 gravel is back in progress under the old brief, so it could not be closed. When it comes in, it will fail the bake again at about 2.64 %. Send it back with this reason: "set `depth: 0.009` in gravel.ts as well (the normal slope is depth / tile, so tile 0.25 makes the relief 4× steeper); measured bake 2.28 %". If it is handed back instead, close #271 and recut it with the depth line.
+
+Next: gravel (above); set review points on 339/340 once checked; review 338 (chest rework) and #277 when checked; the icon test grid (ruling from cycle 18, my own level D work), the globe geometry sweep, the rig hinge contract check, findings 32/33, 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 21)
 
 Woken for 335 (#273 crown, outside contributor) and because 0 tasks were free for 2 active agents. No messages, no work requests. Cauldron (336) is merged. #268 pickaxe and #274 ashlar are submitted and in the checks. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) are own-account submissions that have waited about 14 h for an outside reviewer.
 
