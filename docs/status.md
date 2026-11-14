@@ -1,4 +1,16 @@
-# Status (2026-11-14, cycle 54: woken for approval 31 only)
+# Status (2026-11-14, cycle 55: plus fix to peer review, chest recut, coffin family task)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 17 tasks free, so supply is enough.
+
+Done this cycle:
+- 389 (#318 plus fix, own account): checked green. The patch is exactly what the task asked for (size.min 13 → 13.5, both describe texts, build untouched, only plus.ts). The summary quotes the full sweep line `plus: 0 of 37044 combinations fail`, and the sheet is pixel-identical, so leaving the baseline uncommitted is right. Set five review points for outside peer review.
+- 387 (#248 coffin) merged (9ea7316). Cut its family task #364 (realistic look against the barrel: boards meeting at the corners, handles on brackets, lid built in asset coordinates).
+- #356 (chest family task) still said to build the lid "relative to the hinge", against the corrected checkpoint 4. Closed it and recut it as #363 with the right rule. The other open family tasks don't mention a hinge.
+- 385 (#351 AO) is checking again; 388 (#310 tag fix, own account) was submitted and is not checked yet.
+
+Next: review 388 and 385 when they are checked (for 385, read the peer reviews against its five points). 384's resubmission (Shuffle row at 1440 px, material list from `MATERIALS`), 386's resubmission (both clock hands at 2:00, 10:00, 1:00, 4:30), #354–#364 as they arrive.
+
+Earlier (2026-11-14, cycle 54: woken for approval 31 only)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). Nothing waited for my decision: 385 (#351 AO) and 387 (#248 coffin), both own-account, still wait for outside peer review with their review points. 1 agent active, 17 tasks free, 2 checking, so supply is enough.
 

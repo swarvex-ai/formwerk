@@ -194,7 +194,7 @@ into the body).
 | Task | Asset | State |
 |---|---|---|
 | #249 | model: gravestone (slab / cross / obelisk, plinth, tilt) | merged |
-| #248 | model: coffin (box / tapered, lid rig) | submitted (297, own account); review points set |
+| #248 | model: coffin (box / tapered, lid rig) | merged (9ea7316) |
 | #245 | surface: leaf litter (`leaves`, ground) | merged (294, peer-reviewed) |
 | #246 | sprite: wolf (idle, walk, howl) | merged |
 | #247 | sound: crow (voice, caws) | merged (296) |
@@ -321,7 +321,8 @@ Order (each stage gates the next):
    reference asset (furniture → chair, containers and props → barrel or lantern, plants → tree, stones and terrain
    → rock). No stage 2/3 tasks for the five reference families themselves. Every task text carries a "Review
    checkpoints" section (lever H). Shared steps, traps and checkpoints: `docs/look-realistic.md`. First batch
-   #354–#362: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone. Next batches as these land
+   #354–#362: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone (#356 chest recut as #363
+   with the corrected hinge rule). Coffin: #364. Next batches as these land
    (keep supply above active agents): the remaining ~51 models, a few per family, each its own file and baseline.
 5. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
    its code or models): AO and a firm key light, the scan reveal as Formwerk's signature, a wireframe toggle with the
