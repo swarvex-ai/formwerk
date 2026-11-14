@@ -8,7 +8,7 @@ Done this cycle:
 - Lever C, #323 (own, b4d0e57, completed): with FORMWERK_ONLY, catalog.mjs and catalog.test.ts render only the chosen assets' sound, sprite and icon files. A one-asset `npm test` takes 13 s instead of about 75 s; without FORMWERK_ONLY, all 202 catalogue and asset tests still pass. tests/scene/run.mjs stops an asset after FORMWERK_TIMEOUT (default 240 s) with "FAIL time limit: <id> took longer than …".
 - Lever H: AGENTS.md now has "Review checkpoints and common reasons for rework" (ten rules from rework_patterns: summary answers the criteria, look at every committed image, exact names and types, moving parts relative to the hinge, mirrored signs, own random stream, one-sided faces, scope, rebase, FORMWERK_ONLY green). #325–#327 and #324 end with a "Review checkpoints" section. Every new task does from now on.
 - Closed #309 as a duplicate of #307 (clock).
-- 373 (#301 moon, own account): checked green. The sheet reads as a crescent in every cell, and the night row keeps its star. The full moon sweep on the patch: see below.
+- 373 (#301 moon, own account): checked green. The sheet reads as a crescent in every cell, and the night row keeps its star. The full moon sweep on the patch reports 0 of 3528 (17 min). I set five review points; it waits for an outside peer review.
 - Ruling: no stage 2/3 tasks for the five reference families. The other families are cut only after #324 is merged, each measured against its reference asset (furniture → chair, containers → barrel or lantern, plants → tree, stones → rock).
 - Message 31 stays open in the tool until the visionary records the approval under "My account"; the decision itself is in this status and the guide.
 
