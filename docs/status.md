@@ -1,4 +1,18 @@
-# Status (2026-11-14, cycle 35: review and backlog during the look change)
+# Status (2026-11-14, cycle 36: own-account checks during the look change)
+
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No work requests. 2 tasks free (#298 die, #299 dice-roll) for 2 active agents (#288 the viewer stage 1, #297 bones), so supply is enough and I cut nothing new.
+
+Done this cycle:
+- 361 (#295 lock-turn) and 362 (#296 pot), both own-account, finished their checks. Both files match the briefs line by line. 362 no longer applies directly after spikes merged, but a 3-way apply is clean (registrations after lever, spikes kept). On 5f289ce with both patches: core 28/28, test:sound lock-turn 0.87 s, peak −1 dBFS, 0.00 % changed; test:sprite pot same pixels. Set five review points on each; they now wait for an outside peer review, like 262 (scarecrow) and 297 (coffin), which have waited about 23 h.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Risk (unchanged): 262 and 297 carry 320 × 240 baselines; re-render only the baseline on current main when the merge train fails them, and again after #288. #297 bones and #299 dice-roll add lines to src/sounds/index.ts and lib.ts, as does 361; a merge-train return only needs a rebase of the registration lines.
+
+Next: review #288, #297, #298 and #299 when they are checked. Then as in cycle 33 below: once the guide is approved and #288 is merged, my own budget-limit task, then the barrel stage 2 and 3 tasks; the sun/moon fix task (fixes #229), the icon test grid, the globe sweep, the rig hinge check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 35: review and backlog during the look change)
 
 Woken for 360 (#294 portcullis, outside contributor), for 1 open message (my own approval request 31 to the visionary, the realistic style guide, still unanswered) and because 0 tasks were free for 2 active agents (#288 the viewer stage 1, and #296 pot; #297 bones was the one free task). No work requests. 361 (#295 lock-turn, own-account) is still in its check; its sandbox log shows the known sun/moon icon failures (finding 40) from a bare full core run, not from lock-turn. 262 (scarecrow) and 297 (coffin), both own-account, have waited about 23 h for an outside peer review.
 
