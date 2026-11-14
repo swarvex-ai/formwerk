@@ -36,6 +36,7 @@ import { knock } from "./impact/knock";
 import { woodBreak } from "./impact/wood-break";
 import { pickaxe } from "./impact/pickaxe";
 import { woodpecker } from "./impact/woodpecker";
+import { portcullis } from "./impact/portcullis";
 import { splash } from "./movement/splash";
 import { creak } from "./movement/creak";
 import { stoneSlide } from "./movement/stone-slide";
@@ -79,6 +80,7 @@ export const SOUNDS: AnySound[] = [
   woodBreak,
   pickaxe,
   woodpecker,
+  portcullis,
   footstep,
   rustle,
   chain,
