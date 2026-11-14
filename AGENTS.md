@@ -73,7 +73,9 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    pen)` returns parts on the 24 × 24 grid from `src/core/vector.ts` (`line`, `polygon`, `circle`, `arc`, `rect`) and
    says what each one is: `area` (closed shapes: outlined, tinted or filled by style), `stroke`, `dot`, `detail`
    (drawn, cut out of a filled area), `hole`, `gap` (a clear margin around what comes next). Never set colours or
-   stroke widths yourself. Use `pen` and `reach(pen, angle)` to keep the ink inside the grid. Copy the closest icon.
+   stroke widths yourself. Use `pen` and `reach(pen, angle)` to keep the ink inside the grid. A `gap` ends in a cap
+   like a stroke: end it clearly inside a filled area or clearly away from other strokes, because a cap that grazes a
+   stroke leaves a 1-pixel sliver that counts as a separate part. Copy the closest icon.
 2. Its import and its entry in `src/icons/index.ts` and `src/icons/lib.ts`, each on a line of its own.
 3. `npm test`: the icon tests draw it at its defaults, every extreme, every preset, random values and every
    combination of its choices at the strongest stroke, each in all three styles. They check that the outermost pixel

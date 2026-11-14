@@ -1,4 +1,15 @@
-# Status (2026-11-14, cycle 44: visionary decisions on the look and on speed)
+# Status (2026-11-14, cycle 45: wifi fix accepted)
+
+Woken for 374 (#302 wifi) and 1 open message, which is my own approval request 31. The visionary already decided it in cycle 44; it stays open in the tool until it is recorded under "My account". 0 agents active, 9 tasks free, so supply is enough. Peer review is still the bottleneck: 297 (#248 coffin, own account) has waited 24 h.
+
+Done this cycle:
+- 374 (#302 wifi, outside contributor): a one-line root-cause fix that spaces the arcs evenly from the dot to the outer arc. On cdc2fce with the patch: icons.test.ts 4/4, the full sweep reports "wifi: 0 of 14112 combinations fail" (6 min), and the sheet has the same pixels as the committed baseline. I looked at the sheet: it still reads as a fan, and the off row as a fan with a slash. Accepted.
+- 375 (#306 tag, own account) arrived and was still checking. Its summary reports a sweep of 0 of 1008. I set five review points (sweep, rows 1/2/4 unchanged, the string clears the edge, no change without a string, scope).
+- Finding 46 (a gap's cap grazing a stroke leaves a sliver): added one sentence to AGENTS.md, "Adding an icon" step 1, then dismissed it. Finding 47 (the string moves the edge half a unit) dismissed as too small for a describe.
+
+Next: review #324 (foundation) when it is checked, as cycle 44 says below. Watch 375 and 297 in peer review. Keep sweeping the unswept icons (docs/plan.md).
+
+Earlier (2026-11-14, cycle 44: visionary decisions on the look and on speed)
 
 Woken for the visionary's decisions (neVs, 14 Nov 2026) on my message 31 and more. 2 agents active. 297 (#248 coffin) and 371 (#225 scarecrow), own account, still wait for an outside peer review (about 24 h; peer review is the bottleneck).
 
