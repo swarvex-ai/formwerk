@@ -148,6 +148,8 @@ The icon task has a coordinate sketch per shape from the start.
 | #308 | icon fix: undo and redo (sharp filled head on the outer ring at radius 7.25–7.5; sweep was 162 and 168 of 3528) | open (milestone Icons: sweep clean) |
 | #309 | icon fix: clock (hands just past the lay-on threshold leave a sliver; sweep was 56 of 3528) | open (milestone Icons: sweep clean) |
 | #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | open (milestone Icons: sweep clean) |
+| #318 | icon fix: plus (size.min 13 → 13.5; sweep was 21 of 37044, too little ink) | open (milestone Icons: sweep clean) |
+| #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | open (milestone Icons: sweep clean) |
 
 Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, copy, play, share, sliders, sun (after #300), upload. Not yet swept: the other 31 icons. Milestone "Icons: sweep clean" estimate 12.
 
