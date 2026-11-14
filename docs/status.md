@@ -1,4 +1,19 @@
-# Status (2026-11-14, cycle 28: realistic look)
+# Status (2026-11-14, cycle 29: backlog during the look change)
+
+Woken because 0 tasks were free for 1 active agent. That agent holds #288 (the viewer stage 1). The open message is my own approval request to the visionary (31, the realistic style guide), still unanswered. There were no work requests and no new submissions. Only 262 (scarecrow) and 297 (coffin) wait, both own-account, now about 19 h for an outside peer review.
+
+Done this cycle:
+- Cut milestone "Depth 19: dungeon" (estimate 3) with only kinds that have no 3D baseline: #289 sprite torch-sprite and #290 sound chain, both level B. While #288 re-renders every model and surface baseline, a new model or surface would collide with it and need a second render, so it waits.
+- Built both in scratch on a16c837 first, and each brief carries the full file. Torch: the sprite tests pass, and enlarged the sheet reads as a torch with a pointed, swaying flame in every preset (torch, sconce with an iron cage, blue magic). Chain: the sound tests pass. The defaults run 0.58 s as two bursts of clinks around 2 kHz, keys 0.43 s, shackles 1.06 s, anchor 1.07 s with a thud. The longest case is 1.27 s, inside the 1.5 s movement cap.
+- Ruling: no new model or surface tasks until #288 is merged. Why: they would carry old-light baselines and need re-rendering. Cost if wrong: a few hours of idle model contributors.
+
+Risk (unchanged): 262 and 297 carry 320 × 240 baselines. When the merge train fails them, re-render only the baseline on current main, and after #288 merges, re-render again.
+
+Next: review #288, #289 and #290 when they are checked. For #288, look at the renders and check the full suite, the baked and glb diffs, and that the sprite, icon and sound baselines are unchanged. Once the guide is approved and #288 is merged: my own budget-limit task, then the barrel stage 2 and 3 tasks, built in scratch first. Backlog: the sun/moon fix task (fixes #229; rebuild it in scratch, since the cycle 27 scratch is gone), then dismiss findings 33, 34 and 40. Also the icon test grid, the globe geometry sweep, the rig hinge contract check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 28: realistic look)
 
 Woken for the visionary's decision of 14 Nov: the look moves to realistic, and Formwerk becomes a hybrid project (software cards plus the art and audio game cards). There were no messages and no work requests. 354 (#286 hoot) is accepted, and moth (#287) is merged, so Depth 18 is done. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 19 h for an outside reviewer.
 

@@ -277,7 +277,7 @@ or surface task. All three were built on main in a scratch worktree first, and e
 | #284 | sprite: duck (idle, walk, swim; mallard, hen, duckling, farm duck; scratch: 26 tests green, sheet reads) | accepted (352), waits for merge |
 | #285 | model: reeds (cattail, common reed, sedge; scratch: 26/26, 2 draw calls, 778 triangles, baked 0.10 %, glb 0.11 %) | accepted, waits for merge |
 
-## Milestone "Depth 18: night" (estimate 4 tasks)
+## Milestone "Depth 18: night" (estimate 2 tasks, done)
 
 Cut 2026-11-14 on base 20a55bd, level B, no dependencies, paths disjoint except the union-merged registries. Both new
 assets were built in a scratch worktree first, and each brief carries the full file.
@@ -310,7 +310,19 @@ Order (each stage gates the next):
 
 | Task | What | State |
 |---|---|---|
-| #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | open |
+| #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | in progress |
+
+## Milestone "Depth 19: dungeon" (estimate 3 tasks)
+
+Cut 2026-11-14 on base a16c837 while #288 re-renders every model and surface baseline: only kinds without a 3D
+baseline (sprites, sounds, icons), so nothing collides with #288 or needs a second re-render. Level B, no
+dependencies, paths disjoint except the union-merged registries. Both built in a scratch worktree first, and each brief
+carries the full file.
+
+| Task | Asset | State |
+|---|---|---|
+| #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | open |
+| #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | open |
 
 ## Next (lead, level D, not cut yet)
 
