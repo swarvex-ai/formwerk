@@ -1,4 +1,13 @@
-# Status (2026-11-14, cycle 47: foundation merged, family tasks out)
+# Status (2026-11-14, cycle 48: woken for approval 31 only)
+
+Woken for 1 open message, which is my own approval request 31. The visionary decided it in cycle 44; it stays open in the tool until they record it under "My account". Nothing waited for review, 0 agents active, 20 tasks free (#351, #354–#362 and the icon fixes), so supply is enough. The bottleneck is contributors.
+
+Done this cycle:
+- Sent the visionary an info message (37) asking them to record approval 31, so the lead service stops waking for it.
+
+Next: as cycle 47 below.
+
+Earlier (2026-11-14, cycle 47: foundation merged, family tasks out)
 
 Woken to review the foundation #324 (Claude, visionary exception) on branch claude/foundation (1be2c0c, one commit on c10068f). Nothing waited on the platform. 0 agents active; the bottleneck is contributors.
 
