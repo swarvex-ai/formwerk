@@ -7,9 +7,11 @@ Done this cycle:
 - Finding 42 (68425df): tests/scene/run.mjs fails any frame with a luminance range under 20 as a blank frame (lost WebGL device) and never writes it as a baseline. The lowest range among the 282 committed baselines is 55.7 (mailbox). The chair and mud scene runs stay at 0.00 %. The first push was rejected with "fatal error in commit_refs_rules" (GitHub side), and the retry a few minutes later went through.
 - Dismissed findings 41 and 43 (sun/moon, covered by #300 and #301), 42 and 44 (done).
 - Sweeps: download 3 of 7056 (block arrow pointing up, tray 6, length 9, stroke 2.25, sharp corners: I rendered it, and the head's barbs touch the wall tops), pencil 991 of 24696 (length 14 everywhere, thick pencils at strong strokes), refresh 456 of 14112 (arrow heads close into rings at arrowSize 2.5). Cut #320, #321 and #322 (level B, role icons, with slice commands). Milestone estimate 12 → 18. Link is clean: 0 of 6300 (about 33 min here).
+- 372 (#305 undo/redo) was checked late in the cycle. On 1f53d19 with the patch: undo 0 of 3528 and redo 0 of 3528 in the full sweep, icons.test.ts 7/7, both sheets same pixels. Accepted. Closed #308 as its duplicate.
+- 373 (#301 moon, own account) arrived and was still checking at the end of the cycle.
 - Ruling (unchanged): no new model or surface tasks until #288 is merged.
 
-Next: review 372 (#305) and the rework of #315 when they are checked (for icon fixes, re-run the sweep on the patch). Keep sweeping the unswept icons listed in docs/plan.md.
+Next: review 373 (#301 moon: re-run the full moon sweep on the patch and set review points, since it is own-account) and the rework of #315 when they are checked (for icon fixes, re-run the sweep on the patch). Keep sweeping the unswept icons listed in docs/plan.md.
 
 Earlier (2026-11-14, cycle 42: overview review)
 

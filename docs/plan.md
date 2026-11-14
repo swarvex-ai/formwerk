@@ -145,7 +145,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #300 | icon fix: sun (fixes #229; core gives way, sharp 12-ray caps apart; lead's diff, sweep 0 of 5040 on 3aa4988) | accepted (366; lead re-ran the sweep on the patch: 0 of 5040) |
 | #301 | icon fix: moon (fixes #229; star inside the grid from the lead, horn slits by the contributor; sweep was 784 of 3528) | open |
 | #302 | icon fix: wifi (off slash at size 18, four arcs; sweep was 84 of 14112) | open |
-| #308 | icon fix: undo and redo (sharp filled head on the outer ring at radius 7.25–7.5; sweep was 162 and 168 of 3528) | open (milestone Icons: sweep clean) |
+| #305 | icon fix: undo and redo (radius gives way through largest(), open head legs grow below stroke 1.25; sweep was 162 and 168 of 3528) | accepted (372), both sweeps 0 of 3528; #308 closed as its duplicate |
 | #309 | icon fix: clock (hands just past the lay-on threshold leave a sliver; sweep was 56 of 3528) | open (milestone Icons: sweep clean) |
 | #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | open (milestone Icons: sweep clean) |
 | #318 | icon fix: plus (size.min 13 → 13.5; sweep was 21 of 37044, too little ink) | open (milestone Icons: sweep clean) |
@@ -154,7 +154,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | open (milestone Icons: sweep clean) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | open (milestone Icons: sweep clean) |
 
-Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, close, copy, link, pause, play, share, sliders, sun (after #300), upload. Failing with a fix task: undo, redo, clock, tag, plus, check, download, pencil, refresh, moon (#301), wifi (#302). Not yet swept: search, trash, volume, arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Milestone "Icons: sweep clean" estimate 18.
+Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, close, copy, link, pause, play, share, sliders, sun (after #300), upload. Clean after a fix: undo and redo (#305). Failing with a fix task: clock, tag, plus, check, download, pencil, refresh, moon (#301), wifi (#302). Not yet swept: search, trash, volume, arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Milestone "Icons: sweep clean" estimate 18.
 
 ## Milestone "Depth 8: tavern" (estimate 9 tasks)
 
