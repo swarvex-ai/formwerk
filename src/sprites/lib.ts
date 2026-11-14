@@ -40,6 +40,7 @@ import { cat as catSprite } from "./creatures/cat";
 import { hare as hareSprite } from "./creatures/hare";
 import { wolf as wolfSprite } from "./creatures/wolf";
 import { deer as deerSprite } from "./creatures/deer";
+import { duck as duckSprite } from "./creatures/duck";
 import { snail as snailSprite } from "./creatures/snail";
 
 export { SPRITES, spriteById } from "./index";
@@ -88,4 +89,5 @@ export const hare = bogen(hareSprite);
 export const owl = bogen(owlSprite);
 export const wolf = bogen(wolfSprite);
 export const deer = bogen(deerSprite);
+export const duck = bogen(duckSprite);
 export const snail = bogen(snailSprite);
