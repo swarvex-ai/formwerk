@@ -18,6 +18,16 @@
       .liste h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--leise); margin: 14px 0 6px; }
       .liste button { display: block; width: 100%; text-align: left; padding: 8px 10px; margin: 2px 0; border: 1px solid transparent; border-radius: 6px; background: none; color: var(--text); font: inherit; cursor: pointer; }
       .liste button[aria-pressed="true"] { border-color: var(--akzent); color: var(--akzent); }
+      /* Catalogue overview in the models list (src/gallery/model-list.ts): filter bar, count line, entry facts */
+      .modell-filter { display: grid; gap: 8px; padding: 4px 0 10px; border-bottom: 1px solid var(--linie); }
+      .modell-feld { display: grid; gap: 3px; }
+      .modell-filter label { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--leise); }
+      .modell-filter select { width: 100%; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--linie); background: var(--flaeche); color: var(--text); font: inherit; }
+      .reihenfolge-feld { display: flex; gap: 6px; align-items: center; }
+      .reihenfolge-feld select { flex: 1 1 auto; min-width: 0; }
+      .modell-status { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 2px; color: var(--leise); font-size: .85rem; }
+      .modell-eintrag small { display: block; margin-top: 2px; color: var(--leise); font: 12px ui-monospace, monospace; }
+      .modell-filter .knopf-mischen, .modell-status button { width: auto; flex: none; display: inline-block; padding: 5px 10px; border: 1px solid var(--linie); border-radius: 6px; background: var(--flaeche); color: var(--text); font: inherit; cursor: pointer; }
       .buehne { grid-area: buehne; position: relative; min-height: 0; }
       canvas { display: block; width: 100%; height: 100%; touch-action: none; } canvas[hidden] { display: none; } [hidden] { display: none !important; }
       .reiter { display: flex; flex-wrap: wrap; gap: 6px; }

@@ -2,21 +2,20 @@
 // view, a share link, a code snippet and downloads (.glb with baked patterns, .usdz, .obj) made in the browser.
 import type { Object3D } from "three";
 import { ASSETS, assetById } from "../assets";
-import { CATEGORIES, infoOf, make, measure, pose, size, type AnyAsset } from "../assets/define";
+import { infoOf, make, measure, pose, size, type AnyAsset } from "../assets/define";
 import { defaults, random, withPreset, type Param } from "../core/params";
 import { toGLB, toOBJ, toUSDZ } from "../core/export";
 import { rng } from "../core/rng";
+import { drawModelList } from "./model-list";
 import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
 import { stage } from "./stage";
 
 const M = de
-  ? { kategorien: { furniture: "Möbel", architecture: "Architektur", nature: "Natur", vehicles: "Fahrzeuge", props: "Requisiten" },
-      dreiecke: "Dreiecke", aufrufe: "Draw Calls", bewegen: "Bewegen",
+  ? { dreiecke: "Dreiecke", aufrufe: "Draw Calls", bewegen: "Bewegen",
       backen: "Muster als Textur backen (Maserung, Gestein; größere Datei)", backt: "Backe …",
       formate: { glb: ".glb (Godot, Blender, Web)", usdz: ".usdz (AR auf iPhone und iPad)", obj: ".obj (nur Form)" },
       koerper: { static: "statisch", dynamic: "beweglich" }, kollider: { box: "Kollider Box", hull: "Kollider Hülle", cylinder: "Kollider Zylinder" } }
-  : { kategorien: { furniture: "Furniture", architecture: "Architecture", nature: "Nature", vehicles: "Vehicles", props: "Props" },
-      dreiecke: "triangles", aufrufe: "draw calls", bewegen: "Move",
+  : { dreiecke: "triangles", aufrufe: "draw calls", bewegen: "Move",
       backen: "Bake patterns into a texture (grain, stone; larger file)", backt: "Baking …",
       formate: { glb: ".glb (Godot, Blender, web)", usdz: ".usdz (AR on iPhone and iPad)", obj: ".obj (shape only)" },
       koerper: { static: "static", dynamic: "dynamic" }, kollider: { box: "box collider", hull: "hull collider", cylinder: "cylinder collider" } };
@@ -54,14 +53,9 @@ export async function start(b: Bereich): Promise<Galerie> {
     hashSetzen(asset.id, nichtStandard(), seed);
   };
 
-  const listeZeichnen = () => {
-    b.liste.replaceChildren(...CATEGORIES.filter((k) => ASSETS.some((a) => a.category === k)).map((k) => el("section", {}, el("h2", {}, M.kategorien[k]),
-      ...ASSETS.filter((a) => a.category === k).map((a) => {
-        const k2 = el("button", { type: "button", "aria-pressed": String(a.id === asset.id) }, text(a.title));
-        k2.onclick = () => { asset = a; werte = defaults(a.params); seed = 1; haltung = {}; listeZeichnen(); reglerZeichnen(); neuBauen(true); };
-        return k2;
-      }))));
-  };
+  const listeZeichnen = () => drawModelList(b.liste, asset.id, (a) => {
+    asset = a; werte = defaults(a.params); seed = 1; haltung = {}; listeZeichnen(); reglerZeichnen(); neuBauen(true);
+  });
 
   const exportZeichnen = () => {
     const format = el("select", { id: "e-format", "aria-label": T.export }, ...(["glb", "usdz", "obj"] as const).map((f) => el("option", { value: f }, M.formate[f]))) as HTMLSelectElement;
