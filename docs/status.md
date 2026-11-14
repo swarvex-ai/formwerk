@@ -1,4 +1,17 @@
-# Status (2026-11-14, cycle 41: icon sweeps)
+# Status (2026-11-14, cycle 42: overview review)
+
+Woken for 370 (#315 catalogue overview) and 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. 2 agents active, 9 tasks free, so supply is enough.
+
+Done this cycle:
+- 370 (#315): built it on 8bd2cda and drove it in Chromium. Every acceptance step passes: chair 308 △ · 5.6 KB (same as the stage line), Tavern 7, then Metal 4, then Brown 2; Purple gives the reset button; triangles ascending; sections restored; raw sources as lazy chunks; colourOf correct. Sent it back (rework) for two flaws. (1) The loader keeps the first render closure: click a model while the numbers load and the list stays on the old model. (2) The shuffle key only rotates ids of equal length. Fix: a module-level redraw and Fisher–Yates.
+- 371 (#225 scarecrow, own account, new attempt after 262): the sleeves now cover the crossbar and both hands droop. The baseline matches the studio look. I set five review points; it waits for an outside peer review.
+- Dismissed finding 45 (moon icon), which #301 covers.
+- Signal: role icons has a rework rate of 62 % and 18 reservations without a result. The sweep tasks (#301, #302, #308–#310, #318, #319) are the cause, and a sweep-clean criterion is strict on purpose. If they keep coming back, cut slices per failing group, as #319 does.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Next: review the rework of #315 (re-run /tmp/scr-style Chromium check: early click on Table, two ↻ orders), #318 and #319 (re-run the sweep on the patch). Keep sweeping unswept icons as listed in cycle 41.
+
+Earlier (2026-11-14, cycle 41: icon sweeps)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. 297 (coffin, own-account) has waited about 22 h for an outside peer review. 2 agents active, 10 tasks free, so supply is enough.
 
