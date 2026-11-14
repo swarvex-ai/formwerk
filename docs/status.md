@@ -1,4 +1,14 @@
-# Status (2026-11-14, cycle 60: woken for approval 31 only)
+# Status (2026-11-14, cycle 61: clock fix back again, double-check fix to peer review)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 0 agents active, 15 tasks free, so supply is enough. Two new own-account submissions waited.
+
+Done this cycle:
+- 395 (#307 clock fix): sent back. It is the same filled hub circle as 391. I rendered it at 48 px: at 2:00 with stroke 2 the disc (radius 3.25) swallows the hour hand, and 2:05 at s1.25 and 12:10 at s2.25 are discs with stubs. #307's task text doesn't carry the cycle 57 guidance, and last_review was empty, so the rework reason now spells it out: fill only the wedge triangle c → nab along both hands; swap the hands where less than 2 units of the hour hand would show; ASCII renders of the four times in the summary.
+- 396 (#319 double check in a frame): green, sweep `check: 0 of 74088`, sheet byte-identical. I rendered framed doubles at 48 px: the framed second check has no short arm now (a check plus a parallel stroke, gaps open), and at frameSize 14 with stroke 2.25 the second check is left out. size.min 17.5 matches both describe texts. Set five review points (does it still read as a double check, the dropped double, free double unchanged, range texts, scope) for outside peer review.
+
+Next: 392 (#351 AO) and 396 wait for outside peer review. 395's resubmission (check the 2:00 s2 render first). #354–#364 as they arrive.
+
+Earlier (2026-11-14, cycle 60: woken for approval 31 only)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). Nothing waited for my decision: 392 (#351 gallery AO, own account) still waits for outside peer review with its five review points (1.2 h so far). #307 (clock fix) is being worked on again (wedge-fill rework). 1 agent active, 15 tasks free, so supply is enough.
 
