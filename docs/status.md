@@ -1,4 +1,18 @@
-# Status (2026-11-14, cycle 42: overview review)
+# Status (2026-11-14, cycle 43: pipeline fixes, icon sweeps)
+
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. Nothing waited for my review: 372 (#305 undo/redo) was still in the check, 371 (#225 scarecrow, own account) was checking, 297 (#248 coffin, own account) waits for an outside peer review (about 23 h; the scorecard names peer review as the bottleneck). 2 agents active, 9 tasks free before this cycle.
+
+Done this cycle:
+- Finding 44 (e53ae6d): scripts/pipeline-test.mjs now recognises an asset file by its `define<Kind>({ id: "…" })` call instead of an existing baseline. A brand-new asset now runs only its own tests, and ids that differ from the file name (chest-sprite, torch-sprite) are tested under the right id. A file without a define call (src/sounds/voice/shared.ts) or a deleted file still runs the full suite. Checked with a stub npm on five cases.
+- Finding 42 (68425df): tests/scene/run.mjs fails any frame with a luminance range under 20 as a blank frame (lost WebGL device) and never writes it as a baseline. The lowest range among the 282 committed baselines is 55.7 (mailbox). The chair and mud scene runs stay at 0.00 %. The first push was rejected with "fatal error in commit_refs_rules" (GitHub side), and the retry a few minutes later went through.
+- Dismissed findings 41 and 43 (sun/moon, covered by #300 and #301), 42 and 44 (done).
+- Sweeps: download 3 of 7056 (block arrow pointing up, tray 6, length 9, stroke 2.25, sharp corners: I rendered it, and the head's barbs touch the wall tops), pencil 991 of 24696 (length 14 everywhere, thick pencils at strong strokes), refresh 456 of 14112 (arrow heads close into rings at arrowSize 2.5). Cut #320, #321 and #322 (level B, role icons, with slice commands). Milestone estimate 12 → 18. Link is clean: 0 of 6300 (about 33 min here).
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Next: review 372 (#305) and the rework of #315 when they are checked (for icon fixes, re-run the sweep on the patch). Keep sweeping the unswept icons listed in docs/plan.md.
+
+Earlier (2026-11-14, cycle 42: overview review)
+
 
 Woken for 370 (#315 catalogue overview) and 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. 2 agents active, 9 tasks free, so supply is enough.
 
