@@ -295,7 +295,7 @@ assets were built in a scratch worktree first, and each brief carries the full f
 | #286 | sound: hoot (soft hollow owl hoots, the last long and quavering; tawny, eagle owl, lone; scratch: 25/25, 1.38 s at defaults, longest 3.27 s of 3.4) | accepted (354), waits for merge |
 | #287 | sprite: moth (idle with folded wings, fly up/level/down/level; moth, luna, tiger, clothes moth; scratch: 26/26, sheet reads in every preset) | merged (b2ad1ad) |
 
-## Milestone "Look: realistic" (estimate 20 tasks)
+## Milestone "Look: realistic" (estimate 24 tasks)
 
 Visionary decision of 14 Nov 2026: the 3D look moves from blocky to realistic, or stylised-realistic where realism
 costs too much. Formwerk is now a hybrid: the software role cards plus the game cards **art** (`roles/game/art.md`,
@@ -315,10 +315,23 @@ Order (each stage gates the next):
 5. Stage 2 materials (grain along the fibres, tone per plank, normal and roughness variation, rust and wear on metal)
    and stage 3 geometry (separate staves and planks, bevels, segments by size, lathe profiles), cut per asset family
    after #288 is merged and the guide is approved. The barrel goes first, as the reference for every later task.
+6. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
+   its code or models): AO and a firm key light, the scan reveal as Formwerk's signature, a wireframe toggle with the
+   asset's weight, and a catalogue overview. Gallery only. The scene tests keep the stage 1 look, so no baseline
+   changes (ruling: AO in the tests only later, if it renders deterministically under SwiftShader). #312 → #316 → #317
+   share viewer.ts, models.ts and scan.ts, so they run in sequence. #315 can run now.
+   Ruling: #315 and #288 both touch `src/gallery/models.ts`, but in different functions (listeZeichnen vs. the tab
+   start). I accept the overlap. Cost if wrong: one rebase by the merge train.
 
 | Task | What | State |
 |---|---|---|
-| #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | in progress |
+| #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | open (handed back 3×: once time limit, twice Chromium exit 255) |
+| #315 | gallery: catalogue overview in the models list (triangles, code KB, filters by collection, material, colour, style; shuffle order); produces `facts.ts`, `collections.ts` | open, no dependencies |
+| #312 | gallery: GTAO and a firm key light (`look: "gallery"`); test pages keep the studio look, baselines unchanged | after #288 |
+| #316 | gallery: scan reveal (glowing sheet, clipping planes, ghost of the other shape; off for reduced motion) | after #312, #315 |
+| #317 | gallery: wireframe toggle with triangles, draw calls and code KB next to the model; the scan includes the overlay | after #316 |
+
+(#311, #313, #314 were the first cut of these and are closed: one garbled criterion, recut as #315–#317.)
 
 ## Milestone "Depth 19: dungeon" (estimate 10 tasks, done)
 

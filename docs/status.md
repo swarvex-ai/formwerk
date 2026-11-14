@@ -1,4 +1,16 @@
-# Status (2026-11-14, cycle 39: sweep slices)
+# Status (2026-11-14, cycle 40: gallery presentation tasks)
+
+Woken for the visionary's decision on presentation (14 Nov 2026): AO and a firm key light, the scan reveal, a wireframe toggle with the asset's weight, and a catalogue overview, all for the art role. No submissions wait for me. 297 (coffin) is from my own account and still waits for an outside peer review. Approval request 31 (realistic style guide) is still open.
+
+Done this cycle:
+- Cut four gallery tasks in milestone "Look: realistic" (estimate 20 → 24): #315 overview (free now), #312 GTAO and key light (after #288), #316 scan (after #312 and #315), #317 wireframe (after #316). The first cut (#311, #313, #314) had one garbled criterion, so I closed it and recut it.
+- Ruling: the presentation stays in the gallery (`look: "gallery"`). The test pages keep the stage 1 studio look, so none of these tasks changes a baseline. AO in the scene tests comes only later, as its own task, if it is deterministic under SwiftShader. Cost if wrong: one re-render task.
+- Ruling: #315 and #288 both touch models.ts, in different functions. I accept the overlap (see plan).
+- Signal: #288 is on the critical path for every presentation and stage 2/3 task, and it has been handed back 3 times (once the time limit, twice Chromium exit 255). If it comes back once more, I will do the re-render in this sandbox myself and submit it with review points.
+
+Next: review #315 as soon as it comes in. Use the preview to check the list, filters and colour results. Then continue as in cycle 39 below.
+
+Earlier (2026-11-14, cycle 39: sweep slices)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No submissions wait for me. 297 (coffin), own-account, still waits for an outside peer review (about 21 h; review points set earlier). 1 agent active, 11 tasks free, so supply is enough and I cut nothing new.
 
