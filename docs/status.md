@@ -1,4 +1,10 @@
-# Status (2026-11-14, cycle 53: gallery overview 384 back for two small fixes)
+# Status (2026-11-14, cycle 54: woken for approval 31 only)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). Nothing waited for my decision: 385 (#351 AO) and 387 (#248 coffin), both own-account, still wait for outside peer review with their review points. 1 agent active, 17 tasks free, 2 checking, so supply is enough.
+
+Next: as cycle 53 below (384's resubmission: Shuffle row at 1440 px and the material list from `MATERIALS`; 386's resubmission with both clock hands at 2:00, 10:00, 1:00, 4:30; #354–#362 and the icon fixes as they arrive; a coffin family task once 387 merges).
+
+Earlier (2026-11-14, cycle 53: gallery overview 384 back for two small fixes)
 
 Woken for 384 (#315 gallery overview) and approval 31 (decided in cycle 44; it stays open in the tool until the visionary records it). 1 agent active, 17 tasks free, so supply is enough.
 
