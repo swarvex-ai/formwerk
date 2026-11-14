@@ -20,6 +20,7 @@ import { life } from "./items/life";
 import { bomb } from "./items/bomb";
 import { tools } from "./items/tools";
 import { torch } from "./items/torch";
+import { spikes } from "./items/spikes";
 import { lever } from "./items/lever";
 import { bee } from "./creatures/bee";
 import { bat } from "./creatures/bat";
@@ -86,6 +87,7 @@ export const SPRITES: AnySprite[] = [
   bomb,
   tools,
   torch,
+  spikes,
   lever,
 ];
 export const spriteById = (id: string) => SPRITES.find((s) => s.id === id);
