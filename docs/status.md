@@ -1,4 +1,20 @@
-# Status (2026-11-14, cycle 43: pipeline fixes, icon sweeps)
+# Status (2026-11-14, cycle 44: visionary decisions on the look and on speed)
+
+Woken for the visionary's decisions (neVs, 14 Nov 2026) on my message 31 and more. 2 agents active. 297 (#248 coffin) and 371 (#225 scarecrow), own account, still wait for an outside peer review (about 24 h; peer review is the bottleneck).
+
+Done this cycle:
+- Style guide accepted: docs/style-guide.md says "Accepted 2026-11-14"; sprites stay pixel art and icons stay line icons (written into both sections). New triangle limits in tests/core/assets.test.ts: furniture 60k, architecture 80k, nature 150k, vehicles 150k, props 30k.
+- Foundation (visionary exception): #324, level C, role art: stage 1 viewer (the content of #288), wood/metal/stone with relief and roughness variation plus their bake in src/core/export.ts, and five reference assets (barrel, chair, tree, rock, lantern), as one submission for Claude that I review. #288 was not reserved, so I closed it. The presentation chain waited for #288, so I recut it: #325 (GTAO, was #312) after #324, #326 (scan, was #316) after #325 and #315, #327 (wireframe, was #317) after #326. Milestone estimate 24 → 66.
+- Lever C, #323 (own, b4d0e57, completed): with FORMWERK_ONLY, catalog.mjs and catalog.test.ts render only the chosen assets' sound, sprite and icon files. A one-asset `npm test` takes 13 s instead of about 75 s; without FORMWERK_ONLY, all 202 catalogue and asset tests still pass. tests/scene/run.mjs stops an asset after FORMWERK_TIMEOUT (default 240 s) with "FAIL time limit: <id> took longer than …".
+- Lever H: AGENTS.md now has "Review checkpoints and common reasons for rework" (ten rules from rework_patterns: summary answers the criteria, look at every committed image, exact names and types, moving parts relative to the hinge, mirrored signs, own random stream, one-sided faces, scope, rebase, FORMWERK_ONLY green). #325–#327 and #324 end with a "Review checkpoints" section. Every new task does from now on.
+- Closed #309 as a duplicate of #307 (clock).
+- 373 (#301 moon, own account): checked green. The sheet reads as a crescent in every cell, and the night row keeps its star. The full moon sweep on the patch: see below.
+- Ruling: no stage 2/3 tasks for the five reference families. The other families are cut only after #324 is merged, each measured against its reference asset (furniture → chair, containers → barrel or lantern, plants → tree, stones → rock).
+- Message 31 stays open in the tool until the visionary records the approval under "My account"; the decision itself is in this status and the guide.
+
+Next: review #324 when it is checked (re-run the full scene test on the patch, look at all five reference renders and the baked/glb lines, check that no sprite, icon, sound or maps baseline changed). Then cut the other model families against the references. Review 373's sweep result and the icon fixes as they arrive.
+
+Earlier (2026-11-14, cycle 43: pipeline fixes, icon sweeps)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. Nothing waited for my review: 372 (#305 undo/redo) was still in the check, 371 (#225 scarecrow, own account) was checking, 297 (#248 coffin, own account) waits for an outside peer review (about 23 h; the scorecard names peer review as the bottleneck). 2 agents active, 9 tasks free before this cycle.
 

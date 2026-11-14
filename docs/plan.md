@@ -300,7 +300,7 @@ assets were built in a scratch worktree first, and each brief carries the full f
 | #286 | sound: hoot (soft hollow owl hoots, the last long and quavering; tawny, eagle owl, lone; scratch: 25/25, 1.38 s at defaults, longest 3.27 s of 3.4) | accepted (354), waits for merge |
 | #287 | sprite: moth (idle with folded wings, fly up/level/down/level; moth, luna, tiger, clothes moth; scratch: 26/26, sheet reads in every preset) | merged (b2ad1ad) |
 
-## Milestone "Look: realistic" (estimate 24 tasks)
+## Milestone "Look: realistic" (estimate 66 tasks: foundation, 4 presentation, #323, about 60 other models one task each)
 
 Visionary decision of 14 Nov 2026: the 3D look moves from blocky to realistic, or stylised-realistic where realism
 costs too much. Formwerk is now a hybrid: the software role cards plus the game cards **art** (`roles/game/art.md`,
@@ -310,33 +310,38 @@ and voices). The lead plays both until the numbers call for area leads. New task
 
 Order (each stage gates the next):
 1. Scene render at 640 × 480: done by the lead (f181c42), all 95 model and surface baselines re-rendered.
-2. Art director: style guide rewrite (models and surfaces sections, references with adopt / don't adopt): proposed in
-   a6ede40, **waiting for the visionary's approval** (message 31).
-3. Stage 1, lighting in `src/gallery/viewer.ts`: #288 (level B, role art). The lead checked the viewer in scratch:
-   ACES, PCFSoft shadows, RoomEnvironment, light studio background with ground and fog all render in SwiftShader, and
-   baked and glb diffs stay under 0.7 %. GTAO is optional in that task.
-4. Budget limits for the new look (protected `tests/core/assets.test.ts`, lead's own task): proposed furniture 60k,
-   architecture 80k, nature 150k, vehicles 150k, props 30k.
-5. Stage 2 materials (grain along the fibres, tone per plank, normal and roughness variation, rust and wear on metal)
-   and stage 3 geometry (separate staves and planks, bevels, segments by size, lathe profiles), cut per asset family
-   after #288 is merged and the guide is approved. The barrel goes first, as the reference for every later task.
-6. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
+2. Style guide: **accepted by the visionary on 14 Nov 2026** (models and surfaces; sprites stay pixel art, icons stay
+   line icons). New triangle limits set in tests/core/assets.test.ts (b4d0e57): furniture 60k, architecture 80k,
+   nature 150k, vehicles 150k, props 30k.
+3. **Foundation #324** (visionary exception, 14 Nov 2026): Claude builds stage 1 light (the content of the closed
+   #288), the shared materials wood, metal and stone with relief and roughness variation (plus the bake of those maps
+   in src/core/export.ts) and five reference assets (barrel, chair, tree, rock, lantern) as ONE submission that the
+   lead reviews. Level C, may exceed the 500-line limit and touch src/materials and src/core/export.ts by that
+   exception.
+4. **After #324 is merged:** cut the other asset families, one task per asset, each measured against the matching
+   reference asset (furniture → chair, containers and props → barrel or lantern, plants → tree, stones and terrain
+   → rock). No stage 2/3 tasks for the five reference families themselves. Every task text carries a "Review
+   checkpoints" section (lever H).
+5. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
    its code or models): AO and a firm key light, the scan reveal as Formwerk's signature, a wireframe toggle with the
    asset's weight, and a catalogue overview. Gallery only. The scene tests keep the stage 1 look, so no baseline
-   changes (ruling: AO in the tests only later, if it renders deterministically under SwiftShader). #312 → #316 → #317
-   share viewer.ts, models.ts and scan.ts, so they run in sequence. #315 can run now.
-   Ruling: #315 and #288 both touch `src/gallery/models.ts`, but in different functions (listeZeichnen vs. the tab
-   start). I accept the overlap. Cost if wrong: one rebase by the merge train.
+   changes (ruling: AO in the tests only later, if it renders deterministically under SwiftShader). #325 → #326 →
+   #327 share viewer.ts, models.ts and scan.ts, so they run in sequence after #324.
+
+Speed (visionary, levers C and H, 14 Nov 2026): #323 done (b4d0e57): a one-asset `npm test` renders only that
+asset's files (13 s instead of about 75 s), the scene test stops a hanging asset after FORMWERK_TIMEOUT (240 s). AGENTS.md
+has a "Review checkpoints and common reasons for rework" section from rework_patterns; refresh it weekly.
 
 | Task | What | State |
 |---|---|---|
-| #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | open (handed back 3×: once time limit, twice Chromium exit 255) |
-| #315 | gallery: catalogue overview in the models list (triangles, code KB, filters by collection, material, colour, style; shuffle order); produces `facts.ts`, `collections.ts` | open, no dependencies |
-| #312 | gallery: GTAO and a firm key light (`look: "gallery"`); test pages keep the studio look, baselines unchanged | after #288 |
-| #316 | gallery: scan reveal (glowing sheet, clipping planes, ghost of the other shape; off for reduced motion) | after #312, #315 |
-| #317 | gallery: wireframe toggle with triangles, draw calls and code KB next to the model; the scan includes the overlay | after #316 |
+| #324 | foundation: stage 1 viewer, materials with relief, bake of the new maps, five reference assets, re-render all model and surface baselines | open (level C, for Claude by the visionary's exception) |
+| #315 | gallery: catalogue overview in the models list (triangles, code KB, filters, shuffle); produces `facts.ts`, `collections.ts` | rework, held for its contributor |
+| #325 | gallery: GTAO and a firm key light (`look: "gallery"`); replaces #312 | after #324 |
+| #326 | gallery: scan reveal; replaces #316 | after #325, #315 |
+| #327 | gallery: wireframe toggle with the asset's weight; replaces #317 | after #326 |
 
-(#311, #313, #314 were the first cut of these and are closed: one garbled criterion, recut as #315–#317.)
+(#288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation
+tasks and are closed too.)
 
 ## Milestone "Depth 19: dungeon" (estimate 10 tasks, done)
 
