@@ -145,6 +145,11 @@ The icon task has a coordinate sketch per shape from the start.
 | #300 | icon fix: sun (fixes #229; core gives way, sharp 12-ray caps apart; lead's diff, sweep 0 of 5040 on 3aa4988) | accepted (366; lead re-ran the sweep on the patch: 0 of 5040) |
 | #301 | icon fix: moon (fixes #229; star inside the grid from the lead, horn slits by the contributor; sweep was 784 of 3528) | open |
 | #302 | icon fix: wifi (off slash at size 18, four arcs; sweep was 84 of 14112) | open |
+| #308 | icon fix: undo and redo (sharp filled head on the outer ring at radius 7.25–7.5; sweep was 162 and 168 of 3528) | open (milestone Icons: sweep clean) |
+| #309 | icon fix: clock (hands just past the lay-on threshold leave a sliver; sweep was 56 of 3528) | open (milestone Icons: sweep clean) |
+| #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | open (milestone Icons: sweep clean) |
+
+Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, copy, play, share, sliders, sun (after #300), upload. Not yet swept: the other 31 icons. Milestone "Icons: sweep clean" estimate 12.
 
 ## Milestone "Depth 8: tavern" (estimate 9 tasks)
 

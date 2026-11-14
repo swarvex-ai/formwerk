@@ -1,4 +1,18 @@
-# Status (2026-11-14, cycle 37: icon sweep, sun/moon/wifi fix tasks)
+# Status (2026-11-14, cycle 38: icon sweep results, fix tasks #308–#310)
+
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No submissions wait for me; 262 (scarecrow) and 297 (coffin), own-account, still wait for an outside peer review (about 25 h). 2 agents active, 6 tasks free before this cycle.
+
+Done this cycle:
+- Rebased my plan commit (#300 accepted, #303 card sprite, #304 card-shuffle) onto origin/main and pushed it.
+- Read the sweeps of 14 icons run earlier today (tests/scene/out/sweep-*.txt). Clean (0): anchor-icon, bulb, camera, chart, copy, play, share, sliders, sun, upload. Failing: undo 162 and redo 168 of 3528 (sharp filled head on the outer ring at radius 7.25–7.5, a few open heads with too little ink), clock 56 of 3528 (hands just past the lay-on threshold, hour 8 minute 35/40 and two others), tag 31 of 1008 (ring hole with string).
+- Cut #308 (undo and redo, one task: both use curveParts in undo.ts), #309 (clock) and #310 (tag), level B, role icons, milestone "Icons: sweep clean" (estimate 12). Each must quote its sweep line at 0.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Next: review #288, #301, #302, #303, #304, #308, #309, #310 when they are checked (for icon fixes, re-run the sweep on the patch). Sweep the remaining 31 icons a few per cycle and cut a fix task per failing icon. Once the guide is approved and #288 is merged: my own budget-limit task, then the barrel stage 2 and 3 tasks; the rig hinge check, findings 31, 32, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks; each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 37: icon sweep, sun/moon/wifi fix tasks)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered, and because 0 tasks were free for 1 active agent (#288, the viewer stage 1). No work requests.
 
