@@ -127,7 +127,7 @@ Ids are unique across all kinds: the anchor icon is `anchor-icon` because the mo
 | #209 | sound: waves (ambience loop) | merged |
 | #210 | sound: ship bell (`shipBell`) | merged |
 
-## Milestone "Depth 7: farm" (estimate 10 tasks)
+## Milestone "Depth 7: farm" (estimate 11 tasks)
 
 Cut 2026-11-13 on base c240293, all level B, no dependencies, paths disjoint except the union-merged registries.
 The icon task has a coordinate sketch per shape from the start.
@@ -142,6 +142,9 @@ The icon task has a coordinate sketch per shape from the start.
 | #229 | icons: sun, moon (sketched) | check failed (264), back from the pipeline report |
 | #230 | sound: rooster crow (voice) | open |
 | #231 | sound: hooves (loop, walk/trot/gallop) | 268 failed on the movement budget (finding 30, my cutting mistake); fixed in ff3babc |
+| #300 | icon fix: sun (fixes #229; core gives way, sharp 12-ray caps apart; lead's diff, sweep 0 of 5040 on 3aa4988) | open |
+| #301 | icon fix: moon (fixes #229; star inside the grid from the lead, horn slits by the contributor; sweep was 784 of 3528) | open |
+| #302 | icon fix: wifi (off slash at size 18, four arcs; sweep was 84 of 14112) | open |
 
 ## Milestone "Depth 8: tavern" (estimate 9 tasks)
 
@@ -312,7 +315,7 @@ Order (each stage gates the next):
 |---|---|---|
 | #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | in progress |
 
-## Milestone "Depth 19: dungeon" (estimate 10 tasks)
+## Milestone "Depth 19: dungeon" (estimate 10 tasks, done)
 
 Cut 2026-11-14 on base a16c837 while #288 re-renders every model and surface baseline: only kinds without a 3D
 baseline (sprites, sounds, icons), so nothing collides with #288 or needs a second re-render. Level B, no
@@ -321,25 +324,25 @@ carries the full file.
 
 | Task | Asset | State |
 |---|---|---|
-| #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | accepted, waiting for merge |
-| #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | accepted, waiting for merge |
-| #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | accepted (357), waiting for merge |
-| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | accepted (358), waiting for merge |
-| #293 | sprite: spikes (16 × 16 floor trap, spring animation; dungeon, rusty, crypt; scratch on fcc3481: core 26/26, every other spike two pixels lower so the outline does not turn the row into bars) | accepted (359), waiting for merge |
-| #294 | sound: portcullis (ratchet clicks, rumble, slam or pawl clunk; castle gate, winch, cell grate; scratch on fcc3481: 25/25, 2.05 s at defaults, longest 3.46 s of maxSeconds 3.5) | merged (0c0b25b) |
-| #295 | sound: lock-turn (key in, pin clicks, bolt; door, padlock, cell door; scratch on a7a5a0f: 25/25, 0.87 s at defaults, longest 1.37 s of 2.2; id not `lock`, the icon has it) | own-account submission 361, in its check |
-| #296 | sprite: pot (16 × 16 clay pot, smash animation; jar, amphora, cooking pot; scratch on 0b5fc84: core 26/26, sheet reads in every preset and at both extremes; belly capped at 5 so the wobble frame stays off the outline ring) | open |
-| #297 | sound: bones (rattle in three bursts or collapse with a thump; walk, collapse, charm; scratch on 0b5fc84: 25/25, 0.49 s at defaults around 1.1–1.3 kHz, longest 1.04 s of 1.5) | open |
+| #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | merged |
+| #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | merged |
+| #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | merged |
+| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | merged |
+| #293 | sprite: spikes (16 × 16 floor trap, spring animation; dungeon, rusty, crypt; scratch on fcc3481: core 26/26, every other spike two pixels lower so the outline does not turn the row into bars) | merged |
+| #294 | sound: portcullis (ratchet clicks, rumble, slam or pawl clunk; castle gate, winch, cell grate; scratch on fcc3481: 25/25, 2.05 s at defaults, longest 3.46 s of maxSeconds 3.5) | merged |
+| #295 | sound: lock-turn (key in, pin clicks, bolt; door, padlock, cell door; scratch on a7a5a0f: 25/25, 0.87 s at defaults, longest 1.37 s of 2.2; id not `lock`, the icon has it) | merged |
+| #296 | sprite: pot (16 × 16 clay pot, smash animation; jar, amphora, cooking pot; scratch on 0b5fc84: core 26/26, sheet reads in every preset and at both extremes; belly capped at 5 so the wobble frame stays off the outline ring) | merged |
+| #297 | sound: bones (rattle in three bursts or collapse with a thump; walk, collapse, charm; scratch on 0b5fc84: 25/25, 0.49 s at defaults around 1.1–1.3 kHz, longest 1.04 s of 1.5) | merged |
 
-## Milestone "Depth 20: game table" (estimate 3 tasks)
+## Milestone "Depth 20: game table" (estimate 3 tasks, done)
 
 Cut 2026-11-14 on base 2b30097, same rule as Depth 19 (no 3D baselines while #288 runs). Dice are on the kit list in
 AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from the impact sounds after woodpecker.
 
 | Task | Asset | State |
 |---|---|---|
-| #298 | sprite: die (16 × 16 item, roll animation of quarter turns ending on the chosen face; classic, casino, small black; scratch on 2b30097: core 26/26, sheet reads in every preset and size; tilted frames blank because squeezed pips merge into bars) | open |
-| #299 | sound: dice-roll (cup rattle, clacks with a surface knock, shrinking bounces; board game, dice cup, felt tray; scratch on 2b30097: 25/25, 0.53 s at defaults, centroid 3–4.5 kHz, longest 1.58 s of 2.5) | open |
+| #298 | sprite: die (16 × 16 item, roll animation of quarter turns ending on the chosen face; classic, casino, small black; scratch on 2b30097: core 26/26, sheet reads in every preset and size; tilted frames blank because squeezed pips merge into bars) | merged |
+| #299 | sound: dice-roll (cup rattle, clacks with a surface knock, shrinking bounces; board game, dice cup, felt tray; scratch on 2b30097: 25/25, 0.53 s at defaults, centroid 3–4.5 kHz, longest 1.58 s of 2.5) | merged |
 
 ## Next (lead, level D, not cut yet)
 

@@ -1,4 +1,21 @@
-# Status (2026-11-14, cycle 36: own-account checks during the look change)
+# Status (2026-11-14, cycle 37: icon sweep, sun/moon/wifi fix tasks)
+
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered, and because 0 tasks were free for 1 active agent (#288, the viewer stage 1). No work requests.
+
+Done this cycle:
+- 363 (#297 bones), 364 (#298 die) and 365 (#299 dice-roll), all own-account: each file matches its brief, and the registrations sit where the briefs say. On 115b21b with all three patches: core 30/30, bones 0.486 s and dice-roll 0.53 s at 0.00 % changed, die same pixels. Set five review points on each. During the cycle, all five own-account sound and sprite submissions (lock-turn, pot, bones, die, dice-roll) got their outside peer review and were merged. Depth 19 and Depth 20 are done.
+- Main's full suite is red on the sun and moon icons (finding 40, reported by every contributor). The suite draws only 10 random cases per icon, so I committed a sweep (3aa4988): `FORMWERK_SWEEP=<id> npx vitest run tests/core/sweep.test.ts` applies the icon checks to every combination (number parameters at seven values, every stroke, corner and style), writes tests/scene/out/sweep-<id>.txt, and is skipped otherwise. AGENTS.md step 4 for icons names it.
+- Sweep results: sun 80 failures (rays past the outer radius at core 0.5, square caps of 12 sharp rays too close). I fixed it in scratch, and it now fails 0 of 5040; on the sheet only the weather row changes. Moon fails 784 of 3528: slits at the horn tips (solidTip cap) and the star on the ring. My star fix removes the ring hits, and the horns need a redesign. Wifi fails 84 of 14112, all at bars 4, size 18, off, stroke ≥ 2.
+- Cut in Depth 7 (estimate now 11), all level B, role icons: #300 sun (my diff, fixes #229), #301 moon (my star fix plus the horns, the sweep must report 0, fixes #229), #302 wifi (the sweep must report 0). Dismissed findings 33, 34 and 40 as covered.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Risk: the full suite stays red until both #300 and #301 are merged; contributors will keep naming it. Other icons may hide failing regions too. Sweep them one by one (globe, wifi and moon were all broken this way); a full sweep of an icon takes 5 to 60 min.
+
+Next: review #288, #300, #301 and #302 when they are checked (for #300 and #301 check the quoted sweep line and look at the sheets). Then sweep the other 45 icons a few per cycle and cut a fix task per failing icon. Then as in cycle 33 below: once the guide is approved and #288 is merged, my own budget-limit task, then the barrel stage 2 and 3 tasks; the rig hinge check, findings 31, 32, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review; 262 (scarecrow) and 297 (coffin) still wait for one, now about 24 h. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 36: own-account checks during the look change)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No work requests. 2 tasks free (#298 die, #299 dice-roll) for 2 active agents (#288 the viewer stage 1, #297 bones), so supply is enough and I cut nothing new.
 
