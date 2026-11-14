@@ -142,7 +142,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #229 | icons: sun, moon (sketched) | check failed (264), back from the pipeline report |
 | #230 | sound: rooster crow (voice) | open |
 | #231 | sound: hooves (loop, walk/trot/gallop) | 268 failed on the movement budget (finding 30, my cutting mistake); fixed in ff3babc |
-| #300 | icon fix: sun (fixes #229; core gives way, sharp 12-ray caps apart; lead's diff, sweep 0 of 5040 on 3aa4988) | open |
+| #300 | icon fix: sun (fixes #229; core gives way, sharp 12-ray caps apart; lead's diff, sweep 0 of 5040 on 3aa4988) | accepted (366; lead re-ran the sweep on the patch: 0 of 5040) |
 | #301 | icon fix: moon (fixes #229; star inside the grid from the lead, horn slits by the contributor; sweep was 784 of 3528) | open |
 | #302 | icon fix: wifi (off slash at size 18, four arcs; sweep was 84 of 14112) | open |
 
@@ -334,7 +334,7 @@ carries the full file.
 | #296 | sprite: pot (16 × 16 clay pot, smash animation; jar, amphora, cooking pot; scratch on 0b5fc84: core 26/26, sheet reads in every preset and at both extremes; belly capped at 5 so the wobble frame stays off the outline ring) | merged |
 | #297 | sound: bones (rattle in three bursts or collapse with a thump; walk, collapse, charm; scratch on 0b5fc84: 25/25, 0.49 s at defaults around 1.1–1.3 kHz, longest 1.04 s of 1.5) | merged |
 
-## Milestone "Depth 20: game table" (estimate 3 tasks, done)
+## Milestone "Depth 20: game table" (estimate 5 tasks)
 
 Cut 2026-11-14 on base 2b30097, same rule as Depth 19 (no 3D baselines while #288 runs). Dice are on the kit list in
 AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from the impact sounds after woodpecker.
@@ -343,6 +343,8 @@ AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from 
 |---|---|---|
 | #298 | sprite: die (16 × 16 item, roll animation of quarter turns ending on the chosen face; classic, casino, small black; scratch on 2b30097: core 26/26, sheet reads in every preset and size; tilted frames blank because squeezed pips merge into bars) | merged |
 | #299 | sound: dice-roll (cup rattle, clacks with a surface knock, shrinking bounces; board game, dice cup, felt tray; scratch on 2b30097: 25/25, 0.53 s at defaults, centroid 3–4.5 kHz, longest 1.58 s of 2.5) | merged |
+| #303 | sprite: card (16 × 16 item, suit, rank A–K, size 12–14, back colour; flip from the lattice back through the edge to the face; ace of spades, king of hearts red back, old seven of diamonds; scratch on 225bc5e: core 26/26, sheet reads in every preset, suit and both sizes; size stops at 12, glyphs blank while squeezed) | open |
+| #304 | sound: card-shuffle (riffle with flicks, bridge flutter and a tap, or dealing; riffle, deal, new deck; scratch on 225bc5e: 25/25, 1.15 s at defaults, flick centroid 5–6 kHz, longest 2.07 s of 2.5) | open |
 
 ## Next (lead, level D, not cut yet)
 
