@@ -26,6 +26,7 @@ export async function startTest(params: URLSearchParams) {
   // Standard WebGL 2 (läuft überall gleich); ?webgpu prüft den WebGPU-Pfad, wo der Browser einen Adapter hat
   const viewer = await createViewer(canvas, { forceWebGL: !params.has("webgpu"), antialias: false, background: "#16191d" });
   viewer.resize(canvas.clientWidth, canvas.clientHeight);
+  viewer.setLook("studio");
   const asset = assetById(params.get("asset") ?? "");
   const objekt = asset ? make(asset) : null;
   if (objekt) { viewer.show(objekt); viewer.frame(); }

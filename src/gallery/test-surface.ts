@@ -54,6 +54,7 @@ export async function startSurfaceTest(params: URLSearchParams) {
   const canvas = document.querySelector("canvas")!;
   const viewer = await createViewer(canvas, { forceWebGL: !params.has("webgpu"), antialias: false, background: "#16191d" });
   viewer.resize(canvas.clientWidth, canvas.clientHeight);
+  viewer.setLook("plain");
   viewer.scene.environment = new PMREMGenerator(viewer.renderer).fromScene(new RoomEnvironment(), 0.04).texture;
   viewer.scene.environmentIntensity = ENVIRONMENT;
   const surface = surfaceById(params.get("surface") ?? "") ?? SURFACES[0];

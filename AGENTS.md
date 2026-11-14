@@ -123,7 +123,16 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
   declare the same name in `rig` (rotate in degrees or slide in metres along an axis, 0 closed, positive opens).
   Pass `{ max }` when the range depends on the values (a small drawer slides out less).
 - **Units and placement:** metres, y up, origin at the centre of the floor contact; the asset faces +z.
-- **Materials** only from `src/materials` (`material(kind, colour, scale, density?)`); a new kind is its own task.
+- **Materials** only from `src/materials` (`material(kind, colour, scale, density?, options?)`); a new kind is its own
+  task. Wood, iron, stone and bark carry relief and varying roughness that the export bakes into a normal map and a
+  roughness/metalness map. Options: `grain` (wood fibres along "x", "y" or "z"; default "auto": upright on standing
+  faces, along x on lying ones), `rust` (iron, 0 bare to 1; default 0.45), `moss` (stone, 0 to 1 on upward faces),
+  `plain` (one colour without pattern and bake, e.g. leaf cards). Use `metal` for clean or painted metal, `iron` for
+  forged or cast iron that rusts. Pass a larger `scale` to shrink a pattern on a small object (the lantern uses 4).
+- **Realistic shapes** (style guide): build from real parts with `src/assets/shapes.ts`: `stave` (barrel and tub
+  staves), `rounded` (boxes with rounded edges), `turned` (lathe profiles for legs, spindles, finials), `roundBoards`
+  (a round lid from boards), `grid` (any surface from a function, with sharp edges between faces). The five reference
+  assets show the bar: barrel, chair, tree, rock, lantern.
 - **Budget:** one draw call per material and movable part (use `Parts`, it merges), triangles as low as the shape
   allows. The category limits in `tests/core/assets.test.ts` are protected.
 - **Randomness** only from the `seed` argument (`rng(seed)`), never `Math.random()`: same values and seed, same asset.

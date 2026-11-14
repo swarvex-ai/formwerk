@@ -1,6 +1,8 @@
-import { CylinderGeometry, LatheGeometry, Vector2 } from "three";
+import { Color, CylinderGeometry, RingGeometry } from "three";
+import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { roundBoards, stave, turned } from "../shapes";
 
 export const barrel = defineAsset({
   id: "barrel", category: "props",
@@ -28,18 +30,54 @@ export const barrel = defineAsset({
     "water-butt": { label: { de: "Regentonne", en: "Water butt" }, values: { height: 1.2, radius: 0.42, bulge: 0.08, hoops: 3, color: "#6f5a3e" } },
   },
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 2000, drawCalls: 2 },
-  build(p) {
+  budget: { triangles: 20000, drawCalls: 4 },
+  build(p, seed) {
+    const zufall = rng(seed);
     const holz = p.kind === "wood", bauch = holz ? p.bulge : 0, h = p.height;
-    // Drawn solid, an empty barrel is mostly air: an effective density for its mass
-    const koerper = material(holz ? "wood" : "metal", p.color, 1, holz ? 130 : 180), reif = material("metal", holz ? p.hoopColor : p.color, 1, 180);
     const r = (y: number) => p.radius * (1 + bauch * Math.sin((Math.PI * y) / h));
-    const profil = [new Vector2(0, 0), ...Array.from({ length: 13 }, (_, i) => new Vector2(r((h * i) / 12), (h * i) / 12)), new Vector2(0, h)];
-    const t = new Parts().add(koerper, new LatheGeometry(profil, 20));
-    // Hoops near the ends and spread over the belly, just outside the staves
-    for (let k = 0; k < p.hoops; k++) {
-      const y = h * (0.07 + (0.86 * k) / (p.hoops - 1)), rr = r(y) + 0.008, b = holz ? 0.035 : 0.02;
-      t.add(reif, new CylinderGeometry(rr, rr, b, 20, 1, true).translate(0, y, 0));
+    const t = new Parts();
+    if (holz) {
+      // Drawn solid, an empty barrel is mostly air: an effective density for its mass
+      // Two tones of the same wood, one per stave at random: real barrels are built from staves of different trees
+      const ton = (k: number) => { const c = new Color(p.color); c.multiplyScalar(k); return `#${c.getHexString()}`; };
+      const dauben = material("wood", p.color, 1, 130), dauben2 = material("wood", ton(0.88), 1, 130), boden = material("wood", p.color, 1, 130, { grain: "x" }), reif = material("iron", p.hoopColor, 1, 180);
+      // Staves about a hand wide at the belly, 2 mm apart: the joints read as dark lines
+      const n = Math.max(10, Math.round((2 * Math.PI * r(h / 2)) / 0.095)), fuge = 0.0022, dicke = Math.max(0.014, p.radius * 0.07);
+      for (let i = 0; i < n; i++) {
+        const a0 = (2 * Math.PI * i) / n, a1 = (2 * Math.PI * (i + 1)) / n, halb = fuge / 2 / p.radius;
+        t.add(zufall() < 0.45 ? dauben2 : dauben, stave(r, h, a0 + halb, a1 - halb, dicke, 14, 3));
+      }
+      // Heads sit a little below the stave ends (the chime), boards across x
+      const kimme = Math.min(0.03, h * 0.035), kopfDicke = Math.max(0.014, dicke * 0.9);
+      for (const y of [h - kimme, kimme + kopfDicke]) {
+        const rr = r(y) - dicke + 0.001, bretter = Math.max(3, Math.round((2 * rr) / 0.12));
+        t.add(boden, roundBoards(rr, bretter, 0.002, kopfDicke, 12).translate(0, y, 0));
+      }
+      // Iron hoops near the ends and over the belly: thin conical bands on the staves
+      const breite = Math.min(0.045, h * 0.05), staerke = 0.004;
+      for (let k = 0; k < p.hoops; k++) {
+        const y = h * (0.08 + (0.84 * k) / (p.hoops - 1)), y0 = y - breite / 2, y1 = y + breite / 2;
+        const ru = r(y0) + staerke, ro = r(y1) + staerke;
+        t.add(reif, new CylinderGeometry(ro, ru, breite, 64, 1, true).translate(0, y, 0));
+        t.add(reif, new RingGeometry(r(y1) - 0.0005, ro, 64, 1).rotateX(-Math.PI / 2).translate(0, y1, 0));
+        t.add(reif, new RingGeometry(r(y0) - 0.0005, ru, 64, 1).rotateX(Math.PI / 2).translate(0, y0, 0));
+      }
+      // The bung on the stave that faces the viewer, at the belly
+      const a = (2 * Math.PI * (Math.round((Math.atan2(0.8, 0.6) / (2 * Math.PI)) * n) + 0.5)) / n, rb = Math.min(0.02, p.radius * 0.07);
+      t.add(dauben, new CylinderGeometry(rb, rb * 1.08, 0.012, 16).rotateZ(Math.PI / 2).rotateY(-a).translate(Math.cos(a) * (r(h / 2) - 0.002), h / 2, Math.sin(a) * (r(h / 2) - 0.002)));
+    } else {
+      const blech = material("metal", p.color, 1, 180);
+      // A steel drum: rolled rims at both ends, rolling hoops pressed out of the wall, a lid with two bungs
+      const R = p.radius, lippe = Math.min(0.012, h * 0.015);
+      const profil: [number, number][] = [[0.001, 0.012], [R - 0.01, 0.012], [R - 0.01, 0.004], [R, 0], [R + lippe * 0.6, lippe], [R, lippe * 2]];
+      const sicken = Math.max(1, p.hoops);
+      for (let k = 1; k <= sicken; k++) {
+        const y = (h * k) / (sicken + 1), b = Math.min(0.02, h * 0.025);
+        profil.push([R, y - b], [R + 0.007, y - b * 0.3], [R + 0.007, y + b * 0.3], [R, y + b]);
+      }
+      profil.push([R, h - lippe * 2], [R + lippe * 0.6, h - lippe], [R, h], [R - 0.01, h - 0.004], [R - 0.01, h - 0.012], [0.001, h - 0.012]);
+      t.add(blech, turned(profil, 48));
+      for (const [x, rr] of [[R * 0.55, 0.026], [-R * 0.6, 0.014]] as const) t.add(blech, turned([[rr, 0], [rr, 0.012], [rr * 0.7, 0.016], [0.001, 0.016]], 20, x, h - 0.012, 0));
     }
     return t.cylinder(p.radius * (1 + bauch), h).group();
   },
