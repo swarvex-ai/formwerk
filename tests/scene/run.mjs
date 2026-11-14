@@ -15,7 +15,7 @@ import { checked } from "../only.mjs";
 
 const ordner = new URL(".", import.meta.url).pathname;
 const dist = join(ordner, "../../dist");
-const viewport = { width: 320, height: 240 };
+const viewport = { width: 640, height: 480 };
 const browser = [process.env.CHROME_PATH, "/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome"].find((p) => p && existsSync(p));
 if (!browser) { console.error("No Chromium found: set CHROME_PATH (the swarvex threejs environment has it)."); process.exit(2); }
 if (!existsSync(join(dist, "index.html"))) { console.error("No build: run `npm run build` first."); process.exit(2); }
