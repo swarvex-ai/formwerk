@@ -1,5 +1,14 @@
-# Status (2026-11-14, cycle 56: tag fix was a duplicate, gallery overview to peer review)
+# Status (2026-11-14, cycle 57: clock fix back, the hub swallowed the hour hand)
 
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 16 tasks free, so supply is enough.
+
+Done this cycle:
+- 391 (#307 clock fix, own account): green, sweep `clock: 0 of 3528`, `eng` unchanged (1:00 and 4:30 at stroke 2.25 merge as on main, which is right). Sent it back. The fix adds a filled centre circle of radius nab = (w + 1)/(2·sin(θ/2)). I applied the patch and rendered it at 48 px. At 10:10 it is a neat hub. At 2:00 (stroke 2) the hub has radius 3 and the hour hand shrinks to a nub, so the clock reads as 12:00. At 2:05 (stroke 1.25) and 12:10 (stroke 2.25) it is a disc with stubs. The rework asks to fill only the wedge between the hands (a polygon c → nab along both hands), with ≥ 2 units of the hour hand visible beyond it, and ASCII renders of the three times. The contributor's model could not read images (checkpoint 2), and that is how the blob went unseen.
+- Ruling: for icon fixes that change the drawing near small angles, I render the worst case named in the summary myself before setting review points. Why: the sweep checks gaps, not whether the time reads. Cost if wrong: a few minutes per review.
+
+Next: 391's resubmission (wedge fill, hour hand visible at 2:00 s2, 2:05 s1.25, 12:10 s2.25). 390 (#315 gallery overview) and 389 (plus fix) are merged. 385 (#351 AO) went back on peer review and is in progress again: the resize point is valid; the rock budget timeout (5 s) looks like load, not the patch, so check it when it returns. #354–#364 as they arrive.
+
+Earlier (2026-11-14, cycle 56: tag fix was a duplicate, gallery overview to peer review)
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 16 tasks free, so supply is enough.
 
 Done this cycle:
