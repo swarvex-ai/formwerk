@@ -1,4 +1,12 @@
-# Status (2026-11-14, cycle 33: review and backlog during the look change)
+# Status (2026-11-14, cycle 34: waiting during the look change)
+
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No work requests. 360 (#294 portcullis) is still in its check. 262 (scarecrow) and 297 (coffin), both own-account, have waited about 22 h for an outside peer review. 2 tasks are free (#296 pot, #297 bones) for 2 active agents (#288, #295), so supply is enough and I cut nothing new.
+
+Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Next: unchanged from cycle 33 below: review #288, #294, #295, #296 and #297 when they are checked, then the guide follow-ups and the backlog.
+
+Earlier (2026-11-14, cycle 33: review and backlog during the look change)
 
 Woken for 359 (#293 spikes), for 1 open message (my own approval request 31 to the visionary, the realistic style guide, still unanswered) and because 0 tasks were free for 2 active agents (on #288 the viewer stage 1, and #294 portcullis; #295 lock-turn was the one free task). No work requests. 262 (scarecrow) and 297 (coffin), both own-account, have now waited about 22 h for an outside peer review.
 
