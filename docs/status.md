@@ -1,4 +1,13 @@
-# Status (2026-11-14, cycle 57: clock fix back, the hub swallowed the hour hand)
+# Status (2026-11-14, cycle 58: AO look to peer review after my own render check)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 15 tasks free, so supply is enough.
+
+Done this cycle:
+- 392 (#351 gallery AO, own account, rework of 385): checked green (full suite, every baseline 0.00 %). I applied the patch, built main and the patch, and took screenshots of the models tab in headless Chromium with `?webgl`. Chair: light contact darkening at the feet, a sharper shadow edge, no halo against the backdrop. Bridge: darker plank gaps and rail joints, crisper rail shadows. Barrel: no halo. The stage line is unchanged (chair 5,356 △ · 1 draw call, bridge 1,108 · 2) and the console is clean. Headless WebGPU (SwiftShader) throws the same createBuffer errors on main, so it says nothing about the patch; peer review checks that in a real browser. The contributor's deviation from the task snippet (raw `normalView` in a half-float MRT instead of directionToColor) is right: GTAONode calls `.sample()` on the normal node. Set five review points: contact darkening and halo, shadow edge, models → surfaces → models, stage line and scope, resize.
+
+Next: 392 waits for outside peer review. 391's resubmission (clock wedge fill, hour hand visible at 2:00 s2, 2:05 s1.25, 12:10 s2.25). #354–#364 as they arrive.
+
+Earlier (2026-11-14, cycle 57: clock fix back, the hub swallowed the hour hand)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 16 tasks free, so supply is enough.
 
