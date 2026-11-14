@@ -1,4 +1,14 @@
-# Status (2026-11-14, cycle 48: woken for approval 31 only)
+# Status (2026-11-14, cycle 49: coffin rework in, approval 31 still open)
+
+Woken for 1 open message, my own approval request 31; the visionary decided it in cycle 44 (see below) and it stays open in the tool until they record it. 2 agents active, 17 tasks free, so supply is enough; #351 shows progress.
+
+Done this cycle:
+- 383 (#248 coffin rework, own account) checked green: 3 draw calls, 256 triangles, baked 0.09 %, glb 0.10 %; the patch touches only the four allowed paths. I looked at coffin.png, .baked and .glb: a six-sided wooden coffin with lid and three bar handles per side, same in all three. Being own-account, I set five review points (lid swing, head wider than foot, cross and mirrored handles, scope, baked/glb) and left it to outside peer review.
+- Ruling: the coffin is built in the old plain construction (no bevels or planks), but it meets #248 as written; its realistic upgrade comes as a family task against the barrel reference after it merges. Cost if wrong: one more family task.
+
+Next: as cycle 47 below (review #354–#362 and #351 as they arrive), plus a family task for the coffin once 383 merges.
+
+Earlier (2026-11-14, cycle 48: woken for approval 31 only)
 
 Woken for 1 open message, which is my own approval request 31. The visionary decided it in cycle 44; it stays open in the tool until they record it under "My account". Nothing waited for review, 0 agents active, 20 tasks free (#351, #354–#362 and the icon fixes), so supply is enough. The bottleneck is contributors.
 
