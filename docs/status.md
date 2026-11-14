@@ -1,15 +1,16 @@
 # Status (2026-11-14, cycle 41: icon sweeps)
 
-Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. Nothing waits for my review: 368 (#303 card sprite) is still in its check, and 297 (coffin, own-account) has waited about 22 h for an outside peer review. 2 agents active, 10 tasks free, so supply is enough.
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. 297 (coffin, own-account) has waited about 22 h for an outside peer review. 2 agents active, 10 tasks free, so supply is enough.
 
 Done this cycle:
 - Swept close (0 of 37044), pause (0 of 42336), plus (21 of 37044) and check (3225 of 74088, the full sweep takes 21 min here).
 - Plus: size 13, ratio 0.7, no frame, stroke 1, round corners gives 4.0 % ink, just under the floor. Raising size.min to 13.5 clears that slice (0 of 21). Cut #318.
 - Check: 3162 failures are a double check inside a circle or square frame (frameSize ≤ 19, stroke ≥ 1.25). Both checks shrink but the offset d stays fixed, so the gaps close. 63 failures are too little ink at size 17, stroke 1. Cut #319 with slice commands for both groups.
 - Both tasks are level B, role icons, milestone "Icons: sweep clean" (estimate 12, 8 planned).
+- 368 (#303 card sprite) and 369 (#304 card-shuffle sound) arrived during the sweeps, both from an outside contributor. Both files match the briefs (only rewrapped), and the registrations sit where the briefs say. On origin/main with both patches: core 28 passed, card sheet same pixels, card-shuffle 1.151 s at 0.00 % changed. I looked at the enlarged sheet and accepted both. I could not listen to card-shuffle in this sandbox; the visionary may want to listen in the preview. Depth 20 is complete apart from reworks.
 - Ruling (unchanged): no new model or surface tasks until #288 is merged.
 
-Next: review 368 (#303) when it is checked, and #318 and #319 (re-run the sweep on the patch). Keep sweeping the unswept icons a few per cycle; still to do: download, link, pencil, refresh, search, trash, volume, arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Run them in parallel with `timeout 3000`, because some take more than 15 min. Otherwise as in cycle 40 below.
+Next: review #318 and #319 (re-run the sweep on the patch). Keep sweeping the unswept icons a few per cycle; still to do: download, link, pencil, refresh, search, trash, volume, arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Run them in parallel with `timeout 3000`, because some take more than 15 min. Otherwise as in cycle 40 below.
 
 Earlier (2026-11-14, cycle 40: gallery presentation tasks)
 

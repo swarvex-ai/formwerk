@@ -363,8 +363,8 @@ AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from 
 |---|---|---|
 | #298 | sprite: die (16 × 16 item, roll animation of quarter turns ending on the chosen face; classic, casino, small black; scratch on 2b30097: core 26/26, sheet reads in every preset and size; tilted frames blank because squeezed pips merge into bars) | merged |
 | #299 | sound: dice-roll (cup rattle, clacks with a surface knock, shrinking bounces; board game, dice cup, felt tray; scratch on 2b30097: 25/25, 0.53 s at defaults, centroid 3–4.5 kHz, longest 1.58 s of 2.5) | merged |
-| #303 | sprite: card (16 × 16 item, suit, rank A–K, size 12–14, back colour; flip from the lattice back through the edge to the face; ace of spades, king of hearts red back, old seven of diamonds; scratch on 225bc5e: core 26/26, sheet reads in every preset, suit and both sizes; size stops at 12, glyphs blank while squeezed) | open |
-| #304 | sound: card-shuffle (riffle with flicks, bridge flutter and a tap, or dealing; riffle, deal, new deck; scratch on 225bc5e: 25/25, 1.15 s at defaults, flick centroid 5–6 kHz, longest 2.07 s of 2.5) | open |
+| #303 | sprite: card (16 × 16 item, suit, rank A–K, size 12–14, back colour; flip from the lattice back through the edge to the face; ace of spades, king of hearts red back, old seven of diamonds; scratch on 225bc5e: core 26/26, sheet reads in every preset, suit and both sizes; size stops at 12, glyphs blank while squeezed) | accepted (368) |
+| #304 | sound: card-shuffle (riffle with flicks, bridge flutter and a tap, or dealing; riffle, deal, new deck; scratch on 225bc5e: 25/25, 1.15 s at defaults, flick centroid 5–6 kHz, longest 2.07 s of 2.5) | accepted (369) |
 
 ## Next (lead, level D, not cut yet)
 
