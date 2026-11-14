@@ -8,3 +8,5 @@ export function report(id, text) {
   mkdirSync("tests/scene/out", { recursive: true });
   writeFileSync(`tests/scene/out/sweep-${id}.txt`, text);
 }
+/** FORMWERK_SWEEP_FIX='{"bars":4,"off":true}': parameters held at these values, to sweep only a slice quickly. */
+export const sweepFix = JSON.parse((process.env.FORMWERK_SWEEP_FIX ?? "").trim() || "{}");

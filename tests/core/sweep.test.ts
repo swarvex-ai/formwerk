@@ -3,12 +3,13 @@
 // icons.test.ts to each: the outermost pixel ring stays empty, ink between 4 and 80 %, centred, reads at 24 px.
 // The suite itself draws only a few random cases, so a green suite can hide whole failing regions. Writes every
 // failing combination to tests/scene/out/sweep-<id>.txt and fails when there is one. Skipped when the variable is not
-// set; about 1000 combinations take 4 to 5 minutes.
+// set; about 1000 combinations take 4 to 5 minutes. FORMWERK_SWEEP_FIX='{"size":18}' holds parameters at these values
+// (a slice, quick while working); the report then names the slice.
 import { expect, it } from "vitest";
 import { legibility } from "../../src/core/vector";
 import { ICONS } from "../../src/icons";
 import { makeIcon } from "../../src/icons/define";
-import { report, sweepId } from "../sweep.mjs";
+import { report, sweepFix, sweepId } from "../sweep.mjs";
 
 const id: string = sweepId;
 
@@ -19,7 +20,8 @@ it.skipIf(!id)(`sweeps every combination of ${id || "an icon"}`, () => {
   for (const [k, p] of Object.entries(icon!.params) as [string, Record<string, unknown>][]) {
     if (k === "color" || k === "badge") continue;
     let werte: unknown[];
-    if (p.type === "choice") werte = p.options as string[];
+    if (k in sweepFix) werte = [sweepFix[k]];
+    else if (p.type === "choice") werte = p.options as string[];
     else if (p.type === "boolean") werte = [false, true];
     else {
       const min = p.min as number, max = p.max as number, step = (p.step as number) ?? (p.type === "integer" ? 1 : (max - min) / 6);
@@ -46,6 +48,7 @@ it.skipIf(!id)(`sweeps every combination of ${id || "an icon"}`, () => {
     ].filter(Boolean);
     if (was.length) fehler.push(`${JSON.stringify(werte)}: ${was.join("; ")}`);
   }
-  report(id, `${id}: ${fehler.length} of ${faelle.length} combinations fail\n${fehler.join("\n")}\n`);
+  const scheibe = Object.keys(sweepFix).length ? ` (slice ${JSON.stringify(sweepFix)})` : "";
+  report(id, `${id}: ${fehler.length} of ${faelle.length} combinations fail${scheibe}\n${fehler.join("\n")}\n`);
   expect(fehler.length, `${id}: ${fehler.length} of ${faelle.length} combinations fail, see tests/scene/out/sweep-${id}.txt`).toBe(0);
 }, 3_600_000);

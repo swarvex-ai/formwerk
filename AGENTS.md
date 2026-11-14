@@ -83,7 +83,9 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    the sheet, then commit it with the icon.
 4. The suite draws only a few random cases. `FORMWERK_SWEEP=<id> npx vitest run tests/core/sweep.test.ts` applies the
    same checks to every combination (number parameters at seven values, every stroke, corner and style) and lists the
-   failing ones in `tests/scene/out/sweep-<id>.txt`; it must report 0. About 1000 combinations take 4 to 5 minutes.
+   failing ones in `tests/scene/out/sweep-<id>.txt`; it must report 0. A full sweep takes minutes up to an hour. While you work, sweep only the failing slice:
+   `FORMWERK_SWEEP_FIX='{"size":18,"off":true}'` holds those parameters at these values (seconds); run the full sweep
+   once at the end and quote its line.
 
 ## Adding a sound
 
