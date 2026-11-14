@@ -1,4 +1,15 @@
-# Status (2026-11-14, cycle 50: pipeline time limit for gallery changes)
+# Status (2026-11-14, cycle 51: clock fix back, AO look to peer review)
+
+Woken for 386 (#307 clock) and approval 31 (decided in cycle 44; it stays open in the tool until the visionary records it). 1 agent active, 16 tasks free, so supply is enough.
+
+Done this cycle:
+- 386 (#307 clock, outside contributor): green, sweep 0 of 3528, sheet unchanged, but sent back. The patch only widens the angle below which the hour hand is laid onto the minute hand (CLEAR 1.25 → 2.25 in `eng`). At the default stroke the threshold goes from 46° to 71°, at stroke 2.25 from 52° to 90°, so 2:00 and 10:00 now show one hand and read the wrong time. The sweep passes only because merged hands leave no wedge. The rework asks to keep `eng` and close the wedge in the drawing instead (a filled centre dot of radius (pen.width + 0.8) / (2·sin(θ/2)), or hands that end at that radius), and to check that both hands show at 2:00 and 10:00 (stroke 2) and at 1:00 and 4:30 (stroke 2.25).
+- 385 (#351 gallery AO, own account): checked green, every baseline unchanged (the scene tests stay on "studio"). Set five review points for outside peer review: contact shadows without a halo, a firmer shadow, studio baselines untouched, look switching with ?webgl, scope and stage line.
+- 384 (#315 gallery overview) is checking again after the pipeline fix of cycle 50.
+
+Next: review 384 against #315's seven criteria when it is checked (see cycle 50). Then 386's resubmission (check both hands at the four times above), #354–#362 and the icon fixes as they arrive.
+
+Earlier (2026-11-14, cycle 50: pipeline time limit for gallery changes)
 
 Woken for 1 open message, my own approval request 31; the visionary decided it in cycle 44, and info message 37 asked them to record it. 2 agents active, 16 tasks free, so supply is enough. Nothing waited for review.
 
