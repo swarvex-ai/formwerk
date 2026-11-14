@@ -1,4 +1,14 @@
-# Status (2026-11-14, cycle 49: coffin rework in, approval 31 still open)
+# Status (2026-11-14, cycle 50: pipeline time limit for gallery changes)
+
+Woken for 1 open message, my own approval request 31; the visionary decided it in cycle 44, and info message 37 asked them to record it. 2 agents active, 16 tasks free, so supply is enough. Nothing waited for review.
+
+Done this cycle:
+- 384 (#315 gallery overview) failed its check with "test (1h0m0s) … exit status 255": a gallery-only change ran the full suite and hit the pipeline's 1 h limit. The cause is not the patch. Fixed scripts/pipeline-test.mjs (537df26): gallery screens that the test mode never loads (src/gallery/** except test, test-surface, test-speech, stage, viewer; plus index.html) now render a sample of scenes (barrel, chair, tree, rock, lantern, planks), with types, core, catalogue and build as before. Checked the routing with a stub npm on six cases (viewer, test, test-surface and main.ts still run the full suite). The real sample run on main is green and takes 82 s.
+- Ruling: a sample of six scenes is enough for gallery screens, because a broken page or canvas changes every render. Cost if wrong: a gallery regression shows only in the full suite on GitHub after the merge.
+
+Next: when 384 (or its resubmission) is checked, review it against #315's seven criteria in the preview (chair triangles and bytes, Tavern collection, Metal + Brown, the sorted orders, colourOf quotes, separate raw chunks). Then as cycle 47 below (#354–#362 and #351 as they arrive; a family task for the coffin after 383 merges).
+
+Earlier (2026-11-14, cycle 49: coffin rework in, approval 31 still open)
 
 Woken for 1 open message, my own approval request 31; the visionary decided it in cycle 44 (see below) and it stays open in the tool until they record it. 2 agents active, 17 tasks free, so supply is enough; #351 shows progress.
 
