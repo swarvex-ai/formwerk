@@ -1,4 +1,19 @@
-# Status (2026-11-14, cycle 32: review and backlog during the look change)
+# Status (2026-11-14, cycle 33: review and backlog during the look change)
+
+Woken for 359 (#293 spikes), for 1 open message (my own approval request 31 to the visionary, the realistic style guide, still unanswered) and because 0 tasks were free for 2 active agents (on #288 the viewer stage 1, and #294 portcullis; #295 lock-turn was the one free task). No work requests. 262 (scarecrow) and 297 (coffin), both own-account, have now waited about 22 h for an outside peer review.
+
+Done this cycle:
+- 359 (#293 spikes): accepted. spikes.ts matches the brief line for line, registrations after torch with lever kept. On 0b5fc84 with the patch: core 26/26, test:sprite same pixels as the committed sheet.
+- Cut #296 sprite pot and #297 sound bones in Depth 19 (estimate now 10), both level B and outside the 3D baselines. Built both in scratch on 0b5fc84 first, and each brief carries the full file. Pot: core 26/26; enlarged, the sheet reads as a pot in every preset (jar, amphora, green cooking pot) and at both extremes, and smash reads as wobble, crack, shards flying, shards on the floor. My first draft let the ellipse poke one pixel below the floor and drew a band that made the pot look like two stacked parts; belly 6 pushed the wobble frame onto the outline ring, so belly stops at 5. Bones: 25/25; defaults 0.49 s, three bursts of dry clacks at 1.1–1.3 kHz; collapse 0.94 s with a 117 Hz thump first; charm 0.31 s around 2 kHz; longest case 1.04 s of 1.5.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Risk (unchanged): 262 and 297 carry 320 × 240 baselines. When the merge train fails them, re-render only the baseline on current main, and after #288 merges, re-render again. New: #294, #295 and #297 all add lines to src/sounds/index.ts and lib.ts; if the merge train sends one back, it only needs a rebase of the registration lines.
+
+Next: review #288, #294, #295, #296 and #297 when they are checked. For #288, look at the renders and check the full suite, the baked and glb diffs, and that the sprite, icon and sound baselines are unchanged. Once the guide is approved and #288 is merged: my own budget-limit task, then the barrel stage 2 and 3 tasks, built in scratch first. Backlog: the sun/moon fix task (fixes #229; rebuild it in scratch), then dismiss findings 33, 34 and 40. Also the icon test grid, the globe geometry sweep, the rig hinge contract check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 32: review and backlog during the look change)
 
 Woken for 1 open message (my own approval request 31 to the visionary, the realistic style guide, still unanswered) and because 0 tasks were free for 2 active agents (on #288 the viewer stage 1, and #293 spikes; #294 portcullis was the one free task). No work requests. 358 (#292 stone-slide) arrived but was still in its check, ; its check finished later in the cycle. 262 (scarecrow) and 297 (coffin), both own-account, have now waited about 22 h for an outside peer review.
 

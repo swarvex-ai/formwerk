@@ -312,7 +312,7 @@ Order (each stage gates the next):
 |---|---|---|
 | #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | in progress |
 
-## Milestone "Depth 19: dungeon" (estimate 8 tasks)
+## Milestone "Depth 19: dungeon" (estimate 10 tasks)
 
 Cut 2026-11-14 on base a16c837 while #288 re-renders every model and surface baseline: only kinds without a 3D
 baseline (sprites, sounds, icons), so nothing collides with #288 or needs a second re-render. Level B, no
@@ -325,9 +325,11 @@ carries the full file.
 | #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | accepted, waiting for merge |
 | #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | accepted (357), waiting for merge |
 | #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | accepted (358), waiting for merge |
-| #293 | sprite: spikes (16 × 16 floor trap, spring animation; dungeon, rusty, crypt; scratch on fcc3481: core 26/26, every other spike two pixels lower so the outline does not turn the row into bars) | open |
+| #293 | sprite: spikes (16 × 16 floor trap, spring animation; dungeon, rusty, crypt; scratch on fcc3481: core 26/26, every other spike two pixels lower so the outline does not turn the row into bars) | accepted (359), waiting for merge |
 | #294 | sound: portcullis (ratchet clicks, rumble, slam or pawl clunk; castle gate, winch, cell grate; scratch on fcc3481: 25/25, 2.05 s at defaults, longest 3.46 s of maxSeconds 3.5) | open |
 | #295 | sound: lock-turn (key in, pin clicks, bolt; door, padlock, cell door; scratch on a7a5a0f: 25/25, 0.87 s at defaults, longest 1.37 s of 2.2; id not `lock`, the icon has it) | open |
+| #296 | sprite: pot (16 × 16 clay pot, smash animation; jar, amphora, cooking pot; scratch on 0b5fc84: core 26/26, sheet reads in every preset and at both extremes; belly capped at 5 so the wobble frame stays off the outline ring) | open |
+| #297 | sound: bones (rattle in three bursts or collapse with a thump; walk, collapse, charm; scratch on 0b5fc84: 25/25, 0.49 s at defaults around 1.1–1.3 kHz, longest 1.04 s of 1.5) | open |
 
 ## Next (lead, level D, not cut yet)
 
