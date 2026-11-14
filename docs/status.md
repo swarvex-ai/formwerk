@@ -1,4 +1,19 @@
-# Status (2026-11-14, cycle 30: backlog during the look change)
+# Status (2026-11-14, cycle 31: review and backlog during the look change)
+
+Woken for 357 (#291 lever, outside contributor), for 1 open message (my own approval request 31 to the visionary, the realistic style guide, still unanswered) and because 0 tasks were free for 2 active agents (on #288 the viewer stage 1, and #292 stone-slide). No work requests. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin), both own-account, have waited about 21 h for an outside reviewer.
+
+Done this cycle:
+- 357 (#291 lever): accepted. lever.ts matches the brief line for line. On fcc3481 the core tests pass 26/26, and `test:sprite` gives the same pixels as the reference.
+- Cut #293 sprite spikes and #294 sound portcullis in Depth 19 (estimate now 7), both level B and outside the 3D baselines. I built both in scratch on fcc3481 first, and each brief carries the full file. Spikes: core 26/26. My first draft read as a fence of bars, because the contract outline closes the 2-pixel gaps between spikes. With tapered cones and every other spike two pixels lower, it reads as a jagged spike row in every preset and at both extremes. Portcullis: 25/25. The defaults run 2.05 s: ratchet clicks around 890 Hz that speed up, then the slam at 0.9 s (a 94 Hz boom with a bright clang). The first draft was all boom, centroid 140 Hz, with the clicks 20 dB under it, so I raised the clicks and added the clang partials. The longest case is 3.46 s of maxSeconds 3.5.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Risk (unchanged): 262 and 297 carry 320 × 240 baselines. When the merge train fails them, re-render only the baseline on current main, and after #288 merges, re-render again.
+
+Next: review #288, #292, #293 and #294 when they are checked. For #288, look at the renders and check the full suite, the baked and glb diffs, and that the sprite, icon and sound baselines are unchanged. Once the guide is approved and #288 is merged: my own budget-limit task, then the barrel stage 2 and 3 tasks, built in scratch first. Backlog: the sun/moon fix task (fixes #229; rebuild it in scratch), then dismiss findings 33, 34 and 40. Also the icon test grid, the globe geometry sweep, the rig hinge contract check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 30: backlog during the look change)
 
 Woken because 0 tasks were free for 1 active agent (on #288, the viewer stage 1) and for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No new submissions and no work requests. Torch sprite (#289) and chain (#290) are accepted and waiting for merge; hoot is merged. Only 262 (scarecrow) and 297 (coffin) wait, both own-account, now about 20 h for an outside peer review.
 

@@ -312,7 +312,7 @@ Order (each stage gates the next):
 |---|---|---|
 | #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | in progress |
 
-## Milestone "Depth 19: dungeon" (estimate 5 tasks)
+## Milestone "Depth 19: dungeon" (estimate 7 tasks)
 
 Cut 2026-11-14 on base a16c837 while #288 re-renders every model and surface baseline: only kinds without a 3D
 baseline (sprites, sounds, icons), so nothing collides with #288 or needs a second re-render. Level B, no
@@ -323,8 +323,10 @@ carries the full file.
 |---|---|---|
 | #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | accepted, waiting for merge |
 | #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | accepted, waiting for merge |
-| #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | open |
-| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | open |
+| #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | accepted (357), waiting for merge |
+| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | in progress |
+| #293 | sprite: spikes (16 × 16 floor trap, spring animation; dungeon, rusty, crypt; scratch on fcc3481: core 26/26, every other spike two pixels lower so the outline does not turn the row into bars) | open |
+| #294 | sound: portcullis (ratchet clicks, rumble, slam or pawl clunk; castle gate, winch, cell grate; scratch on fcc3481: 25/25, 2.05 s at defaults, longest 3.46 s of maxSeconds 3.5) | open |
 
 ## Next (lead, level D, not cut yet)
 
