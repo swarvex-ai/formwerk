@@ -284,8 +284,33 @@ assets were built in a scratch worktree first, and each brief carries the full f
 
 | Task | Asset | State |
 |---|---|---|
-| #286 | sound: hoot (soft hollow owl hoots, the last long and quavering; tawny, eagle owl, lone; scratch: 25/25, 1.38 s at defaults, longest 3.27 s of 3.4) | open |
-| #287 | sprite: moth (idle with folded wings, fly up/level/down/level; moth, luna, tiger, clothes moth; scratch: 26/26, sheet reads in every preset) | open |
+| #286 | sound: hoot (soft hollow owl hoots, the last long and quavering; tawny, eagle owl, lone; scratch: 25/25, 1.38 s at defaults, longest 3.27 s of 3.4) | accepted (354), waits for merge |
+| #287 | sprite: moth (idle with folded wings, fly up/level/down/level; moth, luna, tiger, clothes moth; scratch: 26/26, sheet reads in every preset) | merged (b2ad1ad) |
+
+## Milestone "Look: realistic" (estimate 20 tasks)
+
+Visionary decision of 14 Nov 2026: the 3D look moves from blocky to realistic, or stylised-realistic where realism
+costs too much. Formwerk is now a hybrid: the software role cards plus the game cards **art** (`roles/game/art.md`,
+owns `docs/style-guide.md`, the gate for model, surface and sprite tasks) and **audio** (`roles/game/audio.md`, sounds
+and voices). The lead plays both until the numbers call for area leads. New tasks for models and surfaces use
+`role: art` from now on; sounds keep `audio`.
+
+Order (each stage gates the next):
+1. Scene render at 640 × 480: done by the lead (f181c42), all 95 model and surface baselines re-rendered.
+2. Art director: style guide rewrite (models and surfaces sections, references with adopt / don't adopt): proposed in
+   a6ede40, **waiting for the visionary's approval** (message 31).
+3. Stage 1, lighting in `src/gallery/viewer.ts`: #288 (level B, role art). The lead checked the viewer in scratch:
+   ACES, PCFSoft shadows, RoomEnvironment, light studio background with ground and fog all render in SwiftShader, and
+   baked and glb diffs stay under 0.7 %. GTAO is optional in that task.
+4. Budget limits for the new look (protected `tests/core/assets.test.ts`, lead's own task): proposed furniture 60k,
+   architecture 80k, nature 150k, vehicles 150k, props 30k.
+5. Stage 2 materials (grain along the fibres, tone per plank, normal and roughness variation, rust and wear on metal)
+   and stage 3 geometry (separate staves and planks, bevels, segments by size, lathe profiles), cut per asset family
+   after #288 is merged and the guide is approved. The barrel goes first, as the reference for every later task.
+
+| Task | What | State |
+|---|---|---|
+| #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | open |
 
 ## Next (lead, level D, not cut yet)
 

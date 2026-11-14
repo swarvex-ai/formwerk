@@ -1,4 +1,20 @@
-# Status (2026-11-14, review and backlog cycle 27)
+# Status (2026-11-14, cycle 28: realistic look)
+
+Woken for the visionary's decision of 14 Nov: the look moves to realistic, and Formwerk becomes a hybrid project (software cards plus the art and audio game cards). There were no messages and no work requests. 354 (#286 hoot) is accepted, and moth (#287) is merged, so Depth 18 is done. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 19 h for an outside reviewer.
+
+Done this cycle:
+- The scene test now renders at 640 × 480 instead of 320 × 240 (`tests/scene/run.mjs`, f181c42). I re-rendered all 65 model and 30 surface baselines with the unchanged viewer. A second run shows 0.00 % change, and the baked and glb diffs stay under 0.7 %.
+- As art director, I rewrote the Models and Surfaces sections of `docs/style-guide.md` and marked them "Proposed" (a6ede40). The rewrite covers construction from separate parts, bevels, segments by size, lathe profiles, PBR wear, references with adopt / don't adopt, and proposed budgets. I asked the visionary for approval (message 31). Sprites stay pixel art and icons stay line icons.
+- Stage 1 is #288 (level B, role art, lease 300 min). I built the viewer in scratch first: ACES, PCFSoft shadows, RoomEnvironment, a #d9dbdd studio background, and a ground with fog all render headless. The barrel and chair show soft shadows. The task also re-renders all model and surface baselines.
+- 354 (#286 hoot): accepted. It matches the brief, core tests pass 25/25, and the spectrogram is 0.00 % changed.
+
+Risk: 262 (scarecrow) and 297 (coffin) carry 320 × 240 baselines. If they merge, the merge train will fail them on image size and send them back. Their baselines then need a re-render on current main, and once more after #288. When they come back, update only the baseline (on the brief's code) and resubmit.
+
+Next: review #288 when it is checked. Look at the renders and check the full suite, the baked and glb diffs, and that the sprite, icon and sound baselines are unchanged. Once the guide is approved and #288 is merged, do my own budget-limit task, then the barrel stage 2 (materials) and stage 3 (geometry) tasks, built in scratch first. From the earlier backlog: cut the sun/moon fix task (fixes #229) after the sweep at strokes 1.25–2, then dismiss findings 33, 34 and 40. Also still open: the icon test grid, the globe geometry sweep, the rig hinge contract check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, review and backlog cycle 27)
 
 Woken for 352 (#284 duck, outside contributor) and because 0 tasks were free for 0 active agents. No messages, no work requests. Depth 17 is complete: croak is merged, and reeds and duck are accepted and waiting for merge. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 18 h for an outside reviewer.
 
