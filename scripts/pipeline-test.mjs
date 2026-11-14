@@ -1,9 +1,11 @@
 // Tests in the swarvex test pipeline and merge train: only what a contribution changes. SWARVEX_CHANGED lists the
 // changed paths, one per line. If a contribution touches only single assets (their file, their reference images, their
 // lines in the registries, docs), the tests check only those assets (FORMWERK_ONLY, tests/only.mjs); the checks across
-// the whole catalogue and the build always run. Anything else (shared code, contracts, materials, the gallery, tests,
-// scripts, dependencies, a helper next to the assets) runs the full suite, and so does a run without SWARVEX_CHANGED
-// (your own `npm test`, CI). The full suite also runs on GitHub after every merge.
+// the whole catalogue and the build always run. The gallery's own screens (src/gallery/** except the files the test
+// mode loads, and index.html) render a sample of the scenes instead of all of them: a broken page or canvas shows in
+// any render. Anything else (shared code, contracts, materials, the test mode, tests, scripts, dependencies, a helper
+// next to the assets) runs the full suite, and so does a run without SWARVEX_CHANGED (your own `npm test`, CI). The
+// full suite also runs on GitHub after every merge.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 
@@ -13,6 +15,9 @@ const BILD = /^tests\/scene\/baseline\/([a-z0-9-]+)(?:\.maps)?\.png$/;
 const REGISTER = new Set(["src/index.ts", "src/assets/index.ts", "src/surfaces/index.ts", "src/surfaces/list.ts", "src/sprites/index.ts",
   "src/sprites/lib.ts", "src/icons/index.ts", "src/icons/lib.ts", "src/sounds/index.ts", "src/sounds/lib.ts"]);
 const OHNE_TEST = /^(?:docs\/.*|[^/]+\.md)$/;
+// The test mode (src/main.ts → test.ts) loads only these gallery files; the other screens never reach a scene render
+const GALERIE = /^(?:index\.html|src\/gallery\/(?!(?:test|test-surface|test-speech|stage|viewer)\.ts$)[a-z0-9-]+\.ts)$/;
+const STICHPROBE = ["barrel", "chair", "tree", "rock", "lantern", "planks"];
 
 function idOf(p) {
   if (!existsSync(p)) return null;
@@ -29,6 +34,7 @@ for (const p of geaendert) {
   const id = asset && idOf(p);
   if (id) ids.add(id);
   else if (bild) ids.add(bild[1]);
+  else if (GALERIE.test(p)) for (const s of STICHPROBE) ids.add(s);
   else if (!REGISTER.has(p) && !OHNE_TEST.test(p)) { voll = `${p} is shared`; break; }
 }
 const env = { ...process.env };
