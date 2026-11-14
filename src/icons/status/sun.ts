@@ -28,11 +28,13 @@ export const sun = defineIcon({
   build(p, pen) {
     const c: Pt = [12, 12];
     const outer = 12 - EDGE - inkRadius(pen);
-    const rc = p.core * outer;
+    // The core gives way where the rays would have less than 2 units between it and the outer radius
+    const rc = Math.min(p.core * outer, outer - 2 - pen.width - CLEAR);
     const parts: Part[] = [area(circle(c, rc))];
     const n = Number(p.count);
-    const r1 = Math.max(rc + pen.width + CLEAR, (n * (pen.width + CLEAR)) / (2 * Math.PI));
-    const r2Base = r1 + Math.max(2, p.length * (outer - r1));
+    // Square caps reach half a stroke further in, where the rays stand closer together
+    const r1 = Math.max(rc + pen.width + CLEAR, (n * (pen.width + CLEAR)) / (2 * Math.PI) + (pen.corners === "sharp" ? pen.width / 2 : 0));
+    const r2Base = Math.min(outer, r1 + Math.max(2, p.length * (outer - r1)));
     for (let i = 0; i < n; i++) {
       const g = (i * 360) / n;
       const r2 = p.pattern === "alternate" && i % 2 !== 0 ? r1 + 0.6 * (r2Base - r1) : r2Base;
