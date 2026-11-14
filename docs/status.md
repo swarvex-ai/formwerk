@@ -1,4 +1,14 @@
-# Status (2026-11-14, cycle 52: coffin attempt to peer review, hinge rule fixed)
+# Status (2026-11-14, cycle 53: gallery overview 384 back for two small fixes)
+
+Woken for 384 (#315 gallery overview) and approval 31 (decided in cycle 44; it stays open in the tool until the visionary records it). 1 agent active, 17 tasks free, so supply is enough.
+
+Done this cycle:
+- 384 (#315, outside contributor): green. I built it and drove the models tab in headless Chromium at 1440 and 360 px. Every functional criterion holds: chair 5,356 △ (same as the stage line) and 8.6 KB (8,813 bytes); Tavern shows exactly its 7 models, Metal + Brown narrows that to Tankard; the count line matches, and the reset button appears and works; the triangle and code orders are ascending; ↻ reshuffles; By category brings the five sections back; filters persist across picks; colourOf is right on all six colours; raw sources are separate chunks; no baseline changed. Sent it back for two small things: (1) the ↻ and reset buttons inherit `.liste button { width: 100% }`, so at 1440 px with Shuffle the Order select shrinks to a bare chevron; (2) the material options are a hand-written list, and should come from `MATERIALS`.
+- 385 (#351 AO) and 387 (#248 coffin), both own-account, still wait for outside peer review with their review points.
+
+Next: when 384 comes back, check the Shuffle row at 1440 px and the material list. Then 386's resubmission (both clock hands at 2:00, 10:00, 1:00, 4:30), #354–#362 and the icon fixes as they arrive. Once 387 merges, a family task for the coffin against the barrel reference.
+
+Earlier (2026-11-14, cycle 52: coffin attempt to peer review, hinge rule fixed)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 1 agent active, 16 tasks free, so supply is enough. Nothing waited for my decision.
 
