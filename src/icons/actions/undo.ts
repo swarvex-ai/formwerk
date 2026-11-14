@@ -1,21 +1,24 @@
 import { arc, line, onCircle, polygon, type Pen, type Pt } from "../../core/vector";
 import { area, defineIcon, dot, stroke, type Part } from "../define";
-import { centre } from "../shared";
+import { largest } from "../shared";
 
 export type Curve = { sweep: number; head: string; radius: number };
 
 /** A curved arrow whose head sits outside the lower end of the arc, pointing along its tangent: left for undo, right
  *  for redo. The open arc stops about a cap short of the head's back, so the round cap does not poke into the chevron. */
 export function curveParts(p: Curve, pen: Pen, dir: -1 | 1): Part[] {
-  const hw = pen.width / 2, r = p.radius, c: Pt = [12, 12];
-  const l = Math.max(4.2, Math.min(4.8, r * 0.68));
-  const d = p.head === "open" ? (Math.asin(Math.min(1, hw / r)) * 180) / Math.PI : 0, s = p.sweep;
-  const bogen = dir < 0 ? arc(c, r, 180 - s, 180 - d) : arc(c, r, 180 + d, 180 + s);
-  const back = onCircle(c, r, 180), a: Pt = [back[0], back[1] - l], b: Pt = [back[0], back[1] + l];
-  const tip: Pt = [back[0] + dir * l, back[1]];
-  const form = polygon(a, tip, b);
-  const kopf = p.head === "open" ? [stroke(line(a, tip, b))] : [area(form), dot(form)];
-  return centre([stroke(bogen), ...kopf], pen);
+  const hw = pen.width / 2, c: Pt = [12, 12], s = p.sweep;
+  return largest(5, p.radius, pen, (rad) => {
+    const l0 = Math.max(4.2, Math.min(4.8, rad * 0.68));
+    const l = p.head === "open" ? l0 + Math.max(0, (1.25 - pen.width) * 1.6) : l0;
+    const d = p.head === "open" ? (Math.asin(Math.min(1, hw / rad)) * 180) / Math.PI : 0;
+    const bg = dir < 0 ? arc(c, rad, 180 - s, 180 - d) : arc(c, rad, 180 + d, 180 + s);
+    const bk = onCircle(c, rad, 180), a: Pt = [bk[0], bk[1] - l], b: Pt = [bk[0], bk[1] + l];
+    const tip: Pt = [bk[0] + dir * l, bk[1]];
+    const fm = polygon(a, tip, b);
+    const kp = p.head === "open" ? [stroke(line(a, tip, b))] : [area(fm), dot(fm)];
+    return [stroke(bg), ...kp];
+  });
 }
 
 export const undo = defineIcon({
