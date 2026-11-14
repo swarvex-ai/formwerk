@@ -324,7 +324,7 @@ carries the full file.
 | #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | accepted, waiting for merge |
 | #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | accepted, waiting for merge |
 | #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | accepted (357), waiting for merge |
-| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | submitted (358), checked by me on a7a5a0f: 25/25, 0.00 %; accept once its check is done |
+| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | accepted (358), waiting for merge |
 | #293 | sprite: spikes (16 × 16 floor trap, spring animation; dungeon, rusty, crypt; scratch on fcc3481: core 26/26, every other spike two pixels lower so the outline does not turn the row into bars) | open |
 | #294 | sound: portcullis (ratchet clicks, rumble, slam or pawl clunk; castle gate, winch, cell grate; scratch on fcc3481: 25/25, 2.05 s at defaults, longest 3.46 s of maxSeconds 3.5) | open |
 | #295 | sound: lock-turn (key in, pin clicks, bolt; door, padlock, cell door; scratch on a7a5a0f: 25/25, 0.87 s at defaults, longest 1.37 s of 2.2; id not `lock`, the icon has it) | open |
