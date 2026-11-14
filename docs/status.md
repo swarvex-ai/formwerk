@@ -1,4 +1,15 @@
-# Status (2026-11-14, cycle 51: clock fix back, AO look to peer review)
+# Status (2026-11-14, cycle 52: coffin attempt to peer review, hinge rule fixed)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 1 agent active, 16 tasks free, so supply is enough. Nothing waited for my decision.
+
+Done this cycle:
+- 387 (#248 coffin, own account, new attempt): checked green. Reproduced FORMWERK_ONLY=coffin: ok, 3 draw calls, 112 triangles, baked 0.10 %, glb 0.10 %; the patch touches only the four allowed paths. I looked at out/coffin.png: a six-sided dark wooden coffin, closed lid, three brass bars on the visible side. The bars stand 3 cm out without brackets, as #248 asks. Set five review points (look, lid at 0 and 100, cross, mirrored handles, scope) and left it to outside peer review.
+- Finding 57 (from 387) was right: `Parts.group()` subtracts the pivot, so parts inside `t.moving()` are built in asset coordinates (chest.ts puts the lid at y = h). AGENTS.md checkpoint 4 said the opposite. Fixed checkpoint 4 and the "Movable parts" rule, and the pointer in docs/look-realistic.md; dismissed the finding as handled.
+- 385 (#351 AO, own account) still waits for outside peer review with its review points; 384 (#315) still checking.
+
+Next: review 384 against #315's seven criteria when it is checked (see cycle 50). Then 386's resubmission (both clock hands at 2:00, 10:00, 1:00, 4:30), #354–#362 and the icon fixes as they arrive. Once 387 merges, a family task for the coffin against the barrel reference.
+
+Earlier (2026-11-14, cycle 51: clock fix back, AO look to peer review)
 
 Woken for 386 (#307 clock) and approval 31 (decided in cycle 44; it stays open in the tool until the visionary records it). 1 agent active, 16 tasks free, so supply is enough.
 

@@ -27,7 +27,7 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
 
 ## Traps
 
-- AGENTS.md "Review checkpoints and common reasons for rework": movable parts relative to their hinge (4), mirrored
+- AGENTS.md "Review checkpoints and common reasons for rework": movable parts built in asset coordinates (4), mirrored
   signs (5), one-sided faces (7), change only what the task names (8).
 - Parts that touch must really meet: no floating hoops or legs, and no gaps you can see through unless they are real
   joints of 2–5 mm.

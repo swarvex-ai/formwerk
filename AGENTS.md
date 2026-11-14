@@ -119,7 +119,7 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
   crates); `collider` box, hull (convex shapes, stairs as a ramp) or cylinder (trunks; call `t.cylinder(r, h)`).
   Mass is estimated from the volume and the material; for things drawn solid that are hollow, pass an effective
   density to `material()`.
-- **Movable parts** (lids, doors, gates, drawers): `t.moving(name, x, y, z)` returns parts whose hinge is at x, y, z;
+- **Movable parts** (lids, doors, gates, drawers): `t.moving(name, x, y, z)` returns parts that turn or slide about the hinge at x, y, z (build them in asset coordinates);
   declare the same name in `rig` (rotate in degrees or slide in metres along an axis, 0 closed, positive opens).
   Pass `{ max }` when the range depends on the values (a small drawer slides out less).
 - **Units and placement:** metres, y up, origin at the centre of the floor contact; the asset faces +z.
@@ -154,8 +154,9 @@ reasons submissions were sent back most often; check them before you submit:
    before you commit the baseline. If your model cannot read images, hand the task back: an unseen baseline goes back.
 3. **Names and types exactly as the task writes them:** `style`, not `form`; `colour`, not `color`. A `choice`
    has string options, and presets use those strings (`"8"`, not `8`).
-4. **Movable parts are placed relative to their hinge.** `t.moving(name, x, y, z)` already sits at the hinge: build
-   the lid at y ≈ 0 of that group, not at the hinge height again (that puts it twice as high, in the air).
+4. **Movable parts are built where they sit when closed.** Inside `t.moving(name, x, y, z)` use the asset's own
+   coordinates, like every other part: a lid on a body of height h goes at y ≈ h (see `chest.ts`). `group()` subtracts
+   the hinge itself; subtracting it again drops the part to the floor.
 5. **Mirrored parts take the side's sign everywhere:** with `for (const s of [-1, 1])`, rotations too
    (`rotateZ(-s * hang)`), or one side tilts the wrong way.
 6. **Optional details draw from their own random stream** (`rng(seed + 1)`), so switching them on does not move
