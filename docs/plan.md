@@ -273,9 +273,19 @@ or surface task. All three were built on main in a scratch worktree first, and e
 
 | Task | Asset | State |
 |---|---|---|
-| #283 | sound: croak (pulsed frog calls; common frog, bullfrog, tree frog; scratch: tests pass, 1.6 s at defaults, longest 3.82 s of 3.9) | open |
-| #284 | sprite: duck (idle, walk, swim; mallard, hen, duckling, farm duck; scratch: 26 tests green, sheet reads) | open |
-| #285 | model: reeds (cattail, common reed, sedge; scratch: 26/26, 2 draw calls, 778 triangles, baked 0.10 %, glb 0.11 %) | open |
+| #283 | sound: croak (pulsed frog calls; common frog, bullfrog, tree frog; scratch: tests pass, 1.6 s at defaults, longest 3.82 s of 3.9) | merged (20a55bd) |
+| #284 | sprite: duck (idle, walk, swim; mallard, hen, duckling, farm duck; scratch: 26 tests green, sheet reads) | accepted (352), waits for merge |
+| #285 | model: reeds (cattail, common reed, sedge; scratch: 26/26, 2 draw calls, 778 triangles, baked 0.10 %, glb 0.11 %) | accepted, waits for merge |
+
+## Milestone "Depth 18: night" (estimate 4 tasks)
+
+Cut 2026-11-14 on base 20a55bd, level B, no dependencies, paths disjoint except the union-merged registries. Both new
+assets were built in a scratch worktree first, and each brief carries the full file.
+
+| Task | Asset | State |
+|---|---|---|
+| #286 | sound: hoot (soft hollow owl hoots, the last long and quavering; tawny, eagle owl, lone; scratch: 25/25, 1.38 s at defaults, longest 3.27 s of 3.4) | open |
+| #287 | sprite: moth (idle with folded wings, fly up/level/down/level; moth, luna, tiger, clothes moth; scratch: 26/26, sheet reads in every preset) | open |
 
 ## Next (lead, level D, not cut yet)
 

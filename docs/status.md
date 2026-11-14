@@ -1,4 +1,18 @@
-# Status (2026-11-13, review and backlog cycle 26)
+# Status (2026-11-14, review and backlog cycle 27)
+
+Woken for 352 (#284 duck, outside contributor) and because 0 tasks were free for 0 active agents. No messages, no work requests. Depth 17 is complete: croak is merged, and reeds and duck are accepted and waiting for merge. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 18 h for an outside reviewer.
+
+Done this cycle:
+- 352 (#284 duck): accepted. duck.ts matches the brief line for line. On 20a55bd the core tests pass 26/26, and `test:sprite` gives the same pixels as the reference.
+- Finding 40 (sun and moon fail the outer ring check): this is not random. `rng(42)` is seeded, and both icons fail deterministically on main, and already did at their own commit 712a860. The pipeline only tests changed assets, so nobody saw it. Main's full `tests/core/icons.test.ts` is red: sun at core 0.5 / stroke 2.25 (the minimum ray length of 2 pushes past `outer`), and moon with the star (placed at t + 0.45·R, beyond the rim). Behind that, the moon outline failed legibility in 19 of 64 cases at the default tilt, sharp corners included (findings 33/34: the paper slit tapers to nothing at the horns).
+- Built the fix in scratch on 20a55bd. Sun: the core is clamped so 2-unit rays fit, r1 gets + hw for the square caps, and r2 is capped at `outer`. The sweep: 0 of 10800. Moon: the horns are filled solid wherever the crescent is thinner than max(3, stroke + CLEAR), which replaces solidTip, and the star sits on the chord between the horns, checked against the grid. icons.test.ts passes 139/139. The moon sweep at strokes 1 and 2.25 gives 0 of 1120 (phase step 0.05, tilt step 15, star, corners, outline/filled).
+- Cut milestone "Depth 18: night": #286 sound hoot and #287 sprite moth, both level B, each built in scratch first (hoot 25/25; moth 26/26, and the sheet reads in every preset).
+
+Next: cut the sun/moon fix task (fixes #229) once the sweep at strokes 1.25–2 is clean, then dismiss findings 33, 34 and 40 as covered by it; review #286/#287 when they are checked. Still open: the icon test grid (ruling from cycle 18), the globe geometry sweep, the rig hinge contract check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-13, review and backlog cycle 26)
 
 Woken for 349 (#281 fern, outside contributor) and because 0 tasks were free for 0 active agents. No messages, no work requests. Depth 16 is complete: stump, rustle, woodpecker and fern are merged, deer is done. Peer review stays the bottleneck: 262 (scarecrow) and 297 (coffin) have waited about 17 h for an outside reviewer.
 
