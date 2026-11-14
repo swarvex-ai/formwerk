@@ -1,4 +1,4 @@
-import { circle, line, onCircle, polygon, type Pt } from "../../core/vector";
+import { circle, line, polygon, type Pt } from "../../core/vector";
 import { area, defineIcon, hole, stroke, type Part } from "../define";
 import { largest, turn } from "../shared";
 
@@ -24,7 +24,8 @@ export const tag = defineIcon({
     plain: { label: { de: "Schlicht", en: "Plain" }, values: { hole: "none", style: "filled" } },
   },
   build(p, pen) {
-    const r = 2.5, halb = r + pen.width + 1, d = halb * Math.SQRT2, wmin = d + r + pen.width + 1;
+    const schnur = p.string && p.hole === "ring";
+    const r = 2.5, halb = r + pen.width + (schnur ? 1.5 : 1), d = halb * Math.SQRT2, wmin = d + r + pen.width + 1;
     const etikett = (w: number): Part[] => {
       const schulter = -w / 2 + halb, c: Pt = [-w / 2 + d, 0];
       const form: Pt[] = [[-w / 2, 0], [schulter, -halb], [w / 2, -halb], [w / 2, halb], [schulter, halb]];
@@ -32,12 +33,15 @@ export const tag = defineIcon({
       const teile: Part[] = [area(polygon(...drehen(form)))];
       if (p.hole === "ring") {
         teile.push(hole(circle(drehen([c])[0], r)));
-        if (p.string) {
-          // From the rim of the hole out through the upper left edge, bending to one side
-          const von = onCircle(c, r, 315), laenge = halb - r + 3.5;
+        if (schnur) {
+          // Out of the ring through the upper left edge at a right angle (no narrow gap is left beside it), then
+          // bending to one side and ending clear of the edge. The edge sits further off the ring while a string is
+          // drawn (see `halb`), so the ring keeps clear space on both sides of the string where it crosses.
+          const an = r + pen.width / 2, ende = halb + pen.width / 2 + 2, t0 = (halb - an) / (ende - an);
           const kurve = Array.from({ length: 9 }, (_, i): Pt => {
-            const t = i / 8, b = 3 * Math.sin(Math.PI * t);
-            return [von[0] - (laenge * t) * Math.SQRT1_2 + b * Math.SQRT1_2, von[1] - (laenge * t) * Math.SQRT1_2 - b * Math.SQRT1_2];
+            const t = i / 8, s = Math.max(0, (t - t0) / (1 - t0)), b = 1.2 * s * s;
+            return [c[0] - (an + (ende - an) * t) * Math.SQRT1_2 + b * Math.SQRT1_2,
+              c[1] - (an + (ende - an) * t) * Math.SQRT1_2 - b * Math.SQRT1_2];
           });
           teile.push(stroke(line(...drehen(kurve))));
         }
