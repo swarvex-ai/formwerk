@@ -1,6 +1,6 @@
 import { circle, onCircle, polygon, type Pt } from "../../core/vector";
 import { area, defineIcon, dot, type Part } from "../define";
-import { centre, CLEAR, EDGE, solidTip } from "../shared";
+import { centre, CLEAR, EDGE } from "../shared";
 
 export const moon = defineIcon({
   id: "moon", category: "status",
@@ -75,25 +75,19 @@ export const moon = defineIcon({
       points.pop();
     }
 
-    // Horns tips:
-    // Horn hMinus is at index N in points.
-    // Horn hPlus is at index 0 in points.
+    // Horn tips: the polygon ends in a sharp point, and near it the paper slit between the two stroke bands
+    // narrows below what reads at 24 px. Fill each tip solid with a wedge that follows the polygon's own samples
+    // along both arcs, so its sides sit exactly on the stroked edges; it ends where the slit has opened CLEAR.
+    // (A solidTip would end too shallow and straight, leaving a thin paper slit that closes at 24 px.)
     const m = points.length;
-    const hornPlusIdx = 0;
-    const hornMinusIdx = N;
-
-    const prevPlus = points[(hornPlusIdx - 1 + m) % m];
-    const tipPlus = points[hornPlusIdx];
-    const nextPlus = points[(hornPlusIdx + 1) % m];
-
-    const prevMinus = points[(hornMinusIdx - 1 + m) % m];
-    const tipMinus = points[hornMinusIdx];
-    const nextMinus = points[(hornMinusIdx + 1) % m];
+    const k = Math.max(2, Math.min(N - 3, Math.ceil((R * (pen.width + CLEAR + 0.5)) / t)));
+    const tipPlus = polygon(points[0], ...points.slice(1, k + 1), ...points.slice(m - k));
+    const tipMinus = polygon(points[N], ...points.slice(N - k, N).reverse(), ...[...points.slice(N + 1, N + k + 1)].reverse());
 
     const crescentParts: Part[] = [
       area(polygon(...points)),
-      dot(solidTip(prevPlus, tipPlus, nextPlus, pen)),
-      dot(solidTip(prevMinus, tipMinus, nextMinus, pen)),
+      dot(tipPlus),
+      dot(tipMinus),
     ];
 
     // Then centre(parts, pen)
@@ -104,9 +98,12 @@ export const moon = defineIcon({
     const dy = centred[0].shape.kind === "line" ? centred[0].shape.points[0][1] - points[0][1] : 0;
 
     if (p.star) {
-      const qOrig = onCircle(c, t + 0.45 * R, a);
-      const qCentred: Pt = [qOrig[0] + dx, qOrig[1] + dy];
       const starR = Math.max(0.9, hw);
+      // Out along the opening, but no further than its ink stays inside the live area of the grid
+      const room = 12 - EDGE - starR, u = onCircle([0, 0], 1, a);
+      let d = t + 0.45 * R;
+      for (const [k, o] of [[0, c[0] + dx - 12], [1, c[1] + dy - 12]]) if (Math.abs(u[k]) > 1e-6) d = Math.min(d, ((u[k] > 0 ? room : -room) - o) / u[k]);
+      const qCentred = onCircle([c[0] + dx, c[1] + dy], d, a);
 
       // Check distance to crescent: leave it out if it comes closer than hw + CLEAR to the crescent
       // The crescent outer surface has radius R from (c + [dx, dy]), inner surface has radius R from (c2 + [dx, dy])
