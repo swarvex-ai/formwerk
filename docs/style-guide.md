@@ -2,25 +2,64 @@
 
 The catalogue should look like one set, whoever builds an asset.
 
-- **Look:** clean, slightly stylised realism. Clear silhouettes, bevel-free boxes and low segment counts are fine;
-  detail comes from proportions and materials, not from triangles.
-- **Proportions:** real-world defaults (a chair seat at 0.46 m, a door at 2.0 m, a step rise of 0.17 m). Ranges cover
-  what exists in reality, not more.
-- **Colour:** muted, natural defaults; strong colours only as a parameter. Materials from `src/materials`.
-- **Segments:** cylinders 8–16 around for furniture, 32 for turned or architectural parts; icosahedron detail 0–1 for
-  foliage clusters.
-- **Variation:** use the seed for natural things (trees, rocks, plants). Man-made things are exact and need no seed.
-- **Thin parts** (wicks, wires, needles, spokes): at least 4 mm across. Thinner parts are counted in the triangles but
-  vanish in the 320 × 240 scene render, so reviewers cannot see them in the baseline.
+> **Proposed 2026-11-14 (art director, for the visionary's approval):** the 3D look moves from blocky to realistic, or
+> stylised-realistic where realism costs too much (visionary decision of 14 Nov 2026). The sections "Models" and
+> "Surfaces" are the gate for every model and surface task. Sprites stay pixel art and icons stay line icons: realism
+> is a decision for the 3D kinds.
+
+## Models
+
+- **Look:** realistic, or stylised-realistic where realism costs too much triangles or shader time. An asset should
+  read as the real thing in a product shot: real proportions, real construction, real wear. Three words: *built,
+  used, real*. Not a toy: no plain cylinders for a barrel, no single box for a table top made of planks.
+- **Construction:** build it the way it is made. Parts that are separate in reality are separate in the model where
+  they show: staves and hoops of a barrel, planks of a crate or a floor (gaps of 2–5 mm), slats, rails, frames,
+  legs joined to an apron. Wood runs along its fibres; metal parts have thickness.
+- **Bevels on hard edges:** every visible hard edge of a man-made part gets a bevel or a rounded edge, so it catches
+  the light: 2–5 mm on furniture and props (about 2 % of the part's smallest side, at least one segment, two on
+  turned or polished parts), 1–2 cm on architecture. Exceptions: parts thinner than 1 cm, and edges nobody sees
+  (the bottom of a foot).
+- **Curves:** profiles instead of plain cylinders wherever the real thing is shaped (the belly of a barrel, a turned
+  leg, a bottle, a pot): a lathe profile with a point at least every 10° of bend.
+- **Segments by size** (around a round part, at its largest radius): under 2 cm 8; 2–10 cm 16; 10–30 cm 24; 30 cm
+  to 1 m 32; above 1 m 48. Spheres and domes the same around, half that from pole to pole. Foliage clusters:
+  icosahedron detail 1–2.
+- **Proportions:** real-world defaults (a chair seat at 0.46 m, a door at 2.0 m, a step rise of 0.17 m, a barrel
+  stave 2 cm thick). Ranges cover what exists in reality, not more.
+- **Materials and wear (PBR):** colour, roughness and metalness vary across a part, never one flat value. Wood: grain
+  along the fibres of each part, a tone per plank or stave from the seed, darker end grain. Metal: bare metal is
+  metalness 1 with roughness 0.3–0.6; rust, paint and dirt are non-metal patches with roughness 0.7–1. Wear where
+  hands and feet touch (lighter, smoother edges), dirt in corners and crevices. Relief comes from a normal or bump
+  map, not from triangles, below 5 mm. All from `src/materials`; a new material or a new wear parameter is its own
+  task.
+- **Colour:** muted, natural defaults; strong colours only as a parameter.
+- **Variation:** use the seed for natural things (trees, rocks, plants) and for wear and per-part tone on man-made
+  things; the shape of a man-made thing is exact and does not depend on the seed.
+- **Thin parts** (wicks, wires, needles, spokes): at least 3 mm across. Thinner parts vanish in the 640 × 480 scene
+  render, so reviewers cannot see them in the baseline.
+- **Budgets:** detail costs triangles, but every one must show: a bevel or segment that changes nothing at the scene
+  render is waste. Current limits per category are in `tests/core/assets.test.ts` (protected); proposed for the new
+  look: furniture 60,000, architecture 80,000, nature 150,000, vehicles 150,000, props 30,000 at the extremes, set
+  by the lead in its own task. Most assets should stay far below at their defaults. One draw call per material and
+  movable part stays.
 - **Names:** ids in kebab-case English (`server-rack`), parameters in camelCase English (`seatHeight`).
-- **Budgets:** furniture up to 20,000 triangles, architecture 30,000, nature 150,000 at the extremes; most assets
-  should stay far below at their defaults.
 - **Descriptions (`describe`):** one sentence, what the parameter changes and which real values are typical; no
   marketing, no repetition of the label. Agents read them in llms.txt to choose values.
 - **Presets:** two to four looks that differ clearly (a bar stool, a milking stool, a kitchen chair), named in
   kebab-case English after what they are, not after their values (`bar-stool`, not `tall-metal`).
 - **Movable parts:** hinge where the real hinge is; 0 is closed, positive opens; doors and gates open to the front
   (+z), lids upwards. Rotations up to the real stop (a lid 110°, a door 120°).
+- **Light:** judge an asset in the scene render: neutral light studio, image-based light from a room, one soft sun
+  with shadows, ACES tone mapping (`src/gallery/viewer.ts`). Do not tune colours for another light.
+
+### References
+
+| Reference | Adopt | Don't adopt |
+|---|---|---|
+| Poly Haven models (CC0, polyhaven.com/models) | real scale, construction from separate parts, PBR maps with wear on edges and dirt in crevices | scan-level triangle counts, baked photo textures |
+| Real objects (photos of a wine barrel, a Windsor chair, a cast-iron stove) | proportions, how parts join, where wear sits | — |
+| Stylised realism in current games (hand-built props of adventure games) | slightly bolder wear and silhouettes where realism costs too much | painted lighting in the colour map, exaggerated proportions |
+| Low-poly kits (Kenney, Quaternius) | clean, readable silhouettes | flat colours, bevel-free boxes, 8-sided cylinders: the look Formwerk leaves |
 
 ## Surfaces
 
@@ -29,6 +68,9 @@ The catalogue should look like one set, whoever builds an asset.
   and compares; a single pixel that does not repeat fails it.
 - **Relief:** `depth` is the real height between black and white in the height map (4 cm for cobbles, 1.2 cm for
   planks, 6 mm for riveted steel); the normal map follows from it, so do not exaggerate it for effect.
+- **Three scales of detail** (new look): the pattern (stones, planks, plates), the wear (chipped and rounded edges,
+  dirt and moss in joints, rust at rivets) and the micro detail (pores, fibres, scratches). Roughness follows the
+  wear (polished where feet and hands go, rough in the dirt); no map is one flat value.
 - **Colour:** linear values from `color("#hex")` (the bake stores sRGB). Natural materials stay muted; variation per
   stone or plank comes from the cell's random number, wear and dirt from fractal noise.
 - **Detail follows the size:** pass the sampler's `resolution` to the noise of fine detail (pores, fibres), so a 4096
