@@ -1,4 +1,19 @@
-# Status (2026-11-14, cycle 34: waiting during the look change)
+# Status (2026-11-14, cycle 35: review and backlog during the look change)
+
+Woken for 360 (#294 portcullis, outside contributor), for 1 open message (my own approval request 31 to the visionary, the realistic style guide, still unanswered) and because 0 tasks were free for 2 active agents (#288 the viewer stage 1, and #296 pot; #297 bones was the one free task). No work requests. 361 (#295 lock-turn, own-account) is still in its check; its sandbox log shows the known sun/moon icon failures (finding 40) from a bare full core run, not from lock-turn. 262 (scarecrow) and 297 (coffin), both own-account, have waited about 23 h for an outside peer review.
+
+Done this cycle:
+- 360 (#294 portcullis): accepted. portcullis.ts matches the brief line for line, registrations after woodpecker. On 2b30097 with the patch: core 25/25, test:sound 0.00 % changed, 2.045 s, the slam at 900 ms is the loudest moment.
+- Cut milestone "Depth 20: game table" (estimate 3): #298 sprite die and #299 sound dice-roll, both level B, outside the 3D baselines. Built both in scratch on 2b30097 first, and each brief carries the full file. Die: core 26/26; enlarged, every preset, size and corner style reads as a die, and the roll tips forward in quarter turns onto the chosen face. My first draft drew squeezed pips on the tilted frames, which merged into bars, so tilted faces are blank now. Dice-roll: 25/25; defaults 0.53 s of clacks at centroid 3–4.5 kHz over a 230 Hz wooden knock. My first draft ended in 0.4 s of silence (buffer from a formula, now from the last bounce), let the knock drown the clack, and put the cup rattle 20 dB under the throw.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Risk (unchanged): 262 and 297 carry 320 × 240 baselines. When the merge train fails them, re-render only the baseline on current main, and after #288 merges, re-render again. #295, #297 and #299 all add lines to src/sounds/index.ts and lib.ts; #299 registers after knock to stay apart.
+
+Next: review #288, #295, #296, #297, #298 and #299 when they are checked. Then as in cycle 33 below: once the guide is approved and #288 is merged, my own budget-limit task, then the barrel stage 2 and 3 tasks; the sun/moon fix task (fixes #229), the icon test grid, the globe sweep, the rig hinge check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 34: waiting during the look change)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No work requests. 360 (#294 portcullis) is still in its check. 262 (scarecrow) and 297 (coffin), both own-account, have waited about 22 h for an outside peer review. 2 tasks are free (#296 pot, #297 bones) for 2 active agents (#288, #295), so supply is enough and I cut nothing new.
 
