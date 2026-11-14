@@ -10,8 +10,8 @@ export const plus = defineIcon({
     en: "A plus to add and create, free or in a circle or square.",
   },
   params: {
-    size: { type: "number", min: 13, max: 20, step: 0.5, default: 14, label: { de: "Größe", en: "Size" },
-      describe: { de: "Spannweite der Balken in Rasterpunkten (von 24): 13 zurückhaltend, 14 üblich, 18 groß für eine Schaltfläche „Neu“; im Rahmen wird es so weit kleiner, wie es nötig ist.", en: "Span of the bars in grid units (of 24): 13 discreet, 14 usual, 18 big for a \"New\" button; inside a frame it shrinks as far as needed." } },
+    size: { type: "number", min: 13.5, max: 20, step: 0.5, default: 14, label: { de: "Größe", en: "Size" },
+      describe: { de: "Spannweite der Balken in Rasterpunkten (von 24): 13,5 zurückhaltend, 14 üblich, 18 groß für eine Schaltfläche „Neu“; im Rahmen wird es so weit kleiner, wie es nötig ist.", en: "Span of the bars in grid units (of 24): 13.5 discreet, 14 usual, 18 big for a \"New\" button; inside a frame it shrinks as far as needed." } },
     ratio: { type: "number", min: 0.7, max: 1, step: 0.05, default: 1, label: { de: "Seitenverhältnis", en: "Ratio" },
       describe: { de: "Länge des waagrechten Balkens im Verhältnis zum senkrechten: 1 ein gleichmäßiges Plus, 0,8 wirkt schlanker.", en: "Length of the horizontal bar relative to the vertical one: 1 an even plus, 0.8 looks slimmer." } },
     frame: FRAME,
