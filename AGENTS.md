@@ -81,6 +81,9 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
    grid units, measured at eight times the size), plus well-formed SVG in the text colour. `tests/scene/icons.mjs`
    writes its sheet to `tests/scene/baseline/<id>.png` and checks that a browser draws the SVG like the pixels. Look at
    the sheet, then commit it with the icon.
+4. The suite draws only a few random cases. `FORMWERK_SWEEP=<id> npx vitest run tests/core/sweep.test.ts` applies the
+   same checks to every combination (number parameters at seven values, every stroke, corner and style) and lists the
+   failing ones in `tests/scene/out/sweep-<id>.txt`; it must report 0. About 1000 combinations take 4 to 5 minutes.
 
 ## Adding a sound
 
