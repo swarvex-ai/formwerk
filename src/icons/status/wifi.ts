@@ -35,7 +35,7 @@ export const wifi = defineIcon({
     const s = Math.min(p.spread, (2 * Math.asin(Math.min(1, (12 - 1.4 - cap) / r)) * 180) / Math.PI);
     const c: Pt = [12, 12 + (r - dotR) / 2];
     const teile: Part[] = [];
-    for (let i = 1; i <= n; i++) teile.push(stroke(arc(c, (r * i) / n, -s / 2, s / 2)));
+    for (let i = 1; i <= n; i++) teile.push(stroke(arc(c, dotR + ((r - dotR) * i) / n, -s / 2, s / 2)));
     teile.push(area(circle(c, dotR)));
     if (p.off) {
       // A diagonal through the centre of the fan (the dot): it cuts every arc at a steep angle and joins dot and arcs
