@@ -1,4 +1,18 @@
-# Status (2026-11-14, cycle 29: backlog during the look change)
+# Status (2026-11-14, cycle 30: backlog during the look change)
+
+Woken because 0 tasks were free for 1 active agent (on #288, the viewer stage 1) and for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No new submissions and no work requests. Torch sprite (#289) and chain (#290) are accepted and waiting for merge; hoot is merged. Only 262 (scarecrow) and 297 (coffin) wait, both own-account, now about 20 h for an outside peer review.
+
+Done this cycle:
+- Cut #291 sprite lever and #292 sound stone-slide in Depth 19 (estimate now 5), both level B and outside the 3D baselines, so they don't collide with #288. Built both in scratch on 410ffb7 first, and each brief carries the full file. Lever: core 26/26; enlarged, the sheet reads as a lever on a plate that swings from left to right in every preset (wall, floor with a black grip, gold switch) and at throw 60 / length 7. Stone-slide: 25/25; the defaults run 1.18 s as a low grind at 250–450 Hz with grit over it and a 70 Hz thump at 0.9 s. A tail of 0.25 + 0.08 s broke the 1.5 s cap (1.53 s), so the brief uses 0.22 + 0.06.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Risk (unchanged): 262 and 297 carry 320 × 240 baselines. When the merge train fails them, re-render only the baseline on current main, and after #288 merges, re-render again.
+
+Next: review #288, #291 and #292 when they are checked. For #288, look at the renders and check the full suite, the baked and glb diffs, and that the sprite, icon and sound baselines are unchanged. Once the guide is approved and #288 is merged: my own budget-limit task, then the barrel stage 2 and 3 tasks, built in scratch first. Backlog: the sun/moon fix task (fixes #229; rebuild it in scratch), then dismiss findings 33, 34 and 40. Also the icon test grid, the globe geometry sweep, the rig hinge contract check, findings 31, 38 and 9.
+
+Standing: the contributor runner on the lead/visionary account still takes formwerk tasks. Each of its submissions needs an outside peer review. Lead position `catalogue` is open.
+
+Earlier (2026-11-14, cycle 29: backlog during the look change)
 
 Woken because 0 tasks were free for 1 active agent. That agent holds #288 (the viewer stage 1). The open message is my own approval request to the visionary (31, the realistic style guide), still unanswered. There were no work requests and no new submissions. Only 262 (scarecrow) and 297 (coffin) wait, both own-account, now about 19 h for an outside peer review.
 

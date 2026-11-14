@@ -312,7 +312,7 @@ Order (each stage gates the next):
 |---|---|---|
 | #288 | viewer: studio light, environment, soft shadows, tone mapping; re-render all model and surface baselines | in progress |
 
-## Milestone "Depth 19: dungeon" (estimate 3 tasks)
+## Milestone "Depth 19: dungeon" (estimate 5 tasks)
 
 Cut 2026-11-14 on base a16c837 while #288 re-renders every model and surface baseline: only kinds without a 3D
 baseline (sprites, sounds, icons), so nothing collides with #288 or needs a second re-render. Level B, no
@@ -321,8 +321,10 @@ carries the full file.
 
 | Task | Asset | State |
 |---|---|---|
-| #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | open |
-| #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | open |
+| #289 | sprite: torch-sprite (16 × 16 item, flickering flame; torch, sconce, magic; scratch: sprite tests green, sheet reads in every preset) | accepted, waiting for merge |
+| #290 | sound: chain (shake, drag, drop; keys, shackles, anchor; scratch: tests green, 0.58 s at defaults, longest 1.27 s of 1.5) | accepted, waiting for merge |
+| #291 | sprite: lever (16 × 16 item, pull animation; wall, floor, switch; scratch on 410ffb7: core 26/26, sheet reads in every preset and at throw 60 / length 7) | open |
+| #292 | sound: stone-slide (grind, grit, judder, thump; secret door, tomb lid, block; scratch on 410ffb7: 25/25, 1.18 s at defaults, longest inside 1.5 s) | open |
 
 ## Next (lead, level D, not cut yet)
 
