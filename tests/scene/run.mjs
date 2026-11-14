@@ -38,6 +38,18 @@ let fehler = 0;
 // Gebacken gegen live: strenge Farbschwelle, sonst fällt eine falsch liegende Maserung nicht auf (gemessen: richtig
 // höchstens 0,5 % der Pixel, gespiegelte Textur mindestens 2,5 %)
 const BACKEN_SCHWELLE = 0.02, BACKEN_MAX = 1.5;
+// A frame with almost no luminance range is a dead canvas (lost WebGL device), never a picture: it fails and is never
+// written as a baseline, or every later run would match it
+const SPANNE_MIN = 20;
+const spanne = (bild) => {
+  let lo = 255, hi = 0;
+  for (let i = 0; i < bild.data.length; i += 4) {
+    const l = 0.2126 * bild.data[i] + 0.7152 * bild.data[i + 1] + 0.0722 * bild.data[i + 2];
+    if (l < lo) lo = l;
+    if (l > hi) hi = l;
+  }
+  return hi - lo;
+};
 // Die Szenen sind die Assets des Katalogs, mit ihrem eigenen Budget
 const katalog = await chrome.newPage({ viewport });
 await katalog.goto(`${basis}?test`);
@@ -64,7 +76,8 @@ for (const s of scenes) {
     if (asset.triangles > s.triangles) { fehler++; bericht(`FAIL ${asset.triangles} triangles, budget ${s.triangles}`); }
     writeFileSync(join(out, `${s.name}.png`), PNG.sync.write(bild));
     const basisDatei = join(ordner, "baseline", `${s.name}.png`);
-    if (!existsSync(basisDatei)) {
+    if (spanne(bild) < SPANNE_MIN) { fehler++; bericht(`FAIL blank frame (luminance range ${spanne(bild).toFixed(1)}): the WebGL device was probably lost, see tests/scene/out/${s.name}.png`); }
+    else if (!existsSync(basisDatei)) {
       writeFileSync(basisDatei, PNG.sync.write(bild));
       fehler++;
       bericht("FAIL no baseline yet: written to tests/scene/baseline; check it and commit it");
@@ -114,6 +127,7 @@ for (const s of scenes) {
 const vergleichen = (bild, name, schwelle, erlaubt, bericht) => {
   writeFileSync(join(out, `${name}.png`), PNG.sync.write(bild));
   const basisDatei = join(ordner, "baseline", `${name}.png`);
+  if (spanne(bild) < SPANNE_MIN) { bericht(`FAIL ${name}: blank frame (luminance range ${spanne(bild).toFixed(1)}), the WebGL device was probably lost`); return false; }
   if (!existsSync(basisDatei)) { writeFileSync(basisDatei, PNG.sync.write(bild)); bericht(`FAIL no baseline yet for ${name}: written to tests/scene/baseline; check it and commit it`); return false; }
   const soll = PNG.sync.read(readFileSync(basisDatei));
   if (soll.width !== bild.width || soll.height !== bild.height) { bericht(`FAIL ${name}: image size differs from the baseline`); return false; }
