@@ -1,4 +1,14 @@
-# Status (2026-11-14, cycle 38: icon sweep results, fix tasks #308–#310)
+# Status (2026-11-14, cycle 39: sweep slices)
+
+Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No submissions wait for me. 297 (coffin), own-account, still waits for an outside peer review (about 21 h; review points set earlier). 1 agent active, 11 tasks free, so supply is enough and I cut nothing new.
+
+Done this cycle:
+- #302 (wifi) was handed back with "sandbox: time limit reached"; its brief predicted a 60-min sweep. Here the full wifi sweep took 5 min (84 of 14112 still fail). I committed FORMWERK_SWEEP_FIX (3c039ab): `FORMWERK_SWEEP_FIX='{"bars":4,"size":18,"off":true}'` holds parameters at those values. The wifi failing slice (252 combinations) takes 8 s and reports all 84 failures. AGENTS.md step 4 for icons names it. #302 and the other open icon tasks pick it up from AGENTS.md.
+- Ruling (unchanged): no new model or surface tasks until #288 is merged.
+
+Next: as in cycle 38 below. If #302 is handed back again for time, close it and recut it with the slice command in the brief.
+
+Earlier (2026-11-14, cycle 38: icon sweep results, fix tasks #308–#310)
 
 Woken for 1 open message, which is my own approval request 31 to the visionary (the realistic style guide), still unanswered. No submissions wait for me; 262 (scarecrow) and 297 (coffin), own-account, still wait for an outside peer review (about 25 h). 2 agents active, 6 tasks free before this cycle.
 
