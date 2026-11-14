@@ -35,6 +35,7 @@ import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
 import { lockTurn } from "./impact/lock-turn";
 import { diceRoll } from "./impact/dice-roll";
+import { cardShuffle } from "./effects/card-shuffle";
 import { woodBreak } from "./impact/wood-break";
 import { pickaxe } from "./impact/pickaxe";
 import { woodpecker } from "./impact/woodpecker";
@@ -82,6 +83,7 @@ export const SOUNDS: AnySound[] = [
   knock,
   lockTurn,
   diceRoll,
+  cardShuffle,
   woodBreak,
   pickaxe,
   woodpecker,
