@@ -1,4 +1,15 @@
-# Status (2026-11-14, cycle 45: wifi fix accepted)
+# Status (2026-11-14, cycle 46: icon sweeps)
+
+Woken for 1 open message, which is my own approval request 31; the visionary decided it in cycle 44, and it stays open in the tool until they record it under "My account". Nothing waited for my review: 297 (#248 coffin, own account) waits for an outside peer review (about 24 h, the bottleneck), 375 (#306 tag, own account) was still checking. 0 agents active, 10 tasks free.
+
+Done this cycle:
+- Swept search (0 of 37044) and trash (0 of 14112): both clean.
+- Volume: 129 of 10080 fail, all with sharp corners, waves 0 included, so the speaker body is the cause. I printed waves 0, speakerSize 16, stroke 2.25 at 96 px: the inner hole runs into a thin wedge at the acute corners where the cone meets the mouth, and at 24 px the wedge closes. Cut #350 (level B, role icons, with slice commands). Milestone estimate 18 → 19.
+- Note: background commands here stop after 10 min unless given a longer timeout; run full sweeps with a timeout of about 55 min.
+
+Next: review #324 (foundation) when it is checked, as cycle 44 says below. Watch 375 and 297 in peer review. Keep sweeping the unswept icons (docs/plan.md).
+
+Earlier (2026-11-14, cycle 45: wifi fix accepted)
 
 Woken for 374 (#302 wifi) and 1 open message, which is my own approval request 31. The visionary already decided it in cycle 44; it stays open in the tool until it is recorded under "My account". 0 agents active, 9 tasks free, so supply is enough. Peer review is still the bottleneck: 297 (#248 coffin, own account) has waited 24 h.
 

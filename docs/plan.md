@@ -154,7 +154,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | open (milestone Icons: sweep clean) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | open (milestone Icons: sweep clean) |
 
-Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, close, copy, link, pause, play, share, sliders, sun (after #300), upload. Clean after a fix: undo and redo (#305), moon (#301), wifi (#302). In peer review: tag (#306, 375). Failing with a fix task: clock, plus, check, download, pencil, refresh. Not yet swept: search, trash, volume, arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Milestone "Icons: sweep clean" estimate 18.
+Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, close, copy, link, pause, play, search, share, sliders, sun (after #300), trash, upload. Clean after a fix: undo and redo (#305), moon (#301), wifi (#302). In peer review: tag (#306, 375). Failing with a fix task: clock, plus, check, download, pencil, refresh, volume (#350). Not yet swept: arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Milestone "Icons: sweep clean" estimate 19.
 
 ## Milestone "Depth 8: tavern" (estimate 9 tasks)
 
