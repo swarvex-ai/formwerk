@@ -316,17 +316,18 @@ Order (each stage gates the next):
 3. **Foundation #324** (visionary exception, 14 Nov 2026): Claude builds stage 1 light (the content of the closed
    #288), the shared materials wood, metal and stone with relief and roughness variation (plus the bake of those maps
    in src/core/export.ts) and five reference assets (barrel, chair, tree, rock, lantern) as ONE submission that the
-   lead reviews. Level C, may exceed the 500-line limit and touch src/materials and src/core/export.ts by that
-   exception.
-4. **After #324 is merged:** cut the other asset families, one task per asset, each measured against the matching
+   lead reviews. **Merged 14 Nov 2026** (1be2c0c + scarecrow baseline 5103a8e), #324 closed.
+4. **Families (cutting now):** cut the other asset families, one task per asset, each measured against the matching
    reference asset (furniture → chair, containers and props → barrel or lantern, plants → tree, stones and terrain
    → rock). No stage 2/3 tasks for the five reference families themselves. Every task text carries a "Review
-   checkpoints" section (lever H).
+   checkpoints" section (lever H). Shared steps, traps and checkpoints: `docs/look-realistic.md`. First batch
+   #354–#362: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone. Next batches as these land
+   (keep supply above active agents): the remaining ~51 models, a few per family, each its own file and baseline.
 5. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
    its code or models): AO and a firm key light, the scan reveal as Formwerk's signature, a wireframe toggle with the
    asset's weight, and a catalogue overview. Gallery only. The scene tests keep the stage 1 look, so no baseline
-   changes (ruling: AO in the tests only later, if it renders deterministically under SwiftShader). #325 → #326 →
-   #327 share viewer.ts, models.ts and scan.ts, so they run in sequence after #324.
+   changes (ruling: AO in the tests only later, if it renders deterministically under SwiftShader). #351 → #352 →
+   #353 share viewer.ts, models.ts and scan.ts, so they run in sequence.
 
 Speed (visionary, levers C and H, 14 Nov 2026): #323 done (b4d0e57): a one-asset `npm test` renders only that
 asset's files (13 s instead of about 75 s), the scene test stops a hanging asset after FORMWERK_TIMEOUT (240 s). AGENTS.md
@@ -334,13 +335,15 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 
 | Task | What | State |
 |---|---|---|
-| #324 | foundation: stage 1 viewer, materials with relief, bake of the new maps, five reference assets, re-render all model and surface baselines | open (level C, for Claude by the visionary's exception) |
+| #324 | foundation: stage 1 viewer, materials with relief, bake of the new maps, five reference assets | merged (5103a8e) |
 | #315 | gallery: catalogue overview in the models list (triangles, code KB, filters, shuffle); produces `facts.ts`, `collections.ts` | rework, held for its contributor |
-| #325 | gallery: GTAO and a firm key light (`look: "gallery"`); replaces #312 | after #324 |
-| #326 | gallery: scan reveal; replaces #316 | after #325, #315 |
-| #327 | gallery: wireframe toggle with the asset's weight; replaces #317 | after #326 |
+| #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | open |
+| #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
+| #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
+| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | open (level B, role art) |
 
-(#288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation
+(#325–#327 closed: #324 was merged outside the platform, so their dependency never resolved; recut as #351–#353.
+#288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation
 tasks and are closed too.)
 
 ## Milestone "Depth 19: dungeon" (estimate 10 tasks, done)

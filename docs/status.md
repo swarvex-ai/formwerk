@@ -1,4 +1,18 @@
-# Status (2026-11-14, cycle 46: icon sweeps)
+# Status (2026-11-14, cycle 47: foundation merged, family tasks out)
+
+Woken to review the foundation #324 (Claude, visionary exception) on branch claude/foundation (1be2c0c, one commit on c10068f). Nothing waited on the platform. 0 agents active; the bottleneck is contributors.
+
+Done this cycle:
+- Reviewed #324: read the viewer, materials, export and shapes diff, then ran the full `npm test` on the branch. 657 core tests passed (moon included, so #301 is fixed on main). All 66 models ok, every patterned model "baked ok" and "glb ok" (references: baked 0.11–0.32 %, glb 0.22–0.36 %), and no surface, maps, sprite, icon or sound baseline changed. One failure: scarecrow at 92.58 %. #225 reached main after the branch re-rendered its 65 baselines, so its baseline was still the plain look. I looked at its studio render and committed it (5103a8e; FORMWERK_ONLY=scarecrow green, 0.00 %). I looked at barrel, chair, tree, rock, lantern, barrel.glb, tent and workbench: real parts, studio shadow and backdrop, glb same as live. Merged by fast-forward; main = 5103a8e.
+- Deviations from the task text, accepted on merit: PCFShadowMap with radius 6 (r187 dropped PCFSoftShadowMap); a shadow-only floor and a backdrop instead of a fogged ground; `setLook("studio" | "plain")` instead of `opts.look`; AGENTS.md documents the material options and shapes.ts (asked for in the brief).
+- Closed #324 (complete_own_task only takes level D). #325–#327 waited for #324 to be "merged", which a closed task never is, so I recut them: #351 (AO as look "gallery" on setLook; paths viewer.ts and models.ts), #352 (scan, after #351 and #315), #353 (wireframe, after #352). Closed #325–#327 as replaced.
+- Ruling: shared rules for every family task live in docs/look-realistic.md (steps, traps, five review checkpoints). Each task names only its asset, its reference and checkpoint 2. Why: nine copies of one page cost every agent tokens, and one file can be fixed in one place. Cost if wrong: one doc to fold back into the tasks.
+- Cut the first family batch, #354–#362 (level B, role art, milestone "Look: realistic"): table → chair; crate, chest, bucket → barrel; cauldron, candlestick → lantern; stump, bush → tree; gravestone → rock. Each touches only its asset file and its baseline, so all nine run in parallel.
+- Sent the visionary an info message (36) with the result.
+
+Next: review #354–#362 and #351 as they arrive. For each one, look at out/<id>.png next to the reference and check the baked/glb lines and that only the asset file and its baseline changed. Cut the next family batch while supply stays above the active agents. Watch 375 (#306 tag) and 297 (#248 coffin) in peer review. Keep sweeping the unswept icons.
+
+Earlier (2026-11-14, cycle 46: icon sweeps)
 
 Woken for 1 open message, which is my own approval request 31; the visionary decided it in cycle 44, and it stays open in the tool until they record it under "My account". Nothing waited for my review: 297 (#248 coffin, own account) waits for an outside peer review (about 24 h, the bottleneck), 375 (#306 tag, own account) was still checking. 0 agents active, 10 tasks free.
 
