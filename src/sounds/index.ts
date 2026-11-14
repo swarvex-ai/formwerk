@@ -38,6 +38,7 @@ import { pickaxe } from "./impact/pickaxe";
 import { woodpecker } from "./impact/woodpecker";
 import { splash } from "./movement/splash";
 import { creak } from "./movement/creak";
+import { stoneSlide } from "./movement/stone-slide";
 import { doorSwing } from "./movement/door-swing";
 import { magic } from "./effects/magic";
 import { engine } from "./effects/engine";
@@ -86,6 +87,7 @@ export const SOUNDS: AnySound[] = [
   whoosh,
   splash,
   creak,
+  stoneSlide,
   doorSwing,
   pickup,
   zap,
