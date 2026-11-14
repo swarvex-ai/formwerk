@@ -131,6 +131,29 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
   films or songs.
 - Style: `docs/style-guide.md`. Engine traps: https://github.com/swarvex-ai/swarvex/tree/main/lead/engine-reference/threejs
 
+## Review checkpoints and common reasons for rework
+
+Every task ends with **Review checkpoints**: the questions the reviewer answers about your submission. Answer each
+one in your summary, in order, with the evidence (a test line, a number, what the image shows). These are the
+reasons submissions were sent back most often; check them before you submit:
+
+1. **The summary answers the acceptance criteria, not the shell.** One plain sentence per criterion, plus the numbers
+   it asks for (triangles at a preset, what each preset sounds like). A summary of terminal output goes back.
+2. **Look at every image you commit.** `tests/scene/out/<id>.png` (and `.baked.png`, `.glb.png`, the sheet enlarged)
+   before you commit the baseline. If your model cannot read images, hand the task back: an unseen baseline goes back.
+3. **Names and types exactly as the task writes them:** `style`, not `form`; `colour`, not `color`. A `choice`
+   has string options, and presets use those strings (`"8"`, not `8`).
+4. **Movable parts are placed relative to their hinge.** `t.moving(name, x, y, z)` already sits at the hinge: build
+   the lid at y ≈ 0 of that group, not at the hinge height again (that puts it twice as high, in the air).
+5. **Mirrored parts take the side's sign everywhere:** with `for (const s of [-1, 1])`, rotations too
+   (`rotateZ(-s * hang)`), or one side tilts the wrong way.
+6. **Optional details draw from their own random stream** (`rng(seed + 1)`), so switching them on does not move
+   everything else.
+7. **Faces are one-sided:** a flat blade or leaf needs both faces, or half of them vanish from every view.
+8. **Change only what the task names.** A value the task does not mention (a `depth`, a preset) stays as it is.
+9. **Rebase onto current main** before you submit, and keep each registry entry on a line of its own.
+10. **Run `FORMWERK_ONLY=<id> npm test`** and submit only when it is green; quote its lines for your asset.
+
 ## Protected (only the lead changes these)
 
 The parameter, asset, surface, sprite, icon and sound contracts (`src/core/**`, `src/assets/define.ts`,
@@ -148,6 +171,8 @@ scene tests), `npm run test:core` (fast, while working), `npm run test:sound` (s
 `dist/sprites/*.png`, `.tres` and `.json`, and every icon as `dist/icons/*.svg` and `.png`.
 
 `FORMWERK_ONLY=<id>,<id> npm test` checks only these assets one by one (the checks across the whole catalogue and the
-build still run): quick while you work on your asset. The swarvex test pipeline does the same by itself
+build still run, but the ready sound, sprite and icon files are rendered only for these ids): about 15 s for one
+asset instead of minutes. The scene test stops an asset after 240 s with "FAIL time limit" (a page that hangs);
+`FORMWERK_TIMEOUT=<seconds>` changes it. The swarvex test pipeline does the same by itself
 (`scripts/pipeline-test.mjs`): it tests the assets your contribution changes, and the full suite as soon as it touches
 shared code. The full suite also runs on GitHub after every merge.

@@ -2,10 +2,10 @@
 
 The catalogue should look like one set, whoever builds an asset.
 
-> **Proposed 2026-11-14 (art director, for the visionary's approval):** the 3D look moves from blocky to realistic, or
-> stylised-realistic where realism costs too much (visionary decision of 14 Nov 2026). The sections "Models" and
-> "Surfaces" are the gate for every model and surface task. Sprites stay pixel art and icons stay line icons: realism
-> is a decision for the 3D kinds.
+> **Accepted 2026-11-14 (visionary decision, neVs):** the 3D look moves from blocky to realistic, or
+> stylised-realistic where realism costs too much. The sections "Models" and "Surfaces" are the gate for every model
+> and surface task, and every such task is measured against its reference asset (barrel, chair, tree, rock, lantern;
+> see docs/plan.md). Only models and surfaces change: sprites stay pixel art and icons stay line icons.
 
 ## Models
 
@@ -38,9 +38,9 @@ The catalogue should look like one set, whoever builds an asset.
 - **Thin parts** (wicks, wires, needles, spokes): at least 3 mm across. Thinner parts vanish in the 640 × 480 scene
   render, so reviewers cannot see them in the baseline.
 - **Budgets:** detail costs triangles, but every one must show: a bevel or segment that changes nothing at the scene
-  render is waste. Current limits per category are in `tests/core/assets.test.ts` (protected); proposed for the new
-  look: furniture 60,000, architecture 80,000, nature 150,000, vehicles 150,000, props 30,000 at the extremes, set
-  by the lead in its own task. Most assets should stay far below at their defaults. One draw call per material and
+  render is waste. The limits per category are in `tests/core/assets.test.ts` (protected), raised for this
+  look on 14 Nov 2026: furniture 60,000, architecture 80,000, nature 150,000, vehicles 150,000, props 30,000 at the
+  extremes. Most assets should stay far below at their defaults. One draw call per material and
   movable part stays.
 - **Names:** ids in kebab-case English (`server-rack`), parameters in camelCase English (`seatHeight`).
 - **Descriptions (`describe`):** one sentence, what the parameter changes and which real values are typical; no
@@ -81,6 +81,8 @@ The catalogue should look like one set, whoever builds an asset.
 
 ## Sprites
 
+- **Stays pixel art** (visionary decision, 14 Nov 2026): the realistic look of models and surfaces does not apply
+  to sprites. Bevels, PBR, wear maps and segment counts are 3D rules; a sprite follows only this section.
 - **Pixel art:** hard edges (no half-transparent pixels), whole pixels only, a one-pixel outline from the contract
   (a deep shade of the colour it touches). Shading with `ramp()`: light from the top left, three to four shades per
   material; shadows cooler, highlights warmer.
@@ -94,6 +96,8 @@ The catalogue should look like one set, whoever builds an asset.
 
 ## Icons
 
+- **Stays line icons** (visionary decision, 14 Nov 2026): the realistic look of models and surfaces does not apply
+  to icons. No shading, no gradients, no texture: one pen, as below.
 - **Grid:** 24 × 24 units, one pixel each at the design size. Ink stays inside the outermost unit; shapes fill the
   room up to about 2 units from the edge, like other icon sets, so icons sit together in a toolbar.
 - **One pen:** stroke width, corners and style come from the contract, the same for every icon of a set. Draw centre

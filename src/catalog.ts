@@ -84,17 +84,18 @@ function iconEintrag(i: AnyIcon, base: string) {
 /** Size of the ready PNG files of the icons. */
 export const ICON_PNG = 128;
 
-/** The ready icon files: every icon at its defaults and every preset as SVG (currentColor) and PNG (128 px). */
-export function iconFiles(): ({ path: string; image: Pixels } | { path: string; text: string })[] {
-  return ICONS.flatMap((i) => [{ name: i.id, input: {} }, ...Object.keys(i.presets).map((preset) => ({ name: `${i.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
+/** The ready icon files: every icon at its defaults and every preset as SVG (currentColor) and PNG (128 px). `keep`
+ * picks the icons by id (a test run for single assets writes only theirs). */
+export function iconFiles(keep: (id: string) => boolean = () => true): ({ path: string; image: Pixels } | { path: string; text: string })[] {
+  return ICONS.filter((i) => keep(i.id)).flatMap((i) => [{ name: i.id, input: {} }, ...Object.keys(i.presets).map((preset) => ({ name: `${i.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
     const m = makeIcon(i, input);
     return [{ path: `icons/${name}.svg`, text: m.svg() + "\n" }, { path: `icons/${name}.png`, image: m.pixels(ICON_PNG) }];
   }));
 }
 
 /** The ready sprite files: every sprite at its defaults and every preset as sheet (.png), Godot SpriteFrames and JSON. */
-export function spriteFiles(): ({ path: string; image: Pixels } | { path: string; text: string })[] {
-  return SPRITES.flatMap((s) => [{ name: s.id, input: {} }, ...Object.keys(s.presets).map((preset) => ({ name: `${s.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
+export function spriteFiles(keep: (id: string) => boolean = () => true): ({ path: string; image: Pixels } | { path: string; text: string })[] {
+  return SPRITES.filter((s) => keep(s.id)).flatMap((s) => [{ name: s.id, input: {} }, ...Object.keys(s.presets).map((preset) => ({ name: `${s.id}.${preset}`, input: { preset } }))].flatMap(({ name, input }) => {
     const sheet = makeSheet(s, input);
     return [
       { path: `sprites/${name}.png`, image: sheet.image },
@@ -105,8 +106,8 @@ export function spriteFiles(): ({ path: string; image: Pixels } | { path: string
 }
 
 /** The ready sound files of the gallery: every sound at its defaults and at every preset, seed 1. */
-export function soundFiles(): { path: string; bytes: Uint8Array<ArrayBuffer> }[] {
-  return SOUNDS.flatMap((s) => [
+export function soundFiles(keep: (id: string) => boolean = () => true): { path: string; bytes: Uint8Array<ArrayBuffer> }[] {
+  return SOUNDS.filter((s) => keep(s.id)).flatMap((s) => [
     { path: `sounds/${s.id}.wav`, bytes: toWav(makeSound(s).samples) },
     ...Object.keys(s.presets).map((name) => ({ path: `sounds/${s.id}.${name}.wav`, bytes: toWav(makeSound(s, { preset: name }).samples) })),
   ]);

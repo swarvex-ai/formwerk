@@ -9,10 +9,11 @@ import { extremes, presetProblems, random, schemaProblems } from "../../src/core
 import { hullPoints, physicsOf } from "../../src/core/physics";
 import { rng } from "../../src/core/rng";
 
-// Upper limits per category (the lead changes these, not a single asset)
+// Upper limits per category (the lead changes these, not a single asset; raised for the realistic look, style guide
+// approved 14 Nov 2026: bevels, lathe profiles and segment minimums cost triangles)
 // (vehicles: several movable parts such as turret, barrel, wheels or doors, each its own draw call)
-const GRENZE = { furniture: { triangles: 20000, drawCalls: 4 }, architecture: { triangles: 30000, drawCalls: 4 }, nature: { triangles: 150000, drawCalls: 3 },
-  vehicles: { triangles: 60000, drawCalls: 8 }, props: { triangles: 10000, drawCalls: 4 } } as const;
+const GRENZE = { furniture: { triangles: 60000, drawCalls: 4 }, architecture: { triangles: 80000, drawCalls: 4 }, nature: { triangles: 150000, drawCalls: 3 },
+  vehicles: { triangles: 150000, drawCalls: 8 }, props: { triangles: 30000, drawCalls: 4 } } as const;
 
 const pruefsumme = (o: Object3D) => {
   let summe = 0;
