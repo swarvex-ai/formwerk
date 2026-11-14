@@ -42,6 +42,7 @@ import { wolf as wolfSprite } from "./creatures/wolf";
 import { deer as deerSprite } from "./creatures/deer";
 import { duck as duckSprite } from "./creatures/duck";
 import { snail as snailSprite } from "./creatures/snail";
+import { moth as mothSprite } from "./creatures/moth";
 
 export { SPRITES, spriteById } from "./index";
 export { makeSheet, sheetJson, godotSpriteFrames, animationName, SPRITE_CATEGORIES } from "./define";
@@ -91,3 +92,4 @@ export const wolf = bogen(wolfSprite);
 export const deer = bogen(deerSprite);
 export const duck = bogen(duckSprite);
 export const snail = bogen(snailSprite);
+export const moth = bogen(mothSprite);

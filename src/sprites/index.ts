@@ -40,6 +40,7 @@ import { wolf } from "./creatures/wolf";
 import { deer } from "./creatures/deer";
 import { duck } from "./creatures/duck";
 import { snail } from "./creatures/snail";
+import { moth } from "./creatures/moth";
 
 export const SPRITES: AnySprite[] = [
   villager,
@@ -67,6 +68,7 @@ export const SPRITES: AnySprite[] = [
   deer,
   duck,
   snail,
+  moth,
   potion,
   food,
   drinks,
