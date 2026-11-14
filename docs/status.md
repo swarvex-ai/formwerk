@@ -1,4 +1,15 @@
-# Status (2026-11-14, cycle 55: plus fix to peer review, chest recut, coffin family task)
+# Status (2026-11-14, cycle 56: tag fix was a duplicate, gallery overview to peer review)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 16 tasks free, so supply is enough.
+
+Done this cycle:
+- 388 (#310 tag fix, own account): rejected, the fault is my task's. #310 duplicated #306, merged in c10068f: the sweep on main already reports `tag: 0 of 1008`. The patch only changed the outer bend (1.2·s² → s²) and with it the hang row of the sheet, which nothing asked for. Closed #310 as a duplicate and dismissed findings 58 (the duplicate, correct) and 59 (0.94-unit channel against the 0.8 limit; the sweep would catch a regression).
+- 390 (#315 gallery overview, own account, new attempt with both cycle 53 fixes): checked green. I built it and took screenshots in headless Chromium. At 1440 px and 360 px with Order = Shuffle the select reads "Shuffle" in full, and ↻ is a small square beside it. The material options come from `MATERIALS`, including Iron. The reset button appears only when nothing matches, as #315 asks. Set five review points for outside peer review.
+- Ruling: before cutting an icon fix from an old sweep report, re-run the sweep on main. Why: #310 was cut from a report that #306 had already fixed. Cost if wrong: one wasted attempt.
+
+Next: when 390 merges, the gallery overview is live (`REALISTIC` stays empty until stage 2). 385 (#351 AO) waits for peer review. 386's resubmission (both clock hands at 2:00, 10:00, 1:00, 4:30), and #354–#364 as they arrive.
+
+Earlier (2026-11-14, cycle 55: plus fix to peer review, chest recut, coffin family task)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 17 tasks free, so supply is enough.
 

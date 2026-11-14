@@ -147,7 +147,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #302 | icon fix: wifi (off slash at size 18, four arcs; sweep was 84 of 14112) | accepted (374) |
 | #305 | icon fix: undo and redo (radius gives way through largest(), open head legs grow below stroke 1.25; sweep was 162 and 168 of 3528) | accepted (372), both sweeps 0 of 3528; #308 closed as its duplicate |
 | #309 | icon fix: clock (hands just past the lay-on threshold leave a sliver; sweep was 56 of 3528) | open (milestone Icons: sweep clean) |
-| #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | open (milestone Icons: sweep clean) |
+| #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | closed: duplicate of #306 (main already sweeps 0 of 1008; 388 rejected) |
 | #318 | icon fix: plus (size.min 13 → 13.5; sweep was 21 of 37044, too little ink) | open (milestone Icons: sweep clean) |
 | #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | open (milestone Icons: sweep clean) |
 | #320 | icon fix: download (block arrow pointing up touches the walls of a deep tray; sweep was 3 of 7056) | open (milestone Icons: sweep clean) |
