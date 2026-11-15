@@ -1,6 +1,7 @@
-import { CylinderGeometry } from "three";
+import { Color } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const workbench = defineAsset({
   id: "workbench", category: "furniture",
@@ -28,30 +29,37 @@ export const workbench = defineAsset({
     heavy: { label: { de: "Schwere Werkbank", en: "Heavy duty bench" }, values: { width: 2.2, depth: 0.85, topThickness: 0.08 } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 400, drawCalls: 2 },
+  budget: { triangles: 7000, drawCalls: 4 },
   build(p) {
-    const wood = material("wood", p.colour);
+    // Two tones of the same wood for the strips of the top, alternating like the staves of the barrel
+    const dunkler = new Color(p.colour).multiplyScalar(0.82);
+    const holz = material("wood", p.colour, 1, undefined, { grain: "level" }), holz2 = material("wood", `#${dunkler.getHexString()}`, 1, undefined, { grain: "level" });
+    const beine = material("wood", p.colour), eisen = material("iron", "#6a7078", 5, undefined, { rust: 0.25 });
     const t = new Parts();
     const bein = 0.07, einzug = 0.05, zarge = 0.05, hohe = p.height - p.topThickness;
     const bx = p.width / 2 - einzug - bein / 2, bz = p.depth / 2 - einzug - bein / 2;
-    t.box(wood, p.width, p.topThickness, p.depth, 0, p.height - p.topThickness / 2, 0);
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) t.box(wood, bein, hohe, bein, sx * bx, hohe / 2, sz * bz);
+    // Platte aus 5 bis 8 verleimten Streifen über die ganze Breite, 1 mm Fuge dazwischen
+    const n = Math.min(8, Math.max(5, Math.round(p.depth / 0.11))), fuge = 0.001, sb = (p.depth - (n - 1) * fuge) / n;
+    for (let i = 0; i < n; i++) t.add(i % 2 ? holz2 : holz, rounded(p.width, p.topThickness, sb, 0.0025, 0, p.height - p.topThickness / 2, -p.depth / 2 + sb / 2 + i * (sb + fuge)));
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) t.add(beine, rounded(bein, hohe, bein, 0.003, sx * bx, hohe / 2, sz * bz));
     // Zargen von 0,1 bis 0,15 m: die beiden seitlichen zwischen den Beinen, die hintere als Auflage der Ablage
-    for (const sx of [-1, 1]) t.box(wood, zarge, zarge, 2 * bz, sx * bx, 0.125, 0);
-    t.box(wood, 2 * bx, zarge, zarge, 0, 0.125, -bz);
+    for (const sx of [-1, 1]) t.add(holz, rounded(zarge, zarge, 2 * bz, 0.003, sx * bx, 0.125, 0));
+    t.add(holz, rounded(2 * bx, zarge, zarge, 0.003, 0, 0.125, -bz));
     if (p.shelf) {
-      // Ablage auf den Zargen: zwischen den seitlichen, hinten an der hinteren, vorn mit den Beinen bündig
-      const hinten = bz - zarge / 2;
-      t.box(wood, 2 * bx - zarge, 0.025, bz + hinten, 0, 0.1625, (bz - hinten) / 2);
+      // Ablage aus 3 bis 5 Brettern mit 3 mm Abstand: hinten an der hinteren Zarge, vorn mit den Beinen bündig
+      const hinten = bz - zarge / 2, tiefe = bz + hinten, k = Math.min(5, Math.max(3, Math.round(tiefe / 0.13))), spalt = 0.003, bb = (tiefe - (k - 1) * spalt) / k;
+      for (let i = 0; i < k; i++) t.add(holz, rounded(2 * bx - zarge, 0.025, bb, 0.003, 0, 0.1625, -hinten + bb / 2 + i * (bb + spalt)));
     }
     if (p.vise === "front") {
-      // Backenblech vor der Platte, Oberkante bündig; Spindel durch die Backe, davor der Knebel. Bleibt über dem
-      // Boden und vor den Beinen, egal wie hoch und breit die Bank ist.
-      const m = material("metal", "#6a7078");
+      // Backenblech vor der Platte, Oberkante bündig; Spindel durch die Backe, davor der Knebel mit runden Knöpfen.
+      // Bleibt über dem Boden und vor den Beinen, egal wie hoch und breit die Bank ist.
       const x = -p.width / 2 + 0.14, y = p.height - 0.05, z = p.depth / 2 + 0.025;
-      t.box(m, 0.18, 0.1, 0.05, x, y, z);
-      t.add(m, new CylinderGeometry(0.012, 0.012, 0.15, 12).rotateX(Math.PI / 2).translate(x, y, z + 0.05));
-      t.add(m, new CylinderGeometry(0.008, 0.008, 0.1, 8).rotateZ(Math.PI / 2).translate(x, y, z + 0.115));
+      t.add(eisen, rounded(0.18, 0.1, 0.05, 0.004, x, y, z));
+      // Spindel aus der Backe nach vorn, vorn eine Nabe, durch die der Knebel geht
+      t.add(eisen, turned([[0.001, 0], [0.012, 0], [0.012, 0.11], [0.02, 0.112], [0.02, 0.14], [0.016, 0.15], [0.001, 0.15]], 12).rotateX(Math.PI / 2).translate(x, y, z - 0.025));
+      const kn = 0.011, l = 0.14;
+      t.add(eisen, turned([[0.001, 0], [kn * 0.7, kn * 0.3], [kn, kn], [kn * 0.7, kn * 1.7], [0.006, kn * 2], [0.006, l - kn * 2], [kn * 0.7, l - kn * 1.7], [kn, l - kn],
+        [kn * 0.7, l - kn * 0.3], [0.001, l]], 8, 0, -l / 2, 0).rotateZ(Math.PI / 2).translate(x, y, z + 0.11));
     }
     return t.group();
   },
