@@ -16,6 +16,19 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
    "level" for horizontal slats, aprons and rails, "rings" for the cut face of a stump or log, or "x"/"y"/"z"), `iron` with `rust` for forged or cast iron, `metal` for clean or painted metal, `stone` with `moss`,
    `bark`, and `plain: true` only for leaf cards. A small object passes a larger `scale` (the lantern uses 4). Two wood
    materials alternated give boards their own tone, as the barrel does.
+   **Materials per part.** Most sent-back attempts failed here, not on the shape. Give each part the material that
+   matches how it is made, and check it in the render:
+
+   | Part | Material line | Wrong (sent back) |
+   |---|---|---|
+   | boards, slats, rungs, aprons, rails lying level | `material("wood", c, 1, d, { grain: "level" })` | grain "auto" or "y": stripes run across the board |
+   | legs, posts, staves, uprights | `material("wood", c)` (grain "auto") | |
+   | cut face of a stump (pith on the y axis) | `material("wood", c, 1, d, { grain: "rings" })` | grain "y": straight stripes on the cut |
+   | brass, pewter, painted or clean steel | `material("metal", c)` | `iron` with rust: brown blots on brass |
+   | forged or cast iron on a small object | `material("iron", c, 5, d, { rust: 0.25 })` | scale 1–2, rust 0.45: big camouflage blots |
+   | stone, clay, stoneware | `material("stone", c, …, { moss })` (moss 0 for clay) | |
+
+   A colour parameter that offers brass or iron (its `describe` names both) stays `metal`.
 3. Keep the asset's `id`, every existing parameter name, its options and presets, its `physics` and its `rig`; every
    combination of the ranges must still build. Add a parameter only if it helps (with `describe` in German and
    English). Set `budget` to what the asset really needs at its heaviest extreme, inside the category limits in
