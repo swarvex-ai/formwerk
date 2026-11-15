@@ -12,8 +12,8 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
    (lathe profiles for legs, knobs, handles, finials), `stave` (staves of a tub or bucket), `roundBoards` (round lids
    and heads from boards), `grid` (any surface from a function). Segment counts by radius from the style guide (under
    2 cm 8; up to 10 cm 16; up to 30 cm 24; up to 1 m 32).
-2. Materials only from `src/materials` with the options in AGENTS.md (Rules, Materials): `wood` (grain "auto" or
-   "x"/"y"/"z"), `iron` with `rust` for forged or cast iron, `metal` for clean or painted metal, `stone` with `moss`,
+2. Materials only from `src/materials` with the options in AGENTS.md (Rules, Materials): `wood` (grain "auto",
+   "level" for horizontal slats, aprons and rails, or "x"/"y"/"z"), `iron` with `rust` for forged or cast iron, `metal` for clean or painted metal, `stone` with `moss`,
    `bark`, and `plain: true` only for leaf cards. A small object passes a larger `scale` (the lantern uses 4). Two wood
    materials alternated give boards their own tone, as the barrel does.
 3. Keep the asset's `id`, every existing parameter name, its options and presets, its `physics` and its `rig`; every

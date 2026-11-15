@@ -15,8 +15,8 @@ import {
 
 export const MATERIALS = ["wood", "metal", "iron", "paint", "stone", "plastic", "bark", "leaf", "glow"] as const;
 export type MaterialKind = (typeof MATERIALS)[number];
-/** The axis the wood fibres run along, in the asset's coordinates. */
-export type Grain = "x" | "y" | "z" | "auto";
+/** The axis the wood fibres run along, in the asset's coordinates; "level": lying, along the face (slats, aprons). */
+export type Grain = "x" | "y" | "z" | "auto" | "level";
 
 type F = Node<"float">;
 type V3 = Node<"vec3">;
@@ -60,9 +60,18 @@ type Kind = {
 const holzFelder = (q: V3, n: V3, g: Grain) => {
   // "auto": fibres upright on standing faces (legs, staves, posts) and along x on lying ones (tops, seats, shelves),
   // so a table top shows long grain instead of the end of a log
+  // "level": fibres lie level on every face, along z on faces that look along x and along x on all others, so a
+  // crate slat or a table apron shows long grain on its front and on its side
   const liegend = abs(n.y).greaterThan(0.7);
+  if (g === "level") {
+    const seitlich = abs(n.x).greaterThan(abs(n.z));
+    return felder(select(liegend, q.x, select(seitlich, q.z, q.x)), select(liegend, q.yz, select(seitlich, q.xy, q.yz)));
+  }
   const along = g === "x" ? q.x : g === "z" ? q.z : g === "y" ? q.y : select(liegend, q.x, q.y);
   const quer = g === "x" ? q.yz : g === "z" ? q.xy : g === "y" ? q.xz : select(liegend, q.zy, q.xz);
+  return felder(along, quer);
+};
+const felder = (along: F, quer: Node<"vec2">) => {
   const warp = mx_noise_float(vec3(quer.mul(1.3), along.mul(0.22)));
   // The pith lies two metres beside the object: rings cross a board as slightly wavy lines, not as wide arches
   // Uneven ring widths (good and poor years) from a slow noise across the log
