@@ -1,4 +1,19 @@
-# Status (2026-11-15, cycle 63: clock fix back with a one-line change, pencil and volume fixes to peer review)
+# Status (2026-11-15, cycle 64: realistic-look reviews, two new wood grains, clock recipe as code)
+
+Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 2 agents active, 7 tasks free, so supply is enough. Eight new own-account submissions waited: the clock fix and seven realistic-look models. Peer review is still the bottleneck (oldest 6.2 h).
+
+Done this cycle:
+- Materials (own commits abdbb86, c4da1b9): wood grain "level" (fibres lie level along every face: along z on faces looking along x, along x elsewhere) and "rings" (pith on the asset's y axis, round rings on a cut face). Existing grains are unchanged (chair and barrel 0.00 %, test:core green). AGENTS.md and docs/look-realistic.md name both.
+- 407 (#307 clock fix, fifth attempt): sent back. Sweep 0, but it draws a filled hub `circle(c, nab)` again, which swallows the hour hand at 2:00 s2 (reads as 12:00) and drops the `eng` swap. I wrote the fix on their patch (wedge polygon c → nab, sharp-corner hub, eng swap kept): `clock: 0 of 3528`, and the ASCII renders at 48 px show two hands at 12:10 s2.25, 2:00 s2, 2:05 s1.25, 10:10. The rework reason holds the code verbatim.
+- 408 (#354 table) and 410 (#355 crate): sent back for grain across the boards (apron, slats). The recipe uses "level": table lines 43 and 66–67, crate line 40, tested on their patches (table 3 draw calls, baked 0.40 %; crate 3 draw calls, baked 0.37 %).
+- 414 (#360 stump): sent back. The cut face showed stripes, because my task said grain "y". The recipe uses "rings" at scale 1 (tested, baked 0.11 %).
+- 412 (#358 cauldron): sent back. The rust looked like big camouflage blots, and the belly was a 5-point cone with a sharp equator. The recipe uses scale 5, rust 0.25 and a SplineCurve profile (tested: 5416 triangles, baked 0.67 %, glb 1.21 %).
+- 411 (#357 bucket), 413 (#359 candlestick) and 415 (#361 bush): renders look right. Five review points each, for outside peer review.
+- Ruling: when a realistic-look task fails on a material limit, I extend the material myself (level D, new option only, existing looks unchanged) and give the contributor the tested one-line use. Why: the swarm cannot change src/materials, and per-part grain was a contract gap. Cost if wrong: a material option nobody else uses.
+
+Next: 392 (#351 AO), 396 (#319), 398 (#320), 402 (#321), 405 (#350), 411, 413 and 415 wait for outside peer review. Check the resubmissions of 407, 408, 410, 412 and 414 against the recipes. Art rework is 88 %. If the next realistic-look attempts fail again, add a "materials per part" step to docs/look-realistic.md.
+
+Earlier (2026-11-15, cycle 63: clock fix back with a one-line change, pencil and volume fixes to peer review)
 
 Woken for 1 open message: my own approval request 31. The visionary decided it in cycle 44, but it stays open in the tool until they record it (info 37 asked them to). 1 agent active, 9 tasks free, so supply is enough. Three new own-account submissions were waiting. The bottleneck is peer review: 5 submissions wait, the oldest for 5 h.
 
