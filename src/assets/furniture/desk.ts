@@ -1,5 +1,7 @@
+import type { BufferGeometry } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const desk = defineAsset({
   id: "desk", category: "furniture",
@@ -28,43 +30,59 @@ export const desk = defineAsset({
   },
   rig: { drawer: { label: { de: "Schublade", en: "Drawer" }, type: "slide", axis: [0, 0, 1], min: 0, max: 0.45 } },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 3000, drawCalls: 4 },
+  budget: { triangles: 6000, drawCalls: 4 },
   build(p) {
+    // One wood: grain runs along x on the top and upright on panels, legs and fronts by itself ("auto")
     const holz = material("wood", p.color), Metall = material("metal", "#b8bec6");
     const t = new Parts();
-    const w = p.width, d = p.depth, tt = 0.04, ht = p.height - tt;
-    t.box(holz, w, tt, d, 0, p.height - tt / 2, 0);
+    const w = p.width, d = p.depth, tt = 0.04, ht = p.height - tt, r = 0.003;
+    t.add(holz, rounded(w, tt, d, r, 0, p.height - tt / 2, 0, 2));
     const sx = p.pedestal === "none" ? 0 : p.pedestal === "left" ? -1 : 1;
+    const pw = Math.min(0.45, Math.max(0.25, w * 0.36)), pd = d - 0.06, st = 0.015;
+    const px = sx * (w / 2 - 0.02 - pw / 2);
     // Gestell: die Seite des Schubladenblocks bleibt frei
     if (p.base === "legs") {
-      for (const s of sx === 0 ? [1, -1] : [-sx])
-        for (const sz of [1, -1]) t.post(holz, 0.025, ht, s * (w / 2 - 0.06), 0, sz * (d / 2 - 0.06), 10, true);
+      // Square legs, 5 cm under the top tapering to 3.5 cm at the foot, joined by aprons under the top
+      const lb = 0.05, lx = w / 2 - 0.06, lz = d / 2 - 0.06, zh = 0.08, zt = 0.02, zy = ht - zh / 2;
+      const bein = (x: number, z: number): BufferGeometry => {
+        const g = rounded(lb, ht, lb, 0.004, 0, ht / 2, 0, 2), pos = g.attributes.position;
+        for (let i = 0; i < pos.count; i++) { const k = 0.7 + 0.3 * (pos.getY(i) / ht); pos.setX(i, pos.getX(i) * k); pos.setZ(i, pos.getZ(i) * k); }
+        return g.translate(x, 0, z);
+      };
+      for (const s of sx === 0 ? [1, -1] : [-sx]) {
+        for (const sz of [1, -1]) t.add(holz, bein(s * lx, sz * lz));
+        t.add(holz, rounded(zt, zh, 2 * lz, r, s * lx, zy, 0, 2));
+      }
+      // Back apron from leg to leg, or from the leg to the side of the pedestal
+      const x0 = sx === 0 ? -lx : -sx * lx, x1 = sx === 0 ? lx : px - sx * pw / 2;
+      t.add(holz, rounded(Math.abs(x1 - x0), zh, zt, r, (x0 + x1) / 2, zy, -lz, 2));
     } else {
-      for (const s of [1, -1]) if (s !== sx) t.box(holz, 0.03, ht, d - 0.06, s * (w / 2 - 0.035), ht / 2, 0);
+      for (const s of [1, -1]) if (s !== sx) t.add(holz, rounded(0.03, ht, d - 0.06, r, s * (w / 2 - 0.035), ht / 2, 0, 2));
     }
     if (sx) {
-      // Block mit zwei Seitenwänden, Boden und Rückwand; die Fronten sitzen vor der Vorderkante
-      const pw = Math.min(0.45, Math.max(0.25, w * 0.36)), pd = d - 0.06, st = 0.015, spalt = 0.006;
-      const px = sx * (w / 2 - 0.02 - pw / 2), zc = pd / 2 + 0.002;
-      for (const s of [-1, 1]) t.box(holz, st, ht, pd, px + s * (pw / 2 - st / 2), ht / 2, 0);
-      t.box(holz, pw, 0.015, pd, px, 0.0075, 0).box(holz, pw - 2 * st, ht - 0.015, 0.015, px, 0.015 + (ht - 0.015) / 2, -pd / 2 + 0.0075);
-      const zoll = (ht - 0.015) / p.drawers, fh = zoll - spalt, fw = pw - 0.02, ft = 0.016;
+      // Block mit zwei Seitenwänden, Boden und Rückwand; die Fronten sitzen vor der Vorderkante mit 3 mm Fuge
+      const spalt = 0.003, zc = pd / 2 + 0.002;
+      for (const s of [-1, 1]) t.add(holz, rounded(st, ht, pd, r, px + s * (pw / 2 - st / 2), ht / 2, 0, 2));
+      t.add(holz, rounded(pw - 2 * st, st, pd, r, px, st / 2, 0, 2))
+        .add(holz, rounded(pw - 2 * st, ht - st, st, r, px, st + (ht - st) / 2, -pd / 2 + st / 2, 2));
+      const zoll = (ht - st) / p.drawers, fh = zoll - spalt, fw = pw - 0.02, ft = 0.016;
       const yo = (i: number) => ht - zoll * (i + 0.5);
+      // Bar pull: a round bar on two turned posts standing 2 cm off the front
       const griff = (teil: Parts, y: number) => {
-        const bw = Math.min(0.14, fw * 0.5);
-        teil.box(Metall, bw, 0.01, 0.01, px, y, zc + ft / 2 + 0.012);
-        for (const s of [-1, 1]) teil.box(Metall, 0.012, 0.012, 0.014, px + s * (bw / 2 - 0.006), y, zc + ft / 2 + 0.006);
+        const bw = Math.min(0.14, fw * 0.5), zf = zc + ft, ab = 0.02, lang = bw + 0.014;
+        teil.add(Metall, turned([[0.001, 0], [0.004, 0], [0.005, 0.002], [0.005, lang - 0.002], [0.004, lang], [0.001, lang]], 8).rotateZ(-Math.PI / 2).translate(px - lang / 2, y, zf + ab));
+        for (const s of [-1, 1]) teil.add(Metall, turned([[0.001, 0], [0.006, 0], [0.006, 0.002], [0.0035, 0.005], [0.0035, ab], [0.001, ab]], 8).rotateX(Math.PI / 2).translate(px + s * bw / 2, y, zf));
       };
       // Oberste Schublade: Kasten mit 6 mm Luft zu den statischen Seitenwänden, läuft beim Ziehen über die Fronten darunter
-      const y = yo(0), aussen = pw - 2 * st - 0.012, wand = 0.01, hoehe = fh - 0.01, tiefe = pd - st - 0.02, kz = zc - tiefe / 2;
+      const y = yo(0), aussen = pw - 2 * st - 0.012, wand = 0.01, hoehe = fh - 0.01, tiefe = pd - st - 0.02, kz = zc - tiefe / 2, rk = 0.002;
       const s1 = t.moving("drawer", px, y, zc, { max: Math.round(0.8 * pd * 100) / 100 });
-      s1.box(holz, fw, fh, ft, px, y, zc + ft / 2);
-      for (const s of [-1, 1]) s1.box(holz, wand, hoehe, tiefe, px + s * (aussen / 2 - wand / 2), y - 0.003, kz);
-      s1.box(holz, aussen - 2 * wand, wand, tiefe, px, y - hoehe / 2 + wand / 2 - 0.003, kz)
-        .box(holz, aussen - 2 * wand, hoehe, wand, px, y - 0.003, kz - tiefe / 2 + wand / 2);
+      s1.add(holz, rounded(fw, fh, ft, r, px, y, zc + ft / 2, 2));
+      for (const s of [-1, 1]) s1.add(holz, rounded(wand, hoehe, tiefe, rk, px + s * (aussen / 2 - wand / 2), y - 0.003, kz, 1));
+      s1.add(holz, rounded(aussen - 2 * wand, wand, tiefe, rk, px, y - hoehe / 2 + wand / 2 - 0.003, kz, 1))
+        .add(holz, rounded(aussen - 2 * wand, hoehe, wand, rk, px, y - 0.003, kz - tiefe / 2 + wand / 2, 1));
       griff(s1, y);
       for (let i = 1; i < p.drawers; i++) {
-        t.box(holz, fw, fh, ft, px, yo(i), zc + ft / 2);
+        t.add(holz, rounded(fw, fh, ft, r, px, yo(i), zc + ft / 2, 2));
         griff(t, yo(i));
       }
     }
