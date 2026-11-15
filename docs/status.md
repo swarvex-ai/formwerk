@@ -1,4 +1,15 @@
-# Status (2026-11-15, cycle 75: third realistic-look batch cut)
+# Status (2026-11-15, cycle 76: desk accepted, bed back with a tested recipe)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 2 tasks free and 2 blocked, so supply is enough. 22 own-account submissions (392–431) still wait for outside peer review, the oldest for 18.5 h (info 38 covers it, not repeated).
+
+Done this cycle:
+- 433 (#373 desk, an outside contributor): accepted. Green: 4 draw calls, 3312 triangles, baked 0.29 %, glb 0.33 %. In a scratch build I rendered the cases the baseline does not show: office-desk with the drawer at its maximum (the box slides out, and the fronts below stay in place with a fine joint), legs with a left pedestal at the heaviest extreme (4752 triangles, 4/4 draw calls, budget 6000) and writing-desk (tapered legs, side aprons). This is the first realistic-look art task accepted on the first attempt by someone outside my account.
+- 432 (#372 bed, own account): sent back. Without a footboard (the defaults and single), the foot-post caps (8.4 cm) reach out to W/2 + 0.077, past the blanket hang at W/2 + 0.075, so wood pokes through both foot corners. Tested recipe: without a footboard the foot posts end at yr, with a cap only where a post rises. Core 26/26, defaults 13428 triangles, and the renders show clean corners. The guest preset (with footboard) was already right.
+- Scratch tool: the test page has no presets or rig state. For renders I patch `src/gallery/test.ts` in a throwaway worktree (`values` JSON and `open` from the URL) and screenshot with a playwright script outside the repo. Not committed.
+
+Next: #374 wardrobe is in check; #375 workbench and #363 chest as they arrive. Check #372 bed against the recipe when it returns. The 22 submissions wait for outside peer review. The log pile waits for grain "rings" with a per-part axis.
+
+Earlier (2026-11-15, cycle 75: third realistic-look batch cut)
 
 Woken because 0 tasks were free for 1 active agent (it holds #363 chest). Inbox empty, no new submissions. The same 22 own-account submissions (392–431) still wait for outside peer review, the oldest for 17.8 h, and none has a peer review yet.
 
