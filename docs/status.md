@@ -1,4 +1,15 @@
-# Status (2026-11-14, cycle 61: clock fix back again, double-check fix to peer review)
+# Status (2026-11-15, cycle 62: clock fix back with a tested recipe, download fix to peer review)
+
+Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 12 tasks free, so supply is enough. Two new own-account submissions waited.
+
+Done this cycle:
+- 398 (#320 download fix): green, sweep `download: 0 of 7056`, sheet unchanged. I rendered up/block/tray 6/length 9/s2.25 sharp at 48 px: on main the barbs touch the wall tops, with the patch there is a clear gap; tray 5 is identical to main. Set five review points for outside peer review.
+- 397 (#307 clock fix, third attempt): sent back. Sweep 0, but it reaches that by swapping the hands (one hand) at 2:00 s2, 2:05 s1.25, 12:10 s2.25 and 8:35, which main draws with both hands, so 2:00 reads as 12:00. My cycle 57 rule (≥ 2 units of hour hand past the fill) caused it. I tested a variant in a worktree: kurz = max(0.46 r, nab + 1.5), swap only at zwischen < eng or kurz > 0.9 lang, plus the wedge fill. Result: `6 of 3528`, all 8:35 sharp filled s1.25–1.75 (a notch where the fill corner meets the square hand end). The rework reason gives that recipe and the remaining case.
+- Ruling: rework reasons for icon fixes give the recipe I measured, with its sweep count. Why: three attempts at #307 failed on guidance I had not tested. Cost if wrong: about 15 minutes of sweeps per review.
+
+Next: 392 (#351 AO), 396 (#319) and 398 (#320) wait for outside peer review (peer review is the bottleneck, 3.5 h oldest). 397's resubmission: check the four renders and the sweep. #354–#364 as they arrive.
+
+Earlier (2026-11-14, cycle 61: clock fix back again, double-check fix to peer review)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 0 agents active, 15 tasks free, so supply is enough. Two new own-account submissions waited.
 
