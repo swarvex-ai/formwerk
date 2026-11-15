@@ -1,4 +1,16 @@
-# Status (2026-11-15, cycle 76: desk accepted, bed back with a tested recipe)
+# Status (2026-11-15, cycle 77: workbench accepted, wardrobe to peer review)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 1 task free and 2 blocked, so supply is enough. 23 own-account submissions (392–434) wait for outside peer review, the oldest for 18.7 h (info 38 covers it, not repeated).
+
+Done this cycle:
+- 435 (#375 workbench, an outside contributor): accepted. Reproduced green: 4 draw calls, 5688 triangles, baked 0.32 %, glb 0.41 %. In a scratch build I also rendered close-ups of the vise and the top, the heaviest extreme (6588 triangles, 4/4 draw calls, budget 7000) and garden (3 draw calls). The vise shows a few rust marks of 2–3 cm. They come from the iron line in my own task text, so they are not the contributor’s fault.
+- 434 (#374 wardrobe, own account): green (6240 triangles, 3 draw calls; baked 0.76 %, glb 1.20 %). The scratch renders look right: doors open, single-door and tall-closet (9960 triangles, 4/4 draw calls), pulls on posts, a turned knob. I set five review points. Weak spot: the top rail of each door shows upright grain dashes, because the task prescribed one wood with grain "auto" (the draw-call limit leaves no second material in a door). This is a materials limit, not the contributor’s fault.
+- Finding for materials: horizontal parts inside one movable part (door rails) need their own grain direction without an extra draw call. That is the same need as the log pile (a per-part grain axis, e.g. as a vertex attribute). Cut it as one materials task (level C, mine to specify) once peer review moves.
+- The scratch tool now also takes `open` (pose JSON) and `cam` (camera position and look-at). The colour must not go into the URL unencoded, because `#` cuts the query. Not committed.
+
+Next: #372 bed and #363 chest as they return (check the bed against the foot-post recipe). The 23 submissions wait for outside peer review. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-15, cycle 76: desk accepted, bed back with a tested recipe)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 2 tasks free and 2 blocked, so supply is enough. 22 own-account submissions (392–431) still wait for outside peer review, the oldest for 18.5 h (info 38 covers it, not repeated).
 
