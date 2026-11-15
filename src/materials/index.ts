@@ -15,8 +15,9 @@ import {
 
 export const MATERIALS = ["wood", "metal", "iron", "paint", "stone", "plastic", "bark", "leaf", "glow"] as const;
 export type MaterialKind = (typeof MATERIALS)[number];
-/** The axis the wood fibres run along, in the asset's coordinates; "level": lying, along the face (slats, aprons). */
-export type Grain = "x" | "y" | "z" | "auto" | "level";
+/** The axis the wood fibres run along, in the asset's coordinates; "level": lying, along the face (slats, aprons);
+ *  "rings": upright with the pith on the asset's y axis, so a cut face shows round growth rings (stumps, logs). */
+export type Grain = "x" | "y" | "z" | "auto" | "level" | "rings";
 
 type F = Node<"float">;
 type V3 = Node<"vec3">;
@@ -67,16 +68,17 @@ const holzFelder = (q: V3, n: V3, g: Grain) => {
     const seitlich = abs(n.x).greaterThan(abs(n.z));
     return felder(select(liegend, q.x, select(seitlich, q.z, q.x)), select(liegend, q.yz, select(seitlich, q.xy, q.yz)));
   }
+  if (g === "rings") return felder(q.y, q.xz, vec2(0, 0));
   const along = g === "x" ? q.x : g === "z" ? q.z : g === "y" ? q.y : select(liegend, q.x, q.y);
   const quer = g === "x" ? q.yz : g === "z" ? q.xy : g === "y" ? q.xz : select(liegend, q.zy, q.xz);
   return felder(along, quer);
 };
-const felder = (along: F, quer: Node<"vec2">) => {
+const felder = (along: F, quer: Node<"vec2">, mark = vec2(1.9, 1.3)) => {
   const warp = mx_noise_float(vec3(quer.mul(1.3), along.mul(0.22)));
   // The pith lies two metres beside the object: rings cross a board as slightly wavy lines, not as wide arches
   // Uneven ring widths (good and poor years) from a slow noise across the log
   const jahre = mx_noise_float(vec3(quer.mul(2.2), along.mul(0.08)).add(3.1)).mul(1.6);
-  const ring = quer.add(vec2(1.9, 1.3)).length().mul(30).add(warp.mul(1.2)).add(mx_noise_float(vec3(quer.mul(6), along.mul(0.6))).mul(0.5)).add(jahre);
+  const ring = quer.add(mark).length().mul(30).add(warp.mul(1.2)).add(mx_noise_float(vec3(quer.mul(6), along.mul(0.6))).mul(0.5)).add(jahre);
   // Latewood as a narrow band with soft edges (a hard sawtooth edge flickers between the live material and its bake)
   // A soft band (few harmonics), faded to its mean (0.375) where the rings get finer than a few pixels, as mipmaps would
   const spaet = mix(float(0.375), pow(sin(ring.mul(Math.PI * 2)).mul(0.5).add(0.5), float(2)), sichtbar1(ring));
