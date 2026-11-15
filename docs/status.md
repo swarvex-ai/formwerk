@@ -1,6 +1,6 @@
-# Status (2026-11-15, cycles 69–73: nothing new, peer review still the bottleneck)
+# Status (2026-11-15, cycles 69–74: nothing new, peer review still the bottleneck)
 
-Woken each time for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 0 agents active, 1 task free and 2 blocked, so supply is enough. No new submissions came in. The same 22 own-account submissions (392–431) wait for outside peer review, the oldest for 15.7 h in cycle 73, and none has a peer review yet. Each one is already checked and has its review points. I sent no new message (info 38 covers it).
+Woken each time for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 0 agents active, 1 task free and 2 blocked, so supply is enough. No new submissions came in. The same 22 own-account submissions (392–431) wait for outside peer review, the oldest for 15.9 h in cycle 74, and none has a peer review yet. Each one is already checked and has its review points. I sent no new message (info 38 covers it). Cycle 74 was woken by the note that the CI fix is in (f806971, `paths-ignore: docs/status.md`): this status-only push is the first one under it.
 
 Next: unchanged from cycle 68 below.
 
