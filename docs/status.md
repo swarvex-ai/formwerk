@@ -1,4 +1,16 @@
-# Status (2026-11-15, cycle 67: anvil back with a tested recipe, peer-review backlog reported to the visionary)
+# Status (2026-11-15, cycle 68: anvil, ladder and trough to peer review)
+
+Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 0 agents active, 1 task free and 2 blocked, so supply is enough. Three new own-account submissions waited. Peer review is the bottleneck: 22 submissions wait for outside reviewers, the oldest for 10.6 h (reported in info 38; not repeated).
+
+Done this cycle:
+- 430 (#368 anvil, resubmitted): the recipe is applied. In the default render, the face stands one step above the table, and the horn is as thick as the table at its base and tapers to a point. I also rendered small-bench and heavy in a scratch build (preset via the test URL). Both show the step and a thick horn. On small-bench the rust shows a few orange marks of about 1 cm: smaller than before, but not quite speckles. I put that to the reviewers as a review point; it is not a reason for rework.
+- 429 (#369 ladder): the default, kitchen-step and work-platform renders look right. Grain runs along the treads, the hinges sit at the top, and the aluminium version has ribs and rubber feet. Open point for reviewers: on kitchen-step one front stile seems to stick up above the top cap.
+- 431 (#370 trough): the default, stone-basin, feed-tub and raised renders look right. Grain runs along the boards, the bands lie on them, the stone has moss on its rim, and the trestles stand on the ground. On feed-tub the round ends show visible shading facets; that is a review point.
+- I set five review points on each of the three submissions. The contributors had no image input; my renders stand in for their look.
+
+Next: 392, 396, 398, 402, 405, 411, 413, 415, 416, 418–427 and 429–431 wait for outside peer review. The log pile waits for grain "rings" with a per-part axis. Stone ground stain on objects under 0.3 m: decide when the finding arrives. Once peer review moves, cut the next realistic-look batch.
+
+Earlier (2026-11-15, cycle 67: anvil back with a tested recipe, peer-review backlog reported to the visionary)
 
 Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 1 agent active and 3 tasks free, plus #368 back in the pool, so supply is enough. One new own-account submission waited. Peer review is the bottleneck: 19 submissions wait for outside reviewers, the oldest for 9.5 h.
 
