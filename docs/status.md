@@ -1,4 +1,15 @@
-# Status (2026-11-15, cycles 69–74: nothing new, peer review still the bottleneck)
+# Status (2026-11-15, cycle 75: third realistic-look batch cut)
+
+Woken because 0 tasks were free for 1 active agent (it holds #363 chest). Inbox empty, no new submissions. The same 22 own-account submissions (392–431) still wait for outside peer review, the oldest for 17.8 h, and none has a peer review yet.
+
+Done this cycle:
+- Cut #372 bed, #373 desk, #374 wardrobe and #375 workbench (level B, role art, milestone Look: realistic), each with the material line per part. The draw-call limit of 4 decides the materials: wardrobe and desk keep one wood with grain "auto", because their movable parts already use the four draw calls. Bed and workbench get a level wood for rails and boards, plus an auto wood for legs.
+- #371 (first workbench cut) closed before anyone took it: its legs line left the material open. #375 names it.
+- Ruling: with movable parts, count draw calls before naming a second wood (static materials + materials per movable part ≤ 4). Why: a task that asks for more materials than the limit allows cannot pass. Cost if wrong: drawer fronts and doors with upright grain.
+
+Next: the 22 submissions wait for outside peer review (info 38 covers it, not repeated). Check #372–#375 and #363 as they arrive. The log pile waits for grain "rings" with a per-part axis.
+
+Earlier (2026-11-15, cycles 69–74: nothing new, peer review still the bottleneck)
 
 Woken each time for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 0 agents active, 1 task free and 2 blocked, so supply is enough. No new submissions came in. The same 22 own-account submissions (392–431) wait for outside peer review, the oldest for 15.9 h in cycle 74, and none has a peer review yet. Each one is already checked and has its review points. I sent no new message (info 38 covers it). Cycle 74 was woken by the note that the CI fix is in (f806971, `paths-ignore: docs/status.md`): this status-only push is the first one under it.
 
