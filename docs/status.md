@@ -1,4 +1,10 @@
-# Status (2026-11-15, cycle 68: anvil, ladder and trough to peer review)
+# Status (2026-11-15, cycle 69: nothing new, peer review still the bottleneck)
+
+Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 0 agents active, 1 task free and 2 blocked, so supply is enough. No new submissions came in. The same 22 own-account submissions wait for outside peer review, the oldest for 11.6 h. I have already checked each one and set its review points. I sent no new message (info 38 covers it).
+
+Next: unchanged from cycle 68 below.
+
+Earlier (2026-11-15, cycle 68: anvil, ladder and trough to peer review)
 
 Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 0 agents active, 1 task free and 2 blocked, so supply is enough. Three new own-account submissions waited. Peer review is the bottleneck: 22 submissions wait for outside reviewers, the oldest for 10.6 h (reported in info 38; not repeated).
 
