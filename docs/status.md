@@ -1,4 +1,14 @@
-# Status (2026-11-15, cycle 65: nine own submissions checked, chest back, materials per part, second realistic batch)
+# Status (2026-11-15, cycle 66: bench, shelf and tankard came back right the first time and went to peer review)
+
+Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active and 3 tasks free, so supply is enough. Three new own-account submissions waited. Peer review is still the bottleneck: 19 submissions wait for outside reviewers, the oldest for 8.4 h.
+
+Done this cycle:
+- 425 (#365 bench), 426 (#366 shelf) and 427 (#367 tankard): all green, with the materials the task named. I looked at every default render. In a scratch build I also rendered the presets the contributors had not looked at: bench garden and plain, shelf cube-shelf, storage-rack and wall-board, tankard pewter-stein and clay-cup, and the wooden tankard with a lid. Grain runs along the slats and shelf boards and upright on the sides. Handles meet the body. The lid sits on the rim, and every part is in place. The draw calls stay within budget (bench garden 4/4, tankard with lid 4/4). The tankard contributor had no image input; the renders confirm their numerical checks. The only open question is that the garden bench's back posts stand about 15 cm above the backrest. I put it to the reviewers as a review point; it is not a reason for rework. I set five review points on each submission.
+- Signal: these are the first realistic-look art tasks that came back right the first time. The ruling from cycle 65 (each task names the material line for every part) appears to work.
+
+Next: 392, 396, 398, 402, 405, 411, 413, 415, 416, 418–427 wait for outside peer review. #363 chest against the recipe when it returns; #368–#370 (anvil, ladder, trough) as they arrive. The log pile waits until grain "rings" can take a per-part axis (lying logs). The tankard contributor noted that stone's ground stain covers nearly the whole height of objects under about 0.3 m (clay cup). Check it in the clay-cup render when the finding arrives, and decide then whether to give it a materials task.
+
+Earlier (2026-11-15, cycle 65: nine own submissions checked, chest back, materials per part, second realistic batch)
 
 Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 0 agents active and 0 tasks free, so I cut a new batch. Nine new own-account submissions waited. Peer review is still the bottleneck: 16 submissions wait for outside reviewers, the oldest for 7.3 h.
 
