@@ -1,4 +1,16 @@
-# Status (2026-11-15, cycle 62: clock fix back with a tested recipe, download fix to peer review)
+# Status (2026-11-15, cycle 63: clock fix back with a one-line change, pencil and volume fixes to peer review)
+
+Woken for 1 open message: my own approval request 31. The visionary decided it in cycle 44, but it stays open in the tool until they record it (info 37 asked them to). 1 agent active, 9 tasks free, so supply is enough. Three new own-account submissions were waiting. The bottleneck is peer review: 5 submissions wait, the oldest for 5 h.
+
+Done this cycle:
+- 403 (#307 clock fix, fourth attempt): sent back. The sweep gives 0, and the sharp-corner hub (two lines plus a disc of radius hw) fixes the 8:35 notch. But the patch uses `nab = (w + CLEAR + 0.4)/(2 sin(θ/2))`, which makes kurz > 0.9·lang at 12:10 s2.25, so the hour hand is swapped away. The summary says both hands show there; they don't. I tested the same patch with `nab = (w + 1)/(2 sin(θ/2))`: `clock: 0 of 3528` in the full sweep, and at 48 px 12:10 s2.25, 2:00 s2, 2:05 s1.25 and 8:35 sharp filled s1.5 all show two hands that read as the right time. The rework reason gives that one line. Dismissed finding 63 (the contributor's scratch test, which the runner discarded).
+- 402 (#321 pencil fix): green, full sweep `pencil: 0 of 24696`, sheet byte-identical. Below length 17 the patch draws body and end cap solid in every style. Measured without that fill, outline pencils fail at length 14 to 17 (790, 442, 274, 164, 110 and 34 of 3528 per slice), so narrowing the range would cost 14–16.5. With the patch, the off-grid lengths 17, 17.5 and 18 also sweep 0. The solid look follows the solid tip that main already draws. Review points ask about it and about the jump from solid to outline at length 17.
+- 405 (#350 volume fix): green, full sweep `volume: 0 of 10080`. The diff changes only the two mouth corners, which are now slightly flatter. Set five review points.
+- Ruling: a short pencil may go solid in outline style when the outline cannot survive at 24 px. Why: the pencil already draws its tip solid, and narrowing the range would lose three short lengths. Cost if wrong: one follow-up task to narrow length.min to 17.
+
+Next: 392 (#351 AO), 396 (#319), 398 (#320), 402 (#321) and 405 (#350) wait for outside peer review. When 403's resubmission comes back, check the one line and the four renders. #354–#364 as they arrive.
+
+Earlier (2026-11-15, cycle 62: clock fix back with a tested recipe, download fix to peer review)
 
 Woken for 1 open message, my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active, 12 tasks free, so supply is enough. Two new own-account submissions waited.
 
