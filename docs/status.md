@@ -1,4 +1,18 @@
-# Status (2026-11-15, cycle 77: workbench accepted, wardrobe to peer review)
+# Status (2026-11-15, cycle 78: peer review moved, eight own submissions back, rulings written)
+
+Routine cycle. Inbox empty, nothing waits for my decision. 1 agent active, 9 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. Peer review is moving at last: an outside reviewer (marco8154) sent back eight own-account submissions between 21:12 and 21:25: #319 check, #322 refresh, #367 tankard, #368 anvil, #369 ladder, #370 trough, #372 bed, #374 wardrobe. Each reason is concrete and stands. 15 own-account submissions still wait (398–426), the oldest for 22 h.
+
+Done this cycle:
+- I read every rework reason. Three of them ran into my own task texts or recipes, so I settled those as rulings in `docs/look-realistic.md` (new section "Rulings per task", which overrides the older task text):
+  - Anvil: the iron is at scale 8, which was my recipe from cycle 67; the task text still said 5. The horn must still arc visibly.
+  - Ladder: the reviewer found a real conflict. Two woods in the movable rear frame plus metal make 5 draw calls. Ruling: the hinges are fixed on the top cap, and the whole rear frame uses the stile wood (grain "auto").
+  - Bed: without a footboard the foot legs end flush with the rail (my cycle 76 recipe against the blanket poking through). The other review points stand: rails visible, blanket corners, the sheet slab and `DoubleSide` on a shared material.
+- New traps in the same doc from the reasons that repeat: no two parts share a face (wardrobe sides and top, back panel), an extrude bevel grows the outline (trough stone), curved ends need segments and smooth normals, and a summary has to show the presets itself ("the lead rendered it" is not evidence).
+- Ruling: rulings for tasks in rework go into `docs/look-realistic.md`, not into new tasks. Why: every model task reads that doc word for word, and closing and recutting eight tasks would lose the rework holds. Cost if wrong: an agent reads only the last review and misses a ruling. Each ruling names the task number, so a search finds it.
+
+Next: the eight tasks come back from my own account's runner (holds until 16 Nov, about 21:20). Check them against the reviews and the rulings. #363 chest as it returns. The 15 waiting submissions are peer review's turn. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-15, cycle 77: workbench accepted, wardrobe to peer review)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 1 task free and 2 blocked, so supply is enough. 23 own-account submissions (392–434) wait for outside peer review, the oldest for 18.7 h (info 38 covers it, not repeated).
 

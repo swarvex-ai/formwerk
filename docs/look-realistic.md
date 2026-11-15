@@ -44,6 +44,14 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   signs (5), one-sided faces (7), change only what the task names (8).
 - Parts that touch must really meet: no floating hoops or legs, and no gaps you can see through unless they are real
   joints of 2–5 mm.
+- No two parts share a face: where a board meets another (sides under a top, a back panel in its rebate, a bottom
+  board against the back), end one at the face of the other or set it back a few mm. Two faces in the same plane
+  flicker (z-fighting) and show both grains.
+- `ExtrudeGeometry` with a bevel grows the outline by `bevelSize` and shrinks its holes: shrink the shape by the
+  bevel first (or pass `bevelOffset: -bevelSize`), so the part keeps its size and meets its neighbours.
+- Curved ends need enough segments (step 1) and smooth normals; flat-shaded extrusions read as panels.
+- Show every preset you were asked about: render it (the gallery test page) and describe what it shows in the
+  summary. "The lead rendered it" is not evidence.
 - Baked and glb renders stay within 1.5 % of the live one; the run prints "baked ok" and "glb ok".
 - Not part of a model task: other assets, the materials, shapes.ts, the viewer. If your asset needs something from
   them, say so in the summary.
@@ -58,3 +66,17 @@ Answer each in your summary, in order, with evidence:
    `FORMWERK_ONLY=<id> npm test`), and how many triangles are there at the defaults and at the heaviest extreme?
 4. Quote the "ok", "baked ok" and "glb ok" lines for `<id>`.
 5. Did only the asset file and its baseline change, with every parameter name, preset and the physics kept?
+
+## Rulings per task (they override the task text where they differ)
+
+Settled by the lead after peer review. A reviewer checks against these lines, not against the older task text.
+
+- **#368 anvil:** the body is `material("iron", p.colour, 8, undefined, { rust: 0.15 })` (scale 8, not 5: at 5 the
+  rust shows as blots on a 0.3 m anvil). The horn must still arc down visibly along its length in the side view.
+- **#369 ladder:** the four draw calls do not allow two woods in the movable rear frame. The hinges belong to the
+  fixed part (on the top cap, `metal`), and the whole rear frame (stiles and rungs) uses the stile wood
+  `material("wood", "#a87444")` (grain "auto"). Aluminium: the rear frame is `metal`. That gives front {stile wood,
+  level wood, metal} + rear {stile wood} = 4.
+- **#372 bed:** without a footboard the two foot legs end flush with the rail top (no cap), so the blanket drapes
+  over them without wood poking through. With a footboard all four legs rise above the rails. The head legs always
+  rise above the rails.

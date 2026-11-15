@@ -343,8 +343,8 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
 | #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | peer review, chest (#363) in rework |
 | #364 | realistic look: coffin | peer review |
-| #365–#370 | realistic look: bench, shelf, tankard, anvil, ladder, trough (each task names the material per part) | peer review |
-| #372–#375 | realistic look: bed, desk, wardrobe, workbench (materials per part fitted to the 4 draw calls) | desk accepted (433); bed sent back with the foot-post recipe (432); workbench accepted (435); wardrobe in peer review (434, rails show upright grain: needs a per-part grain axis) |
+| #365–#370 | realistic look: bench, shelf, tankard, anvil, ladder, trough (each task names the material per part) | bench and shelf in peer review; tankard, anvil, ladder and trough sent back by peer review (marco8154); rulings for anvil and ladder in docs/look-realistic.md |
+| #372–#375 | realistic look: bed, desk, wardrobe, workbench (materials per part fitted to the 4 draw calls) | desk accepted (433); bed sent back with the foot-post recipe (432); workbench accepted (435); bed (again) and wardrobe sent back by peer review (marco8154: legs, blanket corners, coplanar boards); ruling for the bed foot legs in docs/look-realistic.md |
 
 (#325–#327 closed: #324 was merged outside the platform, so their dependency never resolved; recut as #351–#353.
 #288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation
