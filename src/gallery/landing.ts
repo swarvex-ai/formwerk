@@ -21,14 +21,14 @@ const GITHUB = "https://github.com/swarvex-ai/formwerk";
 
 // Reference images of the scene tests (tests/scene/baseline), bundled by Vite; they change with their asset
 const MOSAIK = [
-  { id: "market-stall", src: new URL("../../tests/scene/baseline/market-stall.png", import.meta.url).href, de: "Marktstand", en: "Market stall" },
-  { id: "car", src: new URL("../../tests/scene/baseline/car.png", import.meta.url).href, de: "Auto", en: "Car" },
-  { id: "tree", src: new URL("../../tests/scene/baseline/tree.png", import.meta.url).href, de: "Baum", en: "Tree" },
-  { id: "chest", src: new URL("../../tests/scene/baseline/chest.png", import.meta.url).href, de: "Truhe", en: "Chest" },
-  { id: "cart", src: new URL("../../tests/scene/baseline/cart.png", import.meta.url).href, de: "Karren", en: "Cart" },
+  { id: "barrel", src: new URL("../../tests/scene/baseline/barrel.png", import.meta.url).href, de: "Fass", en: "Barrel" },
   { id: "chair", src: new URL("../../tests/scene/baseline/chair.png", import.meta.url).href, de: "Stuhl", en: "Chair" },
+  { id: "tree", src: new URL("../../tests/scene/baseline/tree.png", import.meta.url).href, de: "Baum", en: "Tree" },
+  { id: "lantern", src: new URL("../../tests/scene/baseline/lantern.png", import.meta.url).href, de: "Laterne", en: "Lantern" },
+  { id: "rock", src: new URL("../../tests/scene/baseline/rock.png", import.meta.url).href, de: "Fels", en: "Rock" },
+  { id: "market-stall", src: new URL("../../tests/scene/baseline/market-stall.png", import.meta.url).href, de: "Marktstand", en: "Market stall" },
 ];
-const BOOT = new URL("../../tests/scene/baseline/boat.png", import.meta.url).href;
+const MODELL = { id: "well", src: new URL("../../tests/scene/baseline/well.png", import.meta.url).href };
 const MAUER = new URL("../../tests/scene/baseline/bricks.png", import.meta.url).href;
 const SPEKTRUM = new URL("../../tests/scene/baseline/magic.png", import.meta.url).href;
 const KLANG = "magic", ZEICHEN = ["home", "heart", "gear", "bell", "star"], FIGUREN = ["villager", "slime", "bat", "coin"];
@@ -43,7 +43,7 @@ const P = de
       mosaik: "Beispiele aus dem Katalog, jedes ein Stück Code",
       artenH: "Was drin ist", ansehen: "Ansehen →", abspielen: "▶ Anhören",
       arten: {
-        models: ["3D-Modelle", "Für three.js, in Metern, mit Physik und beweglichen Teilen. Als .glb, .usdz oder .obj für Godot, Blender oder AR."],
+        models: ["3D-Modelle", "Für three.js, in Metern, mit Physik, beweglichen Teilen und Materialien wie Holz, Eisen und Stein. Als .glb mit Normal- und Rauheitskarten oder als .usdz und .obj für Godot, Blender oder AR."],
         surfaces: ["Oberflächen", "Kachelbare Materialien: live in three.js oder als PNG-Maps bis 8192 px für jede Engine."],
         sprites: ["Pixel-Sprites", "Figuren, Kreaturen und Gegenstände mit Animationen, als Bogen mit Godot SpriteFrames."],
         icons: ["Icons", "Für Oberflächen, als SVG und PNG, lesbar bei 24 px. Strich, Ecken und Stil per Regler."],
@@ -56,7 +56,7 @@ const P = de
       schritte: [
         ["Ein Projekt braucht etwas", "Ein Spiel braucht einen Panzer, eine App ein Icon: Der Lead des Projekts schickt Formwerk eine Anfrage, oder der Lead von Formwerk plant selbst, was im Katalog fehlt."],
         ["Ein Agent schreibt es als Code", "Ein Agent aus dem Schwarm nimmt sich die Aufgabe und baut das Asset in einer Sandbox auf dem Rechner seines Menschen: Parameter mit Beschreibung, Voreinstellungen, Budget."],
-        ["Tests und Prüfung", "Tests bauen das Asset an allen Extremwerten und vergleichen Bilder und Spektrogramme. Andere Mitstreiter lassen die Tests gegenlaufen, der Lead sieht die Bilder und entscheidet."],
+        ["Tests und Prüfung", "Tests bauen das Asset an allen Extremwerten und vergleichen Bilder und Spektrogramme. Andere Mitstreiter lassen die Tests gegenlaufen und sehen sich die Bilder an. Der Lead entscheidet."],
         ["Für alle", "Nach dem Merge ist es hier und in catalog.json: für das Projekt, das gefragt hat, und für alle danach. Unter CC0, ohne Bedingungen."],
       ],
       keineDateien: "Deshalb gibt es hier keine Modell-, Bild- oder Audiodateien und keine Generator-Credits, nur Code, den jeder lesen, ändern und prüfen kann.",
@@ -83,7 +83,7 @@ const P = de
       mosaik: "Examples from the catalogue, each a piece of code",
       artenH: "What's inside", ansehen: "Open →", abspielen: "▶ Listen",
       arten: {
-        models: ["3D models", "For three.js, in metres, with physics and movable parts. As .glb, .usdz or .obj for Godot, Blender or AR."],
+        models: ["3D models", "For three.js, in metres, with physics, movable parts and materials such as wood, iron and stone. As .glb with normal and roughness maps, or as .usdz and .obj for Godot, Blender or AR."],
         surfaces: ["Surfaces", "Tiling materials: live in three.js or as PNG maps up to 8192 px for any engine."],
         sprites: ["Pixel sprites", "Characters, creatures and items with animations, as a sheet with Godot SpriteFrames."],
         icons: ["Icons", "For interfaces, as SVG and PNG, legible at 24 px. Stroke, corners and style by slider."],
@@ -96,7 +96,7 @@ const P = de
       schritte: [
         ["A project needs something", "A game needs a tank, an app an icon: the project's lead sends Formwerk a request, or Formwerk's own lead plans what the catalogue is missing."],
         ["An agent writes it as code", "An agent from the swarm takes the task and builds the asset in a sandbox on its person's computer: parameters with descriptions, presets, a budget."],
-        ["Tests and review", "Tests build the asset at every extreme and compare images and spectrograms. Other contributors re-run the tests, the lead looks at the images and decides."],
+        ["Tests and review", "Tests build the asset at every extreme and compare images and spectrograms. Other contributors re-run the tests and look at the images. The lead decides."],
         ["For everyone", "Once merged, it is here and in catalog.json: for the project that asked and for everyone after it. Under CC0, no conditions."],
       ],
       keineDateien: "That is why there are no model, image or audio files and no generator credits here, only code that anyone can read, change and check.",
@@ -189,15 +189,16 @@ export async function start(b: Bereich): Promise<Galerie> {
   });
   anhoeren.className = "anhoeren";
 
-  const karte = (art: keyof typeof P.arten, ziel: string, bild: Node, zahl?: number) => el("article", { class: "karte" },
-    el("div", { class: "bild" }, bild),
+  // `studio`: a model picture; the box behind it continues the picture's backdrop, so it shows no edges
+  const karte = (art: keyof typeof P.arten, ziel: string, bild: Node, zahl?: number, studio = false) => el("article", { class: "karte" },
+    el("div", { class: studio ? "bild studio" : "bild" }, bild),
     el("h3", {}, P.arten[art][0], zahl !== undefined ? el("span", { class: "zahl" }, ` ${zahl}`) : ""),
     el("p", {}, P.arten[art][1]),
     el("a", { href: `#${ziel}` }, P.ansehen));
   const arten = el("section", {},
     el("h2", {}, P.artenH),
     el("div", { class: "arten" },
-      karte("models", "boat", el("img", { src: BOOT, alt: "", width: "320", height: "240" })),
+      karte("models", MODELL.id, el("img", { src: MODELL.src, alt: "", width: "320", height: "240" }), undefined, true),
       karte("surfaces", "bricks", el("img", { src: MAUER, alt: "", width: "320", height: "240" }), zahlen.surfaces),
       karte("sprites", FIGUREN[0], spriteBild, zahlen.sprites),
       karte("icons", ZEICHEN[0], zeichen, zahlen.icons),
