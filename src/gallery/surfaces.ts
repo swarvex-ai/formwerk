@@ -11,7 +11,7 @@ import { rng } from "../core/rng";
 import { SURFACES, surfaceById } from "../surfaces";
 import { createBaker, SIZES, toTextures, toZip, type Baker } from "../surfaces/bake";
 import { makeSurface, SURFACE_CATEGORIES, type AnySurface, type MapName } from "../surfaces/define";
-import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
+import { de, el, faltGruppe, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
 import { ENVIRONMENT, stage } from "./stage";
 
 const O = de
@@ -82,12 +82,12 @@ export async function start(b: Bereich): Promise<Galerie> {
   };
 
   const listeZeichnen = () => {
-    b.liste.replaceChildren(...SURFACE_CATEGORIES.filter((k) => SURFACES.some((s) => s.category === k)).map((k) => el("section", {}, el("h2", {}, O.kategorien[k]),
-      ...SURFACES.filter((s) => s.category === k).map((s) => {
+    b.liste.replaceChildren(...SURFACE_CATEGORIES.filter((k) => SURFACES.some((s) => s.category === k)).map((k) => faltGruppe("surfaces", k, O.kategorien[k],
+      SURFACES.filter((s) => s.category === k).map((s) => {
         const k2 = el("button", { type: "button", "aria-pressed": String(s.id === flaeche.id) }, text(s.title));
         k2.onclick = () => { flaeche = s; werte = defaults(s.params); seed = 1; listeZeichnen(); reglerZeichnen(); neuBauen(true); };
         return k2;
-      }))));
+      }), k === flaeche.category)));
   };
 
   const exportZeichnen = () => {

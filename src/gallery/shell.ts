@@ -45,6 +45,20 @@ export const text = (t: Text) => (de ? t.de : t.en);
 export const zahl = (x: number, stellen = 2) => x.toLocaleString(de ? "de-DE" : "en-GB", { maximumFractionDigits: stellen });
 export const kebabZuCamel = (id: string) => id.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
 
+// Folded categories in the lists, per kind and category, for this visit. Only what someone opened or closed is kept;
+// until then a category is open when it holds the asset on show (or when the caller asks, e.g. while filtering).
+const gefaltet = new Map<string, boolean>();
+/** One category of a list as a fold with its name and the number of its entries. */
+export function faltGruppe(art: string, kategorie: string, titel: string, eintraege: HTMLElement[], zeigt: boolean, offen = false): HTMLElement {
+  const schluessel = `${art}:${kategorie}`;
+  const kopf = el("summary", zeigt ? { class: "zeigt" } : {}, el("span", {}, titel), el("span", { class: "anzahl" }, String(eintraege.length)));
+  const d = el("details", { class: "gruppe" }, kopf, el("div", { class: "eintraege" }, ...eintraege));
+  d.open = gefaltet.get(schluessel) ?? (zeigt || offen);
+  // On the click itself (also Enter and Space), before the fold changes: lists that redraw meanwhile keep the choice
+  kopf.addEventListener("click", () => gefaltet.set(schluessel, !d.open));
+  return d;
+}
+
 export const knopf = (beschriftung: string, aktion: (b: HTMLButtonElement) => void) => {
   const b = el("button", { type: "button" }, beschriftung) as HTMLButtonElement;
   b.onclick = () => aktion(b);

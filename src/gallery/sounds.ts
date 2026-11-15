@@ -6,7 +6,7 @@ import { defaults, random, withPreset, type Param } from "../core/params";
 import { rng } from "../core/rng";
 import { SOUNDS, soundById } from "../sounds";
 import { makeSound, SOUND_CATEGORIES, type AnySound } from "../sounds/define";
-import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
+import { de, el, faltGruppe, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
 
 const K = de
   ? { kategorien: { ui: "Bedienung", impact: "Treffer & Explosionen", movement: "Bewegung", effects: "Effekte", voice: "Stimmen", ambience: "Umgebung und Wetter" },
@@ -106,12 +106,12 @@ export async function start(b: Bereich): Promise<Galerie> {
   };
 
   const listeZeichnen = () => {
-    b.liste.replaceChildren(...SOUND_CATEGORIES.filter((k) => SOUNDS.some((s) => s.category === k)).map((k) => el("section", {}, el("h2", {}, K.kategorien[k]),
-      ...SOUNDS.filter((s) => s.category === k).map((s) => {
+    b.liste.replaceChildren(...SOUND_CATEGORIES.filter((k) => SOUNDS.some((s) => s.category === k)).map((k) => faltGruppe("sounds", k, K.kategorien[k],
+      SOUNDS.filter((s) => s.category === k).map((s) => {
         const k2 = el("button", { type: "button", "aria-pressed": String(s.id === klang.id) }, text(s.title));
         k2.onclick = () => { stoppen(); klang = s; werte = defaults(s.params); seed = 1; listeZeichnen(); reglerZeichnen(); neuBauen(true); };
         return k2;
-      }))));
+      }), k === klang.category)));
   };
 
   const reglerZeichnen = () => {

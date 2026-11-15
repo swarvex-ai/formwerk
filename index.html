@@ -18,6 +18,17 @@
       .liste h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--leise); margin: 14px 0 6px; }
       .liste button { display: block; width: 100%; text-align: left; padding: 8px 10px; margin: 2px 0; border: 1px solid transparent; border-radius: 6px; background: none; color: var(--text); font: inherit; cursor: pointer; }
       .liste button[aria-pressed="true"] { border-color: var(--akzent); color: var(--akzent); }
+      /* Categories fold: a row with an arrow, the name and the count; the one holding the asset on show in the accent */
+      .liste details.gruppe { margin: 4px 0 0; }
+      .liste details.gruppe > summary { display: flex; align-items: center; gap: 8px; padding: 7px 6px; border-radius: 6px; list-style: none; cursor: pointer; user-select: none;
+        font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--leise); }
+      .liste details.gruppe > summary::-webkit-details-marker { display: none; }
+      .liste details.gruppe > summary::before { content: ""; flex: none; width: 6px; height: 6px; margin: 0 2px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+      .liste details.gruppe[open] > summary::before { transform: rotate(45deg); }
+      .liste details.gruppe > summary:hover, .liste details.gruppe > summary:focus-visible { color: var(--text); background: var(--flaeche); }
+      .liste details.gruppe > summary.zeigt { color: var(--akzent); }
+      .liste details.gruppe > summary .anzahl { margin-left: auto; font-variant-numeric: tabular-nums; letter-spacing: 0; }
+      .liste details.gruppe > .eintraege { padding-bottom: 6px; }
       /* Catalogue overview in the models list (src/gallery/model-list.ts): filter bar, count line, entry facts */
       .modell-filter { display: grid; gap: 8px; padding: 4px 0 10px; border-bottom: 1px solid var(--linie); }
       .modell-feld { display: grid; gap: 3px; }
@@ -58,6 +69,7 @@
         body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 55vh auto; grid-template-areas: "kopf" "liste" "buehne" "regler"; height: auto; }
         .liste { display: flex; gap: 4px 12px; flex-wrap: wrap; border-right: 0; border-bottom: 1px solid var(--linie); }
         .liste section { display: contents; } .liste h2 { display: none; } .liste button { width: auto; }
+        .liste details.gruppe, .liste .modell-filter, .liste .modell-status { flex: 1 1 100%; } .liste details.gruppe > .eintraege { display: flex; flex-wrap: wrap; gap: 4px 12px; }
         .regler { border-left: 0; }
       }
       .iconbild { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px 16px 36px; }
@@ -117,7 +129,7 @@
         .start ol.schritte { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 520px) { .start ol.schritte { grid-template-columns: minmax(0, 1fr); } .start .mosaik { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      @media (prefers-reduced-motion: reduce) { .start .mosaik img { transition: none; } .start .mosaik a:hover img { transform: none; } }
+      @media (prefers-reduced-motion: reduce) { .start .mosaik img { transition: none; } .start .mosaik a:hover img { transform: none; } .liste details.gruppe > summary::before { transition: none; } }
     </style>
   </head>
   <body>

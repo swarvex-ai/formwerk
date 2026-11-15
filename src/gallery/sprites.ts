@@ -7,7 +7,7 @@ import { rng } from "../core/rng";
 import type { Pixels } from "../core/pixels";
 import { SPRITES, spriteById } from "../sprites";
 import { animationName, godotSpriteFrames, makeSheet, sheetJson, SPRITE_CATEGORIES, type AnySprite, type Direction, type Sheet } from "../sprites/define";
-import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, type Bereich, type Galerie } from "./shell";
+import { de, el, faltGruppe, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, type Bereich, type Galerie } from "./shell";
 
 const P = de
   ? { kategorien: { characters: "Figuren", creatures: "Kreaturen", items: "Gegenstände" }, animation: "Animation", richtung: "Richtung",
@@ -72,12 +72,12 @@ export async function start(b: Bereich): Promise<Galerie> {
   };
 
   const listeZeichnen = () => {
-    b.liste.replaceChildren(...SPRITE_CATEGORIES.filter((k) => SPRITES.some((s) => s.category === k)).map((k) => el("section", {}, el("h2", {}, P.kategorien[k]),
-      ...SPRITES.filter((s) => s.category === k).map((s) => {
+    b.liste.replaceChildren(...SPRITE_CATEGORIES.filter((k) => SPRITES.some((s) => s.category === k)).map((k) => faltGruppe("sprites", k, P.kategorien[k],
+      SPRITES.filter((s) => s.category === k).map((s) => {
         const k2 = el("button", { type: "button", "aria-pressed": String(s.id === sprite.id) }, text(s.title));
         k2.onclick = () => { sprite = s; werte = defaults(s.params); seed = 1; animation = s.animations[s.animations.length - 1].name; richtung = s.directions[0]; listeZeichnen(); reglerZeichnen(); neuBauen(); };
         return k2;
-      }))));
+      }), k === sprite.category)));
   };
 
   const reglerZeichnen = () => {

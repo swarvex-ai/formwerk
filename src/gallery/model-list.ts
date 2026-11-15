@@ -8,7 +8,7 @@ import type { Text } from "../core/params";
 import { MATERIALS, type MaterialKind } from "../materials";
 import { COLLECTIONS, REALISTIC } from "./collections";
 import { codeBytes, factsAtDefaults, kb, type Colour } from "./facts";
-import { de, el, knopf, text, zahl } from "./shell";
+import { de, el, faltGruppe, knopf, text, zahl } from "./shell";
 
 type Reihenfolge = "kategorie" | "dreiecke" | "code" | "mischen";
 
@@ -93,8 +93,11 @@ function zeichnen() {
   status.replaceChildren(...zeilen);
   if (!sichtbar.length) { eintraege.replaceChildren(el("p", { class: "leise" }, M.keine)); return; }
   if (zustand.reihenfolge === "kategorie") {
+    // While a filter narrows the list, its categories open by themselves (unless someone folded them)
+    const filtert = zustand.sammlung !== "alle" || zustand.material !== "alle" || zustand.farbe !== "alle";
+    const zeigt = ASSETS.find((a) => a.id === aktuell)?.category;
     eintraege.replaceChildren(...CATEGORIES.filter((k) => sichtbar.some((a) => a.category === k)).map((k) =>
-      el("section", {}, el("h2", {}, M.kategorien[k]), ...sichtbar.filter((a) => a.category === k).map(eintrag))));
+      faltGruppe("models", k, M.kategorien[k], sichtbar.filter((a) => a.category === k).map(eintrag), k === zeigt, filtert)));
   } else eintraege.replaceChildren(...sichtbar.map(eintrag));
 }
 

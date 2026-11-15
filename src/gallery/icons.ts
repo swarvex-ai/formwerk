@@ -8,7 +8,7 @@ import { legibility } from "../core/vector";
 import type { Pixels } from "../core/pixels";
 import { ICONS, iconById } from "../icons";
 import { ICON_CATEGORIES, makeIcon, ownParams, type AnyIcon, type MadeIcon } from "../icons/define";
-import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, type Bereich, type Galerie } from "./shell";
+import { de, el, faltGruppe, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, type Bereich, type Galerie } from "./shell";
 
 const GROESSEN = [16, 20, 24, 32, 48];
 const PNG_GROESSEN = [16, 24, 32, 48, 64, 96, 128, 256, 512, 1024];
@@ -61,14 +61,14 @@ export async function start(b: Bereich): Promise<Galerie> {
   };
 
   const listeZeichnen = () => {
-    b.liste.replaceChildren(...ICON_CATEGORIES.filter((k) => ICONS.some((i) => i.category === k)).map((k) => el("section", {}, el("h2", {}, P.kategorien[k]),
-      ...ICONS.filter((i) => i.category === k).map((i) => {
+    b.liste.replaceChildren(...ICON_CATEGORIES.filter((k) => ICONS.some((i) => i.category === k)).map((k) => faltGruppe("icons", k, P.kategorien[k],
+      ICONS.filter((i) => i.category === k).map((i) => {
         const k2 = el("button", { type: "button", "aria-pressed": String(i.id === icon.id), class: "mitbild" });
         k2.innerHTML = makeIcon(i).svg(20);
         k2.append(" ", text(i.title));
         k2.onclick = () => { icon = i; werte = defaults(i.params); listeZeichnen(); reglerZeichnen(); neuBauen(); };
         return k2;
-      }))));
+      }), k === icon.category)));
   };
 
   const reglerZeichnen = () => {
