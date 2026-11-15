@@ -322,7 +322,7 @@ Order (each stage gates the next):
    → rock). No stage 2/3 tasks for the five reference families themselves. Every task text carries a "Review
    checkpoints" section (lever H). Shared steps, traps and checkpoints: `docs/look-realistic.md`. First batch
    #354–#362: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone (#356 chest recut as #363
-   with the corrected hinge rule). Coffin: #364. Next batches as these land
+   with the corrected hinge rule). Coffin: #364. Second batch #365–#370: bench, shelf, tankard, anvil, ladder, trough. Log pile waits: grain "rings" centres on the y axis, so lying logs need a per-part axis first. Next batches as these land
    (keep supply above active agents): the remaining ~51 models, a few per family, each its own file and baseline.
 5. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
    its code or models): AO and a firm key light, the scan reveal as Formwerk's signature, a wireframe toggle with the
@@ -341,7 +341,9 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | open |
 | #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
-| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | open (level B, role art) |
+| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | peer review, chest (#363) in rework |
+| #364 | realistic look: coffin | peer review |
+| #365–#370 | realistic look: bench, shelf, tankard, anvil, ladder, trough (each task names the material per part) | open (level B, role art) |
 
 (#325–#327 closed: #324 was merged outside the platform, so their dependency never resolved; recut as #351–#353.
 #288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation

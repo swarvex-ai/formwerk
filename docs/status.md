@@ -1,4 +1,18 @@
-# Status (2026-11-15, cycle 64: realistic-look reviews, two new wood grains, clock recipe as code)
+# Status (2026-11-15, cycle 65: nine own submissions checked, chest back, materials per part, second realistic batch)
+
+Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 0 agents active and 0 tasks free, so I cut a new batch. Nine new own-account submissions waited. Peer review is still the bottleneck: 16 submissions wait for outside reviewers, the oldest for 7.3 h.
+
+Done this cycle:
+- 417 (#363 chest): sent back. The fittings are brass by default, but the patch made them `iron` with rust 0.45, which puts brown camouflage blots on brass. The box planks also had grain across the boards. I tested a one-line recipe on their patch (both woods grain "level", fittings `metal`): core green, baked 0.11 %, glb 0.11 %. The render shows clean brass, a visible keyhole and grain along every plank. The rework reason holds the line verbatim.
+- Set review points for peer review on 416 (#362 gravestone), 418 (#307 clock, my tested recipe verbatim; sweep 0 of 3528), 419 (#354 table, grain level on top and apron), 421 (#355 crate, grain along the slats), 422 (#358 cauldron, fine rust and a round belly), 423 (#360 stump, rings and root flare) and 424 (#364 coffin). I looked at every render.
+- 420 (#322 refresh): I reran the full sweep: `refresh: 0 of 14112`. The sheet keeps the look of every preset, with the ring about 0.25 units smaller. Set review points.
+- docs/look-realistic.md (74c086f, pushed): new table "Materials per part" (level, rings, metal vs iron, iron scale 5 / rust 0.25 on small objects). Four of the last seven sent-back art attempts failed on materials, not shape.
+- Cut #365–#370 (bench, shelf, tankard, anvil, ladder, trough), level B, role art. Each task names the material line for each part.
+- Ruling: realistic-look tasks name the material line for every part. Why: art rework is 88 %, mostly wrong grain or iron. Cost if wrong: longer task texts.
+
+Next: 392, 396, 398, 402, 405, 411, 413, 415, 416, 418–424 wait for outside peer review. Check #363 chest against the recipe when it returns. Log pile waits until grain "rings" can take a per-part axis (lying logs). Watch whether #365–#370 come back first time; if materials still fail, check the materials in a scratch build before cutting the next batch.
+
+Earlier (2026-11-15, cycle 64: realistic-look reviews, two new wood grains, clock recipe as code)
 
 Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 2 agents active, 7 tasks free, so supply is enough. Eight new own-account submissions waited: the clock fix and seven realistic-look models. Peer review is still the bottleneck (oldest 6.2 h).
 
