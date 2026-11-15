@@ -72,8 +72,10 @@ export const chair = defineAsset({
       if (sh > 0.32) t.add(m, new CylinderGeometry(rs, rs, laenge, 12).rotateZ(Math.PI / 2).rotateY(winkel).translate(mx, quer, mz));
     }
     if (p.back !== "none") {
-      // The back leans 6° and its rails curve 2 cm backwards: built upright, then turned about the back edge of the seat
-      const y0 = sh, h = p.backHeight, zb = -d / 2 + Math.max(r, 0.015) + 0.002, bogen = Math.min(0.02, w * 0.04);
+      // The back leans 6° and its rails curve 2 cm backwards: built upright, then turned about its foot on the seat.
+      // The foot stands far enough in that posts, slats and panel stand on the flat of the seat, even where the
+      // curve takes them furthest back, and everything that stands on the seat reaches 6 mm into it.
+      const h = p.backHeight, bogen = Math.min(0.02, w * 0.04), tief = 0.006;
       const lehne: BufferGeometry[] = [];
       const gebogen = (bw: number, bh: number, bt: number, x: number, y: number) => {
         const g = new BoxGeometry(bw, bh, bt, 16, 1, 1), pos = g.attributes.position;
@@ -83,7 +85,9 @@ export const chair = defineAsset({
         return g;
       };
       const px = w / 2 - Math.max(r, 0.015) - 0.012, pr = Math.max(r * 0.85, 0.013);
-      if (p.back === "solid") lehne.push(gebogen(w - 0.02, h - 0.01, 0.022, 0, h / 2));
+      // Half the thickest part behind the curve (panel 11 mm) and 1 cm off the rounded back edge of the seat
+      const zb = -d / 2 + Math.max(pr + 0.01, bogen + 0.022);
+      if (p.back === "solid") lehne.push(gebogen(w - 0.02, h - 0.005, 0.022, 0, (h - 0.005) / 2));
       else {
         for (const sx of [-1, 1]) lehne.push(eckig ? rounded(pr * 2, h, pr * 2, 0.004, sx * px, h / 2, 0) : turned([[0.001, 0], [pr, 0], [pr * 0.9, h * 0.5], [pr, h * 0.92], [pr * 1.15, h * 0.96], [pr * 0.6, h], [0.001, h]], 14, sx * px, 0, 0));
         lehne.push(gebogen(2 * px, 0.06, 0.024, 0, h - 0.045));
@@ -91,10 +95,11 @@ export const chair = defineAsset({
         if (p.back === "slats") for (let i = 0; i < p.slats; i++) {
           const x = p.slats === 1 ? 0 : -px + 0.05 + (i * (2 * px - 0.1)) / Math.max(1, p.slats - 1);
           const u = x / (w / 2), b = Math.min(0.032, ((2 * px - 0.08) / p.slats) * 0.6);
-          lehne.push(rounded(b, h - 0.08, 0.016, 0.004, x, (h - 0.08) / 2 + 0.005, -bogen * (1 - u * u)));
+          // From the seat up into the top rail
+          lehne.push(rounded(b, h - 0.07, 0.016, 0.004, x, (h - 0.07) / 2, -bogen * (1 - u * u)));
         }
       }
-      const kipp = new Matrix4().makeTranslation(0, y0, zb).multiply(new Matrix4().makeRotationX(-0.1));
+      const kipp = new Matrix4().makeTranslation(0, sh - tief, zb).multiply(new Matrix4().makeRotationX(-0.1));
       for (const g of lehne) t.add(m, g.applyMatrix4(kipp));
     }
     return t.group();
