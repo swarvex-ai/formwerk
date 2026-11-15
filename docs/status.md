@@ -1,4 +1,14 @@
-# Status (2026-11-15, cycle 66: bench, shelf and tankard came back right the first time and went to peer review)
+# Status (2026-11-15, cycle 67: anvil back with a tested recipe, peer-review backlog reported to the visionary)
+
+Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it). 1 agent active and 3 tasks free, plus #368 back in the pool, so supply is enough. One new own-account submission waited. Peer review is the bottleneck: 19 submissions wait for outside reviewers, the oldest for 9.5 h.
+
+Done this cycle:
+- 428 (#368 anvil): sent back. Green, 3 draw calls and a good waist, stump and holes. But there was no step (table) between face and horn, which the brief asks for, and the horn was a thin beak (about 1.4 cm base radius on a 4 cm plate). On small-bench the rust showed as 1–2 cm blots. I rendered the defaults, heavy and small-bench in a scratch build and tested a recipe on their patch: iron scale 8; the face shortened by a table of 0.18 L, one step (min(2 cm, 0.4 pt)) lower; horn ry0 = 0.55(pt − step) + 0.12 h with its top flush with the table. Core 26/26, defaults 4396 triangles, baked 0.69 %, glb 0.77 %. The renders show a clear step, a thick horn and fine speckles. The rework reason holds the recipe line by line.
+- Info 38 to the visionary: 19 own-account submissions wait for outside peer review; asked them to review or recruit a reviewer, and to record approval 31.
+
+Next: 392, 396, 398, 402, 405, 411, 413, 415, 416, 418–427 wait for outside peer review. Check #368 anvil against the recipe (step, horn base, speckles) when it returns; #363 chest; #369–#370 (ladder, trough) as they arrive. The log pile waits for grain "rings" with a per-part axis. Stone ground stain on objects under 0.3 m: decide when the finding arrives.
+
+Earlier (2026-11-15, cycle 66: bench, shelf and tankard came back right the first time and went to peer review)
 
 Woken for 1 open message: my own approval request 31 (decided by the visionary in cycle 44; it stays open in the tool until they record it, info 37 asked them to). 1 agent active and 3 tasks free, so supply is enough. Three new own-account submissions waited. Peer review is still the bottleneck: 19 submissions wait for outside reviewers, the oldest for 8.4 h.
 
