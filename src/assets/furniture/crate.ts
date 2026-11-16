@@ -1,5 +1,7 @@
+import { Color, CylinderGeometry } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded } from "../shapes";
 
 export const crate = defineAsset({
   id: "crate", category: "furniture",
@@ -30,25 +32,41 @@ export const crate = defineAsset({
   },
   rig: { lid: { label: { de: "Deckel", en: "Lid" }, type: "rotate", axis: [-1, 0, 0], min: 0, max: 110 } },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 2500, drawCalls: 2 },
+  budget: { triangles: 7500, drawCalls: 4 },
   build(p) {
-    const m = material(p.material, p.color);
+    const holz = p.material === "wood";
+    // Two tones of the same wood, boards alternate: real crates are nailed together from boards of different trees
+    const ton = (k: number) => { const c = new Color(p.color); c.multiplyScalar(k); return `#${c.getHexString()}`; };
+    const a = material(p.material, p.color, 1, undefined, { grain: "level" }), b = holz ? material(p.material, ton(0.86), 1, undefined, { grain: "level" }) : a;
+    const nagel = material("iron", "#3a3a3a", 4);
     const t = new Parts();
-    const w = p.width, h = p.height, d = p.depth, s = 0.015, pf = 0.04;
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) t.box(m, pf, h, pf, sx * (w / 2 - pf / 2), h / 2, sz * (d / 2 - pf / 2));
-    t.box(m, w - 0.01, s, d - 0.01, 0, s / 2, 0);
-    const lh = Math.max(0.01, (h - s - p.gap * (p.slats - 1)) / p.slats);
+    const w = p.width, h = p.height, d = p.depth, s = 0.015, pf = 0.035, r = 0.003;
+    const bx = w / 2 - s - pf / 2, bz = d / 2 - s - pf / 2;
+    // Battens inside the corners; the slats are nailed to their outer faces
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) t.add(a, rounded(pf, h, pf, r, sx * bx, h / 2, sz * bz, 1));
+    t.add(a, rounded(w - 2 * s - 0.004, s, d - 2 * s - 0.004, r, 0, s / 2, 0, 1));
+    const lh = Math.max(0.01, (h - p.gap * (p.slats - 1)) / p.slats);
+    const kopf = (x: number, y: number, z: number, achse: "x" | "z") => {
+      const g = new CylinderGeometry(0.004, 0.004, 0.003, 8);
+      t.add(nagel, (achse === "z" ? g.rotateX(Math.PI / 2) : g.rotateZ(Math.PI / 2)).translate(x, y, z));
+    };
     for (let i = 0; i < p.slats; i++) {
-      const y = s + lh / 2 + i * (lh + p.gap);
-      for (const sz of [-1, 1]) t.box(m, w - 2 * pf, lh, s, 0, y, sz * (d / 2 - s / 2));
-      for (const sx of [-1, 1]) t.box(m, s, lh, d - 2 * pf, sx * (w / 2 - s / 2), y, 0);
+      const y = lh / 2 + i * (lh + p.gap);
+      for (const sz of [-1, 1]) {
+        t.add((i + (sz > 0 ? 1 : 0)) % 2 ? b : a, rounded(w, lh, s, r, 0, y, sz * (d / 2 - s / 2), 1));
+        if (holz) for (const sx of [-1, 1]) kopf(sx * bx, y, sz * (d / 2 + 0.0005), "z");
+      }
+      for (const sx of [-1, 1]) {
+        t.add((i + (sx > 0 ? 0 : 1)) % 2 ? a : b, rounded(s, lh, d - 2 * s, r, sx * (w / 2 - s / 2), y, 0, 1));
+        if (holz) for (const sz of [-1, 1]) kopf(sx * (w / 2 + 0.0005), y, sz * bz, "x");
+      }
     }
     if (p.lid) {
       // Scharnier an der hinteren Oberkante; die Bretter laufen quer, zusammengehalten von zwei Leisten
       const deckel = t.moving("lid", 0, h, -d / 2);
-      const n = p.slats, b = (d - p.gap * (n - 1)) / n;
-      for (let i = 0; i < n; i++) deckel.box(m, w, s, Math.max(0.01, b), 0, h + s / 2, -d / 2 + b / 2 + i * (b + p.gap));
-      for (const sx of [-1, 1]) deckel.box(m, 0.04, s, d - 0.02, sx * (w / 2 - pf - 0.03), h + s * 1.5, 0);
+      const n = p.slats, bb = Math.max(0.01, (d - p.gap * (n - 1)) / n);
+      for (let i = 0; i < n; i++) deckel.add(a, rounded(w, s, bb, r, 0, h + s / 2, -d / 2 + bb / 2 + i * (bb + p.gap), 1));
+      for (const sx of [-1, 1]) deckel.add(a, rounded(0.04, s, d - 0.02, r, sx * (w / 2 - pf - 0.03), h + s * 1.5, 0, 1));
     }
     return t.group();
   },
