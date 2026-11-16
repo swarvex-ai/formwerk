@@ -1,7 +1,8 @@
-import { CircleGeometry, ConeGeometry, CylinderGeometry, Quaternion, Vector3 } from "three";
+import { BufferGeometry, CircleGeometry, ConeGeometry, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid } from "../shapes";
 
 export const stump = defineAsset({
   id: "stump", category: "nature",
@@ -30,18 +31,18 @@ export const stump = defineAsset({
     birch: { label: { de: "Birke", en: "Birch" }, values: { diameter: 0.25, height: 0.3, cut: "axe", roots: 3, barkColor: "#d8d4c8" } },
   },
   physics: { body: "static", collider: "cylinder" },
-  budget: { triangles: 800, drawCalls: 2 },
+  budget: { triangles: 3000, drawCalls: 2 },
   build(p, seed) {
     const r = rng(seed);
     const rinde = material("bark", p.barkColor, 1 / Math.max(0.5, p.diameter * 2.5));
-    const holz = material("wood", p.cutColor, 1);
+    const holz = material("wood", p.cutColor, 1, undefined, { grain: "rings" });
     const t = new Parts();
     const rad = p.diameter / 2;
     const oben = rad * 0.9;
     const h = p.height;
 
     const neig = p.cut === "axe" ? Math.min(Math.tan((25 * Math.PI) / 180), (h * 0.75) / oben) : 0;
-    const schief = <G extends CylinderGeometry | CircleGeometry>(g: G): G => {
+    const schief = <G extends BufferGeometry>(g: G): G => {
       const pos = g.attributes.position;
       for (let i = 0; i < pos.count; i++) {
         const y = pos.getY(i);
@@ -54,8 +55,28 @@ export const stump = defineAsset({
       return g;
     };
 
-    t.add(rinde, schief(new CylinderGeometry(oben, rad, h, 12, 1, true).translate(0, h / 2, 0)));
-    t.add(holz, schief(new CircleGeometry(oben, 12).rotateX(-Math.PI / 2).translate(0, h, 0)));
+    // Roots: each one a bump in the trunk's outline that sweeps out along the ground and runs back into the trunk
+    const wurzeln = Array.from({ length: p.roots }, (_, i) => ({
+      a: (i / p.roots) * 2 * Math.PI + r() * 0.5,
+      reich: p.diameter * p.rootLength * 0.5 * (0.8 + 0.4 * r()),
+      breit: 0.28 + 0.12 * r(),
+    }));
+    const auslauf = Math.min(h * 0.85, rad * 1.3);
+    const radius = (a: number, y: number) => {
+      let rr = rad + (oben - rad) * (y / h);
+      const k = Math.max(0, 1 - y / auslauf);
+      for (const w of wurzeln) {
+        const d = Math.atan2(Math.sin(a - w.a), Math.cos(a - w.a));
+        rr += w.reich * k * k * Math.exp(-((d / w.breit) ** 2));
+      }
+      return rr * (1 + 0.04 * k);
+    };
+    const mantel = (u: number, v: number) => {
+      const a = u * 2 * Math.PI, y = v * h, rr = radius(a, y);
+      return new Vector3(Math.cos(a) * rr, y, Math.sin(a) * rr);
+    };
+    t.add(rinde, schief(grid(48, 14, mantel, (q) => new Vector3(q.x, 0, q.z).normalize())));
+    t.add(holz, schief(new CircleGeometry(oben, 48).rotateX(-Math.PI / 2).translate(0, h, 0)));
     t.cylinder(rad, h);
 
     if (p.cut === "broken") {
@@ -65,18 +86,6 @@ export const stump = defineAsset({
         const dick = oben * (0.2 + 0.1 * r());
         t.add(holz, new ConeGeometry(dick, lang, 5).translate(Math.cos(a) * oben * 0.6, h + lang / 2, Math.sin(a) * oben * 0.6));
       }
-    }
-
-    for (let i = 0; i < p.roots; i++) {
-      const a = (i / p.roots) * 2 * Math.PI + r() * 0.5;
-      const lang = p.diameter * p.rootLength * (0.8 + 0.4 * r());
-      const dick = rad * (0.4 + 0.15 * r());
-      const direction = new Vector3(Math.cos(a), -0.5, Math.sin(a)).normalize();
-      const g = new ConeGeometry(dick, lang, 6, 1, true).translate(0, lang / 2, 0);
-      g.applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), direction));
-      g.translate(Math.cos(a) * rad * 0.5, Math.min(h * 0.6, dick * 1.4), Math.sin(a) * rad * 0.5);
-      g.computeBoundingBox();
-      t.add(rinde, g.translate(0, -g.boundingBox!.min.y, 0));
     }
 
     return t.group();
