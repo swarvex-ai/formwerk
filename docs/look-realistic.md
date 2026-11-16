@@ -64,6 +64,8 @@ Answer each in your summary, in order, with evidence:
 2. The asset's own question in the task.
 3. Do the defaults, every preset and both ends of each range build (quote the core test lines of
    `FORMWERK_ONLY=<id> npm test`), and how many triangles are there at the defaults and at the heaviest extreme?
+   Quote `tests/scene/out/<id>.budget.txt` whole: the core test writes the measured triangles and draw calls at the
+   defaults, at the heaviest of all tested cases and at every preset. An estimate ("≈") goes back.
 4. Quote the "ok", "baked ok" and "glb ok" lines for `<id>`.
 5. Did only the asset file and its baseline change, with every parameter name, preset and the physics kept?
 
@@ -85,3 +87,8 @@ Settled by the lead after peer review. A reviewer checks against these lines, no
 - **#372 bed:** without a footboard the two foot legs end flush with the rail top (no cap), so the blanket drapes
   over them without wood poking through. With a footboard all four legs rise above the rails. The head legs always
   rise above the rails.
+- **#374 wardrobe:** the doors are overlay doors that sit against the carcass front: the back face of each leaf
+  lies at most 1 mm in front of the side and bottom front edges (no open slot around the doors). All reveals, between
+  doors and to the carcass (top, bottom, sides), are 3–4 mm. With 4 doors the centre pair is one rigid part, so it
+  keeps one handle as on main: on the right edge of its right leaf. Cycle 81, after submission 476 (peer review
+  marco8154, points 4 and 5 left to the lead).

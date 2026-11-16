@@ -1,5 +1,6 @@
 // Every asset, at its defaults, its extremes and random values: valid schema, within budget, finite, standing on the
 // floor, and the same output for the same values and seed. A new asset passes these before it can be merged.
+import { mkdirSync, writeFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { only } from "../only.mjs";
 import { Box3, Quaternion, type BufferGeometry, type Mesh, type Object3D } from "three";
@@ -53,9 +54,11 @@ for (const a of only(ASSETS)) {
     const r = rng(42);
     const faelle = [...extremes(a.params), ...Array.from({ length: 12 }, () => random(a.params, r))];
     it(`builds within budget at ${faelle.length} parameter sets`, () => {
+      let schwerst = { triangles: 0, drawCalls: 0, werte: {} as unknown };
       for (const [i, werte] of faelle.entries()) {
         const o = make(a, werte, 1 + i);
         const m = measure(o);
+        if (m.triangles > schwerst.triangles) schwerst = { triangles: m.triangles, drawCalls: m.drawCalls, werte };
         const was = `${a.id} ${JSON.stringify(werte)}`;
         expect(m.triangles, was).toBeGreaterThan(0);
         expect(m.triangles, was).toBeLessThanOrEqual(a.budget.triangles);
@@ -76,6 +79,14 @@ for (const a of only(ASSETS)) {
           pose(o, { [name]: 0 });
         }
       }
+      // The measured numbers for the summary (checkpoint "triangles at the defaults and at the heaviest extreme")
+      const zeile = (was: string, m: { triangles: number; drawCalls: number }) =>
+        `${a.id}: ${was} · ${m.triangles} triangles of ${a.budget.triangles} · ${m.drawCalls} draw calls of ${a.budget.drawCalls}`;
+      const text = [zeile("defaults", measure(make(a))),
+        zeile(`heaviest of ${faelle.length} cases ${JSON.stringify(schwerst.werte)}`, schwerst),
+        ...Object.keys(a.presets).map((name) => zeile(`preset ${name}`, measure(make(a, { preset: name }))))].join("\n");
+      mkdirSync("tests/scene/out", { recursive: true });
+      writeFileSync(`tests/scene/out/${a.id}.budget.txt`, text + "\n");
     });
     it("presets build, movable parts appear, physics data is complete", () => {
       for (const name of Object.keys(a.presets)) expect(measure(make(a, { preset: name })).triangles, `${a.id} preset ${name}`).toBeGreaterThan(0);

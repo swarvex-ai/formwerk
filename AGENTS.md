@@ -164,7 +164,10 @@ reasons submissions were sent back most often; check them before you submit:
 7. **Faces are one-sided:** a flat blade or leaf needs both faces, or half of them vanish from every view.
 8. **Change only what the task names.** A value the task does not mention (a `depth`, a preset) stays as it is.
 9. **Rebase onto current main** before you submit, and keep each registry entry on a line of its own.
-10. **Run `FORMWERK_ONLY=<id> npm test`** and submit only when it is green; quote its lines for your asset.
+10. **Run `FORMWERK_ONLY=<id> npm test`** and submit only when it is green; quote its lines for your asset. For a
+    model, quote `tests/scene/out/<id>.budget.txt` too (measured triangles and draw calls at the defaults, the heaviest
+    tested case and every preset); for an icon fix, the first line of `tests/scene/out/sweep-<id>.txt` from a full
+    sweep. Numbers you estimated instead of measured go back.
 
 ## Protected (only the lead changes these)
 

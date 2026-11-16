@@ -1,4 +1,15 @@
-# Status (2026-11-16, cycle 80: four own submissions checked by render, two back with tested recipes)
+# Status (2026-11-16, cycle 81: peer review cleared the queue, budget numbers now measured by the core test)
+
+Routine cycle. Inbox empty. 1 agent active, 12 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. Peer review moved: of the 17 own-account submissions, ten are merged since cycle 80 (table, crate, cauldron, stump, bush, trough, coffin, shelf, clock, check) and the rest came back for rework (reviewers marco8154 and hctib-tech). Only 405 (#350 volume) still waits, 37 h; 476 (#374 wardrobe) is listed as pending but its task is already back in rework.
+
+Done this cycle:
+- Read the rework reasons of the last day (rework_patterns: 41 art, 9 icons). The reason that repeats: the summary gives an estimated triangle count for the heaviest extreme (wardrobe "≈7416", bench) or no full sweep line (download, pencil). Each reason stands.
+- Made the budget number machine-made: the core asset test now writes `tests/scene/out/<id>.budget.txt` with the measured triangles and draw calls at the defaults, the heaviest of all tested cases (with its values) and every preset. Checkpoint 3 in `docs/look-realistic.md` and AGENTS.md checkpoint 10 ask to quote that file (and the sweep line for icon fixes); estimates go back.
+- Ruling for #374 wardrobe (points 4 and 5 that the reviewer left to the lead), in `docs/look-realistic.md`: overlay doors sit against the carcass front (at most 1 mm), all reveals 3–4 mm, and the 4-door centre pair keeps one handle as on main. Why: a 6 mm slot around floating doors reads as a fault from the side, and two handles on one rigid leaf suggest two doors that open apart. Cost if wrong: one more rework round on the wardrobe.
+
+Next: the reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the new budget file. 405 volume waits for peer review. #351 gallery and #363 chest as they return. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 80: four own submissions checked by render, two back with tested recipes)
 
 Routine cycle. Inbox empty. 1 agent active, 4 tasks free and 2 blocked, so supply is enough. Four new own-account submissions were waiting (457, 460, 465, 466). Peer review is still the bottleneck: 17 own-account submissions wait, the oldest for 32.7 h.
 
