@@ -1,6 +1,7 @@
-import { CylinderGeometry } from "three";
+import { Color } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, roundBoards, turned } from "../shapes";
 
 export const table = defineAsset({
   id: "table", category: "furniture",
@@ -35,43 +36,68 @@ export const table = defineAsset({
   },
   rig: { drawer: { label: { de: "Schublade", en: "Drawer" }, type: "slide", axis: [0, 0, 1], min: 0, max: 0.5 } },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 3000, drawCalls: 2 },
+  budget: { triangles: 7000, drawCalls: 4 },
   build(p) {
+    // Legs, trestles and pedestal on one material (grain upright); top and apron boards lie level, two tones alternate
     const m = material(p.material, p.color);
+    const wood = p.material === "wood";
+    const b1 = wood ? material("wood", p.color, 1, undefined, { grain: "level" }) : m;
+    const b2 = wood ? material("wood", `#${new Color(p.color).offsetHSL(0, 0, 0.025).getHexString()}`, 1, undefined, { grain: "level" }) : m;
     const t = new Parts();
-    const w = p.width, d = p.top === "round" ? p.width : p.depth, ht = p.height - p.thickness;
-    if (p.top === "rect") t.box(m, w, p.thickness, d, 0, p.height - p.thickness / 2, 0);
-    else {
-      const g = new CylinderGeometry(w / 2, w / 2, p.thickness, 48);
-      g.scale(1, 1, d / w);
-      g.translate(0, p.height - p.thickness / 2, 0);
-      t.add(m, g);
+    const w = p.width, d = p.top === "round" ? p.width : p.depth, th = p.thickness, ht = p.height - th, r = 0.03, fuge = 0.002;
+    // Top: glued boards along x with a fine joint and eased edges
+    if (p.top === "rect") {
+      const n = Math.max(2, Math.min(10, Math.round(d / 0.14))), bw = (d - (n - 1) * fuge) / n;
+      for (let i = 0; i < n; i++) t.add(i % 2 ? b2 : b1, rounded(w, th, bw, Math.min(0.003, th * 0.2), 0, p.height - th / 2, -d / 2 + bw / 2 + i * (bw + fuge)));
+    } else {
+      const n = Math.max(3, Math.min(9, Math.round(w / 0.14)));
+      t.add(b1, roundBoards(w / 2, n, fuge, th, 12).rotateY(Math.PI / 2).scale(1, 1, p.top === "oval" ? p.depth / w : 1).translate(0, p.height, 0));
     }
     const ix = w / 2 - p.inset, iz = d / 2 - p.inset, rund = p.top !== "rect" ? Math.SQRT1_2 : 1;
+    const lx = Math.max(0.05, ix * rund), lz = Math.max(0.05, iz * rund);
+    const hoch = Math.min(0.12, ht * 0.25), breite = Math.min(0.6, w * 0.4);
+    const zh = p.drawer ? hoch + 0.01 : Math.min(0.09, ht * 0.2), ad = 0.02, aussen = r - 0.006;
     if (p.base === "legs") {
-      for (const [sx, sz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) t.post(m, 0.03, ht, sx * Math.max(0.05, ix * rund), 0, sz * Math.max(0.05, iz * rund), 10, p.material !== "metal");
+      const eckig = p.material === "metal" || p.material === "paint", h = ht - zh - 0.01;
+      for (const sx of [1, -1]) for (const sz of [1, -1]) {
+        // Square legs have a chamfer, turned ones a taper, a bead and a straight block where the apron joins
+        if (eckig) t.add(m, rounded(r * 2, ht, r * 2, 0.004, sx * lx, ht / 2, sz * lz, 2));
+        else t.add(m, turned([[0.001, 0], [r * 0.72, 0], [r * 0.78, h * 0.02], [r * 0.74, h * 0.05], [r * 0.82, h * 0.45], [r * 0.95, h * 0.68], [r * 1.12, h * 0.71], [r * 1.12, h * 0.735],
+          [r * 0.92, h * 0.765], [r, h * 0.8], [r, ht], [0.001, ht]], 16, sx * lx, 0, sz * lz));
+      }
+      // Apron boards between the legs, flush with the outside of the legs; the drawer takes part of the front
+      const ay = ht - zh / 2, rest = lx - breite / 2 - 0.012;
+      for (const s of [-1, 1]) {
+        t.add(b1, rounded(ad, zh, 2 * lz, 0.003, s * (lx + aussen - ad / 2), ay, 0));
+        if (s < 0 || !p.drawer) t.add(b1, rounded(2 * lx, zh, ad, 0.003, 0, ay, -(lz + aussen - ad / 2)));
+        if (p.drawer && rest > 0.01) t.add(b1, rounded(rest, zh, ad, 0.003, s * (lx + breite / 2 + 0.012) / 2, ay, lz + aussen - ad / 2));
+      }
+      if (!p.drawer) t.add(b1, rounded(2 * lx, zh, ad, 0.003, 0, ay, lz + aussen - ad / 2));
     } else if (p.base === "trestle") {
+      const L = Math.max(0.2, d * 0.8);
       for (const sx of [1, -1]) {
         const x = sx * Math.max(0.1, ix * rund);
-        t.box(m, 0.05, ht, 0.05, x, ht / 2, 0).box(m, 0.06, 0.05, Math.max(0.2, d * 0.8), x, 0.025, 0).box(m, 0.06, 0.05, Math.max(0.2, d * 0.8), x, ht - 0.025, 0);
+        t.add(m, rounded(0.05, ht, 0.05, 0.004, x, ht / 2, 0));
+        t.add(m, rounded(0.06, 0.05, L, 0.004, x, 0.025, 0));
+        t.add(m, rounded(0.06, 0.05, L, 0.004, x, ht - 0.025, 0));
       }
-      t.box(m, Math.max(0.1, 2 * ix * rund), 0.05, 0.04, 0, ht * 0.35, 0);
+      t.add(m, rounded(Math.max(0.1, 2 * ix * rund), 0.05, 0.04, 0.004, 0, ht * 0.35, 0));
     } else {
-      t.post(m, 0.06, ht, 0, 0, 0, 16);
-      const fuss = new CylinderGeometry(Math.min(w, d) * 0.3, Math.min(w, d) * 0.33, 0.04, 32);
-      fuss.translate(0, 0.02, 0);
-      t.add(m, fuss);
+      const R = Math.min(w, d) * 0.32, c = 0.06, y1 = Math.min(0.12, ht * 0.4);
+      t.add(m, turned([[0.001, 0], [R, 0], [R, 0.022], [R * 0.9, 0.035], [R * 0.45, 0.05], [c * 1.6, y1 * 0.55], [c * 1.2, y1], [c, y1 + 0.03], [c, ht - 0.05], [c * 1.2, ht - 0.03], [c * 1.5, ht - 0.01], [c * 1.5, ht], [0.001, ht]], 32));
     }
     if (p.drawer) {
-      // Schublade vorn unter der Platte, zwischen den Beinen; vor der Säule endet sie
-      const front = (p.top === "rect" ? d / 2 : d / 2 * 0.8) - 0.02;
-      const breite = Math.min(0.6, w * 0.4), hoch = Math.min(0.12, ht * 0.25), y = ht - 0.005 - hoch / 2, s = 0.015;
+      // Drawer at the front under the top, between the legs; in front of a pedestal it stops short of the column
+      const front = p.base === "legs" ? lz + aussen : (p.top === "rect" ? d / 2 : d / 2 * 0.8) - 0.02;
+      const y = ht - 0.005 - hoch / 2, s = 0.015;
       const tief = p.base === "pedestal" ? Math.max(0.08, Math.min(d * 0.6, front - 0.08)) : d * 0.6;
       const s1 = t.moving("drawer", 0, y, front, { max: Math.round(tief * 0.75 * 100) / 100 });
-      s1.box(m, breite + 0.02, hoch, 0.02, 0, y, front - 0.01);
-      s1.box(m, breite - 0.01, s, tief - 0.02, 0, y - hoch / 2 + s / 2 + 0.005, front - tief / 2 - 0.01);
-      for (const sx of [-1, 1]) s1.box(m, s, hoch - 0.02, tief - 0.02, sx * (breite / 2 - s / 2 - 0.005), y - 0.005, front - tief / 2 - 0.01);
-      s1.box(m, breite - 0.01, hoch - 0.02, s, 0, y - 0.005, front - tief + s / 2);
+      s1.add(m, rounded(breite + 0.02, hoch, 0.02, 0.003, 0, y, front - 0.01));
+      // small turned knob on the front
+      s1.add(m, turned([[0.001, 0], [0.005, 0], [0.004, 0.01], [0.012, 0.016], [0.013, 0.022], [0.001, 0.026]], 8).rotateX(Math.PI / 2).translate(0, y, front));
+      s1.add(m, rounded(breite - 0.01, s, tief - 0.02, 0.002, 0, y - hoch / 2 + s / 2 + 0.005, front - tief / 2 - 0.01, 1));
+      for (const sx of [-1, 1]) s1.add(m, rounded(s, hoch - 0.02, tief - 0.02, 0.002, sx * (breite / 2 - s / 2 - 0.005), y - 0.005, front - tief / 2 - 0.01, 1));
+      s1.add(m, rounded(breite - 0.01, hoch - 0.02, s, 0.002, 0, y - 0.005, front - tief + s / 2, 1));
     }
     return t.group();
   },
