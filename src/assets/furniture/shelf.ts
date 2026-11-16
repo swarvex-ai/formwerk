@@ -1,5 +1,6 @@
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded } from "../shapes";
 
 export const shelf = defineAsset({
   id: "shelf", category: "furniture",
@@ -31,15 +32,43 @@ export const shelf = defineAsset({
     "wall-board": { label: { de: "Wandbord", en: "Wall board" }, values: { width: 0.8, height: 0.3, depth: 0.2, rows: 1, back: false } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 2000, drawCalls: 1 },
+  budget: { triangles: 20000, drawCalls: 3 },
   build(p) {
-    const m = material(p.material, p.color);
+    const wood = p.material === "wood";
+    // Shelf boards and plinth lie level, sides, dividers and back stand upright; metal and paint use one material
+    const lying = wood ? material("wood", p.color, 1, undefined, { grain: "level" }) : material(p.material, p.color);
+    const up = wood ? material("wood", p.color) : lying;
     const t = new Parts();
-    const s = p.thickness, w = p.width, h = p.height, d = p.depth;
-    for (const sx of [-1, 1]) t.box(m, s, h, d, sx * (w / 2 - s / 2), h / 2, 0);
-    for (let i = 0; i <= p.rows; i++) t.box(m, w - 2 * s, s, d, 0, s / 2 + (i * (h - s)) / p.rows, 0);
-    for (let j = 1; j < p.columns; j++) t.box(m, s, h - 2 * s, d, -w / 2 + (j * w) / p.columns, h / 2, 0);
-    if (p.back) t.box(m, w, h, 0.006, 0, h / 2, -d / 2 + 0.003);
+    const metal = p.material === "metal", w = p.width, h = p.height, d = p.depth;
+    const s = metal ? 0.003 : p.thickness, fuge = 0.0012, rk = Math.min(0.0025, s * 0.4);
+    const kante = (m: typeof lying, bw: number, bh: number, bd: number, x: number, y: number, z: number) => t.add(m, rounded(bw, bh, bd, rk, x, y, z, 2));
+    // Back panel set into the sides, 4 mm in from the rear edge; the boards end at its front face
+    const zb = -d / 2 + 0.004, zv = zb + 0.003, tiefe = d / 2 - zv, zm = (d / 2 + zv) / 2;
+    const sockel = metal ? 0.04 : Math.min(0.08, h * 0.1), innen = w - 2 * s;
+    if (metal) {
+      // Angle posts at the four corners: two flanges of 25 mm
+      for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+        kante(up, 0.025, h, s, sx * (w / 2 - 0.0125), h / 2, sz * (d / 2 - s / 2));
+        kante(up, s, h, 0.025, sx * (w / 2 - s / 2), h / 2, sz * (d / 2 - 0.0125));
+      }
+      if (p.back) kante(up, w - 2 * s, h - 0.01, s, 0, h / 2 + 0.005, -d / 2 + 1.5 * s);
+    } else {
+      for (const sx of [-1, 1]) kante(up, s, h, d, sx * (w / 2 - s / 2), h / 2, 0);
+      if (p.back) kante(up, innen + 0.012, h - 0.012, 0.003, 0, h / 2, zb + 0.0015);
+      // Plinth under the lowest shelf, set back from the front
+      kante(lying, innen - 2 * fuge, sockel, 0.018, 0, sockel / 2, d / 2 - 0.045);
+    }
+    const bw = innen - 2 * fuge, ys: number[] = [];
+    for (let i = 0; i <= p.rows; i++) {
+      const y = sockel + s / 2 + (i * (h - sockel - s)) / p.rows;
+      ys.push(y);
+      kante(lying, bw, s, metal ? d - 2 * s : tiefe, 0, y, metal ? 0 : zm);
+    }
+    // Dividers fill each compartment between two boards
+    for (let i = 0; i < p.rows; i++) for (let j = 1; j < p.columns; j++) {
+      const y0 = ys[i] + s / 2 + fuge, y1 = ys[i + 1] - s / 2 - fuge;
+      kante(up, s, y1 - y0, metal ? d - 2 * s : tiefe, -w / 2 + (j * w) / p.columns, (y0 + y1) / 2, metal ? 0 : zm);
+    }
     return t.group();
   },
 });
