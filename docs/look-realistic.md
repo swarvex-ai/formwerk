@@ -44,6 +44,9 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   signs (5), one-sided faces (7), change only what the task names (8).
 - Parts that touch must really meet: no floating hoops or legs, and no gaps you can see through unless they are real
   joints of 2–5 mm.
+- Joints between boards that open to the inside (lids, doors, panels you can see from behind) must not let light
+  through: close them from behind with a lining or underlayer set 1–2 mm back, and let end pieces (gables) cover the
+  board ends. Check with the movable part open and from the side (chest, cycle 83).
 - No two parts share a face: where a board meets another (sides under a top, a back panel in its rebate, a bottom
   board against the back), end one at the face of the other or set it back a few mm. Two faces in the same plane
   flicker (z-fighting) and show both grains.
@@ -92,3 +95,6 @@ Settled by the lead after peer review. A reviewer checks against these lines, no
   doors and to the carcass (top, bottom, sides), are 3–4 mm. With 4 doors the centre pair is one rigid part, so it
   keeps one handle as on main: on the right edge of its right leaf. Cycle 81, after submission 476 (peer review
   marco8154, points 4 and 5 left to the lead).
+- **#363 chest:** the fittings are clean `metal` (no `rust`), every board has grain "level". The lid joints are closed
+  from inside: arched boards run between full-arch gables with a lining 2 mm above their inner faces; the flat lid has
+  an underlayer set in from every edge. Cycle 83, after submission 484.

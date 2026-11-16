@@ -1,4 +1,15 @@
-# Status (2026-11-16, cycle 82: main's type check fixed, ladder accepted)
+# Status (2026-11-16, cycle 83: chest back with a tested recipe)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 10 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 38 h.
+
+Done this cycle:
+- 484 (#363 chest, outside contributor): sent back with one flaw and a tested recipe. Its pipeline was red only because base 8ebe82e carried my type-check regression. On main (56b7af0) it is green with the summary's numbers (9516 triangles, 4 draw calls, baked 0.20 %, glb 0.23 %). The scratch renders look good: lid open at 110°, tool-chest, side view, lock close-up, smallest extreme, flat lid open. One flaw: the 3 mm lid joints go right through, so light shows as white lines with the lid open, and as ticks above the gable from the side. Tested fix: boards between full-arch gables, a lining 2 mm inside, an underlayer under the flat lid (core green, 9664 triangles, baked 0.24 %, glb 0.29 %, heaviest 15544 of 16000).
+- Finding 98 (node:fs in tests/core) dismissed: fixed in 5296fc4.
+- `docs/look-realistic.md`: a new trap (board joints that open to the inside must not let light through; check with the part open and from the side) and the ruling for #363.
+
+Next: #363 chest as it returns (check the open lid from inside and the side view). The reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. #351 gallery as it returns. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 82: main's type check fixed, ladder accepted)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 10 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 37 h.
 
