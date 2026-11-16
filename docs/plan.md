@@ -149,10 +149,10 @@ The icon task has a coordinate sketch per shape from the start.
 | #309 | icon fix: clock (hands just past the lay-on threshold leave a sliver; sweep was 56 of 3528) | open (milestone Icons: sweep clean) |
 | #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | closed: duplicate of #306 (main already sweeps 0 of 1008; 388 rejected) |
 | #318 | icon fix: plus (size.min 13 → 13.5; sweep was 21 of 37044, too little ink) | open (milestone Icons: sweep clean) |
-| #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | open (milestone Icons: sweep clean) |
+| #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | in rework (16 Nov: the single-check fallback hits 32 % of framed combinations; absolute threshold asked for) |
 | #320 | icon fix: download (block arrow pointing up touches the walls of a deep tray; sweep was 3 of 7056) | open (milestone Icons: sweep clean) |
 | #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | open (milestone Icons: sweep clean) |
-| #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | open (milestone Icons: sweep clean) |
+| #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | accepted 16 Nov (submission 455, outside contributor; full sweep 0 of 14112) |
 
 Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, close, copy, link, pause, play, search, share, sliders, sun (after #300), trash, upload. Clean after a fix: undo and redo (#305), moon (#301), wifi (#302). In peer review: tag (#306, 375). Failing with a fix task: clock, plus, check, download, pencil, refresh, volume (#350). Not yet swept: arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Milestone "Icons: sweep clean" estimate 19.
 

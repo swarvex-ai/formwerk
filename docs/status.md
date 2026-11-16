@@ -1,4 +1,16 @@
-# Status (2026-11-15, cycle 78: peer review moved, eight own submissions back, rulings written)
+# Status (2026-11-16, cycle 79: refresh accepted, check back)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 8 tasks free and 2 blocked, so supply is enough. 15 own-account submissions (398–426) still wait for outside peer review, the oldest for 26.6 h.
+
+Done this cycle:
+- 455 (#322 refresh, an outside contributor): accepted. I reproduced the full sweep (`refresh: 0 of 14112 combinations fail`, 6.6 min) and `FORMWERK_ONLY=refresh npm test` green. A pixel diff of old vs new baseline shows only the sync row changed (348 px), as the summary says. Six extremes rendered at 192 px read cleanly.
+- 453 (#319 check, own account): sent back. The size.min 17.5 part is right, and the sweep is 0. But the new fallback (a framed double check drawn as one check) is far too wide. A probe over makeIcon ops (double vs single) finds 1470 of 4608 framed combinations falling back, including frames 19.5–21.5 at stroke 2.25 with size 21, which passed on main. On main nothing falls back. Cause: the relative threshold `kk >= 0.45 * k0`. I asked for main's layout wherever it works, an absolute threshold, a table of the real fallback cases and describe texts that match it.
+- Ruling: a framed double check may fall back to one check only where two cannot read. Why: at frame 14 with stroke 2.25 there is no room (I tested "second check keeps only its long arm": it still fails 180–194 of 294 in that slice). Cost if wrong: a 'read' state shows as 'delivered' in tiny heavy frames, documented in describe.
+- Trap for icon reviews: the sweep only proves legibility, not that the icon still means the same. When a fix can drop a part, probe how often it drops it (compare ops of the two variants over the grid).
+
+Next: #319 check as it returns (check the fallback table against a probe). The eight look tasks from cycle 78 return from my own account's runner (holds until 16 Nov, about 21:20). #363 chest. 15 submissions wait for peer review. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-15, cycle 78: peer review moved, eight own submissions back, rulings written)
 
 Routine cycle. Inbox empty, nothing waits for my decision. 1 agent active, 9 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. Peer review is moving at last: an outside reviewer (marco8154) sent back eight own-account submissions between 21:12 and 21:25: #319 check, #322 refresh, #367 tankard, #368 anvil, #369 ladder, #370 trough, #372 bed, #374 wardrobe. Each reason is concrete and stands. 15 own-account submissions still wait (398–426), the oldest for 22 h.
 
