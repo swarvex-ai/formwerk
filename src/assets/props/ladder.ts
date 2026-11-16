@@ -1,6 +1,7 @@
-import { BoxGeometry } from "three";
+import { CylinderGeometry, Matrix4, type Material } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded } from "../shapes";
 
 export const ladder = defineAsset({
   id: "ladder", category: "props",
@@ -28,47 +29,84 @@ export const ladder = defineAsset({
   // 0 steht offen, positiver Wert klappt den hinteren Rahmen nach vorn zum Vordersatz; die Reichweite endet bei der Spreizung
   rig: { fold: { label: { de: "Hintersatz", en: "Rear frame" }, type: "rotate", axis: [-1, 0, 0], min: 0, max: 35 } },
   physics: { body: "dynamic", collider: "hull" },
-  budget: { triangles: 1200, drawCalls: 3 },
+  budget: { triangles: 13000, drawCalls: 4 },
   build(p) {
     const alu = p.material === "aluminium";
-    const m = material(alu ? "metal" : "wood", alu ? "#b9bec4" : "#a87444");
+    // Holz: Holme mit stehender Maserung, Stufen und Deckel liegend; der ganze Hintersatz aus Holmholz, damit er ein
+    // Draw Call bleibt. Aluminium: ein Metall für Profile und Scharniere, Gummifüße
+    const metall = material("metal", alu ? "#b9bec4" : "#8e9399");
+    const holm = alu ? metall : material("wood", "#a87444");
+    const latte = alu ? metall : material("wood", "#a87444", 1, undefined, { grain: "level" });
+    const gummi = material("plastic", "#2b2b2b");
     const t = new Parts();
     const H = p.height, n = p.steps, rad = Math.PI / 180;
-    // Der Vordersatz lehnt stärker nach vorn als der Hintersatz nach hinten (70 % / 30 % der Spreizung),
+    // Der Vordersatz lehnt stärker nach vorn als der Hintersatz nach hinten (70 % / 35 % der Spreizung),
     // damit der gefaltete Hintersatz am Ende des Klappbereichs über dem Boden bleibt
-    const af = 0.7 * p.spread * rad, ar = 0.35 * p.spread * rad;
-    const railW = alu ? 0.04 : 0.05, railD = 0.045, braceW = alu ? 0.028 : 0.035, braceD = 0.025;
-    const railC = p.width / 2 - railW / 2;
-    const braceC = p.width / 2 + 0.01 + braceW / 2;
-    const Hh = H + 0.03;
-    // Die Holme laufen oben in den Scharnierpunkt (0, Hh, zS); die unteren Kanten der Füße berühren genau den Boden
-    const Lf = (Hh - (railD / 2) * Math.sin(af)) / Math.cos(af);
-    const Lr = (Hh - (braceD / 2) * Math.sin(ar)) / Math.cos(ar);
-    const zS = (Lr * Math.sin(ar) - Lf * Math.sin(af)) / 2;
-    const zRail = (y: number) => zS + (Hh - y) * Math.tan(af);
-    // Vordersatz: zwei Holme, oben am Scharnier
-    for (const sx of [-1, 1]) t.add(m, new BoxGeometry(railW, Lf, railD).translate(0, -Lf / 2, 0).rotateX(-af).translate(sx * railC, Hh, zS));
-    // Stufen: die oberste bei H, die übrigen gleichmäßig darunter
-    const stufe = (y: number) => t.box(m, p.width, 0.022, 0.11, 0, y - 0.011, zRail(y) + 0.03);
-    for (let i = 1; i < n; i++) stufe((H * i) / n);
+    const tf = Math.tan(0.7 * p.spread * rad), tr = Math.tan(0.35 * p.spread * rad);
+    const railW = alu ? 0.026 : 0.032, railD = alu ? 0.09 : 0.095, braceW = alu ? 0.024 : 0.03, braceD = alu ? 0.045 : 0.055;
+    const ecke = alu ? 0.005 : 0.003, fuss = alu ? 0.035 : 0;
+    const railC = p.width / 2 - railW / 2, braceC = p.width / 2 + 0.01 + braceW / 2, capX = braceC + braceW / 2 + 0.004;
+    // Deckel oben (Oberkante H), darunter enden die Holme; das Scharnier sitzt hinter den Vorderholmen unter dem Deckel
+    const capT = 0.03, y0 = H - capT, yP = y0 - 0.025, yR = y0 - 0.004, zP = -railD / 2 - 0.012 - braceD / 2;
+    // Mittellinien der Holme; die Füße liegen symmetrisch um z = 0
+    const Z0 = -(y0 * tf + zP - yP * tr) / 2;
+    const zF = (y: number) => Z0 + (y0 - y) * tf, zR = (y: number) => Z0 + zP - (yP - y) * tr;
+    // Ein schräger Holm mit waagrechten Enden (Fuß flach am Boden, Kopf im Deckel), Mitte entlang z(y)
+    const holmTeil = (ziel: Parts, m: Material, w: number, d: number, r: number, x: number, yu: number, yo: number, z: (y: number) => number) => {
+      const h = yo - yu, k = (z(yo) - z(yu)) / h;
+      ziel.add(m, rounded(w, h, d, r, 0, h / 2, 0, 2).applyMatrix4(new Matrix4().set(1, 0, 0, 0, 0, 1, 0, 0, 0, k, 1, 0, 0, 0, 0, 1)).translate(x, yu, z(yu)));
+    };
+    // Ein liegendes Brett (Holz) oder geriffeltes Profil (Aluminium) mit Oberkante y, von z0 bis z1
+    const brett = (m: Material, w: number, y: number, z0: number, z1: number, dicke: number) => {
+      const d = z1 - z0, zc = (z0 + z1) / 2;
+      if (!alu) { t.add(m, rounded(w, dicke, d, 0.003, 0, y - dicke / 2, zc)); return; }
+      // Grundplatte und Rippen mit 5 mm breiten, 4 mm tiefen Rillen dazwischen
+      t.add(m, rounded(w, dicke - 0.004, d, 0.003, 0, y - 0.004 - (dicke - 0.004) / 2 + 0.002, zc));
+      const k = Math.max(3, Math.round(d / 0.03)), b = (d - (k - 1) * 0.005) / k;
+      for (let i = 0; i < k; i++) t.add(m, rounded(w, 0.006, b, 0.002, 0, y - 0.003, z0 + b / 2 + i * (b + 0.005), 1));
+    };
+    for (const sx of [-1, 1]) {
+      holmTeil(t, holm, railW, railD, ecke, sx * railC, fuss, y0 + 0.002, zF);
+      if (alu) holmTeil(t, gummi, railW + 0.006, railD + 0.006, 0.004, sx * railC, 0, fuss + 0.005, zF);
+    }
+    // Stufen: in die Holme eingelassen (Enden bis zur Holmmitte), schmaler als die Holme tief sind
+    const tritt = alu ? 0.022 : 0.024, td = railD - 0.015;
+    for (let i = 1; i < n; i++) {
+      const y = (H * i) / n, z = zF(y - tritt / 2);
+      brett(latte, 2 * railC, y, z - td / 2, z + td / 2, tritt);
+    }
+    const zHinten = zR(yR) - braceD / 2 - 0.01, zVorn = zF(y0) + railD / 2 + 0.015;
     if (p.platform) {
-      // Breite Plattform mit U-förmigem Schutzgeländer, vorn offen zum Aufsteigen
-      const zp = zRail(H) - 0.05;
-      t.box(m, 2 * railC + railW + 0.02, 0.03, 0.34, 0, H - 0.015, zp);
-      const ph = 0.66, zb = zp - 0.14;
-      for (const sx of [-1, 1]) {
-        t.box(m, 0.035, ph, 0.035, sx * railC, H + ph / 2, zb);
-        t.box(m, 0.035, ph - 0.03, 0.035, sx * railC, (Hh + H + ph) / 2, zS);
+      // Breite Plattform aus drei Brettern mit U-förmigem Schutzgeländer, vorn offen zum Aufsteigen
+      const zv = zHinten + 0.34;
+      if (alu) brett(latte, 2 * capX, H, zHinten, zv, capT);
+      else for (let i = 0; i < 3; i++) {
+        const b = (0.34 - 0.008) / 3, z0 = zHinten + i * (b + 0.004);
+        brett(latte, 2 * capX, H, z0, z0 + b, capT);
       }
-      t.box(m, 2 * railC + 0.055, 0.03, 0.035, 0, H + ph - 0.0175, zb);
-      for (const sx of [-1, 1]) t.box(m, 0.03, 0.03, Math.abs(zb - zS), sx * railC, H + ph - 0.0175, (zb + zS) / 2);
-    } else stufe(H);
-    // Hintersatz: beweglich um den Scharnierpunkt, Sprossen wie vorne Stufen
-    const hinten = t.moving("fold", 0, Hh, zS, { max: p.spread });
-    for (const sx of [-1, 1]) hinten.add(m, new BoxGeometry(braceW, Lr, braceD).translate(0, -Lr / 2, 0).rotateX(ar).translate(sx * braceC, Hh, zS));
-    for (let i = 1; i <= n; i++) {
-      const s = Lr - (0.08 + ((i - 1) * (Lr - 0.24)) / (n - 1));
-      hinten.box(m, 2 * braceC + braceW, 0.024, 0.026, 0, Hh - s * Math.cos(ar), zS - s * Math.sin(ar));
+      const ph = 0.66, px = capX - 0.025, zb = zHinten + 0.03, zf = zv - 0.08, pw = 0.035;
+      for (const sx of [-1, 1]) {
+        for (const z of [zb, zf]) t.add(holm, rounded(pw, ph - 0.01, pw, ecke, sx * px, H - 0.005 + (ph - 0.01) / 2, z, 2));
+        t.add(latte, rounded(pw, 0.035, zf - zb + pw, ecke, sx * px, H + ph - 0.0175, (zb + zf) / 2, 2));
+      }
+      t.add(latte, rounded(2 * px - pw + 0.004, 0.03, 0.03, ecke, 0, H + ph - 0.0175, zb, 2));
+    } else brett(latte, 2 * capX, H, zHinten, zVorn, capT);
+    // Scharniere am Deckel: Blech an der Stirnseite und der Bolzen, um den der Hintersatz klappt
+    for (const sx of [-1, 1]) {
+      const yu = yP - 0.02, yo = H - 0.004;
+      t.add(metall, rounded(0.003, yo - yu, 0.05, 0.001, sx * (capX + 0.002), (yu + yo) / 2, zR(yP), 1));
+      t.add(metall, new CylinderGeometry(0.007, 0.007, 0.012, 12).rotateZ(Math.PI / 2).translate(sx * (capX - 0.001), yP, zR(yP)));
+    }
+    // Hintersatz: steht offen, beweglich um die Scharnierbolzen; Sprossen rund, in den Holmen
+    const hinten = t.moving("fold", 0, yP, zR(yP), { max: p.spread });
+    for (const sx of [-1, 1]) {
+      holmTeil(hinten, holm, braceW, braceD, ecke, sx * braceC, fuss, yR, zR);
+      if (alu) holmTeil(hinten, gummi, braceW + 0.006, braceD + 0.006, 0.004, sx * braceC, 0, fuss + 0.005, zR);
+    }
+    const ru = Math.min(0.15, yP * 0.25), ro = yP - 0.12, rr = alu ? 0.012 : 0.014;
+    for (let i = 0; i < n; i++) {
+      const y = ru + ((ro - ru) * i) / (n - 1);
+      hinten.add(holm, new CylinderGeometry(rr, rr, 2 * braceC, 12).rotateZ(Math.PI / 2).translate(0, y, zR(y)));
     }
     return t.group();
   },
