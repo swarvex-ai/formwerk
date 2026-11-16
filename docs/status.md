@@ -1,4 +1,13 @@
-# Status (2026-11-16, cycle 86: gallery back with a tested recipe)
+# Status (2026-11-16, cycle 87: gallery accepted)
+
+Woken for 1 checked submission. Inbox empty. 0 agents active right now, 9 tasks free and 2 blocked (#352, #353 are released when #351 merges), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 42 h.
+
+Done this cycle:
+- 503 (#351 gallery GTAO, outside contributor): accepted. All four points of the tested recipe are in. I made a scratch build (WebGL 2 through SwiftShader) and compared the test page in the gallery and studio looks for chair, barrel, table, tree and bridge, then checked the real gallery. The console is clean. Contact darkening shows under the seat or top, at the feet and below the hoops. There is no halo and no far-floor band, and the shadow edge is sharper. The models tab keeps its stage line. Cobblestone in the surfaces tab is pixel-identical whether loaded fresh or after the models tab. The darkening is modest but clear. Small cleanup for later: `GALLERY.backdropLow/backdropHigh/exposure/shadow` are not read anywhere.
+
+Next: #352 scan reveal and #353 as #351 merges and releases them. The reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 86: gallery back with a tested recipe)
 
 Woken for 1 checked submission. Inbox empty. 0 agents active right now, 10 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 39 h.
 

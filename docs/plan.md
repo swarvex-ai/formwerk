@@ -338,7 +338,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 |---|---|---|
 | #324 | foundation: stage 1 viewer, materials with relief, bake of the new maps, five reference assets | merged (5103a8e) |
 | #315 | gallery: catalogue overview in the models list (triangles, code KB, filters, shuffle); produces `facts.ts`, `collections.ts` | merged (97df66a) |
-| #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | in rework (16 Nov: 457 AO too weak; 487 AO pass throws on the normal input, WebGL skipped, fade in wrong units; tested recipe given) |
+| #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | accepted 16 Nov (503, after reworks 457 and 487) |
 | #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
 | #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | table, crate, cauldron, stump, bush merged; bucket, candlestick, gravestone sent back by peer review (16 Nov, rework held until 17 Nov); chest (#363) accepted (486, 16 Nov) |
