@@ -73,6 +73,11 @@ Settled by the lead after peer review. A reviewer checks against these lines, no
 
 - **#368 anvil:** the body is `material("iron", p.colour, 8, undefined, { rust: 0.15 })` (scale 8, not 5: at 5 the
   rust shows as blots on a 0.3 m anvil). The horn must still arc down visibly along its length in the side view.
+  Cycle 80, after submission 465 (side view rendered by the lead: the horn reads as a thin straight skewer). The horn
+  is a cone, not a spike: its root is as tall as the table plus the waist top below it (top edge at the table top,
+  bottom edge at about 0.62 h at the root), both radii taper linearly to the nose (exponent 1, not 0.55 or 0.68), and
+  the top edge drops by at least 0.2 h from root to tip, so the arc shows in the side view. The nose may end below the
+  face block bottom; it stays above 0.5 h, well clear of the foot plate.
 - **#369 ladder:** the four draw calls do not allow two woods in the movable rear frame. The hinges belong to the
   fixed part (on the top cap, `metal`), and the whole rear frame (stiles and rungs) uses the stile wood
   `material("wood", "#a87444")` (grain "auto"). Aluminium: the rear frame is `metal`. That gives front {stile wood,

@@ -149,7 +149,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #309 | icon fix: clock (hands just past the lay-on threshold leave a sliver; sweep was 56 of 3528) | open (milestone Icons: sweep clean) |
 | #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | closed: duplicate of #306 (main already sweeps 0 of 1008; 388 rejected) |
 | #318 | icon fix: plus (size.min 13 → 13.5; sweep was 21 of 37044, too little ink) | open (milestone Icons: sweep clean) |
-| #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | in rework (16 Nov: the single-check fallback hits 32 % of framed combinations; absolute threshold asked for) |
+| #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | in peer review (16 Nov: resubmitted as 460, absolute limits, 12 extra fallback cases at frame 19.5–20 accepted as a ruling) |
 | #320 | icon fix: download (block arrow pointing up touches the walls of a deep tray; sweep was 3 of 7056) | open (milestone Icons: sweep clean) |
 | #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | open (milestone Icons: sweep clean) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | accepted 16 Nov (submission 455, outside contributor; full sweep 0 of 14112) |
@@ -338,7 +338,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 |---|---|---|
 | #324 | foundation: stage 1 viewer, materials with relief, bake of the new maps, five reference assets | merged (5103a8e) |
 | #315 | gallery: catalogue overview in the models list (triangles, code KB, filters, shuffle); produces `facts.ts`, `collections.ts` | rework, held for its contributor |
-| #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | open |
+| #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | in rework (16 Nov: submission 457: AO too weak to see; tested values and a far-floor fade asked for) |
 | #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
 | #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | peer review, chest (#363) in rework |

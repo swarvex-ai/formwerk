@@ -1,4 +1,18 @@
-# Status (2026-11-16, cycle 79: refresh accepted, check back)
+# Status (2026-11-16, cycle 80: four own submissions checked by render, two back with tested recipes)
+
+Routine cycle. Inbox empty. 1 agent active, 4 tasks free and 2 blocked, so supply is enough. Four new own-account submissions were waiting (457, 460, 465, 466). Peer review is still the bottleneck: 17 own-account submissions wait, the oldest for 32.7 h.
+
+Done this cycle:
+- I rendered all four in a scratch build (worktree with patched `test.ts`: `look`, `values` JSON, `cam` direction and `g` for GALLERY overrides; playwright script plus pixel diff and crop tools in /tmp, not committed and gone after the cycle).
+- 465 (#368 anvil): sent back. In the side view the horn is a thin straight skewer with a 4 cm root and a 16 mm drop over 0.35 m. The ruling for #368 in `docs/look-realistic.md` now gives the recipe: root down to 0.62 h, linear taper, the top edge drops at least 0.2 h, the nose stays above 0.5 h.
+- 457 (#351 gallery GTAO): sent back. The structure is right, but the effect hardly shows (chair 1.3 and barrel 2.6 grey levels from studio). Tested: aoRadius 0.15, aoScale 2.5, key 3.8 and environment 0.22 make the contact shadows clear (barrel 5.8). New finding: the floor far behind the asset shows a faint hatch, so AO has to fade with depth.
+- Ruling: the "sharper shadow edge" criterion of #351 is dropped. At 2048 texels the studio shadow is already crisp, so softness 1.5 against 6 changes one pixel line. Cost if wrong: the shadow edge stays as soft as in studio.
+- 466 (#367 tankard): the renders look right (hoops continuous, rim closed, pewter lid seated, clay with drink). Five review points set.
+- 460 (#319 check): five review points set. Ruling: the 12 extra fallback cases (frame 19.5–20, stroke 2.25, arm 0.3, sharp) are accepted, because no stub limit separates them from failing cases while keeping the sweep at 0. Cost if wrong: 12 tiny heavy framed icons show one check instead of two, and describe says so.
+
+Next: #368 anvil and #351 gallery as they return (check the horn in the side view, and the gallery diffs and far floor). #363 chest. 17 submissions wait for peer review. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 79: refresh accepted, check back)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 8 tasks free and 2 blocked, so supply is enough. 15 own-account submissions (398–426) still wait for outside peer review, the oldest for 26.6 h.
 
