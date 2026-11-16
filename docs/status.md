@@ -1,4 +1,13 @@
-# Status (2026-11-16, cycle 84: bed accepted, foot-leg ruling changed)
+# Status (2026-11-16, cycle 85: chest accepted)
+
+Woken for 1 checked submission. Inbox empty. 0 agents active right now, 9 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 487 (#351 gallery) is still in its check. 405 (#350 volume, own account) still waits for peer review, 38 h.
+
+Done this cycle:
+- 486 (#363 chest, outside contributor): accepted. Pipeline green (10452 triangles, 4 draw calls; heaviest case 14640 of 16000; baked 0.30 %, glb 0.35 %). I checked scratch renders: arched lid open at 110° from above, from behind and from the exact side, flat lid open, and the closed side view. The lid joints read dark from inside, and the gables cover the board ends. The contributor added a 4 mm metal hinge barrel on the body to close the light gap at the rounded back edge. It is a good addition: it stays outside the rig, and the hinge point is unchanged.
+
+Next: #351 gallery (487) as its check finishes: check the diffs, the far floor fade and WebGL fallback. The reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 84: bed accepted, foot-leg ruling changed)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 9 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 38 h.
 

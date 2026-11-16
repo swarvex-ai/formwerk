@@ -341,7 +341,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | in rework (16 Nov: submission 457: AO too weak to see; tested values and a far-floor fade asked for) |
 | #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
-| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | table, crate, cauldron, stump, bush merged; bucket, candlestick, gravestone sent back by peer review (16 Nov, rework held until 17 Nov); chest (#363) back in rework after 484 (lid joints; tested recipe in the ruling) |
+| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | table, crate, cauldron, stump, bush merged; bucket, candlestick, gravestone sent back by peer review (16 Nov, rework held until 17 Nov); chest (#363) accepted (486, 16 Nov) |
 | #364 | realistic look: coffin | merged (0a91ade) |
 | #365–#370 | realistic look: bench, shelf, tankard, anvil, ladder, trough (each task names the material per part) | shelf and trough merged; bench, tankard and anvil sent back again by peer review (16 Nov: heaviest extreme not measured, lid, anvil floats above the stump); ladder accepted 16 Nov (482); rulings in docs/look-realistic.md |
 | #372–#375 | realistic look: bed, desk, wardrobe, workbench (materials per part fitted to the 4 draw calls) | desk and workbench merged; bed accepted (485, 16 Nov, outside contributor); wardrobe sent back again (476, 16 Nov: reveals 8 mm, floating doors, centre-pair handles, extreme estimated); ruling for #374 in docs/look-realistic.md |
