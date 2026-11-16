@@ -1,6 +1,7 @@
-import { SphereGeometry } from "three";
+import { SphereGeometry, Vector3 } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded } from "../shapes";
 
 export const bed = defineAsset({
   id: "bed", category: "furniture",
@@ -32,26 +33,80 @@ export const bed = defineAsset({
     guest: { label: { de: "Gästebett", en: "Guest bed" }, values: { width: 1.4, footboard: true, blanket: "#9b4a3c", color: "#6e4a2c" } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 3000, drawCalls: 3 },
+  budget: { triangles: 15000, drawCalls: 4 },
   build(p) {
-    const holz = material("wood", p.color, 1, 450), laken = material("paint", p.sheet, 1, 200), decke = material("paint", p.blanket, 1, 200), t = new Parts();
-    const W = p.width, L = p.length, h = p.height, mat = 0.18, rahmen = 0.16, yr = h - mat;
-    // Frame with legs, the mattress on it
-    t.box(holz, W + 0.06, rahmen, L + 0.06, 0, yr - rahmen / 2, 0);
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) t.box(holz, 0.07, yr - rahmen, 0.07, sx * (W / 2 - 0.02), (yr - rahmen) / 2, sz * (L / 2 - 0.02));
-    t.box(laken, W, mat, L, 0, yr + mat / 2, 0);
-    if (p.headboard > 0.02) t.box(holz, W + 0.1, h + p.headboard, 0.05, 0, (h + p.headboard) / 2, -L / 2 - 0.055);
-    if (p.footboard) t.box(holz, W + 0.1, h + 0.12, 0.05, 0, (h + 0.12) / 2, L / 2 + 0.055);
-    // The blanket covers the foot end and hangs over the sides, folded back at the top
-    const lang = L * 0.68;
-    t.box(decke, W + 0.04, 0.04, lang, 0, h + 0.02, L / 2 - lang / 2);
-    for (const sx of [-1, 1]) t.box(decke, 0.02, mat * 0.8, lang, sx * (W / 2 + 0.03), h - mat * 0.4 + 0.02, L / 2 - lang / 2);
-    t.box(laken, W + 0.04, 0.05, 0.22, 0, h + 0.045, L / 2 - lang + 0.11);
-    // Pillows: flattened ellipsoids
+    // Legs and posts upright, rails, slats and boards with the grain along their length
+    const holz = material("wood", p.color, 1, 450), brett = material("wood", p.color, 1, 450, { grain: "level" });
+    const laken = material("paint", p.sheet, 1, 200), decke = material("paint", p.blanket, 1, 200), t = new Parts();
+    const W = p.width, L = p.length, h = p.height, mat = 0.18, yr = h - mat;
+    // Frame: square legs at the corners 2 cm beside the mattress (3.5 cm at the ends, clear of the blanket), rails set into them, slats under the mattress
+    const q = 0.065, gx = W / 2 + 0.02, gz = L / 2 + 0.035, mitte = 0.023, dick = 0.03, oben = yr + 0.025, unten = yr - 0.115;
+    const fbTop = h + 0.12, kopf = p.headboard > 0.02 ? h + p.headboard : 0;
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      // Every leg rises 3.5 cm above the rails; under a headboard or footboard the leg is its post with a cap
+      const top = sz < 0 && kopf ? kopf : sz > 0 && p.footboard ? fbTop : yr + 0.06, kappe = top > yr + 0.06;
+      const lh = kappe ? top - 0.02 : top, x = sx * (gx + q / 2), z = sz * (gz + q / 2);
+      t.add(holz, rounded(q, lh, q, 0.003, x, lh / 2, z));
+      if (kappe) t.add(holz, rounded(q + 0.016, 0.022, q + 0.016, 0.004, x, top - 0.011, z));
+    }
+    for (const s of [-1, 1]) {
+      t.add(brett, rounded(dick, oben - unten, 2 * gz + 0.006, 0.003, s * (gx + mitte), (oben + unten) / 2, 0));
+      t.add(brett, rounded(2 * gx + 0.006, oben - unten, dick, 0.003, 0, (oben + unten) / 2, s * (gz + mitte)));
+    }
+    for (let i = 0; i < 7; i++) t.add(brett, rounded(2 * (gx + 0.008) + 0.004, 0.02, 0.07, 0.003, 0, yr - 0.011, -L / 2 + 0.1 + (i * (L - 0.2)) / 6));
+    // Headboard and footboard: one panel or 3 to 5 boards between the posts, standing on the end rail
+    const wand = (sz: number, bis: number) => {
+      const spanne = bis - oben, n = spanne < 0.25 ? 1 : Math.min(5, Math.max(3, Math.round(spanne / 0.14))), fuge = 0.005, b = (spanne - fuge * (n - 1)) / n;
+      for (let i = 0; i < n; i++) t.add(brett, rounded(2 * gx + 0.006, b, 0.022, 0.003, 0, oben - 0.002 + b / 2 + i * (b + fuge), sz * (gz + mitte)));
+    };
+    if (kopf) wand(-1, kopf - 0.03);
+    if (p.footboard) wand(1, fbTop - 0.03);
+    // Mattress with soft edges
+    const R = 0.035;
+    t.add(laken, rounded(W, mat, L, R, 0, yr + mat / 2, 0, 4));
+    // The blanket: one cloth from the turned-back edge to the foot. A point (s, z) of the flat cloth lies on the top up
+    // to the edge of the mattress, folds round it with radius rho and then hangs; at the foot corners the distance past
+    // the edge is the larger of both, so the corner is one soft round fold. k is the offset along the cloth normal
+    // (its thickness), welle soft waves in the hanging part.
+    const th = 0.018, rho = R + th / 2 + 0.002, bog = (Math.PI * rho) / 2, a = W / 2 - R, c = L / 2 - R, mittelY = h - R;
+    const fall = 0.075, zh = L / 2 - L * 0.68;
+    const tuch = (s: number, z: number, k: number) => {
+      const ex = Math.sign(s) * Math.max(0, Math.abs(s) - a), ez = Math.max(0, z - c), e = Math.max(Math.abs(ex), ez), n = Math.hypot(ex, ez) || 1;
+      const cx = Math.max(-a, Math.min(a, s)), cz = Math.min(z, c);
+      if (e < bog) { const phi = e / rho, r = (rho + k) * Math.sin(phi); return new Vector3(cx + (ex / n) * r, mittelY + (rho + k) * Math.cos(phi), cz + (ez / n) * r); }
+      const r = rho + k + 0.004 * Math.sin((2 * Math.PI * (cx + cz)) / 0.3) * Math.min(1, (e - bog) / fall);
+      return new Vector3(cx + (ex / n) * r, mittelY - (e - bog), cz + (ez / n) * r);
+    };
+    // Grid lines dense on the fold, sparse on the flat
+    const achse = (start: number, teile: [number, number][]) => {
+      const w = [start];
+      for (const [len, n] of teile) for (let i = 1; i <= n; i++) w.push(w[w.length - 1] + len / n);
+      return (u: number) => { const f = u * (w.length - 1), i = Math.min(w.length - 2, Math.floor(f)); return w[i] + (w[i + 1] - w[i]) * (f - i); };
+    };
+    const quer = (haengt: number) => achse(-a - bog - haengt, [[haengt, 3], [bog, 8], [2 * a, 14], [bog, 8], [haengt, 3]]);
+    const sAt = quer(fall), zAt = achse(zh, [[c - zh, 16], [bog, 8], [fall, 3]]), S = a + bog + fall, Z = c + bog + fall;
+    const up = () => new Vector3(0, 1, 0), down = () => new Vector3(0, -1, 0), k = (v: number) => -th / 2 + th * v;
+    t.add(decke, grid(36, 27, (u, v) => tuch(sAt(u), zAt(v), th / 2), up));
+    t.add(decke, grid(36, 27, (u, v) => tuch(sAt(u), zAt(v), -th / 2), down));
+    // Hem all round: the sides, the foot and the turned-back edge
+    for (const s of [-1, 1]) t.add(decke, grid(27, 1, (u, v) => tuch(s * S, zAt(u), k(v)), down));
+    t.add(decke, grid(36, 1, (u, v) => tuch(sAt(u), Z, k(v)), down));
+    t.add(decke, grid(36, 1, (u, v) => tuch(sAt(u), zh, k(v)), () => new Vector3(0, 0, -1)));
+    // The top sheet turned back over the blanket: a thin cloth on the blanket that folds round its edge
+    const rr = th / 2 + 0.004, auf = 0.24, unter = 0.1, bogen = Math.PI * rr;
+    const falte = (w: number): [number, number] => {
+      const l = w * (auf + bogen + unter);
+      if (l < auf) return [zh + auf - l, rr];
+      if (l < auf + bogen) { const phi = (l - auf) / rr; return [zh - rr * Math.sin(phi), rr * Math.cos(phi)]; }
+      return [zh + l - auf - bogen, -rr];
+    };
+    const sS = quer(0.04);
+    t.add(laken, grid(36, 16, (u, v) => { const [z, kk] = falte(v); return tuch(sS(u), z, kk); }, up));
+    // Pillows: full, slightly flattened ellipsoids
     const breite = p.pillows === 2 ? Math.min(0.32, W / 4 - 0.02) : Math.min(0.36, W / 2 - 0.06);
     for (let i = 0; i < p.pillows; i++) {
       const x = p.pillows === 2 ? (i ? 1 : -1) * W / 4 : 0;
-      t.add(laken, new SphereGeometry(1, 14, 8).scale(breite, 0.07, 0.19).translate(x, h + 0.07, -L / 2 + 0.25));
+      t.add(laken, new SphereGeometry(1, 24, 12).scale(breite, 0.085, 0.2).translate(x, h + 0.07, -L / 2 + 0.25));
     }
     return t.group();
   },
