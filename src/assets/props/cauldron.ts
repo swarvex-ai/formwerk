@@ -1,4 +1,5 @@
-import { CylinderGeometry, LatheGeometry, Quaternion, TorusGeometry, Vector2, Vector3 } from "three";
+import { CylinderGeometry, LatheGeometry, Quaternion, SphereGeometry, SplineCurve, TorusGeometry, Vector2, Vector3 } from "three";
+import { rounded, turned } from "../shapes";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
 
@@ -31,12 +32,12 @@ export const cauldron = defineAsset({
   // The pot variants stand on the floor and ride on one cylinder; the tripod variant stands on its poles, so its
   // collider follows the poles and the whole thing stays a clean convex shell (the contract holds one collider per asset).
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 1400, drawCalls: 3 },
+  budget: { triangles: 20000, drawCalls: 3 },
   build(p) {
     const d = p.diameter, hoehe = p.depth * d, R = d / 2, rand = 0.6 * R;
     const boden = 0.5 * R, wand = Math.max(0.006, 0.03 * R);
-    // The pot is drawn as a solid lathe shell but cast thin: an effective density for a hollow pot
-    const eisen = material("metal", p.colour, 1, 1500);
+    // Cast iron with small rust patches: the pattern is scaled down to the size of a pot; effective density for a hollow pot
+    const eisen = material("iron", p.colour, 5, 1500, { rust: 0.25 });
     const stuetzen: [number, number][] = [[0, boden], [0.16, 0.8 * R], [0.42, R], [0.7, 0.5 * (R + rand)], [1, rand]];
     const aussen = (x: number) => {
       const s = Math.max(0, Math.min(1, x));
@@ -49,20 +50,23 @@ export const cauldron = defineAsset({
     const fuss = p.legs === "three" ? Math.max(0.035, 0.07 * hoehe) : 0;
     const t = new Parts();
     const y = (anteil: number) => fuss + hoehe * anteil;
-    // The wall bulges to its widest at 42 % of the height and narrows to the rim; inside it stays open down to a tenth
+    // The wall is a spline through the support points: widest at 42 % of the height, narrowing to the rim; inside it
+    // stays open down to a tenth
+    const bauch = new SplineCurve(stuetzen.map(([t1, r1]) => new Vector2(r1, y(t1)))).getPoints(24);
     const profil = [
-      new Vector2(0, fuss), new Vector2(boden, fuss), new Vector2(aussen(0.16), y(0.16)), new Vector2(R, y(0.42)),
-      new Vector2(aussen(0.7), y(0.7)), new Vector2(rand, y(1)),
-      new Vector2(rand - wand, y(1)), new Vector2(aussen(0.7) - wand, y(0.7)), new Vector2(R - wand, y(0.42)),
-      new Vector2(aussen(0.16) - wand, y(0.16)), new Vector2(aussen(0.1) - wand, y(0.1)), new Vector2(0, y(0.1)),
+      new Vector2(0, fuss), ...bauch,
+      ...bauch.slice().reverse().filter((q) => q.y >= y(0.1)).map((q) => new Vector2(q.x - wand, q.y)), new Vector2(0, y(0.1)),
     ];
-    t.add(eisen, new LatheGeometry(profil, 24));
+    t.add(eisen, new LatheGeometry(profil, 32));
+    // The thick rolled rim: a torus around the top edge of the wall; the lid sits on it
+    const rolle = wand * 1.3, rolleY = y(1) - rolle * 0.35;
+    t.add(eisen, new TorusGeometry(rand - wand / 2, rolle, 8, 32).rotateX(Math.PI / 2).translate(0, rolleY, 0));
     if (p.legs === "three") {
-      // Three short stubby feet under the bottom, evenly around
-      const fussR = Math.max(0.02, 0.075 * R);
+      // Three short cast legs: a flared foot, a waist and a shoulder that sits in the thick bottom
+      const fussR = Math.max(0.02, 0.075 * R), hl = fuss + 0.01;
       for (let k = 0; k < 3; k++) {
         const wink = (k * 2 * Math.PI) / 3 + Math.PI / 2;
-        t.add(eisen, new CylinderGeometry(fussR * 0.72, fussR, fuss + 0.004, 8).translate(Math.cos(wink) * 0.6 * boden, (fuss + 0.004) / 2, Math.sin(wink) * 0.6 * boden));
+        t.add(eisen, turned([[0.001, 0], [fussR * 0.85, 0], [fussR, hl * 0.12], [fussR * 0.62, hl * 0.5], [fussR * 0.8, hl * 0.9], [fussR * 0.8, hl], [0.001, hl]], 12, Math.cos(wink) * 0.6 * boden, 0, Math.sin(wink) * 0.6 * boden));
       }
     }
     // Tripod: three poles 1.6 × the pot height meeting above the pot; the feet are spread as far as needed to keep
@@ -83,36 +87,44 @@ export const cauldron = defineAsset({
       }
       fussR = beste;
       spitze = Math.sqrt(Math.max(laenge * laenge - fussR * fussR, 1e-6));
-      const holz = material("wood", "#6e4a2c");
+      const holz = material("wood", "#6e4a2c", 1, undefined, { grain: "y" });
       const hoch = new Vector3(0, 1, 0), richtung = new Vector3(), q = new Quaternion();
       const stabLaenge = Math.hypot(fussR, spitze), sinken = stabR * (fussR / stabLaenge);
       for (let k = 0; k < 3; k++) {
         const wink = (k * 2 * Math.PI) / 3 + Math.PI / 2;
         const fussPunkt = new Vector3(Math.cos(wink) * fussR, 0, Math.sin(wink) * fussR);
-        const stab = new CylinderGeometry(stabR * 0.62, stabR, stabLaenge, 7);
+        const stab = new CylinderGeometry(stabR * 0.62, stabR, stabLaenge, 12);
         richtung.set(-fussPunkt.x, spitze, -fussPunkt.z).normalize();
         // lift by the dip of the tilted foot circle so the pole stands on the floor with its lowest point
         stab.applyQuaternion(q.setFromUnitVectors(hoch, richtung)).translate(fussPunkt.x / 2, spitze / 2 + sinken, fussPunkt.z / 2);
         t.add(holz, stab);
       }
+      // The iron knob where the poles cross, with the chain hanging from it
+      t.add(eisen, new SphereGeometry(stabR * 1.5, 16, 10).translate(0, spitze, 0));
     }
     // The bail: half a ring standing upright over the rim; under the pole crossing it may only be as tall as is left
-    const henkelR = p.legs === "tripod" ? Math.min(rand + 0.039, Math.max(0.03, spitze - fuss - hoehe - 0.05)) : rand + 0.039;
+    const henkelR = p.legs === "tripod" ? Math.min(rand + 0.027, Math.max(0.03, spitze - fuss - hoehe - 0.05)) : rand + 0.027;
     if (p.handle) {
       const rohr = Math.max(0.007, 0.026 * R);
-      t.add(eisen, new TorusGeometry(henkelR, rohr, 6, 16, Math.PI).translate(0, y(1), 0));
-      if (p.legs !== "tripod") for (const seite of [-1, 1]) t.box(eisen, 0.026, 0.05, 0.022, seite * (rand + 0.011), y(1) - 0.024, 0);
+      t.add(eisen, new TorusGeometry(henkelR, rohr, 8, 24, Math.PI).translate(0, y(1), 0));
+      // Two cast lugs on the wall just under the rim, reaching out to the ends of the bail
+      if (p.legs !== "tripod") for (const seite of [-1, 1]) t.add(eisen, rounded(0.034, 0.05, 0.026, 0.005, seite * (rand + 0.012), y(1) - 0.02, 0));
     }
+    // The lid: a flat disc on a slide with a small knob; its geometry rests on the rolled rim above the pivot
+    const staerke = 0.024 + 0.012 * R, lidY = fuss + hoehe + rolle * 0.65 + 0.002, lidR = rand + wand * 0.4;
     if (p.legs === "tripod") {
       // The chain hangs from the crossing down to the bail, or to the lid when the pot has none
-      const ende = fuss + hoehe + (p.handle ? henkelR : 0.024 + 0.012 * R + 0.014);
-      const kette = Math.max(0.02, spitze - ende);
-      t.add(eisen, new CylinderGeometry(0.008, 0.008, kette, 6).translate(0, ende + kette / 2, 0));
+      const ende = fuss + hoehe + (p.handle ? henkelR : staerke + rolle * 0.65 + 0.014);
+      const kette = Math.max(0.02, spitze - ende), glieder = Math.max(1, Math.ceil(kette / 0.02));
+      // Oval links alternately turned by a quarter, each hooked into the next
+      for (let k = 0; k < glieder; k++) {
+        const g = new TorusGeometry(0.0085, 0.0032, 6, 10).scale(1, 1.5, 1);
+        if (k % 2) g.rotateY(Math.PI / 2);
+        t.add(eisen, g.translate(0, spitze - 0.012 - (k + 0.5) * (kette - 0.012) / glieder, 0));
+      }
     }
-    // The lid: a flat disc slightly wider than the rim, on a slide; its geometry rests on the rim above the pivot
-    const staerke = 0.024 + 0.012 * R;
     const deckel = t.moving("lid", 0, fuss + hoehe, 0);
-    deckel.add(eisen, new CylinderGeometry(rand + 0.025, rand + 0.02, staerke, 24).translate(0, fuss + hoehe + staerke / 2 + 0.002, 0));
+    deckel.add(eisen, turned([[0.001, 0], [lidR, 0], [lidR + 0.004, staerke * 0.5], [lidR - 0.003, staerke], [0.022, staerke], [0.02, staerke + 0.014], [0.001, staerke + 0.014]], 32, 0, lidY, 0));
     return (p.legs === "tripod" ? t.cylinder(fussR, spitze) : t.cylinder(R + 0.01, fuss + hoehe)).group();
   },
 });
