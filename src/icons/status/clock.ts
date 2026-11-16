@@ -1,4 +1,4 @@
-import { circle, line, onCircle, type Pt } from "../../core/vector";
+import { circle, line, onCircle, polygon, type Pt } from "../../core/vector";
 import { area, defineIcon, detail, type Part } from "../define";
 import { CLEAR, EDGE } from "../shared";
 
@@ -26,16 +26,23 @@ export const clock = defineIcon({
     const hw = pen.width / 2, r = 12 - EDGE - hw, c: Pt = [12, 12];
     const teile: Part[] = [area(circle(c, r))];
     // Hands close together would trap a sliver between them: then the short one lies on the long one
-    const lang = Math.min(r * 0.68, r - pen.width - CLEAR - 0.25), kurz = r * 0.46, wm = p.minute * 6, ws = (p.hour % 12) * 30 + p.minute * 0.5;
-    const zwischen = Math.abs(((ws - wm + 540) % 360) - 180), eng = (Math.asin(Math.min(1, (pen.width + CLEAR) / kurz)) * 180) / Math.PI;
-    const zeiger = [onCircle(c, kurz, zwischen < eng ? wm : ws), c, onCircle(c, lang, wm)];
+    const lang = Math.min(r * 0.68, r - pen.width - CLEAR - 0.25), wm = p.minute * 6, ws = (p.hour % 12) * 30 + p.minute * 0.5;
+    const zwischen = Math.abs(((ws - wm + 540) % 360) - 180);
+    const nab = (pen.width + 1) / (2 * Math.sin((Math.max(zwischen, 1) * Math.PI) / 360));
+    const kurz = Math.max(r * 0.46, nab + 1.5), eng = (Math.asin(Math.min(1, (pen.width + CLEAR) / kurz)) * 180) / Math.PI;
+    const tauscht = zwischen < eng || kurz > lang * 0.9;
+    const zeiger = [onCircle(c, tauscht ? r * 0.46 : kurz, tauscht ? wm : ws), c, onCircle(c, lang, wm)];
     // Ticks as dots inside the rim at 12, 3, 6 and 9; a hand that comes close covers one
     const punkt = Math.max(0.7, hw * 0.9), lage = r - hw - CLEAR - punkt;
     if (p.ticks) for (const g of [0, 90, 180, 270]) {
       const q = onCircle(c, lage, g);
       if (Math.min(abstand(q, zeiger[0], c), abstand(q, c, zeiger[2])) >= punkt + hw + CLEAR) teile.push(detail(circle(q, punkt), true));
     }
-    teile.push(detail(line(...zeiger)));
+    // Sharp corners would put a long miter tip at the centre: two lines meeting in a round hub instead
+    if (pen.corners === "sharp") teile.push(detail(line(zeiger[0], c)), detail(line(c, zeiger[2])), detail(circle(c, hw), true));
+    else teile.push(detail(line(...zeiger)));
+    // Where the hands part slowly, the narrow apex of the wedge between them is filled so no sliver is cut off
+    if (!tauscht && nab > hw) teile.push(detail(polygon(c, onCircle(c, nab, ws), onCircle(c, nab, wm)), true));
     return teile;
   },
 });
