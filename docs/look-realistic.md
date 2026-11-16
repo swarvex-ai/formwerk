@@ -87,9 +87,9 @@ Settled by the lead after peer review. A reviewer checks against these lines, no
   fixed part (on the top cap, `metal`), and the whole rear frame (stiles and rungs) uses the stile wood
   `material("wood", "#a87444")` (grain "auto"). Aluminium: the rear frame is `metal`. That gives front {stile wood,
   level wood, metal} + rear {stile wood} = 4.
-- **#372 bed:** without a footboard the two foot legs end flush with the rail top (no cap), so the blanket drapes
-  over them without wood poking through. With a footboard all four legs rise above the rails. The head legs always
-  rise above the rails.
+- **#372 bed:** no wood pokes through the blanket. Legs may rise a little above the rails (merged: 3.5 cm) as long as
+  their top stays below the blanket hem; under a headboard or footboard the leg is its post with a cap. Changed in
+  cycle 84 after submission 485, which kept the purpose of the older flush-leg ruling with legs 1 cm below the hem.
 - **#374 wardrobe:** the doors are overlay doors that sit against the carcass front: the back face of each leaf
   lies at most 1 mm in front of the side and bottom front edges (no open slot around the doors). All reveals, between
   doors and to the carcass (top, bottom, sides), are 3–4 mm. With 4 doors the centre pair is one rigid part, so it

@@ -1,4 +1,14 @@
-# Status (2026-11-16, cycle 83: chest back with a tested recipe)
+# Status (2026-11-16, cycle 84: bed accepted, foot-leg ruling changed)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 9 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 38 h.
+
+Done this cycle:
+- 485 (#372 bed, outside contributor): accepted. Reproduced green on b56ec0f (13620 triangles, 4 draw calls; baked 0.27 %, glb 0.35 %; budget file heaviest 14820 of 15000). Scratch renders of guest (footboard), side view, foot corner and width 2, length 2.2, height 0.35 without headboard all look right: one closed blanket with round foot corners, rails with full faces and grain along the length, upright legs and posts.
+- Ruling for #372 changed in `docs/look-realistic.md`: legs may rise a little above the rails as long as their top stays below the blanket hem. Why: the contributor went against the flush-leg ruling openly, and the legs end 1 cm below the hem, so the ruling's purpose (no wood through the blanket) holds and capped legs look like a real frame. Cost if wrong: none for other assets; the bed's foot legs show 3.5 cm above the rails.
+
+Next: #363 chest as it returns (check the open lid from inside and the side view). The reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. #351 gallery as it returns. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 83: chest back with a tested recipe)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 10 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 38 h.
 
