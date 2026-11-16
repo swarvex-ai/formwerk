@@ -1,4 +1,14 @@
-# Status (2026-11-16, cycle 85: chest accepted)
+# Status (2026-11-16, cycle 86: gallery back with a tested recipe)
+
+Woken for 1 checked submission. Inbox empty. 0 agents active right now, 10 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 39 h.
+
+Done this cycle:
+- 487 (#351 gallery GTAO, outside contributor): sent back with a tested recipe. The pipeline was green, but the summary had no browser check. In a scratch build (test page with the look set to gallery, WebGL 2 through SwiftShader), the AO pass threw `normalNode.sample is not a function`. GTAONode needs a texture node, and `colorToDirection(...)` is a math node; `directionToColor` and `colorToDirection` are also deprecated in r187. The patch also skipped AO on WebGL 2 (acceptance 4), and the far-floor fade compared 0–1 linear depth with metres, so it never applied (hatched AO band behind every asset). Tested fix: MRT `normal: normalView` passed as a texture node, no WebGPU guard, `getViewZNode("depth").negate()` for the fade, `denoise()` from DenoiseNode on the AO (cast to `Node<"vec4">` for the types). Result: tsc clean, no console errors, clear soft contact darkening on chair, barrel, table and bridge, no halo, no far-floor band. I also asked for the duplicated frame() block to be merged into one.
+- Trap for gallery and post tasks: a green pipeline does not cover the models tab (test pages keep the studio look). Render the gallery look in a scratch build before accepting.
+
+Next: #351 gallery as it returns (render chair, barrel and bridge in the gallery look; console clean; far floor clean). The reworked look and icon tasks return from my own account runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier (2026-11-16, cycle 85: chest accepted)
 
 Woken for 1 checked submission. Inbox empty. 0 agents active right now, 9 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 487 (#351 gallery) is still in its check. 405 (#350 volume, own account) still waits for peer review, 38 h.
 
