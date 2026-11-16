@@ -1,6 +1,6 @@
-import { arc, onCircle, polygon, type Pt } from "../../core/vector";
+import { arc, onCircle, polygon, reach, translate, type Pt } from "../../core/vector";
 import { area, defineIcon, dot, stroke, type Part } from "../define";
-import { CLEAR } from "../shared";
+import { CLEAR, partsBox } from "../shared";
 
 export const refresh = defineIcon({
   id: "refresh", category: "actions",
@@ -29,8 +29,16 @@ export const refresh = defineIcon({
     // The head is an area: its stroke adds the pen, so its centre line is a little smaller
     const k = Math.max(0.5, b - hw);
     const r = 10.65 - Math.max(hw, b) - (pen.corners === "sharp" ? hw * 1.2 : 0);
-    // Each arrow leaves room for its own head and the start of the next arc
-    const gapMin = ((len + hw + CLEAR + 0.5) / r) * 180 / Math.PI;
+    // Each arrow leaves room for its own head and the start of the next arc: the ink of the tip (a miter with sharp
+    // corners) keeps CLEAR from the cap of the next arc (a square with sharp corners, a disc with round ones)
+    const vor = len + reach(pen, (Math.atan2(k, len) * 360) / Math.PI);
+    const frei = (g: number) => {
+      const w = (g * Math.PI) / 180, dx = r - r * Math.cos(w), dy = vor - r * Math.sin(w);
+      const u = -dx * Math.sin(w) + dy * Math.cos(w), v = dx * Math.cos(w) + dy * Math.sin(w);
+      return pen.corners === "round" ? Math.hypot(u, v) - hw : Math.hypot(Math.max(0, -u - hw), Math.max(0, Math.abs(v) - hw));
+    };
+    let gapMin = ((len + hw + CLEAR + 0.5) / r) * 180 / Math.PI;
+    while (frei(gapMin) < CLEAR) gapMin += 0.5;
     const each = Math.max(30, Math.min(p.sweep / n, 360 / n - gapMin)), gap = 360 / n - each;
     const c: Pt = [12, 12], teile: Part[] = [];
     for (let i = 0; i < n; i++) {
@@ -40,7 +48,18 @@ export const refresh = defineIcon({
       // Solid in every style (its inside is too small to stay open at 24 px), the area keeps the style visible
       const kopf = polygon([e[0] + q[0] * k, e[1] + q[1] * k], [e[0] + t[0] * len, e[1] + t[1] * len], [e[0] - q[0] * k, e[1] - q[1] * k]);
       teile.push(area(kopf), dot(kopf));
+      if (pen.corners === "sharp") {
+        // The miter of the inner barb points back at the arc: the narrow pocket between them would close at 24 px,
+        // so it is solid from the barb's tip to the arc
+        const L = Math.hypot(len, k), ot = -len / L, oq = 1 + k / L, on = Math.hypot(ot, oq);
+        const m = reach(pen, (Math.acos(k / L) * 180) / Math.PI) / on, bi: Pt = [e[0] + q[0] * k, e[1] + q[1] * k];
+        const spitze: Pt = [bi[0] + (t[0] * ot + q[0] * oq) * m, bi[1] + (t[1] * ot + q[1] * oq) * m];
+        teile.push(dot(polygon(e, bi, spitze, onCircle(c, r, to - ((-ot * m + hw) / r) * 180 / Math.PI))));
+      }
     }
-    return teile;
+    // An open arc leans away from its gap: moved back where its ink would sit more than 1.5 off the middle
+    const [x0, y0, x1, y1] = partsBox(teile, pen), mitte = (v: number) => Math.sign(v) * Math.max(0, Math.abs(v) - 1.5);
+    const dx = mitte(12 - (x0 + x1) / 2), dy = mitte(12 - (y0 + y1) / 2);
+    return teile.map((t) => ({ ...t, shape: translate(t.shape, dx, dy) }));
   },
 });
