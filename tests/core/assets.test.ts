@@ -1,8 +1,8 @@
 // Every asset, at its defaults, its extremes and random values: valid schema, within budget, finite, standing on the
 // floor, and the same output for the same values and seed. A new asset passes these before it can be merged.
-import { mkdirSync, writeFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { only } from "../only.mjs";
+import { writeOut } from "../out.mjs";
 import { Box3, Quaternion, type BufferGeometry, type Mesh, type Object3D } from "three";
 import { ASSETS } from "../../src/assets";
 import { CATEGORIES, infoOf, make, measure, partOf, pose } from "../../src/assets/define";
@@ -85,8 +85,7 @@ for (const a of only(ASSETS)) {
       const text = [zeile("defaults", measure(make(a))),
         zeile(`heaviest of ${faelle.length} cases ${JSON.stringify(schwerst.werte)}`, schwerst),
         ...Object.keys(a.presets).map((name) => zeile(`preset ${name}`, measure(make(a, { preset: name }))))].join("\n");
-      mkdirSync("tests/scene/out", { recursive: true });
-      writeFileSync(`tests/scene/out/${a.id}.budget.txt`, text + "\n");
+      writeOut(`${a.id}.budget.txt`, text + "\n");
     });
     it("presets build, movable parts appear, physics data is complete", () => {
       for (const name of Object.keys(a.presets)) expect(measure(make(a, { preset: name })).triangles, `${a.id} preset ${name}`).toBeGreaterThan(0);
