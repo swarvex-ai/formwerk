@@ -1,4 +1,14 @@
-# Status (2026-11-16, cycle 81: peer review cleared the queue, budget numbers now measured by the core test)
+# Status (2026-11-16, cycle 82: main's type check fixed, ladder accepted)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 10 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 37 h.
+
+Done this cycle:
+- Regression of my own (cycle 81, 8ebe82e): the budget file import `node:fs` in `tests/core/assets.test.ts` broke `tsc --noEmit` (tests/core has only vite types), so `npm test` failed on main for every task based on it. Fixed in 5296fc4: the file is written through `tests/out.mjs` with `tests/out.d.mts`, the same pattern as `tests/sweep.mjs`. Rule for myself: after changing a test, run `npx tsc --noEmit`, not only vitest.
+- 482 (#369 ladder, outside contributor): accepted. Reproduced green on 5296fc4 (4 draw calls, 3252 triangles; baked 0.11 %, glb 0.12 %; budget file heaviest 11052 of 13000). Scratch renders of aluminium, aluminium with platform, work-platform, side and top views: all four points of the last review are fixed, the #369 ruling is followed.
+
+Next: the reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. #351 gallery and #363 chest as they return. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
+
+Earlier ((2026-11-16, cycle 81: peer review cleared the queue, budget numbers now measured by the core test)
 
 Routine cycle. Inbox empty. 1 agent active, 12 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. Peer review moved: of the 17 own-account submissions, ten are merged since cycle 80 (table, crate, cauldron, stump, bush, trough, coffin, shelf, clock, check) and the rest came back for rework (reviewers marco8154 and hctib-tech). Only 405 (#350 volume) still waits, 37 h; 476 (#374 wardrobe) is listed as pending but its task is already back in rework.
 
