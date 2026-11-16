@@ -24,7 +24,7 @@ export async function start(b: Bereich): Promise<Galerie> {
   const canvas = b.buehne.querySelector<HTMLCanvasElement>("canvas.dreid")!;
   canvas.hidden = false;
   const { viewer, controls } = await stage(canvas);
-  viewer.setLook("studio");
+  viewer.setLook("gallery");
 
   let asset: AnyAsset = ASSETS[0], werte: Record<string, unknown> = {}, seed = 1;
   let objekt: Object3D | null = null;
