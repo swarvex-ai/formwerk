@@ -1,7 +1,8 @@
-import { CircleGeometry, CylinderGeometry, LatheGeometry, TorusGeometry, Vector2 } from "three";
+import { CatmullRomCurve3, CircleGeometry, CylinderGeometry, TubeGeometry, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, stave, turned } from "../shapes";
 
 export const tankard = defineAsset({
   id: "tankard", category: "props",
@@ -33,29 +34,62 @@ export const tankard = defineAsset({
   },
   rig: { lid: { label: { de: "Deckel", en: "Lid" }, type: "rotate", axis: [0, 0, -1], min: 0, max: 100 } },
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 800, drawCalls: 4 },
+  budget: { triangles: 3000, drawCalls: 4 },
   build(p, seed) {
-    const z = rng(seed), h = p.height, wand = 0.007, seg = 14, rTop = p.radius * (1 - p.taper);
-    const koerper = material(p.body === "wood" ? "wood" : p.body === "clay" ? "stone" : "metal", p.colour);
-    const metall = material("metal", p.body === "pewter" ? "#9a9ea4" : "#4a4a4a");
-    // Outer radius at height y
+    const z = rng(seed), h = p.height, wand = 0.007, seg = 16, rTop = p.radius * (1 - p.taper);
     const r = (y: number) => p.radius + (rTop - p.radius) * (y / h);
-    const profil = [new Vector2(0, 0), new Vector2(p.radius, 0), new Vector2(rTop, h), new Vector2(rTop - wand, h), new Vector2(r(wand) - wand, wand), new Vector2(0, wand)];
-    const t = new Parts().add(koerper, new LatheGeometry(profil, seg).rotateY(z() * Math.PI));
+    const r0 = p.radius, dicke = Math.max(0.012, p.radius * 0.18);
+    const koerper = p.body === "wood" ? material("wood", p.colour, 4)
+      : p.body === "clay" ? material("stone", p.colour, 4, undefined, { moss: 0 })
+      : material("metal", p.colour);
+    const metall = material("metal", p.body === "pewter" ? "#9a9ea4" : "#4a4a4a");
+    const t = new Parts();
+
     if (p.body === "wood") {
-      // Two bands, each a little off level and height
+      // Staves like the barrel: about a hand wide with 2 mm joints, wood grain upright (scale 4, the object is small).
+      // One wood tone: two tones would cost the draw call the lid needs (props stay at four).
+      const n = Math.max(10, Math.round((2 * Math.PI * r(h / 2)) / 0.09)), fuge = 0.0022;
+      for (let i = 0; i < n; i++) {
+        const a0 = (2 * Math.PI * i) / n, a1 = (2 * Math.PI * (i + 1)) / n, halb = fuge / 2 / p.radius;
+        t.add(koerper, stave(r, h, a0 + halb, a1 - halb, dicke, 12, 3));
+      }
+      // A septum in the middle of the wall closes the joints from inside (an open vessel), two faces front and back
+      const mitte = (u: number, v: number) => new Vector3((r(v * h) - dicke / 2) * Math.cos(2 * Math.PI * u), v * h, (r(v * h) - dicke / 2) * Math.sin(2 * Math.PI * u));
+      const raus = (q: Vector3) => new Vector3(q.x, 0, q.z);
+      t.add(koerper, grid(n, 1, mitte, raus));
+      t.add(koerper, grid(n, 1, mitte, (q) => raus(q).negate()));
+      // Floor under the staves
+      t.add(koerper, new CylinderGeometry(r(wand) - dicke / 2, r0 - dicke / 2, wand, n).translate(0, wand / 2, 0));
+      // Two hoops, a little off level
       for (const f of [0.2, 0.8]) {
         const y = h * f + (z() - 0.5) * 0.008, b = 0.012;
         t.add(metall, new CylinderGeometry(r(y + b / 2) + 0.002, r(y - b / 2) + 0.002, b, seg, 1, true).rotateX((z() - 0.5) * 0.04).rotateZ((z() - 0.5) * 0.04).translate(0, y, 0));
       }
+    } else {
+      // Pewter or clay: a turned body with a moulded foot ring and lip, open at the top so the drink shows
+      const profil: [number, number][] = [[0.001, 0], [p.radius, 0]];
+      if (p.body === "pewter") {
+        const fu = 0.005;
+        profil.push([p.radius, fu], [p.radius - 0.0015, fu + 0.004], [rTop, h], [rTop + 0.0035, h], [rTop - wand, h]);
+      } else {
+        profil.push([rTop, h], [rTop + 0.002, h], [rTop - wand, h]);
+      }
+      profil.push([r(wand) - wand, wand], [0.001, wand]);
+      t.add(koerper, turned(profil, seg));
     }
+    // The drink inside, below the rim; for wood it must stay inside the narrower stave cavity
     if (p.fill >= 0.02) {
-      const y = wand + p.fill * (h - 2 * wand);
-      t.add(material("paint", p.drinkColour), new CircleGeometry(r(y) - wand - 0.0005, seg).rotateX(-Math.PI / 2).translate(0, y, 0));
+      const y = wand + p.fill * (h - 2 * wand), innen = p.body === "wood" ? dicke : wand;
+      t.add(material("paint", p.drinkColour), new CircleGeometry(r(y) - innen - 0.0005, seg).rotateX(-Math.PI / 2).translate(0, y, 0));
     }
-    // Half-ring handle on +x from 25 % to 85 % of the height, set into the wall
-    const hr = 0.3 * h, reach = 0.04;
-    t.add(koerper, new TorusGeometry(hr, 0.007, 6, 10, Math.PI).rotateZ(-Math.PI / 2).scale(reach / hr, 1, 1).translate(r(0.55 * h) - 0.012, 0.55 * h, 0));
+    // Curved loop handle joined to the wall at both ends, on the +x side
+    const yL = 0.28 * h, yU = h - 0.010, mitteY = (yL + yU) / 2, reach = 0.04, tube = 0.006;
+    const kurve = new CatmullRomCurve3([
+      new Vector3(r(yL), yL, 0),
+      new Vector3(r(mitteY) + reach, mitteY, 0),
+      new Vector3(r(yU), yU, 0),
+    ]);
+    t.add(koerper, new TubeGeometry(kurve, 12, tube, 6, false));
     if (p.lid) {
       const deckel = t.moving("lid", rTop, h, 0);
       deckel.add(metall, new CylinderGeometry(rTop + 0.006, rTop + 0.006, 0.005, seg).translate(0, h + 0.0025, 0));
