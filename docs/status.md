@@ -1,4 +1,19 @@
-# Status (2026-11-17, cycle 92: tankard back with a tested recipe)
+# Status (2026-11-17, cycle 93: tankard accepted)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 62 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 564 (#367 tankard, outside contributor): accepted. Pipeline green: defaults 2344 triangles, heaviest 2420 of 3000, 4 draw calls; baked 0.10 %, glb 0.11 %. I rendered beer-mug from the side and above, empty wood without a lid from above, clay-cup and pewter (lid off) from above and the side, and pewter-stein closed and open at 100. All three flaws from cycle 92 are fixed: the profiles are open, the joints read dark, and the floor is there. The handle meets the wall at both ends, and the lid sits on the rim and opens about its hinge.
+
+Next:
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- Anvil (#368) and wardrobe (#374) are still out for rework.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 92: tankard back with a tested recipe)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 61 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
