@@ -1,6 +1,6 @@
-import { CylinderGeometry } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const wardrobe = defineAsset({
   id: "wardrobe", category: "furniture",
@@ -34,51 +34,63 @@ export const wardrobe = defineAsset({
     rightDoor: { label: { de: "Rechte Tür", en: "Right door" }, type: "rotate", axis: [0, 1, 0], min: 0, max: 110 },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 4000, drawCalls: 4 },
+  budget: { triangles: 13000, drawCalls: 4 },
   build(p) {
     const holz = material("wood", p.color, 1, 120), t = new Parts();
     const W = p.width, H = p.height, D = p.depth, P = p.plinthHeight;
-    const dT = 0.02, margin = 0.01, gap = 0.004;
-    const bodyH = H - P;
-    // Plinth, slightly inset as a toe kick, and the solid carcass above it
-    t.box(holz, W - 0.02, P, D - 0.02, 0, P / 2, -0.01);
-    t.box(holz, W, bodyH, D, 0, P + bodyH / 2, 0);
-    const inner = W - 2 * margin, doorW = (inner - (p.doors - 1) * gap) / p.doors;
-    const doorH = H - P - 0.01, doorZ = D / 2 + dT / 2, doorY = P + 0.005 + doorH / 2;
+    const sT = 0.019, topT = 0.025, backT = 0.008, dT = 0.02, reveal = 0.0035, vGap = 0.0035;
+    const topY = H - topT;
+    // Plinth set back as a toe kick under the carcass
+    t.add(holz, rounded(W - 0.03, P, D - 0.07, 0.003, 0, P / 2, -0.015, 2));
+    // Carcass: two sides, the bottom and the back panel between them, the top with a cornice over sides and doors
+    for (const s of [-1, 1]) t.add(holz, rounded(sT, topY - P, D, 0.003, s * (W / 2 - sT / 2), (P + topY) / 2, 0, 2));
+    t.add(holz, rounded(W - 2 * sT, sT, D - backT, 0.003, 0, P + sT / 2, backT / 2, 2));
+    t.add(holz, rounded(W - 2 * sT, topY - P, backT, 0.002, 0, (P + topY) / 2, -D / 2 + backT / 2, 2));
+    const front = D / 2 + dT + 0.015;
+    t.add(holz, rounded(W + 0.03, topT, front + D / 2, 0.004, 0, topY + topT / 2, (front - D / 2) / 2, 2));
+    // Overlay doors: 3.5 mm reveals to the carcass edges and between the doors, back face 0.5 mm before the front
+    const inner = W - 2 * reveal, doorW = (inner - (p.doors - 1) * vGap) / p.doors;
+    const doorH = topY - P - 2 * reveal, doorZ = D / 2 + 0.0005 + dT / 2, doorY = P + reveal + doorH / 2;
+    const face = doorZ + dT / 2, hz = face + 0.03, groove = 0.006;
     const leaf = (part: Parts, xLeft: number, width: number, opening: "left" | "right", handle = true) => {
-      part.box(holz, width, doorH, dT, xLeft + width / 2, doorY, doorZ);
-      const panelW = width - 0.08, panelH = doorH - 0.12;
-      if (panelW > 0.02 && panelH > 0.02) part.box(holz, panelW, panelH, 0.006, xLeft + width / 2, doorY, doorZ + dT / 2 + 0.003);
+      const frameW = Math.min(0.07, width * 0.22), cx = xLeft + width / 2;
+      // Frame: two stiles over the full height, two rails between them, their faces a millimetre back
+      for (const s of [-1, 1]) part.add(holz, rounded(frameW, doorH, dT, 0.0025, cx + (s * (width - frameW)) / 2, doorY, doorZ, 2));
+      for (const s of [-1, 1]) part.add(holz, rounded(width - 2 * frameW + 0.002, frameW, dT * 0.9, 0.0025, cx, doorY + (s * (doorH - frameW)) / 2, doorZ, 2));
+      // The panel sits in grooves of the frame, so no light passes around it: a raised field with a bevel, a few
+      // millimetres behind the face of the frame, and its flat margin (four strips running under the field)
+      const panelW = width - 2 * frameW + 2 * groove, panelH = doorH - 2 * frameW + 2 * groove;
+      const inset = groove + Math.min(0.03, (width - 2 * frameW) * 0.2), sw = Math.min(inset + 0.01, panelW / 2 - 0.002);
+      part.add(holz, rounded(panelW - 2 * inset, panelH - 2 * inset, 0.014, 0.004, cx, doorY, doorZ - 0.002, 2));
+      for (const s of [-1, 1]) part.add(holz, rounded(sw, panelH, 0.008, 0.001, cx + (s * (panelW - sw)) / 2, doorY, doorZ - 0.004, 1));
+      for (const s of [-1, 1]) part.add(holz, rounded(panelW - 2 * sw, sw, 0.008, 0.001, cx, doorY + (s * (panelH - sw)) / 2, doorZ - 0.004, 1));
       if (!handle || p.handleStyle === "none") return;
-      const hx = opening === "left" ? xLeft + 0.03 : xLeft + width - 0.03;
-      const hz = doorZ + dT / 2 + 0.01;
-      if (p.handleStyle === "bar") part.box(holz, 0.02, 0.18, 0.02, hx, doorY, hz);
-      else part.add(holz, new CylinderGeometry(0.02, 0.02, 0.02, 8).rotateX(Math.PI / 2).translate(hx, doorY, hz));
+      const hx = opening === "left" ? xLeft + frameW / 2 : xLeft + width - frameW / 2;
+      if (p.handleStyle === "bar") {
+        // The pull stands off the door on two posts that reach the door face
+        part.add(holz, rounded(0.02, 0.24, 0.016, 0.003, hx, doorY, hz, 2));
+        for (const s of [-1, 1]) part.add(holz, rounded(0.014, 0.02, 0.024, 0.002, hx, doorY + s * 0.1, face + 0.011, 2));
+      } else {
+        // A knob turned about z: a neck on the door face, a round head in front
+        part.add(holz, turned([[0.008, 0], [0.007, 0.012], [0.016, 0.018], [0.018, 0.026], [0.012, 0.032], [0.0001, 0.034]], 12).rotateX(Math.PI / 2).translate(hx, doorY, face - 0.001));
+      }
     };
+    const xStart = -W / 2 + reveal;
     if (p.doors === 1) {
-      const part = t.moving("leftDoor", -W / 2 + margin, doorY, doorZ);
-      leaf(part, -W / 2 + margin, inner, "right");
-    } else if (p.doors === 2) {
-      const left = t.moving("leftDoor", -W / 2 + margin, doorY, doorZ);
-      leaf(left, -W / 2 + margin, doorW, "right");
-      const right = t.moving("rightDoor", W / 2 - margin, doorY, doorZ);
-      leaf(right, W / 2 - margin - doorW, doorW, "left");
-    } else if (p.doors === 3) {
-      const left = t.moving("leftDoor", -W / 2 + margin, doorY, doorZ);
-      leaf(left, -W / 2 + margin, doorW, "right");
-      const centre = t.moving("centreDoor", -W / 2 + margin + doorW + gap, doorY, doorZ);
-      leaf(centre, -W / 2 + margin + doorW + gap, doorW, "right");
-      const right = t.moving("rightDoor", W / 2 - margin, doorY, doorZ);
-      leaf(right, W / 2 - margin - doorW, doorW, "left");
+      const part = t.moving("leftDoor", xStart, doorY, doorZ);
+      leaf(part, xStart, inner, "right");
     } else {
-      const left = t.moving("leftDoor", -W / 2 + margin, doorY, doorZ);
-      leaf(left, -W / 2 + margin, doorW, "right");
-      const cx = -W / 2 + margin + doorW + gap;
-      const centre = t.moving("centreDoor", cx, doorY, doorZ);
-      leaf(centre, cx, doorW, "right", false);
-      leaf(centre, cx + doorW + gap, doorW, "right");
-      const right = t.moving("rightDoor", W / 2 - margin, doorY, doorZ);
-      leaf(right, W / 2 - margin - doorW, doorW, "left");
+      const left = t.moving("leftDoor", xStart, doorY, doorZ);
+      leaf(left, xStart, doorW, "right");
+      if (p.doors >= 3) {
+        // With 4 doors the centre pair is one rigid part with one handle, on its right leaf
+        const cx = xStart + doorW + vGap;
+        const centre = t.moving("centreDoor", cx, doorY, doorZ);
+        if (p.doors === 4) leaf(centre, cx, doorW, "right", false);
+        leaf(centre, xStart + (p.doors - 2) * (doorW + vGap), doorW, "right");
+      }
+      const right = t.moving("rightDoor", W / 2 - reveal, doorY, doorZ);
+      leaf(right, W / 2 - reveal - doorW, doorW, "left");
     }
     return t.group();
   },
