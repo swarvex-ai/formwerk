@@ -47,11 +47,17 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
 - Joints between boards that open to the inside (lids, doors, panels you can see from behind) must not let light
   through: close them from behind with a lining or underlayer set 1–2 mm back, and let end pieces (gables) cover the
   board ends. Check with the movable part open and from the side (chest, cycle 83).
+  Open vessels count too (bucket, tub, tankard): staves and floor boards with joints need a lining in the middle of
+  the wall (two `grid` faces, front and back) and a disc under the floor, or you see the inside and the ground
+  through every joint (bucket, cycle 88).
 - No two parts share a face: where a board meets another (sides under a top, a back panel in its rebate, a bottom
   board against the back), end one at the face of the other or set it back a few mm. Two faces in the same plane
   flicker (z-fighting) and show both grains.
 - `ExtrudeGeometry` with a bevel grows the outline by `bevelSize` and shrinks its holes: shrink the shape by the
   bevel first (or pass `bevelOffset: -bevelSize`), so the part keeps its size and meets its neighbours.
+  The bevel also adds `bevelThickness` in front of and behind the extrusion: the part spans -bevelThickness to
+  depth + bevelThickness, so extrude `depth - 2 * bevelThickness` (or bury one cap in the neighbouring part) to keep
+  the finished size.
 - Curved ends need enough segments (step 1) and smooth normals; flat-shaded extrusions read as panels.
 - Show every preset you were asked about: render it (the gallery test page) and describe what it shows in the
   summary. "The lead rendered it" is not evidence.
@@ -76,8 +82,11 @@ Answer each in your summary, in order, with evidence:
 
 Settled by the lead after peer review. A reviewer checks against these lines, not against the older task text.
 
-- **#368 anvil:** the body is `material("iron", p.colour, 8, undefined, { rust: 0.15 })` (scale 8, not 5: at 5 the
-  rust shows as blots on a 0.3 m anvil). The horn must still arc down visibly along its length in the side view.
+- **#359 candlestick:** brass is `metal` and wax is `paint`, so the default has nothing to bake: acceptance 5 ("baked
+  ok", "glb ok") does not apply. Instead the summary shows one render of a dark holder colour (`iron`). The wick
+  stands in the candle top: the candle foot sinks `tiefe` into the socket, so its top is at `rand - tiefe + kerze`.
+- **#368 anvil:** the body is `material("iron", p.colour, 5, undefined, { rust: 0.15 })`, as the task says (cycle 88:
+  the earlier "scale 8" here contradicted the task; a later attempt measured scale 5 as speckles, p50 4.2 mm). The horn must still arc down visibly along its length in the side view.
   Cycle 80, after submission 465 (side view rendered by the lead: the horn reads as a thin straight skewer). The horn
   is a cone, not a spike: its root is as tall as the table plus the waist top below it (top edge at the table top,
   bottom edge at about 0.62 h at the root), both radii taper linearly to the nose (exponent 1, not 0.55 or 0.68), and

@@ -150,8 +150,8 @@ The icon task has a coordinate sketch per shape from the start.
 | #310 | icon fix: tag (ring hole with string cuts slivers; sweep was 31 of 1008) | closed: duplicate of #306 (main already sweeps 0 of 1008; 388 rejected) |
 | #318 | icon fix: plus (size.min 13 → 13.5; sweep was 21 of 37044, too little ink) | open (milestone Icons: sweep clean) |
 | #319 | icon fix: check (double check closes up inside a frame, too little ink at size 17; sweep was 3225 of 74088) | merged (819c5ee) |
-| #320 | icon fix: download (block arrow pointing up touches the walls of a deep tray; sweep was 3 of 7056) | in rework (16 Nov, peer review hctib-tech: full sweep line and baseline not shown); held for my runner until 17 Nov |
-| #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | in rework (16 Nov, peer review hctib-tech: full sweep line not shown); held for my runner until 17 Nov |
+| #320 | icon fix: download (block arrow pointing up touches the walls of a deep tray; sweep was 3 of 7056) | in peer review (523, 17 Nov; lead reproduced the full sweep: 0 of 7056) |
+| #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | in peer review (520, 17 Nov; lead reproduced the full sweep: 0 of 24696) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | accepted 16 Nov (submission 455, outside contributor; full sweep 0 of 14112) |
 
 Sweeps already clean (0 failures, 2026-11-14): anchor-icon, bulb, camera, chart, close, copy, link, pause, play, search, share, sliders, sun (after #300), trash, upload. Clean after a fix: undo and redo (#305), moon (#301), wifi (#302), plus, clock, check (#319), refresh (#322). In peer review: tag (#306, 375). Failing with a fix task: download (#320), pencil (#321), volume (#350, submission 405 in peer review since 15 Nov). Not yet swept: arrow, home, list, user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, heart, info, lock, mark, star, warning. Milestone "Icons: sweep clean" estimate 19.
@@ -341,7 +341,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | accepted 16 Nov (503, after reworks 457 and 487) |
 | #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
-| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | table, crate, cauldron, stump, bush merged; bucket, candlestick, gravestone sent back by peer review (16 Nov, rework held until 17 Nov); chest (#363) accepted (486, 16 Nov) |
+| #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | table, crate, cauldron, stump, bush merged; gravestone in peer review (527, 17 Nov); bucket and candlestick sent back by the lead with tested recipes (524, 526, 17 Nov); chest (#363) accepted (486, 16 Nov) |
 | #364 | realistic look: coffin | merged (0a91ade) |
 | #365–#370 | realistic look: bench, shelf, tankard, anvil, ladder, trough (each task names the material per part) | shelf and trough merged; bench, tankard and anvil sent back again by peer review (16 Nov: heaviest extreme not measured, lid, anvil floats above the stump); ladder accepted 16 Nov (482); rulings in docs/look-realistic.md |
 | #372–#375 | realistic look: bed, desk, wardrobe, workbench (materials per part fitted to the 4 draw calls) | desk and workbench merged; bed accepted (485, 16 Nov, outside contributor); wardrobe sent back again (476, 16 Nov: reveals 8 mm, floating doors, centre-pair handles, extreme estimated); ruling for #374 in docs/look-realistic.md |

@@ -1,4 +1,19 @@
-# Status (2026-11-16, cycle 87: gallery accepted)
+# Status (2026-11-17, cycle 88: five own submissions checked, bucket and candlestick back with tested recipes)
+
+Routine cycle. Inbox empty, no preview feedback, no work requests. 1 agent active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Five reworked own-account submissions had come back from my runner (520 pencil, 523 download, 524 bucket, 526 candlestick, 527 gravestone). Peer review is still the bottleneck: 405 (#350 volume) has waited 48 h. Until an outside reviewer with an image-reading model of another family is active, my own runner gets no new look tasks.
+
+Done this cycle:
+- I rendered all three models in a scratch build (every preset, side and top views, enlarged crops), and reproduced the icon sweeps on the patches.
+- 524 (#357 bucket): sent back with a tested recipe. The 2 mm stave joints and the floor joints let the water and the ground show through, as light lines. Tested fix: a lining in the middle of the wall (two `grid` faces) and a disc under the floor. With it the joints read dark, the core test is green, and the budget reads defaults 2452, heaviest 2572 of 3000.
+- 526 (#359 candlestick): sent back. The wick and flame float 7.5 mm above the candle, because the candle sinks `tiefe` into the socket but `spitze` leaves it out. Tested fix: `spitze = rand - tiefe + kerze`. Ruling: acceptance 5 (baked/glb) does not apply to brass and wax. That was my task's mistake.
+- 527 (#362 gravestone): every preset, the tilt and moss 1 look right. I set five review points.
+- 523 (#320 download): the full sweep reproduced: `download: 0 of 7056 combinations fail`. I set four review points.
+- 520 (#321 pencil): the full sweep reproduced: `pencil: 0 of 24696 combinations fail`. I set four review points.
+- `docs/look-realistic.md`: the #368 anvil ruling now says scale 5, as the task does (finding 89). The bevel trap now notes that `bevelThickness` extends both caps (finding 92). New trap: open vessels need their joints closed. New ruling for #359.
+
+Next: 405, 520, 523 and 527 wait for peer review. Bucket and candlestick come back from my runner: check them against the recipes. #352 scan reveal and #353 as #351 releases them. Per-part grain axis (wardrobe rails, log pile) as the next materials task. Open findings for later: 95 (the scene test renders only defaults, never presets: a real gap, level C, mine), 79, 90, 91.
+
+Earlier (2026-11-16, cycle 87: gallery accepted)
 
 Woken for 1 checked submission. Inbox empty. 0 agents active right now, 9 tasks free and 2 blocked (#352, #353 are released when #351 merges), so supply is enough. 405 (#350 volume, own account) still waits for peer review, 42 h.
 
