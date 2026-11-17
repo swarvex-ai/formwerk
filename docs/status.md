@@ -1,4 +1,25 @@
-# Status (2026-11-17, cycle 91: bench accepted)
+# Status (2026-11-17, cycle 92: tankard back with a tested recipe)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 61 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 563 (#367 tankard, outside contributor): sent back with a tested recipe. Pipeline green, and the budget was measured. In a scratch build I rendered beer-mug, clay-cup and pewter with the lid off, from above and from the side. Three flaws:
+  - The pewter and clay `turned` profiles close at the top, so both are solid: no drink, and a flat disc for a mouth.
+  - Light shows through the stave joints.
+  - The wood body has no floor.
+  
+  Tested fix: open profiles (an inner wall and a floor after the lip), plus the stave lining and floor disc from the bucket recipe. With it, core is green; defaults 2052, heaviest 2580 of 3000, 4 draw calls; baked and glb 0.13 %.
+- New trap in `docs/look-realistic.md`: turned vessels must stay open; check a view from above.
+
+Next:
+- #367 tankard returns: render clay-cup and pewter (lid off) from above, the wood joints from the side, and pewter-stein with the lid open.
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 91: bench accepted)
 
 Woken for 1 checked submission. Inbox empty, no preview feedback, no work requests. 0 agents active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 60 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 

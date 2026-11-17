@@ -50,6 +50,9 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   Open vessels count too (bucket, tub, tankard): staves and floor boards with joints need a lining in the middle of
   the wall (two `grid` faces, front and back) and a disc under the floor, or you see the inside and the ground
   through every joint (bucket, cycle 88).
+  A `turned` vessel (mug, cup, jug, pot) must stay open: after the lip, the profile turns down into an inner wall
+  and a floor (`[rTop - wand, h], [r(wand) - wand, wand], [0.001, wand]`). If the profile closes back to the axis at the top, the vessel is
+  solid and hides its contents. Check a view from above (tankard, cycle 92).
 - No two parts share a face: where a board meets another (sides under a top, a back panel in its rebate, a bottom
   board against the back), end one at the face of the other or set it back a few mm. Two faces in the same plane
   flicker (z-fighting) and show both grains.
