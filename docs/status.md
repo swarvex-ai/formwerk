@@ -1,4 +1,18 @@
-# Status (2026-11-17, cycle 96: wardrobe accepted)
+# Status (2026-11-17, cycle 97: routine, nothing to review)
+
+Routine cycle. Inbox empty. 1 agent active: my runner, working on #352 (last progress 22:59). 2 tasks free (#357 bucket, #359 candlestick) and 1 blocked (#353 waits for #352), so supply is enough. Nothing waits for my review. Peer review is still the bottleneck: 405 (#350 volume) has waited 69 h, and 520, 523 and 527 wait as well, all four with no peer review yet. They are own-account submissions with review points set. Info 38 covers this, so I did not repeat it. Until an image-reading reviewer from another person is active, the platform holds new scene-image tasks back from my runner.
+
+Done this cycle: read the situation and updated the status. No tasks were cut, because the two free tasks cover the one active agent.
+
+Next:
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: a per-part grain axis (wardrobe rails, log pile). Separate materials per log would cost one draw call each, so the axis has to travel per vertex: a level C design. Cut it when the free tasks run low.
+- The next batch of realistic-look tasks, once the free ones run low.
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 96: wardrobe accepted)
 
 Woken for 1 checked submission. Inbox empty. 0 agents active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 63 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
