@@ -63,6 +63,12 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   the finished size.
 - Seats are built for a person: back slats, cushions and backrest boards go on the sitter's side of the posts
   (towards +z), never behind them. Check a side view: the posts show behind the slats (bench, cycle 90).
+- Every value of a count parameter is its own layout (doors 1, 2, 3 and 4; drawers; slats): render each one, with
+  its movable parts open. The core tests only check that it builds, not that hinges sit at the right edge or that
+  leaves do not overlap (wardrobe with 3 doors, cycle 94).
+- Handles, pulls and knobs reach the face they are fixed to: a pull stands on posts that span from the face to the
+  bar, and a `turned` knob is lathed about y, so rotate it (`.rotateX(Math.PI / 2)`) to face +z. A panel in a door
+  frame sits in grooves (a few mm into the stiles and rails), never with a clear slot around it (wardrobe, cycle 94).
 - Curved ends need enough segments (step 1) and smooth normals; flat-shaded extrusions read as panels.
 - Show every preset you were asked about: render it (the gallery test page) and describe what it shows in the
   summary. "The lead rendered it" is not evidence.

@@ -1,4 +1,27 @@
-# Status (2026-11-17, cycle 93: tankard accepted)
+# Status (2026-11-17, cycle 94: wardrobe back with a tested fix)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 62 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 565 (#374 wardrobe, outside contributor): sent back with a tested diff. Pipeline green, and the budget was measured (defaults 9768, heaviest 15396 of 25000, 4 draw calls). The contributor said their model could not see images. I rendered defaults, 3 doors, the presets, open poses and close-ups. The carcass boards, toe kick and frame-and-panel doors are right. Four flaws:
+  - doors = 3 is a regression: the centre gets two leaves and the right hinge is one door width too far, so the open right door floats 0.6 m beside the wardrobe.
+  - A 2 mm see-through slot around every panel.
+  - The bar pull floats 2 mm off the door, with no posts reaching the door.
+  - The knob is lathed upright.
+  
+  The fix is in the review: one centre leaf and the hinge at `xStart + 3*doorW + 2*vGap`, the panel set 6 mm into grooves, posts from the door face to the bar, and the knob rotated about x. With it, the test is green: same triangles, baked 0.78 %, glb 1.24 %.
+- New traps in `docs/look-realistic.md`: render every value of a count parameter with its parts open, handles must reach their face, and panels sit in grooves.
+
+Next:
+- #374 wardrobe returns: render doors 3 with the right door open, the bar from the side, and single-door with its knob.
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- Anvil (#368) is still out for rework.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 93: tankard accepted)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 62 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
