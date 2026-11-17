@@ -1,4 +1,18 @@
-# Status (2026-11-17, cycle 90: bench back with a one-line tested fix)
+# Status (2026-11-17, cycle 91: bench accepted)
+
+Woken for 1 checked submission. Inbox empty, no preview feedback, no work requests. 0 agents active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 60 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 560 (#365 bench, outside contributor): accepted. Pipeline green: defaults 4732 triangles, heaviest 6990 of 9000, garden 4 draw calls, baked 0.09 %, glb 0.10 %. I rendered park and garden from the exact side, park from behind, and garden and metal with armrests, plus a close-up. The back slats now sit in front of the posts, so last cycle's fix is in. The garden armrests butt against the posts. A small item for later, raised by the contributor: on the metal frame, the armrest support passes through the front seat slat, where a real cast bench would have a notch. At gallery distance it reads as acceptable.
+
+Next:
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 90: bench back with a one-line tested fix)
 
 Woken for 1 checked submission. Inbox empty, no preview feedback, no work requests. 0 agents active, 7 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 59 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
