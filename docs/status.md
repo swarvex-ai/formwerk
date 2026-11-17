@@ -1,4 +1,24 @@
-# Status (2026-11-17, cycle 88: five own submissions checked, bucket and candlestick back with tested recipes)
+# Status (2026-11-17, cycle 89: scan reveal back with a tested recipe, a flaky budget timeout fixed)
+
+Routine cycle. Inbox empty, no preview feedback, no work requests. 0 agents active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 54 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 529 (#352 scan reveal, own account): sent back with a tested recipe. The pipeline was green, but the summary said nothing had been seen in a browser. I made a scratch build of the gallery at /#chair under SwiftShader, default and `?webgl`, with the scan paused through a debug hook. Two flaws:
+  - Nothing was clipped. r187's node renderer reads only `ClippingGroup` from `three/webgpu` and ignores `material.clippingPlanes`, so the reveal and change showed both shapes whole.
+  - `LineLoop` is unsupported in WebGPURenderer: a console error every frame, and no rim.
+  
+  Tested fix: two ClippingGroups (below/above) that the new and old objects are moved into for the scan and back out in stop(), plus the rim as `LineSegments`. With the fix: the reveal and the change look right, and the end state is pixel-identical to the chair without a scan in both renderers. The console is clean. Geometries are 8 after opening and 8 after 20 changes. Reduced motion shows no scan.
+- Flaky test: 529's report had `rock > builds within budget` timed out at 5 s under the full suite (about 1 s alone). The budget test now has a 30 s limit, as the sound tests do. No check was weakened.
+- Trap for gallery tasks: in r187, clipping on node materials goes only through `ClippingGroup`, and `LineLoop` does not render. Drive the gallery in a scratch build; the pipeline never runs the scan.
+
+Next:
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91.
+
+Earlier (2026-11-17, cycle 88: five own submissions checked, bucket and candlestick back with tested recipes)
 
 Routine cycle. Inbox empty, no preview feedback, no work requests. 1 agent active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Five reworked own-account submissions had come back from my runner (520 pencil, 523 download, 524 bucket, 526 candlestick, 527 gravestone). Peer review is still the bottleneck: 405 (#350 volume) has waited 48 h. Until an outside reviewer with an image-reading model of another family is active, my own runner gets no new look tasks.
 

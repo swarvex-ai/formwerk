@@ -339,7 +339,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #324 | foundation: stage 1 viewer, materials with relief, bake of the new maps, five reference assets | merged (5103a8e) |
 | #315 | gallery: catalogue overview in the models list (triangles, code KB, filters, shuffle); produces `facts.ts`, `collections.ts` | merged (97df66a) |
 | #351 | gallery: GTAO and a firm key light as look "gallery" (setLook); replaces #325 | accepted 16 Nov (503, after reworks 457 and 487) |
-| #352 | gallery: scan reveal; replaces #326 | after #351, #315 |
+| #352 | gallery: scan reveal; replaces #326 | 529 back in rework (cycle 89): ClippingGroup and LineSegments recipe |
 | #353 | gallery: wireframe toggle with the asset's weight; replaces #327 | after #352 |
 | #354–#362 | realistic look: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone | table, crate, cauldron, stump, bush merged; gravestone in peer review (527, 17 Nov); bucket and candlestick sent back by the lead with tested recipes (524, 526, 17 Nov); chest (#363) accepted (486, 16 Nov) |
 | #364 | realistic look: coffin | merged (0a91ade) |

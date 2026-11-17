@@ -86,7 +86,8 @@ for (const a of only(ASSETS)) {
         zeile(`heaviest of ${faelle.length} cases ${JSON.stringify(schwerst.werte)}`, schwerst),
         ...Object.keys(a.presets).map((name) => zeile(`preset ${name}`, measure(make(a, { preset: name }))))].join("\n");
       writeOut(`${a.id}.budget.txt`, text + "\n");
-    });
+      // 30 s: about 1 s alone, but heavy assets passed 5 s under the full suite on slow runners (rock in 529)
+    }, 30_000);
     it("presets build, movable parts appear, physics data is complete", () => {
       for (const name of Object.keys(a.presets)) expect(measure(make(a, { preset: name })).triangles, `${a.id} preset ${name}`).toBeGreaterThan(0);
       for (const name of Object.keys(a.rig ?? {})) {
