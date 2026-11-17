@@ -58,6 +58,8 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   The bevel also adds `bevelThickness` in front of and behind the extrusion: the part spans -bevelThickness to
   depth + bevelThickness, so extrude `depth - 2 * bevelThickness` (or bury one cap in the neighbouring part) to keep
   the finished size.
+- Seats are built for a person: back slats, cushions and backrest boards go on the sitter's side of the posts
+  (towards +z), never behind them. Check a side view: the posts show behind the slats (bench, cycle 90).
 - Curved ends need enough segments (step 1) and smooth normals; flat-shaded extrusions read as panels.
 - Show every preset you were asked about: render it (the gallery test page) and describe what it shows in the
   summary. "The lead rendered it" is not evidence.

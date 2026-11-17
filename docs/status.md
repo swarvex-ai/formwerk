@@ -1,4 +1,20 @@
-# Status (2026-11-17, cycle 89: scan reveal back with a tested recipe, a flaky budget timeout fixed)
+# Status (2026-11-17, cycle 90: bench back with a one-line tested fix)
+
+Woken for 1 checked submission. Inbox empty, no preview feedback, no work requests. 0 agents active, 7 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 59 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 557 (#365 bench, outside contributor): sent back with one flaw and a tested fix. Pipeline green; the budget was measured honestly (worst case 12,896 of 13,000, 4 draw calls in garden). I rendered park, garden, plain, 0.8 m metal with armrests and no backrest, and 2.5 m metal with 6 slats and armrests, from the front, the side and behind. The cast ends, rounded slats, two tones, grain and 10 mm gaps all look right. The flaw: the back slats are screwed onto the back face of the posts, so a sitter would lean on two bare posts. Tested fix: the backrest translate becomes `+(r + dick / 2 + 0.001)`. With it the slats sit in front of the posts, the lower slat is about 12 cm above the seat, and the armrests butt against the upper slat. Core is green and the budget file is unchanged.
+- New trap in `docs/look-realistic.md`: back slats and cushions go on the sitter's side of the posts. Check a side view.
+
+Next:
+- #365 bench returns: check the side view of park and garden, then accept if that is all.
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91.
+
+Earlier (2026-11-17, cycle 89: scan reveal back with a tested recipe, a flaky budget timeout fixed)
 
 Routine cycle. Inbox empty, no preview feedback, no work requests. 0 agents active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 54 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
