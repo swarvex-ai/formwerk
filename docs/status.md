@@ -1,4 +1,24 @@
-# Status (2026-11-17, cycle 95: anvil accepted)
+# Status (2026-11-17, cycle 96: wardrobe accepted)
+
+Woken for 1 checked submission. Inbox empty. 0 agents active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 63 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 568 (#374 wardrobe, outside contributor): accepted. Pipeline green: defaults 7464 of 13000 triangles, heaviest 12228, 3–4 draw calls; baked 0.79 %, glb 1.32 %. All four flaws from cycle 94 are fixed. I rendered these views, with no console errors:
+  - 3 doors with the right door open 90°: it swings from the right edge, and the centre door is one leaf.
+  - 4 doors with the centre pair and the right door open.
+  - The bar from the side, the knob from the side, the back of an open door, the defaults and single-door.
+  
+  The contributor added a bevelled raised field and split the hidden panel into strips to keep the glb texel density up.
+
+Next:
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- The next batch of realistic-look tasks, once the free ones run low.
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 95: anvil accepted)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 62 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
