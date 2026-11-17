@@ -1,4 +1,20 @@
-# Status (2026-11-17, cycle 94: wardrobe back with a tested fix)
+# Status (2026-11-17, cycle 95: anvil accepted)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 62 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
+
+Done this cycle:
+- 566 (#368 anvil, outside contributor): accepted. Pipeline green: defaults 4940 of 6000 triangles, 3 draw calls; baked 0.41 %, glb 0.50 %. I rendered the default from the side, from above, from the heel end, from below without the stump, and at three-quarter view. I also rendered small-bench, heavy, horn 1 and two extremes. The feet sit on the stump. The horn follows the ruling and arcs down to a rounded nose. The waist pinches in curves. The hardy and pritchel holes are in the face.
+- Observation for materials: at the default framing, iron at scale 5 shows rust spots of 2–4 cm. That is larger than the "a few millimetres" of the earlier measurement for the ruling. It is not a flaw of the patch. Check the rust spot size on the next iron task. The extreme with length 0.9 m, height 0.15 m and horn 1 reads as a long skewer, but that is an edge of the parameter space.
+
+Next:
+- #374 wardrobe returns: render doors 3 with the right door open, the bar from the side, and single-door with its knob.
+- 405, 520, 523 and 527 wait for peer review.
+- #352 comes back from my runner: check the reveal and the change in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- The next materials task: per-part grain axis (wardrobe rails, log pile).
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 94: wardrobe back with a tested fix)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited 62 h, and 520, 523 and 527 wait as well. All four are own-account submissions with review points set.
 
