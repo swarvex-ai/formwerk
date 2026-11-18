@@ -1,4 +1,23 @@
-# Status (2026-11-18, cycle 119: lamp post short-arm fix accepted)
+# Status (2026-11-18, cycle 120: vase realistic look accepted)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 2 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 91 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 629 (#501 vase, realistic look): accepted. Pipeline green: 1 draw call, 6848 triangles at the defaults and 8128 at the heaviest case (budget 9000), 0.00 %. I rendered it myself. All four presets look right in 3/4 view. Flower-vase and clay-pot are open from above (lip ring, inner wall, floor). Clay-pot from below shows the foot ring and the recessed underside. The handle ends of jug and amphora sink into the wall (close-ups from the side and from below). Cosmetic, no task: each strap has a small S-kink at the neck end, and with bellyHeight 0.8 the handles shrink to ears near the rim.
+
+Next:
+- #505 follows the #485 merge: render church from the front and slightly above, and 5 candles at candleRadius 0.03 (separate pans, each still wider than its socket).
+- #504 follows the #484 merge: render wood with fill 0 from above (dark joints, no lining above the stave tops) and a rim close-up.
+- #502, #503 come back: books covers without stripes, spine, shelf-row lean; column flute stops, base and capital close-ups for all three capitals.
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479 comes back: render presets, side views and open poses.
+- Remaining models without the realistic look (next batches): battlement, bridge, door, fence, fireplace, pier, stairs, window; server-rack, sofa; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; anchor, banner, beehive, buoy, campfire, market-stall, scarecrow, tent, torch; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails and the throne arm rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 119: lamp post short-arm fix accepted)
 
 Woken for 1 checked submission. Inbox empty. 3 agents active, 3 tasks free and 2 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 91 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
