@@ -2,7 +2,7 @@ import { CircleGeometry, CylinderGeometry, LatheGeometry, RingGeometry, TorusGeo
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
-import { roundBoards, stave } from "../shapes";
+import { roundBoards, stave, turned } from "../shapes";
 
 export const bucket = defineAsset({
   id: "bucket", category: "props",
@@ -35,9 +35,9 @@ export const bucket = defineAsset({
   },
   rig: { handle: { label: { de: "Bügel", en: "Handle" }, type: "rotate", axis: [1, 0, 0], min: 0, max: 90 } },
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 4200, drawCalls: 4 },
+  budget: { triangles: 4500, drawCalls: 4 },
   build(p, seed) {
-    const z = rng(seed), h = p.height, wall = 0.01, floorT = 0.012, seg = 16;
+    const z = rng(seed), h = p.height, wall = 0.01, floorT = 0.012;
     const rBottom = p.radius * (1 - p.taper);
     const r = (y: number) => rBottom + (p.radius - rBottom) * (y / h);
 
@@ -45,10 +45,13 @@ export const bucket = defineAsset({
     const metall = material("metal", p.body === "metal" ? p.colour : "#4a4a4a");
 
     const t = new Parts();
+    // Ears: iron on the wooden body (one draw call with the hoops), the body's own sheet on the metal one
+    let ohr = koerper, innen = wall;
     if (p.body === "wood") {
       // One wood material for staves and floor: the wood shader already gives every board/stave its own tone
       const holz = material("wood", p.colour, 1, 130);
       const reif = material("iron", "#4a4a4a", 1, 180);
+      ohr = reif;
 
       // Staves about a hand wide, ~2 mm joints; stave(r, h, a0+halb, a1-halb, dicke, 12, 3) like barrel
       const n = Math.max(10, Math.round((2 * Math.PI * r(h / 2)) / 0.095));
@@ -61,6 +64,8 @@ export const bucket = defineAsset({
       const fr = r(floorT) - dicke;
       const bretter = Math.max(3, Math.round((2 * fr) / 0.12));
       t.add(holz, roundBoards(fr, bretter, 0.002, floorT).translate(0, floorT, 0));
+      // A disc in the middle of the boards closes their joints: they show wood below, not the ground
+      t.add(holz, new CircleGeometry(fr, 48).rotateX(-Math.PI / 2).translate(0, floorT / 2, 0));
 
       // Two continuous iron hoops at about 0.2 h and 0.75 h, exactly like barrel: 64 segments + two RingGeometry caps
       const breite = Math.min(0.045, h * 0.05), staerke = 0.004;
@@ -71,37 +76,50 @@ export const bucket = defineAsset({
         t.add(reif, new RingGeometry(r(y1) - 0.0005, ro, 64, 1).rotateX(-Math.PI / 2).translate(0, y1, 0));
         t.add(reif, new RingGeometry(r(y0) - 0.0005, ru, 64, 1).rotateX(Math.PI / 2).translate(0, y0, 0));
       }
-      // Ears share the iron hoop material so hoops + ears stay one draw call
-      for (const seite of [-1, 1]) {
-        t.box(reif, 0.012, 0.025, 0.012, seite * (p.radius + 0.002), h - 0.02, 0);
-      }
     } else {
-      const profil = [
-        new Vector2(0, 0),
-        new Vector2(rBottom, 0),
-        new Vector2(p.radius, h),
-        new Vector2(p.radius - wall, h),
-        new Vector2(r(floorT) - wall, floorT),
-        new Vector2(0, floorT),
-      ];
-      t.add(koerper, new LatheGeometry(profil, seg).rotateY(z() * Math.PI));
+      // Pressed sheet in one lathe profile: under the floor, round heel, up the outside, over a rolled bead, down the
+      // inner wall and across the floor. Counter-clockwise around the section, so every face points out of the sheet
+      const s = 0.0012, b = 0.0025, c = 0.005;
+      innen = s;
+      const profil: Vector2[] = [new Vector2(0, 0)];
+      const bogen = (cx: number, cy: number, rad: number, von: number, bis: number, n: number) => {
+        for (let i = 0; i <= n; i++) {
+          const a = ((von + ((bis - von) * i) / n) * Math.PI) / 180;
+          profil.push(new Vector2(cx + rad * Math.cos(a), cy + rad * Math.sin(a)));
+        }
+      };
+      bogen(rBottom - c, c, c, -90, 0, 3);
+      // A pressed stiffening rib low on the wall
+      const rippe = (y: number) => 0.0018 * Math.exp(-(((y - h * 0.16) / 0.006) ** 2));
+      const ys = [-0.9, -0.5, -0.25, 0, 0.25, 0.5, 0.9].map((k) => h * 0.16 + k * 0.012);
+      for (const y of ys) profil.push(new Vector2(r(y) + rippe(y), y));
+      // Up to the bead, round it outward and over, and in at the inner wall
+      const cy = h - b, cx = r(cy) - s + b, unten = cy - 0.82 * b - 0.004;
+      profil.push(new Vector2(r(unten), unten));
+      bogen(cx, cy, b, -(Math.acos((s - b) / b) * 180) / Math.PI, 180, 9);
+      for (const y of [...ys].reverse()) profil.push(new Vector2(r(y) + rippe(y) - s, y));
+      bogen(rBottom - c, c, c - s, 0, -90, 3);
+      profil.push(new Vector2(0, s));
+      t.add(koerper, new LatheGeometry(profil, 48).rotateY(z() * Math.PI));
+    }
 
-      const b = 0.012;
-      t.add(metall, new CylinderGeometry(p.radius + 0.002, r(h - b) + 0.002, b, seg, 1, true).translate(0, h - b / 2, 0));
-
-      for (const seite of [-1, 1]) {
-        t.box(metall, 0.012, 0.025, 0.012, seite * (p.radius + 0.002), h - 0.02, 0);
-      }
+    // Ears: a thin plate on the wall just below the rim, following its curve and taper, with a round boss for the bail
+    const yo = h - 0.02, ro = r(yo), plattT = 0.0025, plattH = 0.026, halbW = 0.017 / ro, boss = 0.012;
+    for (const seite of [-1, 1]) {
+      const mitte = seite > 0 ? 0 : Math.PI;
+      t.add(ohr, stave((y) => r(yo - plattH / 2 + y) + plattT, plattH, mitte - halbW, mitte + halbW, plattT, 2, 4).translate(0, yo - plattH / 2, 0));
+      t.add(ohr, turned([[0.001, 0], [0.007, 0], [0.007, boss * 0.7], [0.0055, boss], [0.001, boss]], 16).rotateZ((-seite * Math.PI) / 2).translate(seite * (ro + plattT - 0.0005), yo, 0));
     }
 
     if (p.fill >= 0.02) {
       const y = floorT + p.fill * (h - floorT - 0.01);
-      t.add(material("paint", p.liquidColour), new CircleGeometry(r(y) - wall - 0.0005, seg).rotateX(-Math.PI / 2).translate(0, y, 0));
+      t.add(material("paint", p.liquidColour), new CircleGeometry(r(y) - innen - 0.0005, 48).rotateX(-Math.PI / 2).translate(0, y, 0));
     }
 
-    const R = p.radius + 0.006;
-    const henkel = t.moving("handle", 0, h - 0.02, 0);
-    henkel.add(metall, new TorusGeometry(R, 0.004, 6, 12, Math.PI).translate(0, h - 0.02, 0));
+    // The bail: an upright wire half circle over the rim, its ends in the bosses on the hinge axis
+    const R = ro + plattT + boss - 0.0035;
+    const henkel = t.moving("handle", 0, yo, 0);
+    henkel.add(metall, new TorusGeometry(R, 0.004, 8, 32, Math.PI).translate(0, yo, 0));
 
     return t.cylinder(p.radius, h).group();
   },
