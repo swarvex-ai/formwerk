@@ -1,4 +1,28 @@
-# Status (2026-11-18, cycle 106: bucket sent back a third time)
+# Status (2026-11-18, cycle 107: candlestick sent back a third time)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 78 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 595 (#359 candlestick, third attempt): rework. Pipeline green, 1428 triangles at the defaults and 3780 at most (candelabra), 3 draw calls. Fixed: the knops are round beads, church and candelabra show no wax below the cups, the flame follows the lantern profile on the wick. I rendered the defaults, side, knop close-up, church, candelabra, saucer, iron, arm-cup and flame close-ups. The flaws:
+  1. Regression: the saucer ring handle became a straight rod lying on the floor beside the dish.
+  2. The arm cups are open at the bottom (profile starts at tubeR) and show a light sliver at the tube end.
+  3. No drip pan, although the summary claims one: the profile only flares to cupR.
+  4. The candle top dome is wider than the candle (cap with a ledge).
+  5. The foot shows 16 facets; asked for 24 segments.
+- Ruling: if #359 comes back a fourth time with points 1–3 still open, close it and recut it as two smaller tasks (column with drip pan and arms; saucer and candle) — why: three rounds; cost if wrong: one more cycle.
+
+Next:
+- #359 returns: render saucer (ring joined to the dish), arm cups from below and 3/4 (closed, no sliver), side (drip pan on column and arms), flame close-up (no ledge at the candle top), budget.txt.
+- #357 returns: render the default 3/4 view (nothing outside the staves), the front (two continuous hoops), both empty bodies from above (inner wall all round), and the ear close-up (boss on the bail end).
+- #352 returns: on #chest, the arched lid ghost sits on the box mid-scan, also with the lid open; then repeat the cycle 102 checks (script recipe in memory scratch-render).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 106: bucket sent back a third time)
 
 Woken for 1 checked submission. Inbox empty. 3 agents active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 78 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
