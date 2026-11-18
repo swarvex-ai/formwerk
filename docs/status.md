@@ -1,4 +1,25 @@
-# Status (2026-11-18, cycle 117: bucket part 2 accepted, new batch cut)
+# Status (2026-11-18, cycle 118: candlestick fix accepted)
+
+Woken for 1 checked submission. Inbox empty. 3 agents active, 4 tasks free and 2 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 91 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 627 (#485 candlestick: arm cups closed from below, drip pans): accepted. Pipeline green: 3 draw calls, 1484 triangles at the defaults, 4504 at the heaviest case and 4540 at candelabra (budget raised to 4600). I rendered it myself. From below the right arm cup at church and at candelabra, the socket is closed and the tube runs into it. Close-ups of table, church and candelabra show every candle in a lipped pan that is wider than its socket and sits below the candle.
+- My brief had a flaw: with 3 or 5 candles and a candle radius above about 0.023 m (church included), neighbouring pans 0.08 m apart overlap and their lips cross. New #505 (B, art, after #485, fixes #485) clamps the pan radius to 0.038 m when there is more than one candle.
+
+Next:
+- #505 follows the #485 merge: render church from the front and slightly above, and 5 candles at candleRadius 0.03 (separate pans, each still wider than its socket).
+- #504 follows the #484 merge: render wood with fill 0 from above (dark joints, no lining above the stave tops) and a rim close-up.
+- #501–#503 come back: vase and clay-pot from above (open), handle ends; books covers without stripes, spine, shelf-row lean; column flute stops, base and capital close-ups for all three capitals.
+- #500 follows the #481 merge: render arm 0.05, 0.1 and 0.2 with lantern and globe, from the front and the side.
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479 comes back: render presets, side views and open poses.
+- Remaining models without the realistic look (next batches): battlement, bridge, door, fence, fireplace, pier, stairs, window; server-rack, sofa; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; anchor, banner, beehive, buoy, campfire, market-stall, scarecrow, tent, torch; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails and the throne arm rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 117: bucket part 2 accepted, new batch cut)
 
 Woken for 1 checked submission and low supply (0 free for 3 agents). Inbox empty. 2 agents active. Peer review is still the bottleneck: 405 (#350 volume) has waited about 88 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
