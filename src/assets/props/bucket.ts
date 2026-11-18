@@ -1,7 +1,8 @@
-import { CircleGeometry, CylinderGeometry, LatheGeometry, TorusGeometry, Vector2 } from "three";
+import { CircleGeometry, CylinderGeometry, LatheGeometry, RingGeometry, TorusGeometry, Vector2 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { roundBoards, stave } from "../shapes";
 
 export const bucket = defineAsset({
   id: "bucket", category: "props",
@@ -34,48 +35,70 @@ export const bucket = defineAsset({
   },
   rig: { handle: { label: { de: "Bügel", en: "Handle" }, type: "rotate", axis: [1, 0, 0], min: 0, max: 90 } },
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 900, drawCalls: 4 },
+  budget: { triangles: 4200, drawCalls: 4 },
   build(p, seed) {
-    const z = rng(seed), h = p.height, wall = 0.01, floor = 0.012, seg = 16;
+    const z = rng(seed), h = p.height, wall = 0.01, floorT = 0.012, seg = 16;
     const rBottom = p.radius * (1 - p.taper);
     const r = (y: number) => rBottom + (p.radius - rBottom) * (y / h);
 
     const koerper = material(p.body === "wood" ? "wood" : "metal", p.colour);
     const metall = material("metal", p.body === "metal" ? p.colour : "#4a4a4a");
 
-    const profil = [
-      new Vector2(0, 0),
-      new Vector2(rBottom, 0),
-      new Vector2(p.radius, h),
-      new Vector2(p.radius - wall, h),
-      new Vector2(r(floor) - wall, floor),
-      new Vector2(0, floor),
-    ];
-    const t = new Parts().add(koerper, new LatheGeometry(profil, seg).rotateY(z() * Math.PI));
-
+    const t = new Parts();
     if (p.body === "wood") {
+      // One wood material for staves and floor: the wood shader already gives every board/stave its own tone
+      const holz = material("wood", p.colour, 1, 130);
+      const reif = material("iron", "#4a4a4a", 1, 180);
+
+      // Staves about a hand wide, ~2 mm joints; stave(r, h, a0+halb, a1-halb, dicke, 12, 3) like barrel
+      const n = Math.max(10, Math.round((2 * Math.PI * r(h / 2)) / 0.095));
+      const fuge = 0.002, halb = fuge / 2 / p.radius, dicke = Math.max(0.014, p.radius * 0.07);
+      for (let i = 0; i < n; i++) {
+        const a0 = (2 * Math.PI * i) / n, a1 = (2 * Math.PI * (i + 1)) / n;
+        t.add(holz, stave(r, h, a0 + halb, a1 - halb, dicke, 12, 3));
+      }
+      // Floor disc: top at floorT, underside at y = 0, edge touches the staves' inner face (no light gap)
+      const fr = r(floorT) - dicke;
+      const bretter = Math.max(3, Math.round((2 * fr) / 0.12));
+      t.add(holz, roundBoards(fr, bretter, 0.002, floorT).translate(0, floorT, 0));
+
+      // Two continuous iron hoops at about 0.2 h and 0.75 h, exactly like barrel: 64 segments + two RingGeometry caps
+      const breite = Math.min(0.045, h * 0.05), staerke = 0.004;
       for (const f of [0.2, 0.75]) {
-        const y = h * f + (z() - 0.5) * 0.008, b = 0.016;
-        t.add(metall, new CylinderGeometry(r(y + b / 2) + 0.002, r(y - b / 2) + 0.002, b, seg, 1, true)
-          .rotateX((z() - 0.5) * 0.03).rotateZ((z() - 0.5) * 0.03).translate(0, y, 0));
+        const y = h * f, y0 = y - breite / 2, y1 = y + breite / 2;
+        const ru = r(y0) + staerke, ro = r(y1) + staerke;
+        t.add(reif, new CylinderGeometry(ro, ru, breite, 64, 1, true).translate(0, y, 0));
+        t.add(reif, new RingGeometry(r(y1) - 0.0005, ro, 64, 1).rotateX(-Math.PI / 2).translate(0, y1, 0));
+        t.add(reif, new RingGeometry(r(y0) - 0.0005, ru, 64, 1).rotateX(Math.PI / 2).translate(0, y0, 0));
+      }
+      // Ears share the iron hoop material so hoops + ears stay one draw call
+      for (const seite of [-1, 1]) {
+        t.box(reif, 0.012, 0.025, 0.012, seite * (p.radius + 0.002), h - 0.02, 0);
       }
     } else {
-      // Slightly thicker rim band for metal pail
+      const profil = [
+        new Vector2(0, 0),
+        new Vector2(rBottom, 0),
+        new Vector2(p.radius, h),
+        new Vector2(p.radius - wall, h),
+        new Vector2(r(floorT) - wall, floorT),
+        new Vector2(0, floorT),
+      ];
+      t.add(koerper, new LatheGeometry(profil, seg).rotateY(z() * Math.PI));
+
       const b = 0.012;
       t.add(metall, new CylinderGeometry(p.radius + 0.002, r(h - b) + 0.002, b, seg, 1, true).translate(0, h - b / 2, 0));
+
+      for (const seite of [-1, 1]) {
+        t.box(metall, 0.012, 0.025, 0.012, seite * (p.radius + 0.002), h - 0.02, 0);
+      }
     }
 
     if (p.fill >= 0.02) {
-      const y = floor + p.fill * (h - floor - 0.01);
+      const y = floorT + p.fill * (h - floorT - 0.01);
       t.add(material("paint", p.liquidColour), new CircleGeometry(r(y) - wall - 0.0005, seg).rotateX(-Math.PI / 2).translate(0, y, 0));
     }
 
-    // Metal box on the body at each ear (x = ±(radius + 0.002), y = h - 0.02) as plain parts, not moving
-    for (const seite of [-1, 1]) {
-      t.box(metall, 0.012, 0.025, 0.012, seite * (p.radius + 0.002), h - 0.02, 0);
-    }
-
-    // Handle: half ring
     const R = p.radius + 0.006;
     const henkel = t.moving("handle", 0, h - 0.02, 0);
     henkel.add(metall, new TorusGeometry(R, 0.004, 6, 12, Math.PI).translate(0, h - 0.02, 0));
