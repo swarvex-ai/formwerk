@@ -1,4 +1,28 @@
-# Status (2026-11-18, cycle 109: candlestick sent back a fourth time)
+# Status (2026-11-18, cycle 110: scan reveal sent back)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 2 blocked (#353 waits for #352, #483 waits for #482), so supply is enough. 604 (#482 bucket body) is still in the test pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 83 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 603 (#352 scan reveal): rework. Pipeline green; API, keepPrevious, stop() on rig and Download, and reduced motion fit the brief; geometries 6 → 6 after 20 changes. I built the gallery and froze the scan with __scan.tick() (headless Chrome has no WebGPU, so default and ?webgl both ran WebGL2). The flaws:
+  1. No clipping at all: the WebGL path uses material.clippingPlanes, which the r187 node renderer ignores. Mid-reveal the whole chair shows under the ghost, mid-change both chairs overlap. Use ClippingGroup in both backends.
+  2. Console errors every frame: LineLoop is unsupported. Use Line with 5 points.
+  3. Ghosts copy matrixWorld without updateMatrixWorld(true) first (stale hinge matrices after pose()).
+  4. An unrelated indent change in viewer.ts; the summary gives no numbers for checkpoint 4.
+- Lesson: point 4 of the #352 text offered material.clippingPlanes as an option. My task text invited flaw 1. In future gallery tasks, name ClippingGroup only.
+
+Next:
+- #352 returns: render #chair at tick(0.45) (ghost only above the sheet, solid only below), a seat-height change mid-scan (old above, new below), #chest with the lid opened (lid ghost on the opened lid), and the console free of errors.
+- #359 returns: render the socket and an arm cup from above with candleHeight 0.03 and lit false (no see-through), the stem from the side (round beads), and a flame close-up (teardrop); also recheck the saucer, the arm cups from below and the drip pans.
+- #482 returns: render the defaults (two continuous hoops), fill 0 from above (closed inner wall and floor), and the side at floor level; check that the metal body and bail are unchanged from main.
+- #483 follows #482: render pail and milk-pail (rolled rim, ears below the rim), metal fill 0 from above, handle 0 and 90 from the front (ends on the bosses), and an ear close-up.
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 109: candlestick sent back a fourth time)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 6 tasks free and 2 blocked (#353 waits for #352, #483 waits for #482), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 81 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
