@@ -58,7 +58,7 @@ export const candlestick = defineAsset({
     church: { label: { de: "Kirche", en: "Church" }, values: { arms: "3", candleRadius: 0.025, candleHeight: 0.22 } },
   },
   physics: { body: "dynamic", collider: "hull" },
-  budget: { triangles: 3500, drawCalls: 3 },
+  budget: { triangles: 4600, drawCalls: 3 },
   build(p, seed) {
     const r = rng(seed);
     const metall = material("metal", p.holderColour), wachs = material("paint", p.waxColour, 1, 870), flamme = material("glow", "#ffb347");
@@ -80,7 +80,11 @@ export const candlestick = defineAsset({
       // Turned column; three and five candles hang their cups on bent tubes out to the sides
       const h = p.holderHeight, stab = Math.max(0.008, Math.min(0.022, h * 0.075));
       const fuss = Math.min(0.085, Math.max(0.032, h * (kerzen === 1 ? 0.34 : 0.28)));
+      // Drip pan (bobèche) under every socket rim: a flat disc with a raised lip, closed on the axis, below the candle
+      const pan = cupR + 0.012;
+      const tropfschale = (x: number) => turned([[0.0006, 0], [pan, 0], [pan, 0.004], [pan - 0.002, 0.004], [pan - 0.002, 0.002], [0.0006, 0.002]], 16, x, h - 0.007, 0);
       t.add(metall, new LatheGeometry(saeule(h, fuss, stab, cupR), 24));
+      t.add(metall, tropfschale(0));
       stellen.push(0); rand = h;
       for (const weite of kerzen === 5 ? [0.08, 0.16] : kerzen === 3 ? [0.08] : []) for (const seite of [-1, 1]) {
         const x = seite * weite;
@@ -88,7 +92,9 @@ export const candlestick = defineAsset({
           new Vector3(seite * stab * 0.6, h * 0.3, 0), new Vector3(x * 0.55, h * 0.52, 0),
           new Vector3(x * 0.93, h * 0.8, 0), new Vector3(x, h - 0.012, 0),
         ], false, "centripetal"), 12, Math.max(0.004, stab * 0.5), 6, false));
-        t.add(metall, turned([[cupR, h - 0.008], [cupR, h], [cupR - 0.0015, h], [cupR - 0.0015, h - 0.003], [0.0006, h - 0.003]], 16, x, 0, 0));
+        // Socket closed on the axis below, the arm tube runs into its underside
+        t.add(metall, turned([[0.0006, h - 0.012], [cupR * 0.7, h - 0.012], [cupR, h - 0.008], [cupR, h], [cupR - 0.0015, h], [cupR - 0.0015, h - 0.003], [0.0006, h - 0.003]], 16, x, 0, 0));
+        t.add(metall, tropfschale(x));
         stellen.push(x);
       }
     }
