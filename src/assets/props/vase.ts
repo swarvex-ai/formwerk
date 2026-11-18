@@ -1,6 +1,7 @@
-import { CatmullRomCurve3, CircleGeometry, LatheGeometry, TorusGeometry, Vector2, Vector3 } from "three";
+import { CatmullRomCurve3, TubeGeometry, Vector2, Vector3 } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { turned } from "../shapes";
 
 export const vase = defineAsset({
   id: "vase", category: "props",
@@ -29,27 +30,63 @@ export const vase = defineAsset({
     "clay-pot": { label: { de: "Tontopf", en: "Clay pot" }, values: { height: 0.2, belly: 0.5, bellyHeight: 0.5, neck: 1, lip: 0.015 } },
   },
   physics: { body: "dynamic", collider: "hull" },
-  budget: { triangles: 3000, drawCalls: 2 },
+  budget: { triangles: 9000, drawCalls: 1 },
   build(p) {
-    const h = p.height, rb = p.belly * h, rn = rb * p.neck, wall = 0.008;
-    // Hollow vessel drawn as a solid-looking volume: effective density for its mass
+    const h = p.height, rb = p.belly * h, rn = rb * p.neck;
+    // Hollow vessel drawn as a solid-looking volume: effective density for its mass; a glaze is smooth
     const glasur = material("paint", p.colour, 1, 400);
+    // Thrown on the wheel: foot ring 6 mm high and set in 3 mm, wall 7 mm, floor 1 cm above the ground
+    const fuss = 0.006, rf = rb * 0.6 - 0.003, ring = Math.min(0.008, rf * 0.4), mulde = 0.003, boden = 0.01;
+    const wand = Math.min(0.007, rn * 0.5), rTop = rn + p.lip, rl = Math.min(Math.max(0.003, p.lip / 2 + 0.002), rTop * 0.45);
     const kurve = new CatmullRomCurve3([
-      new Vector3(rb * 0.6, 0, 0), new Vector3(rb, h * p.bellyHeight, 0), new Vector3(rn, h * 0.85, 0), new Vector3(rn + p.lip, h, 0),
+      new Vector3(rb * 0.6, 0, 0), new Vector3(rb, h * p.bellyHeight, 0), new Vector3(rn, h * 0.85, 0), new Vector3(rTop, h, 0),
     ], false, "centripetal");
-    const aussen = kurve.getPoints(23).map((v) => new Vector2(Math.max(0.002, v.x), v.y));
-    // One closed profile: up the outside, over the rim, down the inside to just above the floor
-    const innen = aussen.slice().reverse().filter((v) => v.y >= 0.01).map((v) => new Vector2(Math.max(0.002, v.x - wall), v.y));
-    const profil = [...aussen, ...innen, new Vector2(0, Math.max(0.01, innen[innen.length - 1].y))];
-    const t = new Parts().add(glasur, new LatheGeometry(profil, 24));
-    t.add(glasur, new CircleGeometry(aussen[0].x, 24).rotateX(Math.PI / 2));
-    // Handles: half-ring arcs from the shoulder to the neck, bulging outward
-    const radiusBei = (y: number) => kurve.getPoint(Math.min(1, Math.max(0, aussen.findIndex((v) => v.y >= y) / 23))).x;
-    const ys = h * (0.5 + 0.5 * p.bellyHeight) * 0.97, yn = h * 0.85;
-    const a = new Vector2(radiusBei(ys), ys), b = new Vector2(radiusBei(yn), yn), d = b.clone().sub(a);
-    const dreh = Math.atan2(d.y, d.x) - Math.PI / 2 + Math.PI; // arc opens towards the vessel wall
+    // The same curve, set on the foot ring and ending under the rolled lip
+    const aussen = kurve.getPoints(47).map((v): [number, number] => [Math.max(0.002, v.x), fuss + (v.y / h) * (h - rl - fuss)]);
+    const profil: [number, number][] = [
+      [0.001, mulde], [rf - ring, mulde], [rf - ring + 0.0015, 0], [rf - 0.0015, 0], [rf, 0.0015], [rf, fuss - 0.001], [rf + 0.001, fuss],
+      ...aussen,
+    ];
+    // Rolled lip: a half-round over the rim from the outside to the inside
+    for (let i = 1; i <= 5; i++) {
+      const a = (Math.PI * i) / 5;
+      profil.push([rTop - rl + rl * Math.cos(a), h - rl + rl * Math.sin(a)]);
+    }
+    // Down the inner wall to the floor: the vessel stays open, inner faces point inward
+    const innen = aussen.slice().reverse().filter(([, y]) => y < h - rl - 0.002 && y > boden + 0.002);
+    for (const [x, y] of innen) profil.push([Math.max(0.001, x - wand), y]);
+    profil.push([Math.max(0.001, radiusBei(boden) - wand), boden], [0.001, boden]);
+    const t = new Parts().add(glasur, turned(profil, 32));
+
+    // Outside radius and outward normal of the profile at height y
+    function radiusBei(y: number) { return wandBei(y).x; }
+    function wandBei(y: number) {
+      let i = aussen.findIndex(([, v]) => v >= y);
+      i = Math.min(aussen.length - 1, Math.max(1, i));
+      const [x0, y0] = aussen[i - 1], [x1, y1] = aussen[i], f = Math.min(1, Math.max(0, (y - y0) / (y1 - y0 || 1)));
+      const n = new Vector2(y1 - y0, -(x1 - x0)).normalize();
+      return { x: x0 + (x1 - x0) * f, n };
+    }
+    // Strap handles from the shoulder to the neck: a half-oval loop, both ends sunk 4 mm (plus the curve of the wall)
+    // into the wall along its normal
+    const yn = h * 0.85, ys = Math.min(h * (0.5 + 0.5 * p.bellyHeight) * 0.97, yn - h * 0.07);
+    const breite = 0.03 * (h / 0.35), dicke = breite / 2.5;
+    const punkt = (y: number, k: number) => {
+      const w = wandBei(y);
+      return new Vector3(w.x + w.n.x * k, y + w.n.y * k, 0);
+    };
+    const tief = (y: number) => -Math.min(wand * 0.85, 0.004 + (breite / 2) ** 2 / (2 * radiusBei(y)));
+    const a = punkt(ys, 0), b = punkt(yn, 0), mitte = a.clone().add(b).multiplyScalar(0.5), u = b.clone().sub(a).multiplyScalar(0.5);
+    const v = new Vector3(u.y, -u.x, 0).normalize();
+    if (v.x < 0) v.negate();
+    v.multiplyScalar(Math.max(0.03 * (h / 0.35), u.length() * 0.7));
+    const bogen = [1, 2, 3, 4, 5, 6, 7].map((i) => {
+      const w = (Math.PI * i) / 8;
+      return mitte.clone().addScaledVector(u, -Math.cos(w)).addScaledVector(v, Math.sin(w));
+    });
+    const henkel = new CatmullRomCurve3([punkt(ys, tief(ys)), punkt(ys, dicke * 0.6), ...bogen, punkt(yn, dicke * 0.6), punkt(yn, tief(yn))], false, "centripetal");
     for (let k = 0; k < p.handles; k++) {
-      const g = new TorusGeometry(d.length() / 2, 0.012 * (h / 0.35), 8, 12, Math.PI).rotateZ(dreh + Math.PI).translate((a.x + b.x) / 2, (a.y + b.y) / 2, 0);
+      const g = new TubeGeometry(henkel, 32, dicke / 2, 10, false).scale(1, 1, 2.5);
       t.add(glasur, k === 1 ? g.rotateY(Math.PI) : g);
     }
     return t.group();
