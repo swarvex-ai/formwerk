@@ -1,4 +1,27 @@
-# Status (2026-11-18, cycle 112: candlestick accepted)
+# Status (2026-11-18, cycle 113: scan reveal sent back again)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked, so supply is enough. 608 (#478 throne) is still in the test pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 86 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 606 (#352 scan reveal, second attempt): rework. Pipeline green. The cycle 110 points are fixed: the Line rim, ClippingGroup in both backends, no console errors, and geometries 6 → 6 after 20 changes. I built the gallery and froze the scan (default and ?webgl, both WebGL2 here). The flaws:
+  1. The plane signs are inverted (three.js keeps the side where n·p + c ≥ 0). Nothing is clipped: the whole chair shows mid-reveal with no ghost, and on a change the old chair never shows. With both signs flipped in a scratch copy, reveal and change looked right, so the reason gives the exact two lines.
+  2. The ghosts copy into matrixWorld, which the renderer recomputes each frame, so the #chest lid ghost is missing. Copy into g.matrix instead.
+  3. With reduced motion, keepPrevious leaves the old chair in the scene (two chairs, and the geometries leak).
+  Also: THREE.Clock is deprecated (use Timer), and the summary claimed a ghost that was never drawn.
+- Pipeline note: in the full run for 606, `cloud` in tests/core/icons.test.ts hit the 120 s vitest timeout under load (27 s alone here), and the check still passed. If it fails a pipeline run, give that test its own timeout or fewer cases (level D, me).
+
+Next:
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #485 follows the #359 merge: render church from below an arm cup (closed), and candelabra and church for the drip pans under every candle.
+- #484 follows #482: render pail and milk-pail, metal and wood with fill 0 from above, handle 0 and 90 from the front on both bodies, and an ear close-up.
+- #478 (608 in the pipeline): render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 112: candlestick accepted)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 4 tasks free and 3 blocked (#353 waits for #352, #484 for the #482 merge, #485 for the #359 merge), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 83 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
