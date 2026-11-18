@@ -1,4 +1,24 @@
-# Status (2026-11-18, cycle 111: bucket part 1 accepted)
+# Status (2026-11-18, cycle 112: candlestick accepted)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 4 tasks free and 3 blocked (#353 waits for #352, #484 for the #482 merge, #485 for the #359 merge), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 83 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 605 (#359 candlestick, fifth attempt): accepted. Pipeline green: 3 draw calls, 1324 triangles at the defaults and 3484 at candelabra (budget 3500). The contributor's model could not read images, so I rendered it myself: the defaults, the socket and an arm cup from above with candleHeight 0.03 and lit false, the stem, a flame close-up, candelabra, church, the saucer, and an arm cup from below. Points 1–3 of cycle 109 are fixed (closed sockets from above, round beads, lantern teardrop), so the recut ruling did not apply.
+- Two flaws are left: the arm cups are open from below (the profile starts at cupR and the floor is one-sided), and the drip pans are gone. These became #485 (level B, fixes 359, depends on 359), with the profiles spelled out.
+- Ruling: accept a long-running look task when its named rework points are fixed, and cut what remains as a narrow follow-up — why: each restart from main lost earlier fixes; cost if wrong: one small extra task.
+
+Next:
+- #485 follows the #359 merge: render church from below an arm cup (closed), and candelabra and church for the drip pans under every candle.
+- #484 follows #482: render pail and milk-pail (rolled rim, ears below the rim), metal and wood with fill 0 from above (inner wall, no floor seams), handle 0 and 90 from the front on both bodies (ends on the bosses), and an ear close-up.
+- #352 returns: render #chair at tick(0.45) (ghost only above the sheet, solid only below), a seat-height change mid-scan (old above, new below), #chest with the lid opened (lid ghost on the opened lid), and the console free of errors.
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 111: bucket part 1 accepted)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 4 tasks free and 2 blocked (#353 waits for #352, #484 waits for the #482 merge), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 83 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
