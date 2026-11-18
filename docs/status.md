@@ -1,4 +1,22 @@
-# Status (2026-11-18, cycle 113: scan reveal sent back again)
+# Status (2026-11-18, cycle 114: throne accepted)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 86 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 608 (#478 throne): accepted. The pipeline marked it pass, but its glb step hit the 240 s time limit on both the patch and main (counter-check). The bake alone took 64–70 s there, against 3 s here. So I ran FORMWERK_ONLY=throne npm test myself: 4 draw calls, 13840 triangles, 0.00 % changed, baked 0.25 %, glb 0.27 % (heaviest extreme 15376 of budget 16000). I rendered the front, side, back, arms=false, the three presets, the heaviest extreme, the smallest case and an arm close-up. Frame base with panels, raised-panel back, cushions resting on +z, arm rails into the back posts, finials on the crest. No console errors.
+- Pipeline note: a slow pipeline machine can time out the glb step for heavier models, and the check still passes because main fails too. When a model check shows "FAIL time limit", rerun the asset locally before accepting.
+
+Next:
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #485 follows the #359 merge: render church from below an arm cup (closed), and candelabra and church for the drip pans under every candle.
+- #484 follows #482: render pail and milk-pail, metal and wood with fill 0 from above, handle 0 and 90 from the front on both bodies, and an ear close-up.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails and the throne arm rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 113: scan reveal sent back again)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked, so supply is enough. 608 (#478 throne) is still in the test pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 86 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
