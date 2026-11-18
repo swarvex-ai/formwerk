@@ -1,7 +1,8 @@
-import { BoxGeometry, Matrix4 } from "three";
+import { ExtrudeGeometry, Matrix4, Shape, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded } from "../shapes";
 
 export const books = defineAsset({
   id: "books", category: "props",
@@ -31,7 +32,7 @@ export const books = defineAsset({
     tome: { label: { de: "Wälzer", en: "Tome" }, values: { count: 1, size: 0.34, thickness: 0.08, coverColour: "#3a2a1a" } },
   },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 800, drawCalls: 3 },
+  budget: { triangles: 6100, drawCalls: 3 },
   build(p, seed) {
     const r = rng(seed), t = new Parts();
     const covers = [material("paint", p.coverColour), material("paint", p.secondColour)], pages = material("paint", p.pageColour);
@@ -40,15 +41,33 @@ export const books = defineAsset({
       const H = p.size * vary();
       return { H, T: p.thickness * vary(), W: 0.7 * H };
     });
-    // A book in its own frame: thickness along x from 0, height along y from 0, width along z, spine at +z
+    // A book in its own frame: thickness along x from 0, height along y from 0, width along z, spine at +z.
+    // Two boards with eased edges, 3 mm larger than the page block (the squares), a round spine between them that
+    // bulges out on +z, and the page block with a rounded back, 1 mm clear of boards and spine (no shared faces).
     const book = (b: (typeof list)[number], i: number, m: Matrix4) => {
-      const part = (mat: typeof pages, x0: number, x1: number, y0: number, y1: number, z0: number, z1: number) =>
-        t.add(mat, new BoxGeometry(x1 - x0, y1 - y0, z1 - z0).translate((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2).applyMatrix4(m));
-      const { H, T, W } = b, cover = covers[i % 2], f = 0.002, o = 0.004;
-      part(cover, 0, f, 0, H, -W / 2, W / 2);
-      part(cover, T - f, T, 0, H, -W / 2, W / 2);
-      part(cover, f, T - f, 0, H, W / 2 - f, W / 2);
-      part(pages, f, T - f, o, H - o, -W / 2 + o, W / 2);
+      const { H, T, W } = b, cover = covers[i % 2], f = 0.0025, sq = 0.003, gap = 0.001, n = 12;
+      const d = Math.max(0.006, 0.3 * T), zs = W / 2 - d;
+      for (const x of [f / 2, T - f / 2]) t.add(cover, rounded(f, H, zs + 0.001 + W / 2, 0.001, x, H / 2, (zs + 0.001 - W / 2) / 2).applyMatrix4(m));
+      // Spine: a shell f thick on a half ellipse across the thickness, closed inside and at both ends
+      const arc = (s: number, u: number, y: number) => {
+        const a = Math.PI * u;
+        return new Vector3(T / 2 - (T / 2 - s) * Math.cos(a), y, zs + (d - s) * Math.sin(a));
+      };
+      const out = (q: Vector3) => new Vector3(q.x - T / 2, 0, q.z - zs);
+      t.add(cover, grid(n, 1, (u, v) => arc(0, u, v * H), out).applyMatrix4(m));
+      t.add(cover, grid(n, 1, (u, v) => arc(f, u, v * H), (q) => out(q).negate()).applyMatrix4(m));
+      for (const y of [0, H]) t.add(cover, grid(n, 1, (u, v) => arc(f * v, u, y), () => new Vector3(0, y ? 1 : -1, 0)).applyMatrix4(m));
+      // Its edges against the boards, so the joint behind their eased ends stays closed
+      for (const u of [0, 1]) t.add(cover, grid(1, 1, (s, v) => arc(f * s, u, v * H), () => new Vector3(0, 0, -1)).applyMatrix4(m));
+      // Page block: its cross-section in x/z (shape y = -z), extruded upwards
+      const x0 = f + gap, x1 = T - f - gap, s = new Shape();
+      s.moveTo(x0, W / 2 - sq);
+      for (let k = 0; k <= n; k++) {
+        const a = (Math.PI * k) / n;
+        s.lineTo((x0 + x1) / 2 - ((x1 - x0) / 2) * Math.cos(a), -(zs + (d - f - gap) * Math.sin(a)));
+      }
+      s.lineTo(x1, W / 2 - sq);
+      t.add(pages, new ExtrudeGeometry(s, { depth: H - 2 * sq, bevelEnabled: false, curveSegments: 1 }).rotateX(-Math.PI / 2).translate(0, sq, 0).applyMatrix4(m));
     };
     if (p.layout === "stack") {
       list.sort((a, c) => c.H - a.H);
