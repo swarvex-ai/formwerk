@@ -1,4 +1,22 @@
-# Status (2026-11-18, cycle 114: throne accepted)
+# Status (2026-11-18, cycle 115: mailbox accepted)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 87 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 613 (#480 mailbox): accepted. Pipeline green: 4 draw calls, 2648 triangles at the defaults and 5688 at city, the heaviest case (budget 6000); baked and glb both 0.00 %, with no time limit hit. I rendered it myself: rural from the front, side and below; door 100 with flag 90; city at door 84; city from above; wall-box closed and open; rural postHeight 0 open; a short post; and a flag close-up. Bent sheet body with a rear wall, a sealed lid with a latch tab that folds down about its bottom edge, a bracket plate with ears and screws on a chamfered post, the flag on its pin (lying back at 0, upright at 90), and the upright box with a slot frame and pull. The door maximum comes from the door points, so it stays above the floor at every post height.
+- Note: the hollow sheet body dropped the estimated mass to 17 kg (rural) and 0.3 kg (wall-box). That is fine for a static body.
+
+Next:
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #485 follows the #359 merge: render church from below an arm cup (closed), and candelabra and church for the drip pans under every candle.
+- #484 follows #482: render pail and milk-pail, metal and wood with fill 0 from above, handle 0 and 90 from the front on both bodies, and an ear close-up.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479 and #481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails and the throne arm rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 114: throne accepted)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 86 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
