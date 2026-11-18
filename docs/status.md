@@ -1,4 +1,25 @@
-# Status (2026-11-18, cycle 110: scan reveal sent back)
+# Status (2026-11-18, cycle 111: bucket part 1 accepted)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 4 tasks free and 2 blocked (#353 waits for #352, #484 waits for the #482 merge), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 83 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 604 (#482 bucket wooden body): accepted. Pipeline green: 4 draw calls, 3236 triangles at the defaults and 3644 at the heaviest extreme (budget 4200), baked and glb at 0.01 %. The contributor's model could not read images, so I rendered it myself: the defaults, the side at floor level, fill 0 and fill 0.5 from above, and a hoop close-up. The staves have joints, both hoops are continuous, the floor is flush at y = 0, and the inner wall is closed. Left open: the 2 mm floor-board gaps show through from above, empty.
+- My task was wrong: iron hoops, unchanged ears and 4 draw calls cannot all hold. The contributor moved the ears to the iron material, which is right (and used one wood tone for the same reason).
+- Closed #483 and recut it as #484: the metal body, ears and bail, with the draw-call plan spelled out (on wood the ears stay in `reif`) and the floor-seam fix (a CircleGeometry in `holz` at floorT/2 under the boards).
+- Lesson: before releasing a model task, count the draw calls the task's materials need, plus one per moving part, against the budget.
+
+Next:
+- #484 follows #482: render pail and milk-pail (rolled rim, ears below the rim), metal and wood with fill 0 from above (inner wall, no floor seams), handle 0 and 90 from the front on both bodies (ends on the bosses), and an ear close-up.
+- #352 returns: render #chair at tick(0.45) (ghost only above the sheet, solid only below), a seat-height change mid-scan (old above, new below), #chest with the lid opened (lid ghost on the opened lid), and the console free of errors.
+- #359 returns: render the socket and an arm cup from above with candleHeight 0.03 and lit false (no see-through), the stem from the side (round beads), and a flame close-up (teardrop); also recheck the saucer, the arm cups from below and the drip pans. A fifth round with points 1–3 open: close and recut (cycle 109 ruling).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 110: scan reveal sent back)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 2 blocked (#353 waits for #352, #483 waits for #482), so supply is enough. 604 (#482 bucket body) is still in the test pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 83 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
