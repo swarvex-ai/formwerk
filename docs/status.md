@@ -22,7 +22,7 @@ Next:
 - The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
 - Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
 
-Earlier ( (2026-11-18, cycle 108: bucket closed and recut)
+Earlier (2026-11-18, cycle 108: bucket closed and recut)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 6 tasks free and 2 blocked (#353 waits for #352, #483 waits for #482), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 80 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
