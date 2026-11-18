@@ -1,18 +1,29 @@
-import { CatmullRomCurve3, ConeGeometry, CylinderGeometry, LatheGeometry, SphereGeometry, TorusGeometry, TubeGeometry, Vector2, Vector3 } from "three";
+import { CatmullRomCurve3, CylinderGeometry, LatheGeometry, SphereGeometry, TorusGeometry, TubeGeometry, Vector2, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { turned } from "../shapes";
 
 // Turned column of the holder: round foot, two bulges, a cup whose rim sits at y = h; the profile runs back inside so
 // the lathe closes both ends on the axis.
 const saeule = (h: number, fuss: number, stab: number, cupR: number): Vector2[] => {
   const fussH = Math.min(0.028, h * 0.15);
+  const knopR = stab * 0.8, k1 = h * 0.42, k2 = h * 0.66, q = 0.70710678;
+  // Eine Knop ist eine halbe Kugel um (stab, k): zwei glatte Perlen statt scharfer Spitzen
+  const knop = (k: number): Vector2[] => [
+    new Vector2(stab, k - knopR), new Vector2(stab + knopR * q, k - knopR * q),
+    new Vector2(stab + knopR, k), new Vector2(stab + knopR * q, k + knopR * q), new Vector2(stab, k + knopR),
+  ];
   return [
     new Vector2(0.0006, 0), new Vector2(fuss, 0), new Vector2(fuss, fussH * 0.5), new Vector2(fuss * 0.42, fussH),
-    new Vector2(stab * 1.1, h * 0.3), new Vector2(stab * 1.8, h * 0.42), new Vector2(stab * 0.9, h * 0.54),
-    new Vector2(stab * 1.45, h * 0.66), new Vector2(stab * 0.95, h * 0.78),
+    new Vector2(stab * 1.1, h * 0.3),
+    ...knop(k1),
+    new Vector2(stab * 0.9, h * 0.54),
+    ...knop(k2),
+    new Vector2(stab * 0.95, h * 0.78),
     new Vector2(Math.max(stab, cupR * 0.45), h * 0.9), new Vector2(cupR, h * 0.985), new Vector2(cupR, h),
-    new Vector2(cupR * 0.55, h - 0.005), new Vector2(0.0006, h - 0.008),
+    // Dünner Rand und geschlossener Boden der Kerzentasse: kein Blick ins Hohlinnere der Säule
+    new Vector2(cupR - 0.0015, h), new Vector2(cupR - 0.0015, h - 0.003), new Vector2(0.0006, h - 0.003),
   ];
 };
 
@@ -47,7 +58,7 @@ export const candlestick = defineAsset({
     church: { label: { de: "Kirche", en: "Church" }, values: { arms: "3", candleRadius: 0.025, candleHeight: 0.22 } },
   },
   physics: { body: "dynamic", collider: "hull" },
-  budget: { triangles: 3000, drawCalls: 3 },
+  budget: { triangles: 3500, drawCalls: 3 },
   build(p, seed) {
     const r = rng(seed);
     const metall = material("metal", p.holderColour), wachs = material("paint", p.waxColour, 1, 870), flamme = material("glow", "#ffb347");
@@ -77,7 +88,7 @@ export const candlestick = defineAsset({
           new Vector3(seite * stab * 0.6, h * 0.3, 0), new Vector3(x * 0.55, h * 0.52, 0),
           new Vector3(x * 0.93, h * 0.8, 0), new Vector3(x, h - 0.012, 0),
         ], false, "centripetal"), 12, Math.max(0.004, stab * 0.5), 6, false));
-        t.add(metall, new CylinderGeometry(cupR, cupR * 0.45, 0.016, 8).translate(x, h - 0.008, 0));
+        t.add(metall, turned([[cupR, h - 0.008], [cupR, h], [cupR - 0.0015, h], [cupR - 0.0015, h - 0.003], [0.0006, h - 0.003]], 16, x, 0, 0));
         stellen.push(x);
       }
     }
@@ -95,7 +106,7 @@ export const candlestick = defineAsset({
       if (p.lit) {
         // Teardrop flame like the torch, tip up, standing on the glowing wick
         const fh = flammenH * (0.9 + r() * 0.2);
-        t.add(flamme, new ConeGeometry(Math.max(0.0045, cr * 0.5), fh, 6).translate(x, spitze + 0.005 + fh / 2, 0));
+        t.add(flamme, turned([[0.001, 0], [cr * 0.32, fh * 0.18], [cr * 0.36, fh * 0.35], [cr * 0.22, fh * 0.7], [0.001, fh]], 14, x, spitze + 0.011, 0));
       }
     }
     return t.group();
