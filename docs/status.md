@@ -1,4 +1,24 @@
-# Status (2026-11-18, cycle 115: mailbox accepted)
+# Status (2026-11-18, cycle 116: lamp post accepted)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 2 tasks free and 2 blocked (#353 waits for #352, #500 for the #481 merge), so supply is just enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 87 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 617 (#481 lamp post): accepted. Pipeline green: 2 draw calls, 4856 triangles at the defaults and 7600 at the heaviest case (budget 8000). No bake or glb, because metal and glow have no pattern. I rendered it myself with no console warnings: old-town, park, street (also from below), heads 2 with each style, arm 0 with globe and with modern, height 2 and height 7 with arm 1.6 and two heads, and close-ups of the foot, the arm joint and the lantern. The turned foot and shaft have mouldings, the brace is buried at both ends, and the hook ring goes through the finial.
+- New #500 (B, art, after #481): with an arm of 0.05–0.2 m, a hanging lantern or globe overlaps the post (already true on main). The fix gives the arm a minimum length per style, the same way two heads already work.
+
+Next:
+- #500 follows the #481 merge: render arm 0.05, 0.1 and 0.2 with lantern and globe, from the front and the side.
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #485 follows the #359 merge: render church from below an arm cup (closed), and candelabra and church for the drip pans under every candle.
+- #484 follows #482: render pail and milk-pail, metal and wood with fill 0 from above, handle 0 and 90 from the front on both bodies, and an ear close-up.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479 comes back: render presets, side views and open poses.
+- Supply is low (2 free): next cycle, cut the next realistic-look batch (the milestone is at 32 planned of 67).
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails and the throne arm rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 115: mailbox accepted)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 87 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
