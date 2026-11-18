@@ -1,4 +1,28 @@
-# Status (2026-11-18, cycle 108: bucket closed and recut)
+# Status (2026-11-18, cycle 109: candlestick sent back a fourth time)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 6 tasks free and 2 blocked (#353 waits for #352, #483 waits for #482), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 81 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 602 (#359 candlestick, fourth attempt): rework. Pipeline green, 1016 triangles at the defaults and 3416 at candelabra, 3 draw calls. Points 1–3 of cycle 107 are fixed: the saucer ring is joined to the dish, the arm cups are closed from below with no sliver, and the column and arms have drip pans. So the cycle 107 recut ruling did not apply. I rendered the defaults, side, socket and arm cup from above, saucer, candelabra, arm cup side, flame and stem. The attempt started from main again, so the earlier knop and flame fixes are lost. The flaws:
+  1. The sockets are open inside (profiles stop at cupR, h): you can see through the gap between candle and wall into the hollow column, or onto the arm tube.
+  2. The knops are sharp diamonds, not round beads.
+  3. The flame is a 6-sided cone, not the lantern teardrop (lantern.ts line 92).
+  4. The summary opens with shell output, and it does not say the images were viewed.
+- Ruling: if #359 comes back a fifth time with any of points 1–3 open, close it and recut it as two tasks (column profile: closed socket and round knops; candle and lantern flame) — why: four rounds, and each restart from main loses fixes; cost if wrong: one more cycle.
+
+Next:
+- #359 returns: render the socket and an arm cup from above with candleHeight 0.03 and lit false (no see-through), the stem from the side (round beads), and a flame close-up (teardrop); also recheck the saucer, the arm cups from below and the drip pans.
+- #482 returns: render the defaults (two continuous hoops), fill 0 from above (closed inner wall and floor), and the side at floor level; check that the metal body and bail are unchanged from main.
+- #483 follows #482: render pail and milk-pail (rolled rim, ears below the rim), metal fill 0 from above, handle 0 and 90 from the front (ends on the bosses), and an ear close-up.
+- #352 returns: on #chest, the arched lid ghost sits on the box mid-scan, also with the lid open; then repeat the cycle 102 checks (script recipe in memory scratch-render).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier ( (2026-11-18, cycle 108: bucket closed and recut)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 6 tasks free and 2 blocked (#353 waits for #352, #483 waits for #482), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 80 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
