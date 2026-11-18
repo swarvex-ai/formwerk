@@ -1,4 +1,26 @@
-# Status (2026-11-18, cycle 103: candlestick sent back again)
+# Status (2026-11-18, cycle 104: bucket sent back)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 76 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 591 (#357 bucket, first attempt): rework. Pipeline green, 3700 triangles at the defaults and 4188 at most, 4 draw calls. The wooden body is good: separate staves with joints, a lining that blocks light, a board floor, and hoops on the staves. I rendered the defaults (front, top, side), the pail and milk-pail, fill 0 for both bodies, handle 90 and an ear close-up. The flaws:
+  1. The metal body is one outer sheet with no inner wall and no floor, so you see the ground through it from above.
+  2. The bail has 12 segments and is visibly kinked.
+  3. The ears are bare cubes, and the bail end pokes out of them.
+  4. The contributor could not view images (rule 2).
+
+Next:
+- #357 returns: render the empty metal pail from above (inner wall and floor), the bail (smooth), and the ear close-up (lug plate, no cut tube end).
+- #359 returns: render the side (round knops), church and candelabra (no wax below the arm cups), and a flame close-up.
+- #352 returns: on #chest, the arched lid ghost sits on the box mid-scan, also with the lid open; then repeat the cycle 102 checks (script recipe in memory scratch-render).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 103: candlestick sent back again)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. 591 (#357 bucket) is in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 76 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
