@@ -1,4 +1,26 @@
-# Status (2026-11-18, cycle 100: candlestick sent back)
+# Status (2026-11-18, cycle 101: throne sent back)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 73 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
+
+Done this cycle:
+- 588 (#478 throne, outside contributor): rework. Pipeline green, 5868 triangles at the defaults and 6444 at most, 4 draw calls. The good parts: turned arm posts, the stone dais with eased edges, and arm rails that meet the back posts. I rendered the defaults (front, side, 3/4), the presets and arms=false and found these flaws:
+  1. The base is four bare legs with no panels, so it reads as a chair on a plinth.
+  2. The back is a flat board with no frame or raised field, and a slit shows under the crest rail.
+  3. The back cushion is a 9 cm strip floating 2.5 cm above the seat cushion.
+  4. arms=false leaves 22 cm post stubs, and the cushion runs into the back posts.
+  5. The summary does not describe the presets.
+
+Next:
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #359 returns: render the column from the side (knops, drip pan), plus candelabra, church, saucer and a dark iron holder.
+- #352 returns: reveal two assets in a row and check that both show the ghost; change has no ghost; console, geometries, reduced motion.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 and #357 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 100: candlestick sent back)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 73 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
 
