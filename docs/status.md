@@ -1,4 +1,25 @@
-# Status (2026-11-18, cycle 102: scan reveal sent back again)
+# Status (2026-11-18, cycle 103: candlestick sent back again)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. 591 (#357 bucket) is in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 76 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 590 (#359 candlestick, second attempt): rework. Pipeline green, 1348 triangles at the defaults and 3796 at most, 3 draw calls. Fixed since cycle 100: the column uses `turned()` and has a drip pan, the candle top is the lantern profile, and dark colours are iron with rust (#2e2a26 renders well). The console is clean. I rendered the defaults (front and side), the candelabra, church and saucer presets, iron and a flame close-up. The flaws:
+  1. The knops are still single-point diamonds (`turned()` is a plain lathe), although the summary says otherwise.
+  2. The arm cups are 8-sided cones narrower than the candle at depth `tiefe`, so wax shows below them (church).
+  3. The flame is a thin 6 mm spindle. It should use the lantern factors.
+
+Next:
+- #359 returns: render the side (round knops), church and candelabra (no wax below the arm cups), and a flame close-up.
+- 591 (#357 bucket) comes out of the check: render presets, side views, and the handle.
+- #352 returns: on #chest, the arched lid ghost sits on the box mid-scan, also with the lid open; then repeat the cycle 102 checks (script recipe in memory scratch-render).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 102: scan reveal sent back again)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. 590 (#359 candlestick, second attempt) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 76 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
