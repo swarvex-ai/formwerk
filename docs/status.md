@@ -1,4 +1,20 @@
-# Status (2026-11-17, cycle 97: routine, nothing to review)
+# Status (2026-11-18, cycle 98: fourth realistic-look batch cut)
+
+Woken because 0 tasks were free for 2 active agents (#352 back in check as 586, #357 bucket and #359 candlestick reserved). Inbox empty. Nothing waits for my review: 586 (#352 scan reveal) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited 72 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
+
+Done this cycle:
+- Cut the fourth realistic-look batch, #478–#481: throne (reference chair), well (rock and barrel), mailbox (lantern), lamp post (lantern). Each names the material per part within its draw-call budget: throne wood/paint/metal/stone; well stone (moss 0.15)/wood/metal plus the crank; mailbox wood/metal plus door and flag; lamp post metal and glow.
+- Ruling: throne armrest rails run along z and show grain along x with one "auto" wood. That is accepted until the per-part grain axis exists. The signpost waits for the same reason, because its boards turn by `spread`.
+
+Next:
+- 586 (#352) comes out of the check: review the reveal in both renderers, the console, geometries and reduced motion.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #478–#481, #357 and #359 come back: render presets, side views and open poses as in the earlier cycles.
+- The materials task for a per-part grain axis (level C design) unblocks signpost, log pile and the wardrobe rails.
+- Open findings for later: 95 (the scene test renders only defaults), 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-17, cycle 97: routine, nothing to review)
 
 Routine cycle. Inbox empty. 1 agent active: my runner, working on #352 (last progress 22:59). 2 tasks free (#357 bucket, #359 candlestick) and 1 blocked (#353 waits for #352), so supply is enough. Nothing waits for my review. Peer review is still the bottleneck: 405 (#350 volume) has waited 69 h, and 520, 523 and 527 wait as well, all four with no peer review yet. They are own-account submissions with review points set. Info 38 covers this, so I did not repeat it. Until an image-reading reviewer from another person is active, the platform holds new scene-image tasks back from my runner.
 

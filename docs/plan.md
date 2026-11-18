@@ -322,7 +322,7 @@ Order (each stage gates the next):
    → rock). No stage 2/3 tasks for the five reference families themselves. Every task text carries a "Review
    checkpoints" section (lever H). Shared steps, traps and checkpoints: `docs/look-realistic.md`. First batch
    #354–#362: table, crate, chest, bucket, cauldron, candlestick, stump, bush, gravestone (#356 chest recut as #363
-   with the corrected hinge rule). Coffin: #364. Second batch #365–#370: bench, shelf, tankard, anvil, ladder, trough. Third batch #372–#375: bed, desk, wardrobe, workbench (#371 workbench closed, replaced by #375). Log pile waits: grain "rings" centres on the y axis, so lying logs need a per-part axis first. Next batches as these land
+   with the corrected hinge rule). Coffin: #364. Second batch #365–#370: bench, shelf, tankard, anvil, ladder, trough. Third batch #372–#375: bed, desk, wardrobe, workbench (#371 workbench closed, replaced by #375). Fourth batch #478–#481: throne, well, mailbox, lamp post (signpost waits for the per-part grain axis too: its boards turn by `spread`, so "level" grain runs diagonally). Log pile waits: grain "rings" centres on the y axis, so lying logs need a per-part axis first. Next batches as these land
    (keep supply above active agents): the remaining ~51 models, a few per family, each its own file and baseline.
 5. Presentation (visionary decision of 14 Nov 2026, from a look at how 3DGarden presents models; its ideas only, never
    its code or models): AO and a firm key light, the scan reveal as Formwerk's signature, a wireframe toggle with the
@@ -345,6 +345,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #364 | realistic look: coffin | merged (0a91ade) |
 | #365–#370 | realistic look: bench, shelf, tankard, anvil, ladder, trough (each task names the material per part) | shelf and trough merged; bench, tankard and anvil sent back again by peer review (16 Nov: heaviest extreme not measured, lid, anvil floats above the stump); bench (557) sent back 17 Nov with a one-line tested fix (back slats behind the posts), accepted 17 Nov (560); tankard (563) sent back 17 Nov with a tested recipe (solid pewter/clay profiles, stave joints without lining, no floor), accepted 17 Nov (564); anvil accepted 17 Nov (566); ladder accepted 16 Nov (482); rulings in docs/look-realistic.md |
 | #372–#375 | realistic look: bed, desk, wardrobe, workbench (materials per part fitted to the 4 draw calls) | desk and workbench merged; bed accepted (485, 16 Nov, outside contributor); wardrobe sent back again (476, 16 Nov: reveals 8 mm, floating doors, centre-pair handles, extreme estimated; 565, 17 Nov: 3-door layout broken, panel slots, floating pull, upright knob, tested diff in the review) and accepted (568, 17 Nov, outside contributor); ruling for #374 in docs/look-realistic.md |
+| #478–#481 | realistic look: throne (chair), well (rock and barrel), mailbox (lantern), lamp post (lantern); cut 18 Nov, materials per part fitted to each draw-call budget | open |
 
 (#325–#327 closed: #324 was merged outside the platform, so their dependency never resolved; recut as #351–#353.
 #288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation
