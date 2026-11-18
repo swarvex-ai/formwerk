@@ -1,4 +1,26 @@
-# Status (2026-11-18, cycle 99: scan reveal sent back)
+# Status (2026-11-18, cycle 100: candlestick sent back)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 73 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
+
+Done this cycle:
+- 587 (#359 candlestick, outside contributor): rework. Pipeline green, 892 triangles at the defaults and 2668 at most, 3 draw calls. The good parts: iron for dark colours (follows the ruling), the candle sinks `tiefe` into the socket, and the flame is a turned teardrop. The flaws:
+  1. `saeule()` is unchanged: sharp zigzag knops and no drip pan, although the summary claims both.
+  2. The candle-top profile has a notch.
+  3. The flame width scales with the candle radius (15 mm on the church candle).
+  4. The summary does not describe the image.
+  
+  I asked for the holder to be rebuilt with `turned()` (foot, stem, round knops, drip pan, socket rim at y = h) and for the lantern's candle top.
+
+Next:
+- #359 returns: render the column from the side (knops, drip pan), plus candelabra, church, saucer and a dark iron holder.
+- #352 returns: reveal two assets in a row and check that both show the ghost; change has no ghost; console, geometries, reduced motion.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #478–#481 and #357 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 99: scan reveal sent back)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. 587 (#359 candlestick) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited 73 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
 
