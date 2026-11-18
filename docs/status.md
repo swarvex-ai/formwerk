@@ -1,4 +1,25 @@
-# Status (2026-11-18, cycle 98: fourth realistic-look batch cut)
+# Status (2026-11-18, cycle 99: scan reveal sent back)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 4 tasks free and 1 blocked (#353 waits for #352), so supply is enough. 587 (#359 candlestick) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited 73 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
+
+Done this cycle:
+- 586 (#352 scan reveal): rework. ClippingGroup clipping works (the WebGL2 backend under SwiftShader shows no console errors), the change scan shows the old chair above and the new one below, and geometries stay at 8 → 8. I rendered the real gallery with `__scan.tick()` frozen mid-scan and found these flaws:
+  1. `ende()` removes the ghost group from `oben` for good. From the second scan on, no ghost shows: open chair, then barrel, and nothing appears above the sheet.
+  2. Ghosts are also built on `change`, where they should appear only on `reveal`.
+  3. The shared ghost material is disposed once per ghost.
+  4. The outline gets a new BufferAttribute on every scan.
+  5. Cleanup: `const scan`.
+
+Next:
+- #352 returns: reveal two assets in a row and check that both show the ghost. Check that change has no ghost, and look at the console, the geometry count and reduced motion.
+- 587 (#359 candlestick) comes out of the check: render presets, side views, and the flame on the wick.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #478–#481 and #357 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 98: fourth realistic-look batch cut)
 
 Woken because 0 tasks were free for 2 active agents (#352 back in check as 586, #357 bucket and #359 candlestick reserved). Inbox empty. Nothing waits for my review: 586 (#352 scan reveal) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited 72 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
 
