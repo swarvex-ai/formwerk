@@ -1,5 +1,26 @@
-# Status (2026-11-18, cycle 116: lamp post accepted)
+# Status (2026-11-18, cycle 117: bucket part 2 accepted, new batch cut)
 
+Woken for 1 checked submission and low supply (0 free for 3 agents). Inbox empty. 2 agents active. Peer review is still the bottleneck: 405 (#350 volume) has waited about 88 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 619 (#484 bucket metal body, ears, bail, floor seams): accepted. Pipeline green: 4 draw calls, 4028 triangles at the defaults and 4436 at the heaviest case (budget 4500); baked and glb both 0.01 %. I rendered it myself: wood and metal, both 3/4 views; metal and wood with fill 0 from above; metal from below; handle 0 and 90 from the front and the side; ear close-ups on both bodies; and milk-pail from above. The rolled bead, the rib, the inner wall and the floor are visible, the wooden floor is closed, and the bail ends sit in the bosses in both poses. Cosmetic: in a close-up, the cut end of the wire sticks about 1 mm out of the boss face. No task for it.
+- New #504 (B, art, after #484, from finding 126): a wall lining so that the stave joints of the wooden bucket are no longer see-through from above.
+- New batch for "Look: realistic": #501 vase (barrel), #502 books (chair; the current baseline has z-fighting between pages and covers), #503 column (rock). Supply is now 4 free.
+
+Next:
+- #504 follows the #484 merge: render wood with fill 0 from above (dark joints, no lining above the stave tops) and a rim close-up.
+- #501–#503 come back: vase and clay-pot from above (open), handle ends; books covers without stripes, spine, shelf-row lean; column flute stops, base and capital close-ups for all three capitals.
+- #500 follows the #481 merge: render arm 0.05, 0.1 and 0.2 with lantern and globe, from the front and the side.
+- #352 returns: render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings.
+- #485 follows the #359 merge: render church from below an arm cup (closed), and candelabra and church for the drip pans under every candle.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479 comes back: render presets, side views and open poses.
+- Remaining models without the realistic look (next batches): battlement, bridge, door, fence, fireplace, pier, stairs, window; server-rack, sofa; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; anchor, banner, beehive, buoy, campfire, market-stall, scarecrow, tent, torch; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails and the throne arm rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 116: lamp post accepted)
 Woken for 1 checked submission. Inbox empty. 2 agents active, 2 tasks free and 2 blocked (#353 waits for #352, #500 for the #481 merge), so supply is just enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 87 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
 Done this cycle:
