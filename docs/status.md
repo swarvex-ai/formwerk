@@ -1,4 +1,21 @@
-# Status (2026-11-18, cycle 101: throne sent back)
+# Status (2026-11-18, cycle 102: scan reveal sent back again)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. 590 (#359 candlestick, second attempt) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 76 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 589 (#352 scan reveal, second attempt): rework. All five points from cycle 99 are fixed. I rendered the real gallery with the scan frozen. Chest, barrel and chair in a row each show the ghost, change has no ghost, geometries stay at 8 after 20 changes, a change mid-scan ends cleanly, and the console is clean. One flaw: the ghost meshes copy `matrixWorld` with `matrixAutoUpdate = false`, and the parent update then overwrites it with the identity. Parts in offset groups (the chest lid at its hinge, y 0.35, z -0.225) end up at the origin, so the chest shows no lid ghost above the sheet. The fix is `g.matrix.copy(m.matrixWorld)`. The shadow not being clipped is noted as optional.
+
+Next:
+- 590 (#359 candlestick) comes out of the check: render the column from the side (knops, drip pan), plus candelabra, church, saucer and a dark iron holder.
+- #352 returns: on #chest, the arched lid ghost sits on the box mid-scan, also with the lid open; then repeat the cycle 102 checks (script recipe in memory scratch-render).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 and #357 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 101: throne sent back)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 73 h, and 520, 523 and 527 wait as well, all own-account submissions with review points set (info 38 covers this).
 
