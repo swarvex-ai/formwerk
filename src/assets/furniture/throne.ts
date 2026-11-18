@@ -1,6 +1,7 @@
-import { ConeGeometry, SphereGeometry } from "three";
+import type { BufferGeometry, Material } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const throne = defineAsset({
   id: "throne", category: "furniture",
@@ -36,36 +37,71 @@ export const throne = defineAsset({
     "bishop": { label: { de: "Bischofsthron", en: "Bishop's throne" }, values: { width: 0.7, backHeight: 1.6, finials: 1, cushionColor: "#5a2a6a" } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 3000, drawCalls: 4 },
+  budget: { triangles: 16000, drawCalls: 4 },
   build(p) {
     const holz = material("wood", p.color);
     const kissen = material("paint", p.cushionColor);
     const gold = material("metal", p.trimColor);
     const stein = material("stone", "#8a857c", 1, 2400);
     const t = new Parts();
-    const W = p.width, D = p.depth, H = p.backHeight, pf = 0.06;
-    const y0 = p.dais > 0.005 ? p.dais : 0, ys = y0 + p.seatHeight, zb = -D / 2 + 0.04;
-    if (y0 > 0) t.box(stein, W + 0.5, y0, D + 0.5, 0, y0 / 2, 0);
-    t.box(holz, W, p.seatHeight - 0.06, D, 0, y0 + (p.seatHeight - 0.06) / 2, 0);
-    t.box(holz, W + 0.04, 0.06, D + 0.04, 0, ys - 0.03, 0);
-    t.box(gold, W + 0.05, 0.02, D + 0.05, 0, ys - 0.06, 0);
-    t.box(holz, W, H, 0.08, 0, ys + H / 2, zb);
-    for (const s of [-1, 1]) t.box(holz, pf, H, pf + 0.02, s * (W / 2 - pf / 2), ys + H / 2, zb);
-    t.box(gold, W + 0.02, 0.04, 0.1, 0, ys + H - 0.02, zb);
+    const W = p.width, D = p.depth, H = p.backHeight, pt = 0.07, st = 0.04, za = 0.08, hc = 0.1, hb = 0.08;
+    const y0 = p.dais > 0.005 ? p.dais : 0, ys = y0 + p.seatHeight, zp = -D / 2 + pt / 2, xp = W / 2 - pt / 2;
+    // Dais: a stone block with eased edges
+    if (y0 > 0) t.add(stein, rounded(W + 0.5, y0, D + 0.5, 0.015, 0, y0 / 2, 0, 2));
+    // Base: four corner posts; the back ones run on up as the posts of the back frame
+    for (const s of [-1, 1]) {
+      t.add(holz, rounded(pt, ys - st + 0.002 - y0, pt, 0.004, s * xp, (y0 + ys - st + 0.002) / 2, D / 2 - pt / 2, 2));
+      t.add(holz, rounded(pt, ys + H - hc + 0.01 - y0, pt, 0.004, s * xp, (y0 + ys + H - hc + 0.01) / 2, zp, 2));
+    }
+    // Each face of the base: apron under the seat, bottom rail, a panel 9 mm behind the posts in grooves of the frame
+    // with a raised field, and the gilded band on the apron. Built for the front (outer face at z = o), then turned
+    const hp = ys - st - za - (y0 + 0.08);
+    const seite = (L: number, o: number, rot: number) => {
+      const z = (d: number, dicke: number) => o - d - dicke / 2;
+      const teile: [Material, BufferGeometry][] = [
+        [holz, rounded(L + 0.012, za, 0.025, 0.003, 0, ys - st + 0.002 - za / 2, z(0.004, 0.025), 2)],
+        [holz, rounded(L + 0.012, 0.08, 0.025, 0.003, 0, y0 + 0.04, z(0.004, 0.025), 2)],
+        [holz, rounded(L + 0.012, hp + 0.012, 0.016, 0.003, 0, y0 + 0.08 + hp / 2, z(0.009, 0.016), 2)],
+        [holz, rounded(L - 0.08, hp - 0.08, 0.012, 0.004, 0, y0 + 0.08 + hp / 2, z(0.005, 0.012), 2)],
+        [gold, rounded(L, 0.014, 0.006, 0.002, 0, ys - st + 0.002 - za / 2, z(-0.0005, 0.006), 2)],
+      ];
+      for (const [m, g] of teile) t.add(m, g.rotateY(rot));
+    };
+    seite(W - 2 * pt, D / 2, 0);
+    seite(W - 2 * pt, D / 2, Math.PI);
+    seite(D - 2 * pt, W / 2, Math.PI / 2);
+    seite(D - 2 * pt, W / 2, -Math.PI / 2);
+    // Seat board with an eased front edge, overhanging the base at the front and the sides
+    t.add(holz, rounded(W + 0.02, st, D + 0.01, 0.012, 0, ys - st / 2, 0.015, 3));
+    // Back frame: bottom rail on the seat, crest rail over the posts, a panel lapped 8 mm into posts and rails with a
+    // raised field on both faces, and the gilded band on the front of the crest
+    const Lp = W - 2 * pt + 0.016, hpan = H - hc - hb + 0.016, ypan = ys + hb - 0.008 + hpan / 2;
+    t.add(holz, rounded(W - 2 * pt + 0.012, hb, 0.04, 0.004, 0, ys + hb / 2, zp, 2));
+    t.add(holz, rounded(W + 0.02, hc, 0.06, 0.005, 0, ys + H - hc / 2, zp, 2));
+    t.add(holz, rounded(Lp, hpan, 0.018, 0.003, 0, ypan, zp, 2));
+    for (const s of [-1, 1]) t.add(holz, rounded(Lp - 0.12, hpan - 0.12, 0.014, 0.004, 0, ypan, zp + s * 0.009, 2));
+    t.add(gold, rounded(W, 0.016, 0.006, 0.002, 0, ys + H - hc / 2, zp + 0.0315, 2));
     if (p.arms) for (const s of [-1, 1]) {
-      t.box(holz, 0.08, 0.26, D - 0.08, s * (W / 2 - 0.04), ys + 0.13, 0.04);
-      t.box(holz, 0.1, 0.04, D, s * (W / 2 - 0.04), ys + 0.28, 0.02);
-      t.add(gold, new SphereGeometry(0.035, 10, 6).translate(s * (W / 2 - 0.04), ys + 0.32, D / 2 - 0.02));
+      // Turned arm post on the seat over the front corner post, carrying a rail that runs into the back post
+      const ha = 0.245, x = s * xp, zf = D / 2 - pt / 2, z0 = zp + pt / 2 - 0.005, z1 = D / 2 + 0.02;
+      t.add(holz, turned([[0.0001, 0], [0.028, 0], [0.028, 0.03], [0.02, 0.045], [0.017, 0.11], [0.026, 0.13], [0.026, 0.145],
+        [0.018, 0.16], [0.02, 0.22], [0.026, 0.23], [0.026, ha], [0.0001, ha]], 16, x, ys, zf));
+      t.add(holz, rounded(0.06, 0.04, z1 - z0, 0.005, x, ys + 0.26, (z0 + z1) / 2, 2));
+      t.add(gold, turned([[0.0001, -0.003], [0.016, -0.003], [0.022, 0.01], [0.024, 0.02], [0.016, 0.032], [0.0001, 0.036]], 16, x, ys + 0.28, zf));
     }
     if (p.cushion) {
-      const ib = p.arms ? W - 0.18 : W - 0.04;
-      t.box(kissen, ib, 0.07, D - 0.14, 0, ys + 0.035, 0.03);
-      t.box(kissen, ib, H * 0.6, 0.04, 0, ys + 0.1 + H * 0.3, zb + 0.06);
+      // Soft cushions: on the seat between the posts, and against the back panel resting on the seat cushion
+      const cw = W - 2 * pt - 0.01, zc = zp + pt / 2 + 0.002, zv = D / 2 - 0.005, hk = H * 0.42;
+      t.add(kissen, rounded(cw, 0.075, zv - zc, 0.025, 0, ys + 0.0375, (zc + zv) / 2, 3));
+      t.add(kissen, rounded(cw, hk, 0.08, 0.025, 0, ys + 0.075 + hk / 2, zp + 0.058, 3));
     }
+    // Finials: a turned knob and point standing on the crest rail; with an odd count the middle one is taller
     for (let i = 0; i < p.finials; i++) {
-      const x = p.finials === 1 ? 0 : -W / 2 + pf / 2 + (i * (W - pf)) / (p.finials - 1);
-      const h = 0.1 + (i === (p.finials - 1) / 2 ? 0.06 : 0);
-      t.add(gold, new ConeGeometry(0.035, h, 8).translate(x, ys + H + h / 2, zb));
+      const x = p.finials === 1 ? 0 : -W / 2 + 0.03 + (i * (W - 0.06)) / (p.finials - 1);
+      const h = i === (p.finials - 1) / 2 ? 0.2 : 0.14, prof: [number, number][] = [[0.0001, -0.004], [0.027, -0.004], [0.027, 0.012], [0.013, 0.022]];
+      for (let k = 0; k <= 6; k++) { const a = -Math.PI / 2 + (k * Math.PI) / 6; prof.push([0.012 + 0.018 * Math.cos(a), 0.052 + 0.028 * Math.sin(a)]); }
+      prof.push([0.014, 0.084], [0.0001, h]);
+      t.add(gold, turned(prof, 16, x, ys + H, zp));
     }
     return t.group();
   },
