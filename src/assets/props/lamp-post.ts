@@ -11,7 +11,7 @@ export const lampPost = defineAsset({
     height: { type: "number", label: { de: "Höhe", en: "Height" }, min: 2, max: 7, step: 0.05, default: 3.5, unit: "m",
       describe: { de: "Höhe des Masts: 3 m im Park und in der Altstadt, 6 m an einer Straße.", en: "Height of the post: 3 m in a park or an old town, 6 m along a road." } },
     arm: { type: "number", label: { de: "Ausleger", en: "Arm" }, min: 0, max: 1.6, step: 0.05, default: 0.6, unit: "m",
-      describe: { de: "Länge des Auslegers: 0 die Leuchte sitzt oben auf, 0,6 m im Park, 1,5 m über einer Fahrbahn.", en: "Length of the arm: 0 the light sits on top, 0.6 m in a park, 1.5 m over a road." } },
+      describe: { de: "Länge des Auslegers: 0 die Leuchte sitzt oben auf, 0,6 m im Park, 1,5 m über einer Fahrbahn; eine hängende Leuchte rückt so weit aus, dass sie den Mast nicht berührt.", en: "Length of the arm: 0 the light sits on top, 0.6 m in a park, 1.5 m over a road; a hanging light moves out far enough to clear the post." } },
     heads: { type: "integer", label: { de: "Köpfe", en: "Heads" }, min: 1, max: 2, default: 1,
       describe: { de: "Ein Kopf oder zwei gegenüber an beiden Seiten.", en: "One head or two facing each other on both sides." } },
     style: { type: "choice", label: { de: "Leuchte", en: "Light" }, options: ["lantern", "globe", "modern"], labels: { lantern: { de: "Laterne", en: "Lantern" }, globe: { de: "Kugel", en: "Globe" }, modern: { de: "Modern", en: "Modern" } }, default: "lantern",
@@ -44,15 +44,17 @@ export const lampPost = defineAsset({
     const ring = (y: number, d: number): [number, number][] => [[rS(y - 0.04), y - 0.04], [rS(y) + d * 0.7, y - 0.03], [rS(y) + d, y - 0.012], [rS(y) + d, y + 0.012], [rS(y) + d * 0.7, y + 0.03], [rS(y + 0.04), y + 0.04]];
     t.add(mast, turned([[r0, fuss - 0.02], ...ring(fuss + 0.3, 0.022), ...ring(ya, 0.028), [r1, h - 0.06], [r1 + 0.018, h - 0.05],
       [r1 + 0.026, h - 0.03], [r1 + 0.026, h - 0.012], [r1 + 0.012, h], [0.001, h]], 16));
-    // Two heads need an arm to sit on
-    const arm = p.heads === 2 ? Math.max(0.35, p.arm) : p.arm;
+    // Two heads need an arm to sit on; a hanging head moves out until it clears the shaft and its collar by 2 cm
+    const w = 0.2, Rr = (w / 2 + 0.035) * Math.SQRT2, kr = rS(ya) + 0.028;
+    const frei = p.style === "lantern" ? Rr + kr + 0.02 : p.style === "globe" ? Math.max(0.09, 0.17) + kr + 0.02 : 0;
+    const arm0 = p.heads === 2 ? Math.max(0.35, p.arm) : p.arm, arm = arm0 >= 0.05 ? Math.max(frei, arm0) : arm0;
     const ar = 0.022, haengt = arm >= 0.05, yh = ya - ar - 0.05;
     // A turned socket from the cap of the post up to a head standing on top (0.06 m)
     const sockel = (oben: number) => t.add(mast, turned([[r1 + 0.01, h - 0.004], [0.04, h + 0.012], [0.034, h + 0.028], [0.05, h + 0.045], [oben, h + 0.052], [oben, h + 0.06], [0.001, h + 0.06]], 16));
     // A head: hanging, it meets the drop under the arm end at yh; standing, it sits on the socket on the post
     const kopf = (x: number) => {
       if (p.style === "lantern") {
-        const w = 0.2, bh = 0.28, rh = 0.12, rr = 0.03, rt = 0.006;
+        const bh = 0.28, rh = 0.12, rr = 0.03, rt = 0.006;
         // From the base plate to the finial tip: 0.514 m; hanging, the tip sits in the tube of the hook ring
         const y0 = haengt ? yh - 2 * rr + 2 * rt - 0.514 : h + 0.06;
         if (haengt) {
@@ -70,7 +72,6 @@ export const lampPost = defineAsset({
         }
         t.add(mast, rounded(w + 0.012, 0.02, w + 0.012, 0.004, x, y1 + 0.01, 0));
         // A pyramid roof with its rim bent down, flat faces, 2 mm into the top frame
-        const Rr = (w / 2 + 0.035) * Math.SQRT2;
         const dach = turned([[0.001, 0], [Rr - 0.006, 0], [Rr, 0.002], [Rr, 0.01], [Rr - 0.012, 0.026], [0.04, 0.016 + rh], [0.001, 0.016 + rh]], 4).rotateY(Math.PI / 4).toNonIndexed();
         dach.computeVertexNormals();
         t.add(mast, dach.translate(x, y1 + 0.018, 0));
