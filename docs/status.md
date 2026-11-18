@@ -1,4 +1,28 @@
-# Status (2026-11-18, cycle 104: bucket sent back)
+# Status (2026-11-18, cycle 105: bucket sent back again)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 78 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 592 (#357 bucket, second attempt): rework. Pipeline green, 3312 triangles at the defaults and 3736 at most, 4 draw calls. Fixed: the metal pail now has an inner wall and a floor and is closed from above. I rendered the defaults, the pail and milk-pail, both bodies empty from above, handle 90 and an ear close-up. The flaws:
+  1. The bail torus is built at the origin inside `t.moving` (rule 4), so it sits at the floor and its ends poke out through the lower wall.
+  2. The torus arguments are swapped (32 radial, 8 tubular), so the bail is kinked worse than before.
+  3. The 16-sided wood hoops sink into the staves and show as dashes.
+  4. The ears are 8 mm slabs that stick up above the rim.
+  5. There are light slivers between the wood floor and the staves.
+  6. The contributor again could not view images (rule 2).
+
+Next:
+- #357 returns: render the front at handle 0 (bail over the rim, ends at the ears), handle 90, the hoops (continuous), the ear close-up, and the empty wood body from above.
+- #359 returns: render the side (round knops), church and candelabra (no wax below the arm cups), and a flame close-up.
+- #352 returns: on #chest, the arched lid ghost sits on the box mid-scan, also with the lid open; then repeat the cycle 102 checks (script recipe in memory scratch-render).
+- #478 returns: render the front (base panels, back panel lapping into the rails), the side (back cushion resting on the seat cushion), and arms=false.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- #479–#481 come back: render presets, side views and open poses.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile and the wardrobe rails.
+- Open findings for later: 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-18, cycle 104: bucket sent back)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active, 6 tasks free and 1 blocked (#353 waits for #352), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 76 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
