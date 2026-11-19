@@ -1,42 +1,80 @@
-import { BufferGeometry, CylinderGeometry, Float32BufferAttribute, Quaternion, Vector3, type Material } from "three";
+import { BufferGeometry, CatmullRomCurve3, Color, Float32BufferAttribute, Vector3, type Material } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid } from "../shapes";
 
-// One frond: leaflets as a comb on a rachis that runs out and bends down. Every triangle is drawn twice (the
-// materials render front faces only), and the geometry is not indexed, so computeVertexNormals keeps one flat
-// normal per face and the faceted look survives the export (glTF has no flat shading).
-function frond(t: Parts, m: Material, an: Vector3, yaw: number, tilt: number, laenge: number, durchhang: number, drehung: number, bogen: number) {
+const OBEN = new Vector3(0, 1, 0);
+
+/**
+ * A round tube along a curve, `radius(v)` from v = 0 to 1; a radius of 0 at an end closes it there. `bezug` is a
+ * direction the curve never runs along: the rings keep their turn against it, so they never flip. With `boden` the first
+ * ring lies flat on the floor.
+ */
+function roehre(kurve: (v: number) => Vector3, radius: (v: number) => number, nv: number, um: number, bezug: Vector3, boden = false): BufferGeometry {
+  const rahmen = (v: number) => {
+    const tg = kurve(Math.min(1, v + 1e-3)).sub(kurve(Math.max(0, v - 1e-3))).normalize();
+    const quer = new Vector3().crossVectors(tg, bezug).normalize();
+    return { quer, hoch: new Vector3().crossVectors(quer, tg) };
+  };
+  const mitte = kurve(0.5);
+  return grid(um, nv, (u, v) => {
+    const { quer, hoch } = rahmen(v), w = u * Math.PI * 2;
+    const q = kurve(v).addScaledVector(quer, radius(v) * Math.cos(w)).addScaledVector(hoch, radius(v) * Math.sin(w));
+    if (boden && v === 0) q.y = 0;
+    return q;
+  }, (q) => q.clone().sub(mitte));
+}
+
+/** Leaflets of one shade: folded along the midrib, both faces, lit from above the frond. */
+class Fiedern {
+  pos: number[] = []; nor: number[] = []; uv: number[] = [];
+  fieder(basis: Vector3, achse: Vector3, oben: Vector3, laenge: number, breite: number) {
+    const quer = new Vector3().crossVectors(achse, oben).normalize(), spitze = basis.clone().addScaledVector(achse, laenge);
+    const mitte = basis.clone().addScaledVector(achse, laenge * 0.4), knick = oben.clone().multiplyScalar(-breite * 0.3);
+    const l = mitte.clone().addScaledVector(quer, -breite / 2).add(knick), r = mitte.clone().addScaledVector(quer, breite / 2).add(knick);
+    const licht = oben.clone().multiplyScalar(0.8).addScaledVector(OBEN, 0.4).normalize();
+    const vorn = [basis, l, mitte, mitte, l, spitze, basis, mitte, r, mitte, spitze, r];
+    const uvs = [[0.5, 0], [0, 0.4], [0.5, 0.4], [0.5, 0.4], [0, 0.4], [0.5, 1], [0.5, 0], [0.5, 0.4], [1, 0.4], [0.5, 0.4], [0.5, 1], [1, 0.4]];
+    for (const seite of [0, 1]) for (let k = 0; k < 12; k += 3) for (const i of seite ? [k, k + 2, k + 1] : [k, k + 1, k + 2]) {
+      const q = vorn[i]; this.pos.push(q.x, q.y, q.z); this.nor.push(licht.x, licht.y, licht.z); this.uv.push(uvs[i][0], uvs[i][1]);
+    }
+  }
+  geometrie(): BufferGeometry {
+    const g = new BufferGeometry();
+    g.setAttribute("position", new Float32BufferAttribute(this.pos, 3));
+    g.setAttribute("normal", new Float32BufferAttribute(this.nor, 3));
+    g.setAttribute("uv", new Float32BufferAttribute(this.uv, 2));
+    return g;
+  }
+}
+
+/**
+ * One frond: a tapering rachis that runs out from the crown and bends down, with leaflets on both sides that rise
+ * beside it near the crown (the V of a palm leaf) and hang down towards the tip.
+ */
+function wedel(t: Parts, ader: Material, fiedern: [Fiedern, Fiedern], an: Vector3, yaw: number, tilt: number, laenge: number, durchhang: number, drehung: number, bogen: number, r: () => number) {
   const rich = new Vector3(Math.cos(tilt) * Math.cos(yaw), Math.sin(tilt), Math.cos(tilt) * Math.sin(yaw));
   const hoch = new Vector3(-Math.sin(tilt) * Math.cos(yaw), Math.cos(tilt), -Math.sin(tilt) * Math.sin(yaw));
   const quer = new Vector3().crossVectors(rich, hoch);
-  const breit = laenge * 0.17, stufen = 12, schritt = 1 / stufen;
   const k = Math.cos(drehung), s = Math.sin(drehung);
-  const punkt = (u: number, seite: number, ueber: number, out: Vector3) => {
-    const y = laenge * Math.sin(tilt) * u - durchhang * u * u + ueber, z = bogen * laenge * u * u + seite;
-    return out.copy(an).addScaledVector(rich, laenge * u).addScaledVector(hoch, y * k - z * s).addScaledVector(quer, y * s + z * k);
+  const punkt = (u: number) => {
+    const y = laenge * Math.sin(tilt) * u - durchhang * u * u, z = bogen * laenge * u * u;
+    return an.clone().addScaledVector(rich, laenge * u).addScaledVector(hoch, y * k - z * s).addScaledVector(quer, y * s + z * k);
   };
-  const pos: number[] = [], uv: number[] = [];
-  const flaeche = (a: Vector3, ua: number, va: number, b: Vector3, ub: number, vb: number, c: Vector3, uc: number, vc: number) => {
-    for (const q of [a, b, c, a, c, b]) pos.push(q.x, q.y, q.z);
-    uv.push(ua, va, ub, vb, uc, vc, ua, va, uc, vc, ub, vb);
-  };
-  const a = new Vector3(), b = new Vector3(), c = new Vector3();
-  for (let i = 0; i < stufen; i++) {
-    const u0 = i * schritt, u1 = (i + 1) * schritt, uT = Math.min(1, u1 + 0.35 * schritt);
-    punkt(u0, 0, 0, a); punkt(u1, 0, 0, b);
-    for (const seite of [1, -1]) {
-      const halbw = breit * Math.sin(Math.PI * Math.min(1, Math.pow((u0 + u1) / 2, 0.7)));
-      // leaflets rise next to the crown and turn down towards the tip: the usual V of a palm leaf
-      punkt(uT, seite * halbw, halbw * (0.3 - 0.7 * u1), c);
-      flaeche(a, u0, 0.5 + seite * 0.4, b, u1, 0.5 + seite * 0.4, c, uT, 0.5 + seite);
+  const rb = Math.min(0.05, Math.max(0.012, laenge * 0.014));
+  t.add(ader, roehre(punkt, (v) => (v > 0.995 ? 0 : rb * (1 - 0.8 * v)), 14, 6, quer));
+  // Leaflets: longest in the middle of the frond, rising beside the rachis near the crown and hanging at the tip
+  const n = Math.max(10, Math.min(40, Math.round(laenge * 11))), breit = laenge * 0.2;
+  for (let i = 0; i < n; i++) {
+    const u = 0.1 + (0.88 * (i + 0.5)) / n, b = punkt(u), tg = punkt(Math.min(1, u + 0.01)).sub(punkt(Math.max(0, u - 0.01))).normalize();
+    const seitlich = new Vector3().crossVectors(tg, OBEN).normalize(), oben = new Vector3().crossVectors(seitlich, tg).normalize();
+    const ll = breit * Math.sin(Math.PI * Math.min(1, Math.pow(u, 0.7))) + laenge * 0.03;
+    for (const sg of [1, -1]) {
+      const achse = seitlich.clone().multiplyScalar(sg * 0.75).addScaledVector(tg, 0.55).addScaledVector(oben, 0.45 - 1.1 * u).addScaledVector(OBEN, -0.15).normalize();
+      fiedern[r() < 0.5 ? 0 : 1].fieder(b, achse, oben, ll * (0.9 + 0.2 * r()), ll * 0.09);
     }
   }
-  const g = new BufferGeometry();
-  g.setAttribute("position", new Float32BufferAttribute(pos, 3));
-  g.setAttribute("uv", new Float32BufferAttribute(uv, 2));
-  g.computeVertexNormals();
-  t.add(m, g);
 }
 
 export const palm = defineAsset({
@@ -68,11 +106,14 @@ export const palm = defineAsset({
   },
   // Kollision nur am Stamm: unter der Krone kann man hindurchgehen
   physics: { body: "static", collider: "cylinder" },
-  budget: { triangles: 12000, drawCalls: 2 },
+  budget: { triangles: 60000, drawCalls: 3 },
   build(p, seed) {
-    const r = rng(seed);
-    const rinde = material("bark", p.trunkColor, 1 / Math.max(0.4, p.trunkRadius * 4)),
-      fieder = material("leaf", p.frondColor, 1 / Math.max(0.5, p.frondLength * 0.6)), t = new Parts();
+    const r = rng(seed), blattZufall = rng(seed + 1);
+    const rinde = material("bark", p.trunkColor, 1 / Math.max(0.4, p.trunkRadius * 4));
+    // Leaflets in two shades of plain colour, the rachis in the darker one (thousands of cards would not fit a bake atlas)
+    const ton = (f: number) => { const c = new Color(p.frondColor); c.multiplyScalar(f); return `#${c.getHexString()}`; };
+    const hell = material("leaf", p.frondColor, 1, undefined, { plain: true }), dunkel = material("leaf", ton(0.72), 1, undefined, { plain: true });
+    const t = new Parts();
     // Stamm: ein Bogen, der nach oben immer stärker aus dem Lot geht, dann so skaliert, dass die Krone auf `height` sitzt
     const stufen = Math.max(8, Math.min(22, Math.round(6 + p.height * 0.8))), schritt = 1 / stufen;
     const neigung = (p.trunkCurve * 45 * Math.PI) / 180;
@@ -84,22 +125,26 @@ export const palm = defineAsset({
       punkte.push(new Vector3(x, y, z));
     }
     for (const q of punkte) q.multiplyScalar(p.height / y);
-    // nach unten dünner werdend, in der Mitte leicht bauchig
-    const radius = (u: number) => p.trunkRadius * (1 - 0.45 * u) * (1 + 0.12 * Math.sin(Math.PI * u));
-    const oben = new Vector3(0, 1, 0);
-    for (let i = 0; i < stufen; i++) {
-      const a = punkte[i], b = punkte[i + 1], achse = new Vector3().subVectors(b, a), laenge = achse.length();
-      const g = new CylinderGeometry(radius((i + 1) * schritt), radius(i * schritt), laenge, 10, 1, true);
-      g.translate(0, laenge / 2, 0).applyQuaternion(new Quaternion().setFromUnitVectors(oben, achse.normalize())).translate(a.x, a.y, a.z);
-      t.add(rinde, g);
-    }
-    // Kronenschaft: das kurze Stück, aus dem die Blätter treiben
+    // The crown shaft continues the trunk's last direction; the trunk is one smooth tube through both
     const letzte = new Vector3().subVectors(punkte[stufen], punkte[stufen - 1]).normalize();
-    const schaft = Math.min(0.6, p.frondLength * 0.22);
-    const g = new CylinderGeometry(radius(1) * 0.6, radius(1) * 1.5, schaft, 10, 1, true);
-    g.translate(0, schaft / 2, 0).applyQuaternion(new Quaternion().setFromUnitVectors(oben, letzte)).translate(punkte[stufen].x, punkte[stufen].y, punkte[stufen].z);
-    t.add(rinde, g);
-    const an = punkte[stufen].clone().addScaledVector(letzte, schaft * 0.8);
+    const schaft = Math.min(0.6, p.frondLength * 0.22), spitze = punkte[stufen].clone().addScaledVector(letzte, schaft);
+    const kurve = new CatmullRomCurve3([...punkte, spitze]);
+    const gesamt = kurve.getLength(), sStamm = gesamt - schaft;
+    // Thinner towards the top and slightly bellied, flared at the foot, ringed with old leaf scars, swelling into the
+    // crown shaft and closing over it
+    const abstand = Math.max(0.07, p.trunkRadius * 0.45);
+    const radius = (v: number) => {
+      const s = v * gesamt;
+      if (s > sStamm) { const w = (s - sStamm) / schaft, r1 = p.trunkRadius * 0.55; return w >= 0.999 ? 0 : r1 * (1 + 0.35 * Math.sin(Math.PI * Math.min(1, w * 1.4))) * Math.sqrt(1 - w * w); }
+      const u = s / sStamm, ring = 1 + 0.045 * Math.pow(Math.abs(Math.cos((Math.PI * s) / abstand)), 6) * Math.min(1, s / 0.3);
+      return p.trunkRadius * (1 - 0.45 * u) * (1 + 0.12 * Math.sin(Math.PI * u)) * (1 + 0.45 * Math.exp(-s / (0.2 + p.trunkRadius))) * ring;
+    };
+    const ringe = Math.round((sStamm / abstand) * 5) + 12;
+    t.add(rinde, roehre((v) => kurve.getPointAt(v), radius, ringe, 14, new Vector3(0, 0, 1), true));
+    // The foot: a disc closing the trunk where it stands on the floor
+    t.add(rinde, grid(14, 1, (u, v) => new Vector3(Math.cos(u * Math.PI * 2) * radius(0) * v, 0, Math.sin(u * Math.PI * 2) * radius(0) * v), () => new Vector3(0, -1, 0)));
+    const an = punkte[stufen].clone().addScaledVector(letzte, schaft * 0.55);
+    const blaetter: [Fiedern, Fiedern] = [new Fiedern(), new Fiedern()];
     const aufrecht = Math.max(1, Math.min(3, Math.round(p.fronds / 4)));
     for (let f = 0; f < p.fronds; f++) {
       const yaw = f * 2.39996 + (r() - 0.5) * 0.35, jung = f < aufrecht;
@@ -107,8 +152,10 @@ export const palm = defineAsset({
       const laenge = p.frondLength * (jung ? 0.6 + 0.2 * r() : 0.82 + 0.3 * r());
       // die Spitzen bleiben über dem Boden, auch bei langem Blatt auf kurzem Stamm
       const durchhang = Math.min(p.droop * laenge * 0.85, Math.max(0, p.height + laenge * Math.sin(tilt) - 0.45));
-      frond(t, fieder, an, yaw, tilt, laenge, durchhang, (r() - 0.5) * 0.3, (r() - 0.5) * 0.16);
+      wedel(t, dunkel, blaetter, an, yaw, tilt, laenge, durchhang, (r() - 0.5) * 0.3, (r() - 0.5) * 0.16, blattZufall);
     }
+    t.add(hell, blaetter[0].geometrie());
+    t.add(dunkel, blaetter[1].geometrie());
     t.cylinder(p.trunkRadius, punkte[stufen].y);
     return t.group();
   },
