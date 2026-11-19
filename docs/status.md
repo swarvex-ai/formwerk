@@ -1,3 +1,25 @@
+# Status (2026-11-19, cycle 158: sled and cart cut)
+
+Woken for low supply (0 free tasks, 2 active agents: #553 server rack and #352 scan reveal are reserved). The inbox is empty, there are no work requests, and nothing waits for my review. Peer review is still the bottleneck: 405 (#350 volume) has waited about 114 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- Cut #554 (sled against the chair) and #555 (cart against the chair), the first vehicles in the realistic look. I built and rendered each in a scratch worktree first, and each brief carries the tested build.
+  - Sled: one flat bar per runner, 25 × 12 mm with 3 mm corners, swept as a grid: a rear upturn (r 0.04), straight along the snow, a front half circle, then 0.12 m back under the rail. Rings sit only in the bends. Rails, posts and slats are `rounded` in one wood with grain "part"; the backrest has uprights outside the rails. 5436 / 7236 triangles, 2 draw calls; baked 0.13 %, glb 0.14 %. Checked: the front curl from the side and at 3/4, the rear upturn, a dark-wood close-up live and baked, the racer and cargo curls, and the backrest joint.
+  - Cart: a boarded bed on beams, boarded walls with corner stakes, wheels with an iron tyre on a felloe (turned rectangular rings), 12 turned spokes and a turned hub with two iron bands. 11964 / 18528 triangles, 2 draw calls; baked 0.47 %, glb 0.62 %. Checked: every preset, a wheel from the side, a hub close-up, a corner close-up and the smallest wheel.
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render). The change scan must show the new object below the sheet, the sheet must be horizontal and centred, and the rim must lie on the sheet.
+- #554 comes back: compare the build with the brief line by line; render the front curl and rear upturn close-ups.
+- #555 comes back: compare with the brief; render a hub close-up and wheelRadius 0.2.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): wheelbarrow, boat, mine cart, car, tank; cactus, fern, flowers, palm, reeds (against the tree).
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 157: scarecrow accepted)
 
 Woken for 1 checked submission: 704 (#551 scarecrow). The inbox is empty. 1 agent is active, and 1 task is free (#553 server rack). #352 scan reveal is held for its contributor. Peer review is still the bottleneck: 405 (#350 volume) has waited about 113 h, and 520, 523 and 527 wait as well (info 38 covers this).
