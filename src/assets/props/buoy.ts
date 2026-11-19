@@ -1,4 +1,5 @@
-import { ConeGeometry, CylinderGeometry, SphereGeometry } from "three";
+import { CylinderGeometry, SphereGeometry, TorusGeometry } from "three";
+import { turned } from "../shapes";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
 
@@ -28,22 +29,50 @@ export const buoy = defineAsset({
     cardinal: { label: { de: "Kardinal", en: "Cardinal" }, values: { shape: "sphere", colour: "#e8c21a", stripeColour: "#1c1c1c", stripes: 2, topMark: true } },
   },
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 4000, drawCalls: 3 },
+  budget: { triangles: 3000, drawCalls: 4 },
   build(p) {
-    const h = p.height, r = p.diameter / 2, ch = 0.15 * h, bh = h - ch, seg = 20;
+    const h = p.height, r = p.diameter / 2, ch = 0.15 * h, bh = h - ch, seg = 32;
     const body = material("paint", p.colour, 1, 150), band = material("paint", p.stripeColour, 1, 150), metal = material("metal", "#3a3a3a");
+    const iron = material("iron", "#3a3a3a", 3, undefined, { rust: 0.35 });
     const t = new Parts();
     const isSphere = p.shape === "sphere", cylH = p.shape === "cone" ? bh * 0.55 : 0, coneH = bh - cylH, joint = ch + cylH;
     const ballR = Math.min(r, bh / 2), cy = ch + ballR, bodyTop = isSphere ? cy + ballR : h;
-    // Hollow: an effective density for the mass estimate
+    // A rounded corner of radius e at b between the edges to a and to c: tangent point, middle of the arc, tangent point
+    const fillet = (a: [number, number], b: [number, number], c: [number, number], e: number): [number, number][] => {
+      const la = Math.hypot(a[0] - b[0], a[1] - b[1]), lc = Math.hypot(c[0] - b[0], c[1] - b[1]);
+      const u = [(a[0] - b[0]) / la, (a[1] - b[1]) / la], v = [(c[0] - b[0]) / lc, (c[1] - b[1]) / lc];
+      const half = Math.acos(Math.min(1, Math.max(-1, u[0] * v[0] + u[1] * v[1]))) / 2, d = e / Math.tan(half);
+      const bl = Math.hypot(u[0] + v[0], u[1] + v[1]), k = e / Math.sin(half) - e;
+      return [[b[0] + u[0] * d, b[1] + u[1] * d], [b[0] + ((u[0] + v[0]) / bl) * k, b[1] + ((u[1] + v[1]) / bl) * k], [b[0] + v[0] * d, b[1] + v[1] * d]];
+    };
+    // A closed can profile from y0 to y1 with both edges rounded by e
+    const can = (rad: number, y0: number, y1: number, e: number): [number, number][] =>
+      [[0, y0], ...fillet([0, y0], [rad, y0], [rad, y1], e), ...fillet([rad, y0], [rad, y1], [0, y1], e), [0, y1]];
+    // A closed circle profile of radius rad around yc, bottom to top
+    const ball = (rad: number, yc: number, steps: number): [number, number][] =>
+      Array.from({ length: steps + 1 }, (_, i): [number, number] => [rad * Math.sin((Math.PI * i) / steps), yc - rad * Math.cos((Math.PI * i) / steps)]);
+    // Hollow: an effective density for the mass estimate. The ballast tail reaches 1 cm up into the body.
     const cwR = isSphere ? Math.min(0.35 * p.diameter, 0.8 * ballR) : 0.35 * p.diameter;
-    t.add(metal, new CylinderGeometry(cwR, cwR, ch, seg).translate(0, ch / 2, 0));
-    const radAt = (y: number) => p.shape === "can" ? r : p.shape === "cone" ? (y <= joint ? r : r * Math.max(0, 1 - (y - joint) / coneH)) : Math.sqrt(Math.max(0, ballR * ballR - (y - cy) ** 2));
-    if (p.shape === "can") t.add(body, new CylinderGeometry(r, r, bh, seg).translate(0, ch + bh / 2, 0));
-    else if (p.shape === "cone") {
-      t.add(body, new CylinderGeometry(r, r, cylH, seg).translate(0, ch + cylH / 2, 0));
-      t.add(body, new ConeGeometry(r, coneH, seg).translate(0, joint + coneH / 2, 0));
-    } else t.add(body, new SphereGeometry(ballR, seg, Math.max(8, Math.round(seg * 0.6))).translate(0, cy, 0));
+    t.add(iron, turned([[0, 0], ...fillet([0, 0], [cwR, 0], [cwR, ch + 0.01], 0.01), [cwR, ch + 0.01], [0, ch + 0.01]], seg));
+    let prof: [number, number][] = [];
+    if (p.shape === "can") {
+      t.add(body, turned(prof = can(r, ch, h, 0.02), seg));
+    } else if (p.shape === "cone") {
+      // Blunted tip: the cone ends at radius 0.02 m, then a round cap to the axis
+      const tip = fillet([r, joint], [0, h], [-r, joint], (0.02 * Math.hypot(r, coneH)) / coneH).slice(0, 2);
+      t.add(body, turned(prof = [[0, ch], ...fillet([0, ch], [r, ch], [r, joint], 0.02), ...fillet([r, ch], [r, joint], [0, h], 0.015), ...tip], seg));
+    } else t.add(body, turned(prof = ball(ballR, cy, 16), seg));
+    const top = prof[prof.length - 1][1];
+    // Radius of the body at y, from its profile (the widest edge at that height)
+    const radAt = (y: number) => {
+      let best = 0;
+      for (let i = 1; i < prof.length; i++) {
+        const [ra, ya] = prof[i - 1], [rb, yb] = prof[i];
+        if (y < Math.min(ya, yb) - 1e-9 || y > Math.max(ya, yb) + 1e-9) continue;
+        best = Math.max(best, Math.abs(yb - ya) < 1e-9 ? Math.max(ra, rb) : ra + ((rb - ra) * (y - ya)) / (yb - ya));
+      }
+      return best;
+    };
     // Bands: equal periods, the lower half of each in the stripe colour, just outside the body
     const y0base = ch, span = isSphere ? 2 * ballR : bh;
     for (let i = 0; i < p.stripes; i++) {
@@ -51,19 +80,26 @@ export const buoy = defineAsset({
       if (p.shape === "sphere") {
         const theta = (y: number) => Math.acos(Math.min(1, Math.max(-1, (y - cy) / ballR)));
         const ts = theta(y1), tl = theta(y0) - ts;
-        if (tl > 1e-4) t.add(band, new SphereGeometry(ballR + 0.003, seg, 6, 0, Math.PI * 2, ts, tl).translate(0, cy, 0));
-      } else if (p.shape === "cone" && y0 < joint && y1 > joint) {
-        // Split at the joint: a straight frustum over both parts would run inside the body
-        t.add(band, new CylinderGeometry(r + 0.003, r + 0.003, joint - y0, seg, 1, true).translate(0, (y0 + joint) / 2, 0));
-        t.add(band, new CylinderGeometry(radAt(y1) + 0.003, r + 0.003, y1 - joint, seg, 1, true).translate(0, (joint + y1) / 2, 0));
-      } else t.add(band, new CylinderGeometry(radAt(y1) + 0.003, radAt(y0) + 0.003, y1 - y0, seg, 1, true).translate(0, (y0 + y1) / 2, 0));
+        if (tl > 1e-4) t.add(band, new SphereGeometry(ballR + 0.003, seg, Math.max(2, Math.ceil(tl / (Math.PI / 32))), 0, Math.PI * 2, ts, tl).translate(0, cy, 0));
+      } else {
+        // The band follows the body profile: its ends plus every profile height in between.
+        const ys = [...new Set([y0, ...prof.map(([, y]) => y).filter((y) => y > y0 && y < y1), y1])].sort((u, v) => u - v);
+        t.add(band, turned(ys.map((y) => [radAt(y) + 0.003, y]), seg));
+      }
     }
     if (p.topMark) {
-      const mastH = 0.3 * h, mastR = Math.max(0.008, 0.022 * p.diameter), markY = bodyTop + mastH;
-      t.add(metal, new CylinderGeometry(mastR, mastR, mastH, 8).translate(0, bodyTop + mastH / 2, 0));
-      if (p.shape === "can") t.add(body, new CylinderGeometry(0.12 * p.diameter, 0.12 * p.diameter, 0.15 * p.diameter, 12).translate(0, markY + 0.075 * p.diameter, 0));
-      else if (p.shape === "cone") t.add(body, new ConeGeometry(0.14 * p.diameter, 0.18 * p.diameter, 12).translate(0, markY + 0.09 * p.diameter, 0));
-      else t.add(body, new SphereGeometry(0.1 * p.diameter, 12, 8).translate(0, markY + 0.1 * p.diameter, 0));
+      // The mast sinks 1 cm into the body and 1 cm into the mark
+      const mastH = 0.3 * h, mastR = Math.max(0.008, 0.022 * p.diameter), markY = bodyTop + mastH, foot = Math.min(bodyTop, top) - 0.01;
+      t.add(metal, new CylinderGeometry(mastR, mastR, markY + 0.01 - foot, 8).translate(0, (foot + markY + 0.01) / 2, 0));
+      if (p.shape === "can") t.add(body, turned(can(0.12 * p.diameter, markY, markY + 0.15 * p.diameter, 0.005), 16));
+      else if (p.shape === "cone") {
+        const mr = 0.14 * p.diameter, mt = markY + 0.18 * p.diameter;
+        t.add(body, turned([[0, markY], ...fillet([0, markY], [mr, markY], [0, mt], 0.005), ...fillet([mr, markY], [0, mt], [-mr, markY], 0.005).slice(0, 2)], 16));
+      } else t.add(body, turned(ball(0.1 * p.diameter, markY + 0.1 * p.diameter, 8), 16));
+    } else {
+      // Lifting eye: an upright ring in the x–y plane, sunk 1 cm into the body top
+      const er = 0.06 * p.diameter, et = 0.012 * p.diameter;
+      t.add(metal, new TorusGeometry(er, et, 8, 24).translate(0, top - 0.01 + er + et, 0));
     }
     return t.cylinder(r, h).group();
   },
