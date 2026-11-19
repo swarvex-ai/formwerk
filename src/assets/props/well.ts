@@ -1,5 +1,5 @@
 import { CircleGeometry, CylinderGeometry, LatheGeometry, RingGeometry, Shape, ShapeGeometry, TorusGeometry, Vector2, Vector3, type Material } from "three";
-import { material } from "../../materials";
+import { material, grained } from "../../materials";
 import { defineAsset, Parts } from "../define";
 import { rng } from "../../core/rng";
 import { grid, rounded, turned } from "../shapes";
@@ -30,7 +30,7 @@ export const well = defineAsset({
   budget: { triangles: 27000, drawCalls: 4 },
   build(p, seed) {
     // The wall is drawn as two stone shells, so its mass comes from the shells only: an effective density for mortared rubble
-    const stein = material("stone", "#8f8a80", 0.7, 620, { moss: 0.15 }), holz = material("wood", "#7a5836", 1, 340),
+    const stein = material("stone", "#8f8a80", 0.7, 620, { moss: 0.15 }), holz = material("wood", "#7a5836", 1, 340, { grain: "part" }),
       metall = material("metal", "#5c564e", 1, 500);
     const t = new Parts();
     const R = p.radius, h = p.wallHeight, dicke = Math.min(0.1 + R * 0.1, 0.22), innen = R - dicke;
@@ -96,20 +96,20 @@ export const well = defineAsset({
         const Ls = W / Math.cos(alpha), n = Math.max(3, Math.ceil(Ls / 0.13)), step = Ls / n, bw = step + 0.03, beta = alpha - Math.atan2(th, bw);
         const firstY = yT + rh, balkenY = firstY - 0.035 * Math.tan(alpha) - 0.035;
         for (const s of [-1, 1]) {
-          t.add(holz, rounded(0.1, 0.08, 2 * Wt, 0.003, s * pfosten, dachY + 0.04, 0, 1));
+          t.add(holz, grained(rounded(0.1, 0.08, 2 * Wt, 0.003, s * pfosten, dachY + 0.04, 0, 1), "z"));
           t.add(holz, rounded(0.08, balkenY - 0.035 - yT, 0.08, 0.003, s * pfosten, (balkenY - 0.035 + yT) / 2, 0, 1));
           for (let i = 0; i <= n; i++) {
             // Board i from the ridge: its upper edge on the roof plane, its lower edge resting on the next board; i = n is the ridge cap
             const kappe = i === n, a = kappe ? 0 : i * step, b = kappe ? 0.1 : bw, off = kappe ? 1.5 * th : th, tilt = kappe ? alpha : beta;
             const zc = (a + b / 2) * Math.cos(alpha) + off * Math.sin(alpha), yc = firstY - (a + b / 2) * Math.sin(alpha) + off * Math.cos(alpha);
-            t.add(holz, rounded(Lx, th, b, 0.003, 0, 0, 0, 1).rotateX(s * tilt).translate(0, yc, s * zc));
+            t.add(holz, grained(rounded(Lx, th, b, 0.003, 0, 0, 0, 1).rotateX(s * tilt).translate(0, yc, s * zc), "x"));
           }
         }
-        t.add(holz, rounded(Lx - 0.04, 0.07, 0.07, 0.003, 0, balkenY, 0, 1));
+        t.add(holz, grained(rounded(Lx - 0.04, 0.07, 0.07, 0.003, 0, balkenY, 0, 1), "x"));
       } else {
         // A beam across the post tops, the cone resting on its ends: boards from the eaves to the apex with 4 mm joints,
         // an underlayer 1 mm below closes them, a turned finial covers the board tips
-        t.add(holz, rounded(2 * pfosten + 0.1, 0.08, 0.1, 0.003, 0, dachY + 0.04, 0, 1));
+        t.add(holz, grained(rounded(2 * pfosten + 0.1, 0.08, 0.1, 0.003, 0, dachY + 0.04, 0, 1), "x"));
         const Rb = pfosten + 0.2, k = rh / Rb, yA = yT + k * (pfosten + 0.05), unter = (r: number) => yA - k * r, th = 0.03, rIn = 0.04;
         t.add(holz, new LatheGeometry([new Vector2(0.001, yA - 0.004), new Vector2(Rb - 0.01, unter(Rb - 0.01) - 0.004), new Vector2(Rb - 0.01, unter(Rb - 0.01) - 0.001), new Vector2(0.001, yA - 0.001)], 48));
         const brett = [new Vector2(rIn, unter(rIn)), new Vector2(Rb, unter(Rb)), new Vector2(Rb, unter(Rb) + th), new Vector2(rIn, unter(rIn) + th), new Vector2(rIn, unter(rIn))];
@@ -129,10 +129,10 @@ export const well = defineAsset({
       t.add(metall, new TorusGeometry(bugel, 0.005, 6, 16, Math.PI).translate(0, bugelY, rc));
       // Crank: axle with a collar, winding drum with flanges, arm and turned handle turn together about the axle
       const kurbel = t.moving("crank", 0, welle, 0), x0 = -(pfosten + 0.08), x1 = pfosten + 0.115;
-      kurbel.add(holz, turned([[0.05, 0], [0.05, 0.02], [0.035, 0.02], [0.035, x1 - x0]], 16).rotateZ(-Math.PI / 2).translate(x0, welle, 0));
-      kurbel.add(holz, turned([[0.001, -0.14], [0.1, -0.14], [0.1, -0.12], [0.07, -0.115], [0.07, 0.115], [0.1, 0.12], [0.1, 0.14], [0.001, 0.14]], 24).rotateZ(-Math.PI / 2).translate(0, welle, 0));
+      kurbel.add(holz, grained(turned([[0.05, 0], [0.05, 0.02], [0.035, 0.02], [0.035, x1 - x0]], 16).rotateZ(-Math.PI / 2).translate(x0, welle, 0), "x"));
+      kurbel.add(holz, grained(turned([[0.001, -0.14], [0.1, -0.14], [0.1, -0.12], [0.07, -0.115], [0.07, 0.115], [0.1, 0.12], [0.1, 0.14], [0.001, 0.14]], 24).rotateZ(-Math.PI / 2).translate(0, welle, 0), "x"));
       kurbel.add(holz, rounded(0.045, 0.2, 0.05, 0.004, pfosten + 0.09, welle + 0.07, 0, 1));
-      kurbel.add(holz, turned([[0.012, 0], [0.012, 0.03], [0.018, 0.035], [0.022, 0.08], [0.018, 0.13], [0.01, 0.14], [0.001, 0.142]], 12).rotateZ(-Math.PI / 2).translate(pfosten + 0.09, welle + 0.14, 0));
+      kurbel.add(holz, grained(turned([[0.012, 0], [0.012, 0.03], [0.018, 0.035], [0.022, 0.08], [0.018, 0.13], [0.01, 0.14], [0.001, 0.142]], 12).rotateZ(-Math.PI / 2).translate(pfosten + 0.09, welle + 0.14, 0), "x"));
     }
     return t.group();
   },
