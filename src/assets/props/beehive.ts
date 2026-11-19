@@ -1,7 +1,9 @@
-import { CylinderGeometry, SphereGeometry, TorusGeometry } from "three";
+import { ExtrudeGeometry, Shape, SphereGeometry, TorusGeometry } from "three";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { roundBoards } from "../shapes";
 
 export const beehive = defineAsset({
   id: "beehive", category: "props",
@@ -15,7 +17,7 @@ export const beehive = defineAsset({
     coils: { type: "integer", label: { de: "Ringe", en: "Coils" }, min: 8, max: 16, default: 11,
       describe: { de: "Anzahl der übereinander gestapelten Strohringe: 8 grob, 11 üblich, 15 für einen hohen Korb.", en: "Number of straw rings stacked to the top: 8 coarse, 11 usual, 15 for a tall skep." } },
     stand: { type: "number", label: { de: "Ständer", en: "Stand" }, min: 0, max: 0.8, step: 0.05, default: 0.45, unit: "m",
-      describe: { de: "Höhe des Holzständers (Brett auf einem Pfosten): 0 stellt den Korb auf den Boden, 0,45 m ein Gartenständer, 0,8 m ein hoher Ständer.", en: "Height of the wooden stand (a round board on one post): 0 sets the skep on the ground, 0.45 m a garden stand, 0.8 m a tall stand." } },
+      describe: { de: "Höhe des Holzständers (rundes Brett auf einem Pfosten): 0 stellt den Korb auf den Boden, 0,45 m ein Gartenständer, 0,8 m ein hoher Ständer.", en: "Height of the wooden stand (a round board on one post): 0 sets the skep on the ground, 0.45 m a garden stand, 0.8 m a tall stand." } },
     entrance: { type: "number", label: { de: "Flugloch", en: "Entrance" }, min: 0.04, max: 0.12, step: 0.01, default: 0.07, unit: "m",
       describe: { de: "Breite des dunklen Fluglochs vorn: 0,05 m eng, 0,07 m üblich, 0,1 m weit.", en: "Width of the dark entrance hole at the front: 0.05 m narrow, 0.07 m usual, 0.1 m wide." } },
     colour: { type: "color", label: { de: "Farbe", en: "Colour" }, default: "#c8a050",
@@ -29,10 +31,13 @@ export const beehive = defineAsset({
     "tall-skep": { label: { de: "Hoher Korb", en: "Tall skep" }, values: { height: 0.58, radius: 0.2, coils: 15 } },
   },
   physics: { body: "static", collider: "hull" },
-  budget: { triangles: 5000, drawCalls: 3 },
+  budget: { triangles: 9768, drawCalls: 4 },
   build(p, seed) {
     const z = rng(seed), n = p.coils, base = p.stand;
-    const straw = material("wood", p.colour), wood = material("wood", p.standColour);
+    const straw = material("wood", p.colour, 1, undefined, { grain: "level" });
+    const dunkel = material("paint", "#1a140c");
+    const brett = material("wood", p.standColour, 1, undefined, { grain: "level" });
+    const pfosten = material("wood", p.standColour);
     const c = p.height / (2 * n) * 1.2;
     const t = new Parts();
     let R = 0, y = 0, R0 = 0;
@@ -41,14 +46,45 @@ export const beehive = defineAsset({
       R = p.radius * Math.sqrt(1 - Math.pow(f, 2.2)) * (1 + (z() - 0.5) * 0.03);
       if (i === 0) R0 = R;
       y = base + c + i * (p.height - 2 * c) / (n - 1);
-      t.add(straw, new TorusGeometry(R, c, 6, 20).rotateX(Math.PI / 2).rotateY(z() * Math.PI * 2).translate(0, y, 0));
+      t.add(straw, new TorusGeometry(R, c, 8, 32).rotateX(Math.PI / 2).rotateY(z() * Math.PI * 2).translate(0, y, 0));
     }
-    t.add(straw, new SphereGeometry(R + c, 12, 6, 0, Math.PI * 2, 0, Math.PI / 2).translate(0, y, 0));
-    t.box(material("paint", "#1a140c"), p.entrance, 0.035, 0.03, 0, base + c * 1.2, R0 + c * 0.4);
+    // Gewölbe oben: zwei weitere Strohringe und eine Kugel, die die Mitte verschließt
+    t.add(straw, new TorusGeometry(0.6 * R, c, 8, 32).rotateX(Math.PI / 2).translate(0, y + c, 0));
+    t.add(straw, new TorusGeometry(0.25 * R, c, 8, 32).rotateX(Math.PI / 2).translate(0, y + 2 * c, 0));
+    t.add(straw, new SphereGeometry(c, 12, 8).translate(0, y + 3 * c, 0));
+    // Flugloch: dunkle Platte mit geradem Boden und rundem Oberteil, ins unterste Ring gesetzt
+    const w = p.entrance, h = 0.035, fuge = h * 0.5;
+    const mitte = (h * h - fuge * fuge - (w / 2) * (w / 2)) / (2 * (h - fuge));
+    const rad = h - mitte;
+    const a1 = Math.atan2(fuge - mitte, w / 2), a0 = Math.atan2(fuge - mitte, -w / 2);
+    const form = new Shape();
+    form.moveTo(-w / 2, 0);
+    form.lineTo(w / 2, 0);
+    form.lineTo(w / 2, fuge);
+    form.absarc(0, mitte, rad, a1, a0, false);
+    form.lineTo(-w / 2, 0);
+    const vorn = R0 + c + 0.002;
+    t.add(dunkel, new ExtrudeGeometry(form, { depth: 0.01, bevelEnabled: false, curveSegments: 12 }).translate(0, base + c * 1.2, vorn - 0.01));
     if (p.stand > 0) {
-      t.add(wood, new CylinderGeometry(p.radius + 0.04, p.radius + 0.04, 0.03, 20).translate(0, p.stand - 0.015, 0));
-      t.post(wood, 0.04, p.stand - 0.03, 0, 0, 0);
+      const durch = 2 * (p.radius + 0.04);
+      const lang = durch - 0.02;
+      const boardUnter = p.stand - 0.03;
+      // Brett: drei Dielen mit Fugen, von unten durch zwei Kreuzbretter geschlossen
+      t.add(brett, roundBoards(p.radius + 0.04, 3, 0.003, 0.03).translate(0, p.stand, 0));
+      if (p.stand - 0.06 > 0.01) {
+        // Kreuzbretter unter dem Brett, Pfosten vom Boden bis zu ihrer Unterseite
+        const yb = boardUnter - 0.0005 - 0.015;
+        t.add(brett, new RoundedBoxGeometry(lang, 0.03, 0.04, 0.003, 4).translate(0, yb, 0));
+        t.add(brett, new RoundedBoxGeometry(0.04, 0.03, lang, 0.003, 4).translate(0, yb, 0));
+        const hStab = boardUnter - 0.0005 - 0.03 - 0.0005;
+        t.add(pfosten, new RoundedBoxGeometry(0.08, hStab, 0.08, 0.004, 6).translate(0, hStab / 2, 0));
+      } else {
+        // Kurzer Ständer: Pfosten vom Boden bis direkt unter das Brett
+        const hStab = boardUnter - 0.0005;
+        t.add(pfosten, new RoundedBoxGeometry(0.08, hStab, 0.08, 0.004, 6).translate(0, hStab / 2, 0));
+      }
     }
-    return t.group();
+    const gruppe = t.group();
+    return gruppe;
   },
 });
