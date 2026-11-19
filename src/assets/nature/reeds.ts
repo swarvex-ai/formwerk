@@ -1,32 +1,36 @@
-import { BufferGeometry, CylinderGeometry, Float32BufferAttribute, Quaternion, Vector3, type Material } from "three";
+import { BufferGeometry, Color, Float32BufferAttribute, Quaternion, Vector3, type Material } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, turned } from "../shapes";
 
-const SEGMENTE = 6;
+const SEGMENTE = 8;
 
-// A long leaf blade as a strip of SEGMENTE pieces that leans out from the clump and droops towards the tip. The strip
-// is duplicated with reversed winding (formwerk materials render front faces only, so a one-sided strip vanishes
-// from half the viewpoints); the copy has its own vertices, so each side gets its own normal.
+// A long leaf blade, folded along its midrib like a shallow V, that leans out from the clump, droops towards the tip and
+// ends in a point. Both faces are built (formwerk materials render front faces only); each face has its own vertices,
+// so each gets its own normal.
 function blade(t: Parts, m: Material, x: number, z: number, len: number, w: number, yaw: number, lean: number, droop: number, twist: number) {
   const dx = Math.cos(yaw), dz = Math.sin(yaw), ds = len / SEGMENTE;
   const pos: number[] = [], uv: number[] = [];
   let cx = x, cy = 0, cz = z;
   for (let i = 0; i <= SEGMENTE; i++) {
     // the blade twists along its length, so from no side does it show only its edge
-    const s = i / SEGMENTE, half = w * 0.5 * Math.max(0.08, Math.pow(1 - s, 0.6));
+    const s = i / SEGMENTE, half = i === SEGMENTE ? 0 : w * 0.5 * Math.pow(1 - s, 0.45);
     const q = yaw + Math.PI / 2 + twist * (0.4 + s), px = Math.cos(q), pz = Math.sin(q);
-    // clamp just above the floor: a blade drooping past the horizontal must not reach into the ground
-    const y = Math.max(0.005, cy);
-    pos.push(cx - px * half, y, cz - pz * half, cx + px * half, y, cz + pz * half);
-    uv.push(0, s, 1, s);
     // the angle from vertical grows along the blade: lean at the base, droop towards the tip
     const a = lean + droop * s * s * 1.5;
-    cx += dx * Math.sin(a) * ds; cz += dz * Math.sin(a) * ds; cy += Math.cos(a) * ds;
+    const tx = dx * Math.sin(a), ty = Math.cos(a), tz = dz * Math.sin(a);
+    // the fold: the midrib lies behind the edges, along the blade's normal (across × along)
+    const nx = pz * ty, ny = px * tz - pz * tx, nz = -px * ty, kiel = half * 0.3;
+    // clamp just above the floor: a blade drooping past the horizontal must not reach into the ground
+    const y = Math.max(0.005, cy);
+    pos.push(cx - px * half, y, cz - pz * half, cx - nx * kiel, Math.max(0.005, y - ny * kiel), cz - nz * kiel, cx + px * half, y, cz + pz * half);
+    uv.push(0, s, 0.5, s, 1, s);
+    cx += tx * ds; cz += tz * ds; cy += ty * ds;
   }
   const n = pos.length / 3, idx: number[] = [];
-  for (let i = 0; i < SEGMENTE; i++) {
-    const a = i * 2, b = a + 1, c = a + 2, d = a + 3;
+  for (let i = 0; i < SEGMENTE; i++) for (const k of [0, 1]) {
+    const a = i * 3 + k, b = a + 1, c = a + 3, d = a + 4;
     idx.push(a, b, d, a, d, c);
     idx.push(n + a, n + d, n + b, n + a, n + c, n + d);
   }
@@ -38,9 +42,8 @@ function blade(t: Parts, m: Material, x: number, z: number, len: number, w: numb
   t.add(m, g);
 }
 
-// A cylinder from one point along a direction (three.js cylinders stand on y and are centred).
-function along(g: BufferGeometry, from: Vector3, dir: Vector3, len: number): BufferGeometry {
-  g.translate(0, len / 2, 0);
+// A lathe profile (standing on y = 0) turned onto a direction and moved to a point.
+function along(g: BufferGeometry, from: Vector3, dir: Vector3): BufferGeometry {
   g.applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), dir));
   return g.translate(from.x, from.y, from.z);
 }
@@ -75,27 +78,39 @@ export const reeds = defineAsset({
     sedge: { label: { de: "Segge", en: "Sedge" }, values: { height: 0.65, stems: 60, spread: 30, bend: 0.8, width: 0.008, radius: 0.12, heads: 0, leafColor: "#6f8f45" } },
   },
   physics: { body: "static", collider: "hull" },
-  budget: { triangles: 4000, drawCalls: 2 },
+  budget: { triangles: 8000, drawCalls: 3 },
   build(p, seed) {
-    const r = rng(seed), blatt = material("leaf", p.leafColor, 1, 200), kolben = material("bark", p.headColor, 3, 300), t = new Parts();
+    const r = rng(seed), t = new Parts();
+    // Blades in two shades of plain colour like the tree's leaves (thin blades carry no pattern to bake); the cattail
+    // stalks in the darker one
+    const ton = (k: number) => { const c = new Color(p.leafColor); c.multiplyScalar(k); return `#${c.getHexString()}`; };
+    const hell = material("leaf", p.leafColor, 1, 200, { plain: true }), dunkel = material("leaf", ton(0.74), 1, 200, { plain: true });
+    const braun = material("bark", p.headColor, 3, 300);
     const H = p.height, R = p.radius, lean = (p.spread * Math.PI) / 180;
-    // The root clump: a low mound of brown roots and old stems; it holds the blades together and gives the mass
-    // estimate something solid
-    t.add(kolben, new CylinderGeometry(R * 0.55, R * 0.8, 0.04, 10).translate(0, 0.02, 0));
+    // The root clump: a low uneven mound of roots and old stems that holds the blades together, closed underneath
+    const rand = (u: number) => R * 0.8 * (1 + 0.12 * Math.sin(u * Math.PI * 6 + 1) + 0.08 * Math.sin(u * Math.PI * 10 + 2));
+    const hm = Math.min(0.05, 0.02 + R * 0.1);
+    t.add(braun, grid(20, 4, (u, v) => {
+      const a = u * Math.PI * 2, d = rand(u) * Math.sin((v * Math.PI) / 2);
+      return new Vector3(Math.cos(a) * d, v === 1 ? 0 : hm * Math.cos((v * Math.PI) / 2), Math.sin(a) * d);
+    }, (q) => new Vector3(q.x, q.y + 0.05, q.z)));
+    t.add(braun, grid(20, 1, (u, v) => new Vector3(Math.cos(u * Math.PI * 2) * rand(u) * v, 0, Math.sin(u * Math.PI * 2) * rand(u) * v), () => new Vector3(0, -1, 0)));
     const fuss = () => { const a = r() * Math.PI * 2, d = R * 0.7 * Math.sqrt(r()); return [Math.cos(a) * d, Math.sin(a) * d, a] as const; };
     for (let i = 0; i < p.stems; i++) {
       // each blade leans away from the centre, a little scattered, so the clump opens like a fan
       const [x, z, a] = fuss(), yaw = a + (r() - 0.5) * 1.2;
-      blade(t, blatt, x, z, H * (0.6 + 0.4 * r()), p.width * (0.7 + 0.6 * r()), yaw, lean * (0.3 + 0.9 * r()), p.bend * (0.6 + 0.8 * r()), (r() - 0.5) * 2);
+      blade(t, i % 2 ? dunkel : hell, x, z, H * (0.6 + 0.4 * r()), p.width * (0.7 + 0.6 * r()), yaw, lean * (0.3 + 0.9 * r()), p.bend * (0.6 + 0.8 * r()), (r() - 0.5) * 2);
     }
-    // Cattail stalks stand stiff and nearly straight: a thin round stalk, the brown head below the top and a spike above
+    // Cattail stalks stand stiff and nearly straight: a tapering round stalk, the brown head below the top and the dry
+    // spike above it
     for (let i = 0; i < p.heads; i++) {
       const [x, z, a] = fuss(), h = H * (0.85 + 0.2 * r()), th = lean * 0.4 * r();
       const dir = new Vector3(Math.cos(a) * Math.sin(th), Math.cos(th), Math.sin(a) * Math.sin(th));
       const kr = Math.max(0.01, Math.min(0.026, 0.016 * H)), kl = Math.min(0.3, 0.12 * H), unten = h * 0.86 - kl;
-      const basis = new Vector3(x, 0, z), kopf = basis.clone().addScaledVector(dir, unten);
-      t.add(blatt, along(new CylinderGeometry(kr * 0.25, kr * 0.4, h, 5, 1, true), basis, dir, h));
-      t.add(kolben, along(new CylinderGeometry(kr * 0.85, kr, kl, 8), kopf, dir, kl));
+      const basis = new Vector3(x, 0, z);
+      t.add(dunkel, along(turned([[0, 0], [kr * 0.42, 0], [kr * 0.3, unten + kl * 0.5], [0, unten + kl * 0.5]], 6), basis, dir));
+      t.add(braun, along(turned([[0, 0], [kr * 0.45, 0], [kr * 0.85, kl * 0.04], [kr, kl * 0.15], [kr, kl * 0.8], [kr * 0.92, kl * 0.95], [kr * 0.5, kl], [0, kl]], 10), basis.clone().addScaledVector(dir, unten), dir));
+      t.add(braun, along(turned([[0, 0], [kr * 0.25, 0], [kr * 0.12, h - unten - kl], [0, h - unten - kl]], 5), basis.clone().addScaledVector(dir, unten + kl - 0.002), dir));
     }
     return t.group();
   },
