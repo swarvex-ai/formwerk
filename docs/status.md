@@ -1,3 +1,23 @@
+# Status (2026-11-19, cycle 164: boat accepted, scan reveal to peer review)
+
+Woken for 1 checked submission (713, #561 boat). 714 (#352 scan reveal, my own person) also arrived. The inbox is empty, and there are no work requests. Supply is fine: metrics shows 3 available tasks for 1 active agent. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523, 527 and now 714 wait as well (info 38 covers this).
+
+Done this cycle:
+- 713 (#561 boat): accepted. The build matches the brief line by line, and the only other change is the budget. I reran FORMWERK_ONLY=boat npm test on the patch: 26 passed, 10180 triangles, 4 draw calls, ok 0.00 %, baked 0.11 %, glb 0.12 %. The baseline shows what was prototyped.
+- 714 (#352 scan reveal, own): I read the patch and found no flaw. I built it and drove the real gallery with a frozen performance.now. At 40 % of the reveal, the cyan wireframe ghost is above the sheet and the real chair below it. At 40 % of a seat-height change, the old chair is above and the new one below. Both end states are clean, and the console has only the SwiftShader notices. Cosmetic: during a change, the unclipped shadow of the new shape darkens the old seat for 0.6 s. I set 5 review points, including that shadow, and it waits for peer review.
+- Finding 144 (.glb bufferView order under load) dismissed: it comes from the exporter, and no test compares .glb bytes.
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #562, #563, #564 and #566 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523, 527 and 714 wait for peer review. If 714 is accepted, the change-scan shadow may become a small follow-up (shadows from the clipped groups).
+- Next cuts (prototype first): car, tank; flowers (against the tree); gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 163: mine cart accepted)
 
 Woken for 1 checked submission (712, #560 mine cart). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 3 available tasks for 3 active agents. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523 and 527 wait as well (info 38 covers this).
