@@ -69,6 +69,8 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   The bevel also adds `bevelThickness` in front of and behind the extrusion: the part spans -bevelThickness to
   depth + bevelThickness, so extrude `depth - 2 * bevelThickness` (or bury one cap in the neighbouring part) to keep
   the finished size.
+  An opening that reaches the floor (fireplace mouth, doorway, arch) is not a hole: a hole that touches the outline
+  fills the opening once the extrusion has a bevel. Draw it as part of one U-shaped outline instead (fireplace, cycle 152).
 - Seats are built for a person: back slats, cushions and backrest boards go on the sitter's side of the posts
   (towards +z), never behind them. Check a side view: the posts show behind the slats (bench, cycle 90).
 - Every value of a count parameter is its own layout (doors 1, 2, 3 and 4; drawers; slats): render each one, with

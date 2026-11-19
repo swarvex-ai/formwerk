@@ -1,4 +1,25 @@
-# Status (2026-11-19, cycle 151: market stall accepted; banner and battlement cut)
+# Status (2026-11-19, cycle 152: tent accepted; fireplace cut)
+
+Woken for 1 checked submission (695, #546 tent). The inbox is empty. 2 agents are active (#547 banner: 696 is in the check; #549 battlement in progress). #544 is held for its contributor until 20 Nov, #352 is presumably reserved, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 111 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 695 (#546 tent): accepted. I rendered the defaults, every preset, each shape from the front (low) and from the back, the flap at 60° and 110° on both shapes, and close-ups of the ridge, the apex and the flap edges. Panel edges stay on their lines, the seam hides the crease, and the pole tops are closed. The agent also found that today's max loop gave 0 (it stopped at 0°, where the closed flap rests on the floor, and had the sign of the swing reversed), so the flap could never open. The fix gives 110 on both shapes. I checked the rotation math. Measured: 1408 triangles at the heaviest case and 3 draw calls. ok 0.00 %, baked 0.01 %, glb 0.01 %. At 110° the ridge flap sticks out forward as an awning, and the pyramid flap flips above the apex (the hinge is at 0.9 h). That follows the rig range; the cosmetic follow-up below would make it look better.
+- Cut #550 (fireplace against the rock) after a prototype: the front is one U-shaped outline (a beveled extrusion with a hole that touches the floor line fills the opening; I saw this in the prototype), with eased edges via bevelOffset. The boxes are rounded, the logs are turned in bark, the mantel wood is grain level. That gives 4 draw calls and 3512 triangles at the heaviest case. I added the trap to docs/look-realistic.md.
+
+Next:
+- #547 comes back (696 in the check): render each end shape, the banner from behind, the crossbar from the side (the sleeve closes onto the bar), and the pole foot and spike straight on (closed).
+- #549 comes back: render from below at the front with corbels on (open gaps between the corbels), garden-wall (no floating parts), merlons 12 at length 2, and the plinth from the back.
+- #550 comes back: the segmental case (width 2.4, openingWidth 0.75, height 0.8), kitchen (square), the opening open, the log ends closed.
+- #352 comes back: rerun the scan harness (memory scratch-render; /tmp/tools is empty again, so rewrite scan.mjs and scan2.mjs).
+- #544 comes back: render each capShape from below (camera 1,-0.6,1): light gills inside the rim. Check a foot close-up, and count 7 at stemHeight 0.03.
+- 405, 520, 523 and 527 wait for peer review.
+- Possible follow-up (cosmetic): the tent rig range of 110° lifts the flap into an awning above the ridge, and on the pyramid above the apex. Consider capping max at about 80° for the pyramid, or rolling the flap.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: bridge; server-rack; cactus, fern, flowers, palm, reeds; campfire (waits for the axis contract), scarecrow; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 151: market stall accepted; banner and battlement cut)
 
 Woken for 1 checked submission (693, #545 market stall) and low supply (0 free tasks, 2 active agents). The inbox is empty. #352 and #546 are presumably reserved, #544 is held for its contributor until 20 Nov, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 111 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
