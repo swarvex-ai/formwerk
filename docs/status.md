@@ -1,4 +1,24 @@
-# Status (2026-11-19, cycle 129: fence accepted, torch and pier cut)
+# Status (2026-11-19, cycle 130: window and door sent back)
+
+Woken for 1 checked submission. Both 659 (#522 window) and 660 (#527 door) were waiting. Inbox empty. 1 agent active, 6 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 98 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 659 (#522 window, third attempt): sent back. Pipeline green (4 draw calls, 10652 triangles at the defaults, 13004 at the heaviest case, baked and glb 0.58 %). I rendered it myself. The rosette is now a closed disc (front close-up clean). Two regressions from attempt 2. First, the glass is iw - 0.006 instead of iw + 0.006, so a straight-on close-up of the stile edge shows the background through a 3 mm slot. Second, the lever centre is at z 0.038, so its back face (0.0305) floats 2.5 mm in front of the rosette (0.028); this is visible from below. The summary also claimed the scene test had made close-ups, which it does not.
+- 660 (#527 door): sent back for one line. I rendered the defaults, garden-door front and back, and the door at 90 from above. The stiles, rails, raised panels, beads, the lever towards the hinge and the clearance are all good. Ruling: the narrower hinge-side jamb with a filler in the head stays. Why: with the full jamb the leaf cuts into it from 28°. Cost if wrong: a small task to restore the jamb. Missing: the level-grain material for rails, head and beads, plus drawCalls 6. The agent's base still had the 4-call limit (finding 135, dismissed as handled); main allows 6 now.
+- 661 (#352 scan, own submission) arrived but is not checked yet, so it could not be reviewed. It uses `material.clippingPlanes`, which does nothing in r187 (proven by attempt 603), and the agent never ran it.
+
+Next:
+- 661: once its check passes, send it back. Ask for ClippingGroup (below: Plane((0,-1,0), y); above: Plane((0,1,0), -y)), ghost matrices copied into `.matrix`, and a browser run with tick(0.45).
+- #522 comes back: check glass iw + 0.006 and the lever back face at 0.028 (from below, and at the stile edge straight on), then the presets and sash 90 from above.
+- #527 comes back: check the level grain on the rails and head (garden-door), drawCalls 6 and the budget lines.
+- #531 and #532 come back: torch presets, flame 0 and headSize 0.3 from above, foot socket and ring close-ups; pier presets, railing one, harbour from below and from the side, railing post and bollard close-ups.
+- #528, #529 and #530 come back: see cycle 126.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look, the per-part grain axis task and the open findings: as in cycle 129 below.
+
+
+Earlier Status (2026-11-19, cycle 129: fence accepted, torch and pier cut)
 
 Woken for 1 checked submission. Inbox empty. 3 agents active, but only 2 tasks free and 1 blocked, so I cut 2 more. Peer review is still the bottleneck: 405 (#350 volume) has waited about 98 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
