@@ -1,6 +1,7 @@
-import { BoxGeometry } from "three";
-import { material } from "../../materials";
+import { DoubleSide, ExtrudeGeometry, Shape, Vector3 } from "three";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded } from "../shapes";
 
 export const marketStall = defineAsset({
   id: "market-stall", category: "props",
@@ -32,30 +33,53 @@ export const marketStall = defineAsset({
     plain: { label: { de: "Schlicht", en: "Plain" }, values: { roof: "flat", stripes: 0, color1: "#4c7a46" } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 3000, drawCalls: 3 },
+  budget: { triangles: 15000, drawCalls: 3 },
   build(p) {
-    const holz = material("wood", p.wood), stoff = [material("paint", p.color1), material("paint", p.color2)], t = new Parts();
-    const w = p.width, d = p.depth, h = p.height, vorn = d / 2, hinten = -d / 2, ueber = 0.25, pf = 0.08;
+    // One wood: boards, bearers and the rail lie level (grained along their length), the posts stand ("auto")
+    const holz = material("wood", p.wood, 1, undefined, { grain: "part" }), stoff = [material("paint", p.color1), material("paint", p.color2)], t = new Parts();
+    for (const s of stoff) s.side = DoubleSide;
+    const w = p.width, d = p.depth, h = p.height, vorn = d / 2, hinten = -d / 2, ueber = 0.25, pf = 0.08, fuge = 0.003;
     const steig = p.roof === "sloped" ? 0.45 : p.roof === "peaked" ? 0.55 : 0;
     // Roof height at depth z; posts reach up to it
     const dach = (z: number) => (p.roof === "sloped" ? h + (steig * (vorn - z)) / d : p.roof === "peaked" ? h + steig * (1 - Math.abs(z) / vorn) : h);
-    for (const x of [-w / 2 + pf / 2, w / 2 - pf / 2]) for (const z of [vorn - pf / 2, hinten + pf / 2]) t.box(holz, pf, dach(z), pf, x, dach(z) / 2, z);
-    t.box(holz, w, 0.06, 0.6, 0, p.counter - 0.03, vorn - 0.3);
-    t.box(holz, w - 2 * pf, p.counter - 0.06, 0.03, 0, (p.counter - 0.06) / 2, vorn - 0.03);
-    t.box(holz, w - 2 * pf, 0.05, 0.05, 0, h - 0.06, vorn - pf / 2);
-    // The cloth: strips across the width, in two colours, as one or two sloping planes
-    const n = Math.max(1, p.stripes), b = (w + 0.2) / n;
-    const flaeche = (z0: number, z1: number) => {
-      const y0 = dach(z0), y1 = dach(z1), lang = Math.hypot(z1 - z0, y1 - y0), neig = Math.atan2(y1 - y0, z0 - z1);
-      for (let i = 0; i < n; i++) {
-        const g = new BoxGeometry(b, 0.015, lang).rotateX(neig).translate(-(w + 0.2) / 2 + b * (i + 0.5), (y0 + y1) / 2 + 0.03, (z0 + z1) / 2);
-        t.add(stoff[p.stripes ? i % 2 : 0], g);
-      }
+    const pfosten = [-w / 2 + pf / 2, w / 2 - pf / 2].flatMap((x) => [vorn - pf / 2, hinten + pf / 2].map((z) => [x, z]));
+    for (const [x, z] of pfosten) t.add(holz, rounded(pf, dach(z), pf, 0.008, x, dach(z) / 2, z));
+    // Counter top: boards along x with 3 mm joints, 3 mm in from the post faces, on two bearers running front to back
+    const k = Math.round(0.6 / 0.15), bt = (0.6 - 0.003 - (k - 1) * fuge) / k;
+    for (let i = 0; i < k; i++) t.add(holz, grained(rounded(w - 0.006, 0.04, bt, 0.006, 0, p.counter - 0.02, vorn - 0.003 - bt / 2 - i * (bt + fuge)), "x"));
+    // Counter front: upright boards between the posts, closed from behind by a lining 2 mm back
+    const innen = w - 2 * pf, fh = p.counter - 0.04, m = Math.max(1, Math.round(innen / 0.12)), fb = (innen - (m - 1) * fuge) / m;
+    for (let i = 0; i < m; i++) t.add(holz, rounded(fb, fh, 0.02, 0.004, -innen / 2 + fb / 2 + i * (fb + fuge), fh / 2, vorn - 0.03));
+    const futter = vorn - 0.04 - 0.002 - 0.006;
+    t.add(holz, grained(rounded(innen, fh, 0.012, 0.002, 0, fh / 2, futter), "x"));
+    const tr0 = vorn - 0.6 + 0.02, tr1 = futter - 0.006;
+    for (const s of [-1, 1]) t.add(holz, grained(rounded(0.05, 0.05, tr1 - tr0, 0.006, s * (innen / 2 - 0.03), p.counter - 0.065, (tr0 + tr1) / 2), "z"));
+    t.add(holz, grained(rounded(innen, 0.05, 0.05, 0.008, 0, h - 0.06, vorn - pf / 2), "x"));
+    // The cloth: strips across the width, in two colours, each sagging between the two lines of the roof planes
+    const n = Math.max(1, p.stripes), b = (w + 0.2) / n, x0 = -(w + 0.2) / 2;
+    const flaechen: [number, number][] = p.roof === "peaked" ? [[vorn + ueber, 0], [0, hinten - 0.1]] : [[vorn + ueber, hinten - 0.1]];
+    const tuch = ([z0, z1]: [number, number], v: number) => {
+      const y0 = dach(z0), y1 = dach(z1), lang = Math.hypot(z1 - z0, y1 - y0);
+      return y0 + (y1 - y0) * v + 0.03 - 0.03 * lang * Math.sin(Math.PI * v);
     };
-    if (p.roof === "peaked") { flaeche(vorn + ueber, 0); flaeche(0, hinten - 0.1); }
-    else flaeche(vorn + ueber, hinten - 0.1);
-    // A valance hanging from the front edge, striped like the roof
-    for (let i = 0; i < n; i++) t.box(stoff[p.stripes ? i % 2 : 0], b, 0.18, 0.01, -(w + 0.2) / 2 + b * (i + 0.5), dach(vorn + ueber) - 0.06, vorn + ueber);
+    // The cloth rests on the posts: lift it where the sag would reach a post top
+    let heben = 0;
+    for (const [, z] of pfosten) for (let j = -2; j <= 2; j++) {
+      const zz = z + (j * pf) / 4, f = flaechen.find(([a, c]) => (zz - a) * (zz - c) <= 0)!;
+      heben = Math.max(heben, dach(z) + 0.004 - tuch(f, (zz - f[0]) / (f[1] - f[0])));
+    }
+    for (const f of flaechen) for (let i = 0; i < n; i++) {
+      const g = grid(2, 8, (u, v) => new Vector3(x0 + b * (i + u), tuch(f, v) + heben, f[0] + (f[1] - f[0]) * v), () => new Vector3(0, 1, 0));
+      t.add(stoff[p.stripes ? i % 2 : 0], g);
+    }
+    // A valance hanging from the front edge, striped like the roof, ending in rounded tongues (wide strips get several)
+    const oben = dach(vorn + ueber) + 0.03 + heben, zungen = Math.ceil(b / 0.45 - 1e-6), zb = b / zungen, r = zb / 2;
+    for (let i = 0; i < n; i++) for (let j = 0; j < zungen; j++) {
+      const s = new Shape().moveTo(-r, 0).lineTo(-r, -0.12);
+      s.absarc(0, -0.12, r, Math.PI, 2 * Math.PI, false);
+      s.lineTo(r, 0).closePath();
+      t.add(stoff[p.stripes ? i % 2 : 0], new ExtrudeGeometry(s, { depth: 0.01, bevelEnabled: false, curveSegments: 8 }).translate(x0 + b * i + zb * (j + 0.5), oben, vorn + ueber - 0.005));
+    }
     return t.group();
   },
 });
