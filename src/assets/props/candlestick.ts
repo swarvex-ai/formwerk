@@ -81,7 +81,7 @@ export const candlestick = defineAsset({
       const h = p.holderHeight, stab = Math.max(0.008, Math.min(0.022, h * 0.075));
       const fuss = Math.min(0.085, Math.max(0.032, h * (kerzen === 1 ? 0.34 : 0.28)));
       // Drip pan (bobèche) under every socket rim: a flat disc with a raised lip, closed on the axis, below the candle
-      const pan = cupR + 0.012;
+      const pan = kerzen === 1 ? cupR + 0.012 : Math.min(cupR + 0.012, 0.038);
       const tropfschale = (x: number) => turned([[0.0006, 0], [pan, 0], [pan, 0.004], [pan - 0.002, 0.004], [pan - 0.002, 0.002], [0.0006, 0.002]], 16, x, h - 0.007, 0);
       t.add(metall, new LatheGeometry(saeule(h, fuss, stab, cupR), 24));
       t.add(metall, tropfschale(0));
