@@ -1,6 +1,8 @@
-import { CylinderGeometry, LatheGeometry, Vector2 } from "three";
+import { Vector3, type BufferGeometry } from "three";
+import { toCreasedNormals } from "three/addons/utils/BufferGeometryUtils.js";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded, turned } from "../shapes";
 
 export const column = defineAsset({
   id: "column", category: "architecture",
@@ -30,32 +32,73 @@ export const column = defineAsset({
     "modern-pillar": { label: { de: "Moderner Pfeiler", en: "Modern pillar" }, values: { flutes: 0, taper: 0, base: false, capital: "none", material: "paint", color: "#e9e6df" } },
   },
   physics: { body: "static", collider: "hull" },
-  budget: { triangles: 8000, drawCalls: 1 },
+  budget: { triangles: 20000, drawCalls: 1 },
   build(p) {
     const m = material(p.material, p.color, 0.6);
     const t = new Parts();
     const r = p.radius, unten = p.base ? r * 0.35 : 0, oben = p.capital === "none" ? 0 : r * 0.4;
-    const schaft = p.height - unten - oben, segmente = p.flutes ? p.flutes * 6 : 32;
-    const g = new CylinderGeometry(r * (1 - p.taper), r, schaft, segmente, 6, true);
-    if (p.flutes) {
-      const pos = g.attributes.position;
-      for (let i = 0; i < pos.count; i++) {
-        const x = pos.getX(i), z = pos.getZ(i), w = Math.atan2(z, x), f = 1 - 0.035 * (1 + Math.cos(p.flutes * w));
-        pos.setX(i, x * f); pos.setZ(i, z * f);
-      }
-      g.computeVertexNormals();
-    }
-    g.translate(0, unten + schaft / 2, 0);
-    t.add(m, g);
+    const schaft = p.height - unten - oben, rOben = r * (1 - p.taper), segmente = p.flutes ? p.flutes * 6 : 32;
+    // Schaft mit Entasis: linear verjüngt plus eine sanfte Schwellung, die an beiden Enden 0 ist
+    const radius = (y: number) => { const s = Math.min(Math.max(y, 0), schaft); return r + ((rOben - r) * s) / schaft + 0.012 * r * Math.sin((Math.PI * s) / schaft); };
+    // Die Kanneluren laufen über die letzten 0,25 r aus (gerundetes Ende), davor bleibt ein glatter Ring
+    const L = 0.25 * r, glatt = (a: number, b: number, x: number) => { const k = Math.min(Math.max((x - a) / (b - a), 0), 1); return k * k * (3 - 2 * k); };
+    const tiefe = (y: number) => glatt(0.08 * r, L, y) * glatt(0.08 * r, L, schaft - y);
+    // Zeilen [Radius, y ab der Schaftunterkante, Kannelurtiefe 0–1] von unten nach oben
+    const zeilen: [number, number, number][] = [];
+    const strecke = (a: number, b: number, n: number, ab = 0) => { for (let k = ab; k <= n; k++) { const y = a + ((b - a) * k) / n; zeilen.push([radius(y), y, tiefe(y)]); } };
+    // Mit Basis steckt der Schaft 0,015 r in ihrem Plättchen, ohne steht er geschlossen auf dem Boden
+    zeilen.push(p.base ? [r, -0.015 * r, 0] : [0, 0, 0]);
+    const kante = 0.004, ende = p.capital === "none" ? schaft - kante : schaft;
+    strecke(0, L, 6);
+    strecke(L, ende - L, 24, 1);
+    strecke(ende - L, ende, 6, 1);
+    // Ohne Kapitell endet der Schaft in einer 4-mm-Rundung, geschlossen zur Achse; sonst steckt er im Halsring
+    if (p.capital === "none") {
+      for (let k = 1; k <= 3; k++) { const w = (k * Math.PI) / 6; zeilen.push([rOben - kante + kante * Math.cos(w), ende + kante * Math.sin(w), 0]); }
+      zeilen.push([0, schaft, 0]);
+    } else zeilen.push([rOben, schaft + 0.03 * r, 0]);
+    const kehle = r * Math.min(0.09, 1.4 / Math.max(p.flutes, 1)), nv = zeilen.length - 1;
+    const g: BufferGeometry = grid(segmente, nv, (u, v) => {
+      const j = Math.min(Math.floor(v * nv), nv - 1), f = v * nv - j, a = zeilen[j], b = zeilen[j + 1];
+      const s = (u * p.flutes) % 1, rinne = p.flutes ? kehle * Math.sqrt(Math.max(0, 1 - (2 * s - 1) ** 2)) : 0;
+      const rr = Math.max(0, a[0] + (b[0] - a[0]) * f - rinne * (a[2] + (b[2] - a[2]) * f)), w = u * Math.PI * 2;
+      return new Vector3(rr * Math.cos(w), unten + a[1] + (b[1] - a[1]) * f, rr * Math.sin(w));
+    }, (q) => new Vector3(q.x, 0, q.z));
+    // Scharf an den Stegen zwischen den Kanneluren, glatt um den Schaft und über die Naht des Gitters
+    t.add(m, toCreasedNormals(g, (40 * Math.PI) / 180));
+    // Bögen als Profilpunkte [Radius, y]; ein doppelter Punkt ist eine scharfe Kante
+    const bogen = (cx: number, cy: number, rad: number, von: number, bis: number, k: number) => Array.from({ length: k + 1 }, (_, i): [number, number] => { const w = ((von + ((bis - von) * i) / k) * Math.PI) / 180; return [cx + rad * Math.cos(w), cy + rad * Math.sin(w)]; });
     if (p.base) {
-      const profil = [new Vector2(0, 0), new Vector2(r * 1.35, 0), new Vector2(r * 1.35, unten * 0.4), new Vector2(r * 1.15, unten * 0.7), new Vector2(r * 1.05, unten), new Vector2(0, unten)];
-      t.add(m, new LatheGeometry(profil, 32));
+      // Attische Basis auf der Plinthe: unterer Wulst, Kehle (Trochilus), oberer Wulst, Plättchen zum Schaft
+      const yp = 0.12 * r;
+      t.add(m, rounded(2.7 * r, yp, 2.7 * r, 0.005, 0, yp / 2, 0));
+      const kehlung = Array.from({ length: 7 }, (_, k): [number, number] => { const w = (k * Math.PI) / 6; return [r * (1.2 - (0.08 * k) / 6 - 0.08 * Math.sin(w)), yp + r * (0.09 + 0.03 * (1 - Math.cos(w)))]; });
+      t.add(m, turned([
+        [1.2 * r, yp - 0.02 * r],
+        ...bogen(1.26 * r, yp + 0.04 * r, 0.04 * r, -90, 90, 6),
+        [1.2 * r, yp + 0.08 * r], [1.2 * r, yp + 0.08 * r],
+        ...kehlung, [1.12 * r, yp + 0.15 * r],
+        ...bogen(1.12 * r, yp + 0.185 * r, 0.025 * r, -90, 90, 6),
+        [1.03 * r, yp + 0.21 * r], [1.03 * r, yp + 0.21 * r],
+        [1.03 * r, yp + 0.22 * r], [r, unten], [r, unten], [0, unten],
+      ], 32));
     }
-    if (p.capital === "plain") t.box(m, r * 2.6, oben, r * 2.6, 0, p.height - oben / 2, 0);
-    if (p.capital === "round") {
-      const y = p.height - oben;
-      const profil = [new Vector2(0, y), new Vector2(r * (1 - p.taper), y), new Vector2(r * 1.25, y + oben * 0.45), new Vector2(r * 1.4, y + oben * 0.6), new Vector2(r * 1.4, p.height), new Vector2(0, p.height)];
-      t.add(m, new LatheGeometry(profil, 32));
+    if (p.capital !== "none") {
+      // Halsring: ein kleiner Wulst um das obere Schaftende
+      const y0 = p.height - oben, y1 = y0 + 0.08 * r;
+      const hals: [number, number][] = [[rOben, y0], ...bogen(rOben, y0 + 0.04 * r, 0.04 * r, -90, 90, 6), [rOben, y1]];
+      if (p.capital === "plain") {
+        // Dorisch: der Echinus lädt konvex bis 1,25 r aus und steckt oben im Abakus
+        const abakus = 0.14 * r, h = p.height - abakus - y1;
+        const echinus = Array.from({ length: 7 }, (_, k): [number, number] => [rOben + (1.25 * r - rOben) * (1 - (1 - k / 6) ** 2), y1 + (h * k) / 6]);
+        t.add(m, turned([...hals, ...echinus, [1.25 * r, p.height - abakus + 0.02 * r], [0, p.height - abakus + 0.02 * r]], 32));
+        t.add(m, rounded(2.6 * r, abakus, 2.6 * r, 0.005, 0, p.height - abakus / 2, 0));
+      } else {
+        // Wulst: konvex bis 1,4 r, senkrechter Rand, gerundete Oberkante
+        const e = 0.03 * r, h = y0 + 0.6 * oben - y1;
+        const wulst = Array.from({ length: 7 }, (_, k): [number, number] => { const w = (k * Math.PI) / 12; return [rOben + (1.4 * r - rOben) * Math.sin(w), y1 + h * (1 - Math.cos(w))]; });
+        t.add(m, turned([...hals, ...wulst, ...bogen(1.4 * r - e, p.height - e, e, 0, 90, 3), [0, p.height]], 32));
+      }
     }
     return t.group();
   },
