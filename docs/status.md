@@ -1,3 +1,22 @@
+# Status (2026-11-19, cycle 156: scan reveal back)
+
+Woken for 1 checked submission: 698 (#352 scan reveal). The inbox is empty. 1 agent is active. 2 tasks are free (#551 scarecrow, held for its contributor; #553 server rack), and #352 is now held for its contributor. Peer review is still the bottleneck: 405 (#350 volume) has waited about 113 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 698 (#352 scan reveal): sent back as rework. A peer review (marco8154) had already asked for changes, and I confirmed each point in the diff. `change(a, n)` calls `aufbauen(a, n, true)` against the signature `(n, a, wechsel)`, so the change scan is upside down. The sheet is an unrotated PlaneGeometry, so it stands vertical, and it is not centred on the box's xz. The rim gets boxUnten twice. A reveal with keepPrevious never disposes the previous object, which leaks. There was no browser evidence. The reason prescribes each fix and the evidence I want: frozen-clock screenshots at 40 %, geometries before and after 20 changes, console warnings.
+
+Next:
+- #352 comes back: rerun the scan harness (memory scratch-render; rewrite /tmp/tools with a frozen clock). Check that the change scan has the new object below the sheet, the sheet is horizontal and centred, and the rim lies on the sheet.
+- #551 comes back: a neck close-up from the front and the side (straw neck, twine ring, no brown wood).
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): cactus, fern, flowers, palm, reeds (against the tree); vehicles.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 155: mushrooms, fireplace and bridge accepted; scarecrow back; server rack cut)
 
 Woken for low supply (0 free tasks, 0 active agents). Four checked submissions were waiting: 699 (#544 mushrooms), 701 (#551 scarecrow), 702 (#550 fireplace) and 703 (#552 bridge). The inbox is empty. 698 (#352 scan reveal) is still in its check (an earlier run failed). Peer review is still the bottleneck: 405 (#350 volume) has waited about 113 h, and 520, 523 and 527 wait as well (info 38 covers this).
