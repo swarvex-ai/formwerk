@@ -1,6 +1,7 @@
-import { ConeGeometry, ExtrudeGeometry, Shape } from "three";
-import { material } from "../../materials";
+import { ExtrudeGeometry, Shape } from "three";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { turned } from "../shapes";
 
 export const signpost = defineAsset({
   id: "signpost", category: "props",
@@ -26,22 +27,33 @@ export const signpost = defineAsset({
     town: { label: { de: "Stadt", en: "Town" }, values: { height: 3, boards: 4, spread: 45, color: "#6b5038" } },
   },
   physics: { body: "static", collider: "cylinder" },
-  budget: { triangles: 800, drawCalls: 1 },
+  budget: { triangles: 1500, drawCalls: 2 },
   build(p) {
-    const holz = material("wood", p.color), t = new Parts(), h = p.height, hb = 0.16, db = 0.03;
-    t.box(holz, 0.1, h, 0.1, 0, h / 2, 0);
-    t.add(holz, new ConeGeometry(0.085, 0.08, 4).rotateY(Math.PI / 4).translate(0, h + 0.04, 0));
+    const holz = material("wood", p.color, 1, 500, { grain: "part" }), eisen = material("iron", "#4a4440", 4, 7800, { rust: 0.5 }), t = new Parts();
+    const h = p.height, hb = 0.16, db = 0.028, R = 0.06;
+    // The post: a round timber with an eased top under a turned cap that sheds the rain
+    t.add(holz, grained(turned([[0, 0], [R, 0], [R, h - 0.008], [R - 0.006, h], [0, h]], 16), "y"));
+    t.add(holz, grained(turned([[0, h - 0.004], [R + 0.014, h - 0.004], [R + 0.016, h + 0.014], [R + 0.004, h + 0.024], [0.016, h + 0.075], [0.008, h + 0.085], [0, h + 0.088]], 16), "y"));
     for (let k = 0; k < p.boards; k++) {
-      // Each board turns further than the one above, alternating sides
+      // Each board turns further than the one above, alternating sides; it lies on the post's round face (at any angle)
+      // and is nailed to it
       const y = h - 0.18 - k * (hb + 0.07), winkel = ((k % 2 ? -1 : 1) * Math.ceil(k / 2) * p.spread * Math.PI) / 180, l = p.boardLength;
-      const s = new Shape();
-      s.moveTo(0.05, -hb / 2);
-      if (p.pointed) { s.lineTo(l - hb / 2, -hb / 2); s.lineTo(l, 0); s.lineTo(l - hb / 2, hb / 2); }
-      else { s.lineTo(l, -hb / 2); s.lineTo(l, hb / 2); }
-      s.lineTo(0.05, hb / 2);
+      const s = new Shape(), x0 = -0.025, sp = Math.min(hb / 2, l * 0.2);
+      s.moveTo(x0, -hb / 2);
+      if (p.pointed) { s.lineTo(l - sp, -hb / 2); s.lineTo(l, 0); s.lineTo(l - sp, hb / 2); }
+      else { s.lineTo(l - 0.012, -hb / 2); s.lineTo(l, -hb / 2 + 0.012); s.lineTo(l, hb / 2 - 0.012); s.lineTo(l - 0.012, hb / 2); }
+      s.lineTo(x0, hb / 2);
       s.closePath();
-      t.add(holz, new ExtrudeGeometry(s, { depth: db, bevelEnabled: false }).translate(0, 0, 0.05).rotateY(winkel).translate(0, y, 0));
+      const brett = new ExtrudeGeometry(s, { depth: db - 0.006, bevelEnabled: true, bevelSize: 0.003, bevelThickness: 0.003, bevelOffset: -0.003, bevelSegments: 1, curveSegments: 1 });
+      // Grain along the board: x or z, whichever the turned board runs closer to
+      const achse = Math.abs(Math.cos(winkel)) >= Math.abs(Math.sin(winkel)) ? "x" : "z";
+      t.add(holz, grained(brett.translate(0, 0, R - 0.006 + 0.003).rotateY(winkel).translate(0, y, 0), achse));
+      // Two forged nails through the board into the post
+      for (const v of [-0.045, 0.045]) {
+        const nagel = turned([[0, 0], [0.009, 0], [0.008, 0.003], [0, 0.005]], 8).rotateX(Math.PI / 2);
+        t.add(eisen, nagel.translate(0, v, R - 0.006 + db).rotateY(winkel).translate(0, y, 0));
+      }
     }
-    return t.cylinder(0.07, h).group();
+    return t.cylinder(0.075, h).group();
   },
 });
