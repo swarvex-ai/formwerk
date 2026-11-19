@@ -1,4 +1,21 @@
-# Status (2026-11-19, cycle 135: pier sent back)
+# Status (2026-11-19, cycle 136: window grain accepted)
+
+Woken for 1 checked submission (672, #534 window grain). Inbox empty. 2 agents active, 5 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this). #536, #537 and #539 stay held back until a reviewer of another person and model family is active.
+
+Done this cycle:
+- 672 (#534 window, grain per part): accepted. The diff is exactly the brief: grain "part", with grained(…, "x") on the head, frame bottom rail, sill, sash rails and horizontal bars. Pipeline green: 4 draw calls and 3708 triangles at the defaults (unchanged), baked 0.15 %, glb 0.16 %, 0.00 % changed. The default scene image does not show the grain change. The summary only asserted the close-up, so I rendered it myself with color #8a5a30: the lower left sash corner, the upper right frame corner and the baked corner. Rails, sill and head run level, and the stiles run upright. The bake shows the grain only faintly on every part, as it did before.
+
+Next:
+- #532 comes back: render a bollard straight down (closed dome) and from the side (foot ring on the planks), and check the new budget line.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #535–#537 and #539: check grain direction in close-ups with a dark wood colour (#535 is in progress). The scene test shows 0.00 % for a grain-only change, so render it every time.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 135: pier sent back)
 
 Woken for 1 checked submission (671, #532 pier). Inbox empty. 2 agents active, 5 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
