@@ -1,5 +1,6 @@
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded } from "../shapes";
 
 export const battlement = defineAsset({
   id: "battlement", category: "architecture",
@@ -29,22 +30,41 @@ export const battlement = defineAsset({
     "garden-wall": { label: { de: "Gartenmauer", en: "Garden wall" }, values: { length: 3, height: 1.6, thickness: 0.6, merlons: 6, merlonWidth: 0.5, merlonHeight: 0.4, corbels: false } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 400, drawCalls: 1 },
+  budget: { triangles: 22200, drawCalls: 1 },
   build(p) {
-    const m = material("stone", p.color, 1);
+    const m = material("stone", p.color, 1, undefined, { moss: 0.15 });
     const t = new Parts();
     const L = p.length, H = p.height, T = p.thickness;
-    t.box(m, L, H, T, 0, H / 2, 0);
     const ueber = p.corbels ? 0.15 : 0;
     const tiefe = Math.min(0.5, T * 0.4);
     const zVorn = T / 2 + ueber;
+    // Sockel: eine Lage, vorn und hinten 8 cm breiter als die Mauer; die Mauer beginnt 5 mm unter seiner Oberkante
+    const sockel = Math.min(0.4, H / 4), unten = sockel - 0.005;
+    t.add(m, rounded(L, sockel, T + 0.16, 0.02, 0, sockel / 2, 0));
+    // Mit Kragsteinen endet die Mauer 5 mm unter dem Brüstungsgesims, damit die Oberseiten nicht zusammenfallen
+    const oben = p.corbels ? H - 0.005 : H;
+    t.add(m, rounded(L, oben - unten, T, 0.03, 0, (oben + unten) / 2, 0));
     if (p.corbels) {
-      t.box(m, L, 0.3, tiefe + ueber, 0, H - 0.15, zVorn - (tiefe + ueber) / 2);
+      // Einzelne Kragsteine aus zwei gestuften Blöcken, 2 cm in der Mauer; dazwischen bleibt die Gusslochöffnung frei
+      const count = Math.max(2, Math.round(L / 0.45)), z0 = T / 2 - 0.02, vorUnten = T / 2 + ueber * 0.5;
+      for (let i = 0; i < count; i++) {
+        const x = -L / 2 + (L * (i + 0.5)) / count;
+        t.add(m, rounded(0.22, 0.15, vorUnten - z0, 0.025, x, H - 0.345, (vorUnten + z0) / 2));
+        t.add(m, rounded(0.22, 0.15, zVorn - z0, 0.025, x, H - 0.195, (zVorn + z0) / 2));
+      }
+      // Brüstungsgesims auf den Kragsteinen, an jedem Ende 5 mm kürzer, damit es nicht in der Stirnfläche der Mauer liegt
+      t.add(m, rounded(L - 0.01, 0.12, tiefe + ueber, 0.025, 0, H - 0.06, zVorn - (tiefe + ueber) / 2));
     }
     const feld = L / p.merlons;
     const breite = feld * p.merlonWidth;
+    const zMitte = zVorn - tiefe / 2;
     for (let i = 0; i < p.merlons; i++) {
-      t.box(m, breite, p.merlonHeight, tiefe, -L / 2 + feld * (i + 0.5), H + p.merlonHeight / 2, zVorn - tiefe / 2);
+      const x = -L / 2 + feld * (i + 0.5);
+      t.add(m, rounded(breite, p.merlonHeight, tiefe, 0.03, x, H + p.merlonHeight / 2, zMitte));
+      // Abdeckplatte mit 2 cm Überstand an jeder Seite
+      t.add(m, rounded(breite + 0.04, 0.06, tiefe + 0.04, 0.015, x, H + p.merlonHeight + 0.03, zMitte));
+      // Sohlbank in der Zinnenlücke rechts davon, 3 mm Fuge zu jeder Zinne
+      if (i < p.merlons - 1) t.add(m, rounded(feld - breite - 0.006, 0.05, tiefe + 0.04, 0.015, x + feld / 2, H + 0.025, zMitte));
     }
     return t.group();
   },
