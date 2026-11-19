@@ -141,7 +141,7 @@ export const mineCart = defineAsset({
       const brocken = Math.round(8 + 14 * p.load);
       for (let i = 0; i < brocken; i++) {
         const x = (zr() * 2 - 1) * hw * 0.85, z = (zr() * 2 - 1) * hl * 0.85, s = 0.04 + 0.05 * zr();
-        const st = new DodecahedronGeometry(s, 0).toNonIndexed();
+        const st = new DodecahedronGeometry(s, 0);
         st.scale(1, 0.6 + 0.4 * zr(), 0.7 + 0.5 * zr()).rotateY(zr() * Math.PI).rotateX((zr() - 0.5) * 0.8);
         st.computeVertexNormals();
         t.add(erz, st.translate(x, hoehe(x, z) + s * 0.25, z));
