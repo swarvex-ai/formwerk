@@ -1,6 +1,7 @@
-import { BoxGeometry } from "three";
+import { CapsuleGeometry, ExtrudeGeometry, Shape } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded } from "../shapes";
 
 export const stairs = defineAsset({
   id: "stairs", category: "architecture",
@@ -31,32 +32,61 @@ export const stairs = defineAsset({
   },
   // Die konvexe Hülle ist eine Rampe: so laufen Figuren in Spielen die Treppe hinauf
   physics: { body: "static", collider: "hull" },
-  budget: { triangles: 6000, drawCalls: 2 },
+  budget: { triangles: 9000, drawCalls: 3 },
   build(p) {
-    const m = material(p.material, p.color), gel = material("metal", "#3a3d42");
+    // Stone and metal: one material for treads and body; wood: level grain on the treads, upright ("auto") on the
+    // stringers and the body; the railing is always painted steel
+    const korpus = material(p.material, p.color), stufe = p.material === "wood" ? material("wood", p.color, 1, undefined, { grain: "level" }) : korpus;
+    const gel = material("metal", "#3a3d42");
     const t = new Parts();
-    const n = p.steps, w = p.width, lang = n * p.tread, hoch = n * p.rise;
-    for (let i = 0; i < n; i++) {
-      const z = lang / 2 - (i + 0.5) * p.tread, y = (i + 1) * p.rise;
-      if (p.style === "solid") t.box(m, w, y, p.tread, 0, y / 2, z);
-      else t.box(m, w - 0.08, 0.04, p.tread, 0, y - 0.02, z);
-    }
-    if (p.style === "open") {
-      const lw = Math.hypot(lang, hoch), a = Math.atan2(hoch, lang);
-      for (const sx of [-1, 1]) {
-        // so gedreht, dass das untere Ende genau auf dem Boden steht
-        t.add(m, new BoxGeometry(0.04, 0.25, lw).rotateX(a).translate(sx * (w / 2 - 0.02), hoch / 2 + 0.125 * Math.cos(a), 0));
+    const n = p.steps, w = p.width, R = p.rise, T = p.tread, lang = n * T, hoch = n * R;
+    const a = Math.atan2(hoch, lang), lw = Math.hypot(lang, hoch);
+    // A side profile [z, y] extruded across x0..x1, its edges eased by b inside the finished size (docs/look-realistic.md)
+    const profil = (pts: [number, number][], x0: number, x1: number, b: number) => {
+      const s = new Shape();
+      pts.forEach(([z, y], k) => (k ? s.lineTo(z, y) : s.moveTo(z, y)));
+      return new ExtrudeGeometry(s, { depth: x1 - x0 - 2 * b, bevelEnabled: true, bevelSize: b, bevelThickness: b, bevelOffset: -b, bevelSegments: 2 })
+        .rotateY(-Math.PI / 2).translate(x1 - b, 0, 0);
+    };
+    if (p.style === "solid") {
+      // One stepped body 2 cm below each tread top, its risers 2 cm behind the nosing and 1 cm in from the sides
+      const ns = 0.02, pts: [number, number][] = [[lang / 2 - ns, 0]];
+      for (let i = 0; i < n; i++) {
+        const z = lang / 2 - i * T - ns, y = (i + 1) * R - ns;
+        pts.push([z, y], [i < n - 1 ? z - T : -lang / 2, y]);
       }
+      pts.push([-lang / 2, 0]);
+      t.add(korpus, profil(pts, -w / 2 + 0.01, w / 2 - 0.01, 0.01));
+      // Tread slabs: the front overhangs the riser by 2 cm, the back stops 2 mm before the next riser (or the back)
+      for (let i = 0; i < n; i++) {
+        const vorn = lang / 2 - i * T, hinten = i < n - 1 ? lang / 2 - (i + 1) * T - ns + 0.002 : -lang / 2 + 0.002;
+        t.add(stufe, rounded(w, 0.02, vorn - hinten, 0.005, 0, (i + 1) * R - 0.01, (vorn + hinten) / 2));
+      }
+    } else {
+      // Treads 4 cm thick, their ends 1 cm into the stringers
+      for (let i = 0; i < n; i++) t.add(stufe, rounded(w - 0.06, 0.04, T, 0.003, 0, (i + 1) * R - 0.02, lang / 2 - (i + 0.5) * T));
+      // Stringers: boards 25 cm deep across the slope with the treads in the middle, cut level on the floor and
+      // vertical 3 mm behind the last tread; the foot is cut plumb 2 cm before the first nosing, so the flight keeps its
+      // footprint
+      const H = 0.25 / Math.cos(a), m = (H - R - 0.04) / 2, ende = -lang / 2 - 0.003;
+      const oben = (z: number) => R + ((lang / 2 - z) * R) / T + m, boden = (off: number) => lang / 2 + ((R + off) * T) / R;
+      const vorn = lang / 2 + 0.02;
+      const pts: [number, number][] = [[boden(m - H), 0], [vorn, 0], [vorn, oben(vorn)], [ende, oben(ende)], [ende, oben(ende) - H]];
+      for (const sx of [-1, 1]) t.add(korpus, profil(pts, sx * (w / 2 - 0.02) - 0.02, sx * (w / 2 - 0.02) + 0.02, 0.003));
     }
     const seiten = p.railing === "both" ? [-1, 1] : p.railing === "left" ? [-1] : p.railing === "right" ? [1] : [];
+    const rr = 0.025, rb = 0.015;
     for (const sx of seiten) {
-      const x = sx * (w / 2 - 0.05);
+      // Open: 5 mm clear of the stringer
+      const x = sx * (w / 2 - (p.style === "open" ? 0.06 : 0.05));
       for (let i = 0; i < n; i += Math.max(1, Math.round(n / 6))) {
-        const z = lang / 2 - (i + 0.5) * p.tread, y = (i + 1) * p.rise;
-        t.post(gel, 0.015, 0.9, x, y, z, 8);
+        // The rail axis is 0.9 m above this tread; the post is set 5 mm into the tread and reaches 1 cm into the rail
+        // where the rail's underside is highest over it
+        const y = (i + 1) * R, top = y + 0.9 - rr / Math.cos(a) + rb * Math.tan(a) + 0.01;
+        t.post(gel, rb, top - y + 0.005, x, y - 0.005, lang / 2 - (i + 0.5) * T, 8);
       }
-      const lw = Math.hypot(lang, hoch), a = Math.atan2(hoch, lang);
-      t.add(gel, new BoxGeometry(0.04, 0.04, lw).rotateX(a).translate(x, hoch / 2 + 0.9 + p.rise / 2, 0));
+      // Round handrail along the slope with rounded ends, as long as the flight
+      t.add(gel, new CapsuleGeometry(rr, lw - 2 * rr, 4, 16).rotateX(a - Math.PI / 2).translate(x, hoch / 2 + 0.9 + R / 2, 0));
     }
     return t.group();
   },
