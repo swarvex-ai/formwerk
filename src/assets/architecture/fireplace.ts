@@ -1,7 +1,8 @@
-import { CylinderGeometry, ExtrudeGeometry, Shape, Vector3 } from "three";
+import { ExtrudeGeometry, Shape, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const fireplace = defineAsset({
   id: "fireplace", category: "architecture",
@@ -38,11 +39,12 @@ export const fireplace = defineAsset({
     cold: { label: { de: "Kalt", en: "Cold" }, values: { fire: "none", opening: "square" } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 4000, drawCalls: 4 },
+  budget: { triangles: 3512, drawCalls: 4 },
   build(p, seed) {
     const r = rng(seed);
-    const stein = material("stone", p.stoneColour);
-    const holz = material("wood", p.woodColour);
+    const stein = material("stone", p.stoneColour, 1, undefined, { moss: 0 });
+    const holz = material("wood", p.woodColour, 1, undefined, { grain: "level" });
+    const rinde = material("bark", p.woodColour);
     const glut = material("glow", "#ff7a2a");
     const t = new Parts();
 
@@ -54,48 +56,36 @@ export const fireplace = defineAsset({
     const halfOw = ow / 2;
     const frontD = 0.12;
 
-    // 1. Front face with opening (Shape + ExtrudeGeometry)
-    // Outer rect: from x = -w/2 to w/2, y = 0 to h
+    // 1. Front face: one U-shaped outline around the opening (it reaches the floor, so it is no hole)
     const shape = new Shape();
     shape.moveTo(-w / 2, 0);
+    shape.lineTo(-halfOw, 0);
+    if (p.opening === "square") {
+      shape.lineTo(-halfOw, oh);
+      shape.lineTo(halfOw, oh);
+    } else if (halfOw <= 0.5 * oh) {
+      // Half-round top, opening top exactly at oh = 0.65 * h
+      const archY = oh - halfOw;
+      shape.lineTo(-halfOw, archY);
+      shape.absarc(0, archY, halfOw, Math.PI, 0, true);
+    } else {
+      // Segmental arch with rise s = 0.5 * oh
+      const s = 0.5 * oh;
+      const R = (halfOw * halfOw + s * s) / (2 * s);
+      const a = Math.asin((oh - s - (oh - R)) / R);
+      shape.lineTo(-halfOw, oh - s);
+      shape.absarc(0, oh - R, R, Math.PI - a, a, true);
+    }
+    shape.lineTo(halfOw, 0);
     shape.lineTo(w / 2, 0);
     shape.lineTo(w / 2, h);
     shape.lineTo(-w / 2, h);
     shape.closePath();
 
-    const hole = new Shape();
-    if (p.opening === "square") {
-      hole.moveTo(-halfOw, 0);
-      hole.lineTo(halfOw, 0);
-      hole.lineTo(halfOw, oh);
-      hole.lineTo(-halfOw, oh);
-      hole.closePath();
-    } else {
-      // Arched opening: opening top must stay exactly at oh = 0.65 * h
-      hole.moveTo(-halfOw, 0);
-      hole.lineTo(halfOw, 0);
-      if (halfOw <= 0.5 * oh) {
-        // Half-round top
-        const archY = oh - halfOw;
-        hole.lineTo(halfOw, archY);
-        hole.absarc(0, archY, halfOw, 0, Math.PI, false);
-        hole.lineTo(-halfOw, 0);
-      } else {
-        // Segmental arch with rise s = 0.5 * oh
-        const s = 0.5 * oh;
-        const R = (halfOw * halfOw + s * s) / (2 * s);
-        const a = Math.asin((oh - s - (oh - R)) / R);
-        hole.lineTo(halfOw, oh - s);
-        hole.absarc(0, oh - R, R, a, Math.PI - a, false);
-        hole.lineTo(-halfOw, 0);
-      }
-      hole.closePath();
-    }
-    shape.holes.push(hole);
-
-    // Front face extruded by frontD = 0.12, positioned from z = -frontD to 0
-    const frontGeo = new ExtrudeGeometry(shape, { depth: frontD, bevelEnabled: false, curveSegments: 24 });
-    frontGeo.translate(0, 0, -frontD);
+    // Eased edges that keep the finished size: spans z = -frontD to 0
+    const fase = 0.015;
+    const frontGeo = new ExtrudeGeometry(shape, { depth: frontD - 2 * fase, bevelEnabled: true, bevelSize: fase, bevelThickness: fase, bevelOffset: -fase, bevelSegments: 2, curveSegments: 24 });
+    frontGeo.translate(0, 0, -frontD + fase);
     t.add(stein, frontGeo);
 
     // 2. Firebox
@@ -106,28 +96,28 @@ export const fireplace = defineAsset({
     const cavityZ = -d + backWallThick + cavityDepth / 2;
 
     // Back wall: thickness backWallThick at z = -d + backWallThick/2
-    t.box(stein, w, h, backWallThick, 0, h / 2, -d + backWallThick / 2);
+    t.add(stein, rounded(w, h, backWallThick, 0.02, 0, h / 2, -d + backWallThick / 2));
 
     // Left and right side walls of firebox
     if (cavityDepth > 0.001) {
-      t.box(stein, wallThick, h, cavityDepth, -w / 2 + wallThick / 2, h / 2, cavityZ);
-      t.box(stein, wallThick, h, cavityDepth, w / 2 - wallThick / 2, h / 2, cavityZ);
+      t.add(stein, rounded(wallThick, h, cavityDepth, 0.02, -w / 2 + wallThick / 2, h / 2, cavityZ));
+      t.add(stein, rounded(wallThick, h, cavityDepth, 0.02, w / 2 - wallThick / 2, h / 2, cavityZ));
     }
 
     // Top enclosure / lintel ceiling over cavity
     const topH = h - oh;
     if (topH > 0.001 && cavityDepth > 0.001) {
-      t.box(stein, ow, topH, cavityDepth, 0, oh + topH / 2, cavityZ);
+      t.add(stein, rounded(ow, topH, cavityDepth, 0.02, 0, oh + topH / 2, cavityZ));
     }
 
     // Firebox floor behind front opening
     const floorH = 0.04;
     if (cavityDepth > 0.001) {
-      t.box(stein, ow, floorH, cavityDepth, 0, floorH / 2, cavityZ);
+      t.add(stein, rounded(ow, floorH, cavityDepth, 0.02, 0, floorH / 2, cavityZ));
     }
 
     // Hearth slab: 0.04 m high, 0.3 m deep in front, spans full width w
-    t.box(stein, w, 0.04, 0.3, 0, 0.02, 0.15);
+    t.add(stein, rounded(w, 0.04, 0.3, 0.02, 0, 0.02, 0.15));
 
     // 3. Mantel
     if (p.mantel) {
@@ -136,7 +126,7 @@ export const fireplace = defineAsset({
       const mantelW = w + 2 * overhang;
       const mantelD = d + overhang;
       // Sticking out 0.08 m to the front (up to z = 0.08) and wall at z = -d
-      t.box(holz, mantelW, mantelThick, mantelD, 0, h + mantelThick / 2, -d + mantelD / 2);
+      t.add(holz, rounded(mantelW, mantelThick, mantelD, 0.01, 0, h + mantelThick / 2, -d + mantelD / 2));
     }
 
     // Chimney breast
@@ -144,7 +134,7 @@ export const fireplace = defineAsset({
       const chimW = 0.7 * w;
       const chimH = p.chimney;
       const chimY0 = h + (p.mantel ? 0.06 : 0);
-      t.box(stein, chimW, chimH, d, 0, chimY0 + chimH / 2, -d / 2);
+      t.add(stein, rounded(chimW, chimH, d, 0.02, 0, chimY0 + chimH / 2, -d / 2));
     }
 
     // 4. Fire
@@ -168,12 +158,13 @@ export const fireplace = defineAsset({
         const logL = Math.min(0.85 * fireW, maxLByDepth);
 
         const addCylinder = (rad: number, len: number, pos: Vector3, rotY: number, tiltX: number) => {
-          const g = new CylinderGeometry(rad, rad, len, 10);
+          // Closed turned log: swells a little in the middle, eased ends
+          const g = turned([[0, -len / 2], [rad * 0.92, -len / 2], [rad, -len / 2 + 0.012], [rad * 1.03, 0], [rad, len / 2 - 0.012], [rad * 0.92, len / 2], [0, len / 2]], 12);
           g.rotateZ(Math.PI / 2);
           if (tiltX !== 0) g.rotateX(tiltX);
           if (rotY !== 0) g.rotateY(rotY);
           g.translate(pos.x, pos.y, pos.z);
-          t.add(holz, g);
+          t.add(rinde, g);
         };
 
         // Log 1: bottom-left-to-right
