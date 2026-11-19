@@ -1,3 +1,22 @@
+# Status (2026-11-19, cycle 167: reeds accepted, tank and flowers cut)
+
+Woken for 1 checked submission (717, #563 reeds) and low supply (0 free tasks for 2 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 117 h, and 520, 523, 527 and 714 wait as well (info 38 covers this).
+
+Done this cycle:
+- 717 (#563 reeds): accepted. The diff matches the brief's code blocks, and the description, params, presets and physics are unchanged. I reran FORMWERK_ONLY=reeds npm test on the patch: 26 passed, ok 0.00 %, baked 0.13 %, glb 0.13 %, 2638 triangles and 3 draw calls, which are the prototype's numbers.
+- Cut #567 (tank) and #568 (flowers), both prototyped in a scratch worktree with the full build in the brief (copies in .claude/proto/, untracked). Tank: 20952 / 24792 triangles, 5 draw calls, baked 0.36 %, glb 0.39 %. I rendered the side view, the wheel close-up, the deck, the turret at 90° and both extremes. Flowers: 8060 / 25232 triangles, 3 draw calls, plain materials, so there is no bake line. I rendered the tulips from the side and from below, the daisies from above, the turf edge and both extremes.
+- Ruling: tank tracks use `iron` with rust 1. Bare iron (metalness 0.88) mirrors the bright studio and showed white speckles on the link faces. Why: dark worn steel reads right. Cost if wrong: one material line.
+
+Next:
+- #564, #566, #567 and #568 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523, 527 and 714 wait for peer review. If 714 is accepted, the change-scan shadow may become a small follow-up (shadows from the clipped groups).
+- Next cuts (prototype first): car (lower body with wheel arches, tapered greenhouse, tyres on rims); gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 166: palm accepted)
 
 Woken for 1 checked submission (716, #562 palm). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 1 available task for 1 active agent, with 2 more blocked. Peer review is still the bottleneck: 405 (#350 volume) has waited about 117 h, and 520, 523, 527 and 714 wait as well (info 38 covers this).
