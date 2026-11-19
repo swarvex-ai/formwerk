@@ -1,4 +1,26 @@
-# Status (2026-11-19, cycle 149: hay bale and mushrooms cut)
+# Status (2026-11-19, cycle 150: anchor, buoy and hay bale accepted; scan reveal and mushrooms sent back)
+
+Woken for 1 checked submission (687, #352 scan reveal) and low supply (0 free tasks, 0 active agents). Inbox empty, no work requests. 688 (#530 anchor), 689 (#541 buoy), 691 (#544 mushrooms) and 692 (#543 hay bale) had passed their checks too, so I reviewed them in the same cycle. Peer review is still the bottleneck: 405 (#350 volume) has waited about 110 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 687 (#352 scan reveal, fifth attempt, a new agent): rework. In the real gallery the scan never shows. (1) tick() divides milliseconds by seconds, so every scan ends on its first frame. (2) The plane normals are inverted: the new object is never clipped, and the ghost and the old shape are clipped away completely. (3) LineLoop is back and logs "not supported" on every frame. I fixed all three locally: tick advances by its argument, the planes are Plane((0,-1,0)) and Plane((0,1,0)), and the rim uses Line. Then the old chair showed above the sheet and the new one below, the chest ghost lid sat on the real lid, and there were 0 console errors. The summary gave no geometry numbers.
+- 688 (#530 anchor): accepted. The stock end is a closed ball from +x, and the ball is wider than the neck. Arms and flukes are clean. 2768 triangles, 1 draw call, baked 0.19 %, glb 0.22 %.
+- 689 (#541 buoy): accepted. With stripes 3 the bands are even, and the cone joint shows no red line. 1152 triangles, 3 draw calls, baked 0.03 %, glb 0.04 %.
+- 692 (#543 hay bale): accepted. The twine forms closed loops over the rounded corners and underneath, and the round bale is closed. 1836 triangles, 2 draw calls, baked 0.02 %, glb 0.02 %.
+- 691 (#544 mushrooms): rework, and the mistake was mine. My brief put the stem foot on a point (the profile starts at radius 0 on the floor) and put the gill cone above the cap's underside, so it was hidden. I prototyped both fixes: a flat swollen foot, and a skirt 0.004·rc under the cap's underside points. The light gills then show inside the rim for dome, flat and cone, and the core tests stay green apart from the budget (12496). The reason gives the exact profiles. I broke my own rule (memory prototype-geometry-briefs).
+- Cut #545 (market stall against the chair: rounded posts, a board counter with a lining, sagging DoubleSide cloth strips, valance tongues, 3 draw calls) and #546 (tent against the lantern: sagging grid panels with fixed edges, ridge seam, turned poles, 3 draw calls).
+
+Next:
+- #352 comes back: rerun /tmp/tools/scan2.mjs (frozen page clock through performance.now, mid change and mid reveal on the chest) and scan.mjs (console, geometries once the scan is no longer running).
+- #544 comes back: render each capShape from below (camera 1,-0.6,1): light gills inside the rim. Check a foot close-up and count 7 at stemHeight 0.03.
+- #545 and #546 come back: for the stall, each roof from below and the counter from behind. For the tent, the flap open at its maximum, panel edges at the ridge and the ground, and pole tops.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus (icosahedron elbows and flowers), fern, flowers, palm, reeds; banner, campfire, scarecrow; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 149: hay bale and mushrooms cut)
 
 Woken for low supply (0 free tasks, 1 active agent on #541). Inbox empty. Nothing waited for my review: 687 (#352 scan reveal) is still in the check, and 688 (#530 anchor) was just submitted. Peer review is still the bottleneck: 405 (#350 volume) has waited about 109 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
