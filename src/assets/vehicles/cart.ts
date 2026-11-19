@@ -1,6 +1,6 @@
-import { BoxGeometry, CylinderGeometry, TorusGeometry } from "three";
-import { material } from "../../materials";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const cart = defineAsset({
   id: "cart", category: "vehicles",
@@ -28,41 +28,57 @@ export const cart = defineAsset({
     flatbed: { label: { de: "Plattformwagen", en: "Flatbed" }, values: { wheels: "four", wheelRadius: 0.2, sides: 0, length: 1.2, width: 0.7, color: "#7d8a6a" } },
   },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 9000, drawCalls: 2 },
+  budget: { triangles: 20000, drawCalls: 2 },
   build(p) {
-    const holz = material("wood", p.color, 1, 450), eisen = material("metal", p.metalColor), t = new Parts();
+    const holz = material("wood", p.color, 1, 450, { grain: "part" }), eisen = material("metal", p.metalColor), t = new Parts();
     const r = p.wheelRadius, L = p.length, W = p.width, boden = r + 0.06, d = 0.04;
-    t.box(holz, W, d, L, 0, boden + d / 2, 0);
-    // Two beams under the bed carry it on the axles
-    for (const x of [-W * 0.3, W * 0.3]) t.box(holz, 0.07, 0.07, L, x, boden - 0.035, 0);
+    // The bed: boards along the cart with 4 mm joints, on two beams that carry it on the axles
+    const bretter = Math.max(3, Math.round(W / 0.15)), bb = W / bretter;
+    for (let i = 0; i < bretter; i++) t.add(holz, grained(rounded(bb - 0.004, d, L, 0.004, -W / 2 + bb * (i + 0.5), boden + d / 2, 0), "z"));
+    for (const x of [-W * 0.3, W * 0.3]) t.add(holz, grained(rounded(0.07, 0.07, L, 0.006, x, boden - 0.035, 0), "z"));
     if (p.sides > 0.02) {
-      const y = boden + d + p.sides / 2;
-      for (const s of [-1, 1]) t.box(holz, d, p.sides, L, s * (W / 2 - d / 2), y, 0).box(holz, W - 2 * d, p.sides, d, 0, y, s * (L / 2 - d / 2));
-      for (const s of [-1, 1]) for (const z of [-L / 2 + 0.05, L / 2 - 0.05]) t.box(holz, 0.05, p.sides + 0.06, 0.05, s * (W / 2 + 0.025), y + 0.03, z);
+      // Side and end walls from boards 4 mm apart, a stake at each corner outside the side walls
+      const reihen = Math.max(1, Math.ceil(p.sides / 0.14)), bh = p.sides / reihen, y0 = boden + d;
+      for (let k = 0; k < reihen; k++) {
+        const y = y0 + bh * (k + 0.5);
+        for (const s of [-1, 1]) {
+          t.add(holz, grained(rounded(d, bh - 0.004, L, 0.004, s * (W / 2 - d / 2), y, 0), "z"));
+          t.add(holz, grained(rounded(W - 2 * d - 0.002, bh - 0.004, d, 0.004, 0, y, s * (L / 2 - d / 2)), "x"));
+        }
+      }
+      for (const s of [-1, 1]) for (const z of [-L / 2 + 0.05, L / 2 - 0.05]) t.add(holz, rounded(0.05, p.sides + d + 0.06, 0.05, 0.006, s * (W / 2 + 0.025), boden + (p.sides + d + 0.06) / 2, z));
     }
-    // Spoked wheels: a tyre, a rim, spokes and a hub, the axle between them
+    // A ring of rectangular section about the x axis: inner radius a, outer radius b, width w, centred at x
+    const ring = (a: number, b: number, w: number, x: number, z: number) =>
+      turned([[a, -w / 2], [b, -w / 2], [b, w / 2], [a, w / 2], [a, -w / 2]], 48).rotateZ(Math.PI / 2).translate(x, r, z);
+    // Spoked wheels: iron tyre on a wooden felloe, 12 turned spokes, a turned hub with two iron bands
     const achsen = p.wheels === "two" ? [0] : [-(L / 2 - Math.min(r + 0.05, L * 0.25)), L / 2 - Math.min(r + 0.05, L * 0.25)];
-    const spur = W / 2 + 0.07;
+    const spur = W / 2 + 0.07, fi = r - 0.012 - Math.max(0.04, r * 0.13);
     for (const z of achsen) {
-      t.add(eisen, new CylinderGeometry(0.03, 0.03, 2 * spur + 0.1, 8).rotateZ(Math.PI / 2).translate(0, r, z));
+      t.add(eisen, turned([[0, 0], [0.03, 0], [0.03, 2 * spur + 0.12], [0, 2 * spur + 0.12]], 12).rotateZ(Math.PI / 2).translate(spur + 0.06, r, z));
       for (const s of [-1, 1]) {
         const x = s * spur;
-        t.add(eisen, new TorusGeometry(r - 0.025, 0.025, 6, 24).rotateY(Math.PI / 2).translate(x, r, z));
-        t.add(holz, new TorusGeometry(r - 0.065, 0.03, 4, 20).rotateY(Math.PI / 2).translate(x, r, z));
-        for (let k = 0; k < 6; k++) t.add(holz, new BoxGeometry(0.03, 2 * (r - 0.07), 0.035).rotateX((k * Math.PI) / 6).translate(x, r, z));
-        t.add(eisen, new CylinderGeometry(0.06, 0.06, 0.12, 10).rotateZ(Math.PI / 2).translate(x, r, z));
+        t.add(eisen, ring(r - 0.012, r, 0.05, x, z));
+        t.add(holz, ring(fi, r - 0.012, 0.045, x, z));
+        const lang = fi - 0.055 + 0.01;
+        for (let k = 0; k < 12; k++) {
+          const sp = turned([[0, 0], [0.018, 0], [0.016, lang * 0.3], [0.012, lang], [0, lang]], 8, 0, 0.055);
+          t.add(holz, sp.rotateX((k * Math.PI * 2) / 12).translate(x, r, z));
+        }
+        t.add(holz, turned([[0, -0.08], [0.042, -0.08], [0.058, -0.04], [0.064, 0], [0.058, 0.04], [0.042, 0.08], [0, 0.08]], 16).rotateZ(Math.PI / 2).translate(x, r, z));
+        for (const o of [-0.055, 0.055]) t.add(eisen, ring(0.05, 0.066, 0.012, x + o, z));
       }
     }
     if (p.wheels === "two") {
       // Shafts reaching forward and down to the ground, joined by a bar to pull on
       const lang = 1, neig = Math.atan2(boden - 0.04, lang);
-      for (const s of [-1, 1]) t.add(holz, new BoxGeometry(0.05, 0.05, Math.hypot(lang, boden - 0.04)).rotateX(neig).translate(s * W * 0.32, (boden + 0.04) / 2 + 0.01, L / 2 + lang / 2 - 0.05));
-      t.box(holz, W * 0.64 + 0.05, 0.04, 0.04, 0, 0.12, L / 2 + lang - 0.15);
+      for (const s of [-1, 1]) t.add(holz, grained(rounded(0.05, 0.05, Math.hypot(lang, boden - 0.04), 0.008).rotateX(neig).translate(s * W * 0.32, (boden + 0.04) / 2 + 0.01, L / 2 + lang / 2 - 0.05), "z"));
+      t.add(holz, grained(rounded(W * 0.64 + 0.05, 0.04, 0.04, 0.008, 0, 0.12, L / 2 + lang - 0.15), "x"));
     } else {
       // A pull bar from the front axle down to the ground with a handle
       const lang = 0.9, z0 = L / 2, neig = Math.atan2(boden - 0.04, lang);
-      t.add(eisen, new BoxGeometry(0.035, 0.035, Math.hypot(lang, boden - 0.04)).rotateX(neig).translate(0, (boden + 0.04) / 2, z0 + lang / 2));
-      t.box(eisen, 0.3, 0.035, 0.035, 0, 0.05, z0 + lang);
+      t.add(eisen, rounded(0.035, 0.035, Math.hypot(lang, boden - 0.04), 0.006).rotateX(neig).translate(0, (boden + 0.04) / 2, z0 + lang / 2));
+      t.add(eisen, rounded(0.3, 0.035, 0.035, 0.006, 0, 0.05, z0 + lang));
     }
     return t.group();
   },
