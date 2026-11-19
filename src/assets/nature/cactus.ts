@@ -1,7 +1,8 @@
-import { BufferGeometry, Float32BufferAttribute, IcosahedronGeometry, Quaternion, Vector3 } from "three";
+import { BufferGeometry, ConeGeometry, Float32BufferAttribute, Quaternion, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { turned } from "../shapes";
 
 const TAU = Math.PI * 2, OBEN = new Vector3(0, 1, 0);
 
@@ -63,6 +64,42 @@ function koerper(profil: (u: number) => number, hoehe: number, ribs: number, amp
   return g;
 }
 
+/** A point on a path: centre, unit tangent and radius over the rib crests. */
+type Stelle = { c: Vector3; t: Vector3; r: number };
+
+/**
+ * Ribbed tube along a path in the plane normal to `seite` (the side vector): one ring at each point of `stellen`, the
+ * crests at the same angles as koerper(); a radius of 0 at the last point closes it in a tip.
+ */
+function rohr(stellen: Stelle[], seite: Vector3, ribs: number, amp: number): BufferGeometry {
+  const um = Math.max(16, ribs * 4), pos: number[] = [], uv: number[] = [], idx: number[] = [];
+  const rippe = (phi: number) => 1 - amp * Math.pow(Math.abs(Math.sin((ribs * phi) / 2)), 0.75);
+  let vorher = -1;
+  stellen.forEach(({ c, t, r }, j) => {
+    const n = new Vector3().crossVectors(t, seite).normalize();
+    if (r <= 1e-4) {
+      const spitze = pos.length / 3;
+      pos.push(c.x, c.y, c.z); uv.push(0.5, 1);
+      for (let i = 0; i < um; i++) idx.push(vorher + i, spitze, vorher + i + 1);
+      return;
+    }
+    const start = pos.length / 3;
+    for (let i = 0; i <= um; i++) {
+      const phi = (i / um) * TAU, rr = r * rippe(phi);
+      pos.push(c.x + rr * (Math.cos(phi) * seite.x + Math.sin(phi) * n.x), c.y + rr * (Math.cos(phi) * seite.y + Math.sin(phi) * n.y), c.z + rr * (Math.cos(phi) * seite.z + Math.sin(phi) * n.z));
+      uv.push(i / um, j / (stellen.length - 1));
+    }
+    if (vorher >= 0) for (let i = 0; i < um; i++) idx.push(vorher + i, start + i + 1, vorher + i + 1, vorher + i, start + i, start + i + 1);
+    vorher = start;
+  });
+  const g = new BufferGeometry();
+  g.setAttribute("position", new Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  return g;
+}
+
 export const cactus = defineAsset({
   id: "cactus", category: "nature",
   title: { de: "Kaktus", en: "Cactus" },
@@ -90,46 +127,77 @@ export const cactus = defineAsset({
   },
   // Kollision am Körper: Arme und Blüten ragen über den Zylinder hinaus, wie bei der Palme der Stamm
   physics: { body: "static", collider: "cylinder" },
-  budget: { triangles: 40000, drawCalls: 2 },
+  budget: { triangles: 50000, drawCalls: 3 },
   build(p, seed) {
     const r = rng(seed), t = new Parts();
     // the body is solid pulp, not air-filled foliage
     const gruene = material("leaf", p.bodyColor, 1 / Math.max(0.5, p.radius * 2.2), 400), bluete = material("paint", p.flowerColor);
+    const dorn = material("paint", "#d9cfae");
     const tonne = p.form === "barrel", amp = tonne ? 0.24 : 0.16;
     const welle = (u: number) => 0.5 - 0.5 * Math.cos(Math.PI * u);
     // the crests of the ribs carry the profile, so the body is never wider than p.radius
     const profil = tonne
-      ? (u: number) => p.radius * (u < 0.42 ? 0.62 + 0.38 * welle(u / 0.42) : 1 - 0.48 * welle((u - 0.42) / 0.58))
+      ? (u: number) => p.radius * (u < 0.45 ? 0.8 + 0.2 * Math.sin((Math.PI / 2) * (u / 0.45)) : 1 - 0.3 * welle((u - 0.45) / 0.55))
       : (u: number) => p.radius * (1 - 0.14 * u);
     const kuppe = Math.max(0.015, Math.min(p.height * (tonne ? 0.3 : 0.26), p.radius * (tonne ? 0.9 : 1.1)));
     t.add(gruene, koerper(profil, p.height, p.ribs, amp, Math.max(8, Math.min(40, Math.round(8 + p.height * 4))), kuppe));
+    // Spines: a pair of short pale spikes at every areole along the rib crests, spaced by the body's size
+    const abstand = Math.max(0.03, p.radius * 0.25, p.height / 60), dl = Math.min(0.04, Math.max(0.012, p.radius * 0.12));
+    const stachel = (at: Vector3, raus: Vector3) => {
+      for (const neig of [0.35, -0.35]) {
+        const d = new Vector3(raus.x, raus.y + neig, raus.z).normalize();
+        t.add(dorn, new ConeGeometry(dl * 0.1, dl, 3, 1, true).translate(0, dl / 2, 0).applyQuaternion(new Quaternion().setFromUnitVectors(OBEN, d)).translate(at.x, at.y, at.z));
+      }
+    };
+    for (let k = 0; k < p.ribs; k++) {
+      const phi = (k / p.ribs) * TAU, raus = new Vector3(Math.cos(phi), 0, Math.sin(phi));
+      for (let y = abstand * 0.6; y < p.height - kuppe; y += abstand) {
+        const rr = profil(y / (p.height - kuppe));
+        stachel(new Vector3(rr * raus.x, y, rr * raus.z), raus);
+      }
+    }
+    // Flowers: small open cups standing out of the surface
     const bluem = Math.min(0.05, Math.max(0.012, p.height * 0.02));
-    const blume = (x: number, y: number, z: number, s: number) => t.add(bluete, new IcosahedronGeometry(s, 0).translate(x, y, z));
+    const becher = turned([[0, 0], [0.3, 0], [0.45, 0.35], [1, 0.85], [0.85, 1], [0.35, 0.6], [0, 0.55]], 10);
+    const blume = (x: number, y: number, z: number, s: number, n: Vector3) =>
+      t.add(bluete, becher.clone().scale(s, s, s).applyQuaternion(new Quaternion().setFromUnitVectors(OBEN, n.clone().normalize())).translate(x, y, z));
     // a crown of flowers around the shoulder of the tip
     const { rho, ym } = kappenArc(profil(1), p.height, kuppe), yBl = p.height - kuppe * 0.55;
-    const rBl = Math.sqrt(Math.max(0, rho * rho - (yBl - ym) * (yBl - ym))) * 0.86;
+    const rBl = Math.sqrt(Math.max(0, rho * rho - (yBl - ym) * (yBl - ym)));
     const kranz = Math.max(4, Math.min(8, Math.round(p.ribs / 2)));
     for (let i = 0; i < kranz; i++) {
-      const phi = (i / kranz) * TAU + (r() - 0.5) * 0.3;
-      blume(rBl * Math.cos(phi), yBl, rBl * Math.sin(phi), bluem);
+      const phi = (i / kranz) * TAU + (r() - 0.5) * 0.3, n = new Vector3(rBl * Math.cos(phi), yBl - ym, rBl * Math.sin(phi));
+      blume(rBl * 0.97 * Math.cos(phi), yBl, rBl * 0.97 * Math.sin(phi), bluem, n.lerp(OBEN.clone().multiplyScalar(n.length()), 0.4));
     }
-    // arms on the rib crests: a horizontal stub, a round elbow, an upright that ends in one flower
+    // arms on the rib crests: one ribbed tube that leaves the trunk sideways, bends up round an elbow and ends in a dome
     const armRibs = Math.max(6, Math.round(p.ribs * 0.55));
     if (!tonne) for (let i = 0; i < p.arms; i++) {
       const crest = (i * Math.max(1, Math.floor(p.ribs / Math.max(1, p.arms))) + Math.floor(r() * 2)) % p.ribs;
       const dir = new Vector3(Math.cos((crest / p.ribs) * TAU), 0, Math.sin((crest / p.ribs) * TAU));
+      const seite = new Vector3().crossVectors(dir, OBEN).normalize();
       const uA = 0.34 + 0.18 * r(), yA = p.height * uA, stammR = p.radius * (1 - 0.14 * uA);
       // elbow and stub keep their whole thickness above the floor, even on a short trunk
-      const armR = Math.min(stammR * 0.42, yA * 0.45), stuetz = Math.max(p.height * 0.2, armR * 1.7);
-      const ansatz = new Vector3().copy(dir).multiplyScalar(stammR * 0.35);
-      const ellbogen = new Vector3().copy(ansatz).addScaledVector(dir, stuetz);
-      const stub = koerper(() => armR, stuetz, armRibs, amp, 6, 0).applyQuaternion(new Quaternion().setFromUnitVectors(OBEN, dir));
-      stub.translate(ansatz.x, yA, ansatz.z);
-      t.add(gruene, stub);
-      t.add(gruene, new IcosahedronGeometry(armR * 1.25, 1).translate(ellbogen.x, yA, ellbogen.z));
-      const rise = p.height * (0.16 + 0.14 * r()), spitze = yA - 0.35 * armR + rise + 0.4 * armR;
-      t.add(gruene, koerper((u: number) => armR * (1 - 0.1 * u), rise + 0.4 * armR, armRibs, amp, Math.max(6, Math.round(rise * 4)), armR * 0.85).translate(ellbogen.x, yA - 0.35 * armR, ellbogen.z));
-      blume(ellbogen.x, spitze - armR * 0.25, ellbogen.z, bluem * 0.9);
+      const armR = Math.min(stammR * 0.42, yA * 0.45), bogenR = armR * 1.3, stub = stammR * 0.75 + armR * 0.3;
+      const rise = p.height * (0.16 + 0.14 * r()), armK = armR * 0.85;
+      const start = new Vector3().copy(dir).multiplyScalar(stammR * 0.35).setY(yA);
+      const bei = (a: number, b: number, ta: number, tb: number, rr: number): Stelle => ({ c: start.clone().addScaledVector(dir, a).setY(yA + b), t: dir.clone().multiplyScalar(ta).setY(tb), r: rr });
+      const stellen: Stelle[] = [bei(0, 0, 1, 0, armR), bei(stub, 0, 1, 0, armR)];
+      for (let k = 1; k <= 8; k++) { const w = -Math.PI / 2 + (k / 8) * (Math.PI / 2); stellen.push(bei(stub + bogenR * Math.cos(w), bogenR + bogenR * Math.sin(w), -Math.sin(w), Math.cos(w), armR)); }
+      const aX = stub + bogenR, yTop = bogenR + rise, stufenA = Math.max(2, Math.round(rise * 4));
+      for (let k = 1; k <= stufenA; k++) stellen.push(bei(aX, bogenR + ((rise - armK) * k) / stufenA, 0, 1, armR * (1 - 0.1 * (k / stufenA))));
+      const { rho: rA, ym: yM } = kappenArc(armR * 0.9, yTop, armK);
+      for (let k = 1; k <= 6; k++) { const y = yTop - armK + (armK * k) / 7; stellen.push(bei(aX, y, 0, 1, Math.sqrt(Math.max(1e-8, rA * rA - (y - yM) * (y - yM))))); }
+      stellen.push(bei(aX, yTop, 0, 1, 0));
+      t.add(gruene, rohr(stellen, seite, armRibs, amp));
+      // spines on the arm's crests where it stands clear of the trunk, below its dome
+      for (let k = 0; k < armRibs; k++) {
+        const phi = (k / armRibs) * TAU;
+        for (let y = bogenR + abstand * 0.5; y < yTop - armK; y += abstand) {
+          const raus = new Vector3().addScaledVector(seite, Math.cos(phi)).addScaledVector(new Vector3().crossVectors(OBEN, seite).normalize(), Math.sin(phi));
+          stachel(start.clone().addScaledVector(dir, aX).setY(yA + y).addScaledVector(raus, armR * (1 - 0.1 * ((y - bogenR) / Math.max(1e-3, rise - armK)))), raus);
+        }
+      }
+      blume(start.x + dir.x * aX, yA + yTop - armR * 0.1, start.z + dir.z * aX, bluem * 0.9, OBEN);
     }
     t.cylinder(p.radius, p.height);
     return t.group();
