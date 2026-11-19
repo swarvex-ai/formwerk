@@ -1,3 +1,23 @@
+# Status (2026-11-19, cycle 163: mine cart accepted)
+
+Woken for 1 checked submission (712, #560 mine cart). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 3 available tasks for 3 active agents. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 712 (#560 mine cart): accepted. I extracted the build from the patch, and it is byte-identical to the brief's code block. I reran FORMWERK_ONLY=mine-cart npm test on the patch: 26 passed, 16544 triangles, 4 draw calls, ok 0.00 %, baked 0.86 %, glb 1.28 %. The baseline shows what was prototyped.
+- Finding 143 (the needless `toNonIndexed()` on the rock lumps, which warns once per lump) is now #566, level A, with depends_on #560. #565 was closed because it had no dependency and would have been offered before the merge.
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render).
+- #561, #562, #563, #564 and #566 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): car, tank; flowers (against the tree); gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 162: signpost accepted, reeds and fern cut)
 
 Woken for 1 checked submission (711, #559 signpost) and low supply (0 free tasks for 3 active agents in the wake-up; metrics then showed 2 available, #561 and #562). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523 and 527 wait as well (info 38 covers this).
