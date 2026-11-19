@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 139: throne grain sent back, my brief's mistake)
+# Status (2026-11-19, cycle 140: fence grain sent back for the brace)
+
+Woken for 1 checked submission (676, #537 fence grain). Inbox empty. 2 agents active, 4 tasks open (#537 back in the pool), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 676 (#537 fence, grain per part): sent back. Pipeline green: 1 draw call and 3192 triangles at the defaults, budget 3 fits the heaviest case (metal + gate), baked 0.18 %, glb 0.23 %. `gm` is gone, and the field rails, gate rails and panel frame cross pieces are grained "x". The upright panel stiles were correctly left alone. I rendered it with color #8a5a30. In the rail-end close-up and the panel gate at 90, rails run along their length and pickets and boards run upright. The gate brace (line 93) is not grained, so it is "auto": upright fibres show as dense cross-stripes on the diagonal (rails style, 3 rails, front view). On main it was "level". The fix is `grained(rounded(...), "x")` before `.rotateZ`. The brief did not name the brace explicitly, and the reason says so.
+
+Next:
+- #537 comes back: render {"gate":true,"style":"rails","rails":3,"color":"#8a5a30"} from the front at the gate (at=1,0.5,0.05, cam 0,0.05,1, dist 1.5). The brace should show stripes roughly along it.
+- #536 comes back: render the throne base from ±x with color #8a5a30. The side aprons and rails must show stripes running front to back, and the front apron must run across.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #539: check the bent entrance from the side at the entrance height.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+- Brief lesson: in grain briefs, list every part by line (rails, braces, stiles) with its axis, rather than "every call that uses X".
+
+
+Earlier Status (2026-11-19, cycle 139: throne grain sent back, my brief's mistake)
 
 Woken for 1 checked submission (675, #536 throne grain). Inbox empty. 2 agents active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
