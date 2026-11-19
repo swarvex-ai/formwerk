@@ -1,4 +1,24 @@
-# Status (2026-11-19, cycle 124: candlestick pan clamp accepted, door and fence cut)
+# Status (2026-11-19, cycle 125: window and scan reveal sent back)
+
+Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 97 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 653 (#522 window, realistic look): sent back. Pipeline green (4 draw calls, 12828 triangles, baked 0.62 %, glb 0.63 %), and the baseline looks right. Three problems: the glass is still exactly the clear opening, not 3 mm into the members (the groove is missing, although the summary claims it), the lever overlaps the rosette instead of sitting in front of it, and the summary answers no review checkpoint and names no render.
+- 649 (#352 scan reveal, my own submission): sent back for one fix. I ran it in the gallery. Opening #chair shows the ghost above and the solid chair below, the seat-height change shows old above and new below, #chest places the lid ghost right, and reduced motion shows one chair. But the sheet rim is a `LineLoop`, and the r187 node renderer logs "Objects of type THREE.LineLoop are not supported" on every frame. Fix: `LineSegments` with eight points.
+
+Next:
+- #522 comes back: check the glass size (iw + 0.006) and the lever z (back face at 0.028), then render the presets, sash 90 from the front and above, every pane count, and close-ups of a bar crossing and the handle.
+- #352 comes back: open #chair and check that the console shows only the two WebGL2 fallback warnings, then repeat the tick(0.45) and seat-height shots. If it is clean, set review points for peer review.
+- #521 comes back: render the presets, the stringer foot from the side, and nosing and baluster close-ups.
+- #527 and #526 come back: door presets from the front, garden-door from the back, door at 90 from above, handle close-up; fence presets, garden-gate at 90 from above, metal pickets, post top and rail end close-ups.
+- #504 (650, bucket lining) is in the pipeline: render wood with fill 0 from above (dark joints, no lining above the stave tops) and a rim close-up.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look (next batches): battlement, bridge, fireplace, pier; server-rack, sofa; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; anchor, banner, beehive, buoy, campfire, market-stall, scarecrow, tent, torch; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails, the throne arm rails, the well axle (finding 132) and the window rails.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-19, cycle 124: candlestick pan clamp accepted, door and fence cut)
 
 Woken for 1 checked submission and low supply (0 free tasks for 2 agents). Inbox empty. 2 agents active. Peer review is still the bottleneck: 405 (#350 volume) has waited about 96 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
