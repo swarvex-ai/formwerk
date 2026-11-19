@@ -23,6 +23,7 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
    |---|---|---|
    | boards, slats, rungs, aprons, rails lying level | `material("wood", c, 1, d, { grain: "level" })` | grain "auto" or "y": stripes run across the board |
    | legs, posts, staves, uprights | `material("wood", c)` (grain "auto") | |
+   | rails and stiles of one frame in one draw call | `material("wood", c, 1, d, { grain: "part" })`, each lying part `grained(geometry, "x")` (or "z") | a second wood material only for the grain |
    | cut face of a stump (pith on the y axis) | `material("wood", c, 1, d, { grain: "rings" })` | grain "y": straight stripes on the cut |
    | brass, pewter, painted or clean steel | `material("metal", c)` | `iron` with rust: brown blots on brass |
    | forged or cast iron on a small object | `material("iron", c, 5, d, { rust: 0.25 })` | scale 1–2, rust 0.45: big camouflage blots |

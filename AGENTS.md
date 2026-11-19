@@ -126,7 +126,7 @@ rules (sizes, palette, grid) as the first task, and the swarm builds them side b
 - **Materials** only from `src/materials` (`material(kind, colour, scale, density?, options?)`); a new kind is its own
   task. Wood, iron, stone and bark carry relief and varying roughness that the export bakes into a normal map and a
   roughness/metalness map. Options: `grain` (wood fibres along "x", "y" or "z"; default "auto": upright on standing
-  faces, along x on lying ones; "level": lying along every face, for slats, aprons and rails; "rings": upright with the pith on the asset's y axis, round rings on a cut face), `rust` (iron, 0 bare to 1; default 0.45), `moss` (stone, 0 to 1 on upward faces),
+  faces, along x on lying ones; "level": lying along every face, for slats, aprons and rails; "rings": upright with the pith on the asset's y axis, round rings on a cut face; "part": each part's own axis from `grained(geometry, "x" | "y" | "z")` in `src/materials`, so rails and stiles of one wood share a draw call, and parts without it follow "auto"), `rust` (iron, 0 bare to 1; default 0.45), `moss` (stone, 0 to 1 on upward faces),
   `plain` (one colour without pattern and bake, e.g. leaf cards). Use `metal` for clean or painted metal, `iron` for
   forged or cast iron that rusts. Pass a larger `scale` to shrink a pattern on a small object (the lantern uses 4).
 - **Realistic shapes** (style guide): build from real parts with `src/assets/shapes.ts`: `stave` (barrel and tub

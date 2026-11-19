@@ -1,9 +1,10 @@
 // An asset: id, category, texts, its parameter schema, presets, movable parts (rig), physics hints, a triangle and
 // draw-call budget, and a build function that turns valid values (and a seed for variation) into a three.js object.
 // Origin at the centre of the floor, metres, y up, the front faces +z.
-import { Box3, BoxGeometry, BufferGeometry, CylinderGeometry, Group, Mesh, Vector3, type Material, type Object3D } from "three";
+import { Box3, BoxGeometry, BufferGeometry, CylinderGeometry, Float32BufferAttribute, Group, Mesh, Vector3, type Material, type Object3D } from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { withPreset, type Presets, type Schema, type Text, type Values } from "../core/params";
+import { GRAIN_ATTRIBUTE } from "../materials";
 
 // Vehicles and props came with requests from other projects in mind (a tank for a game, a market stall for a town)
 export type Category = "furniture" | "architecture" | "nature" | "vehicles" | "props";
@@ -86,7 +87,7 @@ export class Parts {
   private masse = 0;
   private zylinder?: { radius: number; height: number };
   add(material: Material, geometry: BufferGeometry): this {
-    for (const name of Object.keys(geometry.attributes)) if (!["position", "normal", "uv"].includes(name)) geometry.deleteAttribute(name);
+    for (const name of Object.keys(geometry.attributes)) if (!["position", "normal", "uv", GRAIN_ATTRIBUTE].includes(name)) geometry.deleteAttribute(name);
     const liste = this.teile.get(material) ?? [];
     liste.push(geometry);
     this.teile.set(material, liste);
@@ -126,6 +127,10 @@ export class Parts {
   group(): Group {
     const gruppe = new Group();
     for (const [material, geos] of this.teile) {
+      // A wood with grain "part" reads every part's axis: parts without grained() get a zero axis ("auto")
+      if (material.userData.grainPart || geos.some((g) => g.attributes[GRAIN_ATTRIBUTE])) {
+        for (const g of geos) if (!g.attributes[GRAIN_ATTRIBUTE]) g.setAttribute(GRAIN_ATTRIBUTE, new Float32BufferAttribute(new Float32Array(g.attributes.position.count * 3), 3));
+      }
       const indiziert = geos.every((g) => g.index);
       const merged = mergeGeometries(indiziert ? geos : geos.map((g) => (g.index ? g.toNonIndexed() : g)));
       if (!merged) {

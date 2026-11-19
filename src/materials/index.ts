@@ -6,18 +6,31 @@
 // the object, in the object's own metres. The height gives the relief (grain, rust, pits, furrows): a normal from finite
 // differences of the height, the same function live and in the bake, so the exported normal map matches what the
 // gallery shows. Wood has a grain direction: the fibres run along one axis of the asset ("y" for staves and legs).
-import { MeshStandardMaterial, type Material } from "three";
+import { Float32BufferAttribute, MeshStandardMaterial, type BufferGeometry, type Material } from "three";
 import { MeshStandardNodeMaterial, type Node } from "three/webgpu";
 import {
-  abs, color, cross, dFdx, dFdy, dot, float, Fn, fwidth, max, mix, mx_cell_noise_float, mx_fractal_noise_float, mx_noise_float,
+  abs, attribute, color, cross, dFdx, dFdy, dot, float, Fn, fwidth, max, mix, mx_cell_noise_float, mx_fractal_noise_float, mx_noise_float,
   mx_worley_noise_float, normalize, normalLocal, positionLocal, pow, select, sin, smoothstep, transformNormalToView, vec2, vec3,
 } from "three/tsl";
 
 export const MATERIALS = ["wood", "metal", "iron", "paint", "stone", "plastic", "bark", "leaf", "glow"] as const;
 export type MaterialKind = (typeof MATERIALS)[number];
 /** The axis the wood fibres run along, in the asset's coordinates; "level": lying, along the face (slats, aprons);
- *  "rings": upright with the pith on the asset's y axis, so a cut face shows round growth rings (stumps, logs). */
-export type Grain = "x" | "y" | "z" | "auto" | "level" | "rings";
+ *  "rings": upright with the pith on the asset's y axis, so a cut face shows round growth rings (stumps, logs);
+ *  "part": the axis each part carries from `grained()` (rails along x and stiles along y in one draw call), "auto"
+ *  for parts without one. */
+export type Grain = "x" | "y" | "z" | "auto" | "level" | "rings" | "part";
+
+/** The vertex attribute that carries a part's grain axis (a unit vector along x, y or z; zero: "auto"). */
+export const GRAIN_ATTRIBUTE = "grain";
+/** Marks a geometry's fibres to run along `axis` in a wood material with `grain: "part"`, so one material serves
+ *  parts whose fibres run different ways: `t.add(holz, grained(rounded(...), "x"))`. Returns the geometry. */
+export function grained<G extends BufferGeometry>(geometry: G, axis: "x" | "y" | "z"): G {
+  const n = geometry.attributes.position.count, a = new Float32Array(n * 3), k = axis === "x" ? 0 : axis === "y" ? 1 : 2;
+  for (let i = 0; i < n; i++) a[i * 3 + k] = 1;
+  geometry.setAttribute(GRAIN_ATTRIBUTE, new Float32BufferAttribute(a, 3));
+  return geometry;
+}
 
 type F = Node<"float">;
 type V3 = Node<"vec3">;
@@ -69,8 +82,14 @@ const holzFelder = (q: V3, n: V3, g: Grain) => {
     return felder(select(liegend, q.x, select(seitlich, q.z, q.x)), select(liegend, q.yz, select(seitlich, q.xy, q.yz)));
   }
   if (g === "rings") return felder(q.y, q.xz, vec2(0, 0));
-  const along = g === "x" ? q.x : g === "z" ? q.z : g === "y" ? q.y : select(liegend, q.x, q.y);
-  const quer = g === "x" ? q.yz : g === "z" ? q.xy : g === "y" ? q.xz : select(liegend, q.zy, q.xz);
+  const autoAlong = select(liegend, q.x, q.y), autoQuer = select(liegend, q.zy, q.xz);
+  if (g === "part") {
+    // Each part's own axis from its vertices (the same at every vertex of a part, so interpolation keeps it exact)
+    const a = attribute<"vec3">(GRAIN_ATTRIBUTE, "vec3"), ax = a.x.greaterThan(0.5), ay = a.y.greaterThan(0.5), az = a.z.greaterThan(0.5);
+    return felder(select(ax, q.x, select(az, q.z, select(ay, q.y, autoAlong))), select(ax, q.yz, select(az, q.xy, select(ay, q.xz, autoQuer))));
+  }
+  const along = g === "x" ? q.x : g === "z" ? q.z : g === "y" ? q.y : autoAlong;
+  const quer = g === "x" ? q.yz : g === "z" ? q.xy : g === "y" ? q.xz : autoQuer;
   return felder(along, quer);
 };
 const felder = (along: F, quer: Node<"vec2">, mark = vec2(1.9, 1.3)) => {
@@ -233,6 +252,7 @@ export function material(kind: MaterialKind, hex: string, scale = 1, density?: n
     backen.set(m, { color: p.color, roughness: p.roughness, metalness: p.metalness, normal });
   } else if (kind === "glow") { m.colorNode = base; m.emissiveNode = base.mul(2); }
   else m.colorNode = base;
+  if (kind === "wood" && opts.grain === "part" && !opts.plain) m.userData.grainPart = true;
   m.userData.export = { kind, color: hex, emissive: kind === "glow" ? hex : "#000000", ...PBR[kind], density: density ?? DICHTE[kind], pattern: !opts.plain && MUSTER.includes(kind) };
   return m;
 }
