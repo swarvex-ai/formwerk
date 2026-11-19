@@ -1,6 +1,7 @@
-import { TorusGeometry } from "three";
-import { material } from "../../materials";
+import { Vector3 } from "three";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded } from "../shapes";
 
 export const sled = defineAsset({
   id: "sled", category: "vehicles",
@@ -29,22 +30,58 @@ export const sled = defineAsset({
     "chair-sled": { label: { de: "Stuhlschlitten", en: "Chair sled" }, values: { backrest: true, height: 0.26 } },
   },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 2000, drawCalls: 2 },
+  budget: { triangles: 8000, drawCalls: 2 },
   build(p) {
-    const holz = material("wood", p.color, 1, 450), eisen = material("metal", p.metalColor), t = new Parts();
+    const holz = material("wood", p.color, 1, 450, { grain: "part" }), eisen = material("metal", p.metalColor), t = new Parts();
     const L = p.length, W = p.width, H = p.height;
-    const rc = (H - 0.012) / 2, zc = L / 2 - rc, xr = W / 2 - 0.03, deck = L - rc;
-    // Runner bar on the snow, the half ring that curls its front end up to the deck, the rail and three posts
-    for (const s of [-1, 1]) {
-      const x = s * xr;
-      t.box(eisen, 0.025, 0.024, zc + L / 2, x, 0.012, (zc - L / 2) / 2);
-      t.add(eisen, new TorusGeometry(rc, 0.012, 6, 12, Math.PI).rotateZ(-Math.PI / 2).rotateY(-Math.PI / 2).translate(x, rc + 0.012, zc));
-      t.box(holz, 0.04, 0.03, deck, x, H - 0.035, -L / 2 + deck / 2);
-      for (const z of [-L / 2 + 0.06, -L / 2 + deck / 2, zc - 0.04]) t.box(holz, 0.03, H - 0.074, 0.04, x, 0.024 + (H - 0.074) / 2, z);
+    // The runner: a flat bar 25 × 12 mm, one piece bent from the snow up round the front and back under the rail
+    const bw = 0.025, bt = 0.012, xr = W / 2 - 0.03, yT = H - 0.05 - bt / 2, rc = (yT - bt / 2) / 2, zc = L / 2 - rc - bt / 2;
+    const zFront = zc - 0.03, deck = zc + 0.02 + L / 2;
+    // Centre line of the bar in (z, y) and its direction, s from 0 (back end) to 1 (bolted under the rail)
+    const gerade = zc - (-L / 2 + 0.04), bogen = Math.PI * rc, heck = (Math.PI / 2) * 0.04, rueck = 0.12, ges = heck + gerade + bogen + rueck;
+    const bahn = (s: number): [number, number, number, number] => {
+      let d = s * ges;
+      if (d < heck) { const a = Math.PI + d / 0.04; return [-L / 2 + 0.04 + 0.04 * Math.cos(a), bt / 2 + 0.04 + 0.04 * Math.sin(a), -Math.sin(a), Math.cos(a)]; }
+      d -= heck;
+      if (d < gerade) return [-L / 2 + 0.04 + d, bt / 2, 1, 0];
+      d -= gerade;
+      if (d < bogen) { const a = d / rc; return [zc + rc * Math.sin(a), bt / 2 + rc - rc * Math.cos(a), Math.cos(a), Math.sin(a)]; }
+      d -= bogen;
+      return [zc - d, yT, -1, 0];
+    };
+    // Rounded-rectangle cross-section (radius 3 mm), 16 points round
+    const ecke = 0.003, quer: [number, number][] = [];
+    for (let k = 0; k < 4; k++) for (let i = 0; i <= 3; i++) {
+      const a = (k + i / 3) * (Math.PI / 2), sx = k === 0 || k === 3 ? 1 : -1, sy = k < 2 ? 1 : -1;
+      quer.push([sx * (bw / 2 - ecke) + ecke * Math.cos(a), sy * (bt / 2 - ecke) + ecke * Math.sin(a)]);
     }
-    const n = p.slats, d = Math.min(0.08, (deck / n) * 0.8);
-    for (let i = 0; i < n; i++) t.box(holz, W, 0.02, d, 0, H - 0.01, -L / 2 + d / 2 + 0.01 + (i * (deck - d - 0.02)) / Math.max(1, n - 1));
-    if (p.backrest) t.box(holz, W - 0.06, 0.25, 0.025, 0, H + 0.125, -L / 2 + 0.0125);
+    // rings only where the bar bends: 4 on the rear upturn, 16 round the front, none along the straight parts
+    const n = 4 * 4, ringe: number[] = [];
+    for (let i = 0; i <= 4; i++) ringe.push((heck * i) / 4 / ges);
+    for (let i = 0; i <= 16; i++) ringe.push((heck + gerade + (bogen * i) / 16) / ges);
+    ringe.push(1);
+    const schritte = ringe.length - 1;
+    const punkt = (x0: number, i: number, s: number, k = 1) => {
+      const [z, y, dz, dy] = bahn(s), [qx, qn] = quer[i % n];
+      return new Vector3(x0 + k * qx, y + k * qn * dz, z - k * qn * dy);
+    };
+    for (const sg of [-1, 1]) {
+      const x = sg * xr;
+      // The bar and its two end caps
+      t.add(eisen, grid(n, schritte, (u, v) => punkt(x, Math.round(u * n), ringe[Math.round(v * schritte)]), (q) => { const [z, y] = bahn(0.5); return new Vector3(q.x - x, q.y - y, q.z - z); }));
+      for (const s of [0, 1]) t.add(eisen, grid(n, 1, (u, v) => punkt(x, Math.round(u * n), s, 1 - v), () => { const [, , dz, dy] = bahn(s); return new Vector3(0, s ? dy : -dy, s ? dz : -dz); }));
+      // Rail along the deck and three posts standing on the bar
+      t.add(holz, grained(rounded(0.04, 0.03, deck, 0.004, x, H - 0.035, -L / 2 + deck / 2), "z"));
+      for (const z of [-L / 2 + 0.06, (-L / 2 + zFront - 0.06) / 2, zFront - 0.12]) t.add(holz, rounded(0.03, H - 0.05 - bt + 0.004, 0.04, 0.004, x, bt - 0.002 + (H - 0.05 - bt + 0.004) / 2, z));
+    }
+    // Slats across the rails
+    const m = p.slats, d = Math.min(0.08, (deck / m) * 0.8);
+    for (let i = 0; i < m; i++) t.add(holz, grained(rounded(W, 0.02, d, 0.004, 0, H - 0.01, -L / 2 + d / 2 + 0.01 + (i * (deck - d - 0.02)) / Math.max(1, m - 1)), "x"));
+    if (p.backrest) {
+      // Two uprights outside the rails and a board between them
+      for (const sg of [-1, 1]) t.add(holz, rounded(0.025, 0.3, 0.03, 0.004, sg * (xr + 0.0325), H - 0.05 + 0.15, -L / 2 + 0.03));
+      t.add(holz, grained(rounded(W - 0.02, 0.12, 0.02, 0.004, 0, H + 0.17, -L / 2 + 0.025), "x"));
+    }
     return t.group();
   },
 });
