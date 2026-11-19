@@ -1,4 +1,4 @@
-import { material } from "../../materials";
+import { material, grained } from "../../materials";
 import { defineAsset, Parts } from "../define";
 import { rounded, turned } from "../shapes";
 
@@ -36,18 +36,18 @@ export const wardrobe = defineAsset({
   physics: { body: "static", collider: "box" },
   budget: { triangles: 13000, drawCalls: 4 },
   build(p) {
-    const holz = material("wood", p.color, 1, 120), t = new Parts();
+    const holz = material("wood", p.color, 1, 120, { grain: "part" }), t = new Parts();
     const W = p.width, H = p.height, D = p.depth, P = p.plinthHeight;
     const sT = 0.019, topT = 0.025, backT = 0.008, dT = 0.02, reveal = 0.0035, vGap = 0.0035;
     const topY = H - topT;
     // Plinth set back as a toe kick under the carcass
-    t.add(holz, rounded(W - 0.03, P, D - 0.07, 0.003, 0, P / 2, -0.015, 2));
+    t.add(holz, grained(rounded(W - 0.03, P, D - 0.07, 0.003, 0, P / 2, -0.015, 2), "x"));
     // Carcass: two sides, the bottom and the back panel between them, the top with a cornice over sides and doors
     for (const s of [-1, 1]) t.add(holz, rounded(sT, topY - P, D, 0.003, s * (W / 2 - sT / 2), (P + topY) / 2, 0, 2));
-    t.add(holz, rounded(W - 2 * sT, sT, D - backT, 0.003, 0, P + sT / 2, backT / 2, 2));
-    t.add(holz, rounded(W - 2 * sT, topY - P, backT, 0.002, 0, (P + topY) / 2, -D / 2 + backT / 2, 2));
+    t.add(holz, grained(rounded(W - 2 * sT, sT, D - backT, 0.003, 0, P + sT / 2, backT / 2, 2), "x"));
+    t.add(holz, grained(rounded(W - 2 * sT, topY - P, backT, 0.002, 0, (P + topY) / 2, -D / 2 + backT / 2, 2), "x"));
     const front = D / 2 + dT + 0.015;
-    t.add(holz, rounded(W + 0.03, topT, front + D / 2, 0.004, 0, topY + topT / 2, (front - D / 2) / 2, 2));
+    t.add(holz, grained(rounded(W + 0.03, topT, front + D / 2, 0.004, 0, topY + topT / 2, (front - D / 2) / 2, 2), "x"));
     // Overlay doors: 3.5 mm reveals to the carcass edges and between the doors, back face 0.5 mm before the front
     const inner = W - 2 * reveal, doorW = (inner - (p.doors - 1) * vGap) / p.doors;
     const doorH = topY - P - 2 * reveal, doorZ = D / 2 + 0.0005 + dT / 2, doorY = P + reveal + doorH / 2;
@@ -56,14 +56,14 @@ export const wardrobe = defineAsset({
       const frameW = Math.min(0.07, width * 0.22), cx = xLeft + width / 2;
       // Frame: two stiles over the full height, two rails between them, their faces a millimetre back
       for (const s of [-1, 1]) part.add(holz, rounded(frameW, doorH, dT, 0.0025, cx + (s * (width - frameW)) / 2, doorY, doorZ, 2));
-      for (const s of [-1, 1]) part.add(holz, rounded(width - 2 * frameW + 0.002, frameW, dT * 0.9, 0.0025, cx, doorY + (s * (doorH - frameW)) / 2, doorZ, 2));
+      for (const s of [-1, 1]) part.add(holz, grained(rounded(width - 2 * frameW + 0.002, frameW, dT * 0.9, 0.0025, cx, doorY + (s * (doorH - frameW)) / 2, doorZ, 2), "x"));
       // The panel sits in grooves of the frame, so no light passes around it: a raised field with a bevel, a few
       // millimetres behind the face of the frame, and its flat margin (four strips running under the field)
       const panelW = width - 2 * frameW + 2 * groove, panelH = doorH - 2 * frameW + 2 * groove;
       const inset = groove + Math.min(0.03, (width - 2 * frameW) * 0.2), sw = Math.min(inset + 0.01, panelW / 2 - 0.002);
       part.add(holz, rounded(panelW - 2 * inset, panelH - 2 * inset, 0.014, 0.004, cx, doorY, doorZ - 0.002, 2));
       for (const s of [-1, 1]) part.add(holz, rounded(sw, panelH, 0.008, 0.001, cx + (s * (panelW - sw)) / 2, doorY, doorZ - 0.004, 1));
-      for (const s of [-1, 1]) part.add(holz, rounded(panelW - 2 * sw, sw, 0.008, 0.001, cx, doorY + (s * (panelH - sw)) / 2, doorZ - 0.004, 1));
+      for (const s of [-1, 1]) part.add(holz, grained(rounded(panelW - 2 * sw, sw, 0.008, 0.001, cx, doorY + (s * (panelH - sw)) / 2, doorZ - 0.004, 1), "x"));
       if (!handle || p.handleStyle === "none") return;
       const hx = opening === "left" ? xLeft + frameW / 2 : xLeft + width - frameW / 2;
       if (p.handleStyle === "bar") {
