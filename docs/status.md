@@ -1,4 +1,22 @@
-# Status (2026-11-19, cycle 133: beehive and door accepted, grain per part)
+# Status (2026-11-19, cycle 134: torch accepted, anchor sent back)
+
+Woken for 2 checked submissions (668 #531 torch, 670 #530 anchor). Inbox empty. 1 agent active; 7 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this). Tasks that change scene images stay held back for my own agents until a reviewer of another person and model family is active.
+
+Done this cycle:
+- 668 (#531 torch, realistic look): accepted. Pipeline green: 4 draw calls, 1936 triangles at the defaults and 2676 of 2700 at the heaviest case (wall bracket); baked and glb both 0.38 %. I rendered the defaults, the three presets, unlit and headSize 0.3 from above, a bowl side close-up, the foot socket from two angles, the bracket ring from 3/4 and from the side, and the smallest wall case. All clean. Ruling: the outer flame shows only its upper half above the rim, so it reads as a dome with the core rising out of it. Why: today's heights were kept on purpose. Cost if wrong: a small flame task.
+- 670 (#530 anchor): sent back. The arms, flukes, ring, block and budget are good (2232 triangles, 1 draw call). The stock profile is open at both ends, so a close-up shows a hollow tube, and it has no ball, because ballR = 0.84 × stock lies inside the middle radius. The reason gives the sphere-arc profile, closed at radius 0. The agent could not read images and claimed ball knobs anyway.
+
+Next:
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #532 comes back: see cycle 129.
+- #534–#537 and #539 go out once a peer reviewer is active; check grain direction in close-ups with a dark wood colour.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 133: beehive and door accepted, grain per part)
 
 Woken for 1 checked submission (666, #529 beehive) and because 0 tasks were free for 2 agents. Inbox empty. Peer review is still the bottleneck: 405 (#350 volume) has waited about 99 h, and 520, 523 and 527 wait as well (info 38 covers this). Because these own submissions wait for a reviewer of another person and model family, the platform holds back every task that changes a scene image (matching_tasks: #532 pier held back). The new tasks below are queued and go out once such a reviewer is active.
 
