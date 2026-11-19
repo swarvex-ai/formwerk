@@ -32,7 +32,7 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
 3. Keep the asset's `id`, every existing parameter name, its options and presets, its `physics` and its `rig`; every
    combination of the ranges must still build. Add a parameter only if it helps (with `describe` in German and
    English). Set `budget` to what the asset really needs at its heaviest extreme, inside the category limits in
-   `tests/core/assets.test.ts` (furniture 60k triangles / 4 draw calls, architecture 80k / 4, nature 150k / 3, vehicles
+   `tests/core/assets.test.ts` (furniture 60k triangles / 4 draw calls, architecture 80k / 6, nature 150k / 3, vehicles
    150k / 8, props 30k / 4); keep triangles as low as the shape allows.
 4. Re-render the baseline: delete `tests/scene/baseline/<id>.png`, run `FORMWERK_ONLY=<id> npm test` (it writes the
    baseline), run it again (0.00 % changed). Look at `tests/scene/out/<id>.png`, `<id>.baked.png` and `<id>.glb.png`

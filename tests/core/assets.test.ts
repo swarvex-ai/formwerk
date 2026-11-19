@@ -12,8 +12,9 @@ import { rng } from "../../src/core/rng";
 
 // Upper limits per category (the lead changes these, not a single asset; raised for the realistic look, style guide
 // approved 14 Nov 2026: bevels, lathe profiles and segment minimums cost triangles)
-// (vehicles: several movable parts such as turret, barrel, wheels or doors, each its own draw call)
-const GRENZE = { furniture: { triangles: 60000, drawCalls: 4 }, architecture: { triangles: 80000, drawCalls: 4 }, nature: { triangles: 150000, drawCalls: 3 },
+// (vehicles: several movable parts such as turret, barrel, wheels or doors, each its own draw call; architecture: a
+// moving leaf or gate with glass and hardware next to its fixed frame, raised to 6 on 19 Nov 2026)
+const GRENZE = { furniture: { triangles: 60000, drawCalls: 4 }, architecture: { triangles: 80000, drawCalls: 6 }, nature: { triangles: 150000, drawCalls: 3 },
   vehicles: { triangles: 150000, drawCalls: 8 }, props: { triangles: 30000, drawCalls: 4 } } as const;
 
 const pruefsumme = (o: Object3D) => {

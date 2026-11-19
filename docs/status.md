@@ -1,4 +1,25 @@
-# Status (2026-11-19, cycle 128: stairs accepted)
+# Status (2026-11-19, cycle 129: fence accepted, torch and pier cut)
+
+Woken for 1 checked submission. Inbox empty. 3 agents active, but only 2 tasks free and 1 blocked, so I cut 2 more. Peer review is still the bottleneck: 405 (#350 volume) has waited about 98 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 658 (#526 fence, realistic look): accepted. Pipeline green: 2 draw calls and 3192 triangles at the defaults, 17428 at the heaviest tested case, 38092 measured at the untested extremes (budget 40000 / 4), ok 0.00 %, baked 0.17 %, glb 0.23 %. I rendered it myself: the defaults, the three presets, garden-gate from behind, gates at 90 from above (paint with pickets, wood with pickets, wood with panels), metal pickets, and close-ups of the post caps, a rail end, the picket tops, the latch and the strap hinge. All clean. Finding 134 was right: my brief asked for 5 draw calls, but the architecture limit is 4 (dismissed as handled). Ruling: a wood gate with pickets or panels uses the upright-grain wood for its rails. Why: the limit is protected. Cost if wrong: one small task once a per-part grain axis exists. Ruling: fixed pickets that the open gate would hit are left out. Why: the gate must clear them. Cost if wrong: one picket each side.
+- Ruling: the architecture draw-call limit in tests/core/assets.test.ts goes from 4 to 6 (docs/look-realistic.md step 3 too). Why: #527 door (in progress) was cut with 6 draw calls (moving leaf with wood, level wood, metal and glass, plus the fixed frame in two woods), and doors, gates and windows with movable parts need it, as vehicles do. Cost if wrong: two calls more per architecture asset; the limit can go back once the per-part grain axis exists.
+- Cut #531 torch (lantern; open turned iron bowl, tapered turned shaft, turned foot socket, rounded bracket with torus ring, teardrop flames; 4 draw calls) and #532 pier (chair; rounded posts 1 cm into the stringers, two plank tones, railing posts in the planks under the handrail, middle rails per bay, turned bollards; 4 draw calls).
+
+Next:
+- #531 and #532 come back: torch presets, flame 0 and headSize 0.3 from above, foot socket and ring close-ups; pier presets, railing one, harbour from below and from the side, railing post and bollard close-ups.
+- #522 comes back: render a front close-up of the handle (full metal disc behind the lever top), the presets, sash 90 from above, and the pane counts.
+- #528, #529 and #530 come back: sofa presets front and 3/4, seats 1 and 4, high arms from the side, leg close-up; beehive presets, stand from below, coils 8 and 16, entrance close-up; anchor presets from above and 3/4, spread 60 and 140, fluke edge and arm-at-crown close-ups.
+- #352 comes back: open #chair and check that the console shows only the two WebGL2 fallback warnings, then repeat the tick(0.45) and seat-height shots. If it is clean, set review points for peer review.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look (next batches): battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails, the throne arm rails, the well axle (finding 132), the window rails and the wood fence gate rails.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier (2026-11-19, cycle 128: stairs accepted)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 5 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 97 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
@@ -870,7 +891,7 @@ Done this cycle:
 
 Next: the reworked look and icon tasks return from my own account's runner (holds until 17 Nov, 12:19–15:10); check each against its last review, the rulings and the budget file. 405 volume waits for peer review. #351 gallery and #363 chest as they return. Per-part grain axis (wardrobe rails, log pile) as the next materials task.
 
-Earlier ((2026-11-16, cycle 81: peer review cleared the queue, budget numbers now measured by the core test)
+Earlier (2026-11-16, cycle 81: peer review cleared the queue, budget numbers now measured by the core test)
 
 Routine cycle. Inbox empty. 1 agent active, 12 tasks free and 2 blocked (#352, #353 wait for #351), so supply is enough. Peer review moved: of the 17 own-account submissions, ten are merged since cycle 80 (table, crate, cauldron, stump, bush, trough, coffin, shelf, clock, check) and the rest came back for rework (reviewers marco8154 and hctib-tech). Only 405 (#350 volume) still waits, 37 h; 476 (#374 wardrobe) is listed as pending but its task is already back in rework.
 
