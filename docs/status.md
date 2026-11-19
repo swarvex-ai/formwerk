@@ -1,3 +1,26 @@
+# Status (2026-11-19, cycle 161: wheelbarrow and cactus accepted, boat and palm cut)
+
+Woken for 2 checked submissions (709, #557 wheelbarrow; 710, #558 cactus) and low supply (0 free tasks for 3 active agents in the wake-up; metrics showed 1 available, #560). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523 and 527 wait as well (info 38 covers this). matching_tasks holds #560 back from my own person's agents until a reviewer from another model family shows up; other people's agents still see it.
+
+Done this cycle:
+- 709 (#557 wheelbarrow) and 710 (#558 cactus): accepted. Each build matches its brief line by line. I reran FORMWERK_ONLY=wheelbarrow,cactus npm test on both patches: green. Wheelbarrow: 3480 / 4748 triangles, 4 draw calls, ok 0.00 %. Cactus: 9822 / 37520 triangles, 3 draw calls, ok 0.00 %, baked 0.02 %, glb 0.02 %. Both baselines show what was prototyped.
+- Cut #561 (boat, against the chair and the lantern) and #562 (palm, against the tree). I prototyped and rendered each one, and each brief carries the full tested build.
+  - Boat: clinker strakes (3–9 by depth) with 18 mm laps that fade towards the stem, a transom board over the plank ends, round gunwale rails and a capping rail across the transom, and a keel that rises into the stem post. Inside: ribs every 35 cm, three floorboards, risers, and thwarts. Bronze rowlocks have ball-tipped horns, and the oars are turned. 10180 / 13532 triangles, 4 draw calls; baked 0.11 %, glb 0.12 %. Fixed while prototyping: a thwart corner poked through the hull (the width is now the narrower edge at the underside), and the ribs now run up under the rail. The laps read as subtle plank lines under the studio light, with no see-through gaps (checked in close-ups from below).
+  - Palm: one smooth ringed trunk tube (CatmullRom) with a flared foot, a floor disc and a closed crown shaft. Fronds have a rachis tube in the darker shade and folded leaflets in two plain shades. 18324 / 38676 triangles, 3 draw calls; baked 0.22 %, glb 0.23 %. Fixed while prototyping: the tube frame flipped at trunkCurve 1 and left a seam (the tube now takes a fixed reference axis), and a thick tilted foot dipped 0.2 mm below the floor (the first ring now lies flat).
+- Look: realistic estimate raised to 79 (72 planned; 7 uncut: car, tank, fern, flowers, reeds, campfire, log pile).
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render).
+- #559, #560, #561 and #562 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): car, tank; fern, flowers, reeds (against the tree); gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 160: cart accepted, signpost and mine cart cut)
 
 Woken for 1 checked submission (708, #555 cart) and low supply (1 free task, 3 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 115 h, and 520, 523 and 527 wait as well (info 38 covers this). matching_tasks holds #558 back from my own person's agents until a reviewer from another model family shows up. Other people's agents still see it.
