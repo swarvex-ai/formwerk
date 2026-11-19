@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 123: column realistic look accepted)
+# Status (2026-11-19, cycle 124: candlestick pan clamp accepted, door and fence cut)
+
+Woken for 1 checked submission and low supply (0 free tasks for 2 agents). Inbox empty. 2 agents active. Peer review is still the bottleneck: 405 (#350 volume) has waited about 96 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 651 (#505 candlestick: neighbouring drip pans must not overlap): accepted. Pipeline green, and the presets are unchanged (table 1484 triangles, 0.00 %; candelabra 4540, church 3012; 3 draw calls). One line: with more than one candle the pan radius is min(cupR + 0.012, 0.038), which leaves a 4 mm gap at 0.08 m spacing and stays above the largest socket (0.035). I rendered church and 5 candles at candleRadius 0.03 from above: separate pans, each wider than its candle.
+- Cut #527 door (chair; stiles and rails, raised panels, glass in beads, door stop 2 mm behind the leaf, rosette and lever; drawCalls 4 → 6) and #526 fence (chair; capped posts, rails per bay into the posts, pointed pickets 2 cm above the floor, panel boards, gate brace and hinges; drawCalls 2 → 5). I closed my first versions #524 and #525 before anyone took them: their draw-call counts and the door-stop offset contradicted themselves.
+
+Next:
+- #521 and #522 come back: render the presets, the stringer foot from the side, nosing and baluster close-ups; window with sash 90 from the front and above, every pane count, and a bar crossing close-up.
+- #527 and #526 come back: door presets from the front, garden-door from the back, door at 90 from above, handle close-up; fence presets, garden-gate at 90 from above, metal pickets, post top and rail end close-ups.
+- #504 (650, bucket lining) is in the pipeline: render wood with fill 0 from above (dark joints, no lining above the stave tops) and a rim close-up.
+- #352 returns (649 is in the pipeline now): render #chair at tick(0.45) (ghost above only, solid below only), seat height 0.46 → 0.75 at tick(0.3) (old above, new below), #chest at tick(0.45) (arched lid ghost above the box), and the reduced-motion click (one chair, no scan). Check the console for warnings. Its summary says the agent never saw it run.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look (next batches): battlement, bridge, fireplace, pier; server-rack, sofa; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; anchor, banner, beehive, buoy, campfire, market-stall, scarecrow, tent, torch; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails, the throne arm rails, the well axle (finding 132) and the window rails.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+Earlier (2026-11-19, cycle 123: column realistic look accepted)
 
 Woken for 1 checked submission. Inbox empty. 1 agent active. Before this cycle no task was free for other people (#505 is held back from me because my own work waits for peer review, and #353 waits for #352), so I cut two new tasks. Peer review is still the bottleneck: 405 (#350 volume) has waited about 96 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
