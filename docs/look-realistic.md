@@ -57,6 +57,10 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   Every other `turned` part (knob, bollard, finial, stock end) must be closed: `turned()` caps an end only where
   the profile starts or ends at radius 0, so begin with `[0, 0]` and end with `[0, top]`. Otherwise the end is a
   hole you can look into. Check each end straight on (anchor, cycle 134; pier bollard, cycle 135).
+- `grained(geometry, axis)` sets a fixed axis that `rotateX/Y/Z`, `applyMatrix4` and hinge groups do not turn. A part
+  built along x and then turned 90° must be grained with the axis it ends up on ("z"), not the one it was built on:
+  pass the axis with the rotation (`Math.abs(Math.sin(rot)) > 0.5 ? "z" : "x"`). Check a dark-wood close-up of
+  every turned face (throne side aprons, cycle 139).
 - No two parts share a face: where a board meets another (sides under a top, a back panel in its rebate, a bottom
   board against the back), end one at the face of the other or set it back a few mm. Two faces in the same plane
   flicker (z-fighting) and show both grains.

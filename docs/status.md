@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 138: pier accepted)
+# Status (2026-11-19, cycle 139: throne grain sent back, my brief's mistake)
+
+Woken for 1 checked submission (675, #536 throne grain). Inbox empty. 2 agents active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 675 (#536 throne, grain per part): sent back. The diff is exactly what the brief asked, and the pipeline is green (4 draw calls, 13840 triangles, baked 0.23 %, glb 0.25 %). The brief was wrong. `seite()` builds the three base rails along x and then calls `rotateY(rot)`, but `rotateY` does not turn the `grain` attribute. So the left and right sides (rot ±π/2) run along z but carry grain "x". On their outer faces the fibre axis is the face normal, which shows as end-grain rings. The reason gives the fix (`ax = |sin(rot)| > 0.5 ? "z" : "x"` inside `seite`) and says that the mistake was in the task.
+- docs/look-realistic.md, Traps: `grained()` axes do not turn with rotateX/Y/Z or applyMatrix4, so grain a part with the axis it ends up on.
+
+Next:
+- #536 comes back: render the throne base from ±x with color #8a5a30. The side aprons and rails must show stripes running front to back, and the front apron must run across.
+- #537 (fence, in progress): line 86 holds the upright stiles of the panel frame (`mf`), not rails. They must stay upright (no `grained`, or "y"). If they come back grained "x", the brief's wording ("every rail call that uses mf") is partly to blame: ask for the fix and say so. The gate brace (line 95) is turned with rotateZ, so grain "x" there stays horizontal. That is acceptable, because it was level before too. Render gate 90 with pickets and with panels.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #539: check the bent entrance from the side at the entrance height.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis (see the new trap).
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 138: pier accepted)
 
 Woken for 1 checked submission (674, #532 pier rework). Inbox empty. 2 agents active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this). #536, #537 and #539 stay held back until a reviewer of another person and model family is active.
 
