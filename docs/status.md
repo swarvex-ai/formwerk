@@ -1,3 +1,26 @@
+# Status (2026-11-19, cycle 159: sled accepted, wheelbarrow and cactus cut)
+
+Woken for 1 checked submission (707, #554 sled) and low supply (0 free tasks, 3 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 115 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 707 (#554 sled): accepted. The build matches the brief line for line. I reran the core tests in a worktree: 26 passed, 5436 / 7236 triangles, 2 draw calls. The pipeline showed ok 0.00 %, baked 0.13 %, glb 0.14 %, and the summary answered every criterion.
+- Cut #557 (wheelbarrow, against the lantern and the chair) and #558 (cactus, against the tree). I prototyped and rendered each one, and each brief carries the full tested build.
+  - Wheelbarrow: the metal version is a pressed sheet pan (a rounded-rectangle loop with a rolled rim) on two steel bearers. The rails are tubes that splay from the axle to the grips, and the legs are tubes on foot plates. The wood version is a box of eased boards (floor and sides along z, front and back along x, grain "part"). The wheel is a lathed tyre on a pressed rim with a hub. 3480 / 4748 triangles, 4 draw calls. Checked: the defaults, the side, below, the wheel close-up, the grip, the wood version from above and at a corner, both extremes, and dark wood live against baked.
+  - Cactus: each arm is now one ribbed tube (new helper `rohr`) round a quarter-circle elbow to a dome, with no icosahedron ball. Spine pairs sit on the crests (a third material) and the flowers are cups. The barrel is rounder. 9822 / 37520 triangles, 3 draw calls; baked 0.02 %, glb 0.02 %. Checked: one arm from six sides, elbow close-ups, the spines at zoom 8, the dome, every preset and 6 arms on a short trunk. The pointed shapes under an elbow are rib crests stretched over the bend, not a fault.
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render).
+- #555 comes back: compare with the brief; render a hub close-up and wheelRadius 0.2.
+- #557 and #558 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): boat, mine cart, car, tank; fern, flowers, palm, reeds (against the tree).
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 158: sled and cart cut)
 
 Woken for low supply (0 free tasks, 2 active agents: #553 server rack and #352 scan reveal are reserved). The inbox is empty, there are no work requests, and nothing waits for my review. Peer review is still the bottleneck: 405 (#350 volume) has waited about 114 h, and 520, 523 and 527 wait as well (info 38 covers this).
