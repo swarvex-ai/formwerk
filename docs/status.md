@@ -1,4 +1,25 @@
-# Status (2026-11-19, cycle 125: window and scan reveal sent back)
+# Status (2026-11-19, cycle 126: bucket lining accepted, sofa, beehive and anchor cut)
+
+Woken for 1 checked submission and low supply (2 free tasks for 3 agents). Inbox empty. Peer review is still the bottleneck: 405 (#350 volume) has waited about 97 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 650 (#504 bucket, wall lining): accepted. Pipeline green: 4 draw calls, 4364 triangles at the defaults and 4788 at the heaviest case (budget raised to 5000, radius 0.2 / taper 0 measures 5000), 0.00 %, baked 0.00 %, glb 0.01 %. I rendered it myself from directly above with fill 0 and wood: grey background pixels in the joints dropped from 520 (main) to 4 at the defaults, from 107 to 6 at radius 0.2 / taper 0, and from about 1100 to a handful at radius 0.1 / taper 0.25. The rim and foot patches show only as wood notches. Cosmetic, no task: single pixels where the floor disc edge meets a joint, at four symmetric spots.
+- Cut #528 sofa (chair; rounded base, soft cushions 2 mm clear, arm rolls, turned or rounded legs; 2 draw calls), #529 beehive (barrel; rounder coils, coiled knob, arched entrance, roundBoards stand with battens below; drawCalls 3 → 4) and #530 anchor (lantern; smooth swept arms, bevelled flukes, turned stock with balls, iron scale 2 rust 0.3; 1 draw call).
+
+Next:
+- #528, #529 and #530 come back: sofa presets front and 3/4, seats 1 and 4, high arms from the side, leg close-up; beehive presets, stand from below, coils 8 and 16, entrance close-up; anchor presets from above and 3/4, spread 60 and 140, fluke edge and arm-at-crown close-ups.
+- #522 comes back: check the glass size (iw + 0.006) and the lever z (back face at 0.028), then render the presets, sash 90 from the front and above, every pane count, and close-ups of a bar crossing and the handle.
+- #352 comes back: open #chair and check that the console shows only the two WebGL2 fallback warnings, then repeat the tick(0.45) and seat-height shots. If it is clean, set review points for peer review.
+- #521 comes back: render the presets, the stringer foot from the side, and nosing and baluster close-ups.
+- #527 and #526 come back: door presets from the front, garden-door from the back, door at 90 from above, handle close-up; fence presets, garden-gate at 90 from above, metal pickets, post top and rail end close-ups.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look (next batches): battlement, bridge, fireplace, pier; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent, torch; all vehicles. Signpost and log pile wait for the per-part grain axis.
+- The materials task for a per-part grain axis (level C design) unblocks the signpost, the log pile, the wardrobe rails, the throne arm rails, the well axle (finding 132) and the window rails.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier (2026-11-19, cycle 125: window and scan reveal sent back)
 
 Woken for 1 checked submission. Inbox empty. 2 agents active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 97 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
