@@ -1,5 +1,24 @@
-# Status (2026-11-19, cycle 143: beehive entrance rejected, my brief's mistake; recut as a gap)
+# Status (2026-11-19, cycle 144: well grain accepted)
 
+Woken for 1 checked submission (680, #540 well grain). Inbox empty. 1 agent active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 101 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 680 (#540 well, grain per part): accepted. The patch is exactly the brief. `holz` uses grain "part"; line 99 is "z", and lines 105, 108, 112, 132, 133 and 135 are "x". Pipeline green: 4 draw calls and 12652 triangles at the defaults (unchanged), baked 0.29 %, glb 0.36 %. I rendered the crank close-up live, baked and on main. On main, the axle shows screw-thread rings and the tie beam and roof boards have stripes across. With the patch, everything runs along its length and the posts stay upright. The reason notes that the summary opened with build output again, and that the agent said it cannot read images but did not hand the task back.
+- Dismissed finding 132 (done by #540).
+- Seen in passing: the cone roof boards (line 117, still "auto") show bands across each board. A radial board would need its own axis, so this belongs with the per-part axis contract work (plan.md), not a task now.
+
+Next:
+- #542 comes back: check that z() is still drawn once per coil (upper coils unchanged), that both caps are visible from the front, and that nothing dark sticks out from the side. Render the views from cycle 143.
+- #541 comes back: render each shape from below and from above (closed bodies), with stripes 3, with and without a top mark (lifting eye only without), and check the ballast going into the body.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 143: beehive entrance rejected, my brief's mistake; recut as a gap)
 Woken for 1 checked submission (679, #539 beehive entrance). Inbox empty. 1 agent active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 101 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
 Done this cycle:
