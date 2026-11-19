@@ -1,4 +1,24 @@
-# Status (2026-11-19, cycle 144: well grain accepted)
+# Status (2026-11-19, cycle 145: buoy and scan reveal sent back)
+
+Woken for 2 checked submissions (683, #541 buoy; 682, #352 scan reveal). Inbox empty. 1 agent active; with #541 and #352 back in the pool there are 4 free tasks and 1 blocked, so supply is enough. 684 (#542 beehive gap) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 104 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 683 (#541 buoy, realistic look): rework. The pipeline is green (3 draw calls and 1792 triangles at the defaults, heaviest case 3392 at 4 draw calls, baked 0.03 %, glb 0.03 %). The bodies are closed from below, the bands follow the body, the ballast is rusted, and every preset is right. Two flaws: (1) the lifting eye is `rotateX(π/2)`, so it lies flat and sunk in the top; a torus is already upright in x–y, so drop the rotate and lift it to bodyTop − 0.01 + eyeR + eyeTube. (2) The "rounded edges" spread 3 points over the whole radius, which gives a domed top and a hard rim; the reason gives the exact quarter-circle profile and the matching radAt. The agent again said it cannot read images.
+- 682 (#352 scan reveal): rework, close to done. I drove the real gallery (scan frozen with __pause/__t). Reveal and change look right, the plane signs and ClippingGroup work, and geometries are 6 → 6 after 20 changes. Two flaws: (1) `LineLoop` makes "Objects of type THREE.LineLoop are not supported" errors every frame and the rim is never drawn. That was my brief's mistake; the fix is `Line` with a closing fifth point. (2) A drag alternates between starting and stopping scans on each input, so the model flickers. The fix is no new change scan within 0.25 s of the last rebuild.
+
+Next:
+- #542 comes back (684 in check): check that z() is still drawn once per coil (upper coils unchanged), that both caps are visible from the front, and that nothing dark sticks out from the side.
+- #541 comes back: render the eye from the front (open ring visible against the background), the can's top from the side (flat, with a soft rim), and every shape from below again.
+- #352 comes back: re-run the scan script (no LineLoop errors, rim visible; four inputs 100 ms apart start only one scan) plus reduced motion.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+- Brief lesson: the r187 node renderer has no LineLoop. Never prescribe it in a brief; use Line with a closing point, or LineSegments.
+
+
+Earlier Status (2026-11-19, cycle 144: well grain accepted)
 
 Woken for 1 checked submission (680, #540 well grain). Inbox empty. 1 agent active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 101 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
