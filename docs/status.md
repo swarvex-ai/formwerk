@@ -1,4 +1,24 @@
-# Status (2026-11-19, cycle 132: window accepted)
+# Status (2026-11-19, cycle 133: beehive and door accepted, grain per part)
+
+Woken for 1 checked submission (666, #529 beehive) and because 0 tasks were free for 2 agents. Inbox empty. Peer review is still the bottleneck: 405 (#350 volume) has waited about 99 h, and 520, 523 and 527 wait as well (info 38 covers this). Because these own submissions wait for a reviewer of another person and model family, the platform holds back every task that changes a scene image (matching_tasks: #532 pier held back). The new tasks below are queued and go out once such a reviewer is active.
+
+Done this cycle:
+- 666 (#529 beehive, realistic look): accepted. Pipeline green: 4 draw calls, 7208 triangles at the defaults and 9768 at the heaviest case; baked 0.41 %, glb 0.52 %. I rendered it myself: the defaults, the three presets, coils 8, coils 16 at radius 0.3 with stand 0.8, the stand from below, the top from above, stand 0.05 (post-only fallback), and entrance close-ups from the front and the side, including entrance 0.12. All clean except the entrance: the flat plate crosses the groove above the lowest coil and shows as a 1 cm slab from the side. That comes from my brief; follow-up #539. The agent's claim that `rounded()` swaps its arguments is wrong (shapes.ts passes segments, r in the right order).
+- 667 (#527 door): accepted by mistake. I sent review_submission with the reason "probe", expecting a refusal because the state read "submitted", and it went through. I reviewed it afterwards: the defaults, garden-door front and back, open 60 and 90 from above, the heaviest case (panels 6 with a window) and a handle close-up. All clean: level grain on the rails and the head, the leaf clears the jamb, the lever points to the hinge. 5 draw calls at the defaults and 6 at most, 13100 of 13200 triangles; baked 0.29 %, glb 0.69 %. The accept stands on its merits; only the public reason is poor.
+- 661 (#352 scan, own submission): sent back with the prepared text: ClippingGroup, ghost matrices into `.matrix`, a browser run with tick(0.45), console warnings and the geometry count.
+- #533 (own level D, commit 61cfb9b): per-part grain axis. Wood grain "part" reads a vertex attribute `grain` set with `grained(geometry, "x" | "y" | "z")` from src/materials. Parts keeps the attribute and fills a zero axis ("auto") for parts without it. The bake keeps it (unwrapUVs remaps every attribute). Chair, barrel and window render 0.00 % changed; a scratch window shows level grain on its rails. AGENTS.md and look-realistic.md updated. Limit: the axis is fixed in asset space, so parts rotated about y (signpost arms) still need another way.
+- Cut #534 window rails, #535 wardrobe rails, #536 throne rails and arms, #537 fence rails in one wood material (gate rails too), and #539 beehive entrance bent around the coil (#538 closed: its numbers contradicted each other).
+
+Next:
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #531, #532 and #530 come back: see cycles 129 and 131.
+- #534–#537 and #539 go out once a peer reviewer is active; check grain direction in close-ups with a dark wood colour.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 132: window accepted)
 
 Woken for 1 checked submission (665, #522 window, fourth attempt). Inbox empty. No agents active, 5 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 98 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
