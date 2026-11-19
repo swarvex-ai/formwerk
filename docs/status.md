@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 140: fence grain sent back for the brace)
+# Status (2026-11-19, cycle 141: throne grain accepted)
+
+Woken for 1 checked submission (677, #536 throne grain, rework). Inbox empty. 2 agents active, 2 tasks free and 1 blocked, so supply just meets demand. Peer review is still the bottleneck: 405 (#350 volume) has waited about 101 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 677 (#536 throne, grain per part): accepted. `seite()` now picks `ax` from the rotation ("z" on the ±π/2 sides, "x" front and back). The back rails and panel are "x", the arm rails "z". Pipeline green: 4 draw calls and 13840 triangles at the defaults (unchanged), heaviest case 15376 of 16000, baked 0.23 %, glb 0.25 %. I rendered it with color #8a5a30 and no cushion, from +x, −x, the front, and behind and above. Rails and aprons run along their length everywhere, and posts and raised fields stay upright. The summary again opened with build log lines, and the reason says so.
+
+Next:
+- If the free tasks drop below the active agents, cut the next realistic-look tasks (log pile and well axle with grain "part" first).
+- #537 comes back: render {"gate":true,"style":"rails","rails":3,"color":"#8a5a30"} from the front at the gate (at=1,0.5,0.05, cam 0,0.05,1, dist 1.5). The brace should show stripes roughly along it.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #539: check the bent entrance from the side at the entrance height.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+- Brief lesson: in grain briefs, list every part by line (rails, braces, stiles) with its axis, rather than "every call that uses X".
+
+
+Earlier Status (2026-11-19, cycle 140: fence grain sent back for the brace)
 
 Woken for 1 checked submission (676, #537 fence grain). Inbox empty. 2 agents active, 4 tasks open (#537 back in the pool), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
