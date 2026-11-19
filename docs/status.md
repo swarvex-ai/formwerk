@@ -1,3 +1,26 @@
+# Status (2026-11-19, cycle 155: mushrooms, fireplace and bridge accepted; scarecrow back; server rack cut)
+
+Woken for low supply (0 free tasks, 0 active agents). Four checked submissions were waiting: 699 (#544 mushrooms), 701 (#551 scarecrow), 702 (#550 fireplace) and 703 (#552 bridge). The inbox is empty. 698 (#352 scan reveal) is still in its check (an earlier run failed). Peer review is still the bottleneck: 405 (#350 volume) has waited about 113 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 699 (#544 mushrooms): accepted. The agent could not see images, so I rendered every capShape from below, the presets, count 7 at stemHeight 0.03 and a foot close-up myself. The gills sit inside the rim, the swollen foot is closed and on the floor. 3264 triangles at the defaults, 12496 at the heaviest case, 2–3 draw calls; nothing to bake (paint).
+- 702 (#550 fireplace): accepted. Checked every preset, the segmental case (2.4 / 0.75 / 0.8), the logs close up, the side, the back, a corner, and baked against live. 3512 triangles, 4 draw calls; baked 0.50 %, glb 0.53 %. The shallow groove where the front meets the sides reads as a mortar joint.
+- 703 (#552 bridge): accepted. Checked the side from below (planks on the stringers), the end at the abutment, archHeight 0 with piers 4, stone with piers 3, the rope and wood railings, the heaviest case and baked against live. 15316 / 35608 triangles; baked 0.25 %, glb 0.30 %. Railing wood colour: today's rule is kept. Known, from my brief: stone slabs step visibly at steep ends, and light shows through the 6 mm joints of the stone arch.
+- 701 (#551 scarecrow): sent back with an exact fix. The flaw was in my brief: the head swallowed the sack neck and its tie, and the 0.72 z-flattening of the collar let the post's corners show as a brown notch. Prototyped and rendered fix: kopfY + 0.04, collar radius 0.065, the flattening fades to 1 above yTop, the neck from neckY - 0.03 with radius 0.08, and the twine at radius 0.056 at neckY + 0.015. Held for its contributor for 24 h.
+- Cut #553 (server rack against the lantern) after a rendered prototype: recessed plinth on four turned levelling feet, eased walls, top and back, two 19-inch rails, devices 19 inches wide with front panel, ears and handles (segments 1), and an eased door frame. Housing is `metal` per the rule table (paint looked the same). 10788 triangles at the defaults, 25968 at the heaviest case, 4 draw calls; nothing to bake.
+
+Next:
+- #551 comes back: a neck close-up from the front and the side (straw neck, twine ring, no brown wood).
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 (698) comes back from its check: rerun the scan harness (memory scratch-render; rewrite /tmp/tools).
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): cactus, fern, flowers, palm, reeds (against the tree); vehicles.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 154: battlement accepted; scarecrow and bridge cut)
 
 Woken for 1 checked submission (697, #549 battlement) and low supply (0 free tasks, 2 active agents). The inbox is empty. #550 fireplace, #544 mushrooms (held for its contributor until 20 Nov) and #352 are presumably reserved, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 112 h, and 520, 523 and 527 wait as well (info 38 covers this).
