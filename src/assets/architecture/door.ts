@@ -1,6 +1,7 @@
-import { CylinderGeometry } from "three";
+import { CurvePath, LineCurve3, QuadraticBezierCurve3, SphereGeometry, TubeGeometry, Vector3 } from "three";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const door = defineAsset({
   id: "door", category: "architecture",
@@ -27,30 +28,76 @@ export const door = defineAsset({
   },
   rig: { door: { label: { de: "Tür", en: "Door" }, type: "rotate", axis: [0, -1, 0], min: 0, max: 100 } },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 2000, drawCalls: 4 },
+  budget: { triangles: 13200, drawCalls: 6 },
   build(p) {
-    const holz = material("wood", p.color), metall = material("metal", "#b8b2a6"), glas = material("plastic", "#a9c6d6"), t = new Parts();
+    const holz = material("wood", p.color), quer = material("wood", p.color, 1, undefined, { grain: "level" });
+    const metall = material("metal", "#b8b2a6"), glas = material("plastic", "#a9c6d6"), t = new Parts();
     const W = p.width, H = p.height, d = 0.045, z = p.frame ? 0.04 : 0;
     if (p.frame) {
-      for (const sx of [-1, 1]) t.box(holz, 0.08, H + 0.08, 0.13, sx * (W / 2 + 0.045), (H + 0.08) / 2, z);
-      t.box(holz, W + 0.17, 0.08, 0.13, 0, H + 0.04, z);
+      // Jambs and the head between them; the hinge-side jamb is narrower, so the leaf clears it when open
+      const innen = W / 2 + 0.026, aussen = W / 2 + 0.085;
+      t.add(holz, rounded(aussen - innen, H + 0.08, 0.13, 0.005, -(aussen + innen) / 2, (H + 0.08) / 2, z));
+      t.add(holz, rounded(0.08, H + 0.08, 0.13, 0.005, W / 2 + 0.045, (H + 0.08) / 2, z));
+      t.add(quer, rounded(innen + W / 2 + 0.005, 0.08, 0.13, 0.005, (W / 2 + 0.005 - innen) / 2, H + 0.04, z));
+      // Door stop behind the closed leaf, its front face 2 mm behind the leaf's back face
+      const zs = z - d / 2 - 0.0095;
+      t.add(holz, rounded(0.03, H - 0.03, 0.015, 0.002, -innen + 0.015, (H - 0.03) / 2, zs));
+      t.add(holz, rounded(0.03, H - 0.03, 0.015, 0.002, W / 2 - 0.01, (H - 0.03) / 2, zs));
+      t.add(holz, rounded(innen + W / 2 + 0.005, 0.03, 0.015, 0.002, (W / 2 + 0.005 - innen) / 2, H - 0.015, zs));
     }
-    // The leaf swings on its left edge
+    // The leaf swings on its left edge: stiles and rails, with panels and glass set into them
     const blatt = t.moving("door", -W / 2, 0, z);
-    blatt.box(holz, W - 0.01, H - 0.01, d, 0, H / 2, z);
-    const spalten = p.panels >= 4 ? 2 : 1, reihen = Math.ceil(p.panels / spalten), fensterAb = H * 0.62;
-    const rand = 0.09, oben = p.window ? fensterAb - 0.06 : H - rand, unten = 0.12;
-    const bw = (W - 2 * rand - (spalten - 1) * rand) / spalten, bh = reihen ? (oben - unten - (reihen - 1) * rand) / reihen : 0;
-    // Raised panels on both faces
-    for (let i = 0; i < spalten; i++) for (let j = 0; j < reihen; j++) for (const s of [-1, 1]) {
-      blatt.box(holz, bw, bh, 0.02, -W / 2 + rand + bw / 2 + i * (bw + rand), unten + bh / 2 + j * (bh + rand), z + s * (d / 2 + 0.01));
+    const x0 = -W / 2 + 0.005, x1 = W / 2 - 0.005, y0 = 0.005, y1 = H - 0.005, sb = 0.1, rh = 0.1, fensterAb = H * 0.62;
+    const brett = (m: typeof holz, a0: number, a1: number, b0: number, b1: number) => blatt.add(m, rounded(a1 - a0, b1 - b0, d, 0.003, (a0 + a1) / 2, (b0 + b1) / 2, z));
+    if (!p.panels && !p.window) brett(holz, x0, x1, y0, y1);
+    else {
+      for (const [a0, a1] of [[x0, x0 + sb], [x1 - sb, x1]]) brett(holz, a0, a1, y0, y1);
+      brett(quer, x0 + sb, x1 - sb, y1 - rh, y1);
+      const spalten = p.panels >= 4 ? 2 : 1, reihen = Math.ceil(p.panels / spalten);
+      const oben = p.window ? fensterAb - (p.panels ? rh : 0) : y1 - rh;
+      // Flush below the window
+      if (!p.panels) brett(holz, x0 + sb, x1 - sb, y0, oben);
+      else {
+        brett(quer, x0 + sb, x1 - sb, y0, y0 + 0.2);
+        if (p.window) brett(quer, x0 + sb, x1 - sb, oben, fensterAb);
+        const bw = (x1 - x0 - 2 * sb - (spalten - 1) * rh) / spalten, bh = (oben - y0 - 0.2 - (reihen - 1) * rh) / reihen;
+        for (let j = 0; j < reihen; j++) {
+          const b0 = y0 + 0.2 + j * (bh + rh);
+          if (j) brett(quer, x0 + sb, x1 - sb, b0 - rh, b0);
+          for (let i = 0; i < spalten; i++) {
+            const a0 = x0 + sb + i * (bw + rh);
+            if (i) brett(holz, a0 - rh, a0, b0, b0 + bh);
+            // Raised panel: 8 mm into the frame around it, the field 5 mm proud on both faces
+            blatt.add(holz, rounded(bw + 0.016, bh + 0.016, 0.02, 0.003, a0 + bw / 2, b0 + bh / 2, z));
+            blatt.add(holz, rounded(bw - 0.08, bh - 0.08, 0.03, 0.003, a0 + bw / 2, b0 + bh / 2, z));
+          }
+        }
+      }
+      if (p.window) {
+        // Glass 8 mm into the frame, held by glazing beads on both faces
+        const a0 = x0 + sb, a1 = x1 - sb, b0 = fensterAb, b1 = y1 - rh, k = 0.012;
+        blatt.box(glas, a1 - a0 + 0.016, b1 - b0 + 0.016, 0.006, (a0 + a1) / 2, (b0 + b1) / 2, z);
+        for (const s of [-1, 1]) {
+          const zl = z + s * (0.0025 + k / 2);
+          for (const b of [b0 - 0.0005 + k / 2, b1 + 0.0005 - k / 2]) blatt.add(quer, rounded(a1 - a0 + 0.001, k, k, 0.002, (a0 + a1) / 2, b, zl));
+          for (const a of [a0 - 0.0005 + k / 2, a1 + 0.0005 - k / 2]) blatt.add(quer, rounded(k, b1 - b0 - 2 * k + 0.002, k, 0.002, a, (b0 + b1) / 2, zl));
+        }
+      }
     }
-    if (p.window) blatt.box(glas, W - 2 * rand, H - rand - fensterAb, d + 0.006, 0, (fensterAb + H - rand) / 2, z);
-    // A lever handle on both sides
+    // A lever on a rosette on both faces, its grip towards the hinge, and a keyhole escutcheon below
+    const hx = W / 2 - 0.055, hy = 1.02;
     for (const s of [-1, 1]) {
-      blatt.box(metall, 0.035, 0.16, 0.012, W / 2 - 0.08, 1.02, z + s * (d / 2 + 0.006));
-      blatt.add(metall, new CylinderGeometry(0.01, 0.01, 0.12, 8).rotateZ(Math.PI / 2).translate(W / 2 - 0.13, 1.06, z + s * (d / 2 + 0.05)));
-      blatt.box(metall, 0.02, 0.02, 0.045, W / 2 - 0.08, 1.06, z + s * (d / 2 + 0.028));
+      const zf = z + s * (d / 2 - 0.0005);
+      const scheibe = (r: number, h: number, y: number) => blatt.add(metall, turned([[0.001, 0], [r, 0], [r, h * 0.6], [r - 0.003, h], [0.001, h]], 16).rotateX((s * Math.PI) / 2).translate(hx, y, zf));
+      scheibe(0.025, 0.008, hy);
+      scheibe(0.018, 0.005, hy - 0.08);
+      // Neck out of the rosette, a 90° bend, the grip with a rounded end
+      const zr = zf + s * 0.008, bahn = new CurvePath<Vector3>();
+      bahn.add(new LineCurve3(new Vector3(hx, hy, zr - s * 0.003), new Vector3(hx, hy, zr + s * 0.04)));
+      bahn.add(new QuadraticBezierCurve3(new Vector3(hx, hy, zr + s * 0.04), new Vector3(hx, hy, zr + s * 0.06), new Vector3(hx - 0.02, hy, zr + s * 0.06)));
+      bahn.add(new LineCurve3(new Vector3(hx - 0.02, hy, zr + s * 0.06), new Vector3(hx - 0.115, hy, zr + s * 0.06)));
+      blatt.add(metall, new TubeGeometry(bahn, 32, 0.01, 12, false));
+      blatt.add(metall, new SphereGeometry(0.01, 12, 6).translate(hx - 0.115, hy, zr + s * 0.06));
     }
     return t.group();
   },
