@@ -1,8 +1,8 @@
-import { CircleGeometry, CylinderGeometry, LatheGeometry, RingGeometry, TorusGeometry, Vector2 } from "three";
+import { CircleGeometry, CylinderGeometry, LatheGeometry, RingGeometry, TorusGeometry, Vector2, Vector3 } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
-import { roundBoards, stave, turned } from "../shapes";
+import { grid, roundBoards, stave, turned } from "../shapes";
 
 export const bucket = defineAsset({
   id: "bucket", category: "props",
@@ -35,7 +35,7 @@ export const bucket = defineAsset({
   },
   rig: { handle: { label: { de: "Bügel", en: "Handle" }, type: "rotate", axis: [1, 0, 0], min: 0, max: 90 } },
   physics: { body: "dynamic", collider: "cylinder" },
-  budget: { triangles: 4500, drawCalls: 4 },
+  budget: { triangles: 5000, drawCalls: 4 },
   build(p, seed) {
     const z = rng(seed), h = p.height, wall = 0.01, floorT = 0.012;
     const rBottom = p.radius * (1 - p.taper);
@@ -59,6 +59,28 @@ export const bucket = defineAsset({
       for (let i = 0; i < n; i++) {
         const a0 = (2 * Math.PI * i) / n, a1 = (2 * Math.PI * (i + 1)) / n;
         t.add(holz, stave(r, h, a0 + halb, a1 - halb, dicke, 12, 3));
+      }
+      // A lining in the middle of the wall closes the joints from inside (an open vessel): two faces, out and in, from
+      // the floor boards to 3 mm below the rim, so it never shows above the stave tops
+      const y0 = floorT, y1 = h - 0.003;
+      const mitte = (u: number, v: number) => {
+        const y = y0 + v * (y1 - y0), rm = r(y) - dicke / 2;
+        return new Vector3(rm * Math.cos(2 * Math.PI * u), y, rm * Math.sin(2 * Math.PI * u));
+      };
+      const raus = (q: Vector3) => new Vector3(q.x, 0, q.z);
+      t.add(holz, grid(64, 1, mitte, raus));
+      t.add(holz, grid(64, 1, mitte, (q) => raus(q).negate()));
+      // The lining leaves two ways through a joint to the ground: past its top down the outer half (the taper) and
+      // past its foot down the inner half, beside the floor boards. A small closed patch in each joint, 2 mm below the
+      // rim and at the foot, 0.4 mm into both staves and 0.15 mm inside both faces, shuts both
+      const breit = halb + 0.0004 / p.radius;
+      for (let i = 0; i < n; i++) for (const yd of [h - 0.002, y0]) {
+        const a = (2 * Math.PI * i) / n;
+        const fleck = (u: number, v: number) => {
+          const rd = r(yd) - dicke + 0.00015 + v * (dicke - 0.0003), w = a + (2 * u - 1) * breit;
+          return new Vector3(rd * Math.cos(w), yd, rd * Math.sin(w));
+        };
+        for (const s of [1, -1]) t.add(holz, grid(1, 1, fleck, () => new Vector3(0, s, 0)));
       }
       // Floor disc: top at floorT, underside at y = 0, edge touches the staves' inner face (no light gap)
       const fr = r(floorT) - dicke;
