@@ -1,5 +1,5 @@
 import { BoxGeometry } from "three";
-import { material } from "../../materials";
+import { material, grained } from "../../materials";
 import { defineAsset, Parts } from "../define";
 import { rounded, turned } from "../shapes";
 
@@ -32,18 +32,18 @@ export const windowAsset = defineAsset({
   physics: { body: "static", collider: "box" },
   budget: { triangles: 5000, drawCalls: 4 },
   build(p) {
-    const holz = material("wood", p.color), glas = material("plastic", "#a9c6d6"), metall = material("metal", "#b8b2a6");
+    const holz = material("wood", p.color, 1, undefined, { grain: "part" }), glas = material("plastic", "#a9c6d6"), metall = material("metal", "#b8b2a6");
     const t = new Parts();
     const W = p.width, H = p.height, f = p.frame, d = 0.08, g = 0.005;
     const seg = 2;
     // Aussenrahmen: zwei Pfosten und zwei Riegel in der Wandöffnung, gerundete Kanten (3 mm)
     for (const s of [-1, 1]) t.add(holz, rounded(f, H, d, 0.003, s * (W / 2 - f / 2), H / 2, 0, seg));
-    t.add(holz, rounded(W - 2 * f, f, d, 0.003, 0, H - f / 2, 0, seg));
-    t.add(holz, rounded(W - 2 * f, f, d, 0.003, 0, f / 2, 0, seg));
+    t.add(holz, grained(rounded(W - 2 * f, f, d, 0.003, 0, H - f / 2, 0, seg), "x"));
+    t.add(holz, grained(rounded(W - 2 * f, f, d, 0.003, 0, f / 2, 0, seg), "x"));
     // Fensterbank: oben bei min(0,04 m, Rahmenstärke), damit der Flügel darüber schwingt; Rückseite 2 mm vor der Rahmenrückseite
     if (p.sillDepth > 0.001) {
       const sb = Math.min(0.04, f);
-      t.add(holz, rounded(W + 0.08, sb, p.sillDepth, 0.005, 0, sb / 2, (p.sillDepth - d) / 2 + 0.002, seg));
+      t.add(holz, grained(rounded(W + 0.08, sb, p.sillDepth, 0.005, 0, sb / 2, (p.sillDepth - d) / 2 + 0.002, seg), "x"));
     }
     // Der Flügel mit Sprossen und Glas schwingt an seiner linken Kante nach vorn
     const sx0 = -W / 2 + f + g, sx1 = W / 2 - f - g, sy0 = f + g, sy1 = H - f - g;
@@ -52,15 +52,15 @@ export const windowAsset = defineAsset({
     const sash = t.moving("sash", sx0, f, 0);
     sash.add(holz, rounded(sf, sh, sd, 0.003, sx0 + sf / 2, yc, 0, seg));
     sash.add(holz, rounded(sf, sh, sd, 0.003, sx1 - sf / 2, yc, 0, seg));
-    sash.add(holz, rounded(sw - 2 * sf, sf, sd, 0.003, xc, sy1 - sf / 2, 0, seg));
-    sash.add(holz, rounded(sw - 2 * sf, sf, sd, 0.003, xc, sy0 + sf / 2, 0, seg));
+    sash.add(holz, grained(rounded(sw - 2 * sf, sf, sd, 0.003, xc, sy1 - sf / 2, 0, seg), "x"));
+    sash.add(holz, grained(rounded(sw - 2 * sf, sf, sd, 0.003, xc, sy0 + sf / 2, 0, seg), "x"));
     // Sprossen teilen die lichte Fläche in panesAcross × panesDown Scheiben. Die senkrechten Sprossen sind 2 mm
     // tiefer als die waagerechten, sodass an den Kreuzungen keine Fläche auf Fläche trifft.
     const ix0 = sx0 + sf, ix1 = sx1 - sf, iy0 = sy0 + sf, iy1 = sy1 - sf;
     const iw = ix1 - ix0, ih = iy1 - iy0, bt = Math.min(sf * 0.5, 0.02);
     const stiefe = sd * 0.7, waagerecht = stiefe - 0.002;
     for (let i = 1; i < p.panesAcross; i++) sash.add(holz, rounded(bt, ih, stiefe, 0.002, ix0 + (i * iw) / p.panesAcross, yc, 0, seg));
-    for (let j = 1; j < p.panesDown; j++) sash.add(holz, rounded(iw, bt, waagerecht, 0.002, xc, iy0 + (j * ih) / p.panesDown, 0, seg));
+    for (let j = 1; j < p.panesDown; j++) sash.add(holz, grained(rounded(iw, bt, waagerecht, 0.002, xc, iy0 + (j * ih) / p.panesDown, 0, seg), "x"));
     // Glas liegt im Falz: die Rahmenteile und Sprossen reichen 3 mm über die Glasrand hinaus, das Glas ist also etwas
     // grösser als die lichte Fläche und sitzt tief im Flügel, ohne dass ein Spalt darum sichtbar wäre
     sash.add(glas, new BoxGeometry(iw + 0.006, ih + 0.006, 0.006).translate(xc, yc, -0.008));
