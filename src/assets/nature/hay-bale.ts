@@ -1,7 +1,8 @@
-import { BoxGeometry, CylinderGeometry, TorusGeometry, type BufferGeometry, type Material } from "three";
+import { LatheGeometry, TorusGeometry, Vector2, type BufferGeometry, type Material } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 export const hayBale = defineAsset({
   id: "hay-bale", category: "nature",
@@ -27,7 +28,7 @@ export const hayBale = defineAsset({
     stack: { label: { de: "Stapel", en: "Stack" }, values: { stack: 3 } },
   },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 2200, drawCalls: 2 },
+  budget: { triangles: 7380, drawCalls: 2 },
   build(p, seed) {
     const r = rng(seed), rund = p.shape === "round", L = p.length, S = p.size;
     // Drawn solid although a bale is loose hay: an effective density for its mass
@@ -42,12 +43,36 @@ export const hayBale = defineAsset({
       // Every bale lies a little crooked; long thin ones less, so stacked bales do not cross
       const dreh = rund ? 0 : (r() - 0.5) * (Math.PI / 45) * Math.min(1, S / L);
       const leg = (g: BufferGeometry, x: number, y: number, z: number, m: Material) => t.add(m, g.rotateY(dreh).translate(x, y0 + y, z0 + z));
-      leg(rund ? new CylinderGeometry(S / 2, S / 2, L, 24).rotateZ(Math.PI / 2) : new BoxGeometry(L, S, S), 0, S / 2, 0, heu);
+      if (rund) {
+        // Closed lathe profile: from the axis at one end out over a rounded edge, along the side and back to the axis
+        const kr = 0.1 * S, profil: [number, number][] = [[0, -L / 2]];
+        for (let k = 0; k < 4; k++) { const a = (k / 3 - 1) * (Math.PI / 2); profil.push([S / 2 - kr + kr * Math.cos(a), -L / 2 + kr + kr * Math.sin(a)]); }
+        for (let k = 3; k >= 0; k--) { const [rp, yp] = profil[k + 1]; profil.push([rp, -yp]); }
+        profil.push([0, L / 2]);
+        leg(turned(profil, 32).rotateZ(Math.PI / 2), 0, S / 2, 0, heu);
+        for (const x of xen) {
+          // The ring's tube centre on the lathe surface at this x (on the rounded edge it is smaller)
+          const y = -Math.abs(x), i = profil.findIndex(([, yp]) => yp >= y), [r0, ya] = profil[i - 1], [r1, yb] = profil[i];
+          const rr = yb > ya ? r0 + ((y - ya) / (yb - ya)) * (r1 - r0) : r1;
+          leg(new TorusGeometry(rr, d / 2, 6, 32).rotateY(Math.PI / 2), x, S / 2, 0, schnur);
+        }
+        continue;
+      }
+      const kr = 0.12 * S;
+      leg(rounded(L, S, S, kr, 0, 0, 0, 3), 0, S / 2, 0, heu);
       for (const x of xen) {
-        if (rund) leg(new TorusGeometry(S / 2, d / 2, 6, 24).rotateY(Math.PI / 2), x, S / 2, 0, schnur);
-        else {
-          for (const sz of [-1, 1]) leg(new BoxGeometry(b, S, d), x, S / 2, sz * (S / 2), schnur);
-          leg(new BoxGeometry(b, d, S + 2 * d), x, S, 0, schnur);
+        // The loop follows the slice of the rounded bale at this x: near the ends the corner spheres pull it in
+        const dx = Math.max(0, Math.abs(x) - (L / 2 - kr)), rk = Math.sqrt(Math.max(0, kr * kr - dx * dx));
+        const h = S / 2 - kr + rk, gerade = 2 * (S / 2 - kr);
+        // Four straight strips, their middle on the surface (half the thickness in the hay), bottom included
+        for (const s of [-1, 1]) {
+          leg(rounded(b, gerade, d, d / 2 - 1e-4, 0, 0, 0, 1), x, S / 2, s * h, schnur);
+          leg(rounded(b, d, gerade, d / 2 - 1e-4, 0, 0, 0, 1), x, S / 2 + s * h, 0, schnur);
+        }
+        // A quarter ring across each rounded edge closes the loop
+        if (rk > 1e-3) for (let k = 0; k < 4; k++) {
+          const ecke = new LatheGeometry([[rk - d / 2, -b / 2], [rk + d / 2, -b / 2], [rk + d / 2, b / 2], [rk - d / 2, b / 2], [rk - d / 2, -b / 2]].map(([u, v]) => new Vector2(u, v)), 6, 0, Math.PI / 2);
+          leg(ecke.rotateZ(Math.PI / 2).translate(0, S / 2 - kr, S / 2 - kr).rotateX((k * Math.PI) / 2), x, S / 2, 0, schnur);
         }
       }
     }
