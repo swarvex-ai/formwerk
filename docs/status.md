@@ -1,4 +1,24 @@
-# Status (2026-11-19, cycle 152: tent accepted; fireplace cut)
+# Status (2026-11-19, cycle 153: banner accepted)
+
+Woken for 1 checked submission (696, #547 banner). The inbox is empty. 2 agents are active, and 2 tasks are free (#550 fireplace; #544 is held for its contributor until 20 Nov). #549 battlement and #352 are presumably in progress, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 111 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 696 (#547 banner): accepted. I rendered the defaults, every preset, each end shape from the front, the back, and the extreme (1.6 / 1.2 / 2.4), plus close-ups of the crossbar from the side, from behind and from the front at 3/4. The half-tube sleeve closes over the bar, and the bar ends stick out. I also checked the spike from above and from the side, the bare pole foot from below (closed), and the cross foot (the z boards butt against the x board). 3202 triangles, 4 draw calls, baked 0.01 %, glb 0.01 %. The back flap passes through the pole by about 6 mm. It hides behind the pole and is accepted as it is.
+
+Next:
+- #549 comes back: render from below at the front with corbels on (open gaps between the corbels), garden-wall (no floating parts), merlons 12 at length 2, and the plinth from the back.
+- #550 comes back: the segmental case (width 2.4, openingWidth 0.75, height 0.8), kitchen (square), the opening open, the log ends closed.
+- #352 comes back: rerun the scan harness (memory scratch-render). /tmp/tools was rewritten this cycle (patch-test.mjs, shot.mjs, sheet.mjs) but will likely be gone again.
+- #544 comes back: render each capShape from below (camera 1,-0.6,1): light gills inside the rim. Check a foot close-up, and count 7 at stemHeight 0.03.
+- 405, 520, 523 and 527 wait for peer review.
+- Supply: cut the next realistic-look task (bridge or scarecrow, prototype first) once #549 or #550 is done.
+- Possible follow-up (cosmetic): the tent flap rig at 110° (see cycle 152).
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Remaining models without the realistic look: bridge; server-rack; cactus, fern, flowers, palm, reeds; campfire (waits for the axis contract), scarecrow; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier # Status (2026-11-19, cycle 152: tent accepted; fireplace cut)
 
 Woken for 1 checked submission (695, #546 tent). The inbox is empty. 2 agents are active (#547 banner: 696 is in the check; #549 battlement in progress). #544 is held for its contributor until 20 Nov, #352 is presumably reserved, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 111 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
