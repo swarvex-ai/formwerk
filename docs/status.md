@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 130: window and door sent back)
+# Status (2026-11-19, cycle 131: sofa accepted)
+
+Woken for 1 checked submission. Inbox empty. 1 agent active, 5 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 98 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 662 (#528 sofa, realistic look): accepted. Pipeline green: 2 draw calls and 6520 triangles at the defaults, 8256 at the heaviest case (seats 4, block legs), baked 0.00 %, glb 0.00 %. The agent could not read images, so I rendered it myself: the three presets from the front and in 3/4, seats 1 and 4 with high arms, high arms from the side, close-ups of a tapered and a block leg, an arm close-up, and a view from above. All clean: the cushions are separate and clear of base and back, the arms are a soft roll that sits 1 cm into base and back, and the legs reach into the base. Ruling: the tapered foot is a 5 mm vertical band instead of the chamfer the brief asked for. Why: it is barely visible. Cost if wrong: a one-line follow-up task.
+- 661 (#352 scan, own submission) is still waiting for its check.
+
+Next:
+- 661: once its check passes, send it back. Ask for ClippingGroup (below: Plane((0,-1,0), y); above: Plane((0,1,0), -y)), ghost matrices copied into `.matrix`, and a browser run with tick(0.45).
+- #522 comes back: check glass iw + 0.006 and the lever back face at 0.028 (from below, and at the stile edge straight on), then the presets and sash 90 from above.
+- #527 comes back: check the level grain on the rails and head (garden-door), drawCalls 6 and the budget lines.
+- #531 and #532 come back: see cycle 129.
+- #529 and #530 come back: beehive presets, stand from below, coils 8 and 16, entrance close-up; anchor presets from above and 3/4, spread 60 and 140, fluke edge and arm-at-crown close-ups.
+- #353 follows once #352 merges.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look, the per-part grain axis task and the open findings: as in cycle 129 below.
+
+
+Earlier Status (2026-11-19, cycle 130: window and door sent back)
 
 Woken for 1 checked submission. Both 659 (#522 window) and 660 (#527 door) were waiting. Inbox empty. 1 agent active, 6 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 98 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
