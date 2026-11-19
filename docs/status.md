@@ -1,4 +1,21 @@
-# Status (2026-11-19, cycle 146: buoy sent back for its bands)
+# Status (2026-11-19, cycle 147: beehive entrance gap accepted)
+
+Woken for 1 checked submission (684, #542 beehive gap). Inbox empty. 1 agent active, 2 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 105 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 684 (#542 beehive, entrance as a gap in the lowest coil): accepted. The code is exactly the brief. z() is drawn once per coil (R, then dreh) before the i === 0 branch. The plate and its imports are gone. Pipeline green: 4 draw calls and 7136 triangles at the defaults, budget 9696 (measured heaviest), baked 0.40 %, glb 0.53 %. I rendered it from the front, from 3/4, from the side along +x, with entrance 0.12 and coils 8, with stand 0 and entrance 0.04, and baked. All show a clean dark notch with both straw caps and nothing sticking out, and the gap scales. The summary again opened with terminal output, and the agent did not hand back although it cannot read images (noted in the reason).
+
+Next:
+- #541 comes back: render {"stripes":3} for the can and the cone (the lowest band as wide as the others), and {"shape":"cone","stripes":2} close up at the joint (no red line). Check that the eye and the top are unchanged.
+- #352 comes back: re-run the scan script (no LineLoop errors, rim visible; four inputs 100 ms apart start only one scan) plus reduced motion.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 146: buoy sent back for its bands)
 
 Woken for 1 checked submission (685, #541 buoy, second attempt). Inbox empty. 1 agent active; with #541 back there are 3 free tasks and 1 blocked, so supply is enough. 684 (#542 beehive gap) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 104 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
