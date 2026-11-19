@@ -1,7 +1,8 @@
-import { BoxGeometry, ConeGeometry, CylinderGeometry, Mesh, Quaternion, SphereGeometry, Vector3, type Material } from "three";
+import { ConeGeometry, Mesh, Quaternion, SphereGeometry, TorusGeometry, Vector3, type Material } from "three";
 import { rng } from "../../core/rng";
-import { material } from "../../materials";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { rounded, turned } from "../shapes";
 
 const rad = (deg: number) => (deg * Math.PI) / 180;
 
@@ -12,14 +13,6 @@ function stroehalm(t: Parts, m: Material, base: Vector3, dir: Vector3, len: numb
   g.applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), dir.clone().normalize()));
   g.translate(base.x, base.y, base.z);
   t.add(m, g);
-}
-
-// A square bar from A to B (wood core or cloth sleeve), tilted by the angle of the line so both share the droop.
-function stange(t: Parts, m: Material, A: Vector3, B: Vector3, thick: number): void {
-  const len = B.clone().sub(A).length();
-  const mittel = A.clone().add(B).multiplyScalar(0.5);
-  const winkel = Math.atan2(B.y - A.y, B.x - A.x);
-  t.add(m, new BoxGeometry(len, thick, thick).rotateZ(winkel).translate(mittel.x, mittel.y, mittel.z));
 }
 
 export const scarecrow = defineAsset({
@@ -50,30 +43,47 @@ export const scarecrow = defineAsset({
     spooky: { label: { de: "Gruselig", en: "Spooky" }, values: { hat: "pointed", coat: "long", droop: 25, lean: 8, clothColour: "#3a3a40" } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 900, drawCalls: 3 },
+  budget: { triangles: 3244, drawCalls: 3 },
   build(p, seed) {
     const r = rng(seed);
-    const holz = material("wood", "#6b4a2e"), stoff = material("paint", p.clothColour), stroh = material("leaf", p.strawColour);
+    const holz = material("wood", "#6b4a2e", 1, undefined, { grain: "part" }), stoff = material("paint", p.clothColour), stroh = material("leaf", p.strawColour);
     const t = new Parts();
     const h = p.height, schulter = 0.8 * h, neckY = schulter + 0.1;
-    const kopfR = 0.145, flach = 0.85, kopfY = neckY + kopfR * 0.7;
+    const kopfR = 0.145, flach = 0.85, kopfY = neckY + kopfR * 0.7 + 0.04;
     const kopfX = (r() - 0.5) * 0.02, dreh = (r() - 0.5) * 0.5;
     const droop = rad(p.droop), half = p.span / 2;
 
-    // 1. post (square, foot on the floor) and the two crossbar arms out to the hands
-    t.post(holz, 0.04, neckY, 0, 0, 0, 10, true);
+    // 1. post (square with eased edges, foot on the floor, grain upright) and the two crossbar arms out to the hands
+    t.add(holz, rounded(0.08, neckY, 0.08, 0.008, 0, neckY / 2, 0));
     const mittig = new Vector3(0, schulter, 0);
     const hand = (s: number) => new Vector3(s * half, schulter - half * Math.tan(droop), 0);
 
     // 3. coat body around the post, from the shoulders to the waist (shirt) or near the floor (long)
     const oben = schulter + 0.05, unten = p.coat === "long" ? 0.35 : h * 0.5;
-    t.add(stoff, new CylinderGeometry(0.16, p.coat === "long" ? 0.26 : 0.20, oben - unten, 4).rotateY(Math.PI / 4).translate(0, (oben + unten) / 2, 0));
+    // turned, then soft folds that grow towards the hem; the body is flatter front to back, the collar round
+    const rU = p.coat === "long" ? 0.26 : 0.2, yTop = oben - 0.07;
+    const mantel = turned([[0, unten + 0.02], [rU - 0.012, unten], [rU, unten + 0.012], [0.17, oben - 0.07], [0.12, oben - 0.01], [0.065, oben + 0.03], [0, oben + 0.03]], 32);
+    const pos = mantel.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+      const w = Math.atan2(z, x), k = Math.min(1, Math.max(0, (yTop - y) / (yTop - unten)));
+      const f = 1 + 0.07 * k * Math.sin(7 * w + 1);
+      const fz = 0.72 + 0.28 * Math.min(1, Math.max(0, (y - yTop) / 0.1));
+      pos.setXYZ(i, x * f, y, z * f * fz);
+    }
+    mantel.computeVertexNormals();
+    t.add(stoff, mantel);
 
     for (const s of [-1, 1]) {
       const E = hand(s);
       // the crossbar (wood) out to the hand and the sleeve (cloth) over it, coaxial so the wood never pokes through the cloth
-      stange(t, holz, mittig, E, 0.05);
-      stange(t, stoff, mittig, mittig.clone().lerp(E, 0.82), 0.1);
+      const len = E.clone().sub(mittig).length(), mittel = mittig.clone().add(E).multiplyScalar(0.5);
+      const winkel = Math.atan2(E.y - mittig.y, E.x - mittig.x);
+      t.add(holz, grained(rounded(len, 0.05, 0.05, 0.006), "x").rotateZ(winkel).translate(mittel.x, mittel.y, mittel.z));
+      // turned sleeve along the bar: the cuff flares slightly at 0.82 of the arm, its end recessed 4 cm
+      const dir = E.clone().sub(mittig).normalize(), c = 0.82 * len - 0.1, ansatz = mittig.clone().addScaledVector(dir, 0.1);
+      t.add(stoff, turned([[0, 0], [0.058, 0], [0.052, c / 2], [0.064, c], [0.05, c], [0, c - 0.04]], 16)
+        .applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), dir)).translate(ansatz.x, ansatz.y, ansatz.z));
       // 3-5 straw tufts at the wrist, poking out of the cuff along the arm
       const cuff = mittig.clone().lerp(E, 0.82), richt = new Vector3(s * Math.cos(droop), -Math.sin(droop), 0);
       const anzahl = 3 + Math.floor(r() * 3);
@@ -84,7 +94,11 @@ export const scarecrow = defineAsset({
     }
 
     // 2. head: a slightly flattened sack on the post, a little turned and off-centre
-    t.add(stroh, new SphereGeometry(kopfR, 12, 8).rotateY(dreh).scale(1, flach, 1).translate(kopfX, kopfY, 0));
+    t.add(stroh, new SphereGeometry(kopfR, 24, 16).rotateY(dreh).scale(1, flach, 1).translate(kopfX, kopfY, 0));
+    // the gathered sack neck under the head, tied with twine
+    const yK = kopfY - kopfR * flach * 0.6;
+    t.add(stroh, turned([[0, neckY - 0.03], [0.08, neckY - 0.03], [0.055, neckY + 0.01], [0.05, yK], [0, yK]], 16, kopfX, 0, 0));
+    t.add(stroh, new TorusGeometry(0.056, 0.008, 6, 20).rotateX(Math.PI / 2).translate(kopfX, neckY + 0.015, 0));
     // straw tufts poking up around the neck
     const hals = 3 + Math.floor(r() * 3);
     for (let k = 0; k < hals; k++) {
@@ -95,11 +109,10 @@ export const scarecrow = defineAsset({
     // 4. hat on top of the head (in the straw colour)
     const hutY = kopfY + kopfR * flach * 0.55;
     if (p.hat === "straw") {
-      t.add(stroh, new CylinderGeometry(0.27, 0.27, 0.02, 16).translate(kopfX, hutY, 0));
-      t.add(stroh, new CylinderGeometry(0.11, 0.13, 0.1, 10).translate(kopfX, hutY + 0.05, 0));
+      // a drooping brim and a low crown in one closed profile
+      t.add(stroh, turned([[0, hutY], [0.24, hutY - 0.012], [0.27, hutY - 0.022], [0.272, hutY - 0.008], [0.13, hutY + 0.012], [0.12, hutY + 0.09], [0.1, hutY + 0.105], [0, hutY + 0.108]], 32, kopfX, 0, 0));
     } else if (p.hat === "pointed") {
-      t.add(stroh, new CylinderGeometry(0.2, 0.22, 0.02, 16).translate(kopfX, hutY, 0));
-      t.add(stroh, new ConeGeometry(0.16, 0.28, 12).translate(kopfX, hutY + 0.14, 0));
+      t.add(stroh, turned([[0, hutY], [0.2, hutY - 0.01], [0.222, hutY - 0.004], [0.2, hutY + 0.012], [0.15, hutY + 0.03], [0.06, hutY + 0.2], [0, hutY + 0.3]], 32, kopfX, 0, 0));
     }
 
     const g = t.group();
