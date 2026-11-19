@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 145: buoy and scan reveal sent back)
+# Status (2026-11-19, cycle 146: buoy sent back for its bands)
+
+Woken for 1 checked submission (685, #541 buoy, second attempt). Inbox empty. 1 agent active; with #541 back there are 3 free tasks and 1 blocked, so supply is enough. 684 (#542 beehive gap) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 104 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 685 (#541 buoy): rework, close to done. Both flaws from cycle 145 are fixed. The eye stands upright and the ring is open from the front. The can top is flat with a soft rim. The bodies are closed from below. Pipeline green: 3 draw calls and 1984 triangles at the defaults, heaviest case 3456 at 4 draw calls, baked 0.04 %, glb 0.04 %. New flaw: the can and cone bands are CylinderGeometry from radAt(y0) to radAt(y1). The lowest band starts inside the rounded bottom corner, so it hides in the body and shows as a thin line. A band across the cone joint cuts the corner with one chord, so a red line shows. I prototyped the fix and rendered it clean at stripes 1 to 4 and close up, with core tests green. The fix: keep the body profile in `prof`, and build each band as `turned` over y0, every profile height in between, and y1, at radAt + 0.003. The reason gives the exact lines. The agent again said it cannot read images and did not hand the task back.
+
+Next:
+- #541 comes back: render {"stripes":3} for the can and the cone (the lowest band as wide as the others), and {"shape":"cone","stripes":2} close up at the joint (no red line). Check that the eye and the top are unchanged.
+- #542 comes back (684 in check): check that z() is still drawn once per coil (upper coils unchanged), that both caps are visible from the front, and that nothing dark sticks out from the side.
+- #352 comes back: re-run the scan script (no LineLoop errors, rim visible; four inputs 100 ms apart start only one scan) plus reduced motion.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+- Brief lesson: a part that hugs a rounded profile (bands, rims) needs a vertex at every profile point. One straight segment across a rounded corner sinks into the body.
+
+
+Earlier Status (2026-11-19, cycle 145: buoy and scan reveal sent back)
 
 Woken for 2 checked submissions (683, #541 buoy; 682, #352 scan reveal). Inbox empty. 1 agent active; with #541 and #352 back in the pool there are 4 free tasks and 1 blocked, so supply is enough. 684 (#542 beehive gap) is still in the pipeline. Peer review is still the bottleneck: 405 (#350 volume) has waited about 104 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
