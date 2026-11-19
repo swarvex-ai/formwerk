@@ -1,6 +1,8 @@
-import { CylinderGeometry, SphereGeometry } from "three";
-import { material } from "../../materials";
+import { DodecahedronGeometry, ExtrudeGeometry, Shape, Vector2, Vector3 } from "three";
+import { rng } from "../../core/rng";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded, turned } from "../shapes";
 
 export const mineCart = defineAsset({
   id: "mine-cart", category: "vehicles",
@@ -38,62 +40,112 @@ export const mineCart = defineAsset({
     empty: { label: { de: "Leer", en: "Empty" }, values: { load: 0, rails: false } },
   },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 2500, drawCalls: 4 },
-  build(p) {
+  budget: { triangles: 30000, drawCalls: 4 },
+  build(p, seed) {
     const L = p.length, W = p.width, D = p.depth, r = p.wheelRadius, g = W * 0.7;
-    const wanne = material(p.body === "wood" ? "wood" : "metal", p.color);
-    const eisen = material("metal", p.metalColor);
-    const balken = material("wood", "#5e4630", 1, 450);
+    const holzig = p.body === "wood";
+    // Drawn solid but really boards or sheet: effective densities give a tub's mass
+    const wanne = holzig ? material("wood", p.color, 1, 500, { grain: "part" }) : material("metal", p.color, 1, 1200);
+    const eisen = material("iron", p.metalColor, 2, 3000, { rust: 0.25 });
+    const balken = material("wood", "#5e4630", 1, 500, { grain: "part" });
     const t = new Parts();
-    const base = p.rails ? 0.07 : 0;
+    // Without track the cart stands on its flanges, so the flange touches the floor
+    const base = p.rails ? 0.07 : 0.012;
     const yb = base + 2 * r + 0.03;
 
     if (p.rails) {
+      // Sleepers of eased timber, two flat-bottom rails (foot, web, head) on top
       const n = Math.ceil((L + 0.6) / 0.35);
       for (let i = 0; i < n; i++) {
-        t.box(balken, g + 0.3, 0.04, 0.12, 0, 0.02, -(L + 0.6) / 2 + 0.06 + (i * (L + 0.6 - 0.12)) / (n - 1));
+        t.add(balken, grained(rounded(g + 0.3, 0.04, 0.12, 0.006, 0, 0.02, -(L + 0.6) / 2 + 0.06 + (i * (L + 0.6 - 0.12)) / (n - 1)), "x"));
       }
+      const profil = new Shape([[-0.024, 0], [0.024, 0], [0.024, 0.004], [0.005, 0.008], [0.005, 0.018], [0.011, 0.02], [0.011, 0.03], [-0.011, 0.03], [-0.011, 0.02], [-0.005, 0.018], [-0.005, 0.008], [-0.024, 0.004]].map(([x, y]) => new Vector2(x, y)));
       for (const s of [-1, 1]) {
-        t.box(eisen, 0.03, 0.03, L + 0.6, (s * g) / 2, 0.055, 0);
+        t.add(eisen, new ExtrudeGeometry(profil, { depth: L + 0.6, bevelEnabled: false, curveSegments: 1 }).translate((s * g) / 2, 0.04, -(L + 0.6) / 2));
       }
     }
 
-    const az = Math.max(r + 0.02, L / 2 - r - 0.08);
+    // Flanged wheels: a dished web between hub and a coned tread, the flange on the inner side; a turned axle, and a
+    // bearing block where each beam rests on it
+    const rad: [number, number][] = [[0, -0.04], [0.035, -0.04], [0.04, -0.032], [0.04, -0.012], [r - 0.016, -0.012], [r - 0.014, -0.025], [r - 0.004, -0.025], [r, 0.018], [r + 0.012, 0.022], [r + 0.012, 0.03], [r - 0.006, 0.034], [r - 0.02, 0.012], [0.04, 0.012], [0.04, 0.03], [0, 0.03]];
+    const az = Math.max(r + 0.02, L / 2 - r - 0.08), xb = g / 2 - 0.08;
     for (const z of [-az, az]) {
-      t.add(eisen, new CylinderGeometry(0.02, 0.02, g + 0.06, 8).rotateZ(Math.PI / 2).translate(0, base + r, z));
+      t.add(eisen, turned([[0, 0], [0.022, 0], [0.022, g + 0.06], [0, g + 0.06]], 12).rotateZ(Math.PI / 2).translate(g / 2 + 0.03, base + r, z));
       for (const s of [-1, 1]) {
-        t.add(eisen, new CylinderGeometry(r, r, 0.05, 16).rotateZ(Math.PI / 2).translate((s * g) / 2, base + r, z));
-        if (p.rails) {
-          t.add(eisen, new CylinderGeometry(r + 0.012, r + 0.012, 0.012, 16).rotateZ(Math.PI / 2).translate(s * (g / 2 - 0.031), base + r, z));
+        const rad3 = turned(rad, 28).rotateZ(Math.PI / 2);
+        if (s < 0) rad3.rotateY(Math.PI);
+        t.add(eisen, rad3.translate((s * g) / 2, base + r, z));
+        t.add(eisen, rounded(0.07, 0.08, 0.1, 0.008, s * xb, base + r + 0.005, z, 1));
+      }
+    }
+    // Two beams on the bearing blocks carry the tub
+    const hb = yb - (base + r + 0.045);
+    for (const s of [-1, 1]) t.add(balken, grained(rounded(0.06, hb, L * 0.9, 0.006, s * xb, base + r + 0.045 + hb / 2, 0), "z"));
+
+    const d = 0.03;
+    if (holzig) {
+      // Boarded tub: floor boards and side boards along the cart, end boards across, 4 mm joints
+      const nb = Math.max(3, Math.round((W - 2 * d) / 0.12)), bb = (W - 2 * d) / nb;
+      for (let i = 0; i < nb; i++) t.add(wanne, grained(rounded(bb - 0.004, d, L - 2 * d, 0.004, -(W - 2 * d) / 2 + bb * (i + 0.5), yb + d / 2, 0), "z"));
+      const reihen = Math.max(2, Math.ceil(D / 0.13)), bh = D / reihen;
+      for (let k = 0; k < reihen; k++) {
+        const y = yb + bh * (k + 0.5);
+        for (const s of [-1, 1]) {
+          t.add(wanne, grained(rounded(d, bh - 0.004, L, 0.004, s * (W / 2 - d / 2), y, 0), "z"));
+          t.add(wanne, grained(rounded(W - 2 * d - 0.002, bh - 0.004, d, 0.004, 0, y, s * (L / 2 - d / 2)), "x"));
         }
       }
+    } else {
+      // Sheet steel tub: floor and walls as plates, a rolled bead round the top
+      t.add(wanne, rounded(W - 2 * d + 0.004, 0.012, L - 2 * d + 0.004, 0.003, 0, yb + 0.006, 0));
+      for (const s of [-1, 1]) {
+        t.add(wanne, rounded(0.012, D, L, 0.004, s * (W / 2 - 0.006), yb + D / 2, 0));
+        t.add(wanne, rounded(W - 0.024, D, 0.012, 0.004, 0, yb + D / 2, s * (L / 2 - 0.006)));
+      }
+      for (const s of [-1, 1]) {
+        t.add(wanne, turned([[0, 0], [0.012, 0], [0.012, L], [0, L]], 10).rotateX(Math.PI / 2).translate(s * (W / 2 - 0.006), yb + D, -L / 2));
+        t.add(wanne, turned([[0, 0], [0.012, 0], [0.012, W], [0, W]], 10).rotateZ(-Math.PI / 2).translate(-W / 2, yb + D, s * (L / 2 - 0.006)));
+      }
     }
-
-    for (const s of [-1, 1]) {
-      t.box(balken, 0.06, yb - base - r, L * 0.9, s * (g / 2 - 0.06), base + r + (yb - base - r) / 2, 0);
+    // Iron: straps round the tub at the bottom and below the rim, angle irons up each corner, rivets through them
+    const niet = (x: number, y: number, z: number, nx: number, nz: number) => {
+      const k = turned([[0, 0], [0.008, 0], [0.007, 0.003], [0, 0.005]], 8);
+      t.add(eisen, (nx ? k.rotateZ(-nx * Math.PI / 2) : k.rotateX(nz * Math.PI / 2)).translate(x, y, z));
+    };
+    for (const y of [yb + 0.035, yb + D - 0.04]) {
+      for (const s of [-1, 1]) {
+        t.add(eisen, rounded(0.006, 0.04, L + 0.012, 0.002, s * (W / 2 + 0.003), y, 0, 1));
+        t.add(eisen, rounded(W, 0.04, 0.006, 0.002, 0, y, s * (L / 2 + 0.003), 1));
+        for (const f of [-0.3, 0, 0.3]) niet(s * (W / 2 + 0.006), y, f * L, s, 0);
+        niet(0, y, s * (L / 2 + 0.006), 0, s);
+      }
     }
-
-    t.box(wanne, W, 0.03, L, 0, yb + 0.015, 0);
-    for (const s of [-1, 1]) {
-      t.box(wanne, 0.03, D, L, s * (W / 2 - 0.015), yb + D / 2, 0);
-      t.box(wanne, W - 0.06, D, 0.03, 0, yb + D / 2, s * (L / 2 - 0.015));
-    }
-    for (const s of [-1, 1]) {
-      for (const zs of [-1, 1]) {
-        t.box(eisen, 0.04, D + 0.01, 0.04, s * (W / 2 - 0.01), yb + (D + 0.01) / 2, zs * (L / 2 - 0.01));
+    for (const s of [-1, 1]) for (const zs of [-1, 1]) {
+      t.add(eisen, rounded(0.009, D + 0.01, 0.06, 0.002, s * (W / 2 + 0.0045), yb + (D + 0.01) / 2, zs * (L / 2 - 0.021), 1));
+      t.add(eisen, rounded(0.06, D + 0.01, 0.009, 0.002, s * (W / 2 - 0.021), yb + (D + 0.01) / 2, zs * (L / 2 + 0.0045), 1));
+      for (const y of [yb + 0.1, yb + D - 0.1]) {
+        niet(s * (W / 2 + 0.009), y, zs * (L / 2 - 0.025), s, 0);
+        niet(s * (W / 2 - 0.025), y, zs * (L / 2 + 0.009), 0, zs);
       }
     }
 
     if (p.load > 0.02) {
-      const erz = material("stone", p.loadColor);
-      const steig = (D - 0.03) * p.load * 0.8;
-      t.box(erz, W - 0.06, steig, L - 0.06, 0, yb + 0.03 + steig / 2, 0);
-      t.add(
-        erz,
-        new SphereGeometry(1, 12, 6, 0, Math.PI * 2, 0, Math.PI / 2)
-          .scale(W / 2 - 0.035, D * 0.3 * p.load + 0.02, L / 2 - 0.035)
-          .translate(0, yb + 0.03 + steig, 0),
-      );
+      // The load: a heaped surface of broken rock between the walls, with loose lumps lying on it
+      const erz = material("stone", p.loadColor), zr = rng(seed + 1);
+      const hw = W / 2 - d - 0.002, hl = L / 2 - d - 0.002, y0 = yb + d + (D - d) * p.load * 0.85, kuppe = D * 0.5 * p.load + 0.02;
+      const hoehe = (x: number, z: number) => {
+        const u = x / hw, v = z / hl;
+        return y0 + kuppe * (1 - u * u) * (1 - v * v) + 0.012 * Math.sin(x * 37 + 1.3) * Math.sin(z * 29 + 0.7) + 0.008 * Math.sin(x * 71 + z * 53);
+      };
+      t.add(erz, grid(14, 18, (u, v) => { const x = (u * 2 - 1) * hw, z = (v * 2 - 1) * hl; return new Vector3(x, hoehe(x, z), z); }, () => new Vector3(0, 1, 0)));
+      const brocken = Math.round(8 + 14 * p.load);
+      for (let i = 0; i < brocken; i++) {
+        const x = (zr() * 2 - 1) * hw * 0.85, z = (zr() * 2 - 1) * hl * 0.85, s = 0.04 + 0.05 * zr();
+        const st = new DodecahedronGeometry(s, 0).toNonIndexed();
+        st.scale(1, 0.6 + 0.4 * zr(), 0.7 + 0.5 * zr()).rotateY(zr() * Math.PI).rotateX((zr() - 0.5) * 0.8);
+        st.computeVertexNormals();
+        t.add(erz, st.translate(x, hoehe(x, z) + s * 0.25, z));
+      }
     }
 
     return t.group();
