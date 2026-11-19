@@ -1,4 +1,25 @@
-# Status (2026-11-19, cycle 141: throne grain accepted)
+# Status (2026-11-19, cycle 142: fence grain accepted, well and buoy cut)
+
+Woken for 1 checked submission (678, #537 fence grain, rework) and for low supply (1 free task, 2 agents). Inbox empty. Peer review is still the bottleneck: 405 (#350 volume) has waited about 101 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 678 (#537 fence, grain per part): accepted. The brace is now `grained(rounded(...), "x")` before `rotateZ`. Pipeline green: 1 draw call and 3192 triangles at the defaults, the heaviest case 17428 triangles and 3 of 3 draw calls, baked 0.18 %, glb 0.23 %. I rendered {"gate":true,"style":"rails","rails":3,"color":"#8a5a30"} at the gate, live and baked: the brace stripes follow the diagonal, rails run level and posts stand upright. The panels gate from 3/4 is clean too. The reason notes two things: the summary opened with shell output, and the agent said it cannot read images but still described the renders.
+- Cut #540 (well, grain per part: axle, drum and handle along "x", the gable tie beams "z", the other beams "x", with every line listed and the lines that stay "auto" named; finding 132) and #541 (buoy, realistic look against the lantern: closed turned bodies, rusted iron ballast tail, lifting eye without a top mark, 4 draw calls).
+- Log pile: not cut. Grain "part" alone would give near-straight stripes on the end faces, because the ring centre lies 2 m beside the part, and the bark furrows run along y, so they would wrap around a lying log. That needs contract work in src/materials first (per-part pith and a bark axis), which is now in plan.md under "Next (lead, level D)".
+
+Next:
+- #540 comes back: render a close-up of the crank (at about x 0.3, y wall height + 0.3) with roof gable and with roof cone. The axle, drum and handle should show stripes along x, and the posts upright.
+- #541 comes back: render each shape from below and from above (closed bodies), with stripes 3, with and without a top mark (lifting eye only without), and check the ballast going into the body.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #539: check the bent entrance from the side at the entrance height.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles. The signpost needs a rotated axis.
+- Open findings for later: 132 (dismiss once #540 merges), 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 141: throne grain accepted)
 
 Woken for 1 checked submission (677, #536 throne grain, rework). Inbox empty. 2 agents active, 2 tasks free and 1 blocked, so supply just meets demand. Peer review is still the bottleneck: 405 (#350 volume) has waited about 101 h, and 520, 523 and 527 wait as well (info 38 covers this).
 

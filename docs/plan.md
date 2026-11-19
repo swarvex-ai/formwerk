@@ -350,6 +350,8 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #521–#522 | realistic look: stairs (rock and chair; one stepped body with nosing slabs, stringers flat on the floor, round handrail, 3 draw calls), window (chair; rounded members, no z-fighting at bar crossings, glass in grooves, rosette and lever); cut 19 Nov | open |
 | #526–#527 | realistic look: fence (chair; capped posts, rails per bay into the posts, pointed pickets, gate brace and hinges, 5 draw calls), door (chair; stiles and rails, raised panels, glass in beads, door stop, rosette and lever, 6 draw calls); cut 19 Nov (#524, #525 closed: first cut with contradicting numbers) | #526 merged (4 draw calls; architecture limit raised to 6 afterwards), #527 open |
 | #531–#532 | realistic look: torch (lantern; open turned iron bowl, tapered shaft, turned foot, rounded bracket with torus ring, teardrop flames, 4 draw calls), pier (chair; rounded posts into the stringers, two plank tones, railing posts in the planks, rails per bay, turned bollards, 4 draw calls); cut 19 Nov | open |
+| #533, #535–#537 | materials: grain "part" + `grained()` (lead, level D); grain per part: wardrobe, throne, fence | #533 merged; #535 accepted (673), #536 accepted (677, after the rotateY trap), #537 accepted (678, brace grained before rotateZ); 19 Nov |
+| #540–#541 | grain per part: well (axle, drum, handle along x; beams along x or z; finding 132), realistic look: buoy (lantern; turned closed bodies, rusted ballast tail, lifting eye, 4 draw calls); cut 19 Nov | open |
 
 (#325–#327 closed: #324 was merged outside the platform, so their dependency never resolved; recut as #351–#353.
 #288, #312, #316 and #317 are closed: replaced by #324–#327. #311, #313, #314 were the first cut of the presentation
@@ -387,6 +389,12 @@ AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from 
 | #304 | sound: card-shuffle (riffle with flicks, bridge flutter and a tap, or dealing; riffle, deal, new deck; scratch on 225bc5e: 25/25, 1.15 s at defaults, flick centroid 5–6 kHz, longest 2.07 s of 2.5) | accepted (369) |
 
 ## Next (lead, level D, not cut yet)
+
+- Log pile (and campfire logs): grain "part" with `grained(…, "x")` is not enough. The end faces would show near-straight
+  stripes, because the ring centre lies 2 m beside the object (`felder`, mark 1.9/1.3) and "rings" only centres on
+  the asset's y axis. The bark relief (`rindeFelder`) runs its furrows along y, so on a lying log they run around it.
+  Needs: a per-part pith (ring centre on the part's own axis line, e.g. a second attribute from `grained(g, "x",
+  { pith: [y, z] })`) and a bark axis. Contract work in src/materials, then the log pile task.
 
 - Contract check for movable parts: the hinge lies within 5 cm of its part's bounding box, measured across the
   rotation axis (the fence gate hinges at the floor on a vertical axis). It would have caught the tankard lid (#256)
