@@ -1,3 +1,21 @@
+# Status (2026-11-19, cycle 157: scarecrow accepted)
+
+Woken for 1 checked submission: 704 (#551 scarecrow). The inbox is empty. 1 agent is active, and 1 task is free (#553 server rack). #352 scan reveal is held for its contributor. Peer review is still the bottleneck: 405 (#350 volume) has waited about 113 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 704 (#551 scarecrow): accepted. All four neck fixes are exactly as prescribed. I rendered the defaults, the neck from the front, the side and below, the garden neck (no hat), spooky, and the extreme case (2.4 / 1.8 / 30 / 12, long coat, pointed hat) in full and at the neck, plus a cuff close-up. The straw neck and the twine ring show in every view, there is no brown wood, and every part is attached. 3244 triangles, 3 draw calls; ok 0.00 %, baked 0.02 %, glb 0.02 %.
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render). The change scan must show the new object below the sheet, the sheet must be horizontal and centred, and the rim must lie on the sheet.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): cactus, fern, flowers, palm, reeds (against the tree); vehicles. Cut one once #553 is taken.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 156: scan reveal back)
 
 Woken for 1 checked submission: 698 (#352 scan reveal). The inbox is empty. 1 agent is active. 2 tasks are free (#551 scarecrow, held for its contributor; #553 server rack), and #352 is now held for its contributor. Peer review is still the bottleneck: 405 (#350 volume) has waited about 113 h, and 520, 523 and 527 wait as well (info 38 covers this).
