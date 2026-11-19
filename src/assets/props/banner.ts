@@ -1,6 +1,7 @@
-import { ConeGeometry, DoubleSide, ExtrudeGeometry, Shape } from "three";
-import { material } from "../../materials";
+import { DoubleSide, Vector3 } from "three";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded, turned } from "../shapes";
 
 export const banner = defineAsset({
   id: "banner", category: "props",
@@ -31,40 +32,56 @@ export const banner = defineAsset({
     pennant: { label: { de: "Wimpel", en: "Pennant" }, values: { height: 3.4, width: 0.45, clothLength: 1.6, tail: "point", emblem: false, stand: false, color: "#2f6b3a" } },
   },
   physics: { body: "dynamic", collider: "box" },
-  budget: { triangles: 600, drawCalls: 4 },
+  budget: { triangles: 3202, drawCalls: 4 },
   build(p) {
-    const holz = material("wood", "#6b4a2e"), eisen = material("metal", "#40454b"), stoff = material("paint", p.color, 1, 40);
+    // One wood: the pole stands ("auto"), crossbar and foot boards are grained along their length
+    const holz = material("wood", "#6b4a2e", 1, undefined, { grain: "part" }), eisen = material("metal", "#40454b"), stoff = material("paint", p.color, 1, 40);
     stoff.side = DoubleSide;
     const t = new Parts();
     const h = p.height, w = p.width, r = 0.03, yQuer = h - 0.12, zStoff = r + 0.02;
     const l = Math.min(p.clothLength, yQuer - 0.4);
     const kerbe = Math.min(w * 0.4, l * 0.4);
-    t.post(holz, r, h, 0, 0, 0, 8);
-    t.add(eisen, new ConeGeometry(r * 1.6, 0.1, 6).translate(0, h + 0.05, 0));
-    t.box(holz, w + 0.1, 0.04, 0.04, 0, yQuer, zStoff);
-    // The cloth hangs in front of the pole on +z; its top edge sits just under the crossbar
-    const s = new Shape();
-    s.moveTo(-w / 2, 0);
-    s.lineTo(w / 2, 0);
-    if (p.tail === "point") { s.lineTo(w / 2, -l + kerbe); s.lineTo(0, -l); s.lineTo(-w / 2, -l + kerbe); }
-    else if (p.tail === "swallowtail") { s.lineTo(w / 2, -l); s.lineTo(0, -l + kerbe); s.lineTo(-w / 2, -l); }
-    else { s.lineTo(w / 2, -l); s.lineTo(-w / 2, -l); }
-    s.closePath();
-    t.add(stoff, new ExtrudeGeometry(s, { depth: 0.01, bevelEnabled: false }).translate(0, yQuer - 0.02, zStoff));
+    // Turned pole: closed foot with a small chamfer, a collar just under the spike, closed top
+    t.add(holz, turned([[0, 0], [r * 0.9, 0], [r, 0.008], [r, h - 0.05], [r * 1.25, h - 0.05], [r * 1.4, h - 0.045], [r * 1.4, h - 0.025],
+      [r * 1.25, h - 0.02], [r, h - 0.02], [r, h], [0, h]], 16));
+    // Iron spike: a ferrule ring round the pole top, a neck, then the point
+    t.add(eisen, turned([[0, h - 0.017], [r * 1.1, h - 0.017], [r * 1.15, h - 0.012], [r * 1.15, h + 0.01], [r * 0.8, h + 0.018], [r * 0.8, h + 0.026],
+      [r * 1.6, h + 0.034], [r * 0.9, h + 0.06], [r * 0.4, h + 0.08], [0, h + 0.1]], 16));
+    t.add(holz, grained(rounded(w + 0.1, 0.04, 0.04, 0.006, 0, yQuer, zStoff), "x"));
+    // The cloth hangs in front of the pole on +z; its outline starts under the crossbar (yTop). Just below the bar it
+    // bends forward into the sleeve's front, and from there it hangs in soft vertical folds.
+    const yTop = yQuer - 0.02, R = 0.02 + 0.006, zc = zStoff + 0.005, zVorn = zStoff + R;
+    const glatt = (k: number) => { const c = Math.min(1, Math.max(0, k)); return c * c * (3 - 2 * c); };
+    const zAt = (x: number, y: number) => zc + (zVorn - zc) * glatt((y - yTop + 0.04) / 0.06) + 0.012 * Math.sin((2 * Math.PI * x) / (w / 3)) * glatt((yTop - y) / 0.15);
+    const unten = (x: number) => {
+      const a = Math.abs(x) / (w / 2);
+      return yTop - l + (p.tail === "point" ? kerbe * a : p.tail === "swallowtail" ? kerbe * (1 - a) : 0);
+    };
+    // Rows: 6 through the bend, 4 through the fading folds, 2 down to the end
+    const zeile = (j: number, x: number) => (j <= 6 ? yQuer - (0.06 * j) / 6 : j <= 10 ? yTop - 0.04 - (0.12 * (j - 6)) / 4 : yTop - 0.16 + ((unten(x) - yTop + 0.16) * (j - 10)) / 2);
+    t.add(stoff, grid(36, 12, (u, v) => {
+      const x = -w / 2 + w * u, y = zeile(Math.round(v * 12), x);
+      return new Vector3(x, y, zAt(x, y));
+    }, () => new Vector3(0, 0, 1)));
+    // Sleeve: a half tube over the bar's front, top and back, and the back flap hanging down behind the bar
+    t.add(stoff, grid(1, 8, (u, v) => new Vector3(-w / 2 + w * u, yQuer + R * Math.sin(Math.PI * v), zStoff + R * Math.cos(Math.PI * v)),
+      (q) => new Vector3(0, q.y - yQuer, q.z - zStoff)));
+    t.add(stoff, grid(1, 1, (u, v) => new Vector3(-w / 2 + w * u, yQuer - 0.04 * v, zStoff - R), () => new Vector3(0, 0, -1)));
     if (p.emblem) {
       const d = Math.min(w * 0.3, (l - kerbe) * 0.35);
       const yR = yQuer - 0.02 - Math.min(l * 0.4, (l - kerbe) * 0.5);
-      const raute = new Shape();
-      raute.moveTo(0, d);
-      raute.lineTo(0.75 * d, 0);
-      raute.lineTo(0, -d);
-      raute.lineTo(-0.75 * d, 0);
-      raute.closePath();
-      t.add(material("paint", p.emblemColor), new ExtrudeGeometry(raute, { depth: 0.004, bevelEnabled: false }).translate(0, yR, zStoff + 0.01));
+      const wappen = material("paint", p.emblemColor);
+      wappen.side = DoubleSide;
+      // The lozenge as a patch 2 mm in front of the folds: from the left corner, u towards the bottom, v towards the top
+      t.add(wappen, grid(16, 16, (u, v) => {
+        const x = 0.75 * d * (u + v - 1), y = yR + d * (v - u);
+        return new Vector3(x, y, zAt(x, y) + 0.002);
+      }, () => new Vector3(0, 0, 1)));
     }
     if (p.stand) {
-      t.box(holz, 0.7, 0.06, 0.08, 0, 0.03, 0);
-      t.box(holz, 0.08, 0.06, 0.7, 0, 0.03, 0);
+      // Cross foot: the board along x runs through, the board along z butts against it from both sides
+      t.add(holz, grained(rounded(0.7, 0.06, 0.08, 0.006, 0, 0.03, 0), "x"));
+      for (const s of [-1, 1]) t.add(holz, grained(rounded(0.08, 0.06, 0.31, 0.006, 0, 0.03, s * 0.195), "z"));
     }
     return t.group();
   },
