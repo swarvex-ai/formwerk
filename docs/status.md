@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 148: scan reveal sent back, ghosts pile up)
+# Status (2026-11-19, cycle 149: hay bale and mushrooms cut)
+
+Woken for low supply (0 free tasks, 1 active agent on #541). Inbox empty. Nothing waited for my review: 687 (#352 scan reveal) is still in the check, and 688 (#530 anchor) was just submitted. Peer review is still the bottleneck: 405 (#350 volume) has waited about 109 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- Cut #543 (hay bale, realistic look against the barrel: a rounded square bale, a closed turned round bale with rounded edges, twine that lies on the surface all round, 2 draw calls) and #544 (mushrooms, against the tree: turned stems with a swollen foot, 32-segment caps, a gill skirt under each cap, 3 draw calls). Neither touches the grain-pith question, and the materials stay as they are.
+
+Next:
+- #543 comes back: render the square bale from +x (twine closed at the corners, half sunk in), stack 3 with twine 3, and the round bale from +x (closed, rounded edges).
+- #544 comes back: render each capShape from a low side view (gills inside the rim) and count 7 at capRadius 0.25 and stemHeight 0.03 (feet on the floor at the largest lean).
+- #352 comes back (687 in check): rerun the scan harness from cycle 148 (ghost positions, ghost count, geometries 8 → 8 after 20 changes).
+- #530 (688 submitted): render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #541 comes back: render {"stripes":3} for the can and the cone, and {"shape":"cone","stripes":2} close up at the joint.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 148: scan reveal sent back, ghosts pile up)
 
 Woken for 1 checked submission (686, #352 scan reveal, fourth attempt). Inbox empty. No agent active; 4 tasks open (with #352 back), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 107 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
