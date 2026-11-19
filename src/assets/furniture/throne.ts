@@ -1,5 +1,5 @@
 import type { BufferGeometry, Material } from "three";
-import { material } from "../../materials";
+import { grained, material } from "../../materials";
 import { defineAsset, Parts } from "../define";
 import { rounded, turned } from "../shapes";
 
@@ -39,7 +39,7 @@ export const throne = defineAsset({
   physics: { body: "static", collider: "box" },
   budget: { triangles: 16000, drawCalls: 4 },
   build(p) {
-    const holz = material("wood", p.color);
+    const holz = material("wood", p.color, 1, undefined, { grain: "part" });
     const kissen = material("paint", p.cushionColor);
     const gold = material("metal", p.trimColor);
     const stein = material("stone", "#8a857c", 1, 2400);
@@ -57,11 +57,12 @@ export const throne = defineAsset({
     // with a raised field, and the gilded band on the apron. Built for the front (outer face at z = o), then turned
     const hp = ys - st - za - (y0 + 0.08);
     const seite = (L: number, o: number, rot: number) => {
+      const ax = Math.abs(Math.sin(rot)) > 0.5 ? "z" : "x";
       const z = (d: number, dicke: number) => o - d - dicke / 2;
       const teile: [Material, BufferGeometry][] = [
-        [holz, rounded(L + 0.012, za, 0.025, 0.003, 0, ys - st + 0.002 - za / 2, z(0.004, 0.025), 2)],
-        [holz, rounded(L + 0.012, 0.08, 0.025, 0.003, 0, y0 + 0.04, z(0.004, 0.025), 2)],
-        [holz, rounded(L + 0.012, hp + 0.012, 0.016, 0.003, 0, y0 + 0.08 + hp / 2, z(0.009, 0.016), 2)],
+        [holz, grained(rounded(L + 0.012, za, 0.025, 0.003, 0, ys - st + 0.002 - za / 2, z(0.004, 0.025), 2), ax)],
+        [holz, grained(rounded(L + 0.012, 0.08, 0.025, 0.003, 0, y0 + 0.04, z(0.004, 0.025), 2), ax)],
+        [holz, grained(rounded(L + 0.012, hp + 0.012, 0.016, 0.003, 0, y0 + 0.08 + hp / 2, z(0.009, 0.016), 2), ax)],
         [holz, rounded(L - 0.08, hp - 0.08, 0.012, 0.004, 0, y0 + 0.08 + hp / 2, z(0.005, 0.012), 2)],
         [gold, rounded(L, 0.014, 0.006, 0.002, 0, ys - st + 0.002 - za / 2, z(-0.0005, 0.006), 2)],
       ];
@@ -76,9 +77,9 @@ export const throne = defineAsset({
     // Back frame: bottom rail on the seat, crest rail over the posts, a panel lapped 8 mm into posts and rails with a
     // raised field on both faces, and the gilded band on the front of the crest
     const Lp = W - 2 * pt + 0.016, hpan = H - hc - hb + 0.016, ypan = ys + hb - 0.008 + hpan / 2;
-    t.add(holz, rounded(W - 2 * pt + 0.012, hb, 0.04, 0.004, 0, ys + hb / 2, zp, 2));
-    t.add(holz, rounded(W + 0.02, hc, 0.06, 0.005, 0, ys + H - hc / 2, zp, 2));
-    t.add(holz, rounded(Lp, hpan, 0.018, 0.003, 0, ypan, zp, 2));
+    t.add(holz, grained(rounded(W - 2 * pt + 0.012, hb, 0.04, 0.004, 0, ys + hb / 2, zp, 2), "x"));
+    t.add(holz, grained(rounded(W + 0.02, hc, 0.06, 0.005, 0, ys + H - hc / 2, zp, 2), "x"));
+    t.add(holz, grained(rounded(Lp, hpan, 0.018, 0.003, 0, ypan, zp, 2), "x"));
     for (const s of [-1, 1]) t.add(holz, rounded(Lp - 0.12, hpan - 0.12, 0.014, 0.004, 0, ypan, zp + s * 0.009, 2));
     t.add(gold, rounded(W, 0.016, 0.006, 0.002, 0, ys + H - hc / 2, zp + 0.0315, 2));
     if (p.arms) for (const s of [-1, 1]) {
@@ -86,7 +87,7 @@ export const throne = defineAsset({
       const ha = 0.245, x = s * xp, zf = D / 2 - pt / 2, z0 = zp + pt / 2 - 0.005, z1 = D / 2 + 0.02;
       t.add(holz, turned([[0.0001, 0], [0.028, 0], [0.028, 0.03], [0.02, 0.045], [0.017, 0.11], [0.026, 0.13], [0.026, 0.145],
         [0.018, 0.16], [0.02, 0.22], [0.026, 0.23], [0.026, ha], [0.0001, ha]], 16, x, ys, zf));
-      t.add(holz, rounded(0.06, 0.04, z1 - z0, 0.005, x, ys + 0.26, (z0 + z1) / 2, 2));
+      t.add(holz, grained(rounded(0.06, 0.04, z1 - z0, 0.005, x, ys + 0.26, (z0 + z1) / 2, 2), "z"));
       t.add(gold, turned([[0.0001, -0.003], [0.016, -0.003], [0.022, 0.01], [0.024, 0.02], [0.016, 0.032], [0.0001, 0.036]], 16, x, ys + 0.28, zf));
     }
     if (p.cushion) {
