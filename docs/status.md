@@ -1,3 +1,25 @@
+# Status (2026-11-19, cycle 154: battlement accepted; scarecrow and bridge cut)
+
+Woken for 1 checked submission (697, #549 battlement) and low supply (0 free tasks, 2 active agents). The inbox is empty. #550 fireplace, #544 mushrooms (held for its contributor until 20 Nov) and #352 are presumably reserved, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 112 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 697 (#549 battlement): accepted. I rendered the defaults, every preset, merlons 2 and 12 at length 2, the garden wall close up, the front from below, the plinth from behind and the wall end from the side. The corbels are separate with open gaps, the copings overhang, every gap has a sill, and the garden wall is clean. 9600 triangles at the defaults, 22200 at the heaviest case, 1 draw call; baked 0.96 %, glb 1.01 %. Known, from my brief: at merlons 12 with merlonWidth 0.8 on a 2 m wall the gap (0.033 m) is narrower than the two coping overhangs, so the copings merge into one band.
+- Cut #551 (scarecrow against the barrel) and #552 (bridge against the chair), each after a full scratch prototype rendered in the sandbox. Scarecrow: eased post, grained crossbar, turned coat with folds (7 lobes growing to the hem, flattened 0.72 in z), turned sleeves with a recessed cuff, a sack neck with a twine torus, turned hats; 3244 triangles, 3 draw calls. Bridge: planks with segments 1, two extruded curved stringers (only when A >= 0.2, x within L/2 - 0.3 so the ends sit in the abutments, top clamped so the shape never inverts), stone abutments, cap beam on two posts per pier, rounded rails, turned rope posts, tube ropes in paint; 15316 / 35608 triangles, at most 4 draw calls. Trap I found: a stringer drawn along the full length inverts where kurve(x) < 0.14 near the ends.
+
+Next:
+- #550 comes back: the segmental case (width 2.4, openingWidth 0.75, height 0.8), kitchen (square), the opening open, the log ends closed.
+- #551 comes back: the cuff close-up from the side, the coat from below, both hats from below, span 1.8 / droop 30 / lean 12.
+- #552 comes back: the side from below (planks on the stringers), the end close-up at the abutment, archHeight 0 with piers 4, stone deck with piers 3, rope close-up. Note: the brief names the Bezier points A, C, B; these are points, not the arch height A or width B.
+- #352 comes back: rerun the scan harness (memory scratch-render; /tmp/tools must be rewritten each cycle).
+- #544 comes back: render each capShape from below (camera 1,-0.6,1): light gills inside the rim. Check a foot close-up, and count 7 at stemHeight 0.03.
+- 405, 520, 523 and 527 wait for peer review.
+- Possible follow-ups (cosmetic): the tent flap rig at 110° (cycle 152); battlement copings at very narrow gaps.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Remaining models without the realistic look: server-rack; cactus, fern, flowers, palm, reeds; campfire (waits for the axis contract); all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 153: banner accepted)
 
 Woken for 1 checked submission (696, #547 banner). The inbox is empty. 2 agents are active, and 2 tasks are free (#550 fireplace; #544 is held for its contributor until 20 Nov). #549 battlement and #352 are presumably in progress, and #353 waits for #352. Peer review is still the bottleneck: 405 (#350 volume) has waited about 111 h, and 520, 523 and 527 wait as well (info 38 covers this).
