@@ -1,4 +1,4 @@
-import { ExtrudeGeometry, Shape, SphereGeometry, TorusGeometry } from "three";
+import { CircleGeometry, CylinderGeometry, SphereGeometry, TorusGeometry } from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
@@ -31,7 +31,7 @@ export const beehive = defineAsset({
     "tall-skep": { label: { de: "Hoher Korb", en: "Tall skep" }, values: { height: 0.58, radius: 0.2, coils: 15 } },
   },
   physics: { body: "static", collider: "hull" },
-  budget: { triangles: 9768, drawCalls: 4 },
+  budget: { triangles: 9696, drawCalls: 4 },
   build(p, seed) {
     const z = rng(seed), n = p.coils, base = p.stand;
     const straw = material("wood", p.colour, 1, undefined, { grain: "level" });
@@ -40,31 +40,30 @@ export const beehive = defineAsset({
     const pfosten = material("wood", p.standColour);
     const c = p.height / (2 * n) * 1.2;
     const t = new Parts();
-    let R = 0, y = 0, R0 = 0;
+    let R = 0, y = 0;
     for (let i = 0; i < n; i++) {
       const f = (i + 0.5) / n;
       R = p.radius * Math.sqrt(1 - Math.pow(f, 2.2)) * (1 + (z() - 0.5) * 0.03);
-      if (i === 0) R0 = R;
+      const dreh = z() * Math.PI * 2;
       y = base + c + i * (p.height - 2 * c) / (n - 1);
-      t.add(straw, new TorusGeometry(R, c, 8, 32).rotateX(Math.PI / 2).rotateY(z() * Math.PI * 2).translate(0, y, 0));
+      if (i === 0) {
+        // Flugloch: eine Lücke im untersten Ring, vorn (+z), mit Strohdeckeln an den Enden
+        const g = 2 * Math.asin(Math.min(0.9, p.entrance / 2 / R)), u0 = Math.PI / 2 + g / 2;
+        t.add(straw, new TorusGeometry(R, c, 8, 32, Math.PI * 2 - g).rotateX(Math.PI / 2).rotateY(-u0).translate(0, y, 0));
+        for (const s of [-1, 1]) {
+          const u = Math.PI / 2 + s * g / 2;
+          t.add(straw, new CircleGeometry(c, 8).rotateY(s > 0 ? Math.PI : 0).rotateY(-u).translate(Math.cos(u) * R, y, Math.sin(u) * R));
+        }
+        // Dunkle Rückseite des Lochs, ein etwas offener gebogener Streifen hinter der Lücke
+        t.add(dunkel, new CylinderGeometry(R - c * 0.4, R - c * 0.4, 2 * c, 8, 1, true, -g / 2 - 0.05, g + 0.1).translate(0, y, 0));
+      } else {
+        t.add(straw, new TorusGeometry(R, c, 8, 32).rotateX(Math.PI / 2).rotateY(dreh).translate(0, y, 0));
+      }
     }
     // Gewölbe oben: zwei weitere Strohringe und eine Kugel, die die Mitte verschließt
     t.add(straw, new TorusGeometry(0.6 * R, c, 8, 32).rotateX(Math.PI / 2).translate(0, y + c, 0));
     t.add(straw, new TorusGeometry(0.25 * R, c, 8, 32).rotateX(Math.PI / 2).translate(0, y + 2 * c, 0));
     t.add(straw, new SphereGeometry(c, 12, 8).translate(0, y + 3 * c, 0));
-    // Flugloch: dunkle Platte mit geradem Boden und rundem Oberteil, ins unterste Ring gesetzt
-    const w = p.entrance, h = 0.035, fuge = h * 0.5;
-    const mitte = (h * h - fuge * fuge - (w / 2) * (w / 2)) / (2 * (h - fuge));
-    const rad = h - mitte;
-    const a1 = Math.atan2(fuge - mitte, w / 2), a0 = Math.atan2(fuge - mitte, -w / 2);
-    const form = new Shape();
-    form.moveTo(-w / 2, 0);
-    form.lineTo(w / 2, 0);
-    form.lineTo(w / 2, fuge);
-    form.absarc(0, mitte, rad, a1, a0, false);
-    form.lineTo(-w / 2, 0);
-    const vorn = R0 + c + 0.002;
-    t.add(dunkel, new ExtrudeGeometry(form, { depth: 0.01, bevelEnabled: false, curveSegments: 12 }).translate(0, base + c * 1.2, vorn - 0.01));
     if (p.stand > 0) {
       const durch = 2 * (p.radius + 0.04);
       const lang = durch - 0.02;
