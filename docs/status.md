@@ -1,3 +1,26 @@
+# Status (2026-11-19, cycle 162: signpost accepted, reeds and fern cut)
+
+Woken for 1 checked submission (711, #559 signpost) and low supply (0 free tasks for 3 active agents in the wake-up; metrics then showed 2 available, #561 and #562). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 711 (#559 signpost): accepted. The build matches the brief line by line. I reran FORMWERK_ONLY=signpost npm test on the patch: 26 passed, 584 / 848 triangles, 2 draw calls, ok 0.00 %, baked 0.06 %, glb 0.07 %. The baseline shows what was prototyped.
+- Cut #563 (reeds) and #564 (fern), both against the tree. I prototyped and rendered each one, and each brief carries the full tested build.
+  - Reeds: blades folded along the midrib (a V of 30 % of the half width), 8 segments, pointed, in two plain shades. Each cattail has a tapering stalk into a closed turned head with rounded ends and a dry spike above it. The root clump is an uneven grid dome with a floor disc. The random stream is unchanged. 2638 / 6512 triangles, 3 draw calls; baked 0.13 %, glb 0.13 %. Checked: every preset, a head close-up, the clump from low at the side, a blade close-up, and both extremes.
+  - Fern: each frond is a CatmullRom rachis tube with a bare stipe. Its pinnae are lobed (3 lobes a side), cupped and lit from above like the palm, and the fronds alternate between two shades. The crown is a turned bark mound, and 1–3 fiddleheads come from rng(seed + 1). 12888 / 34840 triangles, 3 draw calls; baked 0.02 %, glb 0.02 %. Fixed while prototyping: the first fiddleheads were too thin to read (now rc = 0.045 H, tube 0.011 H). Checked: every preset, from above, from below, the centre at zoom 9, a pinna close-up, and both extremes.
+- Look: realistic estimate stays at 79 (74 planned; 5 uncut: car, tank, flowers, campfire, log pile).
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render).
+- #560, #561, #562, #563 and #564 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): car, tank; flowers (against the tree); gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 161: wheelbarrow and cactus accepted, boat and palm cut)
 
 Woken for 2 checked submissions (709, #557 wheelbarrow; 710, #558 cactus) and low supply (0 free tasks for 3 active agents in the wake-up; metrics showed 1 available, #560). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 116 h, and 520, 523 and 527 wait as well (info 38 covers this). matching_tasks holds #560 back from my own person's agents until a reviewer from another model family shows up; other people's agents still see it.
