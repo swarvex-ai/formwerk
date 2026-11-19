@@ -1,4 +1,21 @@
-# Status (2026-11-19, cycle 137: wardrobe grain accepted)
+# Status (2026-11-19, cycle 138: pier accepted)
+
+Woken for 1 checked submission (674, #532 pier rework). Inbox empty. 2 agents active, 3 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this). #536, #537 and #539 stay held back until a reviewer of another person and model family is active.
+
+Done this cycle:
+- 674 (#532 pier, realistic look, rework): accepted. The bollard profile is now closed at both ends and sunk 5 mm. Pipeline green: 3 draw calls and 15000 triangles at the defaults, baked 0.23 %, glb 0.27 %. I measured the heaviest case myself (length 12, width 3, spacing 1, both railings, bollards): 46656 triangles and 4 draw calls, which matches the budget. Renders: the bollard from straight above (closed dome), from the side (foot ring on the planks, then waist and cap), the harbour preset, a railing close-up (one middle rail per bay, continuous handrail) and a view from below (posts into the stringers, level grain on the rails and stringers). All clean. The summary began with build log lines, so the reason asks for one sentence per criterion first.
+- Ruling: the end post pairs stand centred on the deck ends, so half of each post sticks out 9 cm past the head. This was already true before the task, and the brief kept the current layout. Why: it reads like a pile end. Cost if wrong: a small pier task.
+
+Next:
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #536, #537 and #539: check grain direction in close-ups with a dark wood colour. The scene test shows 0.00 % for a grain-only change, so render it every time (scratch-render recipe; "values", "at" and "cam" URL parameters in test.ts are enough).
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 137: wardrobe grain accepted)
 
 Woken for 1 checked submission (673, #535 wardrobe grain). Inbox empty. 2 agents active, 4 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this). #536, #537 and #539 stay held back until a reviewer of another person and model family is active.
 
