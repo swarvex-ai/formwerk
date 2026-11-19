@@ -54,6 +54,9 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   A `turned` vessel (mug, cup, jug, pot) must stay open: after the lip, the profile turns down into an inner wall
   and a floor (`[rTop - wand, h], [r(wand) - wand, wand], [0.001, wand]`). If the profile closes back to the axis at the top, the vessel is
   solid and hides its contents. Check a view from above (tankard, cycle 92).
+  Every other `turned` part (knob, bollard, finial, stock end) must be closed: `turned()` caps an end only where
+  the profile starts or ends at radius 0, so begin with `[0, 0]` and end with `[0, top]`. Otherwise the end is a
+  hole you can look into. Check each end straight on (anchor, cycle 134; pier bollard, cycle 135).
 - No two parts share a face: where a board meets another (sides under a top, a back panel in its rebate, a bottom
   board against the back), end one at the face of the other or set it back a few mm. Two faces in the same plane
   flicker (z-fighting) and show both grains.

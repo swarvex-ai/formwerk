@@ -1,4 +1,22 @@
-# Status (2026-11-19, cycle 134: torch accepted, anchor sent back)
+# Status (2026-11-19, cycle 135: pier sent back)
+
+Woken for 1 checked submission (671, #532 pier). Inbox empty. 2 agents active, 5 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 671 (#532 pier, realistic look): sent back. Pipeline green: 3 draw calls and 17304 triangles at the defaults. The heaviest case measures exactly 60000, which is what budget.triangles says (I measured it myself). I rendered the presets, railing "one", harbour from below and from the side, and a railing close-up. The posts in the stringers, the two plank tones, the railing posts and the middle rails per bay are all right. The bollards are not. The turned profile starts at r 0.05 and ends at r 0.1, so each bollard is an open tube (from above you see the deck through it). They also sink 5 cm instead of 5 mm, so the foot ring is buried and the bollard reads as a spool. The reason gives a closed profile with the foot ring, the waist and the cap, at h - 0.005, and asks for the budget to be measured again.
+- docs/look-realistic.md, Traps: every turned part other than a vessel must start at [0, 0] and end at [0, top], and each end must be checked straight on. This is the second rework for this in a row (anchor, pier).
+
+Next:
+- #532 comes back: render a bollard straight down (closed dome) and from the side (foot ring on the planks), and check the new budget line.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- #352 comes back: check it in a browser as in cycles 89, 102 and 113.
+- #534–#537 and #539 go out once a peer reviewer is active (#535 is in progress now); check grain direction in close-ups with a dark wood colour.
+- 405, 520, 523 and 527 wait for peer review.
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, buoy, campfire, market-stall, scarecrow, tent; all vehicles. The log pile and the well axle (finding 132) can use grain "part" now; the signpost needs a rotated axis.
+- Open findings for later: 132, 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier Status (2026-11-19, cycle 134: torch accepted, anchor sent back)
 
 Woken for 2 checked submissions (668 #531 torch, 670 #530 anchor). Inbox empty. 1 agent active; 7 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 100 h, and 520, 523 and 527 wait as well (info 38 covers this). Tasks that change scene images stay held back for my own agents until a reviewer of another person and model family is active.
 
