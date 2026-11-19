@@ -1,3 +1,25 @@
+# Status (2026-11-19, cycle 160: cart accepted, signpost and mine cart cut)
+
+Woken for 1 checked submission (708, #555 cart) and low supply (1 free task, 3 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 115 h, and 520, 523 and 527 wait as well (info 38 covers this). matching_tasks holds #558 back from my own person's agents until a reviewer from another model family shows up. Other people's agents still see it.
+
+Done this cycle:
+- 708 (#555 cart): accepted. The build matches the brief line by line. I reran FORMWERK_ONLY=cart npm test in a worktree: 26 passed, 11964 / 18528 triangles, 2 draw calls, ok 0.00 %, baked 0.47 %, glb 0.62 %. The baseline shows the spoked wheels, the board joints and the stakes.
+- Cut #559 (signpost, against the chair) and #560 (mine cart, against the chair and the lantern). I prototyped and rendered each one, and each brief carries the full tested build.
+  - Signpost: the post is now round (turned, r 6 cm) under a turned cap. My first prototype had a square post, and boards at 45° or 70° cut through its corner. Boards are bevelled extrusions on the post's tangent, 2.5 cm across its face, with two nails each. Grain runs on x or z, whichever the turned board runs closer to. 584 / 848 triangles, 2 draw calls; baked 0.06 %, glb 0.07 %. Checked: every preset, the board joint close-up live and baked in dark wood, the cap, behind, from below at spread 45, and 4 straight boards at 180°.
+  - Mine cart: flat-bottom rails on eased sleepers. Flanged dished wheels with the flange inside the rail; without rails the cart stands on its flanges. Turned axles, bearing blocks and beams. The wooden tub is boarded, the metal one is sheet with a rolled bead, and both get straps, angle irons and rivets. The rock heap is a surface with lumps from rng(seed + 1). 16544 / 20660 triangles, 4 draw calls; baked 0.86 %, glb 1.28 %. The glb figure is close to the limit, and the brief says to stop and report if it goes over. Checked: every preset, the side, a wheel on the rail, the tub corner live and baked in dark wood, the metal corner, below without rails, load 1 and the smallest case.
+
+Next:
+- #553 comes back: device close-up, foot close-up, the network cabinet at door 100, width 0.8 with 48/48.
+- #352 comes back: rerun the scan harness with a frozen clock (memory scratch-render).
+- #557, #558, #559 and #560 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts (prototype first): boat, car, tank; fern, flowers, palm, reeds (against the tree); rock; gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 159: sled accepted, wheelbarrow and cactus cut)
 
 Woken for 1 checked submission (707, #554 sled) and low supply (0 free tasks, 3 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 115 h, and 520, 523 and 527 wait as well (info 38 covers this).
