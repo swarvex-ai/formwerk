@@ -1,5 +1,5 @@
 import { BoxGeometry, ConeGeometry, CylinderGeometry, ExtrudeGeometry, Shape } from "three";
-import { material } from "../../materials";
+import { material, grained } from "../../materials";
 import { defineAsset, Parts } from "../define";
 import { rounded, turned } from "../shapes";
 
@@ -34,12 +34,13 @@ export const fence = defineAsset({
   },
   rig: { gate: { label: { de: "Tor", en: "Gate" }, type: "rotate", axis: [0, -1, 0], min: 0, max: 100 } },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 40000, drawCalls: 4 },
+  budget: { triangles: 40000, drawCalls: 3 },
   build(p) {
-    // Posts and pickets stand (grain "auto"), rails, frame boards and the brace lie ("level"); on metal and paint the
-    // option changes nothing, so they share one material and one draw call
+    // Wood: one material with grain "part" serves posts, pickets and rails; each part keeps its own fibre axis.
+    // Rails lie along x ("grained"), posts and pickets stand (auto/upright). On metal and paint the option changes
+    // nothing, so they share one material and one draw call
     const holz = p.material === "wood";
-    const m = material(p.material, p.color), mr = holz ? material(p.material, p.color, 1, undefined, { grain: "level" }) : m;
+    const m = holz ? material(p.material, p.color, 1, undefined, { grain: "part" }) : material(p.material, p.color), mr = m;
     const eisen = material("metal", "#3a3d42");
     const t = new Parts();
     const L = p.length, h = p.height, felder = Math.max(1, Math.round(L / p.postSpacing)), feld = L / felder, kopf = h + 0.05;
@@ -48,7 +49,6 @@ export const fence = defineAsset({
     const tor = p.gate ? Math.floor(felder / 2) : -1, x0 = -L / 2 + tor * feld, x1 = x0 + feld, hx = x0 + 0.04, gl = x0 + 0.09, gr = x1 - 0.09;
     const g = p.gate ? t.moving("gate", hx, 0, 0) : null;
     // Architecture allows 4 draw calls: in wood the gate with pickets or boards keeps one wood (see summary)
-    const gm = g && holz && p.style !== "rails" ? m : mr;
     const riegel = Array.from({ length: p.rails }, (_, r) => h * (0.2 + (0.6 * r) / Math.max(1, p.rails - 1)));
     for (let i = 0; i <= felder; i++) {
       const x = -L / 2 + i * feld;
@@ -63,8 +63,8 @@ export const fence = defineAsset({
     for (const y of riegel) for (let i = 0; i < felder; i++) {
       // Ein Riegel je Feld, 1 cm in jeden Pfosten
       const a = -L / 2 + i * feld;
-      if (i === tor) g!.add(gm, rounded(gr - gl, 0.06, 0.03, 0.003, (gl + gr) / 2, y, 0.05, 1));
-      else t.add(mr, rounded(feld - 0.06, 0.06, 0.03, 0.003, a + feld / 2, y, 0.05, 1));
+      if (i === tor) g!.add(mr, grained(rounded(gr - gl, 0.06, 0.03, 0.003, (gl + gr) / 2, y, 0.05, 1), "x"));
+      else t.add(mr, grained(rounded(feld - 0.06, 0.06, 0.03, 0.003, a + feld / 2, y, 0.05, 1), "x"));
     }
     if (p.style === "pickets") {
       const n = Math.floor(L / p.pickets), b = Math.min(0.07, p.pickets * 0.7), H = h * 0.95 - 0.02;
@@ -80,11 +80,11 @@ export const fence = defineAsset({
       }
     } else if (p.style === "panels") {
       for (let i = 0; i < felder; i++) {
-        const a = -L / 2 + i * feld, auf = i === tor ? g! : t, mf = i === tor ? gm : mr;
+        const a = -L / 2 + i * feld, auf = i === tor ? g! : t, mf = mr;
         const xa = i === tor ? gl : a + 0.05, xb = i === tor ? gr : a + feld - 0.05, ya = h * 0.045, yb = h * 0.895, W = xb - xa;
         // Rahmen: zwei Höhen, zwei Querstücke (0,5 cm in den Höhen), Bretter 12 cm breit, 4 mm Fuge, 1 cm im Rahmen
         for (const x of [xa + 0.03, xb - 0.03]) auf.add(mf, rounded(0.06, yb - ya, 0.025, 0.003, x, (ya + yb) / 2, 0.03, 1));
-        for (const y of [ya + 0.03, yb - 0.03]) auf.add(mf, rounded(W - 0.11, 0.058, 0.023, 0.003, (xa + xb) / 2, y, 0.03, 1));
+        for (const y of [ya + 0.03, yb - 0.03]) auf.add(mf, grained(rounded(W - 0.11, 0.058, 0.023, 0.003, (xa + xb) / 2, y, 0.03, 1), "x"));
         const Wi = W - 0.1, k = Math.max(1, Math.round((Wi + 0.004) / 0.124)), bw = (Wi - (k - 1) * 0.004) / k;
         for (let j = 0; j < k; j++) auf.add(m, rounded(bw, yb - ya - 0.1, 0.015, 0.003, xa + 0.05 + bw / 2 + j * (bw + 0.004), (ya + yb) / 2, 0.03, 1));
       }
@@ -92,7 +92,7 @@ export const fence = defineAsset({
     if (g) {
       // Strebe vom untersten Riegel am Scharnier zum obersten am Riegel-Ende, in der Ebene der Riegel
       const ya = riegel[0], yb = riegel[riegel.length - 1], xa = gl + 0.04, xb = gr - 0.04;
-      if (p.rails > 1) g.add(gm, rounded(Math.hypot(xb - xa, yb - ya), 0.06, 0.028, 0.003).rotateZ(Math.atan2(yb - ya, xb - xa)).translate((xa + xb) / 2, (ya + yb) / 2, 0.05));
+      if (p.rails > 1) g.add(mr, grained(rounded(Math.hypot(xb - xa, yb - ya), 0.06, 0.028, 0.003), "x").rotateZ(Math.atan2(yb - ya, xb - xa)).translate((xa + xb) / 2, (ya + yb) / 2, 0.05));
       // Langbänder hinten auf dem untersten und obersten Riegel, gekröpft zum Kloben am Pfosten
       for (const y of p.rails > 1 ? [ya, yb] : [ya]) {
         g.add(eisen, new BoxGeometry(0.25, 0.03, 0.0045).translate(hx + 0.17, y, 0.03325));
