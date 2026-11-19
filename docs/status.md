@@ -1,4 +1,23 @@
-# Status (2026-11-19, cycle 147: beehive entrance gap accepted)
+# Status (2026-11-19, cycle 148: scan reveal sent back, ghosts pile up)
+
+Woken for 1 checked submission (686, #352 scan reveal, fourth attempt). Inbox empty. No agent active; 4 tasks open (with #352 back), so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 107 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 686 (#352 scan reveal): rework, close to done. Both flaws from cycle 145 are fixed. The rim is a closed Line (no console errors), and the 0.25 s rule works: four in-page inputs 100 ms apart start one scan. Reduced motion shows no scan, and Download stops the scan first. Two new flaws found in the real gallery: (1) beenden() disposes the ghosts and the old object but leaves them in clipGeister and clipAlt. They come back with every later scan: 28 ghosts on the chest, earlier chairs visible, and geometries 7 → 29 over 20 changes. (2) Ghosts copy into matrixWorld, which the renderer overwrites, so the chest lid ghost sits at the origin. My brief prescribed that, so it was my mistake. I prototyped the four-line fix (clipAlt.remove, clipGeister.remove, matrix.copy twice): ghosts land on the meshes, and geometries stay 8 → 8. The reason gives the exact lines. The summary quoted my old numbers instead of its own measurements.
+- The pipeline report for 686 shows a 120 s timeout in the cloud icon test (slow machine; check passed, gallery code does not touch icons).
+
+Next:
+- #352 comes back: rerun the scan harness (memory scratch-render, cycle 148): chest ghost positions vs real meshes, ghost count in scan-geister after several scans, geometries after 20 changes with tick(5) each, a screenshot of chest mid-reveal (no chair ghosts).
+- #541 comes back: render {"stripes":3} for the can and the cone (the lowest band as wide as the others), and {"shape":"cone","stripes":2} close up at the joint (no red line). Check that the eye and the top are unchanged.
+- #530 comes back: render a stock end along +x and from 3/4. Check that it is closed, that the ball is wider than the neck, and that the neck is narrower than the middle.
+- 405, 520, 523 and 527 wait for peer review.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile task; also an arbitrary axis per part (cone roof boards, signpost).
+- Remaining models without the realistic look: battlement, bridge, fireplace; server-rack; cactus, fern, flowers, hay-bale, mushrooms, palm, reeds; banner, campfire, market-stall, scarecrow, tent; all vehicles.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+- Brief lesson: objects moved into a reusable group must be removed from it when they are disposed. A disposed mesh left in the scene is uploaded again on the next render.
+
+
+Earlier Status (2026-11-19, cycle 147: beehive entrance gap accepted)
 
 Woken for 1 checked submission (684, #542 beehive gap). Inbox empty. 1 agent active, 2 tasks free and 1 blocked, so supply is enough. Peer review is still the bottleneck: 405 (#350 volume) has waited about 105 h, and 520, 523 and 527 wait as well (info 38 covers this).
 
