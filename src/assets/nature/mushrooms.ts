@@ -1,7 +1,8 @@
-import { CylinderGeometry, LatheGeometry, Matrix4, Quaternion, SphereGeometry, Vector2, Vector3, type Material } from "three";
+import { LatheGeometry, Matrix4, Quaternion, SphereGeometry, Vector2, Vector3, type Material } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { turned } from "../shapes";
 
 type CapShape = "dome" | "flat" | "cone";
 
@@ -73,7 +74,7 @@ export const mushrooms = defineAsset({
     "giant-toadstool": { label: { de: "Riesenschirmling", en: "Giant toadstool" }, values: { count: 3, capRadius: 0.25, stemHeight: 0.4, capShape: "dome", spots: true, capColor: "#b5482f" } },
   },
   physics: { body: "static", collider: "hull" },
-  budget: { triangles: 15000, drawCalls: 3 },
+  budget: { triangles: 12496, drawCalls: 3 },
   build(p, seed) {
     const r = rng(seed), rs = rng(seed + 1);
     const capMat = material("paint", p.capColor), stemMat = material("paint", p.stemColor), spotMat = material("paint", "#f2ead6");
@@ -95,16 +96,31 @@ export const mushrooms = defineAsset({
       const profile = capProfile(p.capShape, rc);
       // A large cap on a short stem may only lean until its rim reaches the floor.
       for (const q of profile) {
-        const dr = q.x - bottom;
+        const dr = q.x - 1.25 * bottom;
         if (dr > 0) lean = Math.min(lean, Math.atan2(hs + q.y, dr));
       }
       // A tilted base disc dips by its radius times sin(lean); lift it so the lowest point rests on the floor.
-      const lift = bottom * Math.sin(lean);
+      const lift = 1.25 * bottom * Math.sin(lean);
       const M = new Matrix4().compose(new Vector3(x, lift, z),
         new Quaternion().setFromAxisAngle(new Vector3(Math.cos(dir), 0, Math.sin(dir)), lean), new Vector3(1, 1, 1));
-      const stem = new CylinderGeometry(top, bottom, hs, 10).translate(0, hs / 2, 0).applyMatrix4(M);
-      t.add(stemMat, stem);
-      t.add(capMat, new LatheGeometry(profile, 18).translate(0, hs, 0).applyMatrix4(M));
+      // A closed turned stem with a flat, slightly swollen foot that rests on the floor.
+      const stemFoot: [number, number][] = [
+        [0, 0], [1.1 * bottom, 0], [1.25 * bottom, 0.04 * hs], [1.2 * bottom, 0.1 * hs],
+        [bottom, 0.2 * hs], [top, hs], [0, hs],
+      ];
+      t.add(stemMat, turned(stemFoot, 16).applyMatrix4(M));
+      t.add(capMat, new LatheGeometry(profile, 32).translate(0, hs, 0).applyMatrix4(M));
+      // A thin gill skirt just under the cap's underside, stem material, visible from below and above.
+      const d = 0.004 * rc, under = (k: number) => profile[k].y - d;
+      t.add(stemMat, turned([
+        [top, -d],
+        [profile[1].x, under(1)],
+        [profile[2].x, under(2)],
+        [0.92 * rc, profile[2].y + 0.6 * (profile[3].y - profile[2].y) - d],
+        [profile[2].x, under(2) - 0.001],
+        [profile[1].x, under(1) - 0.001],
+        [top, -d - 0.001],
+      ] as [number, number][], 32).translate(0, hs, 0).applyMatrix4(M));
       if (p.spots) spots(t, spotMat, rs, profile, hs, M, rc);
     }
     return t.group();
