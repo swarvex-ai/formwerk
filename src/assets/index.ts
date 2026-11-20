@@ -65,6 +65,7 @@ import { wheelbarrow } from "./vehicles/wheelbarrow";
 import { sled } from "./vehicles/sled";
 import { anchor } from "./props/anchor";
 import { candlestick } from "./props/candlestick";
+import { scales } from "./props/scales";
 import { cauldron } from "./props/cauldron";
 import { scarecrow } from "./props/scarecrow";
 import { coffin } from "./props/coffin";
@@ -134,6 +135,7 @@ export const ASSETS: AnyAsset[] = [
   sled,
   anchor,
   candlestick,
+  scales,
   cauldron,
   scarecrow,
   coffin,
