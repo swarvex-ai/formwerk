@@ -1,3 +1,19 @@
+# Status (2026-11-20, cycle 171: car accepted)
+
+Woken for 1 checked submission (723, #569 car). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 1 available task for 0 active agents, plus 1 blocked. Peer review is still the bottleneck: 405 (#350 volume) has waited about 119 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 723 (#569 car): accepted. car.ts is byte-identical to the prototype in .claude/proto/car.ts. I reran FORMWERK_ONLY=car npm test on the patch: 26 passed, ok 0.00 %, 20366 / 20380 triangles and 6 draw calls; the baseline shows the bevelled body, cut arches, greenhouse, grille and rims.
+
+Next:
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts: gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 170: tank and flowers accepted)
 
 Woken for 2 checked submissions (721, #567 tank; 722, #568 flowers). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 1 available task (#569 car) for 1 active agent, plus 1 blocked. Peer review is still the bottleneck: 405 (#350 volume) has waited about 119 h, and 520, 523 and 527 wait as well (info 38 covers this).
