@@ -18,17 +18,27 @@ export type MaterialKind = (typeof MATERIALS)[number];
 /** The axis the wood fibres run along, in the asset's coordinates; "level": lying, along the face (slats, aprons);
  *  "rings": upright with the pith on the asset's y axis, so a cut face shows round growth rings (stumps, logs);
  *  "part": the axis each part carries from `grained()` (rails along x and stiles along y in one draw call), "auto"
- *  for parts without one. */
+ *  for parts without one; a part with a pith from `grained()` shows round rings about it (lying logs). Bark takes
+ *  "part" too: its furrows run along each part's axis (y for parts without one). */
 export type Grain = "x" | "y" | "z" | "auto" | "level" | "rings" | "part";
 
 /** The vertex attribute that carries a part's grain axis (a unit vector along x, y or z; zero: "auto"). */
 export const GRAIN_ATTRIBUTE = "grain";
-/** Marks a geometry's fibres to run along `axis` in a wood material with `grain: "part"`, so one material serves
- *  parts whose fibres run different ways: `t.add(holz, grained(rounded(...), "x"))`. Returns the geometry. */
-export function grained<G extends BufferGeometry>(geometry: G, axis: "x" | "y" | "z"): G {
+/** The vertex attribute that carries a part's pith: a point on the log's centre line in asset coordinates, and 1
+ *  (0: no pith, the rings of a log beside the object). */
+export const PITH_ATTRIBUTE = "pith";
+/** Marks a geometry's fibres to run along `axis` in a wood or bark material with `grain: "part"`, so one material
+ *  serves parts whose fibres run different ways: `t.add(holz, grained(rounded(...), "x"))`. `pith`: a point on the
+ *  log's centre line (asset coordinates, e.g. its centre), so a cut face shows round rings about it:
+ *  `grained(new CircleGeometry(r, 16).rotateY(Math.PI / 2).translate(x, y, z), "x", [x, y, z])`. Call it after the
+ *  geometry is in place. Returns the geometry. */
+export function grained<G extends BufferGeometry>(geometry: G, axis: "x" | "y" | "z", pith?: [number, number, number]): G {
   const n = geometry.attributes.position.count, a = new Float32Array(n * 3), k = axis === "x" ? 0 : axis === "y" ? 1 : 2;
   for (let i = 0; i < n; i++) a[i * 3 + k] = 1;
   geometry.setAttribute(GRAIN_ATTRIBUTE, new Float32BufferAttribute(a, 3));
+  const m = new Float32Array(n * 4);
+  if (pith) for (let i = 0; i < n; i++) m.set([pith[0], pith[1], pith[2], 1], i * 4);
+  geometry.setAttribute(PITH_ATTRIBUTE, new Float32BufferAttribute(m, 4));
   return geometry;
 }
 
@@ -71,7 +81,7 @@ type Kind = {
 // Wood: rings of a log whose pith lies beside the object (planks show slightly wavy stripes), thin dark latewood at the
 // end of each ring, fine fibres along the grain, and a mild tone per board (cells a hand wide and over a metre long;
 // an asset that wants one clear tone per board takes two wood materials and alternates them)
-const holzFelder = (q: V3, n: V3, g: Grain) => {
+const holzFelder = (q: V3, n: V3, g: Grain, scale: number) => {
   // "auto": fibres upright on standing faces (legs, staves, posts) and along x on lying ones (tops, seats, shelves),
   // so a table top shows long grain instead of the end of a log
   // "level": fibres lie level on every face, along z on faces that look along x and along x on all others, so a
@@ -86,13 +96,15 @@ const holzFelder = (q: V3, n: V3, g: Grain) => {
   if (g === "part") {
     // Each part's own axis from its vertices (the same at every vertex of a part, so interpolation keeps it exact)
     const a = attribute<"vec3">(GRAIN_ATTRIBUTE, "vec3"), ax = a.x.greaterThan(0.5), ay = a.y.greaterThan(0.5), az = a.z.greaterThan(0.5);
-    return felder(select(ax, q.x, select(az, q.z, select(ay, q.y, autoAlong))), select(ax, q.yz, select(az, q.xy, select(ay, q.xz, autoQuer))));
+    // A part with a pith: rings round its centre line instead of a log beside the object
+    const m = attribute<"vec4">(PITH_ATTRIBUTE, "vec4"), mitte = m.w.greaterThan(0.5), p = select(mitte, q.sub(m.xyz.mul(scale)), q);
+    return felder(select(ax, p.x, select(az, p.z, select(ay, p.y, autoAlong))), select(ax, p.yz, select(az, p.xy, select(ay, p.xz, autoQuer))), select(mitte, vec2(0, 0), vec2(1.9, 1.3)));
   }
   const along = g === "x" ? q.x : g === "z" ? q.z : g === "y" ? q.y : autoAlong;
   const quer = g === "x" ? q.yz : g === "z" ? q.xy : g === "y" ? q.xz : autoQuer;
   return felder(along, quer);
 };
-const felder = (along: F, quer: Node<"vec2">, mark = vec2(1.9, 1.3)) => {
+const felder = (along: F, quer: Node<"vec2">, mark: Node<"vec2"> = vec2(1.9, 1.3)) => {
   const warp = mx_noise_float(vec3(quer.mul(1.3), along.mul(0.22)));
   // The pith lies two metres beside the object: rings cross a board as slightly wavy lines, not as wide arches
   // Uneven ring widths (good and poor years) from a slow noise across the log
@@ -106,11 +118,11 @@ const felder = (along: F, quer: Node<"vec2">, mark = vec2(1.9, 1.3)) => {
   const brett = mx_cell_noise_float(vec3(quer.x.div(0.11).floor(), quer.y.div(0.11).floor(), along.div(1.7).floor()));
   return { spaet, faser, brett };
 };
-const holz = (g: Grain): Kind => ({
+const holz = (g: Grain, scale: number): Kind => ({
   depth: 0.0007,
-  height: (q, n) => { const f = holzFelder(q, n, g); return f.spaet.mul(-0.5).sub(f.faser.mul(0.5)); },
+  height: (q, n) => { const f = holzFelder(q, n, g, scale); return f.spaet.mul(-0.5).sub(f.faser.mul(0.5)); },
   probe(q, n, base) {
-    const f = holzFelder(q, n, g);
+    const f = holzFelder(q, n, g, scale);
     const ton = mix(float(1.05), float(0.76), f.spaet).mul(f.brett.mul(0.14).add(0.93)).mul(f.faser.mul(0.06).add(1));
     return { color: base.mul(ton), roughness: f.spaet.mul(0.14).add(f.faser.mul(0.05)).add(0.6), metalness: float(0) };
   },
@@ -173,22 +185,28 @@ const stein = (moos: number): Kind => ({
 });
 
 // Bark: ridges and furrows along the trunk, fine fibres, grey-green lichen in patches
-const rindeFelder = (q: V3) => {
+const rindeFelder = (roh: V3, g: Grain) => {
+  // "part": the furrows run along each part's axis (a lying log along x), turned so that axis becomes y
+  let q = roh;
+  if (g === "part") {
+    const a = attribute<"vec3">(GRAIN_ATTRIBUTE, "vec3");
+    q = select(a.x.greaterThan(0.5), roh.yxz, select(a.z.greaterThan(0.5), roh.xzy, roh)) as V3;
+  }
   const w = mx_noise_float(q.mul(vec3(3, 0.6, 3)));
   const rippe = float(1).sub(abs(mx_noise_float(q.mul(vec3(14, 2.2, 14)).add(vec3(0, w.mul(0.8), 0)))));
   const fein = mx_noise_float(q.mul(55)).mul(sichtbar(q.mul(55)));
   return { rippe, fein, w };
 };
 const FLECHTE = farbe("#7d8466");
-const rinde: Kind = {
+const rinde = (g: Grain): Kind => ({
   depth: 0.006,
-  height: (q) => { const f = rindeFelder(q); return pow(f.rippe, float(2)).mul(0.9).add(f.fein.mul(0.1)); },
+  height: (q) => { const f = rindeFelder(q, g); return pow(f.rippe, float(2)).mul(0.9).add(f.fein.mul(0.1)); },
   probe(q, _n, base) {
-    const f = rindeFelder(q);
+    const f = rindeFelder(q, g);
     const holzig = base.mul(mix(float(0.42), float(1.12), f.rippe)).mul(f.fein.mul(0.08).add(1));
     return { color: mix(holzig, FLECHTE.mul(f.rippe.mul(0.3).add(0.7)), smoothstep(0.45, 0.65, f.w).mul(0.6)), roughness: float(0.92), metalness: float(0) };
   },
-};
+});
 
 // Foliage: colour variation only
 const laub: Kind = {
@@ -237,7 +255,7 @@ export type MaterialOptions = {
 export function material(kind: MaterialKind, hex: string, scale = 1, density?: number, opts: MaterialOptions = {}): MeshStandardNodeMaterial {
   const m = new MeshStandardNodeMaterial(PBR[kind]);
   const base = farbe(hex);
-  const art: Kind | null = opts.plain ? null : kind === "wood" ? holz(opts.grain ?? "auto") : kind === "iron" ? eisen(opts.rust ?? 0.45) : kind === "stone" ? stein(opts.moss ?? 0) : kind === "bark" ? rinde : kind === "leaf" ? laub : null;
+  const art: Kind | null = opts.plain ? null : kind === "wood" ? holz(opts.grain ?? "auto", scale) : kind === "iron" ? eisen(opts.rust ?? 0.45) : kind === "stone" ? stein(opts.moss ?? 0) : kind === "bark" ? rinde(opts.grain ?? "auto") : kind === "leaf" ? laub : null;
   if (art) {
     const q = positionLocal.mul(float(scale));
     // The face direction for the grain: the vertex normal (for faceted shading the face normal is the same within a
@@ -252,7 +270,7 @@ export function material(kind: MaterialKind, hex: string, scale = 1, density?: n
     backen.set(m, { color: p.color, roughness: p.roughness, metalness: p.metalness, normal });
   } else if (kind === "glow") { m.colorNode = base; m.emissiveNode = base.mul(2); }
   else m.colorNode = base;
-  if (kind === "wood" && opts.grain === "part" && !opts.plain) m.userData.grainPart = true;
+  if ((kind === "wood" || kind === "bark") && opts.grain === "part" && !opts.plain) m.userData.grainPart = true;
   m.userData.export = { kind, color: hex, emissive: kind === "glow" ? hex : "#000000", ...PBR[kind], density: density ?? DICHTE[kind], pattern: !opts.plain && MUSTER.includes(kind) };
   return m;
 }
