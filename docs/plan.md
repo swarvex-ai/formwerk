@@ -414,6 +414,21 @@ AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from 
 | #303 | sprite: card (16 × 16 item, suit, rank A–K, size 12–14, back colour; flip from the lattice back through the edge to the face; ace of spades, king of hearts red back, old seven of diamonds; scratch on 225bc5e: core 26/26, sheet reads in every preset, suit and both sizes; size stops at 12, glyphs blank while squeezed) | accepted (368) |
 | #304 | sound: card-shuffle (riffle with flicks, bridge flutter and a tap, or dealing; riffle, deal, new deck; scratch on 225bc5e: 25/25, 1.15 s at defaults, flick centroid 5–6 kHz, longest 2.07 s of 2.5) | accepted (369) |
 
+## Milestone "Depth 21: market" (estimate 6 tasks)
+
+Cut in cycle 182 for low supply (0 free tasks for 3 active agents). Open-ended briefs (no lead prototype): each names the
+file to copy, exact parameter and preset names, and review checkpoints. The four tasks touch different registries, so
+they run in parallel; the merchant waits for the goat (same sprite registries).
+
+| Task | Asset | State |
+|---|---|---|
+| #582 | sprite: goat (16 × 16, idle, walk, graze; kid, goat, billy; plain, patched, saddle) | open |
+| #583 | sound: cart-wheels (loop; wood or iron rim on cobble, dirt, planks; speed, load, creak) | open |
+| #584 | model: scales (balance on a post, two pans on chains or cords, tilt; props, ≤ 4 draw calls) | open |
+| #586 | sprite: merchant (24 × 32 like the villager, idle, walk, call; hat, beard, apron, purse; after #582) | waits for #582 |
+
+#585 is closed: it said 16 × 16, the villager is 24 × 32; replaced by #586.
+
 ## Next (lead, level D, not cut yet)
 
 - Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain
