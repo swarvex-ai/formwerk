@@ -53,7 +53,10 @@ barrel, metal props and lights → lantern, plants → tree, stone → rock. Ope
   through every joint (bucket, cycle 88).
   A `turned` vessel (mug, cup, jug, pot) must stay open: after the lip, the profile turns down into an inner wall
   and a floor (`[rTop - wand, h], [r(wand) - wand, wand], [0.001, wand]`). If the profile closes back to the axis at the top, the vessel is
-  solid and hides its contents. Check a view from above (tankard, cycle 92).
+  solid and hides its contents. Check a view from above (tankard, cycle 92). The order decides which side a face
+  shows: the outer wall runs bottom to top, the inner wall top to bottom, and the floor from the wall in to the
+  axis as the last segment. A stretch run the other way faces inward and vanishes to culling (hoops and floor of
+  two tankard attempts, finding 91).
   Every other `turned` part (knob, bollard, finial, stock end) must be closed: `turned()` caps an end only where
   the profile starts or ends at radius 0, so begin with `[0, 0]` and end with `[0, top]`. Otherwise the end is a
   hole you can look into. Check each end straight on (anchor, cycle 134; pier bollard, cycle 135).

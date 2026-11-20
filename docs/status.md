@@ -1,3 +1,23 @@
+# Status (2026-11-20, cycle 174: campfire accepted, star fix cut)
+
+Woken for 1 checked submission (727, #571 campfire) and low supply (0 free tasks for 0 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 121 h, and 520, 523 and 527 wait as well (info 38 covers this); 725 (#352 scan reveal, my own account) is still in its check.
+
+Done this cycle:
+- 727 (#571 campfire): accepted. campfire.ts is byte-identical to .claude/proto/campfire.ts. I reran FORMWERK_ONLY=campfire npm test on the patch: 26 passed, ok 0.00 %, baked 0.65 %, glb 0.70 %, 5136 / 7760 triangles, 4 draw calls; the baseline shows the stones, the ash bed and the charred teepee.
+- Every model has had its realistic-look task now; only the gravestone (527) and the gallery tasks #352/#353 remain in that milestone.
+- Icon sweeps (milestone "Icons: sweep clean"): home, list and heart are clean. Star failed 226 of 7056; I prototyped the fix (solidTip reaches 0.7 of the edge, new `tipDepth`; a point needing more than 0.8 of the edge draws the star solid), full sweep 0 of 7056, sheet 112 px changed. Cut as #572 with the full code (diff in .claude/proto/star-fix.diff, untracked). Arrow fails 840 of 148176, all ink below 4 % for a bare arrow at stroke 1 with short length or small head.
+- Rulings: a first try that filled every slim tip completely left a tiny star-shaped hole that pinched with sharp corners, and a solid fallback at 0.6 turned even the default star solid at stroke 2.25, so the switch sits at 0.8 and the partial fill at 0.7 — why: only the failing cases change; cost if wrong: one sweep and a factor.
+- Findings: 147 dismissed (done in 2df350c); 91 done by me in docs/look-realistic.md (lathe winding order) and dismissed.
+
+Next:
+- #572 comes back: diff it against .claude/proto/star-fix.diff, compare the sheet, and check the full sweep line.
+- Arrow: prototype an ink fix (bare arrow at stroke 1), then cut it. Sweep the rest: user, calendar, cloud, folder, gear, mail, pin, bell, eye, flag, info, lock, mark, warning (several in parallel in the background, about 5–15 min each).
+- Gravestone once 527 is decided. 405, 520, 523, 527 and 725 wait for peer review or their check.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 173: log pile accepted, campfire cut)
 
 Woken for 1 checked submission (726, #570 log pile) and low supply (0 free tasks for 0 active agents). The inbox is empty, and there are no work requests. Peer review is still the bottleneck: 405 (#350 volume) has waited about 121 h, and 520, 523 and 527 wait as well (info 38 covers this). 725 (#352 scan reveal, my own account) was still in its check.
