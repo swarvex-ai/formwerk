@@ -7,6 +7,34 @@ type Symbol = "check" | "cross" | "plus" | "minus" | "exclamation" | "info" | "q
 // !, i and ? are laid out in grid units: their dot is a little wider than the stroke and keeps a clear gap to the line,
 // so it never merges with it at 24 px.
 type Zeichnung = { lines: Pt[][]; dots: Pt[]; arcs: { c: Pt; r: number; from: number; to: number }[] };
+// Geschätzte Tinte eines Zeichens in Rasterquadraten: Strichlänge × Breite (mit quadratischen Kapsen, die je
+// hw über den Endpunkt hinausreichen) plus die Flächen der Punkte. Nah am 24-px-Ergebnis, ohne zu rasterisieren.
+function tinte(z: Zeichnung, width: number, hw: number): number {
+  let t = 0;
+  for (const l of z.lines) {
+    let laenge = 0;
+    for (let i = 1; i < l.length; i++) laenge += Math.hypot(l[i][0] - l[i - 1][0], l[i][1] - l[i - 1][1]);
+    t += width * (laenge + 2 * hw);
+  }
+  const rd = hw * 1.1;
+  for (const _d of z.dots) t += Math.PI * rd * rd;
+  for (const a of z.arcs) t += width * (a.r * ((a.to - a.from) * Math.PI) / 180 + 2 * hw);
+  return t;
+}
+// Die Box der Tinte (Strich plus Punkte/Kapsen), um ein Wachsen am Rande des Live-Bereichs zu stoppen.
+// Striche reichen hw über ihre Endpunkte, Punkte sind bereits ein voller Kreis (kein zweites hw).
+function box(z: Zeichnung, hw: number): [number, number, number, number] {
+  let lx0 = 1 / 0, ly0 = 1 / 0, lx1 = -1 / 0, ly1 = -1 / 0;
+  let dx0 = 1 / 0, dy0 = 1 / 0, dx1 = -1 / 0, dy1 = -1 / 0;
+  const rd = hw * 1.1, hatPunkt = z.dots.length > 0;
+  for (const l of z.lines) for (const q of l) { lx0 = Math.min(lx0, q[0]); lx1 = Math.max(lx1, q[0]); ly0 = Math.min(ly0, q[1]); ly1 = Math.max(ly1, q[1]); }
+  for (const d of z.dots) { dx0 = Math.min(dx0, d[0]); dx1 = Math.max(dx1, d[0]); dy0 = Math.min(dy0, d[1]); dy1 = Math.max(dy1, d[1]); }
+  const x0 = hatPunkt ? Math.min(lx0 - hw, dx0 - rd) : lx0 - hw;
+  const y0 = hatPunkt ? Math.min(ly0 - hw, dy0 - rd) : ly0 - hw;
+  const x1 = hatPunkt ? Math.max(lx1 + hw, dx1 + rd) : lx1 + hw;
+  const y1 = hatPunkt ? Math.max(ly1 + hw, dy1 + rd) : ly1 + hw;
+  return [x0, y0, x1, y1];
+}
 function zeichen(s: Symbol, halb: number, hw: number, eng: boolean, spitz: boolean): Zeichnung {
   const k = (pts: [number, number][]): Pt[] => pts.map(([x, y]) => [x * halb, y * halb]);
   const rd = eng ? hw : hw * 1.1, luecke = eng ? 1 : Math.max(1, hw * 0.9), punktY = halb - rd, stielBis = punktY - rd - luecke - hw;
@@ -22,7 +50,12 @@ function zeichen(s: Symbol, halb: number, hw: number, eng: boolean, spitz: boole
       const r = Math.max(hw + 1, Math.min(halb * 0.62, (stielBis + halb - hw) / 1.9)), my = -halb + hw + r;
       const start = spitz ? 316 : 300, haken = Array.from({ length: 21 }, (_, i): Pt => { const g = ((start + (i * (480 - start)) / 20) * Math.PI) / 180; return [r * Math.sin(g), my - r * Math.cos(g)]; });
       const knick: Pt = [r * 0.12, Math.min(stielBis, my + r + 0.2)];
-      return { lines: [[...haken, knick, [0, Math.max(knick[1], stielBis)]]], dots: [[0, punktY]], arcs: [] };
+      // Der Strich endet vertikal auf der Mittelachse (spitze Ecken), damit eine quadratische Kappe direkt zum
+      // Dot zeigt und die Lücke mindestens ein Rasterpunkt breit bleibt – statt hw * sqrt(2) einer gekippten Kappe.
+      // Runde Ecken behalten den direkten, runden Abschluss bei und ändern sich nicht.
+      const ende: Pt = [0, Math.max(knick[1], stielBis)];
+      const stueck = spitz && knick[1] < ende[1] ? ([0, knick[1]] as Pt) : null;
+      return { lines: [[...haken, knick, ...(stueck ? [stueck] : []), ende]], dots: [[0, punktY]], arcs: [] };
     }
   }
 }
@@ -102,6 +135,22 @@ export const mark = defineIcon({
     const eng = hoch && frame === "triangle" && p.symbol !== "question";
     const mindestens = hoch ? Math.min(halb, ((eng ? 2 : 2.2) * hw + (eng ? 1 : Math.max(1, hw * 0.9)) + 2 * hw + (p.symbol === "question" ? 4 : 1.5)) / 2) : 1.5;
     halb = Math.max(mindestens, halb * p.size);
+    // Ein freies Zeichen wächst, bis seine Tinte sicher über der Untergrenze liegt: bei dünnen Strichen und
+    // kleinen Größen reicht die Größe allein nicht. Innerhalb eines Rahmens ändert sich nichts.
+    if (frame === "none") {
+      const width = pen.width, spitz = pen.corners === "sharp";
+      const ziel = 0.04 * Math.min(1, width / 1.25) * 576 * 1.1; // Ziel-Tinte (+10 % über der Untergrenze)
+      let h = halb, zz = zeichen(p.symbol as Symbol, h, hw, eng, spitz), t = tinte(zz, width, hw);
+      for (let i = 0; t < ziel && i < 40; i++) {
+        const neu = Math.min(h * 1.1 + 0.1, 13);
+        if (neu <= h) break;
+        const zn = zeichen(p.symbol as Symbol, neu, hw, eng, spitz);
+        const [bx0, by0, bx1, by1] = box(zn, hw);
+        if (bx0 < -10.9 || by0 < -10.9 || bx1 > 10.9 || by1 > 10.9) break; // kein Platz mehr im Live-Bereich (Mitte 12)
+        h = neu; zz = zn; t = tinte(zn, width, hw);
+      }
+      halb = h;
+    }
     // A square cap reaches further: with sharp corners the hook of the question mark starts a little later
     const z = zeichen(p.symbol as Symbol, halb, hw, eng, pen.corners === "sharp"), auf = (q: Pt): Pt => [mitte[0] + q[0], mitte[1] + q[1]];
     const innen = frame !== "none";
