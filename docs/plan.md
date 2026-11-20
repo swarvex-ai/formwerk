@@ -365,6 +365,7 @@ has a "Review checkpoints and common reasons for rework" section from rework_pat
 | #563–#564, #566 | realistic look: reeds (tree; folded pointed blades in two plain shades, turned cattail stalks, closed heads and spikes, uneven root mound, 3 draw calls), fern; #566 the rock lumps without `toNonIndexed()` (finding 143); cut 19 Nov (cycles 162–163) | reeds accepted (717, cycle 167); fern accepted (719, cycle 168); #566 open |
 | #567–#568 | realistic look: tank (mine cart and lantern; cast links with grousers on the convex hull of sprocket, idler and tyred road wheels, bevelled hull with sponsons, chamfered turret, turned gun with fume extractor and bored muzzle brake, cupola with vision blocks, 5 draw calls), flowers (tree; folded grass and leaves, round stems, double-sided petals that cup for tulips, golden centre dome, turf mound, 3 draw calls, nothing to bake); both prototyped by the lead with the full build in the brief; cut 19 Nov (cycle 167) | open |
 | #569 | realistic look: car (mine cart and lantern; filleted side profile with wheel arches cut in, extruded with a 7 cm bevel, dark wheel wells, lofted greenhouse with tumblehome and panes on it so the pillars stay in paint, open pickup bed above the arches, door seams, handles, mirrors, grille, lights, plates, five-spoke rims, 6 draw calls, nothing to bake); prototyped by the lead with the full build in the brief; cut 20 Nov (cycle 169), accepted 20 Nov (cycle 171) | done |
+| #570 | realistic look: log pile (tree and stump; bark with grain "part" so furrows run along each log, cut ends with round rings about an off-centre pith from `grained(…, "x", [x, y, z])`, logs not quite round with a slight taper, end discs on the tube outline, 2 draw calls, baked 0.73 %); needs the per-part pith (lead, 2df350c); prototyped by the lead with the full build in the brief; cut 20 Nov (cycle 172) | open |
 | #539, #542 | beehive entrance: #539 bent the plate around the coil (rejected 679, the brief was wrong: still a slab from the side, triangle fan from the front); #542 cuts a gap into the lowest coil instead (open torus, straw caps, dark strip behind; prototyped by the lead); 19 Nov | #539 closed, #542 open |
 
 (#325–#327 closed: #324 was merged outside the platform, so their dependency never resolved; recut as #351–#353.
@@ -404,11 +405,9 @@ AGENTS.md. Level B, no dependencies; dice-roll registers after knock, away from 
 
 ## Next (lead, level D, not cut yet)
 
-- Log pile (and campfire logs): grain "part" with `grained(…, "x")` is not enough. The end faces would show near-straight
-  stripes, because the ring centre lies 2 m beside the object (`felder`, mark 1.9/1.3) and "rings" only centres on
-  the asset's y axis. The bark relief (`rindeFelder`) runs its furrows along y, so on a lying log they run around it.
-  Needs: a per-part pith (ring centre on the part's own axis line, e.g. a second attribute from `grained(g, "x",
-  { pith: [y, z] })`) and a bark axis. Contract work in src/materials, then the log pile task.
+- Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain
+  "part" are done (2df350c, cycle 172); log pile cut as #570. Campfire next (prototype first). Bark scale on thin lying
+  logs: keep it near 1.5 (0.21 / diameter), finer furrows push the bake above 1 %.
 
 - Contract check for movable parts: the hinge lies within 5 cm of its part's bounding box, measured across the
   rotation axis (the fence gate hinges at the floor on a vertical axis). It would have caught the tankard lid (#256)

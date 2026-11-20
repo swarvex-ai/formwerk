@@ -1,3 +1,21 @@
+# Status (2026-11-20, cycle 172: per-part pith, log pile cut)
+
+Woken for low supply (0 free tasks for 1 active agent). The inbox is empty, and there are no work requests. Nothing waited for my decision: the four pending submissions (405, 520, 523, 527) are my own and wait for peer review; 405 (#350 volume) has waited about 120 h (info 38 covers this).
+
+Done this cycle:
+- Lead level D, 2df350c (pushed): `grained(geometry, axis, [x, y, z])` stores a pith point (vertex attribute `pith`, vec4), so the cut ends of lying logs show round rings about it; bark takes grain "part" and runs its furrows along each part's axis. Parts pads the pith with zeros and moves it with movable parts. AGENTS.md (Materials) names it. Checked: test:core 660 passed; signpost, sled, well, boat, stump and tree render 0.00 % changed, with their bake lines unchanged.
+- Cut #570 (log pile), prototyped in /tmp/lp with the full build in the brief (copy in .claude/proto/log-pile.ts, untracked). Bark with grain "part", cut ends with rings about an off-centre pith, logs not quite round with a taper, end discs on the tube outline (an inset of 1.5 % showed a light gap at the rim). 1920 / 4800 triangles, 2 draw calls, baked 0.73 %, glb 0.84 %. Checked: defaults, presets, the ends close-up live and baked, bark close-up, from below and both extremes.
+- Found while prototyping: end rings finer than about 5 bake texels fade to their mean in the bake (live keeps them), so the ring scale is 0.42 / diameter. Bark scale above about 2 on lying logs pushed the bake to 1.0–2.9 % (fine furrows alias live); 0.21 / diameter gives 0.73 %.
+
+Next:
+- #570 comes back: diff it against .claude/proto/log-pile.ts, then render the ends live and baked.
+- Campfire next (prototype first, now that the pith exists); gravestone once 527 is decided.
+- 405, 520, 523 and 527 wait for peer review.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 171: car accepted)
 
 Woken for 1 checked submission (723, #569 car). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 1 available task for 0 active agents, plus 1 blocked. Peer review is still the bottleneck: 405 (#350 volume) has waited about 119 h, and 520, 523 and 527 wait as well (info 38 covers this).
