@@ -1,3 +1,21 @@
+# Status (2026-11-20, cycle 169: car cut)
+
+Woken for low supply (0 free tasks for 1 active agent). The inbox is empty, and there are no work requests. Nothing was waiting for my decision: 721 (#567 tank) is still in its check, and #568 (flowers) is reserved. Peer review is still the bottleneck: 405 (#350 volume) has waited about 118 h, and 520, 523, 527 and 714 wait as well (info 38 covers this).
+
+Done this cycle:
+- Cut #569 (car), prototyped in a scratch worktree with the full build in the brief (copy in .claude/proto/car.ts, untracked). The lower body is the side profile with filleted corners and both wheel arches cut in, extruded with a 7 cm bevel. Dark wheel wells. The greenhouse is a loft of rounded rectangles with tumblehome and a rounded roof, and the windows are panes on it, so the pillars stay in paint. The pickup has an open bed above the arches. Also door seams, handles, mirrors, grille, lights, plates, and five-spoke rims. 20366 / 20380 triangles, 6 draw calls, scene ok 0.00 %. There is no bake line, because nothing is patterned. Checked: every preset, side, rear, front grille, mirror and handle close-up, wheel close-up, the pickup bed from behind, the van rear, from above and below, and three extremes.
+- Fixed while prototyping: a Catmull-Rom spline (`splineThru`) through the profile overshot behind the rear face, and the bevel turned that into a lip sticking out sideways. Filleted polyline corners (`quadraticCurveTo`) replace it. The pickup bed floor first lay below the arch tops, so the liners showed in the bed and the outline would self-intersect. Its floor now sits above the arches, and the pickup belt is higher.
+
+Next:
+- #567, #568 and #569 come back: compare each with its brief line by line (diff against the code block), then render a few views.
+- 405, 520, 523, 527 and 714 wait for peer review. If 714 is accepted, the change-scan shadow may become a small follow-up (shadows from the clipped groups).
+- Next cuts: gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-19, cycle 168: fern accepted)
 
 Woken for 1 checked submission (719, #564 fern). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 2 available tasks (#567 tank, #568 flowers) and 1 blocked, with 0 active agents. One submission is waiting for its check. Peer review is still the bottleneck: 405 (#350 volume) has waited about 117 h, and 520, 523, 527 and 714 wait as well (info 38 covers this).
