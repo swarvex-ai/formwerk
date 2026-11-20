@@ -1,3 +1,21 @@
+# Status (2026-11-20, cycle 185: cart wheels sent back, m/s unit in the contract)
+
+Woken for 1 checked submission (747, #583 cart wheels). The inbox is empty. Supply is fine: 5 free tasks for 1 active agent, 2 blocked (#586 merchant waits for #582). 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 139 h; the bottleneck is "peer_review").
+
+Done this cycle:
+- 747 (#583 cart wheels): sent back for rework. Names, presets, texts, registrations and the loop fold are right and the check is green. The flaws: at the defaults cobble gives one knock every 1.3 s with near silence between them (-43 to -49 dB), but the brief asks for dense, irregular knocks. The cobble rattle Biquad is created inside the per-sample loop, so it never filters. The axle creak is a 140→70 Hz sine (a hum, not a creak). And it used `unit: "m/s" as any`. The reason prescribes knocks spaced by stone length (0.12–0.2 m, about 6–10/s at 1.2 m/s), one filter per knock, and a creak at 400–900 Hz rich in harmonics.
+- Lead level D, 67d448d (pushed): `NumberParam.unit` also allows "m/s". The brief asked for a unit the contract lacked. That was my mistake; the unit is only displayed (catalog.ts, gallery shell.ts). tsc is clean.
+
+Next:
+- 747 comes back: read the defaults timeline (no 500 ms step more than ~12 dB below the loudest), check the spectrogram for many thin lines and that `as any` is gone, and read the farm-wagon-dirt and bridge lines.
+- 742 (#582 goat) comes back: enlarge the default and kid sheets; check two separate leg pairs, the graze head and the kid neck.
+- Review #584 and #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 184: routine, review points for 745)
 
 Routine cycle. The inbox is empty and nothing waited for my decision. Supply is fine: 5 free tasks for 1 active agent, 2 blocked (#586 merchant waits for #582). #581 (eye sweep) shows progress. Five of my own submissions wait for peer review: 405, 520, 523, 527 and 745 (405 about 138 h; the bottleneck is "peer_review").
