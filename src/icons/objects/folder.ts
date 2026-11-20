@@ -1,6 +1,6 @@
 import { line, polygon, rect } from "../../core/vector";
 import { area, defineIcon, detail, gap, type Part } from "../define";
-import { centre, CLEAR, EDGE } from "../shared";
+import { largest, CLEAR, EDGE } from "../shared";
 
 export const folder = defineIcon({
   id: "folder", category: "objects",
@@ -28,19 +28,22 @@ export const folder = defineIcon({
     const hw = pen.width / 2, tabH = Math.max(3.2, pen.width + 1);
     const w = Math.min(p.width, 24 - 2 * EDGE - pen.width);
     const h = Math.min(p.height, 24 - 2 * EDGE - pen.width - (p.tab ? tabH : 0));
-    const links = -w / 2, rechts = w / 2, oben = 0, unten = h, teile: Part[] = [];
-    if (p.tab) teile.push(area(rect(links, oben - tabH, Math.max(5, w * 0.42), tabH + 0.5, 1)));
-    teile.push(area(rect(links, oben, w, h, 1.5)));
-    if (p.open) {
-      // The back reaches the bottom; the front flap leans open inside its outline
-      const e = Math.min(3, w * 0.18), vorn = oben + h * 0.35;
-      const klappe = polygon([links + e, vorn], [rechts, vorn], [rechts - e, unten], [links, unten]);
-      teile.push(gap(klappe), area(klappe));
-    } else {
-      // A fold line across the front, clear of the outline
-      const rand = 2 * hw + CLEAR;
-      teile.push(detail(line([links + rand, oben + h * 0.55], [rechts - rand, oben + h * 0.55])));
-    }
-    return centre(teile, pen);
+    // A sharp corner of the open flap reaches beyond its outline, so the folder is as wide as still fits the grid
+    return largest(12, w, pen, (w) => {
+      const links = -w / 2, rechts = w / 2, oben = 0, unten = h, teile: Part[] = [];
+      if (p.tab) teile.push(area(rect(links, oben - tabH, Math.max(5, w * 0.42), tabH + 0.5, 1)));
+      teile.push(area(rect(links, oben, w, h, 1.5)));
+      if (p.open) {
+        // The back reaches the bottom; the front flap leans open inside its outline
+        const e = 3, vorn = oben + h * 0.35;
+        const klappe = polygon([links + e, vorn], [rechts, vorn], [rechts - e, unten], [links, unten]);
+        teile.push(gap(klappe), area(klappe));
+      } else {
+        // A fold line across the front, clear of the outline
+        const rand = 2 * hw + CLEAR;
+        teile.push(detail(line([links + rand, oben + h * 0.55], [rechts - rand, oben + h * 0.55])));
+      }
+      return teile;
+    });
   },
 });
