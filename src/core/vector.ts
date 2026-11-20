@@ -90,7 +90,7 @@ function distSegment(p: Pt, a: Pt, b: Pt): number {
 // In the frame of a segment from a in direction d (unit): along t and across s
 function imBand(p: Pt, a: Pt, d: Pt, von: number, bis: number, hw: number): boolean {
   const ap = sub(p, a), t = dot(ap, d), s = ap[0] * -d[1] + ap[1] * d[0];
-  return t >= von && t <= bis && Math.abs(s) <= hw;
+  return t >= von - 1e-9 && t <= bis + 1e-9 && Math.abs(s) <= hw + 1e-9;
 }
 
 // The outer corner piece of a sharp join at v between directions d1 (in) and d2 (out): miter, or bevel above the limit
