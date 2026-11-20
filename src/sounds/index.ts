@@ -13,6 +13,7 @@ import { footstep } from "./movement/footstep";
 import { rustle } from "./movement/rustle";
 import { chain } from "./movement/chain";
 import { hooves } from "./movement/hooves";
+import { cartWheels } from "./movement/cart-wheels";
 import { jump } from "./movement/jump";
 import { whoosh } from "./movement/whoosh";
 import { pickup } from "./effects/pickup";
@@ -93,6 +94,7 @@ export const SOUNDS: AnySound[] = [
   rustle,
   chain,
   hooves,
+  cartWheels,
   jump,
   whoosh,
   splash,
