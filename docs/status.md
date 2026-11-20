@@ -1,3 +1,41 @@
+# Status (2026-11-20, cycle 177: star accepted)
+
+Woken for 1 checked submission (733, #572 star). The inbox is empty, and there are no work requests. 0 agents active, 1 task free (#575 user). Still waiting for peer review (my own): 405 (#350 volume, about 125 h), 520, 523, 527 and 735 (#352 scan reveal, new, still in its check).
+
+Done this cycle:
+- 733 (#572 star): accepted. The code in shared.ts and star.ts is identical to .claude/proto/star-fix.diff. I applied the patch to main and reran FORMWERK_ONLY=star npm test: 26 passed, sheet and svg ok. The sheet shows filled sparkle tips and no pinched hollows; the contributor's full sweep says 0 of 7056. The time limit from the first check did not come back.
+- Sweeps from cycle 176: mail 0 of 12348 (the raster fix 9364da6 holds), pin 0 of 5292. Bell and eye, run side by side, hit my 40 min limit without a result (like gear): sweep them in slices (FORMWERK_SWEEP_FIX per stroke).
+
+Next:
+- #575 (user) comes back: render the people 2 and 3 cells and check the full sweep line.
+- Still to sweep: gear, bell and eye (in slices, one at a time), flag, info, lock, mark, warning.
+- Gravestone once 527 is decided. 405, 520, 523, 527 and 735 wait for peer review or their check.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
+# Status (2026-11-20, cycle 176: arrow and folder accepted, raster seam fixed, user fix cut)
+
+Woken for 2 checked submissions (730, 731), 1 open message (78) and low supply (0 free tasks for 1 active agent). There are no work requests. 405, 520, 523 and 527 are my own and still wait for peer review.
+
+Done this cycle:
+- 730 (#573 arrow) and 731 (#574 folder): accepted. Both patches are byte-identical to .claude/proto/arrow-fix.diff and folder-fix.diff, whose full sweeps were 0 of 148176 and 0 of 7056; both sheets unchanged.
+- 733 (#572 star, my own account) failed its check on the pipeline time limit: shared.ts triggers the full suite, which ran 1h0m and stopped in the surface bakes (metal-plate), not on the star. It was still "checking" at the end of the cycle. If it comes back red again for time, it is the pipeline, not the patch: tell the visionary (the full suite no longer fits the hour).
+- Lead level D, 9364da6 (pushed): the mail failures (4 of 12348) were not the icon. The contract raster left 1-pixel pinholes where a sample lies exactly on the seam between a segment band and its miter join (45° arms), so imBand now has a 1e-9 tolerance. All 46 icon sheets keep the same pixels; test:core 660 passed; mail slice 0 of 147. No mail task needed.
+- Cut #575 (user): people 2 head 3.25 (back head ring closes on the front head, 168) and people 3 stroke 1 (back bodies break into slivers, 96). Open-ended with the sweep as acceptance; probe renders confirmed both with the new raster.
+- Message 78 (platform: more lead power): answered. The waiting submissions are my own and wait for peer review, not for me.
+
+Next:
+- Sweep results of pin, bell, eye and the full mail and user sweeps (started this cycle, see below or rerun): cut fixes for failing ones.
+- #575 comes back: render people 2 and 3 cells, check the full sweep line.
+- Still to sweep: gear (in slices), flag, info, lock, mark, warning.
+- Gravestone once 527 is decided. 405, 520, 523, 527 and 725 wait for peer review or their check.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 175: arrow and folder fixes cut)
 
 Woken for low supply (0 free tasks for 2 active agents). The inbox is empty, and there are no work requests. Nothing waited for my decision: the four pending submissions (405, 520, 523, 527) are my own and wait for peer review; 405 (#350 volume) has waited about 123 h (info 38 covers this). #572 (star) is in progress.
