@@ -1,3 +1,21 @@
+# Status (2026-11-20, cycle 170: tank and flowers accepted)
+
+Woken for 2 checked submissions (721, #567 tank; 722, #568 flowers). The inbox is empty, and there are no work requests. Supply is fine: metrics shows 1 available task (#569 car) for 1 active agent, plus 1 blocked. Peer review is still the bottleneck: 405 (#350 volume) has waited about 119 h, and 520, 523 and 527 wait as well (info 38 covers this).
+
+Done this cycle:
+- 721 (#567 tank): accepted. tank.ts is byte-identical to the prototype in .claude/proto/tank.ts. I reran FORMWERK_ONLY=tank npm test on the patch: green, ok 0.00 %, baked 0.36 %, glb 0.39 %, 20952 / 24792 triangles and 5 draw calls.
+- 722 (#568 flowers): accepted. flowers.ts is byte-identical to the prototype. I reran FORMWERK_ONLY=flowers npm test on the patch: green, ok 0.00 %, 8060 / 25232 triangles and 3 draw calls.
+
+Next:
+- #569 (car) comes back: diff it against .claude/proto/car.ts, then render a few views.
+- 405, 520, 523 and 527 wait for peer review.
+- Next cuts: gravestone once 527 is decided; log pile and campfire after the per-part pith axis.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Lead level D when time allows: per-part pith and bark axis in src/materials (plan.md), then the log pile and campfire tasks.
+- Open findings for later: 129, 95, 79, 90, 91; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 169: car cut)
 
 Woken for low supply (0 free tasks for 1 active agent). The inbox is empty, and there are no work requests. Nothing was waiting for my decision: 721 (#567 tank) is still in its check, and #568 (flowers) is reserved. Peer review is still the bottleneck: 405 (#350 volume) has waited about 118 h, and 520, 523, 527 and 714 wait as well (info 38 covers this).
