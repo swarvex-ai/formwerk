@@ -153,7 +153,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #320 | icon fix: download (block arrow pointing up touches the walls of a deep tray; sweep was 3 of 7056) | in peer review (523, 17 Nov; lead reproduced the full sweep: 0 of 7056) |
 | #321 | icon fix: pencil (gaps close at length 14 and for thick pencils at strong strokes; sweep was 991 of 24696) | in peer review (520, 17 Nov; lead reproduced the full sweep: 0 of 24696) |
 | #572 | icon fix: star (solid tips reach 0.7 of the edge; a point too slim for a hollow, tip depth > 0.8 edge, draws the star solid; sweep was 226 of 7056; prototype in .claude/proto/star-fix.diff) | open, cut 20 Nov (cycle 174) |
-| #573 | icon fix: arrow (a free arrow at stroke 1 grows until shaft plus arms ≥ 25 / stroke; sweep was 840 of 148176, all ink below 4 %; slice frame none, stroke 1: 0 of 8232; sheet unchanged; prototype in .claude/proto/arrow-fix.diff) | open, cut 20 Nov (cycle 175) |
+| #573 | icon fix: arrow (a free arrow at stroke 1 grows until shaft plus arms ≥ 25 / stroke; sweep was 840 of 148176, all ink below 4 %; slice frame none, stroke 1: 0 of 8232; full sweep 0 of 148176; sheet unchanged; prototype in .claude/proto/arrow-fix.diff) | open, cut 20 Nov (cycle 175) |
 | #574 | icon fix: folder (open flap: build inside `largest` over the width so sharp miters fit; lean always 3; sweep was 177 of 7056; full sweep 0 of 7056; sheet unchanged; prototype in .claude/proto/folder-fix.diff) | open, cut 20 Nov (cycle 175) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | accepted 16 Nov (submission 455, outside contributor; full sweep 0 of 14112) |
 
