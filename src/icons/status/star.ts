@@ -1,6 +1,6 @@
 import { onCircle, polygon, type Pt } from "../../core/vector";
 import { area, defineIcon, dot, type Part } from "../define";
-import { largest, solidTip } from "../shared";
+import { largest, solidTip, tipDepth } from "../shared";
 
 export const star = defineIcon({
   id: "star", category: "status",
@@ -25,8 +25,11 @@ export const star = defineIcon({
   build(p, pen) {
     const stern = (d: number): Part[] => {
       const n = p.points, ecken: Pt[] = Array.from({ length: 2 * n }, (_, i) => onCircle([12, 12], i % 2 ? (d / 2) * p.inner : d / 2, (i * 180) / n));
-      // The narrow inside of each point is solid near its tip
-      const m = 2 * n, teile: Part[] = [area(polygon(...ecken))];
+      // The narrow inside of each point is solid near its tip; a point too slim for that leaves no room for a
+      // hollow at all (many slim points, strong stroke), so the star is solid
+      const m = 2 * n, umriss = polygon(...ecken), teile: Part[] = [area(umriss)];
+      const kante = Math.hypot(ecken[1][0] - ecken[0][0], ecken[1][1] - ecken[0][1]);
+      if (tipDepth(ecken[m - 1], ecken[0], ecken[1], pen) > 0.8 * kante) return [area(umriss), dot(umriss)];
       for (let i = 0; i < m; i += 2) teile.push(dot(solidTip(ecken[(i - 1 + m) % m], ecken[i], ecken[i + 1], pen)));
       return teile;
     };

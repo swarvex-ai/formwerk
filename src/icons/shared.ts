@@ -100,11 +100,17 @@ export function turn(points: readonly Pt[], deg: number, c: Pt = [12, 12]): Pt[]
   return points.map(([x, y]): Pt => [c[0] + (x - c[0]) * cos - (y - c[1]) * sin, c[1] + (x - c[0]) * sin + (y - c[1]) * cos]);
 }
 
+/** How far the inside of the sharp point v between a and b has to be solid before it has room at 24 px. */
+export function tipDepth(a: Pt, v: Pt, b: Pt, pen: Pen): number {
+  const ax = a[0] - v[0], ay = a[1] - v[1], bx = b[0] - v[0], by = b[1] - v[1];
+  const winkel = Math.acos(Math.max(-1, Math.min(1, (ax * bx + ay * by) / (Math.hypot(ax, ay) * Math.hypot(bx, by)))));
+  return (pen.width * 1.15 + CLEAR) / (2 * Math.sin(winkel / 2));
+}
+
 /** A filled corner for the sharp point v between a and b: the narrow inside of a point (a star's tip) would show as a
  *  sliver of paper that breaks up at 24 px, so it is solid up to where the inside has room. */
 export function solidTip(a: Pt, v: Pt, b: Pt, pen: Pen): Shape {
   const ax = a[0] - v[0], ay = a[1] - v[1], bx = b[0] - v[0], by = b[1] - v[1], la = Math.hypot(ax, ay), lb = Math.hypot(bx, by);
-  const winkel = Math.acos(Math.max(-1, Math.min(1, (ax * bx + ay * by) / (la * lb))));
-  const d = Math.min(0.6 * Math.min(la, lb), (pen.width * 1.15 + CLEAR) / (2 * Math.sin(winkel / 2)));
+  const d = Math.min(0.7 * Math.min(la, lb), tipDepth(a, v, b, pen));
   return polygon(v, [v[0] + (ax / la) * d, v[1] + (ay / la) * d], [v[0] + (bx / lb) * d, v[1] + (by / lb) * d]);
 }
