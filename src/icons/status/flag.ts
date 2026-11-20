@@ -26,12 +26,20 @@ export const flag = defineIcon({
   build(p, pen) {
     const hoehe = 9, stange = 15.5;
     const fahne = (l: number): Part[] => {
-      const N = 10, ts = Array.from({ length: N + 1 }, (_, i) => i / N), schlag = (t: number) => p.wave * Math.sin(2 * Math.PI * t);
-      const spitz = p.tail === "pennant";
-      const oben = ts.map((t): Pt => [l * t, schlag(t) + (spitz ? (hoehe / 2) * t : 0)]);
-      const unten = ts.map((t): Pt => [l * t, hoehe + schlag(t) - (spitz ? (hoehe / 2) * t : 0)]).reverse();
+      const spitz = p.tail === "pennant", kerbe = Math.min(4, Math.max(2.5, l * 0.25));
+      // A notch waves only up to a stroke before its inner corner (as steep as over the whole cloth), so both prongs end
+      // as on a flat cloth; a pennant's wave shrinks with its height towards the point. Either way the edges meet at the
+      // tips at the flat angle, and their strokes cannot pinch a pocket off the hollow there.
+      const weht = p.tail === "notch" && p.wave ? l - kerbe - pen.width : l;
+      const amp = (p.wave * weht) / l;
+      const N = 10, ts = Array.from({ length: N + 1 }, (_, i) => i / N);
+      const schlag = (t: number) => amp * Math.sin(2 * Math.PI * t) * (spitz ? 1 - t : 1);
+      const oben = ts.map((t): Pt => [weht * t, schlag(t) + (spitz ? (hoehe / 2) * t : 0)]);
+      const unten = ts.map((t): Pt => [weht * t, hoehe + schlag(t) - (spitz ? (hoehe / 2) * t : 0)]).reverse();
       const rand: Pt[] = [...oben];
-      if (p.tail === "notch") rand.push([l - Math.min(4, Math.max(2.5, l * 0.25)), hoehe / 2]);
+      if (weht < l) rand.push([l, 0]);
+      if (p.tail === "notch") rand.push([l - kerbe, hoehe / 2]);
+      if (weht < l) rand.push([l, hoehe]);
       if (!spitz) rand.push(...unten); else rand.push(...unten.slice(1));
       return [stroke(line([0, 0], [0, stange])), area(polygon(...rand))];
     };
