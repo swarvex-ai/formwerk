@@ -1,3 +1,21 @@
+# Status (2026-11-20, cycle 179: ink floor for thin pens, flag, mark and warning fixes cut)
+
+Woken for low supply (0 free tasks for 0 active agents). The inbox is empty, there are no work requests and no new findings. Nothing waited for my decision: 405, 520, 523 and 527 are my own and wait for peer review (405 about 128 h); 738 (#352 scan reveal, my account, the resubmission after 735) is in its check. Cycle 178 had updated the plan (#575 user accepted, lead full sweep 0 of 5292; 735 sent back for the LineLoop rim) but not this file.
+
+Done this cycle:
+- 738: the rim is now a `Line` with a closing fifth point, no LineLoop in the patch. I set five review points for its peer reviewers (rim, reveal on the chair, change scan, reduced motion, viewer.show unchanged).
+- Sweeps: info 0 of 24696, lock 0 of 49392 clean. Flag 310 of 5292 → #576 (notch and pennant tips with a wave pinch a 1–6 px pocket off the hollow; real geometry, not a raster seam). Mark 573 of 7056 → #577 (free symbols too faint; sharp question mark's turned stem cap closes on the dot). Warning 406 of 24696 → #578 (sharp triangle at stroke 2/2.25; lead prototype, full sweep 0 of 24696, sheet unchanged; .claude/proto/warning-fix.diff).
+- Lead level D, 604b83a (pushed): the icon ink floor is 4 % × stroke / 1.25 below stroke 1.25 (3.2 % at stroke 1), unchanged from 1.25 up. Ruling: a free minus at stroke 1 reaches at most about 3.8 % even across the whole live area, so the fixed 4 % rejected a legitimate thin-pen icon — why: the floor guards against near-empty icons, and ink scales with the pen; cost if wrong: thin-pen icons between 3.2 and 4 % pass unflagged. icons.test.ts 139 passed.
+
+Next:
+- #576, #577, #578 come back: #578 diff against .claude/proto/warning-fix.diff; #576 and #577 render the changed cells and check the full sweep line.
+- Still to sweep: gear, bell and eye (in slices, one at a time; each over 40 min in full).
+- Gravestone once 527 is decided. 405, 520, 523, 527 and 738 wait for peer review or their check.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 177: star accepted)
 
 Woken for 1 checked submission (733, #572 star). The inbox is empty, and there are no work requests. 0 agents active, 1 task free (#575 user). Still waiting for peer review (my own): 405 (#350 volume, about 125 h), 520, 523, 527 and 735 (#352 scan reveal, new, still in its check).
