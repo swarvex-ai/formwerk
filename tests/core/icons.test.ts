@@ -62,7 +62,8 @@ for (const icon of only(ICONS)) {
           tinte += a / 255; x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
         }
         expect(rand, `${was}: the outermost pixel ring stays empty`).toBe(0);
-        expect(tinte / 576, `${was}: ink between 4 and 80 % of the grid`).toBeGreaterThan(0.04);
+        // A thin pen draws less ink for the same shape: below stroke 1.25 the floor shrinks with the width (3.2 % at 1)
+        expect(tinte / 576, `${was}: ink between 4 and 80 % of the grid`).toBeGreaterThan(0.04 * Math.min(1, m.pen.width / 1.25));
         expect(tinte / 576, `${was}: ink between 4 and 80 % of the grid`).toBeLessThan(0.8);
         if (!m.values.badge) {
           expect(Math.abs((x0 + x1 + 1) / 2 - 12), `${was}: centred across`).toBeLessThanOrEqual(2);

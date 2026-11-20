@@ -1,6 +1,6 @@
 // FORMWERK_SWEEP=<icon id>: draws the icon in every combination of its parameters (number parameters at up to seven
 // evenly spaced values, every choice, every stroke, both corners, all three styles) and applies the checks of
-// icons.test.ts to each: the outermost pixel ring stays empty, ink between 4 and 80 %, centred, reads at 24 px.
+// icons.test.ts to each: the outermost pixel ring stays empty, ink between 4 (3.2 at stroke 1) and 80 %, centred, reads at 24 px.
 // The suite itself draws only a few random cases, so a green suite can hide whole failing regions. Writes every
 // failing combination to tests/scene/out/sweep-<id>.txt and fails when there is one. Skipped when the variable is not
 // set; about 1000 combinations take 4 to 5 minutes. FORMWERK_SWEEP_FIX='{"size":18}' holds parameters at these values
@@ -42,7 +42,7 @@ it.skipIf(!id)(`sweeps every combination of ${id || "an icon"}`, () => {
     }
     const was = [
       rand ? `${rand} pixels on the outermost ring` : null,
-      tinte / 576 <= 0.04 || tinte / 576 >= 0.8 ? `ink ${((tinte / 576) * 100).toFixed(1)} %` : null,
+      tinte / 576 <= 0.04 * Math.min(1, m.pen.width / 1.25) || tinte / 576 >= 0.8 ? `ink ${((tinte / 576) * 100).toFixed(1)} %` : null,
       Math.abs((x0 + x1 + 1) / 2 - 12) > 2 || Math.abs((y0 + y1 + 1) / 2 - 12) > 2 ? "not centred" : null,
       legibility(m.ops, m.pen),
     ].filter(Boolean);
