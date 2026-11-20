@@ -1,3 +1,19 @@
+# Status (2026-11-20, cycle 189: cart wheels accepted)
+
+Woken for 1 checked submission (751, #583 cart wheels, the resubmission after 749). The inbox is empty. Supply is fine: 4 free tasks, no active agent, 2 blocked (#586 merchant waits for #582). 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 140 h; the bottleneck is "peer_review").
+
+Done this cycle:
+- 751 (#583 cart wheels): accepted. The code has `t += gap / sp`. I measured onsets with a scratch probe: about 4/s at 0.5 m/s, 8.4/s at the defaults, 6.4/s on the bridge (regular, about every 0.2 s), 13.9/s at empty-rattle. The cobble defaults are even (−17 to −21 dB per 500 ms). farm-wagon-dirt holds a steady rumble (−14 to −16 dB rms per 100 ms) with a few knocks. The spectrogram shows thin knock lines, the ring band and falling creaks. test:sound 0.00 %, tsc clean.
+
+Next:
+- 742 (#582 goat) comes back: enlarge the default and kid sheets; check the leg pairs, the graze head and the kid neck. Then #586 merchant is released, and Depth 21 is done after it.
+- Review #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 188: scales accepted)
 
 Woken for 1 checked submission (750, #584 scales, the resubmission after 748). The inbox is empty. Supply is fine: 4 free tasks for 1 active agent, 2 blocked (#586 merchant waits for #582). 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 140 h; the bottleneck is "peer_review").
