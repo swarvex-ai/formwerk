@@ -1,3 +1,19 @@
+# Status (2026-11-20, cycle 184: routine, review points for 745)
+
+Routine cycle. The inbox is empty and nothing waited for my decision. Supply is fine: 5 free tasks for 1 active agent, 2 blocked (#586 merchant waits for #582). #581 (eye sweep) shows progress. Five of my own submissions wait for peer review: 405, 520, 523, 527 and 745 (405 about 138 h; the bottleneck is "peer_review").
+
+Done this cycle:
+- 745 (#352 scan reveal, the resubmission after 738): set five review points (sheet on opening, slider swap and fast drags, ?webgl and reduced motion, rim as Line without LineLoop, viewer signatures and scan.stop() before .glb and rig). The patch mentions LineLoop only in a comment.
+
+Next:
+- 742 (#582 goat) comes back: enlarge the default and kid sheets; check two separate leg pairs with background between them, the graze head shape and the kid neck.
+- Review #583, #584 and #579–#581 when they come back (see cycle 182). With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 183: goat sent back for rework)
 
 Woken for 1 checked submission (742, #582 goat). The inbox is empty. Supply is fine: 4 free tasks for 3 active agents. 405, 520, 523 and 527 are still my own and wait for peer review (405 about 132 h; the bottleneck is "peer_review").
