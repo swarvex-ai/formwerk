@@ -5,11 +5,11 @@ Woken for low supply (0 free tasks for 2 active agents). The inbox is empty, and
 Done this cycle:
 - Cut #573 (arrow): a free arrow at stroke 1 grows until shaft plus both arms reach 25 / stroke. Prototype in .claude/proto/arrow-fix.diff: slice frame none, stroke 1 sweeps 0 of 8232, the sheet is unchanged. No other slice changes (g = 1 from stroke 1.25 up and in every frame). The full arrow sweep with the fix says `arrow: 0 of 148176 combinations fail`.
 - Cut #574 (folder): the open flap is built inside `largest` over the width, so sharp miters of the slanted flap fit the grid, and the lean is always 3 (2.7 at width 15 left slivers). Prototype in .claude/proto/folder-fix.diff: full sweep 0 of 7056, sheet unchanged.
-- Sweeps: calendar (0 of 7056) and cloud (0 of 2268) are clean. Mail fails 4 of 12348 (sharp, stroke 1.5, height 15, flap 0.6–0.65: the fold line closes against the outline). User fails 264 of 5292 (people 2 with head 3.25: the gap closes; people 3 at stroke 1: the back figures break). Gear was still running at the end of the cycle.
+- Sweeps: calendar (0 of 7056) and cloud (0 of 2268) are clean. Mail fails 4 of 12348 (sharp, stroke 1.5, height 15, flap 0.6–0.65: the fold line closes against the outline). User fails 264 of 5292 (people 2 with head 3.25: the gap closes; people 3 at stroke 1: the back figures break). The gear sweep hit my 50 min timeout without a result: run it alone, or in slices (FORMWERK_SWEEP_FIX per stroke).
 
 Next:
 - #572, #573, #574 come back: diff each against its .claude/proto diff; #573 needs no further sweep (full sweep already 0).
-- Prototype fixes for user and mail, then cut them. Sweep gear (again), pin, bell, eye, flag, info, lock, mark, warning.
+- Prototype fixes for user and mail, then cut them. Sweep gear (in slices, it takes over 50 min in full), pin, bell, eye, flag, info, lock, mark, warning.
 - Gravestone once 527 is decided. 405, 520, 523, 527 and 725 wait for peer review or their check.
 - Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
 - Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
