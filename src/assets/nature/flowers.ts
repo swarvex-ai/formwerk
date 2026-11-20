@@ -1,47 +1,58 @@
-import { BufferGeometry, CircleGeometry, CylinderGeometry, Float32BufferAttribute, type Material } from "three";
+import { BufferGeometry, Float32BufferAttribute, Vector3, type Material } from "three";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, turned } from "../shapes";
 
-// A strip of grass or a leaf: four corners, duplicated for the back face (formwerk materials render front faces
-// only, so a one-sided quad vanishes from half the viewpoints). Eight vertices give each side its own normal.
-function blade(t: Parts, m: Material, x: number, z: number, h: number, w: number, yaw: number, lean: number) {
-  const c = Math.cos(yaw), s = Math.sin(yaw), px = -s, pz = c;
-  const tx = x + c * lean * h, tz = z + s * lean * h, wt = w * 0.25;
-  const ecken = [
-    [x - px * w, 0, z - pz * w],
-    [x + px * w, 0, z + pz * w],
-    [tx + px * wt, h, tz + pz * wt],
-    [tx - px * wt, h, tz - pz * wt],
-  ];
-  const pos: number[] = [], uv: number[] = [0, 0, 1, 0, 1, 1, 0, 1];
-  for (const q of ecken) pos.push(q[0], q[1], q[2]);
-  for (const q of ecken) pos.push(q[0], q[1], q[2]);
+const SEGMENTE = 6;
+
+// A grass blade or a leaf, folded along its midrib like a shallow V, that leans out, droops towards the tip and ends
+// in a point. Both faces are built (formwerk materials render front faces only); each face has its own vertices.
+function blade(t: Parts, m: Material, x: number, z: number, len: number, w: number, yaw: number, lean: number, droop: number) {
+  const dx = Math.cos(yaw), dz = Math.sin(yaw), ds = len / SEGMENTE;
+  const pos: number[] = [], uv: number[] = [];
+  let cx = x, cy = 0, cz = z;
+  for (let i = 0; i <= SEGMENTE; i++) {
+    const s = i / SEGMENTE, half = i === SEGMENTE ? 0 : w * 0.5 * Math.pow(1 - s, 0.5);
+    const q = yaw + Math.PI / 2 + 0.6 * s, px = Math.cos(q), pz = Math.sin(q);
+    const a = lean + droop * s * s;
+    const tx = dx * Math.sin(a), ty = Math.cos(a), tz = dz * Math.sin(a);
+    // the fold: the midrib lies behind the edges, along the blade's normal (across × along)
+    const nx = pz * ty, ny = px * tz - pz * tx, nz = -px * ty, kiel = half * 0.3;
+    const y = Math.max(0.004, cy);
+    pos.push(cx - px * half, y, cz - pz * half, cx - nx * kiel, Math.max(0.004, y - ny * kiel), cz - nz * kiel, cx + px * half, y, cz + pz * half);
+    uv.push(0, s, 0.5, s, 1, s);
+    cx += tx * ds; cz += tz * ds; cy += ty * ds;
+  }
+  const n = pos.length / 3, idx: number[] = [];
+  for (let i = 0; i < SEGMENTE; i++) for (const k of [0, 1]) {
+    const a = i * 3 + k, b = a + 1, c = a + 3, d = a + 4;
+    idx.push(a, b, d, a, d, c);
+    idx.push(n + a, n + d, n + b, n + a, n + c, n + d);
+  }
   const g = new BufferGeometry();
-  g.setAttribute("position", new Float32BufferAttribute(pos, 3));
+  g.setAttribute("position", new Float32BufferAttribute([...pos, ...pos], 3));
   g.setAttribute("uv", new Float32BufferAttribute([...uv, ...uv], 2));
-  g.setIndex([0, 2, 1, 0, 3, 2, 4, 5, 6, 4, 6, 7]);
+  g.setIndex(idx);
   g.computeVertexNormals();
   t.add(m, g);
 }
 
-// A petal as a small quad in the flower plane, cupped a little: the outer edge rises, so the face turns up and
-// outward and shows from above. Petals stay one-sided like the top of a real blossom.
-function petal(t: Parts, m: Material, cx: number, cy: number, cz: number, angle: number, len: number, half: number, lift: number) {
-  const c = Math.cos(angle), s = Math.sin(angle), px = -s, pz = c, fn = half * 0.35;
-  const fx = cx + c * len, fz = cz + s * len, fy = cy + lift;
-  const ecken = [
-    [cx - px * fn, cy, cz - pz * fn],
-    [cx + px * fn, cy, cz + pz * fn],
-    [fx + px * half, fy, fz + pz * half],
-    [fx - px * half, fy, fz - pz * half],
-  ];
-  const g = new BufferGeometry();
-  g.setAttribute("position", new Float32BufferAttribute(ecken.flat(), 3));
-  g.setAttribute("uv", new Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2));
-  g.setIndex([0, 1, 2, 0, 2, 3]);
-  g.computeVertexNormals();
-  t.add(m, g);
+// A petal from the centre outwards: narrow at the base, widest past the middle, a rounded tip. It rises at `e0` and
+// curls up by `curl` towards the tip; both faces are built, so it shows from below too.
+function petal(t: Parts, m: Material, c: Vector3, angle: number, r0: number, len: number, w: number, e0: number, curl: number) {
+  const ca = Math.cos(angle), sa = Math.sin(angle), px = -sa, pz = ca;
+  const at = (u: number, v: number) => {
+    // radial distance and height along the curled midline, summed in small steps
+    let rho = r0, y = 0;
+    for (let k = 0; k < 8; k++) { const e = e0 + curl * ((k + 0.5) / 8) * v; rho += Math.cos(e) * len * v / 8; y += Math.sin(e) * len * v / 8; }
+    const half = w * Math.pow(Math.sin(Math.PI * (0.12 + 0.88 * v)), 0.6) * (u * 2 - 1);
+    // cupped across: the edges stand a little higher than the midrib
+    const hoch = Math.abs(u * 2 - 1) * w * 0.25;
+    return new Vector3(c.x + ca * rho + px * half, c.y + y + hoch, c.z + sa * rho + pz * half);
+  };
+  t.add(m, grid(2, 4, at, () => new Vector3(0, 1, 0)));
+  t.add(m, grid(2, 4, at, () => new Vector3(0, -1, 0)));
 }
 
 export const flowers = defineAsset({
@@ -68,26 +79,43 @@ export const flowers = defineAsset({
     meadow: { label: { de: "Blumenwiese", en: "Wildflower meadow" }, values: { count: 38, radius: 0.95, stemHeight: 0.3, blossom: 0.03, petals: 5, color: "#f0c419" } },
   },
   physics: { body: "static", collider: "cylinder" },
-  budget: { triangles: 6000, drawCalls: 2 },
+  budget: { triangles: 40000, drawCalls: 3 },
   build(p, seed) {
-    const r = rng(seed), gras = material("leaf", "#4a8a3e", 1, 200), bluete = material("paint", p.color), t = new Parts();
-    const R = p.radius, H = p.stemHeight, B = p.blossom;
-    // A flat turf disc holds the tuft together and gives the mass estimate something solid
-    t.add(gras, new CylinderGeometry(R * 0.92, R, 0.02, 12).translate(0, 0.01, 0));
-    const streuen = () => { const a = r() * Math.PI * 2, d = R * Math.sqrt(r()); return [Math.cos(a) * d, Math.sin(a) * d] as const; };
+    const r = rng(seed), t = new Parts(), R = p.radius, H = p.stemHeight, B = p.blossom;
+    // Grass, stems and turf in one plain leaf green like the tree's leaves; the petals in the blossom colour, the
+    // centre golden (brown in a yellow blossom)
+    const gras = material("leaf", "#4a8a3e", 1, 200, { plain: true }), bluete = material("paint", p.color);
+    const farbe = (() => { const h = parseInt(p.color.slice(1), 16), rr = h >> 16, gg = (h >> 8) & 255, bb = h & 255; return rr > 150 && gg > 120 && bb < 110 && rr - bb > 90 ? "#6b4520" : "#e0a91e"; })();
+    const mitte = material("paint", farbe);
+    // The turf: a low uneven mound, closed underneath
+    const rand = (u: number) => R * (1 + 0.06 * Math.sin(u * Math.PI * 6 + 1) + 0.04 * Math.sin(u * Math.PI * 14 + 2));
+    const hm = Math.min(0.03, 0.012 + R * 0.03);
+    t.add(gras, grid(24, 3, (u, v) => {
+      const a = u * Math.PI * 2, d = rand(u) * Math.sin((v * Math.PI) / 2);
+      return new Vector3(Math.cos(a) * d, v === 1 ? 0 : hm * Math.cos((v * Math.PI) / 2), Math.sin(a) * d);
+    }, (q) => new Vector3(q.x, q.y + 0.05, q.z)));
+    t.add(gras, grid(24, 1, (u, v) => new Vector3(Math.cos(u * Math.PI * 2) * rand(u) * v, 0, Math.sin(u * Math.PI * 2) * rand(u) * v), () => new Vector3(0, -1, 0)));
+    const streuen = () => { const a = r() * Math.PI * 2, d = R * 0.9 * Math.sqrt(r()); return [Math.cos(a) * d, Math.sin(a) * d] as const; };
+    // A tulip (four petals) closes into a cup; other blossoms open flat and curl up a little at the tips
+    const tulpe = p.petals <= 4, e0 = tulpe ? 1.05 : 0.12, curl = tulpe ? 0.25 : 0.35;
     for (let i = 0; i < p.count; i++) {
-      const [x, z] = streuen(), h = H * (0.8 + 0.4 * r()), yaw = r() * Math.PI * 2;
-      // Stem and two leaves: the blades now show from both sides
-      blade(t, gras, x, z, h, 0.004, yaw, 0.1 + 0.2 * r());
-      for (let k = 0; k < 2; k++) blade(t, gras, x, z, h * (0.35 + 0.25 * r()), 0.008, r() * Math.PI * 2, 0.35 + 0.35 * r());
-      // Blossom: petals around a small centre, at the top of the stem
-      const y = h, len = B * 0.5, half = B * 0.24;
-      for (let k = 0; k < p.petals; k++) petal(t, bluete, x, y, z, (k / p.petals) * Math.PI * 2 + r() * 0.15, len * (0.85 + 0.3 * r()), half, B * 0.16);
-      t.add(bluete, new CircleGeometry(B * 0.2, 6).rotateX(-Math.PI / 2).translate(x, y + 0.002, z));
+      const [x, z] = streuen(), h = H * (0.8 + 0.4 * r()), yaw = r() * Math.PI * 2, bend = 0.08 + 0.1 * r();
+      // The stem: a thin round tube that tapers and bends a little to one side
+      const rs = Math.max(0.0015, Math.min(0.004, B * 0.06 + H * 0.004));
+      const mid = (v: number) => new Vector3(x + Math.cos(yaw) * bend * h * v * v, v * h, z + Math.sin(yaw) * bend * h * v * v);
+      t.add(gras, grid(5, 5, (u, v) => { const c = mid(v), a = u * Math.PI * 2, rr = rs * (1 - 0.35 * v); return new Vector3(c.x + Math.cos(a) * rr, c.y, c.z + Math.sin(a) * rr); }, (q) => { const c = mid(0.5); return new Vector3(q.x - c.x, 0, q.z - c.z); }));
+      // Two leaves at the foot of the stem
+      for (let k = 0; k < 2; k++) blade(t, gras, x, z, h * (0.35 + 0.25 * r()), tulpe ? 0.02 : 0.01, r() * Math.PI * 2, 0.3 + 0.3 * r(), 0.6 + 0.6 * r());
+      // The blossom: petals around a domed centre at the top of the stem
+      const top = mid(1), c = B * (tulpe ? 0.14 : 0.2), len = B * (tulpe ? 0.55 : 0.42), w = B * (tulpe ? 0.32 : 0.6 / p.petals + 0.04);
+      for (let k = 0; k < p.petals; k++) petal(t, bluete, top, (k / p.petals) * Math.PI * 2 + r() * 0.15, c * 0.6, len * (0.9 + 0.2 * r()), w, e0, curl);
+      // (inside a tulip's cup the centre stays within the petal bases)
+      const cm = tulpe ? c * 0.6 : c;
+      t.add(mitte, turned([[0, 0], [cm, 0], [cm * 0.92, cm * 0.35], [cm * 0.6, cm * 0.6], [0, cm * 0.68]], 10, top.x, top.y - (tulpe ? 0 : cm * 0.1), top.z));
       // Grass blades around the flower
-      for (let k = 0; k < 2; k++) {
+      for (let k = 0; k < 3; k++) {
         const [gx, gz] = streuen();
-        blade(t, gras, gx, gz, H * (0.5 + 0.6 * r()), 0.006 + 0.006 * r(), r() * Math.PI * 2, 0.15 + 0.5 * r());
+        blade(t, gras, gx, gz, H * (0.5 + 0.6 * r()), 0.005 + 0.004 * r(), r() * Math.PI * 2, 0.1 + 0.4 * r(), 0.4 + 0.8 * r());
       }
     }
     t.cylinder(R * 0.92, H * 1.2 + B);
