@@ -47,7 +47,8 @@ export const warning = defineIcon({
       teile.push(area(polygon(...ecken)));
       const top = ecken[0][1], basis = ecken[ecken.length - 2][1], links = ecken[ecken.length - 1][0];
       const schraeg = (basis - top) / (12 - links);
-      oben = top + (2 * hw + 1) * Math.hypot(1, schraeg);
+      // A square cap (sharp) reaches hw to each side of the stem, where the slopes come closer by hw · schraeg
+      oben = top + (2 * hw + 1) * Math.hypot(1, schraeg) + (pen.corners === "sharp" ? hw * schraeg : 0);
       dotR = hw;
       dotC = [12, basis - 2 * hw - 1 - dotR];
       stielBis = dotC[1] - dotR - p.spacing - hw;
