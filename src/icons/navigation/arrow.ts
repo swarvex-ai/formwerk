@@ -30,7 +30,9 @@ export const arrow = defineIcon({
   build(p, pen) {
     const f = framed(p.frame, pen, p.frameSize), hw = pen.width / 2, kopf = p.head * Math.SQRT1_2;
     // Pointing right around the centre, then turned; the head's arms meet at a right angle
-    const roh: Pt[] = [[-p.length / 2, 0], [p.length / 2, 0], [p.length / 2 - kopf, -kopf], [p.length / 2 - kopf, kopf]];
+    // A free arrow drawn thin and short grows until its strokes carry enough ink to read (shaft plus both arms ≥ 25 / stroke)
+    const g = p.frame === "none" ? Math.max(1, 25 / ((p.length + 2 * p.head) * pen.width)) : 1, l = p.length * g, kg = kopf * g;
+    const roh: Pt[] = [[-l / 2, 0], [l / 2, 0], [l / 2 - kg, -kg], [l / 2 - kg, kg]];
     const k = fit(roh, inkRadius(pen), f), [schwanz, spitze, a, b] = roh.map(([x, y]): Pt => [12 + x * k, 12 + y * k]);
     // A square cap stops short of the tip, so it never pokes out of the head's corner
     const ende: Pt = pen.corners === "sharp" ? [spitze[0] - hw, spitze[1]] : spitze;
