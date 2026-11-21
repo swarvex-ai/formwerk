@@ -1,3 +1,19 @@
+# Status (2026-11-21, cycle 193: merchant sent back)
+
+Woken for 1 checked submission (753, #586 merchant). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 753 (#586 merchant): rework. I looked at the sheet at 4×. Facing up there is no head (the `hinten` branch returns before the head is drawn, so the hat floats over a gap). The beard sits in an `else if` after the hat, so the default and spice-seller looks have no beard. The purse is missing facing down. The brimmed brim is off-centre (x 6–19 for a head at x 7–16). The apron covers the chin and the full body width. The summary was terminal output and did not answer the checkpoints.
+
+Next:
+- #586 merchant comes back: enlarge the sheet; check the up head, the beard under a hat, the purse facing down, the symmetric brim and the apron from the chest. Depth 21 is done after it.
+- Review #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the goat's last graze frame (the neck wedge hides the front legs, the horns fall inside the neck); the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 192: goat accepted)
 
 Woken for 1 checked submission (752, #582 goat, the resubmission after 742). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent, 2 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
