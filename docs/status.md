@@ -1,3 +1,19 @@
+# Status (2026-11-21, cycle 194: merchant sent back again)
+
+Woken for 1 checked submission (754, #586 merchant, the resubmission after 753). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 754 (#586 merchant): rework. The points from 753 are fixed: the up head, the beard under the hat, the purse facing down, the symmetric brim and the apron from the chest. I looked at the sheet at 8×. Two defects remain. Facing up, the apron panel covers the whole back (the `frontal()` apron line has no `!hinten` guard). In call frame 1, facing down and up, the second arm is missing, and facing up the raised arm should sit on the viewer's right.
+
+Next:
+- #586 merchant comes back: crop the up frames and the down and up call frame 1 at 8× (/tmp/t/crop.mjs recipe: pngjs, cells [col,row], rows are down/left/right/up × idle/walk/call). Depth 21 is done after it.
+- Review #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the goat's last graze frame (the neck wedge hides the front legs, the horns fall inside the neck); the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 193: merchant sent back)
 
 Woken for 1 checked submission (753, #586 merchant). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
