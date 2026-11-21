@@ -1,3 +1,26 @@
+# Status (2026-11-21, cycle 199: horse sent back again)
+
+Woken for 1 checked submission (759, #587 horse, second attempt). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 156 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 759 (#587 horse): rework (second time). Idle and walk now read as a horse, the pony stands lower and the draught horse is deeper. Remaining defects:
+  - Graze: the head is drawn inside the chest (`ghx = withersX`), and the "muzzle on the floor" is a 1 px dark column from `kopf`. The head bottom sits at about row 17.
+  - The saddle is missing in graze: the graze branch returns before the saddle is drawn.
+  - The German label for "Bay" says "Fuchs"; it should be "Brauner".
+  - Asked for: a diagonal neck from the withers, and a 4×3 head at x ≥ withersX+3 with the lowest row 21/22. Also a measured row and x range per preset in the summary.
+- Preset render recipe that worked: a temporary tests/core/zz_<id>.test.ts that imports `makeSheet` from src/sprites/define and the sprite, and writes `s.image` via pngjs to /tmp. Then `.claude/tools/crop.mjs <png> <out> 24 24 6 0,1 1,3 0,5 1,5`. Delete the test afterwards.
+
+Next:
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label.
+- #588 whinny comes back: in tests/scene/out/whinny.txt, check the pulses across the whole body (peaks about 90–180 ms apart), one quoted line per preset, and the snort gap.
+- Review #589 straw and #590 hitching post when they come.
+- Review #580 bell and #581 eye when they come back. When both are at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 198: whinny sent back)
 
 Woken for 1 checked submission (758, #588 whinny). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 156 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
