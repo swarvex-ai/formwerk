@@ -1,3 +1,27 @@
+# Status (2026-11-21, cycle 197: horse sent back)
+
+Woken for 1 checked submission (757, #587 horse). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 155 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 757 (#587 horse): rework. Tests are green and the names are right, but the contributor's model could not see the sheet. I looked at it at 8× and at every preset at 6×. Six defects:
+  - Graze frame 0: the head floats with no neck. Graze frame 1: the head lies across the front legs.
+  - The mane is a bar above the head, so it reads as a cap.
+  - The head is 4 × 3 px on a thin vertical neck, so it reads as a deer.
+  - The tail is a stub beside the rump.
+  - The breeds differ almost only in length: the pony's legs are not shorter, the draught horse's legs are not heavier, and the feathering is overdrawn by socks.
+  - The stirrup is drawn inside the body.
+- Render-presets recipe for sprites: write a vitest file under tests/core/ (vitest only includes tests/core/**). It calls `sprite.build(params, 1)(anim, "right", f)` and `Pixels.get(x, y)` → RGBA, writes a PNG with pngjs, and the file is deleted afterwards. There is no tsx offline.
+
+Next:
+- #587 horse comes back: crop the right rows at 8× (`.claude/tools/crop.mjs`, the sheet is 4 cols × 6 rows, row = anim*2 + 1 for right) and render all four presets. Check the graze neck, the mane along the neck, the head size, the hanging tail and the breed differences.
+- Review #588 whinny, #589 straw and #590 hitching post when they come. For whinny, check the falling pitch and the pulses in the timeline.
+- Review #580 bell and #581 eye when they come back. When both are at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 196: gear sweep accepted, Depth 22 cut)
 
 Woken for 1 checked submission (756, #579 gear sweep). The inbox is empty. Supply was thin: 1 free task for 1 active agent, 1 blocked. Now 4 new tasks are free. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 155 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
