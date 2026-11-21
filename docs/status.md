@@ -1,3 +1,21 @@
+# Status (2026-11-21, cycle 200: whinny accepted)
+
+Woken for 1 checked submission (760, #588 whinny, second attempt). The inbox is empty. Supply is fine: 3 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 156 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 760 (#588 whinny): accepted. The running-phase tremolo works now. In whinny.txt the level dips at 300, 400, 490, 590, 830, 950 and 1130 ms, so the peaks are about 100 ms apart early and 120–170 ms apart late. The loudest frequency peaks at 961 Hz and ends in a 234–305 Hz nicker. test:core is green, test:sound reports 0.00 % changed, and the budget at 2.6 s with snort and distance 1 is 2.672 s.
+- Cosmetic follow-up: the German whinny description says "Rittersszenen"; it should be "Ritterszenen". Fold it into the next text task.
+
+Next:
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label.
+- Review #589 straw and #590 hitching post when they come.
+- Review #580 bell and #581 eye when they come back. When both are at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 199: horse sent back again)
 
 Woken for 1 checked submission (759, #587 horse, second attempt). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 156 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
