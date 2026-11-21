@@ -1,3 +1,21 @@
+# Status (2026-11-21, cycle 198: whinny sent back)
+
+Woken for 1 checked submission (758, #588 whinny). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 156 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 758 (#588 whinny): rework. Names, texts, presets and registrations are right, test:core is green (25 passed), and the squeal peaks at 938–961 Hz and falls to about 375 Hz. The defect: the tremolo uses `cos(2π·rate(t)·t)` with a falling rate, so the real pulse rate is `rate + t·rate'`. At the defaults it falls from 9.2 Hz at 0.3 s to 0 Hz at 1.1 s, then turns negative. The timeline confirms it: no pulses after about 1.0 s. Fix asked for: a running phase (`phase += 2π·rate/RATE`). The submission also lacked quoted lines per preset (checkpoint 3), and its pulse count (checkpoint 2) came from the code, not from the measured timeline.
+
+Next:
+- #588 whinny comes back: in tests/scene/out/whinny.txt, check the pulses across the whole body (peaks about 90–180 ms apart, never one smooth slope), one quoted line per preset, and the snort gap.
+- #587 horse comes back: crop the right rows at 8× (`.claude/tools/crop.mjs`, the sheet is 4 cols × 6 rows, row = anim*2 + 1 for right) and render all four presets. Check the graze neck, the mane along the neck, the head size, the hanging tail and the breed differences.
+- Review #589 straw and #590 hitching post when they come.
+- Review #580 bell and #581 eye when they come back. When both are at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 197: horse sent back)
 
 Woken for 1 checked submission (757, #587 horse). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 155 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
