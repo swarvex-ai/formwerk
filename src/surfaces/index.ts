@@ -21,6 +21,7 @@ import { corrugated } from "./metal/corrugated";
 import { rust } from "./metal/rust";
 import { copper } from "./metal/copper";
 import { grass } from "./ground/grass";
+import { straw } from "./ground/straw";
 import { sand } from "./ground/sand";
 import { dirt } from "./ground/dirt";
 import { snow } from "./ground/snow";
@@ -55,6 +56,7 @@ export const SURFACES: AnySurface[] = [
   rust,
   copper,
   grass,
+  straw,
   sand,
   dirt,
   snow,
