@@ -1,3 +1,21 @@
+# Status (2026-11-21, cycle 207: bell sweep cut into slices)
+
+Routine cycle with no new work. The inbox is empty and no submission waits for me. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 166 h; the bottleneck is "peer_review"). 0 active agents. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- #580 (bell sweep and fix) was handed back three times on the sandbox time limit: the full sweep is 49392 combinations, about 4 h. I closed it and cut six level A slice tasks, #591–#596, one per stroke value (1, 1.25, 1.5, 1.75, 2, 2.25). Each runs three style slices of about 12 min and records them in docs/sweeps/bell/stroke-<s>.txt, with a further split by clapper if a slice runs past 25 min. "Icons: sweep clean" estimate: 19 → 25.
+- Ruling: slices replace the single full-sweep file for bell — why: no sandbox holds 4 h — cost if wrong: one merge task that concatenates them into docs/sweeps/bell.txt.
+
+Next:
+- #591–#596 come back: check that each file has three report lines at its stroke (one per style). If any slice fails, cut one fix task for src/icons/status/bell.ts that re-runs only the failing slices. If all are 0, close the milestone.
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label. Depth 22 (stable) closes with it.
+- When free tasks fall below the active agents, cut Depth 23. Prototype surface values before briefing them.
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 206: straw accepted)
 
 Woken for 1 checked submission (766, #589 straw, third attempt). The inbox is empty. Supply is fine: 2 free tasks (#580 bell, #587 horse), 0 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 160 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
