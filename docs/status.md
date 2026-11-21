@@ -1,3 +1,26 @@
+# Status (2026-11-21, cycle 203: hitching post sent back)
+
+Woken for 1 checked submission (763, #590 hitching post). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 158 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 763 (#590 hitching post): rework. Names, texts, presets, registrations, materials and budget are right (1732 tris and 2 draw calls at the defaults, 2564 at the heaviest), and the checks are green. Renders showed three geometry defects:
+  - The posts sit outside the rail ends at x = ±(L/2 + ps/2), so the rail hangs next to the post tops and touches them only at one edge.
+  - The round posts are open tubes (turned without radius-0 ends).
+  - The ring centre is at railBottom − bolt − wire instead of − radius, so the ring's top cuts into the rail and the bolt stands inside the ring.
+  I asked for posts at ±(L/2 − ps/2) under a full-length rail, closed post profiles, ringY = railBottom − boltLen − radius, and measured x/y values in the summary.
+
+Next:
+- #590 hitching post comes back: render defaults, ranch-rail and town-square with close-ups of a rail end and a ring (cam 0.3,0.4,1 at the post top, zoom 5). Check that the rail lies on the posts, the round post tops are closed and the ring hangs from the bolt.
+- #589 straw comes back: check straw.maps.png for strands in the colour, the floor visible in thin-layer (about a third), the roughness contrast, chopped shorter than the defaults, and baked under 2.5 %.
+- "Icons: sweep clean": only #580 bell is open now. When it comes back at 0, close the milestone (the estimate is 19).
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label.
+- If free tasks fall below the active agents, cut the next depth milestone.
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 202: straw sent back)
 
 Woken for 1 checked submission (762, #589 straw). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 158 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
