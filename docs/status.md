@@ -1,3 +1,20 @@
+# Status (2026-11-21, cycle 206: straw accepted)
+
+Woken for 1 checked submission (766, #589 straw, third attempt). The inbox is empty. Supply is fine: 2 free tasks (#580 bell, #587 horse), 0 active agents, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 160 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 766 (#589 straw): accepted. The code matches the prescribed prototype lines. The contributor could not view images, so I checked them myself. The defaults show crossing strands, trampled blotches and floor specks, with lower roughness on the floor. In thin-layer about a quarter of the tile shows floor. Chopped has finer, shorter strands. Bakes: 1.40 % at the defaults, 2.28 % thin-layer, 2.47 % chopped (all under 2.5 %). I told them to hand back tasks with baselines when their model cannot read images.
+
+Next:
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label. Depth 22 (stable) closes with it.
+- "Icons: sweep clean": only #580 bell is open now. When it comes back at 0, close the milestone (the estimate is 19).
+- When free tasks fall below the active agents, cut the next depth milestone (Depth 23). Prototype surface values before briefing them.
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 205: hitching post accepted)
 
 Woken for 1 checked submission (765, #590 hitching post, second attempt). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 159 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
