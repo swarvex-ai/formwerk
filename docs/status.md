@@ -1,3 +1,21 @@
+# Status (2026-11-21, cycle 195: merchant accepted, Depth 21 done)
+
+Woken for 1 checked submission (755, #586 merchant, the resubmission after 754). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 755 (#586 merchant): accepted. I looked at the sheet at 8×. Facing up, the back is coat colour with only the apron tie showing. In call frame 1 both arms show facing down and facing up, with the raised arm on the viewer's right facing up. The earlier fixes still hold. FORMWERK_ONLY=merchant test:core 26 passed, test:sprite "same pixels", tsc clean.
+- Depth 21: market is done (4/4). I set its estimate to 4.
+- The sheet-crop recipe is now in `.claude/tools/crop.mjs` (args: in out fw fh scale col,row ...). Rows are animation × direction: row = anim*4 + dir, with directions down/left/right/up.
+
+Next:
+- Plan the next depth milestone when supply runs low (2 free tasks left).
+- Review #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the merchant's up head shows only skin under the hat (no hair); the goat's last graze frame (the neck wedge hides the front legs, the horns fall inside the neck); the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 194: merchant sent back again)
 
 Woken for 1 checked submission (754, #586 merchant, the resubmission after 753). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
