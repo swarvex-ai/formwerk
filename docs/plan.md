@@ -159,7 +159,7 @@ The icon task has a coordinate sketch per shape from the start.
 | #576 | icon fix: flag (notch and pennant tips with a wave pinch a pocket off the hollow: 306 cases; pennant point at stroke 2.25 breaks: 3; one filled pennant gap; sweep 310 of 5292; open-ended, fade the wave towards the tips) | accepted 20 Nov (739, cycle 180): notch waves up to a stroke before its corner with straight prongs, pennant wave fades with (1 − t); wave 0 unchanged, only the swallowtail sheet row changed; lead full sweep on the patch 0 of 5292 |
 | #577 | icon fix: mark (free symbols below the ink floor at small sizes and thin strokes, about 480 cases; sharp question mark's turned stem cap closes on the dot, 48 cases; sweep 573 of 7056 before the floor change 604b83a; open-ended) | accepted 20 Nov (740, cycle 180): free symbols grow from stroke lengths and pen until 10 % above the floor, inside ±10.9; sharp question stem ends vertically; sheet unchanged; lead full sweep on the patch 0 of 7056 |
 | #578 | icon fix: warning (sharp triangle at stroke 2 and 2.25: the stem's square cap corners come within 0.8 of the slopes; one line, `oben` + hw · schraeg for sharp caps; sweep was 406 of 24696; lead prototype full sweep 0 of 24696, sheet unchanged; .claude/proto/warning-fix.diff) | accepted 20 Nov (741, cycle 181, byte-identical to the prototype; contributor full sweep 0 of 24696, sheet unchanged) |
-| #579 | icon sweep and fix: gear (full sweep never finished in the lead sandbox; contributor runs it in stroke slices, fixes what fails in gear.ts, commits the full sweep output to docs/sweeps/gear.txt) | open, cut 20 Nov (cycle 181) |
+| #579 | icon sweep and fix: gear (full sweep never finished in the lead sandbox; contributor runs it in stroke slices, fixes what fails in gear.ts, commits the full sweep output to docs/sweeps/gear.txt) | merged 21 Nov (cycle 196): 0 of 86436 without a change, docs/sweeps/gear.txt |
 | #580 | icon sweep and fix: bell (same as #579; docs/sweeps/bell.txt) | open, cut 20 Nov (cycle 181) |
 | #581 | icon sweep and fix: eye (same as #579; docs/sweeps/eye.txt) | open, cut 20 Nov (cycle 181) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | accepted 16 Nov (submission 455, outside contributor; full sweep 0 of 14112) |
@@ -427,7 +427,19 @@ they run in parallel; the merchant waits for the goat (same sprite registries).
 | #584 | model: scales (balance on a post, two pans on chains or cords, tilt; props, ≤ 4 draw calls) | open |
 | #586 | sprite: merchant (24 × 32 like the villager, idle, walk, call; hat, beard, apron, purse; after #582) | waits for #582 |
 
-#585 is closed: it said 16 × 16, the villager is 24 × 32; replaced by #586.
+#585 is closed: it said 16 × 16, the villager is 24 × 32; replaced by #586. All four are merged (cycle 195).
+
+## Milestone "Depth 22: stable" (estimate 5 tasks)
+
+Cut in cycle 196 for low supply (1 free task for 1 active agent). Briefs written the same way as Depth 21. No two tasks share a registry,
+except that straw and the hitching post both add lines to src/index.ts, at separate places (after grass and after fence).
+
+| Task | Asset | State |
+|---|---|---|
+| #587 | sprite: horse (24 × 24 like the bat, idle, walk, graze; pony, horse, draught; blaze, socks, saddle) | open |
+| #588 | sound: whinny (voice; squeal falling in pulses to a nicker or snort; size, excitement, distance) | open |
+| #589 | surface: straw (ground; crossing strands over a floor; coverage, strand length, trampled) | open |
+| #590 | model: hitching-post (architecture; rail on two posts, iron rings; sawn or round, ≤ 6 draw calls) | open |
 
 ## Next (lead, level D, not cut yet)
 
