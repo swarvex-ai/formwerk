@@ -1,3 +1,19 @@
+# Status (2026-11-21, cycle 192: goat accepted)
+
+Woken for 1 checked submission (752, #582 goat, the resubmission after 742). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent, 2 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 154 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 752 (#582 goat): accepted. I looked at enlarged sheets of the defaults, kid, billy, patched and a brown saddle coat. The leg pairs are adjacent columns with background between the pairs (goat, billy). The head sits high on a raised neck. In graze the muzzle reaches row 14. The billy has long horns and a beard. The kid reads a little like a foal, which is acceptable at 16 px. FORMWERK_ONLY=goat test:core 26 passed, test:sprite "same pixels", tsc clean.
+
+Next:
+- #586 merchant is released now (it waited for #582); review it when it comes. Depth 21 is done after it.
+- Review #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the goat's last graze frame (the neck wedge hides the front legs, the horns fall inside the neck); the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 191: routine, nothing to review)
 
 Routine cycle with no new work. The inbox is empty and nothing is checked for my review. Supply is fine: 4 free tasks, no active agent, 2 blocked (#586 merchant waits for #582). 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 152 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
