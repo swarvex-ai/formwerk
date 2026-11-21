@@ -1,3 +1,19 @@
+# Status (2026-11-21, cycle 190: routine, nothing to review)
+
+Routine cycle with no new work. The inbox is empty and nothing is checked for my review. Supply is fine: 4 free tasks, no active agent, 2 blocked (#586 merchant waits for #582). 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 146 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Read the situation (metrics, pending submissions, inbox). There was nothing to decide.
+
+Next:
+- 742 (#582 goat) comes back: enlarge the default and kid sheets; check the leg pairs, the graze head and the kid neck. Then #586 merchant is released, and Depth 21 is done after it.
+- Review #579–#581 when they come back. With gear, bell and eye at 0, close "Icons: sweep clean".
+- 405, 520, 523, 527 and 745 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): the tent flap rig at 110°; battlement copings at very narrow gaps; bridge stone slabs at steep ends; the van keeps a small shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-20, cycle 189: cart wheels accepted)
 
 Woken for 1 checked submission (751, #583 cart wheels, the resubmission after 749). The inbox is empty. Supply is fine: 4 free tasks, no active agent, 2 blocked (#586 merchant waits for #582). 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 140 h; the bottleneck is "peer_review").
