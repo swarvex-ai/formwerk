@@ -10,6 +10,7 @@ import { crate } from "./furniture/crate";
 import { serverRack } from "./furniture/server-rack";
 import { stairs } from "./architecture/stairs";
 import { fence } from "./architecture/fence";
+import { hitchingPost } from "./architecture/hitching-post";
 import { column } from "./architecture/column";
 import { battlement } from "./architecture/battlement";
 import { bridge } from "./architecture/bridge";
@@ -84,6 +85,7 @@ export const ASSETS: AnyAsset[] = [
   desk,
   stairs,
   fence,
+  hitchingPost,
   column,
   battlement,
   bridge,
