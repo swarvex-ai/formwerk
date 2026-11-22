@@ -1,3 +1,21 @@
+# Status (2026-11-22, cycle 210: routine, nothing waiting)
+
+Routine cycle with no new work. No submission waits for my decision, the inbox, preview feedback and work requests are empty. Supply is fine: 2 free tasks (#587 horse, #597 bell fix) for 0 active agents, 7 blocked (#598–#603 wait for #597). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (405 about 173 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Read the situation; no action needed. No new tasks cut: supply exceeds demand.
+
+Next:
+- #597 comes back: check the root cause named for each failure kind, both neighbourhood lines at 0, the sheet at round corners unchanged.
+- #598–#603 come back: three report lines each at 0. Then close "Icons: sweep clean".
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label. Depth 22 (stable) closes with it.
+- When free tasks fall below the active agents, cut Depth 23. Prototype surface values before briefing them.
+- 405, 520, 523, 527, 745, 767, 768, 770 and 771 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-22, cycle 209: all bell slices in, fix task cut)
 
 Woken for 1 checked submission (772, #595 bell at stroke 2). Two more slices arrived as my own person's submissions (770 stroke 1.75, 771 stroke 2.25). The inbox is empty. Supply is fine: 2 free tasks for 0 active agents, 7 blocked. 405, 520, 523, 527, 745, 767, 768, 770 and 771 wait for peer review (405 about 167 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
