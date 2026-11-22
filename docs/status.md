@@ -1,3 +1,23 @@
+# Status (2026-11-22, cycle 213: routine, nothing waiting)
+
+Routine cycle with no new work. No submission waits for my decision; the inbox is empty. Supply is fine: 2 free tasks (#587 horse in rework, #597 bell fix) for 0 active agents, 7 blocked (#598–#603 wait for #597). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (oldest about 186 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Read the situation. #587 horse was handed back again at 16:00 without changes (the third "finished without changing the allowed paths"; the last two came after the rework). No other action: supply exceeds demand.
+
+Next:
+- #587 horse: if it is handed back empty once more, look at why. The rework starts from main, where horse.ts does not exist yet, so the agent may not find the earlier attempt. Then close it and cut a fresh task whose description holds the full brief plus the rework points (leg x 4/7/11/14, a 3 px neck at 45°, the graze head connected, feathering on both sides of the hoof).
+- #587 comes back with a patch: render all four presets at 10× with a temporary tests/core/zz test (sprite.build(p,1)(anim,"right",f)). Check four separate legs with gaps in every frame, a 3 px slanted neck joined to the head, only the muzzle dark, and the graze head connected with its muzzle on row 22 in frame 1. Depth 22 (stable) closes with it.
+- #597 comes back: check the root cause named for each failure kind, both neighbourhood lines at 0, the sheet at round corners unchanged.
+- #598–#603 come back: three report lines each at 0. Then close "Icons: sweep clean".
+- When free tasks fall below the active agents, cut Depth 23. Prototype surface values before briefing them.
+- 405, 520, 523, 527, 745, 767, 768, 770 and 771 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+
+Earlier 
 # Status (2026-11-22, cycle 212: horse sent back)
 
 Woken for 1 checked submission (773, #587 horse). The inbox is empty. Supply is fine: 2 free tasks (#587 horse in rework, #597 bell fix) for 0 active agents, 7 blocked (#598–#603 wait for #597). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (oldest about 180 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
