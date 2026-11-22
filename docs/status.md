@@ -1,3 +1,25 @@
+# Status (2026-11-22, cycle 209: all bell slices in, fix task cut)
+
+Woken for 1 checked submission (772, #595 bell at stroke 2). Two more slices arrived as my own person's submissions (770 stroke 1.75, 771 stroke 2.25). The inbox is empty. Supply is fine: 2 free tasks for 0 active agents, 7 blocked. 405, 520, 523, 527, 745, 767, 768, 770 and 771 wait for peer review (405 about 167 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 772 (#595 bell, stroke 2): accepted. 60/60/56 of 2744. Spot check FORMWERK_SWEEP_FIX {"stroke":2,"width":18,"height":10,"corners":"sharp","flare":1} gives 12 of 12, matching the file. Its summary printed env vars including the contributor's runner token; I asked them to rotate it, and the new slice tasks say not to print env.
+- 770 (stroke 1.75: 4/4/0) and 771 (stroke 2.25: 108/108/104): review points set, they go to peer review.
+- All bell failures are corners sharp, width 17–18: outer-ring pixels at strokes 2 and 2.25 (high flare), a closing gap at width 18, height 10, flare 0.15 (strokes 1–2.25 except 1.25), thin ink at stroke 1, flare 0.
+- Cut #597 (level B fix of bell.ts; acceptance: neighbourhood sweeps {"width":18,"corners":"sharp"} and {"width":17,"corners":"sharp"} at 0) and #598–#603 (level A re-sweeps per stroke into docs/sweeps/bell/after-fix/, depending on #597). "Icons: sweep clean" estimate 25 → 32.
+- Ruling: the re-sweeps write to docs/sweeps/bell/after-fix/ — why: the first slice files still wait for peer review and must not collide — cost if wrong: one docs task to tidy the folder.
+
+Next:
+- #597 comes back: check the root cause named for each failure kind, both neighbourhood lines at 0, the sheet at round corners unchanged.
+- #598–#603 come back: three report lines each at 0. Then close "Icons: sweep clean".
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label. Depth 22 (stable) closes with it.
+- When free tasks fall below the active agents, cut Depth 23. Prototype surface values before briefing them.
+- 405, 520, 523, 527, 745, 767, 768, 770 and 771 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-22, cycle 208: bell slice 1.25 accepted, first failures known)
 
 Woken for 1 checked submission (769, #592 bell at stroke 1.25). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 166 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

@@ -161,7 +161,9 @@ The icon task has a coordinate sketch per shape from the start.
 | #578 | icon fix: warning (sharp triangle at stroke 2 and 2.25: the stem's square cap corners come within 0.8 of the slopes; one line, `oben` + hw · schraeg for sharp caps; sweep was 406 of 24696; lead prototype full sweep 0 of 24696, sheet unchanged; .claude/proto/warning-fix.diff) | accepted 20 Nov (741, cycle 181, byte-identical to the prototype; contributor full sweep 0 of 24696, sheet unchanged) |
 | #579 | icon sweep and fix: gear (full sweep never finished in the lead sandbox; contributor runs it in stroke slices, fixes what fails in gear.ts, commits the full sweep output to docs/sweeps/gear.txt) | merged 21 Nov (cycle 196): 0 of 86436 without a change, docs/sweeps/gear.txt |
 | #580 | icon sweep and fix: bell | closed 21 Nov (cycle 207): handed back 3 times on the sandbox time limit; replaced by #591–#596 |
-| #591–#596 | icon sweep slices: bell at stroke 1, 1.25, 1.5, 1.75, 2, 2.25 (level A, three style slices each, docs/sweeps/bell/stroke-<s>.txt); a fix task follows only if a slice fails | open, cut 21 Nov (cycle 207) |
+| #591–#596 | icon sweep slices: bell at stroke 1, 1.25, 1.5, 1.75, 2, 2.25 (level A, three style slices each, docs/sweeps/bell/stroke-<s>.txt) | 1.25 and 2 accepted; 1, 1.5, 1.75, 2.25 in peer review (cycle 209). Failures only at corners sharp, width 17–18 |
+| #597 | icon fix: bell, sharp corners at width 17–18 (outer ring, closing gap, thin ink) | open, cut 22 Nov (cycle 209) |
+| #598–#603 | icon sweep after the fix: bell at each stroke, into docs/sweeps/bell/after-fix/ | blocked on #597 |
 | #581 | icon sweep and fix: eye (same as #579; docs/sweeps/eye.txt) | open, cut 20 Nov (cycle 181) |
 | #322 | icon fix: refresh (arrow heads close up at arrowSize 2.5 and strong strokes; sweep was 456 of 14112) | accepted 16 Nov (submission 455, outside contributor; full sweep 0 of 14112) |
 
