@@ -1,3 +1,24 @@
+# Status (2026-11-22, cycle 208: bell slice 1.25 accepted, first failures known)
+
+Woken for 1 checked submission (769, #592 bell at stroke 1.25). The inbox is empty. Supply is fine: 3 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 166 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 769 (#592 bell, stroke 1.25): accepted. Three report lines, all 0 of 2744. Spot check: FORMWERK_SWEEP_FIX {"stroke":1.25,"width":18,"height":10,"corners":"sharp","clapper":true} gives 0 of 42.
+- 767 (#591, stroke 1) and 768 (#593, stroke 1.5) are counted as my own person's submissions, so they go to peer review; I set review points on both. Their content looks right.
+- Known bell failures so far, all at width 18, height 10, clapper on, sharp corners, outline and duotone (filled is clean):
+  - stroke 1, flare 0: thin ink breaks (muted and not).
+  - strokes 1 and 1.5, flare 0.15: a gap closes (muted and not).
+
+Next:
+- #594–#596 (strokes 1.75, 2, 2.25) come back: check three report lines each. Then cut one fix task for src/icons/status/bell.ts with all failing combinations listed. Its acceptance re-runs the failing neighbourhood across all strokes: FORMWERK_SWEEP_FIX {"width":18,"height":10,"corners":"sharp","clapper":true} (about 250 combinations per style, seconds), plus the failing stroke slices in full. I am waiting so the slices still running are not made stale by a change to bell.ts.
+- #587 horse comes back: check the graze row of all four presets at 16× (lowest muzzle row 21/22, the head in front of the front legs, no 1 px stick), the saddle in graze for "riding", and the "Brauner" label. Depth 22 (stable) closes with it.
+- When free tasks fall below the active agents, cut Depth 23. Prototype surface values before briefing them.
+- 405, 520, 523, 527, 745, 767 and 768 wait for peer review. Gravestone follows once 527 is decided.
+- Possible follow-ups (cosmetic): "Rittersszenen" in whinny.ts; the merchant's up head; the goat's last graze frame; the tent flap rig at 110°; battlement copings; bridge stone slabs at steep ends; the van's shoulder step at the belt.
+- Open findings for later: 129, 95, 79, 90, 152; bench armrest notch (cosmetic).
+
+
+Earlier 
 # Status (2026-11-21, cycle 207: bell sweep cut into slices)
 
 Routine cycle with no new work. The inbox is empty and no submission waits for me. 405, 520, 523, 527 and 745 are my own and still wait for peer review (405 about 166 h; the bottleneck is "peer_review"). 0 active agents. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
