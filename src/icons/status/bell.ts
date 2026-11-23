@@ -1,4 +1,4 @@
-import { line, onCircle, polygon, translate, type Pt } from "../../core/vector";
+import { line, onCircle, polygon, reach, translate, type Pt } from "../../core/vector";
 import { area, defineIcon, dot, gap, stroke, type Part } from "../define";
 
 export const bell = defineIcon({
@@ -26,13 +26,24 @@ export const bell = defineIcon({
     mute: { label: { de: "Stumm", en: "Mute" }, values: { muted: true } },
   },
   build(p, pen) {
-    const hw = pen.width / 2, rand = p.clapper ? 19 : 20.5, halb = p.width / 2;
+    const hw = pen.width / 2, rand = p.clapper ? 19 : 20.5;
     const knauf = 1.5, scheitel = Math.max(rand - p.height, 1 + hw + knauf);
     // Dome on top, straight sides, then the rim flares out
-    const rd = Math.max(3, halb - p.flare * 2.75), schulter = scheitel + rd, knick = rand - 1.25 - p.flare * 1.5;
-    const kuppel = Array.from({ length: 13 }, (_, i) => onCircle([12, schulter], rd, 270 + i * 15));
-    const seite = (x: number): Pt[] => [[12 + x * Math.min(rd, halb), Math.max(knick, schulter)]];
-    const umriss: Pt[] = [[12 - halb, rand], ...seite(-1), ...kuppel, ...seite(1), [12 + halb, rand]];
+    const glocke = (halb: number): Pt[] => {
+      const rd = Math.max(3, halb - p.flare * 2.75), schulter = scheitel + rd, knick = rand - 1.25 - p.flare * 1.5;
+      const kuppel = Array.from({ length: 13 }, (_, i) => onCircle([12, schulter], rd, 270 + i * 15));
+      // A squat bell has no straight side: the dome runs into the rim (a repeated point would be a join without direction)
+      const seite = (x: number): Pt[] => (knick > schulter ? [[12 + x * Math.min(rd, halb), knick]] : []);
+      return [[12 - halb, rand], ...seite(-1), ...kuppel, ...seite(1), [12 + halb, rand]];
+    };
+    // With sharp corners the outline turns back steeply at the rim: narrow it until the miter tip stays off the outer ring
+    const spitze = ([r, s]: Pt[]): number => {
+      const innen = (Math.atan2(r[1] - s[1], s[0] - r[0]) * 180) / Math.PI;
+      return r[0] - reach(pen, innen) * Math.cos((innen * Math.PI) / 360);
+    };
+    let halb = p.width / 2;
+    for (let i = 0; i < 3 && spitze(glocke(halb)) < 1; i++) halb -= 1 - spitze(glocke(halb));
+    const umriss = glocke(halb);
     const teile: Part[] = [area(polygon(...umriss)), stroke(line([12, scheitel], [12, scheitel - knauf]))];
     const klapper = Math.min(2.6, 23 - rand - 0.5);
     if (p.clapper) teile.push(dot(polygon(...Array.from({ length: 9 }, (_, i) => onCircle([12, rand], klapper, 90 + i * 22.5)))));
