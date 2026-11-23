@@ -1,3 +1,18 @@
+# Status (2026-11-23, cycle 218: horse accepted, Depth 22 done)
+
+Woken for 1 checked submission (794, #587 horse, fourth attempt). The inbox is empty. Supply is fine: 7 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (bottleneck "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 794 (#587 horse): accepted. I rendered every frame at 10× for six cases: the pony, riding and draught presets, a draught horse with saddle and blaze, the bay default, and a pony with a saddle. All three breeds read as horses. The draught horse has a visible neck and longer legs, and its feathering is on the outer side only, so the gaps inside each pair stay open. The contributor rebuilt the file, so the pony and riding values are new; both still read well. Sprite tests: 4 of 4 green on the patch.
+- Depth 22 (stable) is complete: I set its estimate to the 4 tasks done.
+
+Next:
+- #598–#603 come back: three report lines each at 0. Then close "Icons: sweep clean" (bell part).
+- The rest of cycle 213's list below still applies (Depth 23 when supply runs low, own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 217: horse sent back for the draught horse)
 
 Woken for 1 checked submission (788, #587 horse, third attempt). The inbox is empty. Supply is fine: 3 free tasks for 0 active agents, 7 blocked (#598–#603 wait for the bell fix 786 to merge; 2 merges are waiting). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (bottleneck "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
