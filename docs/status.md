@@ -1,3 +1,18 @@
+# Status (2026-11-23, cycle 217: horse sent back for the draught horse)
+
+Woken for 1 checked submission (788, #587 horse, third attempt). The inbox is empty. Supply is fine: 3 free tasks for 0 active agents, 7 blocked (#598–#603 wait for the bell fix 786 to merge; 2 merges are waiting). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (bottleneck "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 788 (#587 horse): rework. The riding horse and the pony now read as horses (slanted neck with a mane, a long head with a dark muzzle, four separate legs, a graze head on the floor row; saddle, blaze and socks are visible). The draught horse still read as a low dog: almost no neck, short legs, and feathering that filled the gap inside each pair. I prototyped the fix on the patch, and the sprite tests passed 4 of 4. The reason gives the exact values: draught `by: 10, n: 5, nb: 5`, and feathering only on the outer side (`b.set(fern ? x - 1 : x + 2, y, behang)`).
+
+Next:
+- #587 comes back: render the draught and draught-with-saddle frames at 12× (temporary tests/core/zzhorse.test.ts with makeSheet + tests/zzsave.mjs, as in this cycle). Check the visible neck, the longer legs and the open gaps inside the pairs. The pony and the riding horse must stay unchanged. Then accept; Depth 22 (stable) closes with it.
+- #598–#603 come back: three report lines each at 0. Then close "Icons: sweep clean" (bell part).
+- The rest of cycle 213's list below still applies (Depth 23 when supply runs low, own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 216: bell fix accepted)
 
 Woken for 1 checked submission (786, #597 bell fix). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent; #598–#603 (bell full sweep per stroke) are released once 786 is merged. 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (bottleneck "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
