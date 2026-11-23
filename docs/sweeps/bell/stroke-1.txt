@@ -1,0 +1,12 @@
+bell: 4 of 2744 combinations fail (slice {"stroke":1,"style":"outline"})
+{"width":18,"height":10,"flare":0,"clapper":true,"muted":false,"stroke":1,"corners":"sharp","style":"outline"}: ink thinner than 0.8 grid units vanishes or breaks at 24 px (1 parts become 2)
+{"width":18,"height":10,"flare":0,"clapper":true,"muted":true,"stroke":1,"corners":"sharp","style":"outline"}: ink thinner than 0.8 grid units vanishes or breaks at 24 px (3 parts become 5)
+{"width":18,"height":10,"flare":0.15,"clapper":true,"muted":false,"stroke":1,"corners":"sharp","style":"outline"}: a gap narrower than 0.8 grid units closes at 24 px (1 parts and 3 holes become 1 and 1)
+{"width":18,"height":10,"flare":0.15,"clapper":true,"muted":true,"stroke":1,"corners":"sharp","style":"outline"}: a gap narrower than 0.8 grid units closes at 24 px (3 parts and 2 holes become 3 and 0)
+bell: 4 of 2744 combinations fail (slice {"stroke":1,"style":"duotone"})
+{"width":18,"height":10,"flare":0,"clapper":true,"muted":false,"stroke":1,"corners":"sharp","style":"duotone"}: ink thinner than 0.8 grid units vanishes or breaks at 24 px (1 parts become 2)
+{"width":18,"height":10,"flare":0,"clapper":true,"muted":true,"stroke":1,"corners":"sharp","style":"duotone"}: ink thinner than 0.8 grid units vanishes or breaks at 24 px (3 parts become 5)
+{"width":18,"height":10,"flare":0.15,"clapper":true,"muted":false,"stroke":1,"corners":"sharp","style":"duotone"}: a gap narrower than 0.8 grid units closes at 24 px (1 parts and 3 holes become 1 and 1)
+{"width":18,"height":10,"flare":0.15,"clapper":true,"muted":true,"stroke":1,"corners":"sharp","style":"duotone"}: a gap narrower than 0.8 grid units closes at 24 px (3 parts and 2 holes become 3 and 0)
+bell: 0 of 2744 combinations fail (slice {"stroke":1,"style":"filled"})
+
