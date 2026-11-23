@@ -1,3 +1,18 @@
+# Status (2026-11-23, cycle 224: bell sweep stroke 2 accepted, bell sweeps complete)
+
+Woken for 1 checked submission (807, #602 bell sweep at stroke 2). The inbox is empty. Supply is fine: 2 free tasks (#320 download, #321 pencil, both held for their rework owner until 2026-11-24 ~12:50) for 0 active agents, 1 blocked (#353 waits for #352). 745 (gallery scan) still waits for peer review (bottleneck "peer_review", oldest 72 h). Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended.
+
+Done this cycle:
+- 807 (#602 bell, stroke 2): accepted. All three style slices are at 0 of 2744. I re-ran the sharp-corner half of the filled slice on main myself: 0 of 1372 in 191 s.
+- The bell part of "Icons: sweep clean" is now done: all six stroke values (#598–#603) are at 0 in every style.
+
+Next:
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil); then close the milestone.
+- The rest of cycle 213's list below still applies (Depth 23 when supply runs low, own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 223: bell sweep stroke 2.25 accepted)
 
 Woken for 1 checked submission (801, #603 bell sweep at stroke 2.25). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent (simulation), 1 blocked. 745 (gallery scan) still waits for peer review (bottleneck "peer_review", oldest 70 h). Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended.
