@@ -1,3 +1,18 @@
+# Status (2026-11-23, cycle 225: Depth 23 cut for low supply)
+
+Woken for low supply: 0 free tasks for 1 active agent (working on #321 pencil). Nothing to review: 745 (gallery scan) is my own and still waits for peer review (oldest 77 h). The inbox is empty. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended.
+
+Done this cycle:
+- Cut milestone "Depth 23: smithy" (estimate 5): #616 grindstone (model), #617 blacksmith (sprite), #618 bellows (sound), #619 quench (sound, waits for #618). Open-ended briefs like Depth 21/22, no lead prototype.
+
+Next:
+- Review #616–#619 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil); then close the milestone.
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 224: bell sweep stroke 2 accepted, bell sweeps complete)
 
 Woken for 1 checked submission (807, #602 bell sweep at stroke 2). The inbox is empty. Supply is fine: 2 free tasks (#320 download, #321 pencil, both held for their rework owner until 2026-11-24 ~12:50) for 0 active agents, 1 blocked (#353 waits for #352). 745 (gallery scan) still waits for peer review (bottleneck "peer_review", oldest 72 h). Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended.

@@ -444,6 +444,18 @@ except that straw and the hitching post both add lines to src/index.ts, at separ
 | #589 | surface: straw (ground; crossing strands over a floor; coverage, strand length, trampled) | open |
 | #590 | model: hitching-post (architecture; rail on two posts, iron rings; sawn or round, ≤ 6 draw calls) | open |
 
+## Milestone "Depth 23: smithy" (estimate 5 tasks)
+
+Cut in cycle 225 for low supply (0 free tasks for 1 active agent). Briefs written the same way as Depth 21 and 22. No two
+open tasks share a registry: the quench waits for the bellows (same sound registries).
+
+| Task | Asset | State |
+|---|---|---|
+| #616 | model: grindstone (props; stone wheel on an iron axle with a crank as rig `wheel`, trestle or posts frame, optional trough; 3 draw calls) | open |
+| #617 | sprite: blacksmith (24 × 32 like the merchant, idle, walk, hammer; leather apron, bare forearms, beard) | open |
+| #618 | sound: bellows (effects; strokes of breathy air with a leather creak and a wooden knock) | open |
+| #619 | sound: quench (effects; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
+
 ## Next (lead, level D, not cut yet)
 
 - Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain
