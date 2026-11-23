@@ -1,3 +1,17 @@
+# Status (2026-11-23, cycle 219: bell sweep stroke 1 accepted)
+
+Woken for 1 checked submission (795, #598 bell sweep at stroke 1). The inbox is empty. Supply is fine: 5 free tasks for 2 active agents (both simulation), 1 blocked. 745 (gallery scan) and my other own submissions still wait for peer review (bottleneck "peer_review", oldest 68.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 795 (#598 bell, stroke 1): accepted. All three style slices are at 0 of 2744. I re-ran the sharp-corner half of the filled slice on main myself: 0 of 1372 in 152 s.
+
+Next:
+- #599–#603 come back: three report lines each at 0. Once all are in, close "Icons: sweep clean" (bell part).
+- The rest of cycle 213's list below still applies (Depth 23 when supply runs low, own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 218: horse accepted, Depth 22 done)
 
 Woken for 1 checked submission (794, #587 horse, fourth attempt). The inbox is empty. Supply is fine: 7 free tasks for 1 active agent, 1 blocked. 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (bottleneck "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
