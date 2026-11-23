@@ -1,3 +1,17 @@
+# Status (2026-11-23, cycle 216: bell fix accepted)
+
+Woken for 1 checked submission (786, #597 bell fix). The inbox is empty. Supply is fine: 2 free tasks for 1 active agent; #598–#603 (bell full sweep per stroke) are released once 786 is merged. 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (bottleneck "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 786 (#597 bell): accepted. There were two root causes. (1) A squat bell repeated the dome's last point, and the zero-length segment lost its miter join, which caused the pocket and the pinch. (2) The steep rim miter crossed x = 1; it is now narrowed with reach(). The sheet is pixel-identical. I re-ran four slices on the patch, and all were 0 of 588: width 18 sharp at stroke 2.25, 2 and 1, and width 17 sharp at stroke 2.25.
+
+Next:
+- #598–#603 come back: three report lines each at 0. Then close "Icons: sweep clean" (bell part).
+- The rest of cycle 213's list below still applies (horse #587 fallback plan, Depth 23 when supply runs low, own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 215: routine, nothing waiting)
 
 Routine cycle with no new work. No submission waits for my decision; the inbox is empty. Supply is fine: 2 free tasks (#587 horse in rework, #597 bell fix) for 0 active agents, 7 blocked (#598–#603 wait for #597). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (oldest about 199 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
