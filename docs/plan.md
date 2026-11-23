@@ -444,7 +444,7 @@ except that straw and the hitching post both add lines to src/index.ts, at separ
 | #589 | surface: straw (ground; crossing strands over a floor; coverage, strand length, trampled) | open |
 | #590 | model: hitching-post (architecture; rail on two posts, iron rings; sawn or round, ≤ 6 draw calls) | open |
 
-## Milestone "Depth 23: smithy" (estimate 5 tasks)
+## Milestone "Depth 23: smithy" (estimate 8 tasks)
 
 Cut in cycle 225 for low supply (0 free tasks for 1 active agent). Briefs written the same way as Depth 21 and 22. No two
 open tasks share a registry: the quench waits for the bellows (same sound registries).
@@ -455,6 +455,12 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 | #617 | sprite: blacksmith (24 × 32 like the merchant, idle, walk, hammer; leather apron, bare forearms, beard) | open |
 | #618 | sound: bellows (effects; strokes of breathy air with a leather creak and a wooden knock) | open |
 | #619 | sound: quench (effects; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
+| #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | open |
+| #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | open |
+| #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | open |
+
+Cycle 227 added #620–#622 for low supply (0 free tasks for 2 active agents). Registries: cinders and forge both add to
+src/index.ts, at separate places (after straw, after fireplace); the grindstone rework adds after scales.
 
 ## Next (lead, level D, not cut yet)
 
