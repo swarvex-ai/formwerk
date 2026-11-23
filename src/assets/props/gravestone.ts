@@ -1,7 +1,9 @@
-import { Box3, BoxGeometry, BufferGeometry, ConeGeometry, CylinderGeometry } from "three";
+import { Box3, BufferGeometry, ExtrudeGeometry, Path, Shape, Vector3 } from "three";
+import { toCreasedNormals } from "three/addons/utils/BufferGeometryUtils.js";
 import { rng } from "../../core/rng";
 import { material } from "../../materials";
 import { defineAsset, Parts } from "../define";
+import { grid, rounded } from "../shapes";
 
 export const gravestone = defineAsset({
   id: "gravestone", category: "props",
@@ -20,6 +22,8 @@ export const gravestone = defineAsset({
       describe: { de: "Ein Steinblock von 0,12 m Höhe unter dem Stein; aus steht der Stein direkt im Boden.", en: "A stone block 0.12 m high under the marker; off, the marker stands directly in the ground." } },
     tilt: { type: "number", label: { de: "Neigung", en: "Tilt" }, min: 0, max: 12, step: 0.5, default: 0, unit: "°",
       describe: { de: "Neigung nach hinten (Kopf Richtung −z): 0° gerade, 6° ein alter Stein, 12° fast gekippt.", en: "Lean backwards (top towards −z): 0° upright, 6° an old stone, 12° nearly toppled." } },
+    moss: { type: "number", label: { de: "Moos", en: "Moss" }, min: 0, max: 1, step: 0.05, default: 0.3,
+      describe: { de: "Moos und Flechten auf Oberkante und Schultern des Steins: 0 sauber, 0,3 ein Stein im Schatten, 0,8 dicht bewachsen.", en: "Moss and lichen on the top and shoulders of the stone: 0 clean, 0.3 a stone in the shade, 0.8 thickly overgrown." } },
     colour: { type: "color", label: { de: "Steinfarbe", en: "Stone colour" }, default: "#8a8a84",
       describe: { de: "Farbe des Steins und des Sockels.", en: "Colour of the stone and the plinth." } },
     plaqueColour: { type: "color", label: { de: "Tafelfarbe", en: "Plaque colour" }, default: "#6e6e68",
@@ -32,25 +36,61 @@ export const gravestone = defineAsset({
     simple: { label: { de: "Schlicht", en: "Simple" }, values: { plinth: false, height: 0.6, width: 0.4 } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 200, drawCalls: 2 },
+  budget: { triangles: 4000, drawCalls: 3 },
   build(p, seed) {
-    const stein = material("stone", p.colour), tafel = material("stone", p.plaqueColour), t = new Parts();
+    const stein = material("stone", p.colour, 1, undefined, { moss: p.moss }), tafel = material("stone", p.plaqueColour), sockel = material("stone", p.colour), t = new Parts();
     const { height: h, width: w, thickness: d } = p, obelisk = p.shape === "obelisk";
     const y0 = p.plinth ? 0.12 : 0;
-    if (p.plinth) t.box(stein, 1.3 * w, 0.12, obelisk ? 1.3 * w : 2.5 * d, 0, 0.06, 0);
+    // The plinth is its own block of two steps (no moss): a wide foot and a narrower top, edges eased by 4 mm
+    if (p.plinth) {
+      const pw = 1.3 * w, pd = obelisk ? 1.3 * w : 2.5 * d;
+      t.add(sockel, rounded(pw * 1.08, 0.07, pd * 1.08, 0.004, 0, 0.035, 0, 3));
+      t.add(sockel, rounded(pw, 0.055, pd, 0.004, 0, 0.0925, 0, 3));
+    }
     // The marker around its own base centre at y = 0
     const body: BufferGeometry[] = [], plaque: BufferGeometry[] = [];
-    const box = (gw: number, gh: number, gd: number, y: number, z = 0) => new BoxGeometry(gw, gh, gd).translate(0, y, z);
+    // An extruded outline with eased edges from z0 to z1 (the bevel b lies inside that range)
+    const slab = (s: Shape, z0: number, z1: number, b: number) => {
+      const g = new ExtrudeGeometry(s, { depth: z1 - z0 - 2 * b, bevelEnabled: true, bevelThickness: b, bevelSize: b, bevelOffset: -b, bevelSegments: 3, curveSegments: 24 });
+      return toCreasedNormals(g.translate(0, 0, z0 + b), (40 * Math.PI) / 180);
+    };
+    const b = Math.min(0.006, d / 8);
     if (p.shape === "slab") {
-      body.push(box(w, h - w / 2, d, (h - w / 2) / 2));
-      body.push(new CylinderGeometry(w / 2, w / 2, d, 16, 1, false, 0, Math.PI).rotateX(Math.PI / 2).rotateZ(Math.PI / 2).translate(0, h - w / 2, 0));
-      plaque.push(box(0.6 * w, 0.35 * h, 0.008, 0.55 * h, d / 2));
+      const hs = h - w / 2;
+      const outline = (r: number) => {
+        const s = new Shape();
+        s.moveTo(-r, 0); s.lineTo(r, 0); s.lineTo(r, hs); s.absarc(0, hs, r, 0, Math.PI, false); s.lineTo(-r, 0);
+        return s;
+      };
+      // Body ends 5 mm behind the front face; the front frame (1.5 mm smaller, so the edge reads as worn) has the plaque field cut out
+      const rec = 0.005, fz = 0.014;
+      body.push(slab(outline(w / 2), -d / 2, d / 2 - rec, b));
+      const frame = outline(w / 2 - 0.0015);
+      const pw = 0.6 * w, ph = 0.35 * h, py = 0.55 * h;
+      const hole = new Path();
+      hole.moveTo(-pw / 2, py - ph / 2); hole.lineTo(-pw / 2, py + ph / 2); hole.lineTo(pw / 2, py + ph / 2); hole.lineTo(pw / 2, py - ph / 2); hole.lineTo(-pw / 2, py - ph / 2);
+      frame.holes.push(hole);
+      body.push(slab(frame, d / 2 - fz, d / 2, 0.003));
+      plaque.push(rounded(pw - 0.004, ph - 0.004, 0.002, 0.0008, 0, py, d / 2 - rec + 0.0005, 1));
     } else if (p.shape === "cross") {
-      body.push(box(0.3 * w, h, d, h / 2), box(w, 0.3 * w, d, 0.7 * h));
+      const a = 0.15 * w, ay = 0.7 * h;
+      const s = new Shape();
+      const pts: [number, number][] = [[-a, 0], [a, 0], [a, ay - a], [w / 2, ay - a], [w / 2, ay + a], [a, ay + a], [a, h], [-a, h], [-a, ay + a], [-w / 2, ay + a], [-w / 2, ay - a], [-a, ay - a]];
+      pts.forEach(([x, y], i) => (i ? s.lineTo(x, y) : s.moveTo(x, y)));
+      body.push(slab(s, -d / 2, d / 2, b));
     } else {
-      const top = h * 0.88, r = w / Math.SQRT2;
-      body.push(new CylinderGeometry(0.6 * r, r, top, 4, 1).rotateY(Math.PI / 4).translate(0, top / 2, 0));
-      body.push(new ConeGeometry(0.6 * r, h - top, 4, 1).rotateY(Math.PI / 4).translate(0, top + (h - top) / 2, 0));
+      // Shaft and tip from a rounded square (superellipse) section: the corners are eased, the tip is blunt
+      const top = h * 0.88, n = 10, half = w / 2;
+      const section = (y: number) => (y <= top ? half * (1 - 0.4 * (y / top)) : Math.max(0.006, 0.6 * half * (1 - (y - top) / (h - top))));
+      const at = (u: number, y: number) => {
+        const a = u * 2 * Math.PI, c = Math.cos(a), s = Math.sin(a);
+        const r = section(y) / Math.pow(Math.abs(c) ** n + Math.abs(s) ** n, 1 / n);
+        return new Vector3(r * c, y, r * s);
+      };
+      const raus = (q: Vector3) => new Vector3(q.x, 0, q.z);
+      const eased = (ya: number, yb: number) => grid(64, 1, (u, v) => at(u, ya + (yb - ya) * v), raus);
+      body.push(eased(0, top), eased(top, h));
+      body.push(grid(64, 1, (u, v) => at(u, 0).multiplyScalar(v).setY(0), () => new Vector3(0, -1, 0)));
     }
     const lean = ((rng(seed)() * 2 - 1) * 2 * Math.PI) / 180, tilt = (-p.tilt * Math.PI) / 180;
     const all = [...body, ...plaque];
