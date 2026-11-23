@@ -1,3 +1,18 @@
+# Status (2026-11-23, cycle 228: blacksmith sprite accepted)
+
+Woken for 1 checked submission (824, #617 blacksmith rework). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 2 blocked. 745 (gallery scan) still waits for peer review (oldest 78 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 824 (#617 blacksmith): accepted. I rendered the hammer rows of smith, apprentice and old-smith enlarged, and all five fixes from cycle 226 are in: the hammer is the right way up, the holding arm is drawn, the raised hammer sits beside the face, facing up the head is outside the silhouette in frames 1–2, and the body no longer bobs. Core sprite tests 4/4, tsc clean. Cosmetic, not cut: the struck frame is only 1 px below the rest frame.
+
+Next:
+- Review #616 grindstone (rework), #618 bellows, #619 quench and #620–#622 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil); then close the milestone.
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 227: grindstone back for rework, Depth 23 grows by three)
 
 Woken for 1 checked submission (821, #616 grindstone) and low supply (0 free tasks for 2 active agents; #617 and #618 are reserved). The inbox is empty. 745 (gallery scan) still waits for peer review (oldest 78 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
