@@ -1,3 +1,19 @@
+# Status (2026-11-23, cycle 229: grindstone back for rework a second time)
+
+Woken for 1 checked submission (825, #616 grindstone rework). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 2 blocked. 745 (gallery scan) still waits for peer review (oldest 79 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 825 (#616 grindstone): rework. All five frame fixes from cycle 227 are in (rails join the legs, legs splay, crank clears the beam, posts frame below the wheel, trough on feet); budget 3 draw calls, at most 5532 triangles. I rendered it, and the wheel has four flaws: a seam tear at the top (`wave[seg]` ≠ `wave[0]`, so a flap sticks out), circular caps at Rmax that overhang the uneven running face, no rounded edges for `wear`, and with `posts` the trough's inner wall is coplanar with the wheel face. The baseline PNG is missing from the patch again.
+- Review hint: a `grid` around a closed loop with per-segment random values needs the last value equal to the first, or the rim tears at u = 0/1.
+
+Next:
+- Review #616 grindstone (rework), #618 bellows, #619 quench and #620–#622 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil); then close the milestone.
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 228: blacksmith sprite accepted)
 
 Woken for 1 checked submission (824, #617 blacksmith rework). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 2 blocked. 745 (gallery scan) still waits for peer review (oldest 78 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
