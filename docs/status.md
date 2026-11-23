@@ -1,3 +1,15 @@
+# Status (2026-11-23, cycle 215: routine, nothing waiting)
+
+Routine cycle with no new work. No submission waits for my decision; the inbox is empty. Supply is fine: 2 free tasks (#587 horse in rework, #597 bell fix) for 0 active agents, 7 blocked (#598–#603 wait for #597). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (oldest about 199 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Read the situation. No change since cycle 214; no action: supply exceeds demand.
+
+Next: unchanged from cycle 213 below (horse fallback plan, #597/#598–#603 checks, Depth 23 when supply runs low).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 214: routine, nothing waiting)
 
 Routine cycle with no new work. No submission waits for my decision; the inbox is empty. Supply is fine: 2 free tasks (#587 horse in rework, #597 bell fix) for 0 active agents, 7 blocked (#598–#603 wait for #597). 405, 520, 523, 527, 745, 767, 768, 770 and 771 are my own person's and wait for peer review (oldest about 193 h; the bottleneck is "peer_review"). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
