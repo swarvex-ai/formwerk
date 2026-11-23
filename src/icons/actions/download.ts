@@ -31,16 +31,19 @@ export const download = defineIcon({
     const schale: Pt[] = tief ? [[-breite / 2, -tief], [-breite / 2, 0], [breite / 2, 0], [breite / 2, -tief]] : [[-breite / 2, 0], [breite / 2, 0]];
     const bauen = (l: number): Part[] => {
       const teile: Part[] = [stroke(line(...schale))];
-      // The arrow points down onto the tray or up away from it, with clear room above the tray's line
-      const spitzeAbstand = hw + CLEAR + inkRadius(pen), unten = p.direction === "down" ? -spitzeAbstand : -(pen.width + CLEAR);
+      // The arrow points down onto the tray or up away from it, with clear room above the tray's line. Up with a block
+      // head it starts higher where needed: the barbs (y = hals from the tail) and their ink must clear the wall tops.
+      const schaft = Math.max(2, hw + 0.9), kopf = schaft + 2.5, hals = l - kopf;
+      const spitzeAbstand = hw + CLEAR + inkRadius(pen), frei = -(pen.width + CLEAR);
+      const unten = p.direction === "down" ? -spitzeAbstand
+        : p.arrow === "block" ? Math.min(frei, hals - tief - CLEAR - inkRadius(pen, 45)) : frei;
       const roh = (y: number) => (p.direction === "down" ? unten - l + y : unten - y); // y from the tail (0) to the tip (l)
       if (p.arrow === "block") {
-        const schaft = Math.max(2, hw + 0.9), kopf = schaft + 2.5, hals = l - kopf;
         const pts: Pt[] = [[-schaft, 0], [schaft, 0], [schaft, hals], [kopf, hals], [0, l], [-kopf, hals], [-schaft, hals]];
         teile.push(area(polygon(...pts.map(([x, y]): Pt => [x, roh(y)]))));
       } else {
-        const kopf = Math.min(5, l * 0.42), ende = pen.corners === "sharp" ? l - hw : l;
-        teile.push(stroke(line([0, roh(0)], [0, roh(ende)])), stroke(line([-kopf, roh(l - kopf)], [0, roh(l)], [kopf, roh(l - kopf)])));
+        const arme = Math.min(5, l * 0.42), ende = pen.corners === "sharp" ? l - hw : l;
+        teile.push(stroke(line([0, roh(0)], [0, roh(ende)])), stroke(line([-arme, roh(l - arme)], [0, roh(l)], [arme, roh(l - arme)])));
       }
       return teile;
     };
