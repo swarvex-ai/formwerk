@@ -27,15 +27,15 @@ export const volume = defineIcon({
   build(p, pen) {
     const hw = pen.width / 2, step = pen.width + CLEAR, spread = p.spread;
     const make = (n: number, h = p.speakerSize / 2 - hw): Part[] => {
-      // Origin at the mouth of the cone, which opens towards +x
-      const body: Pt[] = [[-1.5 * h, -0.5 * h], [-0.8 * h, -0.5 * h], [0, -h], [0, h], [-0.8 * h, 0.5 * h], [-1.5 * h, 0.5 * h]];
+      // Origin at the mouth of the cone, which opens towards +x; its acute corners are cut short so the inner hole keeps a width
+      const body: Pt[] = [[-1.5 * h, -0.5 * h], [-0.8 * h, -0.5 * h], [-0.12 * h, -0.92 * h], [0, -0.8 * h], [0, 0.8 * h], [-0.12 * h, 0.92 * h], [-0.8 * h, 0.5 * h], [-1.5 * h, 0.5 * h]];
       const teile: Part[] = [area(polygon(...body.map(([x, y]): Pt => [12 + x, 12 + y])))];
       if (p.muted) {
         // The cross stands clear of the mouth, as far from it as a wave would
         const c = Math.min(0.55 * h, 3.5), cx = step + c + 0.5;
         teile.push(stroke(line([12 + cx - c, 12 - c], [12 + cx + c, 12 + c])), stroke(line([12 + cx - c, 12 + c], [12 + cx + c, 12 - c])));
       } else {
-        const c: Pt = [12 - 0.3 * h, 12], r1 = (0.3 * h + step) / Math.cos((spread / 2 * Math.PI) / 180);
+        const c: Pt = [12 - 0.3 * h, 12], r1 = (0.3 * h + step + (pen.corners === "sharp" ? 0.5 * hw : 0)) / Math.cos((spread / 2 * Math.PI) / 180);
         for (let i = 0; i < n; i++) teile.push(stroke(arc(c, r1 + i * step, 90 - spread / 2, 90 + spread / 2)));
       }
       return teile;
