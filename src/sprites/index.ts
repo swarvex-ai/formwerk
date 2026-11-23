@@ -46,6 +46,7 @@ import { hare } from "./creatures/hare";
 import { owl } from "./creatures/owl";
 import { wolf } from "./creatures/wolf";
 import { deer } from "./creatures/deer";
+import { horse } from "./creatures/horse";
 import { duck } from "./creatures/duck";
 import { snail } from "./creatures/snail";
 import { moth } from "./creatures/moth";
@@ -76,6 +77,7 @@ export const SPRITES: AnySprite[] = [
   owl,
   wolf,
   deer,
+  horse,
   duck,
   snail,
   moth,
