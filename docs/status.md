@@ -1,3 +1,23 @@
+# Status (2026-11-24, cycle 248: apple bite sent back)
+
+Woken for 1 checked submission (875, #646 apple bite). The inbox is empty. Supply: 4 free tasks for 1 active agent, 3 blocked. 17 patches wait for the merge train (oldest 8.2 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 89 h) waits for peer review; 874 (#321 pencil) is not checked yet; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 875 (#646 apple bite): sent back. `FORMWERK_ONLY=apple-bite npm test` passes here too. I measured makeSound levels in 20 ms windows (a temporary vitest file, deleted afterwards) and found two flaws. (1) The buffer is fixed at 1.15 s, so without chew the file is about 0.83 s of silence with a −71 dB rumble. (2) At juice 1 the hiss peaks at −14 dB, louder than the crunch body (−19 dB) and only 6 dB below the peak; the brief asks for about −10 dB. Juicy pear has the same problem. Chewing (−20/−23/−26 dB at 0.35/0.65/0.95 s) and the own random stream are fine.
+
+Next:
+- Review #646 again when it returns: check that the defaults are about 0.4 s long, and that the juice-1 rows are at least 10 dB below the first row.
+- Set review points on 874 (pencil, own) once checked, and on 848, 851, 853 once their checks pass (own person's; never accept).
+- After 873 merges (own, cosmetic): in swing.ts, "Ein hölzerner Gartenschaukel" → "Eine hölzerne Gartenschaukel"; drop the duplicate `sitzholz` material only if the budget stays at 3 draw calls.
+- After 871 merges (own, cosmetic): in sift.ts, `tempo` unit "/s"; "durchs Maschen" → "durch die Maschen".
+- After 829 merges: move bellows.ts to src/sounds/ambience/ (both registries), test, push. #623 quench is released by that merge.
+- Review #630, #634, #639–#642, #647 as they come in. Reproduce every sound submission locally before accepting.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 874); then close the milestone.
+- The rest of cycle 213's list still applies (findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 247: swing accepted)
 
 Woken for 1 checked submission (873, #645 swing). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 17 patches wait for the merge train (oldest 7.9 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 89 h) waits for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
