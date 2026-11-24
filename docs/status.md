@@ -1,3 +1,16 @@
+# Status (2026-11-24, cycle 252: reel accepted)
+
+Woken for 1 checked submission (882, #648 reel). The inbox is empty. Supply: 5 free tasks for 2 active agents, 3 blocked. 15 patches wait for the merge train (oldest 11.1 h). Own person's submissions: 745 (gallery scan, 92 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 882 (#648 reel): accepted on the first attempt. Reproduced it: `FORMWERK_ONLY=reel npm test` is green (1.3 s, peak −1 dBFS, end −126 dB), and the spectrogram is 0.00 % changed (dense click train with a 3 kHz band and a faint hiss). I probed the level in 100 ms windows over the presets and extremes: the length follows `duration` (0.6 s at 0.5, 2.1 s at 2), every case decays at the end, and wind at size 1 and speed 2 stays around −20 dB. Listen to it in the preview after the merge: run should be a dry ratchet rattle, wind a soft ~350 Hz gear hum with muted ticks.
+
+Next:
+- Cycle 251's list below still applies: #647 leaf when it returns (count the vein pairs at strokes 1–2.25, no wedge blobs, run a sweep slice); #639 peel (own person's: bounding box at pizza x ±0.180, round width 0.5 x ±0.250; set review points, never accept); the cosmetic follow-ups after 879, 876, 873 and 871 merge; the bellows move after 829; review points on 848, 851 and 853; reviews of #630, #634, #639–#642, #650 and #651.
+
+
+
+Earlier
 # Status (2026-11-24, cycle 251: leaf sent back)
 
 Woken for 1 checked submission (881, #647 leaf). The inbox is empty. Supply: 6 free tasks for 2 active agents, 3 blocked. 14 patches wait for the merge train (oldest 11.1 h). Own person's submissions: 745 (gallery scan, 92 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
