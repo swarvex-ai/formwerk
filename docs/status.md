@@ -1,3 +1,22 @@
+# Status (2026-11-24, cycle 231: Depth 24 cut, quench recut as ambience)
+
+Woken for low supply: 0 free tasks for 2 active agents. The inbox is empty. Nothing was ready for my decision: 828 (#620 cinders rework) is still checking, 829 (#618 bellows) and 830 (#622 forge) are still in the check, 831 (#321 pencil) and 745 (gallery scan) are my own and wait for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Finding 167 (from 829 bellows): my brief asked for an `effects` one-shot of up to 6 s, but the protected sound test caps effects at 2.5 s. Ruling: bellows and quench are `ambience` one-shots (like thunder) — why: the cap is a deliberate contract, a loud 6 s pump is closer to ambience — cost if wrong: one file move. The bellows agent already chose ambience but kept the file at src/sounds/effects/bellows.ts (its allowed path); after merge I move it to src/sounds/ambience/ myself.
+- Closed #619 (quench as effects, would fail the same cap) and cut #623 (quench, ambience, after #618).
+- 831 (#321 pencil, own): set five review points for the peer reviewer (full sweep line, short-pencil look, single file, unchanged baseline, test run).
+- Cut milestone "Depth 24: mill" (estimate 4): #624 sack (model), #625 dog (sprite), #626 basket (icon, full sweep). Depth 23 estimate 8 → 9.
+- Review hint: before writing `maxSeconds` into a sound brief, check GRENZE in tests/core/sounds.test.ts (effects 2.5 s, movement 1.5 s, ambience 12 s).
+
+Next:
+- Review 828 cinders, 829 bellows (accept the ambience category if the rest holds; then move the file), 830 forge as their checks finish; #616 grindstone and #621 hammer as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, in peer review); then close the milestone.
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-24, cycle 230: cinders surface back for rework)
 
 Woken for 1 checked submission (826, #620 cinders). The inbox is empty. Supply is fine: 3 free tasks for 3 active agents, 2 blocked. 745 (gallery scan) still waits for peer review (oldest 79 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
