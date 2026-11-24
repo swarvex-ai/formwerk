@@ -1,3 +1,20 @@
+# Status (2026-11-24, cycle 245: basket icon accepted)
+
+Woken for 1 checked submission (869, #626 basket). The inbox is empty. Supply: 7 free tasks for 1 active agent, 3 blocked. 19 accepted patches wait for the merge train (oldest 7.2 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 88 h) and 867 (#637 dough trough) wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 869 (#626 basket icon): accepted. Pipeline green. Here `FORMWERK_ONLY=basket npm test` passes (26 tests, sheet same pixels, SVG 0.00 %). Sweep slices report 0 of 504 failures for {slats "3", depth 7, taper 0.3} and 0 of 756 for {ears, width 21, taper 0}. The submission quotes a full sweep of 0 of 74088. The sheet reads in all three styles, and arch and ears differ clearly. Upright slats fixed the sharp-corner sweep failures. Depth 24 (mill) now has its basket icon.
+
+Next:
+- Set review points on 848, 851, 853 once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #630, #634, #639–#642, #644 (rework), #645 (rework: ropes), #646, #647 as they come in. Reproduce every sound submission locally (`FORMWERK_ONLY=<id> npm test`) before accepting.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 863 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 244: swing sent back)
 
 Woken for 1 checked submission (868, #645 swing). The inbox is empty. Supply: 7 free tasks for 1 active agent, 3 blocked. 18 accepted patches wait for the merge train (oldest 7 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 88 h) and 867 (#637 dough trough) wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
