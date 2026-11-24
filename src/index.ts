@@ -19,6 +19,7 @@ import { battlement as battlementAsset } from "./assets/architecture/battlement"
 import { bridge as bridgeAsset } from "./assets/architecture/bridge";
 import { pier as pierAsset } from "./assets/architecture/pier";
 import { fireplace as fireplaceAsset } from "./assets/architecture/fireplace";
+import { forge as forgeAsset } from "./assets/architecture/forge";
 import { tree as treeAsset } from "./assets/nature/tree";
 import { rock as rockAsset } from "./assets/nature/rock";
 import { logPile as logPileAsset } from "./assets/nature/log-pile";
@@ -139,6 +140,7 @@ export const battlement = bauer(battlementAsset);
 export const bridge = bauer(bridgeAsset);
 export const pier = bauer(pierAsset);
 export const fireplace = bauer(fireplaceAsset);
+export const forge = bauer(forgeAsset);
 export const tree = bauer(treeAsset);
 export const rock = bauer(rockAsset);
 export const logPile = bauer(logPileAsset);

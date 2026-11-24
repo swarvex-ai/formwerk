@@ -16,6 +16,7 @@ import { battlement } from "./architecture/battlement";
 import { bridge } from "./architecture/bridge";
 import { pier } from "./architecture/pier";
 import { fireplace } from "./architecture/fireplace";
+import { forge } from "./architecture/forge";
 import { tree } from "./nature/tree";
 import { rock } from "./nature/rock";
 import { logPile } from "./nature/log-pile";
@@ -91,6 +92,7 @@ export const ASSETS: AnyAsset[] = [
   bridge,
   pier,
   fireplace,
+  forge,
   door,
   windowAsset,
   tree,
