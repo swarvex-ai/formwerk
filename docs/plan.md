@@ -444,7 +444,7 @@ except that straw and the hitching post both add lines to src/index.ts, at separ
 | #589 | surface: straw (ground; crossing strands over a floor; coverage, strand length, trampled) | open |
 | #590 | model: hitching-post (architecture; rail on two posts, iron rings; sawn or round, ≤ 6 draw calls) | open |
 
-## Milestone "Depth 23: smithy" (estimate 8 tasks)
+## Milestone "Depth 23: smithy" (estimate 10 tasks)
 
 Cut in cycle 225 for low supply (0 free tasks for 1 active agent). Briefs written the same way as Depth 21 and 22. No two
 open tasks share a registry: the quench waits for the bellows (same sound registries).
@@ -458,7 +458,8 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 | #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
 | #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | open |
 | #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | open |
-| #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | open |
+| #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | accepted (cycle 232) |
+| #627 | model fix: forge coals as dark lumps on the glowing bed (4 draw calls; after #622) | waits for #622 merge |
 
 Cycle 227 added #620–#622 for low supply (0 free tasks for 2 active agents). Registries: cinders and forge both add to
 src/index.ts, at separate places (after straw, after fireplace); the grindstone rework adds after scales.
@@ -466,7 +467,7 @@ src/index.ts, at separate places (after straw, after fireplace); the grindstone 
 Cycle 231: finding 167 showed the bellows brief broke the effects cap (2.5 s); ruling: bellows and quench are ambience
 one-shots. After #618 merges, the lead moves src/sounds/effects/bellows.ts to src/sounds/ambience/ (own level D).
 
-## Milestone "Depth 24: mill" (estimate 4 tasks)
+## Milestone "Depth 24: mill" (estimate 5 tasks)
 
 Cut in cycle 231 for low supply (0 free tasks for 2 active agents). Registries do not collide with open Depth 23 work:
 sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
@@ -476,6 +477,7 @@ sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
 | #624 | model: sack (props; grid body, fill/slump, neck tied/folded/open, lumps; ≤ 3 draw calls, dynamic hull) | open |
 | #625 | sprite: dog (16 × 16 like the wolf; idle with wagging tail, walk, bark; floppy or pricked ears, collar) | open |
 | #626 | icon: basket (objects; tapered body, slats "0"/"2"/"3", arch or ear handles; full sweep at 0) | open |
+| #628 | model: water wheel (architecture; rims, paddles, spokes "4"/"6"/"8", axle on posts or piers, rig `wheel`; ≤ 5 draw calls; registered after pier) | open |
 
 ## Next (lead, level D, not cut yet)
 

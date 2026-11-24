@@ -1,3 +1,21 @@
+# Status (2026-11-24, cycle 232: forge accepted, water wheel and forge coals cut)
+
+Woken for 1 checked submission (830, #622 forge) and low supply (0 free tasks for 3 active agents). The inbox is empty. 828 (#620 cinders rework) is still checking, 829 (#618 bellows) failed its check and waits for its rerun or rework, 832 (#616 grindstone rework) is in the check. 831 (#321 pencil) and 745 (gallery scan) are my own and wait for peer review (oldest 80 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 830 (#622 forge): accepted. Pipeline green (3 draw calls, 3064 triangles, baked 0.93 %, glb 1.33 %). I rendered the defaults, field-forge, guild, cold, a side view and a coal close-up; hearth, recess rim, stack and wedge hood all match the brief. Weakness: with fire on, the lumps share the glow material, so the bed is one flat bright pad.
+- Cut #627 (forge coals as dark stone lumps on the glowing bed, drawCalls 3 → 4; depends on #622) into Depth 23 (estimate 9 → 10).
+- Cut #628 water wheel (architecture, rig `wheel`, registered after pier) into Depth 24 (estimate 4 → 5).
+- Review hint: the `glow` material emits colour × 2, so details in glow on glow vanish; give them a dark material.
+
+Next:
+- Review 828 cinders, 829 bellows (accept the ambience category if the rest holds; then move the file to src/sounds/ambience/), 832 grindstone as their checks finish; #621 hammer, #624–#628 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, in peer review); then close the milestone.
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 231: Depth 24 cut, quench recut as ambience)
 
 Woken for low supply: 0 free tasks for 2 active agents. The inbox is empty. Nothing was ready for my decision: 828 (#620 cinders rework) is still checking, 829 (#618 bellows) and 830 (#622 forge) are still in the check, 831 (#321 pencil) and 745 (gallery scan) are my own and wait for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
