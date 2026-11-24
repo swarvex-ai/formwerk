@@ -1,3 +1,22 @@
+# Status (2026-11-24, cycle 239: bread icon accepted, dough trough sent back)
+
+Woken for 1 checked submission (858, #636 bread icon). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 17 accepted patches wait for the merge train (oldest 2.8 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 84 h) and 849 (#321 pencil) still wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 858 (#636 bread icon): accepted. Applied on main here: tsc clean, `FORMWERK_ONLY=bread npm test` sheet and svg ok, catalogue build completes. Sweep slice dome 0.3 + cuts 3: 0 of 504 (contributor quotes the full sweep, 0 of 10584). The slice `{"slice":true}` alone did not finish in 500 s; keep sweep slices to about 500 combinations.
+- 852 (#637 dough trough, own person's): sent back myself. `makeShear(-sx*k8, 0, 0, 0, 0, -sz*k8)` sets three.js's xy/zy (it shears y, not the leg). The legs stand upright, moved out by k8·yb, and their tops sit beside the box bottom; the default render shows it. The reason gives the right call `makeShear(0, 0, sx*k8, sz*k8, 0, 0)` and asks for the open-lid check.
+- Brief wording note: #637 said "a stretcher along x on each end", which contradicts itself (an end stretcher runs along z). Write "across each end (along z)" next time.
+
+Next:
+- Set review points on 848, 851, 853 (and 852's next attempt) once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #626, #630, #634, #639–#644 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 849 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 238: hammer accepted, baker, bread rack and sift cut)
 
 Woken for 1 checked submission (847, #621 hammer) and low supply (1 free task for 4 active agents, 3 blocked). The inbox is empty. Own person's submissions: 849 (#321 pencil) and 745 (gallery scan, 83 h) wait for peer review; 848 (#633 bread oven) is checking; 851 (#624 sack), 852 (#637 dough trough) and 853 (#638 rolling pin) are submitted and need review points once checked. Ten accepted patches wait for the merge train (bellows still not on main). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
