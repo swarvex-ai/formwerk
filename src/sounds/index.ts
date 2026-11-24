@@ -63,6 +63,7 @@ import { bubbling } from "./ambience/bubbling";
 import { saw } from "./effects/saw";
 import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
+import { grainPour } from "./effects/grain-pour";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 import { horn } from "./effects/horn";
@@ -132,6 +133,7 @@ export const SOUNDS: AnySound[] = [
   saw,
   swordDraw,
   pour,
+  grainPour,
   waves,
   shipBell,
   horn,
