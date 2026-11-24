@@ -48,6 +48,7 @@ import { bucket } from "./props/bucket";
 import { beehive } from "./props/beehive";
 import { lampPost } from "./props/lamp-post";
 import { bench } from "./props/bench";
+import { swing } from "./props/swing";
 import { signpost } from "./props/signpost";
 import { gravestone } from "./props/gravestone";
 import { mailbox } from "./props/mailbox";
@@ -125,6 +126,7 @@ export const ASSETS: AnyAsset[] = [
   beehive,
   lampPost,
   bench,
+  swing,
   signpost,
   gravestone,
   mailbox,
