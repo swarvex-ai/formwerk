@@ -1,3 +1,16 @@
+# Status (2026-11-24, cycle 254: water wheel accepted)
+
+Woken for 1 checked submission (888, #630 water wheel). The inbox is empty. Supply: 4 free tasks for 2 active agents, 1 blocked. 2 patches wait for the merge train (887 quench is not on main yet). Own person's submissions: 745 (gallery scan, 96 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 888 (#630 water wheel fix): accepted on the first attempt. Reproduced it: `FORMWERK_ONLY=water-wheel npm test` is green (4 draw calls, 8928 triangles, 0.00 % changed; baked 0.30 %, glb 0.38 %). The diff changes only d = 0.12·D, the paddle span R − d to R and the rim radius R − d/2; the spokes follow rIn. In the render the floats stand clearly past both rims.
+
+Next:
+- Cycle 253's list below still applies: the bellows move after 887 (quench) merges (run `git apply --check` on queued patches first); the dough-trough German fixes after 879 merges; #647 leaf and #639 peel when they return; review points on 848, 851 and 853; reviews of #634, #640–#642, #650 and #651.
+
+
+
+Earlier
 # Status (2026-11-24, cycle 253: quench accepted, follow-ups pushed)
 
 Woken for 1 checked submission (887, #623 quench). The inbox is empty. Supply: 5 free tasks for 2 active agents, 1 blocked. Own person's submissions: 745 (gallery scan, 96 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
