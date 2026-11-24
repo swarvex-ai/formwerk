@@ -11,7 +11,7 @@ export const appleBite = defineSound({
   },
   params: {
     crispness: { type: "number", min: 0, max: 1, step: 0.05, default: 0.7, label: { de: "Knackigkeit", en: "Crispness" },
-      describe: { de: "Wie knackig das Obst ist: 0 eine mehlige, weiche Äpfel: ein dumpfer kurzer Knirsch; 0,7 ein frischer Apfel; 1 ein sehr harter Apfel oder eine rohe Karotte: ein heller, dichter Knacks.", en: "How crisp the fruit is: 0 a soft mealy apple: a dull short crunch; 0.7 a fresh apple; 1 a very hard apple or a raw carrot: a bright dense crack." } },
+      describe: { de: "Wie knackig das Obst ist: 0 ein mehliger, weicher Apfel: ein dumpfer kurzer Knirsch; 0,7 ein frischer Apfel; 1 ein sehr harter Apfel oder eine rohe Karotte: ein heller, dichter Knacks.", en: "How crisp the fruit is: 0 a soft mealy apple: a dull short crunch; 0.7 a fresh apple; 1 a very hard apple or a raw carrot: a bright dense crack." } },
     size: { type: "number", min: 0.5, max: 1.5, step: 0.05, default: 1, label: { de: "Größe", en: "Size" },
       describe: { de: "Wie groß der Biss ist: 0,5 ein kleiner Biss: kürzer und höher; 1,5 ein großer Biss: länger und voller.", en: "How big the bite is: 0.5 a small nibble: shorter and higher; 1.5 a big bite: longer and fuller." } },
     juice: { type: "number", min: 0, max: 1, step: 0.05, default: 0.4, label: { de: "Saft", en: "Juice" },

@@ -75,7 +75,7 @@ import { horn } from "./effects/horn";
 import { reel } from "./effects/reel";
 import { writing } from "./effects/writing";
 import { rollingPin } from "./effects/rolling-pin";
-import { bellows } from "./effects/bellows";
+import { bellows } from "./ambience/bellows";
 import { sleighBells } from "./movement/sleigh-bells";
 
 export const SOUNDS: AnySound[] = [

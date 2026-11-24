@@ -6,13 +6,13 @@ export const sift = defineSound({
   id: "sift", category: "effects",
   title: { de: "Mehl sieben", en: "Sift flour" },
   description: {
-    de: "Ein rundes Holzsieb wird geschüttelt, damit feines Mehl durchs Maschen fällt: ein weiches, mehliges Rauschen bei jedem Schlag, und der Siebrand klopft leicht gegen die Hand, für Bäckereien, Küchen und Kochspiele.",
+    de: "Ein rundes Holzsieb wird geschüttelt, damit feines Mehl durch die Maschen fällt: ein weiches, mehliges Rauschen bei jedem Schlag, und der Siebrand klopft leicht gegen die Hand, für Bäckereien, Küchen und Kochspiele.",
     en: "A round wooden sieve shaken so fine flour falls through the mesh: a soft mealy hiss at every stroke, and the wooden rim tapping lightly against the hand, for bakeries, kitchens and cooking games.",
   },
   params: {
     strokes: { type: "integer", min: 2, max: 8, default: 4, label: { de: "Schläge", en: "Strokes" },
       describe: { de: "Wie viele Schüttbewegungen das Sieb macht: 2 ein vorsichtiges Sieben, 4 üblich, 8 so viele wie in 1,7 s bei dem gewählten Tempo hineinpassen.", en: "How many shaking strokes the sieve makes: 2 a careful sift, 4 usual, 8 as many as fit in 1.7 s at the chosen tempo." } },
-    tempo: { type: "number", min: 2, max: 6, step: 0.5, default: 3.5, unit: "s", label: { de: "Tempo", en: "Tempo" },
+    tempo: { type: "number", min: 2, max: 6, step: 0.5, default: 3.5, label: { de: "Tempo", en: "Tempo" },
       describe: { de: "Wie schnell das Sieb geschüttelt wird: 2 langsam und vorsichtig, 3,5 üblich, 6 ein schnelles Schütteln, in Schlägen pro Sekunde.", en: "How fast the sieve is shaken: 2 slow and careful, 3.5 usual, 6 a quick shake, in strokes per second." } },
     fineness: { type: "number", min: 0, max: 1, step: 0.05, default: 0.7, label: { de: "Feinheit", en: "Fineness" },
       describe: { de: "Wie fein das gemahlene Getreide ist: 0 grobe Mahlung oder Zucker mit einzelnen hörbaren Körnern um 2 kHz, 1 feines Mehl, ein weiches atemhaftes Rauschen oberhalb von etwa 4 kHz.", en: "How fine the ground grain is: 0 coarse meal or sugar with sparse audible grains around 2 kHz, 1 fine flour, a soft breathy hiss above about 4 kHz." } },

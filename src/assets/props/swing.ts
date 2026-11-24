@@ -6,7 +6,7 @@ import { rounded, turned } from "../shapes";
 export const swing = defineAsset({
   id: "swing", category: "props",
   title: { de: "Schaukel", en: "Swing" },
-  description: { de: "Ein hölzerner Gartenschaukel: zwei A-Rahmen aus runden Stützen mit einem Querbalken, daran ein oder zwei Sitzbretter an Seilen hängen; der Sitz schwingt nach vorne um den Balken.", en: "A wooden garden swing: two A-frames of round posts with a top beam, one or two board seats hanging on ropes; the seat swings forward about the beam." },
+  description: { de: "Eine hölzerne Gartenschaukel: zwei A-Rahmen aus runden Stützen mit einem Querbalken, daran ein oder zwei Sitzbretter an Seilen hängen; der Sitz schwingt nach vorne um den Balken.", en: "A wooden garden swing: two A-frames of round posts with a top beam, one or two board seats hanging on ropes; the seat swings forward about the beam." },
   params: {
     width: { type: "number", label: { de: "Breite", en: "Width" }, min: 1.2, max: 2.4, step: 0.05, default: 1.8, unit: "m",
       describe: { de: "Abstand der beiden A-Rahmen entlang x: 1,2 m für einen Sitz, 1,8 m üblich, 2,4 m breit für zwei Sitze.", en: "Distance between the two A-frames along x: 1.2 m for one seat, 1.8 m usual, 2.4 m wide for two." } },
