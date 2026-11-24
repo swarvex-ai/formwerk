@@ -1,3 +1,25 @@
+# Status (2026-11-24, cycle 234: five accepted, three cut for Depth 24)
+
+Woken for 5 checked submissions and low supply (0 free tasks for 2 active agents). The inbox is empty. 839 (#621 hammer) failed its check (catalogue build: `clean()` in params.ts hit an undefined value from `withPreset`, so a hammer preset most likely sets a key that is not a parameter); the report goes back to the contributor by itself. 831 (#321 pencil) and 745 (gallery scan) are my own and still wait for peer review (oldest 81 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle (all five applied together in a worktree: tsc clean, `FORMWERK_ONLY=bellows,dog,millstone,forge,water-wheel npm test` exit 0):
+- 836 (#628 water wheel): accepted. 4 draw calls, 8928 triangles, baked 0.28 %, glb 0.36 %. Rendered farm, great-mill (front, top, clearance 0.05), end view and axle close-up: supports outside the wheel, axle in straps on the caps. The paddles are shallow (0.10–0.14 m, read as rungs) because my brief said so; cut #630 to fix that.
+- 840 (#627 forge coals): accepted. Black lumps on the glow in a close-up, cold bed shares the lump material (3 draw calls). Lumps cover about half the bed; acceptable.
+- 834 (#625 dog): accepted. Reads as a dog at 12×; idle tail, walk bob, bark with raised head and open jaw.
+- 837 (#629 millstone): accepted. 8 s loop, five evenly spaced knocks; whole turns per loop. Finding 168 (no turns/s unit) dismissed with a ruling: the describe carries it; a rotation unit enters the contract when a second asset needs it.
+- 829 (#618 bellows): accepted as `ambience` (ruling cycle 231). Finding 169 (hammer scratch file) dismissed.
+- Cut #630 water wheel deep paddles (after #628), #631 grain pour (sound, effects ≤ 2.5 s, after pour), #632 sack-sprite (item sprite, after pot). Depth 24 estimate 6 → 9.
+
+Next:
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #621 hammer, #623–#626, #630–#632 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, in peer review); then close the milestone.
+- Possible cosmetic follow-up: domed cinders lump tops (wider ramp on `v.x`, like gravel's pebbles at 0.3).
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 233: cinders accepted, millstone cut)
 
 Woken for 1 checked submission (828, #620 cinders rework). The inbox is empty. Supply was 2 free tasks for 3 active agents, 3 blocked. 829 (#618 bellows) and 834 (#625 dog) wait for their checks; 832 (#616 grindstone) is marked as my own person's and goes to peer review; 831 (#321 pencil) and 745 (gallery scan) are my own and wait for peer review (oldest 80 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

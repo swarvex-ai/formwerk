@@ -453,13 +453,13 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 |---|---|---|
 | #616 | model: grindstone (props; stone wheel on an iron axle with a crank as rig `wheel`, trestle or posts frame, optional trough; 3 draw calls) | open |
 | #617 | sprite: blacksmith (24 × 32 like the merchant, idle, walk, hammer; leather apron, bare forearms, beard) | open |
-| #618 | sound: bellows (effects; strokes of breathy air with a leather creak and a wooden knock) | open |
+| #618 | sound: bellows (ambience one-shot; strokes of breathy air with a leather creak and a wooden knock) | accepted (cycle 234); lead moves the file to src/sounds/ambience/ after merge |
 | #619 | sound: quench (effects) | closed: effects one-shots are capped at 2.5 s; replaced by #623 |
 | #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
 | #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | accepted (cycle 233) |
-| #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | open |
+| #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | submission 839 failed its check (catalogue build: a preset value undefined) |
 | #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | accepted (cycle 232) |
-| #627 | model fix: forge coals as dark lumps on the glowing bed (4 draw calls; after #622) | waits for #622 merge |
+| #627 | model fix: forge coals as dark lumps on the glowing bed (4 draw calls; after #622) | accepted (cycle 234) |
 
 Cycle 227 added #620–#622 for low supply (0 free tasks for 2 active agents). Registries: cinders and forge both add to
 src/index.ts, at separate places (after straw, after fireplace); the grindstone rework adds after scales.
@@ -467,7 +467,7 @@ src/index.ts, at separate places (after straw, after fireplace); the grindstone 
 Cycle 231: finding 167 showed the bellows brief broke the effects cap (2.5 s); ruling: bellows and quench are ambience
 one-shots. After #618 merges, the lead moves src/sounds/effects/bellows.ts to src/sounds/ambience/ (own level D).
 
-## Milestone "Depth 24: mill" (estimate 6 tasks)
+## Milestone "Depth 24: mill" (estimate 9 tasks)
 
 Cut in cycle 231 for low supply (0 free tasks for 2 active agents). Registries do not collide with open Depth 23 work:
 sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
@@ -475,10 +475,13 @@ sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
 | Task | Asset | State |
 |---|---|---|
 | #624 | model: sack (props; grid body, fill/slump, neck tied/folded/open, lumps; ≤ 3 draw calls, dynamic hull) | open |
-| #625 | sprite: dog (16 × 16 like the wolf; idle with wagging tail, walk, bark; floppy or pricked ears, collar) | submitted |
+| #625 | sprite: dog (16 × 16 like the wolf; idle with wagging tail, walk, bark; floppy or pricked ears, collar) | accepted (cycle 234) |
 | #626 | icon: basket (objects; tapered body, slats "0"/"2"/"3", arch or ear handles; full sweep at 0) | open |
-| #628 | model: water wheel (architecture; rims, paddles, spokes "4"/"6"/"8", axle on posts or piers, rig `wheel`; ≤ 5 draw calls; registered after pier) | open |
-| #629 | sound: millstone (ambience loop; speed in turns/s, whole turns per loop; grind, rumble, gear knock; registered after stream) | open |
+| #628 | model: water wheel (architecture; rims, paddles, spokes "4"/"6"/"8", axle on posts or piers, rig `wheel`; ≤ 5 draw calls; registered after pier) | accepted (cycle 234) |
+| #629 | sound: millstone (ambience loop; speed in turns/s, whole turns per loop; grind, rumble, gear knock; registered after stream) | accepted (cycle 234) |
+| #630 | model fix: water wheel paddles 0.12 · diameter deep, sticking out past rims moved in to diameter/2 − d/2 (after #628) | waits for #628 merge |
+| #631 | sound: grain pour (effects ≤ 2.5 s; flour/wheat/beans into sack/pail/floor; registered after pour) | open |
+| #632 | sprite: sack-sprite (items, 16 × 16 like pot; tied/folded/open, drop animation; registered after pot) | open |
 
 ## Next (lead, level D, not cut yet)
 
