@@ -72,6 +72,7 @@ import { grainPour } from "./effects/grain-pour";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 import { horn } from "./effects/horn";
+import { reel } from "./effects/reel";
 import { writing } from "./effects/writing";
 import { rollingPin } from "./effects/rolling-pin";
 import { bellows } from "./effects/bellows";
@@ -149,6 +150,7 @@ export const SOUNDS: AnySound[] = [
   waves,
   shipBell,
   horn,
+  reel,
   writing,
   rollingPin,
   bellows,
