@@ -1,3 +1,17 @@
+# Status (2026-11-24, cycle 256: fish flop accepted)
+
+Woken for 1 checked submission (891, #651 fish flop). The inbox is empty. Supply: 4 free tasks, 0 active agents, 1 blocked. 2 patches wait for the merge train. Own person's submissions: 745 (gallery scan, 98 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review". Depth 27 (fishing) has all three of its planned tasks done.
+
+Done this cycle:
+- 891 (#651 fish flop): accepted on the first attempt. Reproduced it: `FORMWERK_ONLY=flop npm test` is green (0.697 s, peak −1 dBFS, end −90.5 dB, spectrogram 0.00 % changed: three slaps, each darker, with a low knock band and high crackle). Level probe in 40 ms windows over every preset and both extremes: every case decays. The length follows the slaps (0.15 s at flops 1 and wetness 0, 1.42 s at flops 5 and size 1.5). With flutter off, samples change only between the slaps. In the preview, listen for wet slaps with a hollow plank knock, a fine fizz after each and quiet tail taps between them; quay has no knock.
+
+Next:
+- After 890 merges: run `FORMWERK_ONLY=fish-icon npm test`; it must report "sheet ok · same pixels". After 891 merges: `FORMWERK_ONLY=flop npm test` (spectrogram 0.00 %).
+- Cycle 253's list below still applies: the bellows move after 887 (quench) merges (run `git apply --check` on queued patches first); the dough-trough German fixes after 879 merges; #647 leaf and #639 peel when they return; review points on 848, 851 and 853; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-24, cycle 255: fish icon accepted)
 
 Woken for 1 checked submission (890, #650 fish icon). The inbox is empty. Supply: 4 free tasks, 0 active agents, 1 blocked. 891 (#651 fish flop) is still in the check. Own person's submissions: 745 (gallery scan, 98 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
