@@ -73,6 +73,7 @@ import { shipBell as shipBellSound } from "./effects/ship-bell";
 import { horn as hornSound } from "./effects/horn";
 import { writing as writingSound } from "./effects/writing";
 import { rollingPin as rollingPinSound } from "./effects/rolling-pin";
+import { bellows as bellowsSound } from "./effects/bellows";
 import { sleighBells as sleighBellsSound } from "./movement/sleigh-bells";
 
 export { SOUNDS, soundById } from "./index";
@@ -162,4 +163,5 @@ export const shipBell = klang(shipBellSound);
 export const horn = klang(hornSound);
 export const writing = klang(writingSound);
 export const rollingPin = klang(rollingPinSound);
+export const bellows = klang(bellowsSound);
 export const sleighBells = klang(sleighBellsSound);

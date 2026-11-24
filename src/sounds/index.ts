@@ -72,6 +72,7 @@ import { shipBell } from "./effects/ship-bell";
 import { horn } from "./effects/horn";
 import { writing } from "./effects/writing";
 import { rollingPin } from "./effects/rolling-pin";
+import { bellows } from "./effects/bellows";
 import { sleighBells } from "./movement/sleigh-bells";
 
 export const SOUNDS: AnySound[] = [
@@ -146,6 +147,7 @@ export const SOUNDS: AnySound[] = [
   horn,
   writing,
   rollingPin,
+  bellows,
   sleighBells,
 ];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);
