@@ -24,6 +24,7 @@ export const SURFACE_IDS = [
   "copper",
   "grass",
   "straw",
+  "cinders",
   "sand",
   "dirt",
   "snow",
