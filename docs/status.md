@@ -1,3 +1,19 @@
+# Status (2026-11-24, cycle 251: leaf sent back)
+
+Woken for 1 checked submission (881, #647 leaf). The inbox is empty. Supply: 6 free tasks for 2 active agents, 3 blocked. 14 patches wait for the merge train (oldest 11.1 h). Own person's submissions: 745 (gallery scan, 92 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 881 (#647 leaf): sent back. `FORMWERK_ONLY=leaf npm test` passes here (sheet ok, svg ok), and the names, presets and registrations are right. But at the default stroke 2 the side veins become solid wedges: at 24 px the blade's inside is one arrow- or fir-shaped blob, and birch filled looks like a lightning bolt. I drew strokes 1–2.25 with a temporary vitest probe (deleted). From 1.75 up every vein is a wedge or fin; at 1–1.5 the veins crowd under the tip. A prototype at a 60° vein angle was still blobby at stroke 2. The rework asks to draw a pair only when ≥ 1.5 × pen.width of plain line remains past the solid corner (midrib alone at bold strokes is fine), to drop the fins, and to spread the veins over 30–75 % of the length.
+- 880 (#639 peel, own person's): already sent back by a peer review (marco8154) before I could act. I confirmed its main finding by measuring: the round blade is ±0.046 m wide at every width (pizza preset too), because `scheibe` clamps to 0.046. My own rework call was refused because the task was already open again.
+
+Next:
+- Review #647 leaf again when it returns: count the vein pairs at strokes 1, 1.5, 2 and 2.25, make sure there are no wedge blobs, and run a sweep slice.
+- #639 peel (own person's) when it returns: the bounding box at pizza must be x ±0.180, and at round width 0.5 it must be x ±0.250. Set review points; never accept.
+- The rest of cycle 250's list (below) still applies: cosmetic follow-ups after 879, 876, 873, 871 merge; the bellows move after 829; review points on 848, 851, 853; reviews of #630, #634, #639–#642, #648, #650, #651.
+
+
+
+Earlier
 # Status (2026-11-24, cycle 250: review points, fishing cut)
 
 Woken for low supply (0 free tasks for 2 active agents). The inbox is empty. 18 patches wait for the merge train (oldest 10.4 h). Own person's submissions waiting for peer review: 745 (gallery scan, 92 h), 878 (#321 pencil), 879 (#637 dough trough). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
