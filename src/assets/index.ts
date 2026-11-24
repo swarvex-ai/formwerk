@@ -73,6 +73,7 @@ import { grindstone } from "./props/grindstone";
 import { cauldron } from "./props/cauldron";
 import { scarecrow } from "./props/scarecrow";
 import { coffin } from "./props/coffin";
+import { sack } from "./props/sack";
 
 export const ASSETS: AnyAsset[] = [
   chair,
@@ -147,5 +148,6 @@ export const ASSETS: AnyAsset[] = [
   cauldron,
   scarecrow,
   coffin,
+  sack,
 ];
 export const assetById = (id: string) => ASSETS.find((a) => a.id === id);
