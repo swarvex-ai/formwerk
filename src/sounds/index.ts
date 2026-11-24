@@ -33,6 +33,7 @@ import { wind } from "./ambience/wind";
 import { typing } from "./ui/typing";
 import { page } from "./ui/page";
 import { glass } from "./impact/glass";
+import { appleBite } from "./impact/apple-bite";
 import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
 import { lockTurn } from "./impact/lock-turn";
@@ -88,6 +89,7 @@ export const SOUNDS: AnySound[] = [
   hit,
   explosion,
   glass,
+  appleBite,
   clang,
   knock,
   lockTurn,
