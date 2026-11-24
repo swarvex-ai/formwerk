@@ -1,3 +1,20 @@
+# Status (2026-11-24, cycle 240: bread rack accepted)
+
+Woken for 1 checked submission (860, #643 bread rack). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 18 accepted patches wait for the merge train (oldest 2.9 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 84 h) and 849 (#321 pencil) still wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 860 (#643 bread rack): accepted. Pipeline green (1 draw call, 2828 triangles at the defaults, 4808 at the heaviest case, baked 0.28 %, glb 0.33 %); tsc clean on main. Rendered the defaults (front, side), slats 8 at depth 0.3 close up, shelves 8 at height 0.9, tall and counter: clean, no overlaps. Its local `chamfered` helper (ConvexGeometry, 44 triangles) is justified: `rounded` at segments 1 costs about 108 per part and 8 × 8 would exceed 8000.
+
+Next:
+- Set review points on 848, 851, 853 (and 852's next attempt) once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #626, #630, #634, #637 (rework), #639–#642, #644 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 849 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 239: bread icon accepted, dough trough sent back)
 
 Woken for 1 checked submission (858, #636 bread icon). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 17 accepted patches wait for the merge train (oldest 2.8 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 84 h) and 849 (#321 pencil) still wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended; bottleneck "peer_review".
