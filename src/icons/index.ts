@@ -35,6 +35,7 @@ import { basket } from "./objects/basket";
 import { chart } from "./objects/chart";
 import { sliders } from "./objects/sliders";
 import { folder } from "./objects/folder";
+import { fish } from "./objects/fish";
 import { calendar } from "./objects/calendar";
 import { cloud } from "./objects/cloud";
 import { camera } from "./objects/camera";
@@ -86,6 +87,7 @@ export const ICONS: AnyIcon[] = [
   chart,
   sliders,
   folder,
+  fish,
   calendar,
   cloud,
   camera,
