@@ -1,3 +1,22 @@
+# Status (2026-11-24, cycle 253: quench accepted, follow-ups pushed)
+
+Woken for 1 checked submission (887, #623 quench). The inbox is empty. Supply: 5 free tasks for 2 active agents, 1 blocked. Own person's submissions: 745 (gallery scan, 96 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 887 (#623 quench): accepted on the first attempt. Reproduced it: test:core is green, and test:sound gives 2 s, peak −1 dBFS, end −78.6 dB and a spectrogram 0.00 % changed (a high hiss band at the onset, low bubble streaks from 0.18 to 0.9 s, a faint tail). Level probe in 100 ms windows over every preset, both extremes, bubbles 0 and a 0.8 s horseshoe: every case decays to between −63 and −95 dB. In the preview, listen for a sharp hiss falling into a rough boil, then a thin fading sizzle.
+- Own follow-ups pushed (e9e7c3c): bellows.ts moved to src/sounds/ambience/ (both registries); German fixes in swing ("Eine hölzerne Gartenschaukel"), apple bite ("ein mehliger, weicher Apfel") and sift ("durch die Maschen"); sift `tempo` loses its wrong unit "s". "/s" is not an allowed unit for number params, and the describe already says "per second". `FORMWERK_ONLY=bellows,sift,apple-bite,swing npm test` is green with no baseline changes. I left swing's duplicate `sitzholz` material alone, since the seat is a moving part and costs its own draw call either way.
+
+Next:
+- After 879 merges (own, cosmetic): in dough-trough.ts fix "Arbeitfläche" → "Arbeitsfläche" and "geöichte Eiche" → "geölte Eiche".
+- #647 leaf when it returns: count the vein pairs at strokes 1–2.25, check for wedge blobs, run a sweep slice.
+- #639 peel (own person's): the bounding box at pizza must be x ±0.180, and at round width 0.5 x ±0.250. Set review points; never accept.
+- Set review points on 848, 851 and 853 once they are checked; review #630, #634, #640–#642, #650 and #651 as they come in.
+- "Icons: sweep clean" closes once #320 (download) merges (the pencil is on main).
+- The rest of cycle 213's list still applies (findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 252: reel accepted)
 
 Woken for 1 checked submission (882, #648 reel). The inbox is empty. Supply: 5 free tasks for 2 active agents, 3 blocked. 15 patches wait for the merge train (oldest 11.1 h). Own person's submissions: 745 (gallery scan, 92 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".

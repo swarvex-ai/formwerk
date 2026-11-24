@@ -453,9 +453,9 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 |---|---|---|
 | #616 | model: grindstone (props; stone wheel on an iron axle with a crank as rig `wheel`, trestle or posts frame, optional trough; 3 draw calls) | open |
 | #617 | sprite: blacksmith (24 × 32 like the merchant, idle, walk, hammer; leather apron, bare forearms, beard) | open |
-| #618 | sound: bellows (ambience one-shot; strokes of breathy air with a leather creak and a wooden knock) | accepted (cycle 234); lead moves the file to src/sounds/ambience/ after merge |
+| #618 | sound: bellows (ambience one-shot; strokes of breathy air with a leather creak and a wooden knock) | merged; moved to src/sounds/ambience/ (cycle 253) |
 | #619 | sound: quench (effects) | closed: effects one-shots are capped at 2.5 s; replaced by #623 |
-| #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
+| #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | accepted (cycle 253) |
 | #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | accepted (cycle 233) |
 | #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | accepted (cycle 238) |
 | #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | accepted (cycle 232) |
