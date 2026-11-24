@@ -41,6 +41,7 @@ import { pin } from "./objects/pin";
 import { bulb } from "./objects/bulb";
 import { flag } from "./status/flag";
 import { tag } from "./objects/tag";
+import { hammer } from "./objects/hammer";
 import { anchorIcon } from "./objects/anchor-icon";
 import { upload } from "./actions/upload";
 import { share } from "./actions/share";
@@ -89,6 +90,7 @@ export const ICONS: AnyIcon[] = [
   bulb,
   flag,
   tag,
+  hammer,
   anchorIcon,
   upload,
   share,
