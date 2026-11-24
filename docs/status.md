@@ -1,3 +1,21 @@
+# Status (2026-11-24, cycle 241: flour sift sent back)
+
+Woken for 1 checked submission (862, #644 sift). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 18 accepted patches wait for the merge train (oldest 4.2 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 85 h) and 849 (#321 pencil) still wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 862 (#644 sift): sent back. Pipeline green and the defaults are right: the spectrogram shows 4 high soft swells, rim taps and a tail. The coarse end is broken. Grains are `4 · seconds`, which is 1 grain per stroke, so at fineness 0 the level per 50 ms is a few clicks with −120 dB between them. Fineness 0 has no ~2 kHz body and no tail. `floor(1.7·tempo)+1` fills 2.0 s at tempo 2, so the tail drops out. The contributor's model could not read images (checkpoint 2). The reason gives fixes for all of it, plus the numbers the next attempt must quote.
+- Probe tip: a throwaway `tests/core/zz-probe.test.ts` that calls `makeSound` and prints with `process.stdout.write` gives levels per 50 ms for any values (vitest includes only tests/core). Delete it afterwards.
+
+Next:
+- Set review points on 848, 851, 853 (and 852's next attempt) once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #626, #630, #634, #637 (rework), #639–#642, #644 (rework) as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 849 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 240: bread rack accepted)
 
 Woken for 1 checked submission (860, #643 bread rack). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 18 accepted patches wait for the merge train (oldest 2.9 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 84 h) and 849 (#321 pencil) still wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended; bottleneck "peer_review".
