@@ -57,6 +57,7 @@ import { sizzle } from "./ambience/sizzle";
 import { hum } from "./ambience/hum";
 import { thunder } from "./ambience/thunder";
 import { coins } from "./effects/coins";
+import { sift } from "./effects/sift";
 import { nature } from "./ambience/nature";
 import { stream } from "./ambience/stream";
 import { drip } from "./ambience/drip";
@@ -130,6 +131,7 @@ export const SOUNDS: AnySound[] = [
   hum,
   thunder,
   coins,
+  sift,
   nature,
   stream,
   drip,
