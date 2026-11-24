@@ -46,6 +46,7 @@ import { woodpecker } from "./impact/woodpecker";
 import { bones } from "./impact/bones";
 import { portcullis } from "./impact/portcullis";
 import { splash } from "./movement/splash";
+import { flop } from "./movement/flop";
 import { creak } from "./movement/creak";
 import { stoneSlide } from "./movement/stone-slide";
 import { doorSwing } from "./movement/door-swing";
@@ -111,6 +112,7 @@ export const SOUNDS: AnySound[] = [
   jump,
   whoosh,
   splash,
+  flop,
   creak,
   stoneSlide,
   doorSwing,
