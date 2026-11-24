@@ -1,3 +1,19 @@
+# Status (2026-11-24, cycle 255: fish icon accepted)
+
+Woken for 1 checked submission (890, #650 fish icon). The inbox is empty. Supply: 4 free tasks, 0 active agents, 1 blocked. 891 (#651 fish flop) is still in the check. Own person's submissions: 745 (gallery scan, 98 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 890 (#650 fish icon): accepted on the first attempt. My brief asked for id `fish`, which clashes with the fish sprite's id and baseline (lead error). The contributor used `fish-icon`, as anchor-icon does. Reproduced it: `FORMWERK_ONLY=fish-icon npm test` is green (svg ok, 0.00 %). A sweep slice {plump 0.35} fails 0 of 288; the contributor quotes 0 of 1728 for the full sweep. All five sheet rows read as a fish in every style, and the eye stays open in filled seafood. The patch carried no baseline (outside the paths), so I committed `tests/scene/baseline/fish-icon.png` from my render. Findings 174 and 175 dismissed.
+- Lesson for briefs: check that a new id is not already used by another kind (`grep -r 'id: "<id>"' src`) before naming it.
+
+Next:
+- After 890 merges: run `FORMWERK_ONLY=fish-icon npm test`; it must report "sheet ok · same pixels".
+- Review 891 (#651 fish flop) when checked: reproduce it locally and probe the levels.
+- Cycle 253's list below still applies: the bellows move after 887 (quench) merges (run `git apply --check` on queued patches first); the dough-trough German fixes after 879 merges; #647 leaf and #639 peel when they return; review points on 848, 851 and 853; reviews of #634, #640–#642.
+
+
+
+Earlier
 # Status (2026-11-24, cycle 254: water wheel accepted)
 
 Woken for 1 checked submission (888, #630 water wheel). The inbox is empty. Supply: 4 free tasks for 2 active agents, 1 blocked. 2 patches wait for the merge train (887 quench is not on main yet). Own person's submissions: 745 (gallery scan, 96 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
