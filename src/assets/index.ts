@@ -16,6 +16,7 @@ import { column } from "./architecture/column";
 import { battlement } from "./architecture/battlement";
 import { bridge } from "./architecture/bridge";
 import { pier } from "./architecture/pier";
+import { waterWheel } from "./architecture/water-wheel";
 import { fireplace } from "./architecture/fireplace";
 import { forge } from "./architecture/forge";
 import { breadOven } from "./architecture/bread-oven";
@@ -96,6 +97,7 @@ export const ASSETS: AnyAsset[] = [
   battlement,
   bridge,
   pier,
+  waterWheel,
   fireplace,
   forge,
   breadOven,
