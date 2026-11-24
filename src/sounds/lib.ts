@@ -76,7 +76,7 @@ import { horn as hornSound } from "./effects/horn";
 import { reel as reelSound } from "./effects/reel";
 import { writing as writingSound } from "./effects/writing";
 import { rollingPin as rollingPinSound } from "./effects/rolling-pin";
-import { bellows as bellowsSound } from "./ambience/bellows";
+import { bellows as bellowsSound } from "./effects/bellows";
 import { sleighBells as sleighBellsSound } from "./movement/sleigh-bells";
 
 export { SOUNDS, soundById } from "./index";

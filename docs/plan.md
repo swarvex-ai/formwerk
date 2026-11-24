@@ -453,7 +453,7 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 |---|---|---|
 | #616 | model: grindstone (props; stone wheel on an iron axle with a crank as rig `wheel`, trestle or posts frame, optional trough; 3 draw calls) | open |
 | #617 | sprite: blacksmith (24 × 32 like the merchant, idle, walk, hammer; leather apron, bare forearms, beard) | open |
-| #618 | sound: bellows (ambience one-shot; strokes of breathy air with a leather creak and a wooden knock) | merged; moved to src/sounds/ambience/ (cycle 253) |
+| #618 | sound: bellows (ambience one-shot; strokes of breathy air with a leather creak and a wooden knock) | merged; the lead moves it to src/sounds/ambience/ after #623 merges |
 | #619 | sound: quench (effects) | closed: effects one-shots are capped at 2.5 s; replaced by #623 |
 | #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | accepted (cycle 253) |
 | #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | accepted (cycle 233) |

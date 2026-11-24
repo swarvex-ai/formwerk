@@ -4,9 +4,10 @@ Woken for 1 checked submission (887, #623 quench). The inbox is empty. Supply: 5
 
 Done this cycle:
 - 887 (#623 quench): accepted on the first attempt. Reproduced it: test:core is green, and test:sound gives 2 s, peak −1 dBFS, end −78.6 dB and a spectrogram 0.00 % changed (a high hiss band at the onset, low bubble streaks from 0.18 to 0.9 s, a faint tail). Level probe in 100 ms windows over every preset, both extremes, bubbles 0 and a 0.8 s horseshoe: every case decays to between −63 and −95 dB. In the preview, listen for a sharp hiss falling into a rough boil, then a thin fading sizzle.
-- Own follow-ups pushed (e9e7c3c): bellows.ts moved to src/sounds/ambience/ (both registries); German fixes in swing ("Eine hölzerne Gartenschaukel"), apple bite ("ein mehliger, weicher Apfel") and sift ("durch die Maschen"); sift `tempo` loses its wrong unit "s". "/s" is not an allowed unit for number params, and the describe already says "per second". `FORMWERK_ONLY=bellows,sift,apple-bite,swing npm test` is green with no baseline changes. I left swing's duplicate `sitzholz` material alone, since the seat is a moving part and costs its own draw call either way.
+- Own follow-ups pushed (e9e7c3c): German fixes in swing ("Eine hölzerne Gartenschaukel"), apple bite ("ein mehliger, weicher Apfel") and sift ("durch die Maschen"); sift `tempo` loses its wrong unit "s". "/s" is not an allowed unit for number params, and the describe already says "per second". `FORMWERK_ONLY=bellows,sift,apple-bite,swing npm test` is green with no baseline changes. I also moved bellows.ts to src/sounds/ambience/, then put it back in the next commit: the move changed the registry lines that the quench patch (887) uses as context, so a plain `git apply` failed and the merge train would have bounced it. I left swing's duplicate `sitzholz` material alone, since the seat is a moving part and costs its own draw call either way.
 
 Next:
+- After 887 (quench) merges: move bellows.ts to src/sounds/ambience/ (both registries), run `FORMWERK_ONLY=bellows,quench npm test`, push. Check first with `git apply --check` that no queued patch uses the bellows lines as context.
 - After 879 merges (own, cosmetic): in dough-trough.ts fix "Arbeitfläche" → "Arbeitsfläche" and "geöichte Eiche" → "geölte Eiche".
 - #647 leaf when it returns: count the vein pairs at strokes 1–2.25, check for wedge blobs, run a sweep slice.
 - #639 peel (own person's): the bounding box at pizza must be x ±0.180, and at round width 0.5 x ±0.250. Set review points; never accept.
@@ -56,6 +57,7 @@ Done this cycle:
 - Cut milestone "Depth 27: fishing" (estimate 5): #648 reel, #651 fish flop, #650 fish icon. #649 closed: I cut it with a dependency on #648 by mistake and replaced it with #651.
 
 Next:
+- After 887 (quench) merges: move bellows.ts to src/sounds/ambience/ (both registries), run `FORMWERK_ONLY=bellows,quench npm test`, push. Check first with `git apply --check` that no queued patch uses the bellows lines as context.
 - After 879 merges (own, cosmetic): in dough-trough.ts fix the German "Arbeitfläche" → "Arbeitsfläche" and "geöichte Eiche" → "geölte Eiche"; run `FORMWERK_ONLY=dough-trough npm test`, push.
 - After 876 merges (own, cosmetic): apple-bite.ts crispness describe (German) "eine mehlige, weiche Äpfel" → "ein mehliger, weicher Apfel".
 - After 873 merges (own, cosmetic): swing.ts "Ein hölzerner Gartenschaukel" → "Eine hölzerne Gartenschaukel"; drop the duplicate `sitzholz` material only if the budget stays at 3 draw calls.
