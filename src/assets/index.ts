@@ -5,6 +5,7 @@ import { chair } from "./furniture/chair";
 import { throne } from "./furniture/throne";
 import { table } from "./furniture/table";
 import { shelf } from "./furniture/shelf";
+import { breadRack } from "./furniture/bread-rack";
 import { workbench } from "./furniture/workbench";
 import { crate } from "./furniture/crate";
 import { serverRack } from "./furniture/server-rack";
@@ -80,6 +81,7 @@ export const ASSETS: AnyAsset[] = [
   throne,
   table,
   shelf,
+  breadRack,
   workbench,
   crate,
   serverRack,
