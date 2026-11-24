@@ -61,6 +61,7 @@ import { stream } from "./ambience/stream";
 import { drip } from "./ambience/drip";
 import { bubbling } from "./ambience/bubbling";
 import { saw } from "./effects/saw";
+import { kneading } from "./effects/kneading";
 import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
 import { grainPour } from "./effects/grain-pour";
@@ -131,6 +132,7 @@ export const SOUNDS: AnySound[] = [
   drip,
   bubbling,
   saw,
+  kneading,
   swordDraw,
   pour,
   grainPour,
