@@ -6,6 +6,7 @@ import { makeSheet, type Sprite } from "./define";
 import { villager as villagerSprite } from "./characters/villager";
 import { merchant as merchantSprite } from "./characters/merchant";
 import { blacksmith as blacksmithSprite } from "./characters/blacksmith";
+import { baker as bakerSprite } from "./characters/baker";
 import { wizard as wizardSprite } from "./characters/wizard";
 import { knight as knightSprite } from "./characters/knight";
 import { slime as slimeSprite } from "./creatures/slime";
@@ -67,6 +68,7 @@ const bogen = <S extends Sprite<any>>(s: S) => (values: Input<S> = {}, seed = 1)
 export const villager = bogen(villagerSprite);
 export const merchant = bogen(merchantSprite);
 export const blacksmith = bogen(blacksmithSprite);
+export const baker = bogen(bakerSprite);
 export const wizard = bogen(wizardSprite);
 export const knight = bogen(knightSprite);
 export const slime = bogen(slimeSprite);
