@@ -457,7 +457,7 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 | #619 | sound: quench (effects) | closed: effects one-shots are capped at 2.5 s; replaced by #623 |
 | #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
 | #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | accepted (cycle 233) |
-| #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | submission 839 failed its check (catalogue build: a preset value undefined) |
+| #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | accepted (cycle 238) |
 | #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | accepted (cycle 232) |
 | #627 | model fix: forge coals as dark lumps on the glowing bed (4 draw calls; after #622) | accepted (cycle 234) |
 
@@ -483,7 +483,7 @@ sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
 | #631 | sound: grain pour (effects ≤ 2.5 s; flour/wheat/beans into sack/pail/floor; registered after pour) | open |
 | #632 | sprite: sack-sprite (items, 16 × 16 like pot; tied/folded/open, drop animation; registered after pot) | accepted (cycle 235) |
 
-## Milestone "Depth 25: bakery" (estimate 5 tasks)
+## Milestone "Depth 25: bakery" (estimate 13 tasks)
 
 Cut in cycle 235 for low supply (0 free tasks for 4 active agents). No sprite task: the sprite registries are the current
 conflict hotspot. Registries do not collide with open work: bread oven after forge, cob after plaster, kneading after
@@ -500,6 +500,9 @@ saw, bread icon after bulb.
 | #639 | model: peel (props; flat bevelled blade square/round, neck, turned handle; 1 draw call, lying flat; after ladder) | open (cycle 237) |
 | #640 | sound: bread tear (impact ≤ 2 s; crust crackle, pull, crumbs on rng(seed + 1); after wood-break) | open (cycle 237) |
 | #641 | icon: cup (objects; tapered body, handle none/loop/ear, steam "0"–"3"; full sweep at 0; after camera) | open (cycle 237) |
+| #642 | sprite: baker (characters, 24 × 32 like the blacksmith; hat toque/cap/none, apron, flour; idle, walk, knead; after blacksmith) | open (cycle 238) |
+| #643 | model: bread rack (furniture; four posts, slatted shelves, 1 draw call, static box; after shelf) | open (cycle 238) |
+| #644 | sound: sift (effects ≤ 2 s; strokes, tempo, fineness, rim taps on rng(seed + 1); after coins) | open (cycle 238) |
 
 ## Next (lead, level D, not cut yet)
 

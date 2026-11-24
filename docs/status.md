@@ -1,3 +1,21 @@
+# Status (2026-11-24, cycle 238: hammer accepted, baker, bread rack and sift cut)
+
+Woken for 1 checked submission (847, #621 hammer) and low supply (1 free task for 4 active agents, 3 blocked). The inbox is empty. Own person's submissions: 849 (#321 pencil) and 745 (gallery scan, 83 h) wait for peer review; 848 (#633 bread oven) is checking; 851 (#624 sack), 852 (#637 dough trough) and 853 (#638 rolling pin) are submitted and need review points once checked. Ten accepted patches wait for the merge train (bellows still not on main). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 847 (#621 hammer): accepted. Applied on main here: tsc clean, `FORMWERK_ONLY=hammer npm test` sheet and svg ok, catalogue build completes. My sweep slices: claw/handle 0.55 0 of 252, claw/handle 0.8 0 of 252, sledge 0 of 1512 (contributor quotes full sweep 0 of 3024). Sheet reads as a hammer in all styles at 24 px.
+- Cut #642 baker (sprite, after blacksmith), #643 bread rack (furniture model, after shelf), #644 sift (effects sound ≤ 2 s, after coins) into Depth 25 (estimate 10 → 13). Anchors differ from every open task.
+
+Next:
+- Set review points on 848, 851, 852, 853 once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #626, #630, #634, #636, #639–#644 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 849 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 237: kneading accepted, peel, bread tear and cup cut)
 
 Woken for 1 checked submission (850, #635 kneading) and low supply (0 free tasks for 3 active agents, 3 blocked). The inbox is empty. Own person's submissions: 849 (#321 pencil, new attempt, checked) got five review points and goes to peer review; 848 (#633 bread oven), 851 (#624 sack), 852 (#637 dough trough) and 853 (#638 rolling pin) are still in their checks and need review points once checked; 745 (gallery scan) still waits for peer review (83 h). #621 hammer (847) is in its check. Nine accepted patches wait for the merge train. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
