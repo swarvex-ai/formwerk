@@ -35,11 +35,10 @@ export const forge = defineAsset({
     cold: { label: { de: "Kalt", en: "Cold" }, values: { fire: false } },
   },
   physics: { body: "static", collider: "box" },
-  budget: { triangles: 6000, drawCalls: 3 },
+  budget: { triangles: 6000, drawCalls: 4 },
   build(p, seed) {
     const r = rng(seed);
     const stein = material("stone", p.stone, 1, undefined, { moss: 0 });
-    const kohle = p.fire ? material("glow", "#ff7a2a") : material("stone", "#2a2826", 4, undefined, { moss: 0 });
     const t = new Parts();
 
     const w = p.width, d = p.depth, h = p.height;
@@ -62,17 +61,19 @@ export const forge = defineAsset({
     course(-w / 2, -rw / 2, r0, r1);
     course(rw / 2, w / 2, r0, r1);
 
-    // 2. Coal bed: a layer up to 0.04 m below the top, lumps from the seed half sunk in it
+    // 2. Coal bed: a layer up to 0.04 m below the top, dark lumps from the seed half sunk in it, glow between them
+    const lumpM = material("stone", "#2a2826", 4, undefined, { moss: 0 });
+    const kohle = p.fire ? material("glow", "#ff7a2a") : lumpM;
     const bedH = coalTop - (h - bedDrop);
     t.box(kohle, rw, bedH, rd, 0, h - bedDrop + bedH / 2, rz);
-    const lumps = Math.round((rw * rd) / 0.0035);
+    const lumps = Math.max(4, Math.round((rw * rd) / 0.0028));
     for (let i = 0; i < lumps; i++) {
-      const s = 0.018 + r() * 0.016;
+      const s = 0.028 + r() * 0.02;
       const g = new DodecahedronGeometry(s, 0);
       g.rotateX(r() * Math.PI).rotateY(r() * Math.PI);
       g.scale(1, 0.7, 1);
-      g.translate((r() - 0.5) * (rw - 2 * s), coalTop - s * 0.3, r0 + s + r() * (rd - 2 * s));
-      t.add(kohle, g);
+      g.translate((r() - 0.5) * (rw - 2 * s), coalTop, r0 + s + r() * (rd - 2 * s));
+      t.add(lumpM, g);
     }
 
     // 3. Hood: a closed wedge, flat underside 0.55 m above the top, sloping from the stack face over the coals
