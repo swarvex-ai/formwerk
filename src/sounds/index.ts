@@ -39,6 +39,7 @@ import { lockTurn } from "./impact/lock-turn";
 import { diceRoll } from "./impact/dice-roll";
 import { cardShuffle } from "./effects/card-shuffle";
 import { woodBreak } from "./impact/wood-break";
+import { breadTear } from "./impact/bread-tear";
 import { pickaxe } from "./impact/pickaxe";
 import { woodpecker } from "./impact/woodpecker";
 import { bones } from "./impact/bones";
@@ -90,6 +91,7 @@ export const SOUNDS: AnySound[] = [
   diceRoll,
   cardShuffle,
   woodBreak,
+  breadTear,
   pickaxe,
   woodpecker,
   bones,
