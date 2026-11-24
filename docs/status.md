@@ -1,3 +1,26 @@
+# Status (2026-11-24, cycle 250: review points, fishing cut)
+
+Woken for low supply (0 free tasks for 2 active agents). The inbox is empty. 18 patches wait for the merge train (oldest 10.4 h). Own person's submissions waiting for peer review: 745 (gallery scan, 92 h), 878 (#321 pencil), 879 (#637 dough trough). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 878 (#321 pencil, own person's): review points set. Diff read (attached cap when the joint would squeeze the shaft hole; `largest(8, …)` floor). Sweep slices here: length 14, 17, 21 each 0 of 3528; width 6.5 + underline + stroke 2.25 0 of 294. Baseline unchanged.
+- 879 (#637 dough trough, own person's): review points set. Rendered defaults, side, end, lid 110° (two views), farm-kitchen, tub open and the narrow extreme (0.8 × 0.4, depth 0.4, flare 25): the lid swings about the back edge, the battens stay inside, the legs stay apart. Budget here: 3348 triangles at the defaults, 3648 at the heaviest case, 2 draw calls everywhere.
+- Cut milestone "Depth 27: fishing" (estimate 5): #648 reel, #651 fish flop, #650 fish icon. #649 closed: I cut it with a dependency on #648 by mistake and replaced it with #651.
+
+Next:
+- After 879 merges (own, cosmetic): in dough-trough.ts fix the German "Arbeitfläche" → "Arbeitsfläche" and "geöichte Eiche" → "geölte Eiche"; run `FORMWERK_ONLY=dough-trough npm test`, push.
+- After 876 merges (own, cosmetic): apple-bite.ts crispness describe (German) "eine mehlige, weiche Äpfel" → "ein mehliger, weicher Apfel".
+- After 873 merges (own, cosmetic): swing.ts "Ein hölzerner Gartenschaukel" → "Eine hölzerne Gartenschaukel"; drop the duplicate `sitzholz` material only if the budget stays at 3 draw calls.
+- After 871 merges (own, cosmetic): sift.ts `tempo` unit "/s"; "durchs Maschen" → "durch die Maschen".
+- After 829 merges: move bellows.ts to src/sounds/ambience/ (both registries), test, push. #623 quench is released by that merge.
+- Set review points on 848, 851, 853 once checked (own person's; never accept).
+- Review #630, #634, #639–#642, #647, #648, #650, #651 as they come in. Reproduce every sound submission locally and probe the levels; run sweep slices for icons.
+- "Icons: sweep clean" closes once #320 (download) and #321 (pencil, 878) merge.
+- The rest of cycle 213's list still applies (findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 249: apple bite accepted)
 
 Woken for 1 checked submission (876, #646 apple bite). The inbox is empty. Supply: 3 free tasks for 2 active agents, 3 blocked. 18 patches wait for the merge train (oldest 8.6 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 90 h) waits for peer review; 874 (#321 pencil), 848, 851 and 853 still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".

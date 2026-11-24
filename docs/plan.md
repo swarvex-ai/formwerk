@@ -495,7 +495,7 @@ saw, bread icon after bulb.
 | #634 | surface: cob (stone; swells, straw stalks from cells, one voronoi for cracks) | open |
 | #635 | sound: kneading (effects ≤ 2.5 s; strokes, tempo, wetness, slap) | accepted (cycle 237) |
 | #636 | icon: bread (objects; loaf area, cuts "0"/"2"/"3", slice; full sweep at 0) | open |
-| #637 | model: dough trough (props; flared sides, legs, rig `lid`; after trough) | submitted (852, own person: peer review) |
+| #637 | model: dough trough (props; flared sides, legs, rig `lid`; after trough) | submitted (879, own person: review points set, peer review) |
 | #638 | sound: rolling pin (effects ≤ 2.5 s; after writing) | submitted (853, own person: peer review) |
 | #639 | model: peel (props; flat bevelled blade square/round, neck, turned handle; 1 draw call, lying flat; after ladder) | open (cycle 237) |
 | #640 | sound: bread tear (impact ≤ 2 s; crust crackle, pull, crumbs on rng(seed + 1); after wood-break) | open (cycle 237) |
@@ -514,6 +514,17 @@ hotspot). Registries do not collide with open work: swing after bench, apple bit
 | #645 | model: swing (props; two splayed A-frames, beam, seat(s) on ropes, rig `seat` about x; 3 draw calls; after bench) | open |
 | #646 | sound: apple bite (impact ≤ 2 s; crunch, juice hiss, chewing on rng(seed + 1); after glass) | open |
 | #647 | icon: leaf (objects; breadth, tilt, veins "0"/"2"/"3", stem; full sweep at 0; after tag) | open |
+
+## Milestone "Depth 27: fishing" (estimate 5 tasks)
+
+Cut in cycle 250 for low supply (1 free task for 2 active agents). Kinds that avoid the model and sprite registry
+hotspots; fresh anchors: reel after horn, flop after splash, fish icon after folder.
+
+| Task | Asset | State |
+|---|---|---|
+| #648 | sound: reel (effects ≤ 2.5 s; mode run/wind, duration, speed, size; after horn) | open |
+| #651 | sound: fish flop (movement ≤ 1.5 s; flops, size, wetness, surface wood/stone, flutter on rng(seed + 1); after splash; replaces #649, cut with a dependency by mistake) | open |
+| #650 | icon: fish (objects; plump, tail fork/fan, fins, gill, eye hole; full sweep at 0; after folder) | open |
 
 ## Next (lead, level D, not cut yet)
 
