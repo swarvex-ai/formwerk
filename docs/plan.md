@@ -493,8 +493,13 @@ saw, bread icon after bulb.
 |---|---|---|
 | #633 | model: bread oven (architecture; plinth, turned dome, arched mouth ring, glow mouth, chimney; ≤ 2 draw calls) | open |
 | #634 | surface: cob (stone; swells, straw stalks from cells, one voronoi for cracks) | open |
-| #635 | sound: kneading (effects ≤ 2.5 s; strokes, tempo, wetness, slap) | open |
+| #635 | sound: kneading (effects ≤ 2.5 s; strokes, tempo, wetness, slap) | accepted (cycle 237) |
 | #636 | icon: bread (objects; loaf area, cuts "0"/"2"/"3", slice; full sweep at 0) | open |
+| #637 | model: dough trough (props; flared sides, legs, rig `lid`; after trough) | submitted (852, own person: peer review) |
+| #638 | sound: rolling pin (effects ≤ 2.5 s; after writing) | submitted (853, own person: peer review) |
+| #639 | model: peel (props; flat bevelled blade square/round, neck, turned handle; 1 draw call, lying flat; after ladder) | open (cycle 237) |
+| #640 | sound: bread tear (impact ≤ 2 s; crust crackle, pull, crumbs on rng(seed + 1); after wood-break) | open (cycle 237) |
+| #641 | icon: cup (objects; tapered body, handle none/loop/ear, steam "0"–"3"; full sweep at 0; after camera) | open (cycle 237) |
 
 ## Next (lead, level D, not cut yet)
 
