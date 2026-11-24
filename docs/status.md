@@ -1,3 +1,19 @@
+# Status (2026-11-24, cycle 230: cinders surface back for rework)
+
+Woken for 1 checked submission (826, #620 cinders). The inbox is empty. Supply is fine: 3 free tasks for 3 active agents, 2 blocked. 745 (gallery scan) still waits for peer review (oldest 79 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 826 (#620 cinders): rework. Names, presets, texts, registrations, one voronoi call and both baselines are right; the scene test is green. The committed maps show three parameters not working: at coverage 0.7 the ash network dominates (lumps about a third, reads as cracked mud; the 0.25-wide ramp from `gap` reaches 1 only near cell centres), the roughness map is flat (the `ramp(schupp, 0.78, 0.88)` fleck threshold is never reached), and the pores are invisible (24-cell fbm is a swell, not pits). Also flat plateau lump tops. Four numbered fixes in the reason.
+- Review hint: for surfaces, the roughness quadrant of `<id>.maps.png` shows at a glance whether metal flecks exist at all.
+
+Next:
+- Review #620 cinders (rework), #616 grindstone (rework), #618 bellows, #619 quench, #621 hammer, #622 forge as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil); then close the milestone.
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier 
 # Status (2026-11-23, cycle 229: grindstone back for rework a second time)
 
 Woken for 1 checked submission (825, #616 grindstone rework). The inbox is empty. Supply is fine: 4 free tasks for 2 active agents, 2 blocked. 745 (gallery scan) still waits for peer review (oldest 79 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
