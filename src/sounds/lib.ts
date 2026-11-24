@@ -77,6 +77,7 @@ import { reel as reelSound } from "./effects/reel";
 import { writing as writingSound } from "./effects/writing";
 import { rollingPin as rollingPinSound } from "./effects/rolling-pin";
 import { bellows as bellowsSound } from "./effects/bellows";
+import { quench as quenchSound } from "./ambience/quench";
 import { sleighBells as sleighBellsSound } from "./movement/sleigh-bells";
 
 export { SOUNDS, soundById } from "./index";
@@ -170,4 +171,5 @@ export const reel = klang(reelSound);
 export const writing = klang(writingSound);
 export const rollingPin = klang(rollingPinSound);
 export const bellows = klang(bellowsSound);
+export const quench = klang(quenchSound);
 export const sleighBells = klang(sleighBellsSound);

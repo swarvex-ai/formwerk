@@ -76,6 +76,7 @@ import { reel } from "./effects/reel";
 import { writing } from "./effects/writing";
 import { rollingPin } from "./effects/rolling-pin";
 import { bellows } from "./effects/bellows";
+import { quench } from "./ambience/quench";
 import { sleighBells } from "./movement/sleigh-bells";
 
 export const SOUNDS: AnySound[] = [
@@ -154,6 +155,7 @@ export const SOUNDS: AnySound[] = [
   writing,
   rollingPin,
   bellows,
+  quench,
   sleighBells,
 ];
 export const soundById = (id: string) => SOUNDS.find((s) => s.id === id);
