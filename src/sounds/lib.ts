@@ -70,6 +70,7 @@ import { waves as wavesSound } from "./ambience/waves";
 import { shipBell as shipBellSound } from "./effects/ship-bell";
 import { horn as hornSound } from "./effects/horn";
 import { writing as writingSound } from "./effects/writing";
+import { rollingPin as rollingPinSound } from "./effects/rolling-pin";
 import { sleighBells as sleighBellsSound } from "./movement/sleigh-bells";
 
 export { SOUNDS, soundById } from "./index";
@@ -156,4 +157,5 @@ export const waves = klang(wavesSound);
 export const shipBell = klang(shipBellSound);
 export const horn = klang(hornSound);
 export const writing = klang(writingSound);
+export const rollingPin = klang(rollingPinSound);
 export const sleighBells = klang(sleighBellsSound);
