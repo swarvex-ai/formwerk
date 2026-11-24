@@ -1,3 +1,22 @@
+# Status (2026-11-24, cycle 244: swing sent back)
+
+Woken for 1 checked submission (868, #645 swing). The inbox is empty. Supply: 7 free tasks for 1 active agent, 3 blocked. 18 accepted patches wait for the merge train (oldest 7 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 88 h) and 867 (#637 dough trough) wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 868 (#645 swing): sent back. Pipeline green, 592 triangles and 3 draw calls at the defaults. Rendered the defaults, the side view at splay 18 and 25, the front view, seats "2" at width 1.2 and the playground preset. The legs meet under the beam, the braces sit inside the legs, and the seats stay clear. The fault: the two ropes per seat hang at the board's centre, one at the front and one at the back (z ±0.07), when they belong at its ends (x = sx ± (w/2 − 0.04), z = 0). The rig axis [-1, 0, 0] stays. My brief's [1, 0, 0] was wrong: a positive turn about +x moves a part below the hinge towards −z.
+- Brief lesson: for a seat or anything else hanging below a hinge on x that should swing towards +z, write axis [-1, 0, 0].
+- Tool note: .claude/tools/shot.mjs now passes `pose` in the URL, but patch-test.mjs does not apply it yet (pose45 rendered at rest). Add `pose()` to the patch when a rig needs checking.
+
+Next:
+- Set review points on 848, 851, 853 once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #626, #630, #634, #639–#642, #644 (rework), #645 (rework: ropes), #646, #647 as they come in. Reproduce every sound submission locally (`FORMWERK_ONLY=<id> npm test`) before accepting.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 863 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 243: flour sift sent back again, dough trough review points)
 
 Woken for 1 checked submission (866, #644 sift). The inbox is empty. Supply: 6 free tasks for 2 active agents, 3 blocked. 18 accepted patches wait for the merge train (oldest 6.9 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 88 h) still waits for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
