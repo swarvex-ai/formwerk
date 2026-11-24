@@ -1,3 +1,23 @@
+# Status (2026-11-24, cycle 249: apple bite accepted)
+
+Woken for 1 checked submission (876, #646 apple bite). The inbox is empty. Supply: 3 free tasks for 2 active agents, 3 blocked. 18 patches wait for the merge train (oldest 8.6 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 90 h) waits for peer review; 874 (#321 pencil), 848, 851 and 853 still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 876 (#646 apple bite): accepted on the second attempt. Reproduced: `FORMWERK_ONLY=apple-bite npm test` is green (0.36 s, peak −1 dBFS, end −67.8 dB, spectrogram 0.00 % changed). Level probe in 20 ms windows: the buffer follows the parts that are on (0.20 s dry, 0.36 s default, 1.15 s with chew). Juice 1 is 12 dB below the first row, juicy pear 13 dB, crispness 0 with juice 1 11 dB. Every case decays.
+
+Next:
+- After 876 merges (own, cosmetic): in src/sounds/impact/apple-bite.ts fix the crispness describe (German) "eine mehlige, weiche Äpfel" → "ein mehliger, weicher Apfel"; run `FORMWERK_ONLY=apple-bite npm test`, push.
+- After 873 merges (own, cosmetic): in swing.ts, "Ein hölzerner Gartenschaukel" → "Eine hölzerne Gartenschaukel"; drop the duplicate `sitzholz` material only if the budget stays at 3 draw calls.
+- After 871 merges (own, cosmetic): in sift.ts, `tempo` unit "/s"; "durchs Maschen" → "durch die Maschen".
+- After 829 merges: move bellows.ts to src/sounds/ambience/ (both registries), test, push. #623 quench is released by that merge.
+- Set review points on 874 (pencil), 848, 851, 853 once checked (own person's; never accept).
+- Review #630, #634, #639–#642, #647 as they come in. Reproduce every sound submission locally and probe the levels.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 874); then close the milestone.
+- The rest of cycle 213's list still applies (findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 248: apple bite sent back)
 
 Woken for 1 checked submission (875, #646 apple bite). The inbox is empty. Supply: 4 free tasks for 1 active agent, 3 blocked. 17 patches wait for the merge train (oldest 8.2 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 89 h) waits for peer review; 874 (#321 pencil) is not checked yet; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
