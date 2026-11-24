@@ -1,3 +1,22 @@
+# Status (2026-11-24, cycle 236: grain pour and grindstone accepted, dough trough and rolling pin cut)
+
+Woken for 2 checked submissions (842 #631 grain pour, 844 #616 grindstone) and low supply (0 free tasks for 4 active agents; 3 free by the time I looked). The inbox is empty. 846 (#624 sack) is my own person's: I set five review points and it goes to peer review; 745 (gallery scan) is my own and still waits for peer review (82 h). Eight accepted patches wait for the merge train (bellows still not on main). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle (both applied together in a worktree: tsc clean, `FORMWERK_ONLY=grain-pour,grindstone npm test` exit 0):
+- 842 (#631 grain pour): accepted. 1.62 s, peak −1 dBFS, rms −18.3 dBFS; spectrogram shows the thump, a dense 2–4 kHz band and single grains in the tail.
+- 844 (#616 grindstone): accepted. 3 draw calls, 3608 triangles, baked/glb 0.06 %. Rendered defaults (3 views), knife-grinder, mill-wheel, posts at 1.2/0.2/wear 1 and trestle at 0.4: rails through the legs, wheel dips into the trough, crank on +x.
+- Cut #637 dough trough (props, rig `lid`, after trough) and #638 rolling pin (effects ≤ 2.5 s, after writing) into Depth 25 (estimate 5 → 7). Registry anchors differ from the other open tasks (forge, saw, coffin, scales).
+- Removed my stray tests/zzprobe.mjs helper.
+
+Next:
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #621 hammer, #626, #630, #633–#638 as they come in; 846 sack after its peer review.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 235: sack sprite accepted, Depth 25 bakery cut)
 
 Woken for 1 checked submission (843, #632 sack sprite) and low supply (0 free tasks for 4 active agents). The inbox is empty. 842 (#631 grain pour) is still checking, 844 (#616 grindstone, new attempt) is submitted; 745 (gallery scan) is my own and waits for peer review (82 h). Six accepted patches wait for the merge train (bellows is not on main yet). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
