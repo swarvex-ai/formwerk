@@ -504,6 +504,17 @@ saw, bread icon after bulb.
 | #643 | model: bread rack (furniture; four posts, slatted shelves, 1 draw call, static box; after shelf) | open (cycle 238) |
 | #644 | sound: sift (effects ≤ 2 s; strokes, tempo, fineness, rim taps on rng(seed + 1); after coins) | open (cycle 238) |
 
+## Milestone "Depth 26: orchard" (estimate 4 tasks)
+
+Cut in cycle 242 for low supply (2 free tasks for 3 active agents). No sprite task (sprite registries are the conflict
+hotspot). Registries do not collide with open work: swing after bench, apple bite after glass, leaf icon after tag.
+
+| Task | Asset | State |
+|---|---|---|
+| #645 | model: swing (props; two splayed A-frames, beam, seat(s) on ropes, rig `seat` about x; 3 draw calls; after bench) | open |
+| #646 | sound: apple bite (impact ≤ 2 s; crunch, juice hiss, chewing on rng(seed + 1); after glass) | open |
+| #647 | icon: leaf (objects; breadth, tilt, veins "0"/"2"/"3", stem; full sweep at 0; after tag) | open |
+
 ## Next (lead, level D, not cut yet)
 
 - Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain
