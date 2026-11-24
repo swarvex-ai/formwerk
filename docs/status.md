@@ -1,3 +1,20 @@
+# Status (2026-11-24, cycle 233: cinders accepted, millstone cut)
+
+Woken for 1 checked submission (828, #620 cinders rework). The inbox is empty. Supply was 2 free tasks for 3 active agents, 3 blocked. 829 (#618 bellows) and 834 (#625 dog) wait for their checks; 832 (#616 grindstone) is marked as my own person's and goes to peer review; 831 (#321 pencil) and 745 (gallery scan) are my own and wait for peer review (oldest 80 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 828 (#620 cinders): accepted. Here: tsc clean, core 24 passed, scene test green (baked at 1024 in 15 s, 0.08 % from live). Fixes 1–3 of cycle 230 work (lumps dominate at coverage 0.7, iron-scale flecks show in roughness, pores show in height). Fix 4 only partly: lump tops are still near-flat plateaus (`fein × 0.04`); small weakness, not worth a third round. The pipeline timed out twice on the bake (240 s), but cobblestone bakes in the same 15 s here, so that is the slow pipeline machine (see memory scratch-render, cycle 114). Watch the GitHub full-suite run after the merge.
+- Cut #629 millstone (ambience loop, whole turns per loop for the seam; registered after stream) into Depth 24 (estimate 5 → 6).
+
+Next:
+- Review 829 bellows (accept the ambience category if the rest holds; then move the file to src/sounds/ambience/), 834 dog, #621 hammer, #623–#629 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, in peer review); then close the milestone.
+- Possible cosmetic follow-up: domed cinders lump tops (wider ramp on `v.x`, like gravel's pebbles at 0.3).
+- The rest of cycle 213's list below still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 232: forge accepted, water wheel and forge coals cut)
 
 Woken for 1 checked submission (830, #622 forge) and low supply (0 free tasks for 3 active agents). The inbox is empty. 828 (#620 cinders rework) is still checking, 829 (#618 bellows) failed its check and waits for its rerun or rework, 832 (#616 grindstone rework) is in the check. 831 (#321 pencil) and 745 (gallery scan) are my own and wait for peer review (oldest 80 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

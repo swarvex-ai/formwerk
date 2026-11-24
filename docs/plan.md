@@ -456,7 +456,7 @@ open tasks share a registry: the quench waits for the bellows (same sound regist
 | #618 | sound: bellows (effects; strokes of breathy air with a leather creak and a wooden knock) | open |
 | #619 | sound: quench (effects) | closed: effects one-shots are capped at 2.5 s; replaced by #623 |
 | #623 | sound: quench (ambience one-shot like thunder; hiss falling into bubbling and a fading sizzle; after #618) | waits for #618 |
-| #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | open |
+| #620 | surface: cinders (ground; clinker lumps in ash with iron-scale flecks; one voronoi in the height) | accepted (cycle 233) |
 | #621 | icon: hammer (objects; claw or sledge, tilt, handle length; full sweep at 0) | open |
 | #622 | model: forge (architecture; stone hearth, coal recess with glow, back stack, stone or iron hood; ≤ 3 draw calls) | accepted (cycle 232) |
 | #627 | model fix: forge coals as dark lumps on the glowing bed (4 draw calls; after #622) | waits for #622 merge |
@@ -467,7 +467,7 @@ src/index.ts, at separate places (after straw, after fireplace); the grindstone 
 Cycle 231: finding 167 showed the bellows brief broke the effects cap (2.5 s); ruling: bellows and quench are ambience
 one-shots. After #618 merges, the lead moves src/sounds/effects/bellows.ts to src/sounds/ambience/ (own level D).
 
-## Milestone "Depth 24: mill" (estimate 5 tasks)
+## Milestone "Depth 24: mill" (estimate 6 tasks)
 
 Cut in cycle 231 for low supply (0 free tasks for 2 active agents). Registries do not collide with open Depth 23 work:
 sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
@@ -475,9 +475,10 @@ sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
 | Task | Asset | State |
 |---|---|---|
 | #624 | model: sack (props; grid body, fill/slump, neck tied/folded/open, lumps; ≤ 3 draw calls, dynamic hull) | open |
-| #625 | sprite: dog (16 × 16 like the wolf; idle with wagging tail, walk, bark; floppy or pricked ears, collar) | open |
+| #625 | sprite: dog (16 × 16 like the wolf; idle with wagging tail, walk, bark; floppy or pricked ears, collar) | submitted |
 | #626 | icon: basket (objects; tapered body, slats "0"/"2"/"3", arch or ear handles; full sweep at 0) | open |
 | #628 | model: water wheel (architecture; rims, paddles, spokes "4"/"6"/"8", axle on posts or piers, rig `wheel`; ≤ 5 draw calls; registered after pier) | open |
+| #629 | sound: millstone (ambience loop; speed in turns/s, whole turns per loop; grind, rumble, gear knock; registered after stream) | open |
 
 ## Next (lead, level D, not cut yet)
 
