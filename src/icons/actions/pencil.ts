@@ -31,20 +31,37 @@ export const pencil = defineIcon({
     const bauen = (l: number): Part[] => {
       const at = (u: number, v: number): Pt => [u * dir[0] + v * quer[0], u * dir[1] + v * quer[1]];
       // The body from the tip, and the end cap apart from it with a clear gap (reads as a cut in every style)
-      const fuge = l - zwinge - pen.width - CLEAR;
-      const teile: Part[] = [
-        area(polygon(at(0, 0), at(kegel, -halb), at(fuge, -halb), at(fuge, halb), at(kegel, halb))),
-        area(polygon(at(l - zwinge, -halb), at(l, -halb), at(l, halb), at(l - zwinge, halb))),
+      const kappe = l - zwinge; // the cap from here to the end
+      const fuge = kappe - pen.width - CLEAR; // the body ends here, CLEAR clear of the cap's ink
+      // Room for the body's hollow interior: behind the solid tip and before the cut's stroke. A marginal
+      // interior (open but under CLEAR) flickers at 24 px, so below this the body is drawn solid instead.
+      const raum = fuge - kegel - hw;
+      const teile: Part[] = [];
+      if (raum >= CLEAR) {
+        teile.push(area(polygon(at(0, 0), at(kegel, -halb), at(fuge, -halb), at(fuge, halb), at(kegel, halb))));
         // The sharpened tip is solid: no narrow wedge of paper inside it
-        dot(polygon(at(0, 0), at(kegel, -halb), at(kegel, halb))),
-      ];
+        teile.push(dot(polygon(at(0, 0), at(kegel, -halb), at(kegel, halb))));
+      } else if (fuge >= kegel) {
+        // Short or thick pencil: no room for the interior, so the body reads solid with the same outer shape
+        const schaft = polygon(at(0, 0), at(kegel, -halb), at(fuge, -halb), at(fuge, halb), at(kegel, halb));
+        teile.push(area(schaft), dot(schaft));
+      } else {
+        // The cut falls inside the cone: a stubby pencil, its flat end across the gap from the cap
+        const rand = (halb * fuge) / kegel;
+        teile.push(dot(polygon(at(0, 0), at(fuge, -rand), at(fuge, rand))));
+      }
+      teile.push(area(polygon(at(kappe, -halb), at(l, -halb), at(l, halb), at(kappe, halb))));
       if (p.underline) {
-        // Below the tip with clear room under its point, as far right as the pencil reaches
-        const y = reach(pen, spitzeWinkel) + CLEAR + hw, ende = at(l, halb)[0];
-        teile.push(stroke(line([-halb, y], [ende, y])));
+        // Below the tip, clear of its point. A round tip reaches hw straight down; a sharp one drops sin(angle)
+        // of its miter reach. The line's own ink adds hw. As far right as the pencil reaches.
+        const tiefe = pen.corners === "round" ? hw : Math.max(hw, Math.sin(a) * reach(pen, spitzeWinkel));
+        const y = tiefe + CLEAR + hw, rechts = at(l, halb)[0];
+        teile.push(stroke(line([-halb, y], [rechts, y])));
       }
       return teile;
     };
-    return largest(kegel + zwinge + pen.width + CLEAR + 1.5, p.length, pen, bauen);
+    // The smallest pencil that still reads: a stub of cone, the gap of the cut and the cap. It must fit the grid
+    // in every combination, else largest() would return this floor unchecked and its ink would touch the outer ring.
+    return largest(2 + pen.width + CLEAR + zwinge, p.length, pen, bauen);
   },
 });
