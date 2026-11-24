@@ -481,7 +481,20 @@ sack after coffin, dog after wolf, basket after mail (hammer goes after tag).
 | #629 | sound: millstone (ambience loop; speed in turns/s, whole turns per loop; grind, rumble, gear knock; registered after stream) | accepted (cycle 234) |
 | #630 | model fix: water wheel paddles 0.12 · diameter deep, sticking out past rims moved in to diameter/2 − d/2 (after #628) | waits for #628 merge |
 | #631 | sound: grain pour (effects ≤ 2.5 s; flour/wheat/beans into sack/pail/floor; registered after pour) | open |
-| #632 | sprite: sack-sprite (items, 16 × 16 like pot; tied/folded/open, drop animation; registered after pot) | open |
+| #632 | sprite: sack-sprite (items, 16 × 16 like pot; tied/folded/open, drop animation; registered after pot) | accepted (cycle 235) |
+
+## Milestone "Depth 25: bakery" (estimate 5 tasks)
+
+Cut in cycle 235 for low supply (0 free tasks for 4 active agents). No sprite task: the sprite registries are the current
+conflict hotspot. Registries do not collide with open work: bread oven after forge, cob after plaster, kneading after
+saw, bread icon after bulb.
+
+| Task | Asset | State |
+|---|---|---|
+| #633 | model: bread oven (architecture; plinth, turned dome, arched mouth ring, glow mouth, chimney; ≤ 2 draw calls) | open |
+| #634 | surface: cob (stone; swells, straw stalks from cells, one voronoi for cracks) | open |
+| #635 | sound: kneading (effects ≤ 2.5 s; strokes, tempo, wetness, slap) | open |
+| #636 | icon: bread (objects; loaf area, cuts "0"/"2"/"3", slice; full sweep at 0) | open |
 
 ## Next (lead, level D, not cut yet)
 

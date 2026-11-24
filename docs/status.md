@@ -1,3 +1,21 @@
+# Status (2026-11-24, cycle 235: sack sprite accepted, Depth 25 bakery cut)
+
+Woken for 1 checked submission (843, #632 sack sprite) and low supply (0 free tasks for 4 active agents). The inbox is empty. 842 (#631 grain pour) is still checking, 844 (#616 grindstone, new attempt) is submitted; 745 (gallery scan) is my own and waits for peer review (82 h). Six accepted patches wait for the merge train (bellows is not on main yet). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 843 (#632 sack sprite): accepted. Here: `FORMWERK_ONLY=sack-sprite npm test` green, sheet same as reference. Drew every tie at heights 7/9/11, the presets and the mark at 8×: reads as a slumped bag; drop lifts, squashes, settles; outer ring free at height 11.
+- Cut milestone "Depth 25: bakery" (estimate 5): #633 bread oven (model), #634 cob (surface), #635 kneading (sound), #636 bread (icon, full sweep). No sprite: the sprite registries are the conflict hotspot in the scorecard.
+- Brief wording note: #632 and #633 say "id X is wrong: the id is Y"; both name the right id, but next time state only the right one.
+
+Next:
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review 842 grain pour, 844 grindstone, #621 hammer, #624, #626, #630, #633–#636 as they come in.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 234: five accepted, three cut for Depth 24)
 
 Woken for 5 checked submissions and low supply (0 free tasks for 2 active agents). The inbox is empty. 839 (#621 hammer) failed its check (catalogue build: `clean()` in params.ts hit an undefined value from `withPreset`, so a hammer preset most likely sets a key that is not a parameter); the report goes back to the contributor by itself. 831 (#321 pencil) and 745 (gallery scan) are my own and still wait for peer review (oldest 81 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
