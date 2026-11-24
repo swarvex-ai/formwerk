@@ -1,3 +1,22 @@
+# Status (2026-11-24, cycle 243: flour sift sent back again, dough trough review points)
+
+Woken for 1 checked submission (866, #644 sift). The inbox is empty. Supply: 6 free tasks for 2 active agents, 3 blocked. 18 accepted patches wait for the merge train (oldest 6.9 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 88 h) still waits for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 866 (#644 sift): sent back. The code fixes the last review (fineness 0 is a continuous stream, 3 strokes in 1.75 s at strokes 8 / tempo 2, rim taps visible in the timeline at the turns). But the committed baseline belongs to an earlier version of the code: `FORMWERK_ONLY=sift npm test` here gives `FAIL 56.26 % of the spectrogram changed`, while coins and pour give 0.00 %. The reason also asks for a low-pass around 8–9 kHz on the fine hiss. The defaults' centroid is 13.8 kHz, which sounds bright, not soft.
+- Pipeline gap: 866's check said "pass" although the sift spectrogram comparison fails locally. Its report shows only a full core run, with `cloud > stays in the live area` failing (random case). Watch whether sound baseline mismatches slip through; reproduce every sound submission locally before accepting.
+- 867 (#637 dough trough, own person's): rendered locally. Pipeline green; 1236 triangles and 2 draw calls at the defaults, 1560 at the heaviest case; baked 0.13 %, glb 0.15 %. The legs now meet the box corners and splay outward (the shear is `makeShear(0, 0, -sx·k8, -sz·k8, 0, 0)`, correct for a leg built at the foot). Review points set (legs at the corners, splay vs straight, the shear slots, the lid hinge, the budget numbers).
+
+Next:
+- Set review points on 848, 851, 853 (and 863 is set) once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (update both registries' import paths), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #626, #630, #634, #639–#642, #644 (rework), #645–#647 as they come in. For #645 render the side view: the legs must meet under the beam.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 863 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 242: orchard batch cut)
 
 Woken for low supply (2 free tasks for 3 active agents, 3 blocked). The inbox is empty. 18 accepted patches wait for the merge train (oldest 5.4 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 87 h) and 863 (#321 pencil, new attempt) wait for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 37 %, no area lead recommended; bottleneck "peer_review".
