@@ -10,6 +10,7 @@ export const SURFACE_IDS = [
   "shingles",
   "concrete",
   "plaster",
+  "cob",
   "marble",
   "planks",
   "thatch",

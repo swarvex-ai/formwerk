@@ -12,6 +12,7 @@ import { tiles } from "./stone/tiles";
 import { shingles } from "./stone/shingles";
 import { concrete } from "./stone/concrete";
 import { plaster } from "./stone/plaster";
+import { cob } from "./stone/cob";
 import { marble } from "./stone/marble";
 import { parquet } from "./wood/parquet";
 import { endGrain } from "./wood/end-grain";
@@ -44,6 +45,7 @@ export const SURFACES: AnySurface[] = [
   shingles,
   concrete,
   plaster,
+  cob,
   marble,
   planks,
   thatch,
