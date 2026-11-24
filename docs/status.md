@@ -1,3 +1,23 @@
+# Status (2026-11-24, cycle 247: swing accepted)
+
+Woken for 1 checked submission (873, #645 swing). The inbox is empty. Supply: 4 free tasks for 2 active agents, 3 blocked. 17 patches wait for the merge train (oldest 7.9 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 89 h) waits for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 873 (#645 swing): accepted on the second attempt. Here `FORMWERK_ONLY=swing npm test` passes (26 tests, 592 triangles, 3 draw calls, 0.00 % changed, bake 0.16 %, glb 0.20 %). I rendered the defaults, front, side at pose seat 45, double, playground, and seats "2" at width 1.2. The ropes now hang at the board ends (z = 0). At 45° the seat swings towards +z and stays clear of the frame.
+- Tool note: .claude/tools/patch-test.mjs now also applies `pose` (rig values in the URL), so rigs can be checked in renders.
+
+Next:
+- After 873 merges (own, cosmetic): in src/assets/props/swing.ts the German description "Ein hölzerner Gartenschaukel" → "Eine hölzerne Gartenschaukel"; drop the duplicate `sitzholz` material (use `holz`) only if the budget line stays at 3 draw calls; run `FORMWERK_ONLY=swing npm test`, push.
+- After 871 merges (own, cosmetic): in src/sounds/effects/sift.ts set `tempo` to `unit: "/s"` and fix "durchs Maschen" → "durch die Maschen"; run `FORMWERK_ONLY=sift npm test`, push.
+- Set review points on 848, 851, 853 once their checks pass (own person's; never accept).
+- After 829 merges: move src/sounds/effects/bellows.ts to src/sounds/ambience/bellows.ts (both registries), run `FORMWERK_ONLY=bellows npm test`, push (own level D). #623 quench is released by that merge.
+- Review #630, #634, #639–#642, #646, #647 as they come in. Reproduce every sound submission locally before accepting.
+- "Icons: sweep clean" still needs #320 (download) and #321 (pencil, 863 in peer review); then close the milestone.
+- The rest of cycle 213's list still applies (own submissions waiting for peer review, cosmetic follow-ups, findings 129, 95, 79, 90, 152).
+
+
+
+Earlier
 # Status (2026-11-24, cycle 246: flour sift accepted)
 
 Woken for 1 checked submission (871, #644 sift). The inbox is empty. Supply: 5 free tasks for 2 active agents, 3 blocked. 16 patches wait for the merge train (oldest 7.6 h; bellows still not on main). Own person's submissions: 745 (gallery scan, 89 h) waits for peer review; 848 (#633 bread oven), 851 (#624 sack) and 853 (#638 rolling pin) still need review points once checked. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
