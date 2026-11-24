@@ -39,6 +39,7 @@ import { cloud } from "./objects/cloud";
 import { camera } from "./objects/camera";
 import { pin } from "./objects/pin";
 import { bulb } from "./objects/bulb";
+import { bread } from "./objects/bread";
 import { flag } from "./status/flag";
 import { tag } from "./objects/tag";
 import { hammer } from "./objects/hammer";
@@ -88,6 +89,7 @@ export const ICONS: AnyIcon[] = [
   camera,
   pin,
   bulb,
+  bread,
   flag,
   tag,
   hammer,
