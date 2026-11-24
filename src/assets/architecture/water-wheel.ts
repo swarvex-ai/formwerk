@@ -34,8 +34,8 @@ export const waterWheel = defineAsset({
       stein = material("stone", "#8a8278", 1, undefined, { moss: 0.3 });
     const t = new Parts();
     const D = p.diameter, R = D / 2, w = p.width, ya = p.clearance + R, ra = 0.06;
-    // Rim section from 0.08 m on the small wheel to 0.12 m on the 4 m wheel; rim from rIn to rOut
-    const s = 0.08 + (0.04 * (D - 1.6)) / 2.4, rOut = R - 0.02, rIn = rOut - s, b = 0.012;
+    // Paddle depth d; rim section from 0.08 m on the small wheel to 0.12 m on the 4 m wheel; rim from rIn to rOut, d / 2 inside the outer radius
+    const d = 0.12 * D, s = 0.08 + (0.04 * (D - 1.6)) / 2.4, rOut = R - d / 2, rIn = rOut - s, b = 0.012;
     const sx = w / 2 + 0.25, breit = 0.24, rh = 0.1 + 0.03 * D, hubL = 0.16;
     // Turned about x: a [radius, x] profile laid along the axle at height ya
     const drehen = (profil: [number, number][], seg: number, x0: number) => turned(profil, seg).rotateZ(-Math.PI / 2).translate(x0, ya, 0);
@@ -57,10 +57,10 @@ export const waterWheel = defineAsset({
         rad.add(holz, grained(g, Math.abs(Math.cos(a)) > Math.abs(Math.sin(a)) ? "y" : "z"));
       }
     }
-    // Paddles: boards along x from rim to rim, standing radially from the rim's inner face to the outer radius
+    // Paddles: boards along x through both rims, standing radially from R - d to the outer radius, about d / 2 past the rims
     for (let k = 0; k < p.paddles; k++) {
       const a = (2 * Math.PI * k) / p.paddles;
-      rad.add(holz, grained(umAchse(rounded(w + 0.04, R - rIn, 0.03, 0.005, 0, ya + (R + rIn) / 2, 0, 1), a), "x"));
+      rad.add(holz, grained(umAchse(rounded(w + 0.04, d, 0.03, 0.005, 0, ya + R - d / 2, 0, 1), a), "x"));
     }
     // Axle: an iron shaft from support to support, with turned ends
     const xa = sx + breit / 2 + 0.04;
