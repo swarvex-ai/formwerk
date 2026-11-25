@@ -533,9 +533,11 @@ trough (after trough) and peel (after ladder): washboard after bucket, scrub aft
 
 | Task | Asset | State |
 |---|---|---|
-| #668 | model: washboard (props; wooden frame with feet, rippled zinc or wooden board via grid(), 2 draw calls, dynamic box; after bucket) | open |
-| #669 | sound: scrub (effects ≤ 2.5 s; strokes, tempo, board zinc/wood, wetness, drips on rng(seed + 1); after saw) | open |
-| #670 | icon: shirt (objects; sleeves short/long, width, neck round/v/collar, placket, pocket; full sweep at 0; after basket) | open |
+| #668 | model: washboard (props; wooden frame with feet, rippled zinc or wooden board via grid(), 2 draw calls, dynamic box; after bucket) | submitted 905, review points set (cycle 258) |
+| #669 | sound: scrub (effects ≤ 2.5 s; strokes, tempo, board zinc/wood, wetness, drips on rng(seed + 1); after saw) | 906 in the check; send back for levels (squelch on wood, drips) |
+| #670 | icon: shirt (objects; sleeves short/long, width, neck round/v/collar, placket, pocket; full sweep at 0; after basket) | in progress |
+| #671 | model: washtub (props; bucket wood branch scaled up, ear staves with a hand hole, hoops 1–3, ≤ 12000 tris, 3 draw calls; after barrel) | open |
+| #672 | sprite: laundress (characters; like baker, skirt instead of legs, cover kerchief/bonnet/none, sleeves, animation scrub; after baker) | open |
 
 ## Next (lead, level D, not cut yet)
 

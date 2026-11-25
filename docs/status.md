@@ -1,3 +1,21 @@
+# Status (2026-11-25, cycle 258: washboard review points, scrub to send back, washtub and laundress cut)
+
+Woken for low supply (0 free tasks for 2 active agents). The inbox is empty, and there is no preview feedback and no work request. Own-person submissions waiting for peer review: 745 (gallery scan, 104 h), 899 (#637 dough trough), 901 (#639 peel) and now 905 (#668 washboard). 906 (#669 scrub) was still in the check, so I could not review it yet. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 905 (#668 washboard): the patch applies on main and the pipeline passed (1776 triangles, 2 draw calls; heaviest 2160). The contributor had not looked at the back, so I rendered it: the zinc is visible from behind, the wooden board is solid with a flat back, ribs 10/30 and ripple 0.002/0.008 differ, the crests stay round at ribs 30, and there are no gaps at the frame. Set five review points; I may not accept it myself.
+- 906 (#669 scrub): reviewed the code and probed the levels (temporary vitest, deleted). The timing, the 2.5 s fit (strokes 6 / tempo 1.5 → 2.50 s, decays), strokes 1 (0.72 s) and the drips stream are right. Two level flaws: (1) on wood (the wooden preset) the squelch peaks 12 dB above the median 20 ms window, against 8 for zinc, so a "soft squelch" is the loudest part; (2) the drips are only about 3 dB below the rattle instead of −15 dB. review_submission was refused ("review only after a passing check").
+- Cut #671 washtub (model after barrel: bucket's wood branch scaled up, ear staves with a hand hole) and #672 laundress (sprite after baker, scrub animation). Ids checked across all kinds. Depth 28 estimate 4 → 6.
+
+Next:
+- **906 first**: once it is checked, send it back (rework) with the two points above, word for word as an instruction: squelch scaled by board so loudest-minus-median ≤ 10 dB (wetness 0.6, both boards, seeds 1–8) and ≤ 13 dB for soaked; loudest drip 20 ms window ≥ 10 dB below the median stroke window; probe with a temporary vitest via makeSound and quote the numbers; re-commit the baseline. Do not accept it, because it is an own submission.
+- Review #670 shirt icon (run a sweep slice for neck collar with placket true, and check the armpits at stroke 2.25), #671 washtub (view it from above at fill 0 and look at the ears close up) and #672 laundress (look at the sheet enlarged with crop.mjs, especially the scrub rows and the outer ring) as they come in. 641 (cup icon) is free.
+- After 899/901/905 merge: run `FORMWERK_ONLY=<id> npm test` on main (dough-trough, peel, washboard: 0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (run `git apply --check` on the queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 257: Depth 28 laundry cut, review points on 899 and 901)
 
 Woken for low supply (0 free tasks for 2 active agents). The inbox is empty. 3 own-person submissions wait for peer review: 745 (gallery scan, 103 h), 899 (#637 dough trough rework) and 901 (#639 peel rework). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
