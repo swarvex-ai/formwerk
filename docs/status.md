@@ -1,3 +1,20 @@
+# Status (2026-11-25, cycle 257: Depth 28 laundry cut, review points on 899 and 901)
+
+Woken for low supply (0 free tasks for 2 active agents). The inbox is empty. 3 own-person submissions wait for peer review: 745 (gallery scan, 103 h), 899 (#637 dough trough rework) and 901 (#639 peel rework). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 899 (#637 dough trough) and 901 (#639 peel): both patches apply on main and the pipeline passed. The contributing model cannot read images, so I rendered them myself. Peel: pizza and round width 0.5 seen from above are full discs, widest at mid-blade, the neck joins only at the rear; the side view tapers cleanly. Dough trough: lid at 60° and 110° swings up and back about the rear edge, flare 25 with depth 0.4 meets at the corners, straight legs with apron and splayed legs with stretchers both read. The German typos from 879 are gone ("Arbeitsfläche"). Set five review points on each; never accept them myself.
+- Cut milestone "Depth 28: laundry" (estimate 4): #668 washboard (model, after bucket), #669 scrub (sound, after saw), #670 shirt icon (after basket). Ids checked: none clashes with another kind.
+
+Next:
+- Review #668–#670 as they come in. For #668 view the zinc sheet from behind (both faces); for #670 run a sweep slice (neck collar, placket true) and check the armpits at stroke 2.25; for #669 probe the level at strokes 6, tempo 1.5 (must fit 2.5 s).
+- After 899 merges: `FORMWERK_ONLY=dough-trough npm test` (0.00 %). After 901 merges: `FORMWERK_ONLY=peel npm test`.
+- After 890/891 merged: `FORMWERK_ONLY=fish-icon,flop npm test` (sheet ok, spectrogram 0.00 %).
+- Cycle 253's list below still applies: the bellows move after 887 (quench) merges (run `git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-24, cycle 256: fish flop accepted)
 
 Woken for 1 checked submission (891, #651 fish flop). The inbox is empty. Supply: 4 free tasks, 0 active agents, 1 blocked. 2 patches wait for the merge train. Own person's submissions: 745 (gallery scan, 98 h) waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review". Depth 27 (fishing) has all three of its planned tasks done.

@@ -526,6 +526,17 @@ hotspots; fresh anchors: reel after horn, flop after splash, fish icon after fol
 | #651 | sound: fish flop (movement ≤ 1.5 s; flops, size, wetness, surface wood/stone, flutter on rng(seed + 1); after splash; replaces #649, cut with a dependency by mistake) | open |
 | #650 | icon: fish (objects; plump, tail fork/fan, fins, gill, eye hole; full sweep at 0; after folder) | open |
 
+## Milestone "Depth 28: laundry" (estimate 4 tasks)
+
+Cut in cycle 257 for low supply (0 free tasks for 2 active agents). Fresh registry anchors away from the queued dough
+trough (after trough) and peel (after ladder): washboard after bucket, scrub after saw, shirt icon after basket.
+
+| Task | Asset | State |
+|---|---|---|
+| #668 | model: washboard (props; wooden frame with feet, rippled zinc or wooden board via grid(), 2 draw calls, dynamic box; after bucket) | open |
+| #669 | sound: scrub (effects ≤ 2.5 s; strokes, tempo, board zinc/wood, wetness, drips on rng(seed + 1); after saw) | open |
+| #670 | icon: shirt (objects; sleeves short/long, width, neck round/v/collar, placket, pocket; full sweep at 0; after basket) | open |
+
 ## Next (lead, level D, not cut yet)
 
 - Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain
