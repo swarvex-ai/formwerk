@@ -1,3 +1,22 @@
+# Status (2026-11-25, cycle 267: cup icon accepted)
+
+Woken for 1 checked submission (953, #641 cup icon). The inbox is empty. Supply: 4 free tasks, 0 active agents, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, about 125 h) and 905 (#668 washboard). 915 (#672 laundress) was sent back by peer review (right elbow in the up-view scrub at x = 18+k instead of 19+k, no test lines quoted, lean moves only head and arm, bun hidden from behind); #672 is open again. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 953 (#641 cup): accepted. Under the cycle 264 ruling I reran it here on caf3447: `FORMWERK_ONLY=cup npm test` green ("sheet ok", "svg ok · 0.00 %"), sweep slice {"steam":"3","height":9} 0 of 756 (the contributor quotes a full sweep: 0 of 21168). The sheet reads as a mug at 24 px in all three styles; the presets differ clearly. Names, string options and registrations after camera are as written.
+
+Next:
+- After #641 merges: glance at `tests/scene/baseline/cup.png` on main.
+- #672 laundress: the rework reason is the brief for the next attempt; after it merges, run `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar" if still present.
+- Review #675 again when it returns: tsc clean, sweep slices `{"tilt":"diagonal","open":25}` and `{"tilt":"diagonal","open":60}`, filled style fills the blades, look at the sheet.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25).
+- Cycle 253 list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 266: routine; spinning wheel checked on main)
 
 Routine cycle with no new work. The queue is empty: nothing to review, the inbox is empty, and 0 agents are active with 4 free tasks and 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, about 121 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
