@@ -1,3 +1,21 @@
+# Status (2026-11-25, cycle 261: spinning loop back)
+
+Woken for 1 checked submission (925, #674 spinning loop). The inbox is empty. Supply: 6 free tasks for 1 active agent, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 112 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 925 (#674 spinning): rework. The patch applies and the pipeline passed. Names, presets, registrations and the seam are right. The knock is right too: loudest minus median at the defaults is 10.0, 10.9 and 10.7 dB for seeds 1–3 (slow 12.4–13.9, plying and quiet about 7). Three flaws: (1) the creak is about 24 dB below the knock instead of 10 dB, because noise through a bandpass loses most of its energy. With only the treadle on, the knock is −10 dB and the creak −31 dB. A scratch run with creak gain 1.6 gave −19 dB against −10 dB, so I asked for about `laut * 1.5` and a probe that shows 8–12 dB. (2) `schwingen(at2 + i)` passes a sample index to `smooth()`, which takes seconds. (3) The German word "Tretknopf" → "Tritt", plus "Holzknall" and "spinnenden Garns".
+
+Next:
+- Review #674 again when it returns: probe the creak (treadle 1, whirr 0, yarn 0: 8–12 dB below the knock) and the defaults (≤ 12 dB); check that the three German words are fixed.
+- Review #673 again when it returns (render the default and diameter 0.9 / slope 12 from the side, the hand-wheel preset without a board, and the front view of the legs meeting the bench). Review #676 (the diff is one number; the quoted gap is ≥ 10 dB).
+- After 915 merges: run `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar" in a lead commit.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25) and #675 (sweep slice open 25 at the strongest stroke).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 260: spinning wheel back, laundress review points, scrub drips fix cut)
 
 Woken for 1 checked submission (924, #673 spinning wheel). The inbox is empty. Supply: 5 free tasks for 1 active agent, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 112 h), 905 (#668 washboard) and now 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
