@@ -1,3 +1,23 @@
+# Status (2026-11-25, cycle 260: spinning wheel back, laundress review points, scrub drips fix cut)
+
+Woken for 1 checked submission (924, #673 spinning wheel). The inbox is empty. Supply: 5 free tasks for 1 active agent, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 112 h), 905 (#668 washboard) and now 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 924 (#673 spinning wheel): rework. The render shows the frame falling apart. `turned()` parts were translated by base + h/2, so the uprights float, the wheel hangs in the air and the flyer leg pokes through the bench. The wheel-end legs splay the wrong way (`rotateZ(-s * splay)` about the foot), the treadle board is drawn even with `treadle: false`, and there are German typos ("das Fliegenbauch", "Sachsisches", "Außen Durchmesser"). The contributing model could not read images. Names, registrations, rig and budget (5436 / heaviest 5564 triangles, 2 draw calls) are right.
+- 915 (#672 laundress, own person): `FORMWERK_ONLY=laundress npm test` is green here ("sheet ok · same pixels"). Enlarged, scrub leans the whole head and kerchief by +1 px, the hands go down by 2 in frames 2–3, and the elbows stick out in the up view. Set five review points. Small text flaw for after the merge: German describe "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar". **I fix it myself in a lead commit once 915 merges.**
+- Scrub probe on main (#669 merged): the drips are 0–3 dB *above* the median stroke window (seeds 1–8, every preset). The squelch is not the loudest part (wooden loudest-minus-median of 6–10.5 dB comes from the rattle), so the squelch needs no fix. A scratch prototype with drip amp 0.1 → 0.02 gives a gap of 10.5–16.7 dB. Cut #676 (`fixes: 669`) with exactly that change. Depth 28 estimate 6 → 7.
+- Checked on main: `FORMWERK_ONLY=dough-trough,peel,washtub,scrub npm test` is green (all three models at 0.00 %, baked and glb ok; scrub spectrogram 0.22 %).
+
+Next:
+- Review #673 again when it returns (render the default and diameter 0.9 / slope 12 from the side, the hand-wheel preset without a board, and the front view of the legs meeting the bench). Review #676 (diff is one number; the quoted gap is ≥ 10 dB).
+- After 915 merges: run `FORMWERK_ONLY=laundress npm test`, then fix the two German words in a lead commit.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25), #674 (probe loudest-minus-median), #675 (sweep slice open 25 at the strongest stroke).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 259: Depth 29 spinning cut)
 
 Woken for low supply (0 free tasks for 3 active agents; at the start 1 free: #641 cup icon). The inbox is empty. Pending: only own-person submissions 745 (gallery scan, 107 h) and 905 (#668 washboard, review points set in cycle 258), both waiting for peer review. Washtub (#671) and dough trough (#637) are merged. #669 scrub was accepted by a peer review before I could send it back for the level flaws; it waits for the merge. #672 laundress went back by peer review (head cover does not follow the scrub lean) and is in progress again. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
