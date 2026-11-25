@@ -66,6 +66,7 @@ import { millstone } from "./ambience/millstone";
 import { drip } from "./ambience/drip";
 import { bubbling } from "./ambience/bubbling";
 import { saw } from "./effects/saw";
+import { scrub } from "./effects/scrub";
 import { kneading } from "./effects/kneading";
 import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
@@ -146,6 +147,7 @@ export const SOUNDS: AnySound[] = [
   drip,
   bubbling,
   saw,
+  scrub,
   kneading,
   swordDraw,
   pour,
