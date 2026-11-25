@@ -39,6 +39,7 @@ import { palm } from "./nature/palm";
 import { cactus } from "./nature/cactus";
 import { hayBale } from "./nature/hay-bale";
 import { barrel } from "./props/barrel";
+import { washtub } from "./props/washtub";
 import { trough } from "./props/trough";
 import { doughTrough } from "./props/dough-trough";
 import { buoy } from "./props/buoy";
@@ -118,6 +119,7 @@ export const ASSETS: AnyAsset[] = [
   cactus,
   hayBale,
   barrel,
+  washtub,
   trough,
   doughTrough,
   buoy,
