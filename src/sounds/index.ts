@@ -63,6 +63,7 @@ import { sift } from "./effects/sift";
 import { nature } from "./ambience/nature";
 import { stream } from "./ambience/stream";
 import { millstone } from "./ambience/millstone";
+import { spinning } from "./ambience/spinning";
 import { drip } from "./ambience/drip";
 import { bubbling } from "./ambience/bubbling";
 import { saw } from "./effects/saw";
@@ -144,6 +145,7 @@ export const SOUNDS: AnySound[] = [
   nature,
   stream,
   millstone,
+  spinning,
   drip,
   bubbling,
   saw,
