@@ -1,3 +1,21 @@
+# Status (2026-11-25, cycle 262: spinning wheel back again)
+
+Woken for 1 checked submission (927, #673 spinning wheel, second attempt). The inbox is empty. Supply: 7 free tasks, 0 active agents, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 113 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 927 (#673 spinning wheel): rework. The fixes from cycle 260 work: the uprights stand on the bench, the wheel clears it (and turns at 90°), and the treadle only appears when it is on. Budget 3680 / heaviest 3776 triangles, 3 draw calls. Renders from the side, front and top and a flyer close-up showed five flaws. (1) The flyer cross-piece `rounded(…, 0, xM, sY+0.088, flZ)` has an extra 0, so a stray block sits at z 0.78, beyond the bench. (2) The maidens are at x 0.17 and hang off the 0.30 m bench; the spindle is stood upright by `rotateX`; the bobbin is at x 0 instead of the spindle's x; the flyer is a flat one-sided ribbon. (3) The crank is at x 0 in the wheel plane, and the footman pierces the bench plank and the wheel. I asked for the crank and footman at x 0.21, outside the upright. (4) The leg splay equals `slope`, so at castle (slope 0) the legs are vertical and pierce the treadle board; the flyer leg is off-centre at x −0.095. I asked for a fixed 8° splay and that leg at x 0. (5) "Fussstange" → "Fußstange", "Kastellrad" → "Bockspinnrad".
+
+Next:
+- Review #673 again when it returns: front view (footman outside the bench edge and the wheel), flyer close-up from above (spindle along z, bobbin between the arms, maidens on the bench), castle preset (legs clear the board), and no speck beyond the bench end.
+- Review #674 again when it returns: probe the creak (treadle 1, whirr 0, yarn 0: 8–12 dB below the knock) and the defaults (≤ 12 dB); check that the three German words are fixed. Review #676 (the diff is one number; the quoted gap is ≥ 10 dB).
+- After 915 merges: run `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar" in a lead commit.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25) and #675 (sweep slice open 25 at the strongest stroke).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 261: spinning loop back)
 
 Woken for 1 checked submission (925, #674 spinning loop). The inbox is empty. Supply: 6 free tasks for 1 active agent, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 112 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
