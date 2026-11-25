@@ -9,7 +9,7 @@ Done this cycle:
 Next:
 - Review #668–#670 as they come in. For #668 view the zinc sheet from behind (both faces); for #670 run a sweep slice (neck collar, placket true) and check the armpits at stroke 2.25; for #669 probe the level at strokes 6, tempo 1.5 (must fit 2.5 s).
 - After 899 merges: `FORMWERK_ONLY=dough-trough npm test` (0.00 %). After 901 merges: `FORMWERK_ONLY=peel npm test`.
-- After 890/891 merged: `FORMWERK_ONLY=fish-icon,flop npm test` (sheet ok, spectrogram 0.00 %).
+- Checked on main: fish-icon (sheet same pixels, svg 0.00 %) and flop (0.697 s, spectrogram 0.00 %) are green.
 - Cycle 253's list below still applies: the bellows move after 887 (quench) merges (run `git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
 
 
