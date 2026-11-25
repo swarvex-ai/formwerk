@@ -61,6 +61,7 @@ import { torch } from "./props/torch";
 import { banner } from "./props/banner";
 import { lantern } from "./props/lantern";
 import { ladder } from "./props/ladder";
+import { peel } from "./props/peel";
 import { campfire } from "./props/campfire";
 import { anvil } from "./props/anvil";
 import { well } from "./props/well";
@@ -141,6 +142,7 @@ export const ASSETS: AnyAsset[] = [
   banner,
   lantern,
   ladder,
+  peel,
   campfire,
   anvil,
   well,
