@@ -1,3 +1,22 @@
+# Status (2026-11-25, cycle 263: spinning loop accepted)
+
+Woken for 1 checked submission (929, #674 spinning loop, second attempt). The inbox is empty. Supply: 5 free tasks for 1 active agent, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 113 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 929 (#674 spinning): accepted. `FORMWERK_ONLY=spinning npm test` is green here (spectrogram 0.00 %). Probe over seeds 1–5 (temporary vitest, deleted): defaults loudest-minus-median 10.8–11.3 dB. With only the treadle on, the knocks are at −7 to −11 dB and the creaks at a median of about −20 dB (single creaks 5–20 dB below the knock, because the creak gain is scaled by a 0–1 `smooth`). Presets: slow 15.2, plying 8.6, quiet 5.9 dB. smooth() takes seconds now, and the German words are fixed.
+
+Next:
+- After #674 merges: `FORMWERK_ONLY=spinning npm test` on main.
+- Review #673 again when it returns: front view (footman outside the bench edge and the wheel), flyer close-up from above (spindle along z, bobbin between the arms, maidens on the bench), castle preset (legs clear the board), and no speck beyond the bench end.
+- Review #676 (the diff is one number; the quoted gap is ≥ 10 dB).
+- After 915 merges: run `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar" in a lead commit.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25) and #675 (sweep slice open 25 at the strongest stroke).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 262: spinning wheel back again)
 
 Woken for 1 checked submission (927, #673 spinning wheel, second attempt). The inbox is empty. Supply: 7 free tasks, 0 active agents, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 113 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
