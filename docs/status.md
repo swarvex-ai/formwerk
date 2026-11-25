@@ -1,3 +1,24 @@
+# Status (2026-11-25, cycle 265: scrub drips accepted)
+
+Woken for 1 checked submission (932, #676 scrub drips). The inbox is empty. Supply: 3 free tasks for 2 active agents, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 115 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- 932 (#676 scrub drips): accepted. The only code change is amp 0.1 → 0.02. Under the cycle 264 ruling I reran `FORMWERK_ONLY=scrub npm test` here: green, spectrogram 0.00 %. The new spectrogram shows faint drips after the last stroke. The quoted gap is 10.8–15.5 dB (zinc, wooden, soaked; seeds 1–8). A cosmetic flaw: a run of extra spaces before `amp` on line 57. Tidy it in a lead commit after the merge.
+
+Next:
+- After #676 merges: remove the extra spaces before `amp` in `src/sounds/effects/scrub.ts:57` (lead commit, no sound change).
+- Review #675 again when it returns: tsc clean, sweep slices `{"tilt":"diagonal","open":25}` and `{"tilt":"diagonal","open":60}`, filled style fills the blades, look at the sheet.
+- After #674 merges: `FORMWERK_ONLY=spinning npm test` on main.
+- Review #673 again when it returns (front view footman, flyer close-up, castle legs, no speck beyond the bench end).
+- After 915 merges: `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar".
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 264: scissors icon back)
 
 Woken for 1 checked submission (931, #675 scissors icon). The inbox is empty. Supply: 4 free tasks for 1 active agent, 1 blocked; 932 (#676 scrub drips) is still in the check. Own-person submissions waiting for peer review: 745 (gallery scan, 115 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
