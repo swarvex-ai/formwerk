@@ -39,6 +39,7 @@ import { fish } from "./objects/fish";
 import { calendar } from "./objects/calendar";
 import { cloud } from "./objects/cloud";
 import { camera } from "./objects/camera";
+import { cup } from "./objects/cup";
 import { pin } from "./objects/pin";
 import { bulb } from "./objects/bulb";
 import { bread } from "./objects/bread";
@@ -91,6 +92,7 @@ export const ICONS: AnyIcon[] = [
   calendar,
   cloud,
   camera,
+  cup,
   pin,
   bulb,
   bread,
