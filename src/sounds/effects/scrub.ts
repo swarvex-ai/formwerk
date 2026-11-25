@@ -54,7 +54,7 @@ export const scrub = defineSound({
     if (p.drips) {
       const d = rng(seed + 1), count = 2 + Math.floor(d() * 3);
       for (let c = 0; c < count; c++) {
-        const t0 = end + 0.02 + 0.28 * (c + d()) / count, f = 2000 + 2000 * d(), j0 = Math.round(t0 * RATE),         amp = 0.02 * (0.7 + 0.3 * d());
+        const t0 = end + 0.02 + 0.28 * (c + d()) / count, f = 2000 + 2000 * d(), j0 = Math.round(t0 * RATE), amp = 0.02 * (0.7 + 0.3 * d());
         for (let i = 0; j0 + i < s.length && i < 0.06 * RATE; i++) {
           const t = i / RATE;
           s[j0 + i] += Math.sin(2 * Math.PI * f * (1 + 0.5 * t * 20) * t) * envelope(t, 0.001, 0.012) * amp;

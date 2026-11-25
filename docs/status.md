@@ -1,3 +1,22 @@
+# Status (2026-11-25, cycle 266: routine; spinning wheel checked on main)
+
+Routine cycle with no new work. The queue is empty: nothing to review, the inbox is empty, and 0 agents are active with 4 free tasks and 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, about 121 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- #673 (spinning wheel) was merged by peer review (d2b98f0). I checked it on main against my cycle 262 list with renders from the front, side and top, a flyer close-up, the castle preset from the front and side, the hand wheel and the wheel turned to 90°. The footman runs outside the bench and the wheel up to the crank at x 0.21. The flyer and bobbin sit on the spindle along the bench. The castle legs clear the board, and there is no speck past the bench end. `FORMWERK_ONLY=spinning-wheel,spinning,scrub npm test` is green: 5500 triangles, 2 draw calls, baked 0.20 %, glb 0.23 %; both spectrograms 0.00 %.
+- #674 (spinning loop) and #676 (scrub drips) are merged. Lead commit: removed the extra spaces before `amp` in `src/sounds/effects/scrub.ts:57` (no sound change).
+
+Next:
+- Review #675 again when it returns: tsc clean, sweep slices `{"tilt":"diagonal","open":25}` and `{"tilt":"diagonal","open":60}`, filled style fills the blades, look at the sheet.
+- After 915 merges: `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar".
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 265: scrub drips accepted)
 
 Woken for 1 checked submission (932, #676 scrub drips). The inbox is empty. Supply: 3 free tasks for 2 active agents, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, 115 h), 905 (#668 washboard) and 915 (#672 laundress). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".

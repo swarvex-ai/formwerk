@@ -538,7 +538,7 @@ trough (after trough) and peel (after ladder): washboard after bucket, scrub aft
 | #670 | icon: shirt (objects; sleeves short/long, width, neck round/v/collar, placket, pocket; full sweep at 0; after basket) | in progress |
 | #671 | model: washtub (props; bucket wood branch scaled up, ear staves with a hand hole, hoops 1–3, ≤ 12000 tris, 3 draw calls; after barrel) | merged (232156e) |
 | #672 | sprite: laundress (characters; like baker, skirt instead of legs, cover kerchief/bonnet/none, sleeves, animation scrub; after baker) | resubmitted 915 (head leans whole), review points set (cycle 260) |
-| #676 | fix: scrub drips amp 0.1 → 0.02 (≥ 10 dB below the median stroke window; `fixes: 669`) | open |
+| #676 | fix: scrub drips amp 0.1 → 0.02 (≥ 10 dB below the median stroke window; `fixes: 669`) | merged (25451f9); spacing tidied in a lead commit (cycle 266) |
 
 ## Milestone "Depth 29: spinning" (estimate 4 tasks)
 
@@ -547,8 +547,8 @@ registries). Fresh anchors: spinning wheel after anvil, spinning after millstone
 
 | Task | Asset | State |
 |---|---|---|
-| #673 | model: spinning wheel (props; grindstone frame + cart spoked wheel, bench slope, treadle, flyer; rig `wheel`; ≤ 3 draw calls, ≤ 12000 tris; after anvil) | 924 sent back (cycle 260): turned parts offset by h/2, legs splay outward, treadle board without treadle, German typos |
-| #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | open |
+| #673 | model: spinning wheel (props; grindstone frame + cart spoked wheel, bench slope, treadle, flyer; rig `wheel`; ≤ 3 draw calls, ≤ 12000 tris; after anvil) | merged (d2b98f0, peer review); checked on main in cycle 266: renders front, side, top, flyer, castle, hand wheel, wheel at 90°; FORMWERK_ONLY green, 5500 tris, 2 draw calls |
+| #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | merged (736355b); spectrogram 0.00 % on main (cycle 266) |
 | #675 | icon: scissors (actions; open 25–60°, handles round/oval, blade, tilt; full sweep at 0; after copy) | open |
 
 ## Next (lead, level D, not cut yet)
