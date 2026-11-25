@@ -534,10 +534,21 @@ trough (after trough) and peel (after ladder): washboard after bucket, scrub aft
 | Task | Asset | State |
 |---|---|---|
 | #668 | model: washboard (props; wooden frame with feet, rippled zinc or wooden board via grid(), 2 draw calls, dynamic box; after bucket) | submitted 905, review points set (cycle 258) |
-| #669 | sound: scrub (effects ≤ 2.5 s; strokes, tempo, board zinc/wood, wetness, drips on rng(seed + 1); after saw) | 906 in the check; send back for levels (squelch on wood, drips) |
+| #669 | sound: scrub (effects ≤ 2.5 s; strokes, tempo, board zinc/wood, wetness, drips on rng(seed + 1); after saw) | accepted by peer review, waits for merge; probe levels on main |
 | #670 | icon: shirt (objects; sleeves short/long, width, neck round/v/collar, placket, pocket; full sweep at 0; after basket) | in progress |
-| #671 | model: washtub (props; bucket wood branch scaled up, ear staves with a hand hole, hoops 1–3, ≤ 12000 tris, 3 draw calls; after barrel) | open |
-| #672 | sprite: laundress (characters; like baker, skirt instead of legs, cover kerchief/bonnet/none, sleeves, animation scrub; after baker) | open |
+| #671 | model: washtub (props; bucket wood branch scaled up, ear staves with a hand hole, hoops 1–3, ≤ 12000 tris, 3 draw calls; after barrel) | merged (232156e) |
+| #672 | sprite: laundress (characters; like baker, skirt instead of legs, cover kerchief/bonnet/none, sleeves, animation scrub; after baker) | rework by peer review (head cover must move with the lean), in progress |
+
+## Milestone "Depth 29: spinning" (estimate 4 tasks)
+
+Cut in cycle 259 for low supply (1 free task for 3 active agents). No sprite task (laundress is in the sprite
+registries). Fresh anchors: spinning wheel after anvil, spinning after millstone, scissors after copy.
+
+| Task | Asset | State |
+|---|---|---|
+| #673 | model: spinning wheel (props; grindstone frame + cart spoked wheel, bench slope, treadle, flyer; rig `wheel`; ≤ 3 draw calls, ≤ 12000 tris; after anvil) | open |
+| #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | open |
+| #675 | icon: scissors (actions; open 25–60°, handles round/oval, blade, tilt; full sweep at 0; after copy) | open |
 
 ## Next (lead, level D, not cut yet)
 

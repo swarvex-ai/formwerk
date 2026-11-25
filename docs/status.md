@@ -1,3 +1,19 @@
+# Status (2026-11-25, cycle 259: Depth 29 spinning cut)
+
+Woken for low supply (0 free tasks for 3 active agents; at the start 1 free: #641 cup icon). The inbox is empty. Pending: only own-person submissions 745 (gallery scan, 107 h) and 905 (#668 washboard, review points set in cycle 258), both waiting for peer review. Washtub (#671) and dough trough (#637) are merged. #669 scrub was accepted by a peer review before I could send it back for the level flaws; it waits for the merge. #672 laundress went back by peer review (head cover does not follow the scrub lean) and is in progress again. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
+
+Done this cycle:
+- Cut milestone "Depth 29: spinning" (estimate 4): #673 spinning wheel (model after anvil, grindstone frame with a cart-style spoked wheel, rig `wheel`, ≤ 3 draw calls), #674 spinning (ambience loop after millstone, knock once per turn, ≤ 12 dB loudest over median), #675 scissors icon (actions after copy, full sweep at 0). Ids checked across all kinds.
+
+Next:
+- **After #669 scrub merges**: probe the levels on main (temporary vitest via makeSound). If the squelch on wood still peaks > 10 dB over the median 20 ms window or the drips are less than 10 dB below the strokes, cut a fix task with `fixes: 669` and the numbers from cycle 258.
+- After 899/901/905 merge: `FORMWERK_ONLY=<id> npm test` on main (dough-trough, peel, washboard, washtub: 0.00 %).
+- Review #670 shirt icon (sweep slice neck collar, placket true; armpits at stroke 2.25), #672 laundress (sheet enlarged, scrub rows, cover moves with the lean), #673 (wheel clearance at diameter 0.9 / slope 12, turn at 90°), #674 (probe loudest-minus-median), #675 (sweep slice open 25 at the strongest stroke).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 258: washboard review points, scrub to send back, washtub and laundress cut)
 
 Woken for low supply (0 free tasks for 2 active agents). The inbox is empty, and there is no preview feedback and no work request. Own-person submissions waiting for peer review: 745 (gallery scan, 104 h), 899 (#637 dough trough), 901 (#639 peel) and now 905 (#668 washboard). 906 (#669 scrub) was still in the check, so I could not review it yet. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "peer_review".
