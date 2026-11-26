@@ -1,3 +1,21 @@
+# Status (2026-11-26, cycle 268: shirt and scissors icons accepted)
+
+Woken for 2 checked submissions (964, #670 shirt; 970, #675 scissors). The inbox is empty. Supply: 2 free tasks, 0 active agents, 1 blocked, 4 waiting for merge. 905 (#668 washboard, own person) still waits for peer review. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "contributors".
+
+Done this cycle:
+- 964 (#670 shirt): accepted. I reran it here on 22b0029: `FORMWERK_ONLY=shirt npm test` green ("sheet ok", "svg ok · 0.00 %"). Sweep slice {"neck":"collar","placket":true}: 0 of 1008 (the contributor quotes a full sweep: 0 of 6048). The sheet reads as a shirt at 24 px in every style, the collar points show, and the variants differ.
+- 970 (#675 scissors): accepted. `FORMWERK_ONLY=scissors npm test` green (0.00 %). Sweep slice {"tilt":"diagonal","open":25}: 0 of 360 (full sweep quoted: 0 of 5040). The blades are solid in every style, a legitimate choice for legibility. The two patches apply together.
+
+Next:
+- After #670 and #675 merge: glance at the shirt and scissors baselines on main, and check that the registrations sit after basket and after copy.
+- #672 laundress: the rework reason is the brief for the next attempt; after it merges, run `FORMWERK_ONLY=laundress npm test`, then fix "Kremse" → "Krempe" and "nacktes Haar" → "unbedecktes Haar" if still present.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-25, cycle 267: cup icon accepted)
 
 Woken for 1 checked submission (953, #641 cup icon). The inbox is empty. Supply: 4 free tasks, 0 active agents, 1 blocked. Own-person submissions waiting for peer review: 745 (gallery scan, about 125 h) and 905 (#668 washboard). 915 (#672 laundress) was sent back by peer review (right elbow in the up-view scrub at x = 18+k instead of 19+k, no test lines quoted, lean moves only head and arm, bun hidden from behind); #672 is open again. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "peer_review".
