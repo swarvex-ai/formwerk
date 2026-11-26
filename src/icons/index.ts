@@ -14,6 +14,7 @@ import { pencil } from "./actions/pencil";
 import { download } from "./actions/download";
 import { play } from "./actions/play";
 import { copy } from "./actions/copy";
+import { scissors } from "./actions/scissors";
 import { undo } from "./actions/undo";
 import { redo } from "./actions/redo";
 import { pause } from "./actions/pause";
@@ -68,6 +69,7 @@ export const ICONS: AnyIcon[] = [
   download,
   play,
   copy,
+  scissors,
   undo,
   redo,
   pause,
