@@ -106,14 +106,21 @@ export async function createViewer(canvas: HTMLCanvasElement, opts: { forceWebGL
       if (current) shadows(current);
       if (next === "gallery" && !pipeline) ensureGalleryPipeline();
     },
-    show(o: Object3D) {
-      if (current) {
-        scene.remove(current);
-        current.traverse((x) => { const m = x as Mesh; if (m.isMesh) { m.geometry.dispose(); (Array.isArray(m.material) ? m.material : [m.material]).forEach((y) => y.dispose()); } });
+    /** Disposes an object's geometries and materials. */
+    dispose(o: Object3D) {
+      o.traverse((x) => { const m = x as Mesh; if (m.isMesh) { m.geometry.dispose(); (Array.isArray(m.material) ? m.material : [m.material]).forEach((y) => y.dispose()); } });
+    },
+    /** Shows o and disposes the previous object; with keepPrevious it is only taken out of the scene and returned. */
+    show(o: Object3D, opts: { keepPrevious?: boolean } = {}): Object3D | null {
+      const previous = current;
+      if (previous) {
+        scene.remove(previous);
+        if (!opts.keepPrevious) viewer.dispose(previous);
       }
       current = o;
       shadows(o);
       scene.add(o);
+      return opts.keepPrevious ? previous : null;
     },
     /** Camera from front-right and a little above, so the whole object fits; in the studio and gallery also the key light, its
      *  shadow camera and the floor, fitted to the object. */

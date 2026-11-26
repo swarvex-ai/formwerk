@@ -8,6 +8,7 @@ import { toGLB, toOBJ, toUSDZ } from "../core/export";
 import { rng } from "../core/rng";
 import { drawModelList } from "./model-list";
 import { de, el, feld, hashSetzen, hashTeile, kebabZuCamel, knopf, kopieren, speichern, T, text, zahl, type Bereich, type Galerie } from "./shell";
+import { createScan } from "./scan";
 import { stage } from "./stage";
 
 const M = de
@@ -25,6 +26,8 @@ export async function start(b: Bereich): Promise<Galerie> {
   canvas.hidden = false;
   const { viewer, controls } = await stage(canvas);
   viewer.setLook("gallery");
+  const scan = createScan(viewer);
+  const ohneBewegung = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let asset: AnyAsset = ASSETS[0], werte: Record<string, unknown> = {}, seed = 1;
   let objekt: Object3D | null = null;
@@ -38,15 +41,21 @@ export async function start(b: Bereich): Promise<Galerie> {
       const id = `r-${name}`, wert = haltung[name] ?? 0, einheit = r.type === "rotate" ? "°" : " m";
       const eingabe = el("input", { id, type: "range", min: String(r.min), max: String(r.max), step: r.type === "rotate" ? "1" : "0.01", value: String(wert) }) as HTMLInputElement;
       const anzeige = el("output", { for: id }, `${zahl(wert)}${einheit}`);
-      eingabe.oninput = () => { haltung[name] = Number(eingabe.value); anzeige.textContent = `${zahl(haltung[name])}${einheit}`; if (objekt) pose(objekt, { [name]: haltung[name] }); };
+      eingabe.oninput = () => { haltung[name] = Number(eingabe.value); anzeige.textContent = `${zahl(haltung[name])}${einheit}`; scan.stop(); if (objekt) pose(objekt, { [name]: haltung[name] }); };
       return el("div", { class: "feld" }, el("label", { for: id }, text(r.label)), eingabe, anzeige);
     }));
   };
   const neuBauen = (rahmen = false) => {
+    // A rebuild while a scan runs ends it and shows the newest shape whole, so dragging a slider stays live
+    const gescannt = scan.running;
+    scan.stop();
     objekt = make(asset, werte, seed);
     pose(objekt, haltung);
-    viewer.show(objekt);
+    const vorher = viewer.show(objekt, { keepPrevious: true });
     if (rahmen) { viewer.frame(); controls.target.copy(viewer.center); }
+    if (gescannt || ohneBewegung()) { if (vorher) viewer.dispose(vorher); }
+    else if (rahmen || !vorher) { if (vorher) viewer.dispose(vorher); scan.reveal(objekt); }
+    else scan.change(vorher, objekt);
     const m = measure(objekt), s = size(objekt), ph = infoOf(objekt)!.physics;
     b.werte.textContent = `${zahl(s.width)} × ${zahl(s.height)} × ${zahl(s.depth)} m · ≈ ${zahl(ph.massKg, ph.massKg < 100 ? 1 : 0)} kg · ${M.koerper[ph.body]}, ${M.kollider[ph.collider]} · ${m.triangles.toLocaleString()} ${M.dreiecke} · ${m.drawCalls} ${M.aufrufe}`;
     bewegenZeichnen();
@@ -65,6 +74,7 @@ export async function start(b: Bereich): Promise<Galerie> {
     format.onchange = () => { backenFeld.hidden = format.value === "obj"; };
     const laden = knopf(T.laden, async (k) => {
       if (!objekt) return;
+      scan.stop();
       k.disabled = true; k.textContent = M.backt;
       try {
         const opts = { bake: backen.checked };
@@ -102,7 +112,8 @@ export async function start(b: Bereich): Promise<Galerie> {
   const groesse = () => viewer.resize(canvas.clientWidth, canvas.clientHeight);
   addEventListener("resize", groesse);
   groesse();
-  viewer.renderer.setAnimationLoop(() => { controls.update(); viewer.render(); });
+  let zuletzt = performance.now();
+  viewer.renderer.setAnimationLoop(() => { const jetzt = performance.now(); scan.tick(Math.min(0.1, (jetzt - zuletzt) / 1000)); zuletzt = jetzt; controls.update(); viewer.render(); });
 
   return {
     zeigen() {
@@ -116,6 +127,7 @@ export async function start(b: Bereich): Promise<Galerie> {
       neuBauen(true);
     },
     stop() {
+      scan.stop();
       viewer.renderer.setAnimationLoop(null);
       removeEventListener("resize", groesse);
       canvas.hidden = true;
