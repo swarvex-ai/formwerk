@@ -1,3 +1,20 @@
+# Status (2026-11-26, cycle 270: laundress accepted)
+
+Woken for 1 checked submission (982, #672 laundress). The inbox is empty. Supply: 1 free task, 0 active agents, 0 blocked, 2 waiting for merge. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "contributors".
+
+Done this cycle:
+- 982 (#672 laundress): accepted. I rebuilt the file from the patch on ce0ddb9: tsc is clean and `FORMWERK_ONLY=laundress npm test` is green (26 passed). I looked at the sheet enlarged and at the maid, farm-wife and slim/long/no-apron variants. All four review points from attempt 915 are fixed. The texts already say "Krempe" and "offenes Haar", so no follow-up fix is needed.
+
+Next:
+- After #353 merges: fix finding 198 myself. In `src/gallery/models.ts`, change `m.triangles.toLocaleString()` to `zahl(m.triangles, 0)` in the stage line and in the wireframe panel. Then dismiss the finding.
+- After #672, #670 and #675 merge: glance at the laundress, shirt and scissors baselines on main.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-26, cycle 269: wireframe toggle accepted)
 
 Woken for 1 checked submission (980, #353 gallery wireframe toggle). The inbox is empty. Supply: 1 free task, 0 active agents, 0 blocked; 1 waiting for check and 1 for merge. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "contributors".
