@@ -32,6 +32,7 @@ import { wifi } from "./status/wifi";
 import { gear } from "./objects/gear";
 import { mail } from "./objects/mail";
 import { basket } from "./objects/basket";
+import { shirt } from "./objects/shirt";
 import { chart } from "./objects/chart";
 import { sliders } from "./objects/sliders";
 import { folder } from "./objects/folder";
@@ -85,6 +86,7 @@ export const ICONS: AnyIcon[] = [
   gear,
   mail,
   basket,
+  shirt,
   chart,
   sliders,
   folder,
