@@ -2,12 +2,16 @@
 // above the sheet); on a change the old shape stays above the sheet and the new one appears below it.
 // Clipping uses ClippingGroup (WebGPURenderer, also in its WebGL 2 fallback): the objects are moved into one while the
 // scan runs and back into the scene at the end, so their materials and the object itself stay untouched.
+// Extra objects (the wireframe overlay) are clipped with their side: new ones below the sheet go back into the scene at
+// the end (unless their owner took them out meanwhile), old ones above it are removed and their geometries disposed.
 // The rim is a closed Line, not a LineLoop: the WebGPURenderer has no LineLoop.
 import { AdditiveBlending, BufferGeometry, DoubleSide, Box3, Float32BufferAttribute, Group, Line, Mesh, PlaneGeometry, Plane, Vector3, type Object3D } from "three";
 import { ClippingGroup, LineBasicNodeMaterial, MeshBasicNodeMaterial } from "three/webgpu";
 import type { createViewer } from "./viewer";
 
 type Viewer = Awaited<ReturnType<typeof createViewer>>;
+/** Objects clipped together with the new shape (below the sheet) and the old shape (above it). */
+export type ScanExtras = { new?: Object3D[]; old?: Object3D[] };
 
 const AKZENT = "#22d3ee";
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - ((-2 * t + 2) ** 2) / 2);
@@ -24,23 +28,24 @@ export function createScan(viewer: Viewer) {
   let neu: Object3D | null = null, alt: Object3D | null = null;
   let gruppeNeu: ClippingGroup | null = null, gruppeAlt: ClippingGroup | null = null, gruppeGeist: ClippingGroup | null = null;
   let geist: MeshBasicNodeMaterial | null = null;
+  let extraNeu: Object3D[] = [], extraAlt: Object3D[] = [];
   let von = 0, bis = 0, dauer = 1, zeit = 0, laeuft = false;
 
-  const start = (n: Object3D, a: Object3D | null, sekunden: number) => {
+  const start = (n: Object3D, a: Object3D | null, sekunden: number, extras: ScanExtras = {}) => {
     const box = new Box3().setFromObject(n);
     if (a) box.union(new Box3().setFromObject(a));
     const s = box.getSize(new Vector3()), c = box.getCenter(new Vector3());
-    neu = n; alt = a; dauer = sekunden; zeit = 0; von = box.min.y - 0.001; bis = box.max.y + 0.001;
+    neu = n; alt = a; extraNeu = extras.new ?? []; extraAlt = a ? extras.old ?? [] : []; dauer = sekunden; zeit = 0; von = box.min.y - 0.001; bis = box.max.y + 0.001;
     lampe.scale.set(Math.max(0.01, s.x * 1.15), 1, Math.max(0.01, s.z * 1.15));
     lampe.position.set(c.x, von, c.z);
     setzen(von);
     gruppeNeu = gruppe([unten]);
     viewer.scene.add(gruppeNeu);
-    gruppeNeu.add(n);
+    gruppeNeu.add(n, ...extraNeu);
     if (a) {
       gruppeAlt = gruppe([oben]);
       viewer.scene.add(gruppeAlt);
-      gruppeAlt.add(a);
+      gruppeAlt.add(a, ...extraAlt);
     } else {
       // Above the sheet a wireframe ghost of the new shape: one mesh per mesh, sharing its geometry, outside the asset object
       n.updateWorldMatrix(true, true);
@@ -66,7 +71,10 @@ export function createScan(viewer: Viewer) {
     laeuft = false;
     viewer.scene.remove(lampe);
     if (neu) viewer.scene.add(neu);
+    for (const x of extraNeu) if (x.parent === gruppeNeu) viewer.scene.add(x);
     if (alt) viewer.dispose(alt);
+    for (const x of extraAlt) { x.removeFromParent(); x.traverse((y) => (y as Mesh).geometry?.dispose()); }
+    extraNeu = extraAlt = [];
     for (const g of [gruppeNeu, gruppeAlt, gruppeGeist]) g?.removeFromParent();
     geist?.dispose();
     neu = alt = gruppeNeu = gruppeAlt = gruppeGeist = geist = null;
@@ -74,9 +82,9 @@ export function createScan(viewer: Viewer) {
 
   return {
     /** Opening an asset: the sheet reveals the new shape. */
-    reveal(n: Object3D) { if (laeuft) ende(); start(n, null, 0.9); },
+    reveal(n: Object3D, extras?: ScanExtras) { if (laeuft) ende(); start(n, null, 0.9, extras); },
     /** A parameter or the seed changed: old shape above the sheet, new one below. */
-    change(a: Object3D, n: Object3D) { if (laeuft) ende(); start(n, a, 0.6); },
+    change(a: Object3D, n: Object3D, extras?: ScanExtras) { if (laeuft) ende(); start(n, a, 0.6, extras); },
     /** End at once: new shape whole, old one disposed. */
     stop() { if (laeuft) ende(); },
     get running() { return laeuft; },
