@@ -5,6 +5,7 @@ import { villager } from "./characters/villager";
 import { merchant } from "./characters/merchant";
 import { blacksmith } from "./characters/blacksmith";
 import { baker } from "./characters/baker";
+import { laundress } from "./characters/laundress";
 import { wizard } from "./characters/wizard";
 import { knight } from "./characters/knight";
 import { slime } from "./creatures/slime";
@@ -60,6 +61,7 @@ export const SPRITES: AnySprite[] = [
   merchant,
   blacksmith,
   baker,
+  laundress,
   wizard,
   knight,
   slime,
