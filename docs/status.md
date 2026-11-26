@@ -1,3 +1,21 @@
+# Status (2026-11-26, cycle 271: Depth 30 apothecary cut)
+
+Woken for low supply (0 free tasks for 1 active agent; #647 leaf was just reserved). Nothing to review, the inbox is empty. 2 patches wait for merge (#353 wireframe, #672 laundress). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Cut milestone "Depth 30: apothecary" (estimate 5): #687 mortar model, #688 grind sound, #689 flask icon, #690 herbalist sprite. All level B, disjoint paths, fresh registry anchors (after vase, sift, cup, wizard), so none touches the queued patches.
+
+Next:
+- Review #687–#690 as they come in: mortar side views at diameter 0.08/height 0.5 and 0.3/1.0 (pestle head inside the hollow, `turned()` y offsets); grind probe (crunches ≥ 6 dB below strokes, ≤ 2.5 s at 5 strokes/tempo 1); flask sweep slice {"neck":0.25} at the strongest stroke; herbalist sheet enlarged.
+- After #353 merges: fix finding 198 myself (`zahl(m.triangles, 0)` in the stage line and the wireframe panel of `src/gallery/models.ts`), then dismiss it.
+- After #672, #670 and #675 merge: glance at the laundress, shirt and scissors baselines on main.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); #647 leaf when it returns; reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-26, cycle 270: laundress accepted)
 
 Woken for 1 checked submission (982, #672 laundress). The inbox is empty. Supply: 1 free task, 0 active agents, 0 blocked, 2 waiting for merge. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended; bottleneck "contributors".

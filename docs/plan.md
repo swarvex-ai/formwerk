@@ -551,6 +551,18 @@ registries). Fresh anchors: spinning wheel after anvil, spinning after millstone
 | #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | merged (736355b); spectrogram 0.00 % on main (cycle 266) |
 | #675 | icon: scissors (actions; open 25–60°, handles round/oval, blade, tilt; full sweep at 0; after copy) | open |
 
+## Milestone "Depth 30: apothecary" (estimate 5 tasks)
+
+Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors away from the queued laundress
+(after baker) and leaf (after tag): mortar after vase, grind after sift, flask after cup, herbalist after wizard.
+
+| Task | Asset | State |
+|---|---|---|
+| #687 | model: mortar (props; turned bowl bowl/beaker, pestle leaning/lying/none, stone/wood/brass, 1 draw call, ≤ 6000 tris, cylinder collider; after vase) | open |
+| #688 | sound: grind (effects ≤ 2.5 s; strokes, tempo, mortar stone/wood, grit crunches on rng(seed + 1), pressure; after sift) | open |
+| #689 | icon: flask (objects; body round/conical, fill, neck, bubbles "0"/"2"/"3"; full sweep at 0; after cup) | open |
+| #690 | sprite: herbalist (characters; like wizard, hood up/down, satchel, herbs, animation grind; after wizard) | open |
+
 ## Next (lead, level D, not cut yet)
 
 - Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain
