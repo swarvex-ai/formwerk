@@ -36,6 +36,7 @@ import { glass } from "./impact/glass";
 import { appleBite } from "./impact/apple-bite";
 import { clang } from "./impact/clang";
 import { knock } from "./impact/knock";
+import { nailing } from "./impact/nailing";
 import { lockTurn } from "./impact/lock-turn";
 import { diceRoll } from "./impact/dice-roll";
 import { cardShuffle } from "./effects/card-shuffle";
@@ -104,6 +105,7 @@ export const SOUNDS: AnySound[] = [
   appleBite,
   clang,
   knock,
+  nailing,
   lockTurn,
   diceRoll,
   cardShuffle,
