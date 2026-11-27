@@ -1,3 +1,23 @@
+# Status (2026-11-27, cycle 285: candle and jar accepted)
+
+Woken for 2 checked submissions: 1048 (#713 candle) and 1049 (#715 jar). The inbox and work requests are empty. Supply: 1 free task for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 7.1 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1048 (#713 candle): accepted. Applied on f06a8b7, `FORMWERK_ONLY=candle npm test` green (26 passed, sheet ok). I drew 9 variant sheets at 10× (defaults, 4 presets, height 8 with dish, height 3 pillar on a chamberstick with 3 drips, height 8 snuffed, red wax with a blue flame). Each reads as a candle. The flame stays on rows 1–3 at height 8 with the dish, and the snuffed wisp moves in every frame.
+- 1049 (#715 jar): accepted. Applied on f06a8b7, `FORMWERK_ONLY=jar npm test` green (26 passed; 3 draw calls; 3984 triangles at the defaults, 4176 at the heaviest case; presets 3984/2368/2928). The contributor had not rendered storage-jar or the lid at max, so I rendered them. The lid hovers straight above the rim at max (0.1 m), the jar is hollow when seen from above, storage-jar is a round brown pot, the flat dish (0.08/0.15) is valid, and the band hugs the waist with no z-fighting (live = baked).
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #714 blow-out: check the flutter dips and the centroids myself with the sound-level probe.
+- #716 leaf: slice-sweep the defaults myself before accepting. Do not run a full sweep in the lead cycle.
+- Depth 30 is fully cut (11 of 14 done after these merges, counting the own submissions in peer review). Open Depth 31 when the backlog trigger comes.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 284: leaf recut, jar cut)
 
 Woken for 1 checked submission (1045, #647 leaf) and low supply (0 free tasks for 1 active agent). The inbox is empty. 1048 (#713 candle) is still in the check. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 6.7 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
