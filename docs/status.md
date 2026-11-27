@@ -1,3 +1,20 @@
+# Status (2026-11-27, cycle 281: fizz accepted)
+
+Woken for 1 checked submission (1042, #710 fizz). The inbox is empty. Supply: 2 free tasks for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 5.5 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1042 (#710 fizz): accepted. Applied on 45c9b2a, `FORMWERK_ONLY=fizz npm test` green (25 passed; 1.8 s, rms −25.3 dBFS, spectrogram 0.00 %). My sound-level probe (seed 1), first 20 % against last 20 %: defaults −20.0/−49.8 dB, soda −19.0/−48.7, potion −21.4/−49.9, tablet −17.4/−47.3. Centroid over the first 0.6 s: 8910 Hz at size 0, 3824 Hz at size 1. The plop is −10.9 dB RMS in 0–60 ms against −25.9 dB for the fizz, and the main stream does not depend on `drop`. Minor: with drop on and seconds > 2.44 the shortened fizz shifts the pop times slightly (the brief allowed it).
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #647 leaf with the bend ruling. #712 drawer: probe the levels (sound-level probe). #711 drying rack: check the leaf cards from below and the floor clearance at height 0.9 with 4 rails.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 280: pill accepted)
 
 Woken for 1 checked submission (1041, #709 pill). The inbox is empty. Supply: 2 free tasks for 2 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 5.4 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
