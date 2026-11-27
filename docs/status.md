@@ -1,3 +1,23 @@
+# Status (2026-11-27, cycle 273: cork accepted, mortar to peer review, finding 198 fixed)
+
+Woken for 1 checked submission (1017, #692 cork). The inbox is empty. Supply: 1 free task, 1 active agent; 1013 (flask) and 1010 (mortar) wait for peer review; 1016 (herbalist) is still in the check. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended, no bottleneck.
+
+Done this cycle:
+- 1017 (#692 cork): accepted. I applied it on c260453: `FORMWERK_ONLY=cork npm test` green (25 passed, 0.535 s, spectrogram 0.00 %). The spectrogram shows the squeak band near 2.4 kHz, then the pop tone. The probe rows show the squeak 7–10 dB under the pop. Note: the squeak is normalised to 9 dB under the pop, so `squeak` changes only its tone.
+- 1010 (#687 mortar, own person): rendered the front and top views at the defaults, 0.08/0.5 and 0.3/1.0, the apothecary, granite and baked kitchen presets. The head sits in the hollow and the handle rests on the rim; the lying pestle lies beside the bowl. `FORMWERK_ONLY=mortar npm test` green (26 passed; ok, baked ok, glb ok 0.07 %). Review points set.
+- Finding 198: `zahl(m.triangles, 0)` in the stage line and the wireframe panel of `src/gallery/models.ts` (lead commit), finding dismissed.
+- Render tools rewritten into `.claude/tools` (patch-test.mjs, shot.mjs, sheet.mjs); the folder had been cleared.
+
+Next:
+- 1016 herbalist: once checked, look at the sheet enlarged (grind in four directions), then rework or set review points.
+- #647 leaf and #688 grind return with the reasons from cycle 272.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 272: leaf and grind back, flask to peer review, cork cut)
 
 Woken for low supply (0 free tasks for 1 active agent). Four own-person submissions were waiting; the inbox is empty. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "contributors".

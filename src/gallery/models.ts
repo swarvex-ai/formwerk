@@ -39,7 +39,7 @@ export async function start(b: Bereich): Promise<Galerie> {
     if (leicht.hidden || !objekt) return;
     const m = measure(objekt), id = asset.id;
     void codeBytes(id).then((bytes) => {
-      if (stand === leichtStand) leicht.textContent = `${m.triangles.toLocaleString()} ${M.dreiecke} · ${m.drawCalls} ${M.aufrufe} · ${kb(bytes)} ${M.code}`;
+      if (stand === leichtStand) leicht.textContent = `${zahl(m.triangles, 0)} ${M.dreiecke} · ${m.drawCalls} ${M.aufrufe} · ${kb(bytes)} ${M.code}`;
     });
   };
   const drahtKnopf = knopf(M.draht, () => {
@@ -85,7 +85,7 @@ export async function start(b: Bereich): Promise<Galerie> {
     else scan.change(vorher, objekt, { new: draht, old: drahtVorher ? [drahtVorher] : [] });
     leichtZeichnen();
     const m = measure(objekt), s = size(objekt), ph = infoOf(objekt)!.physics;
-    b.werte.textContent = `${zahl(s.width)} × ${zahl(s.height)} × ${zahl(s.depth)} m · ≈ ${zahl(ph.massKg, ph.massKg < 100 ? 1 : 0)} kg · ${M.koerper[ph.body]}, ${M.kollider[ph.collider]} · ${m.triangles.toLocaleString()} ${M.dreiecke} · ${m.drawCalls} ${M.aufrufe}`;
+    b.werte.textContent = `${zahl(s.width)} × ${zahl(s.height)} × ${zahl(s.depth)} m · ≈ ${zahl(ph.massKg, ph.massKg < 100 ? 1 : 0)} kg · ${M.koerper[ph.body]}, ${M.kollider[ph.collider]} · ${zahl(m.triangles, 0)} ${M.dreiecke} · ${m.drawCalls} ${M.aufrufe}`;
     bewegenZeichnen();
     hashSetzen(asset.id, nichtStandard(), seed);
   };
