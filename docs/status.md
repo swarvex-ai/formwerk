@@ -1,3 +1,21 @@
+# Status (2026-11-27, cycle 276: herbs back for rework again)
+
+Woken for 1 checked submission (1031, #698 herbs, second attempt). The inbox is empty. 1032 (#699 stir) is still in the check; 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting for peer review (the bottleneck, oldest 3.3 h). 0 active agents, 2 free tasks. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1031 (#698 herbs): rework. The tests pass, the names are right and it is registered after pot, but `.claude/tools/herbs-draw.mjs` shows it still doesn't read. The summary describes pixels that aren't there. Bundles: stems at x 7/8/9 merge below the string into a brown block (it reads as a pot) and the heads merge. The root is an A/trousers shape with no body. The mushroom stem is long and dark brown instead of short and pale. The flower has no ring of petals. The sprig is fine. The reason gives pixel positions for each fix (stems at 6/8/10, root body ly 4–7, pale stem 3 rows, 5 petals around the centre).
+
+Next:
+- 1032 stir once checked: probe taps 0/1 for the 8–14 dB band.
+- #698 herbs returns: draw it again with herbs-draw.mjs. If a third attempt fails the same way, think about cutting it into one task per kind.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass. #647 leaf with the bend ruling.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 275: herbs back for rework)
 
 Woken for 1 checked submission (1026, #698 herbs). The inbox is empty. Supply: 2 free tasks (#698 held for its contributor, #699 stir) for 1 active agent. Peer review is the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are still waiting. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
