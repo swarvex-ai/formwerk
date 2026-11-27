@@ -1,3 +1,27 @@
+# Status (2026-11-27, cycle 291: carpenter and nailing rework)
+
+Woken for 2 checked submissions (1057, #719 carpenter; 1059, #721 nailing). The inbox is empty. Supply: 5 free tasks (#719 and #721 reworks, #720 sawhorse rework, #722 sanding, #723 toolbox) for 2 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 9.8 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1059 (#721 nailing): rework, close to done. My rerun was green (25 passed, 0.00 %). My FFT confirms the ring at 3527 → 4371 Hz (blows 1 → 3), the tap 8.8 dB down and the shrink to 4 s. Defect: `thudEnde` caps the thud at 0.1 s, while it is still at about −17 dB. On the last blow the level falls from −26.1 to −43.5 dBFS within one 2 ms window at +100 ms, which is a tick at the end. Fix given: run the thud to 6·tauThud and fade it over 5 ms at the next blow. The German texts used "ss" for "ß", "Reissnagel" (a drawing pin) and "Thock".
+- 1057 (#719 carpenter): rework. Tests green. The side views are right (plane 0/+1/+2/+1, lean on frame 2, board ends at column 22). The contributor did not look at the sheet. In the down view of `plane`, the hands and the plane cover 5 of the 6 board pixels, and the board colour #c9a86e matches the apron, so the board is invisible. Fix given: board x 7–16 with a darker edge row, colour #b08850. Ruling: the down-view board is 10 px instead of 6 — why: 6 px is covered by the hands and plane — cost if wrong: none, the length is only cosmetic. German: "Leibhütte", "Canvas-Schürze", "nacktes Haar", "Draufsicht".
+
+Next:
+- #721 nailing rework: 2 ms windows from +90 to +115 ms on every blow (no drop > 6 dB except at a next blow); German ß.
+- #719 carpenter rework: plane row, down view enlarged: at least 2 board pixels on each side of the hands, with build stout and apron off.
+- #720 sawhorse rework: zoomed side view at splay 25 (square and plank): no light between the leg tops and the beam.
+- #718 planing rework: probe 2 ms windows at a stroke end and the stroke level at chatter 0/1 (within 4 dB). Also check that two strokes really are two blocks.
+- #722 sanding: probe the turn dips and the coarse max step. #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 290: sawhorse rework)
 
 Woken for 1 checked submission (1058, #720 sawhorse). The inbox is empty. Supply: 3 free tasks for 2 active agents. 1057 (#719 carpenter) is checking and 1059 (#721 nailing) is submitted. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 9.7 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
