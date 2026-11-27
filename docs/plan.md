@@ -598,8 +598,9 @@ sift, where the queued grind inserts), knitting after sanding.
 
 | Task | Asset | State |
 |---|---|---|
-| #725 | sound: loom (ambience loop ≤ 12 s; pick = treadle 0, shuttle 0.25, beater 0.6 × tempo; beat/shuttle/treadle; whole picks per loop; after scrub) | open |
+| #725 | sound: loom (ambience loop ≤ 12 s; pick = treadle 0, shuttle 0.25, beater 0.6 × tempo; beat/shuttle/treadle; whole picks per loop; after scrub) | accepted (1068) |
 | #726 | sound: knitting (effects ≤ 2.5 s; stitches 1–12, pace 2–6 Hz, needles metal/bamboo centroid gap ≥ 1500 Hz, yarn pull; after sanding) | open |
+| #727 | sprite: weaver (characters 24×32 like laundress; cover, apron, loom, yarn; animation weave: frame loom, shuttle left/middle/right/middle; after carpenter, 5 lines from the queued herbalist insert) | open |
 
 ## Next (lead, level D, not cut yet)
 

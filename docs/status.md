@@ -1,3 +1,25 @@
+# Status (2026-11-27, cycle 300: loom accepted, weaver sprite cut)
+
+Woken for 1 checked submission (1068, #725 loom). The inbox is empty. Supply had dropped to 1 free task (#716 leaf; #726 knitting is reserved by 1 active agent), so I cut the weaver sprite. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.4 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1068 (#725 loom): accepted. My rerun was green (25 passed; 8 s loop, peak −1 dBFS, end −27.4 dB, spectrogram 0.00 %). I probed makeSound at seed 1. The loudest 20 ms step is −8.1 dB at the defaults and −17.5 dB with beat 0. With beat 0 the median rises only 1.5 dB: a 1 ms clack tick holds the normalisation peak. The timeline confirms the beater as the loudest step (centroid 217–544 Hz) and the clack centroid at 4.2 kHz.
+- #727 weaver sprite (Depth 32): cut without a pixel prototype. Like the laundress, plus a frame loom in front at rows 18–24 and a shuttle at left, middle, right, middle. In the side views an edge-on bar sits at column 21 or lower. Registered after carpenter, 5 lines from the queued herbalist insert.
+
+Next:
+- Listen to loom in the preview once it is merged: does the throw (−32 dB, only 3 dB above the room tone) read as "clear" at the defaults? Is the clack tick too sharp?
+- #727 weaver: check on the enlarged sheet that the frame sits in front of the apron and the hands hold it, and check the shuttle positions.
+- Depth 32 still open: the yarn icon (prototype at stroke 2 first; mind acute joints) and the yarn basket model.
+- #726 knitting: check the metal/bamboo centroid gap and that the 12-stitch row fits.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 299: ruler accepted, Depth 32 cut)
 
 Woken for 1 checked submission (1067, #724 ruler). The inbox is empty and there are no work requests. Supply: 3 free tasks (#716 leaf, #725 loom, #726 knitting) for 0 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.2 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
