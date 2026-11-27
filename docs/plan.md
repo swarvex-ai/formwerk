@@ -570,9 +570,21 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 | #710 | sound: fizz (effects ≤ 2.5 s; seconds, fizz rate, size 8 kHz → 2.5 kHz, drop plop on rng(seed + 1); after cork) | accepted (1042) |
 | #711 | model: drying-rack (props; A-frames, width/height/depth, rails 1–4, bunches 0–8 of two-sided leaf cards, dried, ≤ 2 draw calls, ≤ 8000 tris; after peel) | accepted (1044) |
 | #712 | sound: drawer (movement ≤ 1.5 s; open/shut, travel, size small/large, contents rattle on rng(seed + 1), stiff; open stop ≥ 6 dB below shut knock; after door-swing) | accepted (1046) |
-| #713 | sprite: candle (items 16×16; height, girth taper/pillar, holder none/dish/chamberstick, drips, lit (snuffed: smoke wisp), wax, fire; after torch) | submitted (1048) |
-| #714 | sound: blow-out (effects ≤ 2.5 s; breath, strength 600 → 2500 Hz, flutter 8–14 Hz, candles 1–3, ember on rng(seed + 1); after fizz) | open |
-| #715 | model: jar (props; albarello/round, height, radius, neck, knob button/ball/none, band (2nd material), lid slides up, ≤ 3 draw calls, ≤ 6000 tris, cylinder collider; after tankard) | open |
+| #713 | sprite: candle (items 16×16; height, girth taper/pillar, holder none/dish/chamberstick, drips, lit (snuffed: smoke wisp), wax, fire; after torch) | accepted (1048) |
+| #714 | sound: blow-out (effects ≤ 2.5 s; breath, strength 600 → 2500 Hz, flutter 8–14 Hz, candles 1–3, ember on rng(seed + 1); after fizz) | rework (1051: ember overruns the end, flutter is a grid-aligned gate) |
+| #715 | model: jar (props; albarello/round, height, radius, neck, knob button/ball/none, band (2nd material), lid slides up, ≤ 3 draw calls, ≤ 6000 tris, cylinder collider; after tankard) | accepted (1049) |
+
+## Milestone "Depth 31: carpentry" (estimate 5 tasks)
+
+Cut in cycle 286 for low supply. Anchors clear of the queued patches: sawhorse after drying-rack, planing after saw
+(sift and fizz are 7 lines away), carpenter after villager (not blacksmith: it is 3 lines from wizard, where the
+queued herbalist inserts). A ruler icon follows once I have prototyped its ticks at stroke 2 (memory: icon acute joints, sweep).
+
+| Task | Asset | State |
+|---|---|---|
+| #720 | model: sawhorse (props; beam square/plank, splay 8–25°, braces, 1 draw call, ≤ 3000 tris, box collider; after drying-rack; replaces #717) | open |
+| #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | open |
+| #719 | sprite: carpenter (characters 24×32 like blacksmith; cap, apron, pencil, animation plane; after villager) | open |
 
 ## Next (lead, level D, not cut yet)
 
