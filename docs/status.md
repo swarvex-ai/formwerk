@@ -1,3 +1,21 @@
+# Status (2026-11-27, cycle 275: herbs back for rework)
+
+Woken for 1 checked submission (1026, #698 herbs). The inbox is empty. Supply: 2 free tasks (#698 held for its contributor, #699 stir) for 1 active agent. Peer review is the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are still waiting. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1026 (#698 herbs): rework. Tests green, names and registrations right, but the contributor could not view images and committed the baseline unseen. I drew every kind × {small, large, bundle, bundle+large, dried} plus the presets, enlarged. Problems: the sprig is a leaf blob on a stick (it reads as a lollipop); the mushroom is a tube with a thin lid; the flower centre sits off to one side; the root reads as a tree. Bundle tilts only the heads, so stems stand as solid bars and the heads merge into one block. `large` only lengthens the stem, and droop shifts whole leaves. The reason gives concrete fixes for each.
+- New local tool (untracked): `.claude/tools/herbs-draw.mjs <out.png>` draws a sprite's cases (idle + 4 frames per row) via `makeSheet`. For another sprite, change the import and the case list.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #698 herbs returns: draw it again with herbs-draw.mjs (bundle fan, mushroom cap width, size large). #699 stir: probe taps 0/1 for the 8–14 dB band. #647 leaf with the bend ruling.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 274: herbalist and grind to peer review, herbs and stir cut)
 
 Woken for low supply (0 free tasks for 1 active agent; #647 leaf is reserved). The inbox is empty. Four own-person submissions are waiting for peer review: 1010 mortar, 1013 flask, 1016 herbalist, 1022 grind. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
