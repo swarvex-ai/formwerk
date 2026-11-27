@@ -49,6 +49,7 @@ import { bread } from "./objects/bread";
 import { flag } from "./status/flag";
 import { tag } from "./objects/tag";
 import { hammer } from "./objects/hammer";
+import { ruler } from "./objects/ruler";
 import { anchorIcon } from "./objects/anchor-icon";
 import { upload } from "./actions/upload";
 import { share } from "./actions/share";
@@ -105,6 +106,7 @@ export const ICONS: AnyIcon[] = [
   flag,
   tag,
   hammer,
+  ruler,
   anchorIcon,
   upload,
   share,
