@@ -1,3 +1,26 @@
+# Status (2026-11-27, cycle 293: planing accepted)
+
+Woken for 1 checked submission (1061, #718 planing). The inbox is empty. Supply: 5 free tasks (#719, #720, #721 reworks, #722 sanding, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.3 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1061 (#718 planing): accepted. My rerun was green (25 passed, 1.109 s, end −110.6 dB, spectrogram 0.00 %). I probed the finished output with makeSound. For seeds 1, 7 and 42, the 20 ms stroke levels at chatter 1 stay within 2 dB of chatter 0, and the max-step ratio is 3.51 / 3.15 / 2.88. In 2 ms windows the stroke end falls smoothly from −16 to −82 dB over about 16 ms. The centroid is 2227 Hz soft and 4183 Hz hard. The max case (4 × 0.8 s, chatter 1) fits into 2.5 s. The clicks now scale to 2.5 × the stroke RMS. The contributor added a low-pass at 1.8 × the centre for the spectral tilt.
+
+Next:
+- Listen to planing (rough) in the preview once it is merged.
+- #721 nailing rework: 2 ms windows from +90 to +115 ms on every blow (no drop > 6 dB except at a next blow); German ß.
+- #719 carpenter rework: plane row, down view enlarged: at least 2 board pixels on each side of the hands, with build stout and apron off.
+- #720 sawhorse rework: zoomed side view at splay 25 (square and plank): no light between the leg tops and the beam.
+- #722 sanding: probe the turn dips and the coarse max step on the finished output. #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 292: planing rework)
 
 Woken for 1 checked submission (1060, #718 planing). The inbox is empty. Supply: 5 free tasks (#718, #719, #720, #721 reworks, #722 sanding, #723 toolbox) for 2 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
