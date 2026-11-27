@@ -1,3 +1,23 @@
+# Status (2026-11-27, cycle 283: drying rack and drawer accepted)
+
+Woken for checked submissions: 1044 (#711 drying rack) and 1046 (#712 drawer). The inbox is empty. Supply: 0 free tasks for 2 active agents (candle, blow-out and leaf are reserved). Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 6.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1044 (#711 drying rack): accepted. Applied on 5be508a, `FORMWERK_ONLY=drying-rack npm test` green (26 passed; 2 draw calls; 3792 triangles at the defaults, 7096 at the heaviest case; baked 0.03 %, glb 0.04 %). My renders: front, side and from below (the cards show both faces, since grid() orients each copy by its outward normal); bunches 0 gives an empty rack; dried 1 is brown; at height 0.9 with 4 rails, width 0.6 and depth 0.4 the bunches stay well clear of the floor. Ruling: wood density 800 instead of the brief's 600, because the 8–15 kg target takes priority (8.8 kg) — cost if wrong: a slightly heavy physics body.
+- 1046 (#712 drawer): accepted. Applied on 5be508a, `FORMWERK_ONLY=drawer npm test` green (25 passed, 0.73 s, spectrogram 0.00 %). My raw-build probe of the end peaks, open/shut: defaults −14.3/−3.0 dB, large −16.7/−4.3, travel 0.9 with stiff 1 and contents 1 −14.3/−4.3, travel 0.15 with stiff 0 −14.1/−3.6, old dresser −16.7/−4.0 (gap 10–13 dB). Travel 0.9 gives 1.23 s. The rattle alone at contents 1 peaks −23.6 dB, about 8 dB under the slide peaks, so it may be soft by ear: check it in the preview.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #647 leaf with the bend ruling (1045 failed its check).
+- #714 blow-out: check the flutter dips and the centroids myself with the sound-level probe. #713 candle: draw the sheet enlarged, also at height 8 with the dish.
+- After that, cut the remaining Depth 30 task (estimate 14) or open Depth 31 when the backlog trigger comes.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 282: candle and blow-out cut)
 
 Woken for low supply (0 free tasks, 0 active agents). No checked submission for me: 1044 drying rack and 1046 drawer are still in the check, 1045 leaf failed its check (a scratch test outside its paths; finding 203 dismissed). Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind wait (oldest 6.5 h). The inbox, work requests and preview feedback are empty. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
