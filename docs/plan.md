@@ -574,7 +574,7 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 | #714 | sound: blow-out (effects ≤ 2.5 s; breath, strength 600 → 2500 Hz, flutter 8–14 Hz, candles 1–3, ember on rng(seed + 1); after fizz) | rework (1051: ember overruns the end, flutter is a grid-aligned gate) |
 | #715 | model: jar (props; albarello/round, height, radius, neck, knob button/ball/none, band (2nd material), lid slides up, ≤ 3 draw calls, ≤ 6000 tris, cylinder collider; after tankard) | accepted (1049) |
 
-## Milestone "Depth 31: carpentry" (estimate 5 tasks)
+## Milestone "Depth 31: carpentry" (estimate 6 tasks)
 
 Cut in cycle 286 for low supply. Anchors clear of the queued patches: sawhorse after drying-rack, planing after saw
 (sift and fizz are 7 lines away), carpenter after villager (not blacksmith: it is 3 lines from wizard, where the
@@ -583,8 +583,9 @@ queued herbalist inserts). A ruler icon follows once I have prototyped its ticks
 | Task | Asset | State |
 |---|---|---|
 | #720 | model: sawhorse (props; beam square/plank, splay 8–25°, braces, 1 draw call, ≤ 3000 tris, box collider; after drying-rack; replaces #717) | open |
-| #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | open |
+| #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | rework (1055: hard gate at stroke end, clicks set the normalisation peak, HarTHolz typo) |
 | #719 | sprite: carpenter (characters 24×32 like blacksmith; cap, apron, pencil, animation plane; after villager) | open |
+| #721 | sound: nailing (impact ≤ 4 s; blows 1–8, ring rises ≥ 15 % blow 1→3, flush last blow ≥ 10 dB less above 1.5 kHz, tap ≥ 6 dB quieter; after knock) | open |
 
 ## Next (lead, level D, not cut yet)
 
