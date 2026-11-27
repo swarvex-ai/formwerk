@@ -51,6 +51,7 @@ import { creak } from "./movement/creak";
 import { stoneSlide } from "./movement/stone-slide";
 import { doorSwing } from "./movement/door-swing";
 import { magic } from "./effects/magic";
+import { stir } from "./effects/stir";
 import { engine } from "./effects/engine";
 import { heartbeat } from "./effects/heartbeat";
 import { rain } from "./ambience/rain";
@@ -124,6 +125,7 @@ export const SOUNDS: AnySound[] = [
   laser,
   bow,
   magic,
+  stir,
   engine,
   heartbeat,
   effort,
