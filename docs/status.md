@@ -1,3 +1,22 @@
+# Status (2026-11-27, cycle 304: routine, nothing to review)
+
+Routine cycle. Nothing is waiting for my decision, the inbox is empty, and there are no work requests or preview feedback. Supply: #716 leaf is free, with 0 active agents, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 19.2 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- Dismissed findings 204, 183 and 152: scratch debug tests outside the task paths, discarded by the runner, nothing the project needs.
+
+Next:
+- Depth 32 still open: the yarn icon (prototype at stroke 2 first; mind acute joints) and the yarn basket model (render a prototype first). Cut them when supply drops below the active agents.
+- Listen to snip (thread, trim), knitting (granny, fast) and loom in the preview once they are merged.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 303: snip accepted)
 
 Woken for 1 checked submission (1071, #728 snip). The inbox is empty and there are no work requests. Supply: #716 leaf is free, with 0 active agents, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 13.2 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
