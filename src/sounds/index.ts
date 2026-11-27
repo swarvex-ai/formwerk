@@ -76,6 +76,7 @@ import { pour } from "./effects/pour";
 import { grainPour } from "./effects/grain-pour";
 import { cork } from "./effects/cork";
 import { fizz } from "./effects/fizz";
+import { blowOut } from "./effects/blow-out";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 import { horn } from "./effects/horn";
@@ -162,6 +163,7 @@ export const SOUNDS: AnySound[] = [
   grainPour,
   cork,
   fizz,
+  blowOut,
   waves,
   shipBell,
   horn,
