@@ -1,3 +1,25 @@
+# Status (2026-11-27, cycle 299: ruler accepted, Depth 32 cut)
+
+Woken for 1 checked submission (1067, #724 ruler). The inbox is empty and there are no work requests. Supply: 3 free tasks (#716 leaf, #725 loom, #726 knitting) for 0 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.2 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1067 (#724 ruler): accepted. My rerun was green (26 passed, sheet and SVG 0.00 %), and my own full sweep reported "ruler: 0 of 9072 combinations fail" (4 min 16 s). The code matches the brief line by line. On the sheet, the defaults show a diagonal bar with long, short, long, short ticks, scale shows a level bar, fine shows 5 even ticks, and the filled notches are open. Depth 31 is complete once it merges.
+- Depth 32: weaving (estimate 6). I cut two sounds that need no prototype: #725 loom (ambience loop, after scrub) and #726 knitting (effects, after sanding).
+
+Next:
+- Depth 32: prototype and cut the yarn icon (ball of yarn with needles; mind acute joints), the weaver sprite (like the laundress) and the yarn basket model.
+- #725 loom: check that the beater is the loudest step per pick and that the seam lines up; listen in the preview.
+- #726 knitting: check the metal/bamboo centroid gap and that the 12-stitch row fits.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off) and planing (rough) in the preview once they are merged.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 298: nailing accepted, ruler cut)
 
 Woken for 1 checked submission (1066, #721 nailing rework). The inbox is empty. Supply: 2 free tasks (#716 leaf and the new #724 ruler) for 0 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 11.4 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.

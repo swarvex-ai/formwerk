@@ -585,9 +585,21 @@ queued herbalist inserts). A ruler icon follows once I have prototyped its ticks
 | #720 | model: sawhorse (props; beam square/plank, splay 8–25°, braces, 1 draw call, ≤ 3000 tris, box collider; after drying-rack; replaces #717) | submitted (1058) |
 | #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | rework (1055: hard gate, click peaks, typo; 1056: unfinished, debug logs, `s[at + i]` with at in seconds, no baseline) |
 | #719 | sprite: carpenter (characters 24×32 like blacksmith; cap, apron, pencil, animation plane; after villager) | submitted (1057) |
-| #722 | sound: sanding (effects ≤ 2.5 s; strokes 1–8, tempo, grit coarse/medium/fine centroid gap ≥ 1500 Hz, pressure, blow on rng(seed + 1); after writing) | open |
+| #722 | sound: sanding (effects ≤ 2.5 s; strokes 1–8, tempo, grit coarse/medium/fine centroid gap ≥ 1500 Hz, pressure, blow on rng(seed + 1); after writing) | accepted (1064) |
 | #723 | model: toolbox (props; open tote, peaked/square ends, dowel at max(handle, sides + 0.08), divider, 1 draw call, ≤ 2500 tris; after tent) | accepted (cycle 297) |
-| #721 | sound: nailing (impact ≤ 4 s; blows 1–8, ring rises ≥ 15 % blow 1→3, flush last blow ≥ 10 dB less above 1.5 kHz, tap ≥ 6 dB quieter; after knock) | open |
+| #721 | sound: nailing (impact ≤ 4 s; blows 1–8, ring rises ≥ 15 % blow 1→3, flush last blow ≥ 10 dB less above 1.5 kHz, tap ≥ 6 dB quieter; after knock) | accepted (1066) |
+| #724 | icon: ruler (objects; tilt, ticks 3–5 dropping to 4 where 5 do not fit, width, pattern alternate/even; full sweep 0 of 9072; after hammer) | accepted (1067) |
+
+## Milestone "Depth 32: weaving" (estimate 6 tasks)
+
+Cut in cycle 299 when supply dropped to 1 (0 active agents). Sounds first (no geometry prototype needed); the yarn
+icon, weaver sprite and yarn basket model follow once I have prototyped them. Anchors: loom after scrub (9 lines from
+sift, where the queued grind inserts), knitting after sanding.
+
+| Task | Asset | State |
+|---|---|---|
+| #725 | sound: loom (ambience loop ≤ 12 s; pick = treadle 0, shuttle 0.25, beater 0.6 × tempo; beat/shuttle/treadle; whole picks per loop; after scrub) | open |
+| #726 | sound: knitting (effects ≤ 2.5 s; stitches 1–12, pace 2–6 Hz, needles metal/bamboo centroid gap ≥ 1500 Hz, yarn pull; after sanding) | open |
 
 ## Next (lead, level D, not cut yet)
 
