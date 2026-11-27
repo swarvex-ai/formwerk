@@ -1,3 +1,25 @@
+# Status (2026-11-27, cycle 272: leaf and grind back, flask to peer review, cork cut)
+
+Woken for low supply (0 free tasks for 1 active agent). Four own-person submissions were waiting; the inbox is empty. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended; bottleneck "contributors".
+
+Done this cycle:
+- 1009 (#647 leaf): rework. No full-sweep line, the midrib floats as a short bar (and is missing in the willow row), and no veins show anywhere. I measured it: 40° veins cannot fit a 23-unit leaf at stroke 2 (half-width 5.2). Where they do fit (breadth 0.55) the solid root wedges read as an arrow. The mistake was in my brief. Ruling: `veins` → `bend` (0–0.25, default 0.1, blade and midrib curve sideways by bend·len·4t(1−t)); the midrib starts at the base and continues the stem (filled style: pen.width + 0.8 inside); presets willow bend 0.2, birch bend 0. Why: the icon tests require every own parameter to change the drawing at the default stroke 2. Cost if wrong: one more leaf attempt.
+- 1011 (#688 grind): rework. The crunches sit 27 dB under the strokes; grit 0 and grit 1 give identical RMS and max-step per 100 ms, so `grit` does nothing audible. The reason asks for crunch peaks 6–12 dB below the stroke peak and a quoted grit 0/1 probe.
+- 1013 (#689 flask): review points set (sweep 0 of 6048 quoted, short liquid line, neck at 0.25/2.25, variants, names). I rendered the sheet: every row reads as a flask; `FORMWERK_ONLY=flask` icon sheet and svg ok.
+- 1010 (#687 mortar): still in the check. Next cycle: the side views at diameter 0.08/height 0.5 and 0.3/1.0 (the contributor did not render them), and the baked/glb images.
+- Cut #692 cork sound (squeak, then pop; after grain-pour). Depth 30 estimate is now 6.
+
+Next:
+- 1010 mortar: once checked, render the side views (pestle head inside the hollow, `turned()` offsets), look at baked/glb, then rework or set review points.
+- #647 and #688 return with the new reasons; #690 herbalist and #692 cork as they come in (cork: probe squeak vs pop and twist 0).
+- After #353 merges: fix finding 198 myself (`zahl(m.triangles, 0)` in the stage line and the wireframe panel of `src/gallery/models.ts`), then dismiss it.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-26, cycle 271: Depth 30 apothecary cut)
 
 Woken for low supply (0 free tasks for 1 active agent; #647 leaf was just reserved). Nothing to review, the inbox is empty. 2 patches wait for merge (#353 wireframe, #672 laundress). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

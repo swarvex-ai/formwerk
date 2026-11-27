@@ -513,7 +513,7 @@ hotspot). Registries do not collide with open work: swing after bench, apple bit
 |---|---|---|
 | #645 | model: swing (props; two splayed A-frames, beam, seat(s) on ropes, rig `seat` about x; 3 draw calls; after bench) | open |
 | #646 | sound: apple bite (impact ≤ 2 s; crunch, juice hiss, chewing on rng(seed + 1); after glass) | open |
-| #647 | icon: leaf (objects; breadth, tilt, veins "0"/"2"/"3", stem; full sweep at 0; after tag) | open |
+| #647 | icon: leaf (objects; breadth, tilt, bend 0–0.25 (replaces veins, cycle 272), stem; full sweep at 0; after tag) | rework |
 
 ## Milestone "Depth 27: fishing" (estimate 5 tasks)
 
@@ -551,17 +551,18 @@ registries). Fresh anchors: spinning wheel after anvil, spinning after millstone
 | #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | merged (736355b); spectrogram 0.00 % on main (cycle 266) |
 | #675 | icon: scissors (actions; open 25–60°, handles round/oval, blade, tilt; full sweep at 0; after copy) | open |
 
-## Milestone "Depth 30: apothecary" (estimate 5 tasks)
+## Milestone "Depth 30: apothecary" (estimate 6 tasks)
 
 Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors away from the queued laundress
 (after baker) and leaf (after tag): mortar after vase, grind after sift, flask after cup, herbalist after wizard.
 
 | Task | Asset | State |
 |---|---|---|
-| #687 | model: mortar (props; turned bowl bowl/beaker, pestle leaning/lying/none, stone/wood/brass, 1 draw call, ≤ 6000 tris, cylinder collider; after vase) | open |
-| #688 | sound: grind (effects ≤ 2.5 s; strokes, tempo, mortar stone/wood, grit crunches on rng(seed + 1), pressure; after sift) | open |
-| #689 | icon: flask (objects; body round/conical, fill, neck, bubbles "0"/"2"/"3"; full sweep at 0; after cup) | open |
+| #687 | model: mortar (props; turned bowl bowl/beaker, pestle leaning/lying/none, stone/wood/brass, 1 draw call, ≤ 6000 tris, cylinder collider; after vase) | submitted (1010, in check) |
+| #688 | sound: grind (effects ≤ 2.5 s; strokes, tempo, mortar stone/wood, grit crunches on rng(seed + 1), pressure; after sift) | rework (crunches inaudible) |
+| #689 | icon: flask (objects; body round/conical, fill, neck, bubbles "0"/"2"/"3"; full sweep at 0; after cup) | peer review (1013) |
 | #690 | sprite: herbalist (characters; like wizard, hood up/down, satchel, herbs, animation grind; after wizard) | open |
+| #692 | sound: cork (effects ≤ 1.2 s; squeak twist s, then pop at bottle Hz, tightness, squeak; after grain-pour) | open |
 
 ## Next (lead, level D, not cut yet)
 
