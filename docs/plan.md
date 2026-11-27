@@ -574,7 +574,7 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 | #714 | sound: blow-out (effects ≤ 2.5 s; breath, strength 600 → 2500 Hz, flutter 8–14 Hz, candles 1–3, ember on rng(seed + 1); after fizz) | rework (1051: ember overruns the end, flutter is a grid-aligned gate) |
 | #715 | model: jar (props; albarello/round, height, radius, neck, knob button/ball/none, band (2nd material), lid slides up, ≤ 3 draw calls, ≤ 6000 tris, cylinder collider; after tankard) | accepted (1049) |
 
-## Milestone "Depth 31: carpentry" (estimate 6 tasks)
+## Milestone "Depth 31: carpentry" (estimate 8 tasks)
 
 Cut in cycle 286 for low supply. Anchors clear of the queued patches: sawhorse after drying-rack, planing after saw
 (sift and fizz are 7 lines away), carpenter after villager (not blacksmith: it is 3 lines from wizard, where the
@@ -582,9 +582,11 @@ queued herbalist inserts). A ruler icon follows once I have prototyped its ticks
 
 | Task | Asset | State |
 |---|---|---|
-| #720 | model: sawhorse (props; beam square/plank, splay 8–25°, braces, 1 draw call, ≤ 3000 tris, box collider; after drying-rack; replaces #717) | open |
-| #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | rework (1055: hard gate at stroke end, clicks set the normalisation peak, HarTHolz typo) |
-| #719 | sprite: carpenter (characters 24×32 like blacksmith; cap, apron, pencil, animation plane; after villager) | open |
+| #720 | model: sawhorse (props; beam square/plank, splay 8–25°, braces, 1 draw call, ≤ 3000 tris, box collider; after drying-rack; replaces #717) | submitted (1058) |
+| #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | rework (1055: hard gate, click peaks, typo; 1056: unfinished, debug logs, `s[at + i]` with at in seconds, no baseline) |
+| #719 | sprite: carpenter (characters 24×32 like blacksmith; cap, apron, pencil, animation plane; after villager) | submitted (1057) |
+| #722 | sound: sanding (effects ≤ 2.5 s; strokes 1–8, tempo, grit coarse/medium/fine centroid gap ≥ 1500 Hz, pressure, blow on rng(seed + 1); after writing) | open |
+| #723 | model: toolbox (props; open tote, peaked/square ends, dowel at max(handle, sides + 0.08), divider, 1 draw call, ≤ 2500 tris; after tent) | open |
 | #721 | sound: nailing (impact ≤ 4 s; blows 1–8, ring rises ≥ 15 % blow 1→3, flush last blow ≥ 10 dB less above 1.5 kHz, tap ≥ 6 dB quieter; after knock) | open |
 
 ## Next (lead, level D, not cut yet)

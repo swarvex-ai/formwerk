@@ -1,3 +1,26 @@
+# Status (2026-11-27, cycle 289: planing rework, sanding and toolbox cut)
+
+Woken for 1 checked submission (1056, #718 planing rework) and low supply (0 free tasks for 2 active agents). The inbox is empty. 1057 (#719 carpenter) is checking and 1058 (#720 sawhorse) is submitted. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 9.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1056 (#718 planing): rework, without running tests. The patch is unfinished. It has three debug `console.log` calls (one logs `import.meta.url`) and an nz counting block. There is no spectrogram baseline, and the summary is a terminal dump. The defect the agent was chasing is `s[at + i]` with `at` in seconds: every stroke after the first lands on the first. The reason gives the fix (`off = Math.round(at * RATE)`) and the numbers to quote.
+- Cut #722 sanding (sound, after writing) and #723 toolbox (model, after tent). The anchors are clear of the queued patches: planing after saw is 13 lines away, blow-out 5, and sawhorse after drying-rack is 6 lines away in both files. The ids are unused in every kind. The sanding task names the seconds/samples trap and the grain-peak trap from planing. Depth 31 estimate is now 8.
+
+Next:
+- 1057 carpenter: draw the sheet enlarged (board inside column 22 with build stout). 1058 sawhorse: render a side view along x at splay 25 with the plank beam (feet on the floor, tops touching the beam, braces against the legs).
+- #718 planing rework: probe 2 ms windows at a stroke end and the stroke level at chatter 0/1 (within 4 dB). Also check that two strokes really are two blocks.
+- #721 nailing: FFT the ring of blows 1 and 3 myself, and check the last blow above 1.5 kHz.
+- #722 sanding: probe the turn dips and the coarse max step. #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 288: planing rework, nailing cut)
 
 Woken for 1 checked submission (1055, #718 planing) and low supply. The inbox is empty. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 8.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
