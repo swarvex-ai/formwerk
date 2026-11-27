@@ -27,6 +27,7 @@ import { torch } from "./items/torch";
 import { spikes } from "./items/spikes";
 import { lever } from "./items/lever";
 import { pot } from "./items/pot";
+import { herbs } from "./items/herbs";
 import { sack } from "./items/sack";
 import { die } from "./items/die";
 import { card } from "./items/card";
@@ -108,6 +109,7 @@ export const SPRITES: AnySprite[] = [
   spikes,
   lever,
   pot,
+  herbs,
   sack,
   die,
   card,
