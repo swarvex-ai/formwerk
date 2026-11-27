@@ -1,3 +1,23 @@
+# Status (2026-11-27, cycle 302: weaver accepted)
+
+Woken for 1 checked submission (1070, #727 weaver). The inbox is empty. Supply: #716 leaf is free and #728 snip is blocked on knitting, with 0 active agents, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1070 (#727 weaver): accepted. My rerun was green (26 passed, 1 skipped, "weaver: sheet ok · same pixels as the reference"). On the sheet enlarged 8×, the weave down view shows the 8 × 6 wood frame in front of the apron, warp threads in every other column and 2 checkered rows of yarn. The shuttle is on the top inside row (still above the cloth, so the hand does not cover it) at left, middle, right, middle. In the side views, the bar is 4 wood over 2 yarn and the hand steps 0, +1, +2, +1. In the up view only the elbows move. The registrations follow carpenter.
+
+Next:
+- Depth 32 still open: the yarn icon (prototype at stroke 2 first; mind acute joints) and the yarn basket model (render a prototype first). Cut them when supply drops below the active agents.
+- #728 snip: probe the click-over-shear band per cut, the material centroids, and ring 0 vs 1 at the end of the buffer.
+- Listen to knitting (granny, fast) and loom in the preview once they are merged.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 301: knitting accepted, snip sound cut)
 
 Woken for 1 checked submission (1069, #726 knitting). The inbox is empty and there are no work requests. Supply: #716 leaf is free and #727 weaver is reserved (1 active agent). I cut #728 snip; it is released once knitting merges. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.5 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
