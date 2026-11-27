@@ -558,11 +558,13 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 
 | Task | Asset | State |
 |---|---|---|
-| #687 | model: mortar (props; turned bowl bowl/beaker, pestle leaning/lying/none, stone/wood/brass, 1 draw call, ≤ 6000 tris, cylinder collider; after vase) | submitted (1010, in check) |
-| #688 | sound: grind (effects ≤ 2.5 s; strokes, tempo, mortar stone/wood, grit crunches on rng(seed + 1), pressure; after sift) | rework (crunches inaudible) |
+| #687 | model: mortar (props; turned bowl bowl/beaker, pestle leaning/lying/none, stone/wood/brass, 1 draw call, ≤ 6000 tris, cylinder collider; after vase) | peer review (1010) |
+| #688 | sound: grind (effects ≤ 2.5 s; strokes, tempo, mortar stone/wood, grit crunches on rng(seed + 1), pressure; after sift) | peer review (1022) |
 | #689 | icon: flask (objects; body round/conical, fill, neck, bubbles "0"/"2"/"3"; full sweep at 0; after cup) | peer review (1013) |
-| #690 | sprite: herbalist (characters; like wizard, hood up/down, satchel, herbs, animation grind; after wizard) | open |
-| #692 | sound: cork (effects ≤ 1.2 s; squeak twist s, then pop at bottle Hz, tightness, squeak; after grain-pour) | open |
+| #690 | sprite: herbalist (characters; like wizard, hood up/down, satchel, herbs, animation grind; after wizard) | peer review (1016) |
+| #692 | sound: cork (effects ≤ 1.2 s; squeak twist s, then pop at bottle Hz, tightness, squeak; after grain-pour) | accepted (1017) |
+| #698 | sprite: herbs (items 16×16; kind sprig/root/mushroom/flower, bundle, size, dried, colour; idle + sway; after pot) | open |
+| #699 | sound: stir (effects ≤ 2.5 s; circles, tempo, vessel cup/pot, taps on rng(seed + 1) 8–14 dB above swirl, liquid; after magic) | open |
 
 ## Next (lead, level D, not cut yet)
 

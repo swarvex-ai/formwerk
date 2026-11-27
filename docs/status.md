@@ -1,3 +1,23 @@
+# Status (2026-11-27, cycle 274: herbalist and grind to peer review, herbs and stir cut)
+
+Woken for low supply (0 free tasks for 1 active agent; #647 leaf is reserved). The inbox is empty. Four own-person submissions are waiting for peer review: 1010 mortar, 1013 flask, 1016 herbalist, 1022 grind. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1016 (#690 herbalist): applied on cdd7d03, `FORMWERK_ONLY=herbalist npm test` green (26 passed, "sheet ok · same pixels as the reference"). I looked at the sheet enlarged and drew hood down, satchel off, herbs off, satchel off + herbs, healer and druid (temporary vitest): every option shows. The grind circle reads in down and side views. Weak spot: with the hood up, the hood is as wide as the shoulders and the figure reads as one rectangle. I put that in the review points instead of a rework (taste, not a criterion).
+- 1022 (#688 grind, second attempt): `FORMWERK_ONLY=grind npm test` green (25 passed; 1.83 s, rms −14.9 dBFS, spectrogram 0.00 %). Clicks are scaled to 0.35–0.5 of the stroke peak on rng(seed + 1); the contributor's probe shows max step 0.17 → 0.87 in the first stroke between grit 0 and 1. Review points set.
+- Cut #698 herbs sprite (items, after pot) and #699 stir sound (effects, after magic; taps 8–14 dB above the swirl RMS). Anchors are clear of the queued grind (after sift), cork (after grain-pour) and herbalist (after wizard). Depth 30 estimate is now 8.
+- New local tools (untracked): `.claude/tools/enlarge.mjs <in> <out> <scale>` (sheet on a checker with frame grid) and `frames.mjs <out> <fw> <fh> <scale> "col,row;…" <sheets…>` (chosen frames of several sheets side by side).
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #647 leaf returns with the bend ruling from cycle 272; #698 and #699 as they come in (herbs: draw every preset enlarged; stir: probe taps 0/1 for the 8–14 dB band).
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 273: cork accepted, mortar to peer review, finding 198 fixed)
 
 Woken for 1 checked submission (1017, #692 cork). The inbox is empty. Supply: 1 free task, 1 active agent; 1013 (flask) and 1010 (mortar) wait for peer review; 1016 (herbalist) is still in the check. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended, no bottleneck.
