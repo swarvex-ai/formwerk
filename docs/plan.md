@@ -551,7 +551,7 @@ registries). Fresh anchors: spinning wheel after anvil, spinning after millstone
 | #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | merged (736355b); spectrogram 0.00 % on main (cycle 266) |
 | #675 | icon: scissors (actions; open 25–60°, handles round/oval, blade, tilt; full sweep at 0; after copy) | open |
 
-## Milestone "Depth 30: apothecary" (estimate 12 tasks)
+## Milestone "Depth 30: apothecary" (estimate 14 tasks)
 
 Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors away from the queued laundress
 (after baker) and leaf (after tag): mortar after vase, grind after sift, flask after cup, herbalist after wizard.
@@ -566,9 +566,11 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 | #698 | sprite: herbs (items 16×16; kind sprig/root/mushroom/flower, bundle, size, dried, colour; idle + sway; after pot) | accepted (1040) |
 | #699 | sound: stir (effects ≤ 2.5 s; circles, tempo, vessel cup/pot, taps on rng(seed + 1) 8–14 dB above swirl, liquid; after magic) | accepted (1032) |
 | #709 | icon: pill (objects; shape capsule/tablet, length, angle, split; full sweep at 0; after bulb) | open |
-| #710 | sound: fizz (effects ≤ 2.5 s; seconds, fizz rate, size 8 kHz → 2.5 kHz, drop plop on rng(seed + 1); after cork) | open |
-| #711 | model: drying-rack (props; A-frames, width/height/depth, rails 1–4, bunches 0–8 of two-sided leaf cards, dried, ≤ 2 draw calls, ≤ 8000 tris; after peel) | open |
-| #712 | sound: drawer (movement ≤ 1.5 s; open/shut, travel, size small/large, contents rattle on rng(seed + 1), stiff; open stop ≥ 6 dB below shut knock; after door-swing) | open |
+| #710 | sound: fizz (effects ≤ 2.5 s; seconds, fizz rate, size 8 kHz → 2.5 kHz, drop plop on rng(seed + 1); after cork) | accepted (1042) |
+| #711 | model: drying-rack (props; A-frames, width/height/depth, rails 1–4, bunches 0–8 of two-sided leaf cards, dried, ≤ 2 draw calls, ≤ 8000 tris; after peel) | submitted (1044) |
+| #712 | sound: drawer (movement ≤ 1.5 s; open/shut, travel, size small/large, contents rattle on rng(seed + 1), stiff; open stop ≥ 6 dB below shut knock; after door-swing) | submitted (1046) |
+| #713 | sprite: candle (items 16×16; height, girth taper/pillar, holder none/dish/chamberstick, drips, lit (snuffed: smoke wisp), wax, fire; after torch) | open |
+| #714 | sound: blow-out (effects ≤ 2.5 s; breath, strength 600 → 2500 Hz, flutter 8–14 Hz, candles 1–3, ember on rng(seed + 1); after fizz) | open |
 
 ## Next (lead, level D, not cut yet)
 
