@@ -1,3 +1,25 @@
+# Status (2026-11-27, cycle 294: carpenter accepted)
+
+Woken for 1 checked submission (1062, #719 carpenter). The inbox is empty. Supply: 4 free tasks (#720, #721 reworks, #722 sanding, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.4 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1062 (#719 carpenter): accepted. My rerun was green (26 passed, sheet ok). I checked the enlarged sheet, and a probe sheet with build stout and the apron off (temp vitest makeSheet, removed afterwards). In the down view of `plane` the 10 px board (#b08850, darker edge row) shows on both sides of the plane and the hands. In the side views it moves 0/+1/+2/+1, the board stays inside column 22 and the body leans on frame 2. The German texts are fixed. To stay under the 40-colour limit, the contributor drew the cap and hair top in flat tones and used the shoe colour for the plane.
+
+Next:
+- Listen to planing (rough) in the preview once it is merged.
+- #721 nailing rework: 2 ms windows from +90 to +115 ms on every blow (no drop > 6 dB except at a next blow); German ß.
+- #720 sawhorse rework: zoomed side view at splay 25 (square and plank): no light between the leg tops and the beam.
+- #722 sanding: probe the turn dips and the coarse max step on the finished output. #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 293: planing accepted)
 
 Woken for 1 checked submission (1061, #718 planing). The inbox is empty. Supply: 5 free tasks (#719, #720, #721 reworks, #722 sanding, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.3 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
