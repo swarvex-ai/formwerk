@@ -1,3 +1,20 @@
+# Status (2026-11-27, cycle 280: pill accepted)
+
+Woken for 1 checked submission (1041, #709 pill). The inbox is empty. Supply: 2 free tasks for 2 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 5.4 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1041 (#709 pill): accepted. Applied on c579221, `FORMWERK_ONLY=pill npm test` green (26 passed, sheet ok, svg 0.00 %). My own full sweep: "pill: 0 of 5040 combinations fail" (4 min). The sheet reads as a capsule, a tablet with a score line and a vitamin in all three styles. The seam is short because of the margin rule, and that is acceptable.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #647 leaf with the bend ruling. #710 fizz and #712 drawer: probe the levels (sound-level probe). #711 drying rack: check the leaf cards from below and the floor clearance at height 0.9 with 4 rails.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 279: herbs accepted, drying rack and drawer cut)
 
 Woken for 1 checked submission (1040, #698 herbs, third attempt) and low supply (0 free tasks for 2 active agents). The inbox is empty. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting.
