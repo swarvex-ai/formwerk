@@ -24,6 +24,7 @@ import { life } from "./items/life";
 import { bomb } from "./items/bomb";
 import { tools } from "./items/tools";
 import { torch } from "./items/torch";
+import { candle } from "./items/candle";
 import { spikes } from "./items/spikes";
 import { lever } from "./items/lever";
 import { pot } from "./items/pot";
@@ -106,6 +107,7 @@ export const SPRITES: AnySprite[] = [
   bomb,
   tools,
   torch,
+  candle,
   spikes,
   lever,
   pot,
