@@ -513,7 +513,8 @@ hotspot). Registries do not collide with open work: swing after bench, apple bit
 |---|---|---|
 | #645 | model: swing (props; two splayed A-frames, beam, seat(s) on ropes, rig `seat` about x; 3 draw calls; after bench) | open |
 | #646 | sound: apple bite (impact ≤ 2 s; crunch, juice hiss, chewing on rng(seed + 1); after glass) | open |
-| #647 | icon: leaf (objects; breadth, tilt, bend 0–0.25 (replaces veins, cycle 272), stem; full sweep at 0; after tag) | rework |
+| #647 | icon: leaf (objects; breadth, tilt, bend 0–0.25 (replaces veins, cycle 272), stem; full sweep at 0; after tag) | closed, replaced by #716 (cycle 284) |
+| #716 | icon: leaf (replaces #647 with the bend spec written out; midrib inside the blade in every style; full sweep at 0; after tag) | open |
 
 ## Milestone "Depth 27: fishing" (estimate 5 tasks)
 
@@ -565,12 +566,13 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 | #692 | sound: cork (effects ≤ 1.2 s; squeak twist s, then pop at bottle Hz, tightness, squeak; after grain-pour) | accepted (1017) |
 | #698 | sprite: herbs (items 16×16; kind sprig/root/mushroom/flower, bundle, size, dried, colour; idle + sway; after pot) | accepted (1040) |
 | #699 | sound: stir (effects ≤ 2.5 s; circles, tempo, vessel cup/pot, taps on rng(seed + 1) 8–14 dB above swirl, liquid; after magic) | accepted (1032) |
-| #709 | icon: pill (objects; shape capsule/tablet, length, angle, split; full sweep at 0; after bulb) | open |
+| #709 | icon: pill (objects; shape capsule/tablet, length, angle, split; full sweep at 0; after bulb) | accepted (1041) |
 | #710 | sound: fizz (effects ≤ 2.5 s; seconds, fizz rate, size 8 kHz → 2.5 kHz, drop plop on rng(seed + 1); after cork) | accepted (1042) |
-| #711 | model: drying-rack (props; A-frames, width/height/depth, rails 1–4, bunches 0–8 of two-sided leaf cards, dried, ≤ 2 draw calls, ≤ 8000 tris; after peel) | submitted (1044) |
-| #712 | sound: drawer (movement ≤ 1.5 s; open/shut, travel, size small/large, contents rattle on rng(seed + 1), stiff; open stop ≥ 6 dB below shut knock; after door-swing) | submitted (1046) |
-| #713 | sprite: candle (items 16×16; height, girth taper/pillar, holder none/dish/chamberstick, drips, lit (snuffed: smoke wisp), wax, fire; after torch) | open |
+| #711 | model: drying-rack (props; A-frames, width/height/depth, rails 1–4, bunches 0–8 of two-sided leaf cards, dried, ≤ 2 draw calls, ≤ 8000 tris; after peel) | accepted (1044) |
+| #712 | sound: drawer (movement ≤ 1.5 s; open/shut, travel, size small/large, contents rattle on rng(seed + 1), stiff; open stop ≥ 6 dB below shut knock; after door-swing) | accepted (1046) |
+| #713 | sprite: candle (items 16×16; height, girth taper/pillar, holder none/dish/chamberstick, drips, lit (snuffed: smoke wisp), wax, fire; after torch) | submitted (1048) |
 | #714 | sound: blow-out (effects ≤ 2.5 s; breath, strength 600 → 2500 Hz, flutter 8–14 Hz, candles 1–3, ember on rng(seed + 1); after fizz) | open |
+| #715 | model: jar (props; albarello/round, height, radius, neck, knob button/ball/none, band (2nd material), lid slides up, ≤ 3 draw calls, ≤ 6000 tris, cylinder collider; after tankard) | open |
 
 ## Next (lead, level D, not cut yet)
 

@@ -1,3 +1,25 @@
+# Status (2026-11-27, cycle 284: leaf recut, jar cut)
+
+Woken for 1 checked submission (1045, #647 leaf) and low supply (0 free tasks for 1 active agent). The inbox is empty. 1048 (#713 candle) is still in the check. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 6.7 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1045 (#647 leaf): rework. The patch follows my `bend` ruling, but the default leaf fails the sweep. My slice at the defaults (bend 0.1, stem on, breadth 0.45, tilt 45) printed "leaf: 12 of 36 combinations fail" (gap narrower than 0.8 at strokes 1.5–2.25). The baseline is missing and the summary is debug output. Probe: start the midrib inside the blade in every style with a clearance of 1.5·pen.width + 1.1, which gives 2 of 36 (stroke 2.25 round, outline and duotone). The peer reviewer (marco8154) asked for `veins`. That was the old task text, my fault: I never put the cycle 272 ruling into the description.
+- Closed #647 and cut #716 leaf with the bend spec and the measured traps written out (Depth 26). Note: a leaf sweep runs about 0.2 s per combination. The full sweep did not finish in 10 minutes here, so it is the contributor's job (it takes about an hour).
+- Cut #715 jar (props model, after tankard; albarello/round stoneware, a lid that slides up, a band in a 2nd material, ≤ 3 draw calls). This is the 14th and last task of Depth 30.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #713 candle (1048): draw the sheet enlarged, also at height 8 with the dish. #714 blow-out: check the flutter dips and the centroids myself with the sound-level probe.
+- #715 jar: render the lid at max from the side (hovering, hollow inside) and the band at the waist live/baked/glb.
+- #716 leaf: slice-sweep the defaults myself before accepting. Don't run a full sweep in the lead cycle.
+- Depth 30 is fully cut: open Depth 31 when the backlog trigger comes.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 283: drying rack and drawer accepted)
 
 Woken for checked submissions: 1044 (#711 drying rack) and 1046 (#712 drawer). The inbox is empty. Supply: 0 free tasks for 2 active agents (candle, blow-out and leaf are reserved). Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 6.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
