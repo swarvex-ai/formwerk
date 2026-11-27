@@ -4,6 +4,7 @@
 import type { Values } from "../core/params";
 import { makeSheet, type Sprite } from "./define";
 import { villager as villagerSprite } from "./characters/villager";
+import { carpenter as carpenterSprite } from "./characters/carpenter";
 import { merchant as merchantSprite } from "./characters/merchant";
 import { blacksmith as blacksmithSprite } from "./characters/blacksmith";
 import { baker as bakerSprite } from "./characters/baker";
@@ -70,6 +71,7 @@ type Input<S extends Sprite<any>> = Partial<Values<S["params"]>> & { preset?: Ex
 const bogen = <S extends Sprite<any>>(s: S) => (values: Input<S> = {}, seed = 1) => makeSheet(s, values, seed);
 
 export const villager = bogen(villagerSprite);
+export const carpenter = bogen(carpenterSprite);
 export const merchant = bogen(merchantSprite);
 export const blacksmith = bogen(blacksmithSprite);
 export const baker = bogen(bakerSprite);

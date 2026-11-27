@@ -2,6 +2,7 @@
 // each on a line of its own (never two on one line: parallel tasks then merge cleanly, see .gitattributes).
 import type { AnySprite } from "./define";
 import { villager } from "./characters/villager";
+import { carpenter } from "./characters/carpenter";
 import { merchant } from "./characters/merchant";
 import { blacksmith } from "./characters/blacksmith";
 import { baker } from "./characters/baker";
@@ -60,6 +61,7 @@ import { moth } from "./creatures/moth";
 
 export const SPRITES: AnySprite[] = [
   villager,
+  carpenter,
   merchant,
   blacksmith,
   baker,
