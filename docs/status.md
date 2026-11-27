@@ -1,3 +1,26 @@
+# Status (2026-11-27, cycle 290: sawhorse rework)
+
+Woken for 1 checked submission (1058, #720 sawhorse). The inbox is empty. Supply: 3 free tasks for 2 active agents. 1057 (#719 carpenter) is checking and 1059 (#721 nailing) is submitted. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 9.7 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1058 (#720 sawhorse): rework. The pipeline passed (948 triangles, 1 draw call). The A-frame, side signs, feet, braces and registrations are right. In my side-view close-up at splay 25 there is a V gap under the beam: `beinL` puts the top CENTRE of the square-cut tilted leg at the underside, so the inner corner hangs about 1 cm below it. Fix given: `beinL = (H - bh + half*sin)/cos` (the outer corner sinks 1.9 cm, within the 2 cm allowed). There are also four German text errors (Holzsaubock; "Paar Böcke als Böcke"; preset label Böcke; splay wording).
+
+Next:
+- #720 sawhorse rework: zoomed side view at splay 25 (square and plank): no light between the leg tops and the beam.
+- 1057 carpenter: draw the sheet enlarged (board inside column 22 with build stout).
+- #718 planing rework: probe 2 ms windows at a stroke end and the stroke level at chatter 0/1 (within 4 dB). Also check that two strokes really are two blocks.
+- #721 nailing (1059): FFT the ring of blows 1 and 3 myself, and check the last blow above 1.5 kHz.
+- #722 sanding: probe the turn dips and the coarse max step. #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 289: planing rework, sanding and toolbox cut)
 
 Woken for 1 checked submission (1056, #718 planing rework) and low supply (0 free tasks for 2 active agents). The inbox is empty. 1057 (#719 carpenter) is checking and 1058 (#720 sawhorse) is submitted. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 9.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
