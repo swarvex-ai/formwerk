@@ -1,3 +1,24 @@
+# Status (2026-11-27, cycle 295: sawhorse accepted)
+
+Woken for 1 checked submission (1063, #720 sawhorse). The inbox is empty. Supply: 3 free tasks (#721 nailing rework, #722 sanding, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.6 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1063 (#720 sawhorse): accepted. My rerun was green (26 passed; 756 triangles and 1 draw call at the defaults, every preset and the heaviest case; baked and glb 0.02 %). I rendered zoomed side views along x at splay 8 and 25, with the square beam and the plank. Every leg pair leans outwards symmetrically, the inner top corners touch the beam underside, and no light shows between the legs and the beam. At height 0.4, splay 25 and plank, the braces fit under the beam. The trestle and low presets read right. The contributor corrected my formula: the bounding-box lift already adds half·sin, so the leg length is (H − bh)/cos + 1 mm.
+
+Next:
+- Listen to planing (rough) in the preview once it is merged.
+- #721 nailing rework: 2 ms windows from +90 to +115 ms on every blow (no drop > 6 dB except at a next blow); German ß.
+- #722 sanding: probe the turn dips and the coarse max step on the finished output. #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 294: carpenter accepted)
 
 Woken for 1 checked submission (1062, #719 carpenter). The inbox is empty. Supply: 4 free tasks (#720, #721 reworks, #722 sanding, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.4 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
