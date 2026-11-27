@@ -1,3 +1,24 @@
+# Status (2026-11-27, cycle 296: sanding accepted)
+
+Woken for 1 checked submission (1064, #722 sanding). The inbox is empty. Supply: 2 free tasks (#721 nailing rework, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.7 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1064 (#722 sanding): accepted. My rerun was green (25 passed, 1.7 s, end −132 dB, spectrogram 0.00 %). I probed the finished makeSound output for seeds 1, 7 and 42 at the defaults, coarse, coarse at pressure 1, fine at pressure 0 and rough. Every turn dips below −40 dB. At coarse grit no 20 ms step is more than about 3 dB above its stroke's middle, and the max-step ratio is 11–15 (medium 8). In 2 ms windows the stroke end falls smoothly over about 25 ms. In the tightest case (8 strokes, tempo 1.5, blow) the puff ends 20 ms before the buffer for five seeds, and the strokes are identical with blow on and off.
+
+Next:
+- Listen to sanding (rough, dust-off) and planing (rough) in the preview once they are merged.
+- #721 nailing rework: 2 ms windows from +90 to +115 ms on every blow (no drop > 6 dB except at a next blow); German ß.
+- #723 toolbox: render it end-on (pentagon, no gaps) and at sides 0.2 / handle 0.22.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing (the last open asset of the milestone; cut it when supply drops to 1).
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 295: sawhorse accepted)
 
 Woken for 1 checked submission (1063, #720 sawhorse). The inbox is empty. Supply: 3 free tasks (#721 nailing rework, #722 sanding, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.6 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
