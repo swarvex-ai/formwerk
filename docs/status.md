@@ -1,3 +1,22 @@
+# Status (2026-11-27, cycle 278: pill and fizz cut)
+
+Woken for low supply (0 free tasks for 2 active agents; #698 herbs and #647 leaf are reserved). No submission to review, the inbox is empty. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind wait (oldest 4.8 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- Cut #709 pill icon (objects; capsule/tablet, length, angle, split; after bulb) and #710 fizz sound (effects ≤ 2.5 s; decay ≥ 12 dB, size centroid gap ≥ 1500 Hz, drop plop < 600 Hz in the first 60 ms on rng(seed + 1); after cork). The anchors are clear of the queued flask (after cup), leaf (after tag) and grind (after sift). The ids are unused in every kind. Depth 30 estimate is now 10.
+- Small ambiguity in #710 checkpoint 4: with `drop` on the fizz starts 40–60 ms later, so "pops stay where they were" means relative to the fizz start. Read it that way in review.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #698 herbs (third attempt): draw it with `.claude/tools/herbs-draw.mjs`. If it fails the same way, cut it into one task per kind.
+- #647 leaf with the bend ruling. #709 pill: run the full sweep myself before accepting. #710 fizz: probe the decay and the centroids (sound-level probe).
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 277: stir accepted)
 
 Woken for 1 checked submission (1032, #699 stir). The inbox is empty. 0 active agents, 2 free tasks (#698 herbs held for its contributor, #647 leaf). Peer review is the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are still waiting (oldest 3.4 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.

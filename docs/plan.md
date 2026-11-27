@@ -551,7 +551,7 @@ registries). Fresh anchors: spinning wheel after anvil, spinning after millstone
 | #674 | sound: spinning (ambience loop; speed, whirr, treadle knock once per turn, yarn hiss; ≤ 12 dB loudest over median; after millstone) | merged (736355b); spectrogram 0.00 % on main (cycle 266) |
 | #675 | icon: scissors (actions; open 25–60°, handles round/oval, blade, tilt; full sweep at 0; after copy) | open |
 
-## Milestone "Depth 30: apothecary" (estimate 6 tasks)
+## Milestone "Depth 30: apothecary" (estimate 10 tasks)
 
 Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors away from the queued laundress
 (after baker) and leaf (after tag): mortar after vase, grind after sift, flask after cup, herbalist after wizard.
@@ -563,8 +563,10 @@ Cut in cycle 271 for low supply (0 free tasks for 1 active agent). Fresh anchors
 | #689 | icon: flask (objects; body round/conical, fill, neck, bubbles "0"/"2"/"3"; full sweep at 0; after cup) | peer review (1013) |
 | #690 | sprite: herbalist (characters; like wizard, hood up/down, satchel, herbs, animation grind; after wizard) | peer review (1016) |
 | #692 | sound: cork (effects ≤ 1.2 s; squeak twist s, then pop at bottle Hz, tightness, squeak; after grain-pour) | accepted (1017) |
-| #698 | sprite: herbs (items 16×16; kind sprig/root/mushroom/flower, bundle, size, dried, colour; idle + sway; after pot) | open |
-| #699 | sound: stir (effects ≤ 2.5 s; circles, tempo, vessel cup/pot, taps on rng(seed + 1) 8–14 dB above swirl, liquid; after magic) | open |
+| #698 | sprite: herbs (items 16×16; kind sprig/root/mushroom/flower, bundle, size, dried, colour; idle + sway; after pot) | rework, third attempt reserved |
+| #699 | sound: stir (effects ≤ 2.5 s; circles, tempo, vessel cup/pot, taps on rng(seed + 1) 8–14 dB above swirl, liquid; after magic) | accepted (1032) |
+| #709 | icon: pill (objects; shape capsule/tablet, length, angle, split; full sweep at 0; after bulb) | open |
+| #710 | sound: fizz (effects ≤ 2.5 s; seconds, fizz rate, size 8 kHz → 2.5 kHz, drop plop on rng(seed + 1); after cork) | open |
 
 ## Next (lead, level D, not cut yet)
 
