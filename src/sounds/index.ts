@@ -86,6 +86,7 @@ import { horn } from "./effects/horn";
 import { reel } from "./effects/reel";
 import { writing } from "./effects/writing";
 import { sanding } from "./effects/sanding";
+import { knitting } from "./effects/knitting";
 import { rollingPin } from "./effects/rolling-pin";
 import { bellows } from "./effects/bellows";
 import { quench } from "./ambience/quench";
@@ -177,6 +178,7 @@ export const SOUNDS: AnySound[] = [
   reel,
   writing,
   sanding,
+  knitting,
   rollingPin,
   bellows,
   quench,
