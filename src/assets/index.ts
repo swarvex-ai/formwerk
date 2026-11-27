@@ -59,6 +59,7 @@ import { mailbox } from "./props/mailbox";
 import { marketStall } from "./props/market-stall";
 import { books } from "./props/books";
 import { tent } from "./props/tent";
+import { toolbox } from "./props/toolbox";
 import { torch } from "./props/torch";
 import { banner } from "./props/banner";
 import { lantern } from "./props/lantern";
@@ -145,6 +146,7 @@ export const ASSETS: AnyAsset[] = [
   marketStall,
   books,
   tent,
+  toolbox,
   torch,
   banner,
   lantern,
