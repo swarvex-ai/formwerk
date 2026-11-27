@@ -72,6 +72,7 @@ import { kneading } from "./effects/kneading";
 import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
 import { grainPour } from "./effects/grain-pour";
+import { cork } from "./effects/cork";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 import { horn } from "./effects/horn";
@@ -154,6 +155,7 @@ export const SOUNDS: AnySound[] = [
   swordDraw,
   pour,
   grainPour,
+  cork,
   waves,
   shipBell,
   horn,
