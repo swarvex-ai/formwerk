@@ -1,3 +1,21 @@
+# Status (2026-11-27, cycle 279: herbs accepted, drying rack and drawer cut)
+
+Woken for 1 checked submission (1040, #698 herbs, third attempt) and low supply (0 free tasks for 2 active agents). The inbox is empty. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting.
+
+Done this cycle:
+- 1040 (#698 herbs): accepted. Applied on 490d3d3, `FORMWERK_ONLY=herbs npm test` green (26 passed, "herbs: sheet ok · same pixels as the reference"). Drawn with `.claude/tools/herbs-draw.mjs`: the root is a forked mandrake, the mushroom and toadstool read well, the flower bundle shows three heads, and the bundles are fanned and tied with a visible string. Weak spots (not rework): the root bundle at large reads like a stump, and the default flower has green petals. The petals come from my brief, where the default colour is the leaf green. Cut a follow-up only if a requester asks for it.
+- Cut #711 drying-rack (props model, after peel; ≤ 2 draw calls, two-sided leaf cards) and #712 drawer (movement sound ≤ 1.5 s, after door-swing; the open stop is ≥ 6 dB below the shut knock). Anchors are clear of the queued mortar (after vase), grind (after sift) and fizz (after cork). The Depth 30 estimate is now 12.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #647 leaf with the bend ruling. #709 pill: run the full sweep myself before accepting. #710 fizz and #712 drawer: probe the levels (sound-level probe). #711: check the leaf cards from below and the floor clearance at height 0.9 with 4 rails.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 278: pill and fizz cut)
 
 Woken for low supply (0 free tasks for 2 active agents; #698 herbs and #647 leaf are reserved). No submission to review, the inbox is empty. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind wait (oldest 4.8 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
