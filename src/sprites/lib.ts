@@ -5,6 +5,7 @@ import type { Values } from "../core/params";
 import { makeSheet, type Sprite } from "./define";
 import { villager as villagerSprite } from "./characters/villager";
 import { carpenter as carpenterSprite } from "./characters/carpenter";
+import { weaver as weaverSprite } from "./characters/weaver";
 import { merchant as merchantSprite } from "./characters/merchant";
 import { blacksmith as blacksmithSprite } from "./characters/blacksmith";
 import { baker as bakerSprite } from "./characters/baker";
@@ -72,6 +73,7 @@ const bogen = <S extends Sprite<any>>(s: S) => (values: Input<S> = {}, seed = 1)
 
 export const villager = bogen(villagerSprite);
 export const carpenter = bogen(carpenterSprite);
+export const weaver = bogen(weaverSprite);
 export const merchant = bogen(merchantSprite);
 export const blacksmith = bogen(blacksmithSprite);
 export const baker = bogen(bakerSprite);
