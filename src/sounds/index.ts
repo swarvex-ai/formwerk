@@ -50,6 +50,7 @@ import { flop } from "./movement/flop";
 import { creak } from "./movement/creak";
 import { stoneSlide } from "./movement/stone-slide";
 import { doorSwing } from "./movement/door-swing";
+import { drawer } from "./movement/drawer";
 import { magic } from "./effects/magic";
 import { stir } from "./effects/stir";
 import { engine } from "./effects/engine";
@@ -121,6 +122,7 @@ export const SOUNDS: AnySound[] = [
   creak,
   stoneSlide,
   doorSwing,
+  drawer,
   pickup,
   zap,
   laser,
