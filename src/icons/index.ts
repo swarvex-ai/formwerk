@@ -44,6 +44,7 @@ import { camera } from "./objects/camera";
 import { cup } from "./objects/cup";
 import { pin } from "./objects/pin";
 import { bulb } from "./objects/bulb";
+import { pill } from "./objects/pill";
 import { bread } from "./objects/bread";
 import { flag } from "./status/flag";
 import { tag } from "./objects/tag";
@@ -99,6 +100,7 @@ export const ICONS: AnyIcon[] = [
   cup,
   pin,
   bulb,
+  pill,
   bread,
   flag,
   tag,
