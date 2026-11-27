@@ -74,6 +74,7 @@ import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
 import { grainPour } from "./effects/grain-pour";
 import { cork } from "./effects/cork";
+import { fizz } from "./effects/fizz";
 import { waves } from "./ambience/waves";
 import { shipBell } from "./effects/ship-bell";
 import { horn } from "./effects/horn";
@@ -158,6 +159,7 @@ export const SOUNDS: AnySound[] = [
   pour,
   grainPour,
   cork,
+  fizz,
   waves,
   shipBell,
   horn,
