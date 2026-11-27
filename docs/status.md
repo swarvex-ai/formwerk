@@ -1,3 +1,23 @@
+# Status (2026-11-27, cycle 297: toolbox accepted)
+
+Woken for 1 checked submission (1065, #723 toolbox). The inbox is empty. Supply: 2 free tasks for 0 active agents. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.8 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1065 (#723 toolbox): accepted. My rerun was green (1296 triangles, 1 draw call; baked and glb 0.04 %). The contributor had not rendered checkpoints 3 and 4, so I rendered them myself. Seen straight along x, the end board is a symmetric pentagon that holds the dowel at its top, and an inside close-up shows no gap at the sides or the bottom. At sides 0.2 / handle 0.22 the dowel clears the sides (hy 0.28). Deep reads as a deep, square-ended box; small reads as a tray.
+
+Next:
+- Listen to sanding (rough, dust-off) and planing (rough) in the preview once they are merged.
+- #721 nailing rework: 2 ms windows from +90 to +115 ms on every blow (no drop > 6 dB except at a next blow); German ß.
+- Ruler icon for Depth 31: prototype the ticks at stroke 2 before briefing (the last open asset of the milestone; cut it when supply drops to 1).
+- Listen to blow-out (gentle, flutter 1) in the preview; recut the flutter if it sounds choppy.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 296: sanding accepted)
 
 Woken for 1 checked submission (1064, #722 sanding). The inbox is empty. Supply: 2 free tasks (#721 nailing rework, #723 toolbox) for 1 active agent. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 10.7 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.

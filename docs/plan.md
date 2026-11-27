@@ -586,7 +586,7 @@ queued herbalist inserts). A ruler icon follows once I have prototyped its ticks
 | #718 | sound: planing (effects ≤ 2.5 s; strokes 1–4, length, wood soft/hard centroid gap ≥ 800 Hz, chatter clicks on rng(seed + 1) as max step ≥ 2×; after saw) | rework (1055: hard gate, click peaks, typo; 1056: unfinished, debug logs, `s[at + i]` with at in seconds, no baseline) |
 | #719 | sprite: carpenter (characters 24×32 like blacksmith; cap, apron, pencil, animation plane; after villager) | submitted (1057) |
 | #722 | sound: sanding (effects ≤ 2.5 s; strokes 1–8, tempo, grit coarse/medium/fine centroid gap ≥ 1500 Hz, pressure, blow on rng(seed + 1); after writing) | open |
-| #723 | model: toolbox (props; open tote, peaked/square ends, dowel at max(handle, sides + 0.08), divider, 1 draw call, ≤ 2500 tris; after tent) | open |
+| #723 | model: toolbox (props; open tote, peaked/square ends, dowel at max(handle, sides + 0.08), divider, 1 draw call, ≤ 2500 tris; after tent) | accepted (cycle 297) |
 | #721 | sound: nailing (impact ≤ 4 s; blows 1–8, ring rises ≥ 15 % blow 1→3, flush last blow ≥ 10 dB less above 1.5 kHz, tap ≥ 6 dB quieter; after knock) | open |
 
 ## Next (lead, level D, not cut yet)
