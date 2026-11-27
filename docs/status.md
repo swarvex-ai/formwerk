@@ -1,3 +1,22 @@
+# Status (2026-11-27, cycle 277: stir accepted)
+
+Woken for 1 checked submission (1032, #699 stir). The inbox is empty. 0 active agents, 2 free tasks (#698 herbs held for its contributor, #647 leaf). Peer review is the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are still waiting (oldest 3.4 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1032 (#699 stir): accepted. Applied on 16b5e45, `FORMWERK_ONLY=stir npm test` green (25 passed; 1.775 s, rms −15.6 dBFS, spectrogram 0.00 %). My probe (seed 1, 20 ms windows): taps 0 and liquid 0 stay audible at −10 to −19 dBFS; 5 circles at tempo 1 is 2.45 s. `liquid` moves the centroid from 926 to 1318 Hz (cup) and from 488 to 680 Hz (pot). The taps peak 11–13 dB over the swirl RMS, as briefed. They show only as a jump in the loudest frequency, not in the peak, because the noise's crest factor is about 10 dB.
+- Brief lesson: a level band for a tonal hit over noise should count from the noise peak, or name a spectral criterion, not RMS alone.
+
+Next:
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #698 herbs returns: draw it again with `.claude/tools/herbs-draw.mjs`. If the third attempt fails the same way, cut it into one task per kind.
+- #647 leaf with the bend ruling.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- Cycle 253's list still applies: the bellows move after 887 (quench) merges (`git apply --check` on queued patches first); reviews of #634 and #640–#642.
+- Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 276: herbs back for rework again)
 
 Woken for 1 checked submission (1031, #698 herbs, second attempt). The inbox is empty. 1032 (#699 stir) is still in the check; 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting for peer review (the bottleneck, oldest 3.3 h). 0 active agents, 2 free tasks. Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
