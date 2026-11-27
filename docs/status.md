@@ -1,3 +1,25 @@
+# Status (2026-11-27, cycle 301: knitting accepted, snip sound cut)
+
+Woken for 1 checked submission (1069, #726 knitting). The inbox is empty and there are no work requests. Supply: #716 leaf is free and #727 weaver is reserved (1 active agent). I cut #728 snip; it is released once knitting merges. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.5 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1069 (#726 knitting): accepted. My rerun was green (25 passed; 1.763 s, peak −1 dBFS, end −153 dB, spectrogram 0.00 %). I probed makeSound per 20 ms at seeds 1, 7 and 42 for the defaults, bamboo, yarn 0 and 1, stitches 12 with pace 2, granny and fast. With yarn 0 the gaps fall to −86 dB or lower, against clicks at −21 to −29 dB. At 12/2 the buffer is exactly 2.5 s and the last sample comes at least 70 ms before the end. The click windows are identical across yarn values (the yarn noise uses rng(seed + 1)). The baseline shows six stitches, each with an insert and a wrap click, 5–8 kHz ring lines and a yarn plume.
+- #728 snip sound (Depth 32, depends on #726): a shear of band-passed noise (thread 5–7 kHz, cloth 1–3 kHz, paper 3–5 kHz, the last two grainy) ends in a close click with a ring. The click step must be 4–10 dB above the loudest shear step, measured on makeSound. The buffer follows the parts. It registers after knitting. Estimate for Depth 32 raised to 7.
+
+Next:
+- #728 snip: probe the click-over-shear band per cut, the material centroids, and ring 0 vs 1 at the end of the buffer.
+- Listen to knitting (granny, fast) and loom in the preview once they are merged.
+- #727 weaver: check on the enlarged sheet that the frame sits in front of the apron and the hands hold it, and check the shuttle positions.
+- Depth 32 still open: the yarn icon (prototype at stroke 2 first; mind acute joints) and the yarn basket model (render a prototype first).
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 300: loom accepted, weaver sprite cut)
 
 Woken for 1 checked submission (1068, #725 loom). The inbox is empty. Supply had dropped to 1 free task (#716 leaf; #726 knitting is reserved by 1 active agent), so I cut the weaver sprite. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 12.4 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

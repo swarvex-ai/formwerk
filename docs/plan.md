@@ -590,7 +590,7 @@ queued herbalist inserts). A ruler icon follows once I have prototyped its ticks
 | #721 | sound: nailing (impact ≤ 4 s; blows 1–8, ring rises ≥ 15 % blow 1→3, flush last blow ≥ 10 dB less above 1.5 kHz, tap ≥ 6 dB quieter; after knock) | accepted (1066) |
 | #724 | icon: ruler (objects; tilt, ticks 3–5 dropping to 4 where 5 do not fit, width, pattern alternate/even; full sweep 0 of 9072; after hammer) | accepted (1067) |
 
-## Milestone "Depth 32: weaving" (estimate 6 tasks)
+## Milestone "Depth 32: weaving" (estimate 7 tasks)
 
 Cut in cycle 299 when supply dropped to 1 (0 active agents). Sounds first (no geometry prototype needed); the yarn
 icon, weaver sprite and yarn basket model follow once I have prototyped them. Anchors: loom after scrub (9 lines from
@@ -599,8 +599,9 @@ sift, where the queued grind inserts), knitting after sanding.
 | Task | Asset | State |
 |---|---|---|
 | #725 | sound: loom (ambience loop ≤ 12 s; pick = treadle 0, shuttle 0.25, beater 0.6 × tempo; beat/shuttle/treadle; whole picks per loop; after scrub) | accepted (1068) |
-| #726 | sound: knitting (effects ≤ 2.5 s; stitches 1–12, pace 2–6 Hz, needles metal/bamboo centroid gap ≥ 1500 Hz, yarn pull; after sanding) | open |
+| #726 | sound: knitting (effects ≤ 2.5 s; stitches 1–12, pace 2–6 Hz, needles metal/bamboo centroid gap ≥ 1500 Hz, yarn pull; after sanding) | accepted (1069) |
 | #727 | sprite: weaver (characters 24×32 like laundress; cover, apron, loom, yarn; animation weave: frame loom, shuttle left/middle/right/middle; after carpenter, 5 lines from the queued herbalist insert) | open |
+| #728 | sound: snip (effects ≤ 2 s; cuts 1–4, length 0.03–0.2 s, material thread/cloth/paper centroids ≥ 1000 Hz apart, click 4–10 dB above the shear, ring; buffer follows the parts; after knitting, depends on #726) | open |
 
 ## Next (lead, level D, not cut yet)
 
