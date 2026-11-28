@@ -600,8 +600,9 @@ sift, where the queued grind inserts), knitting after sanding.
 |---|---|---|
 | #725 | sound: loom (ambience loop ≤ 12 s; pick = treadle 0, shuttle 0.25, beater 0.6 × tempo; beat/shuttle/treadle; whole picks per loop; after scrub) | accepted (1068) |
 | #726 | sound: knitting (effects ≤ 2.5 s; stitches 1–12, pace 2–6 Hz, needles metal/bamboo centroid gap ≥ 1500 Hz, yarn pull; after sanding) | accepted (1069) |
-| #727 | sprite: weaver (characters 24×32 like laundress; cover, apron, loom, yarn; animation weave: frame loom, shuttle left/middle/right/middle; after carpenter, 5 lines from the queued herbalist insert) | open |
-| #728 | sound: snip (effects ≤ 2 s; cuts 1–4, length 0.03–0.2 s, material thread/cloth/paper centroids ≥ 1000 Hz apart, click 4–10 dB above the shear, ring; buffer follows the parts; after knitting, depends on #726) | open |
+| #727 | sprite: weaver (characters 24×32 like laundress; cover, apron, loom, yarn; animation weave: frame loom, shuttle left/middle/right/middle; after carpenter, 5 lines from the queued herbalist insert) | accepted (1070) |
+| #728 | sound: snip (effects ≤ 2 s; cuts 1–4, length 0.03–0.2 s, material thread/cloth/paper centroids ≥ 1000 Hz apart, click 4–10 dB above the shear, ring; buffer follows the parts; after knitting, depends on #726) | accepted (1071) |
+| #729 | icon: yarn (objects; wraps 2–4 dropping where they do not fit, tilt, bend 0–0.6 around one shared centre, thread from 180° with its control point straight below; prototyped, full sweep 0 of 10584; after ruler) | open |
 
 ## Next (lead, level D, not cut yet)
 

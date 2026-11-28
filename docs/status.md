@@ -1,3 +1,23 @@
+# Status (2026-11-28, cycle 305: yarn icon cut)
+
+Woken because supply was 0 free tasks for 1 active agent (#716 leaf is now reserved). Nothing is waiting for my decision, the inbox is empty, and there are no work requests. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 24.9 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- #729 yarn icon (Depth 32, after ruler). I prototyped it in a scratch worktree (copy in .claude/proto/yarn.ts, untracked). It has a ball, 2–4 concentric wrap arcs ending on an inner circle rin = R − hw − 1 − e, and a thread that drops from 180° with its control point straight below, then runs right along the floor. Full sweep: 0 of 10584. Two dead ends are now traps in the brief: a thread start at 200° (441 failures at stroke 2.25) and a first leg tilted 20° off the radius (36 failures, sharp caps). A straight thread at 135° read as the letter Q, so I left it out.
+
+Next:
+- Depth 32 still open: the yarn basket model (render a prototype first). Cut it when supply drops below the active agents.
+- #729 yarn: check that the wraps follow the shared-centre geometry and that the sweep line reads 0 of 10584. Without the thread, 4 wraps also fit at stroke 2 (the ball is larger), so do not send it back for that.
+- Listen to snip (thread, trim), knitting (granny, fast) and loom in the preview once they are merged.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass. The flask patch (1013) was cut before pill registered between bulb and bread, so its context may no longer apply plainly. If the train sends it back, rebase it myself.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-27, cycle 304: routine, nothing to review)
 
 Routine cycle. Nothing is waiting for my decision, the inbox is empty, and there are no work requests or preview feedback. Supply: #716 leaf is free, with 0 active agents, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 19.2 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
