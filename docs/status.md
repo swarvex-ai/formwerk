@@ -1,3 +1,23 @@
+# Status (2026-11-28, cycle 312: hourglass recut, clockmaker cut)
+
+Woken for 1 checked submission (1093, #758 hourglass) and a supply of 0 free tasks for 2 active agents. The inbox is empty and there are no work requests. `FORMWERK_ONLY=hourglass npm test` is green here too, but the enlarged sheet showed the flaw of my brief: "the inside empty" leaves transparent pixels in the bulbs, and the sprite contract outlines every transparent pixel, so the bulbs read as dark holes. In a scratch prototype I filled each bulb row with the glass base tone first, and then the sprite reads as pale glass with sand, with the neck as a dark pinch. Supply is now 3 free tasks (#760, #761, #762) for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 38.9 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1093: sent back for rework (my fault, and the reason says so). The contributor's model also could not read images (AGENTS.md rule 2).
+- #758 closed and recut as #761. The only change is the glass paragraph: fill with GLAS.base, light outline, the highlight only off the sand, and no transparent pixel inside the bulbs.
+- #762 clockmaker sprite (Depth 33; characters 24×32 like carpenter; loupe, apron, waistcoat; tinker: watch at chest, tweezer tip steps over the face). Anchor after villager, 5 lines from the queued herbalist insert. Its traps already say that enclosed areas are filled.
+- Lesson for sprite briefs: never write "empty" for an enclosed area. The contract outline turns it dark.
+
+Next:
+- #761: look at the enlarged sheet. The bulbs must have no dark pixels inside, and at fill 0.1 and 0.9 there must be sand in both bulbs.
+- #762: look at the tinker rows enlarged (a free row between the watch and the tweezers, left mirrors right, the head nods from behind).
+- #760: accept only after a local `FORMWERK_ONLY=yarn-basket npm test` with no FAIL line, and the material must be plain.
+- Depth 33 still open: a clock model (wall or mantel clock with a pendulum moving part; prototype first) and maybe a pendulum icon.
+- Everything in the cycle 310 list still applies (#759 ticking probe, the collider-height test gap, the listening list, the registry re-checks, the #716 leaf sweep, washboard, the cycle 253 list, pipeline risk).
+
+
+
+Earlier
 # Status (2026-11-28, cycle 311: yarn basket recut)
 
 Woken for 1 checked submission (1091, #750 yarn basket rework). The pipeline marked it "pass", but locally `FORMWERK_ONLY=yarn-basket npm test` failed the bake (4.54 %) and the glb round trip (5.29 %). That is the third false pass; I told the visionary (message 137, on top of message 107). The cause was my own brief: I prescribed `wood { grain: "level" }` on 4 mm tubes, and my prototype never ran the bake check. The stake fix is correct. Supply is 2 free tasks for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 38.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

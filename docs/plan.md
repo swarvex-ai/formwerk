@@ -610,7 +610,9 @@ sift, where the queued grind inserts), knitting after sanding.
 
 | Task | What | State |
 |---|---|---|
-| #758 | sprite: hourglass (items 16×16; height 8–12 rows of glass, width slim/round, stand posts/plates, fill 0.1–0.9 so sand always runs; idle: a gap moves down the stream, (y − f) mod 4; after card) | open |
+| #758 | sprite: hourglass (items 16×16; height 8–12 rows of glass, width slim/round, stand posts/plates, fill 0.1–0.9 so sand always runs; idle: a gap moves down the stream, (y − f) mod 4; after card) | closed: recut as #761 (submission 1093: an empty glass inside gets the dark contract outline) |
+| #761 | sprite: hourglass, recut of #758 with the bulbs filled with the glass base tone, highlight only off the sand | open |
+| #762 | sprite: clockmaker (characters 24×32 like carpenter; loupe, apron, waistcoat; animation tinker: pocket watch at chest, tweezer tip steps up-left/up/up-right/up; after villager, 5 lines from the queued herbalist insert) | open |
 | #759 | sound: ticking (ambience loop ≤ 12 s; whole tick pairs, two clicks per tick, ring = 0.02 + 0.02·size, room tone ≥ 0.1; prototyped in .claude/proto/ticking.ts, quietest case −32.0 dB RMS; after loom; replaces #757, whose ring floor gave −34.7 dB) | open |
 
 ## Next (lead, level D, not cut yet)
