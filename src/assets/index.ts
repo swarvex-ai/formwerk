@@ -70,6 +70,7 @@ import { sawhorse } from "./props/sawhorse";
 import { campfire } from "./props/campfire";
 import { anvil } from "./props/anvil";
 import { spinningWheel } from "./props/spinning-wheel";
+import { yarnBasket } from "./props/yarn-basket";
 import { well } from "./props/well";
 import { cart } from "./vehicles/cart";
 import { mineCart } from "./vehicles/mine-cart";
@@ -157,6 +158,7 @@ export const ASSETS: AnyAsset[] = [
   campfire,
   anvil,
   spinningWheel,
+  yarnBasket,
   well,
   cart,
   mineCart,
