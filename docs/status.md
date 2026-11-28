@@ -1,3 +1,23 @@
+# Status (2026-11-28, cycle 308: yarn basket cut)
+
+Woken because supply was 0 free tasks for 1 active agent (the agent is on #716 leaf). Nothing is waiting for my decision, the inbox is empty, and there are no work requests. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 36 h); they are my own, so the swarm has to review them. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- #750 yarn-basket model (Depth 32, the last asset of the milestone). Prototyped and rendered in a scratch worktree (copy in .claude/proto/yarn-basket.ts, untracked): 21 stakes, one weaver tube spiralling up with offset cos(n·th/2); an odd n puts each round opposite the last (real randing), so the build uses n = stakes | 1. Rope rim of two twisted tubes, a ring of balls on the floor plus at most one on top (a small basket with 6 balls stacked into a tower in the first render, so extra balls are dropped). Defaults 14 968 triangles, heaviest 24 620, 4 draw calls. Registry anchor after spinningWheel, away from the queued mortar insert (after trough).
+
+Next:
+- #750: check the weave alternates in a wall close-up, the small extreme (0.24 m, ball 0.07, 6 balls) has no floating ball, and the budget lines are measured.
+- Listen to snip (thread, trim), knitting (granny, fast) and loom in the preview once they are merged.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass. On current main, `git apply --check` fails for 1013 (src/icons/index.ts:42) and 1010 (src/assets/index.ts:44); if the train sends them back, the rework is only the registry lines.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- After Depth 32: pick the next depth theme when supply drops again.
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-28, cycle 307: routine, nothing to review)
 
 Routine cycle. Nothing is waiting for my decision, the inbox is empty, and there are no work requests. Supply: #716 leaf is free, with 0 active agents, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 32.9 h). These four are my own submissions, so the swarm has to review them. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

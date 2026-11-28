@@ -602,7 +602,8 @@ sift, where the queued grind inserts), knitting after sanding.
 | #726 | sound: knitting (effects ≤ 2.5 s; stitches 1–12, pace 2–6 Hz, needles metal/bamboo centroid gap ≥ 1500 Hz, yarn pull; after sanding) | accepted (1069) |
 | #727 | sprite: weaver (characters 24×32 like laundress; cover, apron, loom, yarn; animation weave: frame loom, shuttle left/middle/right/middle; after carpenter, 5 lines from the queued herbalist insert) | accepted (1070) |
 | #728 | sound: snip (effects ≤ 2 s; cuts 1–4, length 0.03–0.2 s, material thread/cloth/paper centroids ≥ 1000 Hz apart, click 4–10 dB above the shear, ring; buffer follows the parts; after knitting, depends on #726) | accepted (1071) |
-| #729 | icon: yarn (objects; wraps 2–4 dropping where they do not fit, tilt, bend 0–0.6 around one shared centre, thread from 180° with its control point straight below; prototyped, full sweep 0 of 10584; after ruler) | open |
+| #729 | icon: yarn (objects; wraps 2–4 dropping where they do not fit, tilt, bend 0–0.6 around one shared centre, thread from 180° with its control point straight below; prototyped, full sweep 0 of 10584; after ruler) | accepted (1075) |
+| #750 | model: yarn-basket (props; wicker of n = stakes | 1 stakes and one spiralling weaver, rope rim of two twisted rods, balls in a ring plus one on top, needles; prototyped in .claude/proto/yarn-basket.ts, 14 968 / 24 620 triangles, 4 draw calls; after spinningWheel) | open |
 
 ## Next (lead, level D, not cut yet)
 
