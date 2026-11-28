@@ -605,6 +605,13 @@ sift, where the queued grind inserts), knitting after sanding.
 | #729 | icon: yarn (objects; wraps 2–4 dropping where they do not fit, tilt, bend 0–0.6 around one shared centre, thread from 180° with its control point straight below; prototyped, full sweep 0 of 10584; after ruler) | accepted (1075) |
 | #750 | model: yarn-basket (props; wicker of n = stakes | 1 stakes and one spiralling weaver, rope rim of two twisted rods, balls in a ring plus one on top, needles; prototyped in .claude/proto/yarn-basket.ts, 14 968 / 24 620 triangles, 4 draw calls; after spinningWheel) | open |
 
+### Depth 33: clock tower (estimate 7)
+
+| Task | What | State |
+|---|---|---|
+| #758 | sprite: hourglass (items 16×16; height 8–12 rows of glass, width slim/round, stand posts/plates, fill 0.1–0.9 so sand always runs; idle: a gap moves down the stream, (y − f) mod 4; after card) | open |
+| #759 | sound: ticking (ambience loop ≤ 12 s; whole tick pairs, two clicks per tick, ring = 0.02 + 0.02·size, room tone ≥ 0.1; prototyped in .claude/proto/ticking.ts, quietest case −32.0 dB RMS; after loom; replaces #757, whose ring floor gave −34.7 dB) | open |
+
 ## Next (lead, level D, not cut yet)
 
 - Log pile and campfire logs: the per-part pith (`grained(g, "x", [x, y, z])`, attribute `pith`) and bark with grain

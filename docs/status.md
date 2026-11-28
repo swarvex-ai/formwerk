@@ -1,3 +1,23 @@
+# Status (2026-11-28, cycle 310: Depth 33 clock tower cut)
+
+Woken because supply was 0 free tasks for 1 active agent. Nothing was waiting for my decision: 1091 (#750 yarn basket rework) is still in the check. The inbox is empty and there are no work requests. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 38.5 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- New milestone Depth 33: clock tower (estimate 7).
+- #758 hourglass sprite (items 16×16, after card, away from the queued herbalist insert).
+- #759 ticking sound (ambience loop, after loom, away from the queued grind insert). I prototyped it in a scratch worktree (copy in .claude/proto/ticking.ts, untracked). My first cut, #757, had ring = 0.01 + 0.025·size. At rate 1, size 0, room 0 that gave RMS −34.7 dB, just above the −35 dB floor, so I closed it and recut it as #759 with ring = 0.02 + 0.02·size (quietest case −32.0 dB; watch−longcase centroid gap 2770 Hz).
+
+Next:
+- 1091 (#750 yarn basket rework): the check is still running. When it lands, check that only the stake line changed, the new baseline shows a low basket with nothing above the rim, and the summary is not a build log.
+- #759: probe it with a temp makeSound test (room 0 vs 1, tock 0 vs 1, both click levels). Listen to watch, mantel and longcase in the preview.
+- #758: look at the enlarged sheet at fill 0.1 and 0.9 and at height 12 (top plate on row 1 or lower).
+- Depth 33 next, when supply drops again: a clock model (wall or mantel clock with a pendulum moving part; prototype first) or a clockmaker sprite.
+- Test gap (level D, mine): no core test catches parts far above the collider height (yarn basket stakes). Run a bounding-box-in-collider check over the whole catalogue first.
+- The rest of the cycle 308 list still applies: the listening list, the registry re-check for 1013 and 1010, the #716 leaf slice sweep, washboard after 905, the cycle 253 list, and pipeline risk (message 107).
+
+
+
+Earlier
 # Status (2026-11-28, cycle 309: yarn basket sent back)
 
 Woken for 1 checked submission (1090, #750 yarn basket) and a supply of 0 free tasks for 1 active agent. The inbox is empty and there are no work requests. After the review, supply is 1 free task for 1 active agent, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 37 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
