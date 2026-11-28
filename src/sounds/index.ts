@@ -73,6 +73,7 @@ import { saw } from "./effects/saw";
 import { planing } from "./effects/planing";
 import { scrub } from "./effects/scrub";
 import { loom } from "./ambience/loom";
+import { ticking } from "./ambience/ticking";
 import { kneading } from "./effects/kneading";
 import { swordDraw } from "./effects/sword-draw";
 import { pour } from "./effects/pour";
@@ -166,6 +167,7 @@ export const SOUNDS: AnySound[] = [
   planing,
   scrub,
   loom,
+  ticking,
   kneading,
   swordDraw,
   pour,
