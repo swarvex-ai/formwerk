@@ -1,3 +1,19 @@
+# Status (2026-11-28, cycle 315: ticking accepted)
+
+Woken for 1 checked submission (1099, #759 ticking resubmission). The German texts are fixed: Standuhr, dumpf, Kaminuhr. `grep -E "Langzeit|Mantel|dünkelig"` finds only the English "Mantel clock". Locally `FORMWERK_ONLY=ticking npm test` is green: 25 passed, 6 s loop, peak −1 dBFS, rms −27.5 dBFS, spectrogram 0.00 % changed. The spectrogram shows 12 evenly spaced clicks with case ring. The inbox is empty. Supply is 2 free tasks (#761, #762) plus #760 held for its contributor, for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 39.9 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1099: accepted (#759, Depth 33 now has 1 task done).
+
+Next:
+- Listen to ticking in the preview or dist/sounds once merged (watch, mantel, longcase). I could not listen in the sandbox.
+- #760 resubmission: as in cycle 314.
+- Everything in the cycle 312 list still applies (#761 bulbs, #762 tinker rows, the Depth 33 clock model, the cycle 310 list).
+- German-text pattern: two reworks so far; at a third, add the AGENTS.md checkpoint.
+
+
+
+Earlier
 # Status (2026-11-28, cycle 314: yarn basket sent back for German texts)
 
 Woken for 1 checked submission (1098, #760 yarn basket). Locally `FORMWERK_ONLY=yarn-basket npm test` is green with no FAIL line: 14 968 triangles at the defaults, 24 620 in the heaviest case, 4 draw calls, 0.00 % changed. All materials are plain and the stake line is fixed. The render shows a low woven basket with balls of yarn and needles, and nothing sticks out above the rim. Only the German texts are wrong: "rodelt" (goes sledging), "ein Weber … rund um den anderen", "Wollekorb", and "Stachel" in a comment. The reason gives the full replacement description. The inbox is empty. Supply is 3 free tasks (#760 held for its contributor, #761, #762) for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 39.5 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
