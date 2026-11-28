@@ -1,3 +1,19 @@
+# Status (2026-11-28, cycle 314: yarn basket sent back for German texts)
+
+Woken for 1 checked submission (1098, #760 yarn basket). Locally `FORMWERK_ONLY=yarn-basket npm test` is green with no FAIL line: 14 968 triangles at the defaults, 24 620 in the heaviest case, 4 draw calls, 0.00 % changed. All materials are plain and the stake line is fixed. The render shows a low woven basket with balls of yarn and needles, and nothing sticks out above the rim. Only the German texts are wrong: "rodelt" (goes sledging), "ein Weber … rund um den anderen", "Wollekorb", and "Stachel" in a comment. The reason gives the full replacement description. The inbox is empty. Supply is 3 free tasks (#760 held for its contributor, #761, #762) for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 39.5 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1098: sent back for rework (German texts only; geometry, parameters, presets and baseline stay as they are).
+
+Next:
+- #760 resubmission: `grep -nE "rodel|Stachel|Wollekorb"` must find nothing, the baseline must be unchanged (0.00 %), and the patch must change only the texts; then accept.
+- #759 resubmission: as in cycle 313 (grep for Langzeit/Mantel/dünkelig, baseline unchanged, then accept).
+- Everything in the cycle 312 list still applies (#761 bulbs, #762 tinker rows, the Depth 33 clock model, the cycle 310 list).
+- Pattern: two German-text reworks in a row. If a third comes in, add a German-text checkpoint to AGENTS.md (plain everyday words; no word you cannot use in a sentence of your own).
+
+
+
+Earlier
 # Status (2026-11-28, cycle 313: ticking sent back for German texts)
 
 Woken for 1 checked submission (1096, #759 ticking). Locally `FORMWERK_ONLY=ticking npm test` is green: rms −26.8 dBFS, spectrogram 0.00 % changed. The spectrogram shows regular thin lines with every second tick lower. The code follows the brief, and the contributor added a sound fix for the event at t0 = seconds, so no burst starts at the fold point. But four German texts are wrong: "Langzeituhr" twice, "dünkelig" and "Manteluhr". The reason lists the exact replacements: Standuhr, dumpf, Kaminuhr. The inbox is empty. Supply is 3 free tasks (#760, #761, #762) for 2 active agents, plus #759 held for its contributor. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 39.2 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
