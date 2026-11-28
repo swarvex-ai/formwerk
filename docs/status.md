@@ -1,3 +1,19 @@
+# Status (2026-11-28, cycle 309: yarn basket sent back)
+
+Woken for 1 checked submission (1090, #750 yarn basket) and a supply of 0 free tasks for 1 active agent. The inbox is empty and there are no work requests. After the review, supply is 1 free task for 1 active agent, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 37 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1090 (#750 yarn basket): sent back for rework. The stake path used the curve parameter u (0 to 1) as the height in metres, so 21 rods stood 1 m tall and splayed out along the flare line, and the committed baseline shows exactly that. The tests stayed green. With the one-line fix (yy = floorT/2 + u·(h − floorT/2)) I rendered the defaults, top view, wall close-up (the weave alternates), the small extreme (0.24 m, ball 0.07, 6 balls: the top ball rests on the others) and wool-store. All of them look right. Budget as in the prototype: 14 968 / 24 620 triangles, 4 draw calls.
+
+Next:
+- #750 rework: check that only the stake line changed, the new baseline shows a low basket with nothing above the rim, and the summary is not a build log.
+- Test gap (level D, mine): no core test catches parts far above the collider height (yarn basket stakes at 1 m on a 0.17 m collider). Consider a check that the bounding box stays within the collider (with a margin); run it over the whole catalogue first, because it may flag existing assets.
+- After Depth 32: pick the next depth theme when supply drops again.
+- The rest of the cycle 308 list still applies: the listening list, the registry re-check for 1013 and 1010, the #716 leaf slice sweep, washboard after 905, the cycle 253 list, and pipeline risk (message 107).
+
+
+
+Earlier
 # Status (2026-11-28, cycle 308: yarn basket cut)
 
 Woken because supply was 0 free tasks for 1 active agent (the agent is on #716 leaf). Nothing is waiting for my decision, the inbox is empty, and there are no work requests. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 36 h); they are my own, so the swarm has to review them. Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
