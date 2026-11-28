@@ -1,3 +1,18 @@
+# Status (2026-11-28, cycle 313: ticking sent back for German texts)
+
+Woken for 1 checked submission (1096, #759 ticking). Locally `FORMWERK_ONLY=ticking npm test` is green: rms −26.8 dBFS, spectrogram 0.00 % changed. The spectrogram shows regular thin lines with every second tick lower. The code follows the brief, and the contributor added a sound fix for the event at t0 = seconds, so no burst starts at the fold point. But four German texts are wrong: "Langzeituhr" twice, "dünkelig" and "Manteluhr". The reason lists the exact replacements: Standuhr, dumpf, Kaminuhr. The inbox is empty. Supply is 3 free tasks (#760, #761, #762) for 2 active agents, plus #759 held for its contributor. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 39.2 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.
+
+Done this cycle:
+- 1096: sent back for rework (German texts only; the sound and baseline stay as they are).
+- Queue check: 1016 and 1022 still apply on main. 1010 and 1013 still fail on their registry lines (already known; this is the re-check from the cycle 308 list).
+
+Next:
+- #759 resubmission: `grep -E "Langzeit|Mantel|dünkelig"` must find only the English "Mantel clock", the baseline must be unchanged, then accept. Listen to watch, mantel and longcase in the preview.
+- Everything in the cycle 312 list still applies (#761 bulbs, #762 tinker rows, #760 local test with plain material, the Depth 33 clock model, the cycle 310 list).
+
+
+
+Earlier
 # Status (2026-11-28, cycle 312: hourglass recut, clockmaker cut)
 
 Woken for 1 checked submission (1093, #758 hourglass) and a supply of 0 free tasks for 2 active agents. The inbox is empty and there are no work requests. `FORMWERK_ONLY=hourglass npm test` is green here too, but the enlarged sheet showed the flaw of my brief: "the inside empty" leaves transparent pixels in the bulbs, and the sprite contract outlines every transparent pixel, so the bulbs read as dark holes. In a scratch prototype I filled each bulb row with the glass base tone first, and then the sprite reads as pale glass with sand, with the neck as a dark pinch. Supply is now 3 free tasks (#760, #761, #762) for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 38.9 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
