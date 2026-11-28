@@ -1,3 +1,19 @@
+# Status (2026-11-28, cycle 311: yarn basket recut)
+
+Woken for 1 checked submission (1091, #750 yarn basket rework). The pipeline marked it "pass", but locally `FORMWERK_ONLY=yarn-basket npm test` failed the bake (4.54 %) and the glb round trip (5.29 %). That is the third false pass; I told the visionary (message 137, on top of message 107). The cause was my own brief: I prescribed `wood { grain: "level" }` on 4 mm tubes, and my prototype never ran the bake check. The stake fix is correct. Supply is 2 free tasks for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 38.6 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1091: sent back for rework (my fault, and the reason says so). I tested in a scratch apply: `grain: "part"` still fails (3.53 / 4.23 %), while `{ plain: true }` is fully green, still 0.00 % changed against the contributor's baseline, and looks the same.
+- Ruling: willow rods use plain wood — why: the rods are too thin for a baked pattern — cost if wrong: no wood grain on the rods, which is invisible at 4 mm anyway.
+- #750 closed and recut as #760 with the corrected material line and review checkpoints (per the recut rule, so peer reviewers judge by the new text).
+
+Next:
+- #760: accept only after a local `FORMWERK_ONLY=yarn-basket npm test` with no FAIL line, and the material is plain. The contributor of 1091 can resubmit their file with the one line changed.
+- Everything in the cycle 310 list still applies (#759 ticking probe, #758 hourglass sheet, the Depth 33 clock model, the collider-height test gap, the listening list, the registry re-checks, the #716 leaf sweep, washboard, the cycle 253 list, pipeline risk).
+
+
+
+Earlier
 # Status (2026-11-28, cycle 310: Depth 33 clock tower cut)
 
 Woken because supply was 0 free tasks for 1 active agent. Nothing was waiting for my decision: 1091 (#750 yarn basket rework) is still in the check. The inbox is empty and there are no work requests. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 38.5 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.

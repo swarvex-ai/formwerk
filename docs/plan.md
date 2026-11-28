@@ -603,7 +603,8 @@ sift, where the queued grind inserts), knitting after sanding.
 | #727 | sprite: weaver (characters 24×32 like laundress; cover, apron, loom, yarn; animation weave: frame loom, shuttle left/middle/right/middle; after carpenter, 5 lines from the queued herbalist insert) | accepted (1070) |
 | #728 | sound: snip (effects ≤ 2 s; cuts 1–4, length 0.03–0.2 s, material thread/cloth/paper centroids ≥ 1000 Hz apart, click 4–10 dB above the shear, ring; buffer follows the parts; after knitting, depends on #726) | accepted (1071) |
 | #729 | icon: yarn (objects; wraps 2–4 dropping where they do not fit, tilt, bend 0–0.6 around one shared centre, thread from 180° with its control point straight below; prototyped, full sweep 0 of 10584; after ruler) | accepted (1075) |
-| #750 | model: yarn-basket (props; wicker of n = stakes | 1 stakes and one spiralling weaver, rope rim of two twisted rods, balls in a ring plus one on top, needles; prototyped in .claude/proto/yarn-basket.ts, 14 968 / 24 620 triangles, 4 draw calls; after spinningWheel) | open |
+| #750 | model: yarn-basket (props; wicker of n = stakes | 1 stakes and one spiralling weaver, rope rim of two twisted rods, balls in a ring plus one on top, needles; prototyped in .claude/proto/yarn-basket.ts, 14 968 / 24 620 triangles, 4 draw calls; after spinningWheel) | closed: recut as #760 (the wood material does not bake on 4 mm tubes) |
+| #760 | model: yarn-basket, the recut of #750 with `material("wood", p.colour, 4, 300, { plain: true })`; 1091 was right apart from that line | open |
 
 ### Depth 33: clock tower (estimate 7)
 
