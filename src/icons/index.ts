@@ -50,6 +50,7 @@ import { flag } from "./status/flag";
 import { tag } from "./objects/tag";
 import { hammer } from "./objects/hammer";
 import { ruler } from "./objects/ruler";
+import { yarn } from "./objects/yarn";
 import { anchorIcon } from "./objects/anchor-icon";
 import { upload } from "./actions/upload";
 import { share } from "./actions/share";
@@ -107,6 +108,7 @@ export const ICONS: AnyIcon[] = [
   tag,
   hammer,
   ruler,
+  yarn,
   anchorIcon,
   upload,
   share,
