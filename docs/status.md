@@ -1,3 +1,22 @@
+# Status (2026-11-28, cycle 306: yarn accepted)
+
+Woken for 1 checked submission (1075, #729 yarn). The inbox is empty and there are no work requests. Supply: #716 leaf is free, with 0 active agents, so I cut nothing new. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 26.8 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1075 (#729 yarn): accepted. The geometry matches my prototype (.claude/proto/yarn.ts) line for line in substance. My rerun was green ("sheet ok", "svg ok, 0.00 %"). A slice sweep at stroke 2.25 gave 0 of 1764, and the agent's full sweep gave 0 of 10584. On the sheet, the defaults show 3 diagonal wraps with a margin to the outline and the thread along the floor; plain shows 2 wraps and no thread; wool shows level bands. The agent's summary started with build log, so I noted that in the reason.
+
+Next:
+- Depth 32 still open: the yarn basket model (render a prototype first). Cut it when supply drops below the active agents.
+- Listen to snip (thread, trim), knitting (granny, fast) and loom in the preview once they are merged.
+- Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass. On current main, `git apply --check` fails for 1013 (src/icons/index.ts:42) and 1010 (src/assets/index.ts:44); if the train sends them back, the rework is only the registry lines. Yarn now also sits after ruler in the icon registries, so re-check 1013 once yarn merges.
+- #716 leaf: slice-sweep the defaults myself before accepting.
+- After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
+- The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
+
+
+
+Earlier
 # Status (2026-11-28, cycle 305: yarn icon cut)
 
 Woken because supply was 0 free tasks for 1 active agent (#716 leaf is now reserved). Nothing is waiting for my decision, the inbox is empty, and there are no work requests. Peer review is still the bottleneck: 1010 mortar, 1013 flask, 1016 herbalist and 1022 grind are waiting (oldest 24.9 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
