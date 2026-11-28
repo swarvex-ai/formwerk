@@ -604,7 +604,7 @@ sift, where the queued grind inserts), knitting after sanding.
 | #728 | sound: snip (effects ≤ 2 s; cuts 1–4, length 0.03–0.2 s, material thread/cloth/paper centroids ≥ 1000 Hz apart, click 4–10 dB above the shear, ring; buffer follows the parts; after knitting, depends on #726) | accepted (1071) |
 | #729 | icon: yarn (objects; wraps 2–4 dropping where they do not fit, tilt, bend 0–0.6 around one shared centre, thread from 180° with its control point straight below; prototyped, full sweep 0 of 10584; after ruler) | accepted (1075) |
 | #750 | model: yarn-basket (props; wicker of n = stakes | 1 stakes and one spiralling weaver, rope rim of two twisted rods, balls in a ring plus one on top, needles; prototyped in .claude/proto/yarn-basket.ts, 14 968 / 24 620 triangles, 4 draw calls; after spinningWheel) | closed: recut as #760 (the wood material does not bake on 4 mm tubes) |
-| #760 | model: yarn-basket, the recut of #750 with `material("wood", p.colour, 4, 300, { plain: true })`; 1091 was right apart from that line | open |
+| #760 | model: yarn-basket, the recut of #750 with `material("wood", p.colour, 4, 300, { plain: true })`; 1091 was right apart from that line | accepted (1100) |
 
 ### Depth 33: clock tower (estimate 7)
 
@@ -613,7 +613,9 @@ sift, where the queued grind inserts), knitting after sanding.
 | #758 | sprite: hourglass (items 16×16; height 8–12 rows of glass, width slim/round, stand posts/plates, fill 0.1–0.9 so sand always runs; idle: a gap moves down the stream, (y − f) mod 4; after card) | closed: recut as #761 (submission 1093: an empty glass inside gets the dark contract outline) |
 | #761 | sprite: hourglass, recut of #758 with the bulbs filled with the glass base tone, highlight only off the sand | open |
 | #762 | sprite: clockmaker (characters 24×32 like carpenter; loupe, apron, waistcoat; animation tinker: pocket watch at chest, tweezer tip steps up-left/up/up-right/up; after villager, 5 lines from the queued herbalist insert) | open |
-| #759 | sound: ticking (ambience loop ≤ 12 s; whole tick pairs, two clicks per tick, ring = 0.02 + 0.02·size, room tone ≥ 0.1; prototyped in .claude/proto/ticking.ts, quietest case −32.0 dB RMS; after loom; replaces #757, whose ring floor gave −34.7 dB) | open |
+| #759 | sound: ticking (ambience loop ≤ 12 s; whole tick pairs, two clicks per tick, ring = 0.02 + 0.02·size, room tone ≥ 0.1; prototyped in .claude/proto/ticking.ts, quietest case −32.0 dB RMS; after loom; replaces #757, whose ring floor gave −34.7 dB) | accepted (1099) |
+| #763 | sound: clock-strike (impact ≤ 4 s; whirr 0.25 s band 900 Hz with 45 Hz flutter, coiled-gong partials 0.16/1/2.8/5.49 in beating pairs, hammer click, strokes 1.1 s apart; prototyped in .claude/proto/clock-strike.ts, RMS −17.1 to −27.3 dB; after clang) | open |
+| #764 | sound: cuckoo (effects ≤ 2.5 s; two pipe notes falling `interval` semitones, octave partial, breath band at f, bellows thump via LowPass.run(x, 160); prototyped in .claude/proto/cuckoo.ts, RMS about −9 dB, 2.15 s at the longest; after cork) | open |
 
 ## Next (lead, level D, not cut yet)
 
