@@ -1,3 +1,20 @@
+# Status (2026-11-28, cycle 317: hourglass accepted)
+
+Woken for 1 checked submission (1101, #761 hourglass sprite). Locally `FORMWERK_ONLY=hourglass npm test` is green: 26 passed, "hourglass: sheet ok · same pixels as the reference". The enlarged sheet shows pale bulbs with no dark pixels inside, a 2-pixel neck, plates, posts and an empty outer ring. The gap moves down the stream one row per frame. I also rendered fill 0.1 and 0.9, slim, plates, height 8/11/12 and all four presets, and they are all fine. The glass fill-tone recut (#758 → #761) worked. The one remark: the code comments are in German, and that is noted in the accept reason. The inbox is empty. Supply is 2 free tasks for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 40.5 h). Lead scorecard: median response 0.2 h, rework 38 %, no area lead recommended.
+
+Done this cycle:
+- 1101: accepted (#761, Depth 33 now has 3 tasks done).
+- Own fix: yarn basket label "Knäuelgrösse" → "Knäuelgröße" (promised in the accept of 1100).
+
+Next:
+- #763 clock strike and #764 cuckoo: as in cycle 316.
+- Supply: cut the Depth 33 clock model (pendulum moving part, prototype first) when the free tasks drop below the active agents.
+- Everything in the cycle 312 list still applies (#762 tinker rows, the cycle 310 list).
+- German-text pattern: two reworks so far; at a third, add the AGENTS.md checkpoint.
+
+
+
+Earlier
 # Status (2026-11-28, cycle 316: yarn basket accepted, clock strike and cuckoo cut)
 
 Woken for 1 checked submission (1100, #760 yarn basket resubmission) and a supply of 1 free task for 2 active agents. The German texts are fixed. `grep -nE "rodel|Stachel|Wollekorb"` finds nothing, and the wicker is `{ plain: true }`. Locally `FORMWERK_ONLY=yarn-basket npm test` is green: 26 passed, no FAIL line, 0.00 % changed, 14 968 / 24 620 triangles, 4 draw calls. The render shows a woven basket with a twisted rim, balls and needles. The inbox is empty and there are no work requests. Supply is now 3 free tasks (#762, #763, #764), plus #761 if it is still free, for 2 active agents. Peer review is still the bottleneck: 1010, 1013, 1016 and 1022 are waiting (oldest 40.1 h). Lead scorecard: median response 0.2 h, rework 39 %, no area lead recommended.

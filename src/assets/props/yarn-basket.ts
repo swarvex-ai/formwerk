@@ -21,7 +21,7 @@ export const yarnBasket = defineAsset({
       describe: { de: "Anzahl der aufrechten Staken rund um den Korb: 11 ein schmaler Korb, 21 üblich, 31 ein voller Korb.", en: "Number of upright stakes around the basket: 11 a narrow basket, 21 usual, 31 a full basket." } },
     balls: { type: "integer", label: { de: "Knäuel", en: "Balls" }, min: 0, max: 6, default: 4,
       describe: { de: "Wollknäuel im Korb: 0 ein leerer Korb, 4 ein Wollkorb, 6 eine Wollkammer.", en: "Balls of yarn in the basket: 0 an empty basket, 4 a knitting basket, 6 a wool store." } },
-    ball: { type: "number", label: { de: "Knäuelgrösse", en: "Ball size" }, min: 0.035, max: 0.07, step: 0.005, default: 0.05, unit: "m",
+    ball: { type: "number", label: { de: "Knäuelgröße", en: "Ball size" }, min: 0.035, max: 0.07, step: 0.005, default: 0.05, unit: "m",
       describe: { de: "Radius der Wollknäuel: 0,035 m ein kleines Knäuel, 0,05 m ein übliches, 0,07 m ein großes.", en: "Radius of the yarn balls: 0.035 m a small ball, 0.05 m a usual one, 0.07 m a large ball." } },
     needles: { type: "boolean", label: { de: "Stricknadeln", en: "Needles" }, default: true,
       describe: { de: "Zwei Stricknadeln stecken im obersten Wollknäuel: an für eine Strickecke, aus für einen leeren Korb.", en: "Two knitting needles stuck in the top yarn ball: on for a knitting corner, off for an empty basket." } },
