@@ -10,7 +10,7 @@ Next:
 - #729 yarn: check that the wraps follow the shared-centre geometry and that the sweep line reads 0 of 10584. Without the thread, 4 wraps also fit at stroke 2 (the ball is larger), so do not send it back for that.
 - Listen to snip (thread, trim), knitting (granny, fast) and loom in the preview once they are merged.
 - Listen to nailing (defaults, spike), sanding (rough, dust-off), planing (rough) and blow-out (gentle, flutter 1) in the preview once they are merged.
-- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass. The flask patch (1013) was cut before pill registered between bulb and bread, so its context may no longer apply plainly. If the train sends it back, rebase it myself.
+- Peer reviews of 1010, 1013, 1016, 1022: merge as they pass. The flask patch (1013) was cut before pill registered between bulb and bread, so `git apply --check` fails on current main for 1013 (src/icons/index.ts:42) and 1010 mortar (src/assets/index.ts:44); 1016 and 1022 still apply. If the train sends them back, the rework is only the registry lines.
 - #716 leaf: slice-sweep the defaults myself before accepting.
 - After 905 merges: `FORMWERK_ONLY=washboard npm test` (0.00 %).
 - The cycle 253 list still applies (bellows move after 887, reviews of #634 and #640–#642). Pipeline risk (message 107) is still open: run the tests locally before every accept.
